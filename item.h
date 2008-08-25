@@ -1,4 +1,4 @@
-/* font.h, EasyRPG player font class declaration file.
+/* item.h, EasyRPG player item class declaration file.
    Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
 
    This program is free software: you can redistribute it and/or modify
@@ -14,22 +14,27 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef FONT_H_
-#define FONT_H_
+#ifndef ITEM_H_
+#define ITEM_H_
 
-class Font{
-protected:
-          int size;
-          int fR,  fG,  fB,  fU; // fU = unused
-          const char * Fname;
-public:
-      void init_Font();
-      SDL_Surface* drawText(char* string);
-      SDL_Surface* drawText(char* string,int r, int b,int g, int u);
-      SDL_Surface* drawText(const char* string);
-      void draw_temp_Text(SDL_Surface* screen,char* string, int x, int y);
-      void Quit();
-
+class Item {
+protected: 
+const char* nombre;
+int NOI;//numero de items
+Animacion anim;//animacion de batalla
+unsigned char type;//tipo arama, recuperador, protector etc.
+int coste;//para las tiendas
+public: 
+int id;
+void set_NOI(int The_NOI);
+int* get_NOI();
+void set_name(const char * name);
+const char * get_name();
+void set_type(unsigned char The_type);
+unsigned char * get_type();
+void set_anim(Animacion the_anim);
+Animacion * get_anim();
+// cuanto sube o baja y a que, mejor definido por herencia
 };
 
 #endif

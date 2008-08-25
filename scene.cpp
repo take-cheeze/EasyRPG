@@ -1,19 +1,38 @@
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
+/* scene.cpp, scene routines.
+   Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
+#include <vector>
+#include <string>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_mixer.h"
 #include "sprite.h"
 #include "key.h"
 #include "font.h"
 #include "audio.h"
 #include "map.h"
-#include <vector>
-#include <string>
 #include "skill.h"
 #include "item.h"
 #include "enemy.h"
 #include "player.h"
+#include "math-sll.h"
+#include "actor.h"
 #include "scene.h"
 #define Size_of_font 16
+
 void Menu_Easy::init(Audio * theaudio, bool * run,int X,int Y) {
      myaudio=theaudio;
      desided=false;
@@ -120,7 +139,7 @@ void Window_Base::dispose()
      for (i = 0; i < tp; i ++)  
      (Vtext_Sprite).pop_back();   
 }
-void Window_Base::add_text(char * ctext, int x, int y)
+void Window_Base::add_text(const char * ctext, int x, int y)
 {
  text.x=pos_X+x;
  text.y=pos_Y+y;
@@ -139,7 +158,7 @@ if(visible)
 if(  !disposing  ) 
 {
 tapiz.draw(Screen);
-int i;
+unsigned int i;
 for (i = 0; i < (Vtext_Sprite).size(); i ++)  
 { 
  ((Vtext_Sprite).at(i)).draw(Screen);    
@@ -175,7 +194,7 @@ Init_text_X=10;
 on_use=true;
  }
  
- void Window_Select::add_text(char * ctext, int x, int y)
+ void Window_Select::add_text(const char * ctext, int x, int y)
 {
  text.x=pos_X+x;
  text.y=pos_Y+y;
@@ -233,7 +252,7 @@ void Window_Select::set_posx_text(int x) {
 void Window_Select::setComands(vector <std::string> * str_Vec)
 {
 My_vector=str_Vec;
-int i;
+unsigned int i;
 std::string strd;  
 for (i = 0; i < (*My_vector).size(); i ++)  
 { 
@@ -245,7 +264,10 @@ My_Sprite.push_back(text);
 }
 
 void Window_Select::draw(SDL_Surface* Screen)
- {int i,offset=0;
+ {
+unsigned int i;
+int j;
+int offset=0;
 if(!disposing)
 if(visible)
 {             
@@ -268,16 +290,16 @@ if((Comand_Y!=getindexY())&&(Max_to_show<Comand_Y))
 cursor.y=pos_Y+(getindexY()-offset)*Size_of_font+5;
 cursor.x=pos_X+(getindexX())*Size_of_Block+10*getindexX()+5;
 cursor.draw(Screen);
-for (i = offset; i <= ((Max_to_show+offset+1)*(Comand_X+1)-1); i ++)  //comandos
+for (j = offset; j <= ((Max_to_show+offset+1)*(Comand_X+1)-1); j ++)  //comandos
 {
-    (My_Sprite.at(i)).x=pos_X+Init_text_X;
+    (My_Sprite.at(j)).x=pos_X+Init_text_X;
     if(Comand_X!=0)
     {
-    (My_Sprite.at(i)).x= (My_Sprite.at(i)).x+((Size_of_Block+10)*((i)%(Comand_X+1)));
-    (My_Sprite.at(i)).y=((pos_Y+5)+((i-offset)/(Comand_X+1))*Size_of_font);}
+    (My_Sprite.at(j)).x= (My_Sprite.at(j)).x+((Size_of_Block+10)*((j)%(Comand_X+1)));
+    (My_Sprite.at(j)).y=((pos_Y+5)+((j-offset)/(Comand_X+1))*Size_of_font);}
     else
-    (My_Sprite.at(i)).y=((pos_Y+5)+((i-offset)*Size_of_font));
-    (My_Sprite.at(i)).draw(Screen);
+    (My_Sprite.at(j)).y=((pos_Y+5)+((j-offset)*Size_of_font));
+    (My_Sprite.at(j)).draw(Screen);
 }
 
 for (i = 0; i < (Vtext_Sprite).size(); i ++) //textoadiconal 
@@ -325,7 +347,7 @@ void Window_Player_Select::init_curXY(int x,int y) {
 void Window_Player_Select::set_curY(int y) {
       Cur_pos_Y=y;  
 }  
- void Window_Player_Select::add_text(char * ctext, int x, int y)
+ void Window_Player_Select::add_text(const char * ctext, int x, int y)
 {
  text.x=pos_X+x;
  text.y=pos_Y+y;
@@ -377,7 +399,9 @@ void Window_Player_Select::add_sprite(Sprite * the_sprite, int x, int y)
 }
 
 void Window_Player_Select::draw(SDL_Surface* Screen)
- {int i,offset=0;
+ {
+unsigned int i;
+int offset=0;
 if(visible_window)
 if(!disposing)
 

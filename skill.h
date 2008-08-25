@@ -1,4 +1,4 @@
-/* font.h, EasyRPG player font class declaration file.
+/* skill.h, EasyRPG player skill class declaration file.
    Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
 
    This program is free software: you can redistribute it and/or modify
@@ -14,22 +14,29 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef FONT_H_
-#define FONT_H_
+#ifndef SKILL_H_
+#define SKILL_H_
 
-class Font{
-protected:
-          int size;
-          int fR,  fG,  fB,  fU; // fU = unused
-          const char * Fname;
-public:
-      void init_Font();
-      SDL_Surface* drawText(char* string);
-      SDL_Surface* drawText(char* string,int r, int b,int g, int u);
-      SDL_Surface* drawText(const char* string);
-      void draw_temp_Text(SDL_Surface* screen,char* string, int x, int y);
-      void Quit();
+class Skill {
 
+protected: 
+const char* nombre;
+int mp_price;//numero mp a usar
+Animacion anim;//animacion de batalla
+int damange;
+int level_req; 
+public: 
+
+void set_name(const char * name);
+const char * get_name();
+void set_anim(Animacion the_anim);
+Animacion * get_anim();
+void set_mp_price(int The_mp_price);
+int* get_mp_price();
+void set_damange(int The_damange);
+int* get_damange();
+void set_level_req(int The_level_req);
+int* get_level_req();
 };
 
 #endif

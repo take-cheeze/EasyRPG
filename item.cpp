@@ -1,4 +1,4 @@
-/* font.h, EasyRPG player font class declaration file.
+/* item.cpp, item routines.
    Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
 
    This program is free software: you can redistribute it and/or modify
@@ -14,22 +14,49 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-#ifndef FONT_H_
-#define FONT_H_
+#include <vector>
+#include <string>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_mixer.h"
+#include "sprite.h"
+#include "key.h"
+#include "font.h"
+#include "audio.h"
+#include "map.h"
+#include "item.h"
 
-class Font{
-protected:
-          int size;
-          int fR,  fG,  fB,  fU; // fU = unused
-          const char * Fname;
-public:
-      void init_Font();
-      SDL_Surface* drawText(char* string);
-      SDL_Surface* drawText(char* string,int r, int b,int g, int u);
-      SDL_Surface* drawText(const char* string);
-      void draw_temp_Text(SDL_Surface* screen,char* string, int x, int y);
-      void Quit();
+void Item::set_NOI(int The_NOI)
+{
+   NOI=The_NOI;
+}
+int* Item::get_NOI()
+{
+   return (&NOI);
+}
+void Item::set_name(const char * name)
+{
+   nombre=name;
+}
+const char * Item::get_name()
+{
+   return(nombre);
+}
 
-};
+void Item::set_type(unsigned char The_type)
+{
+   type=The_type;
+}
+unsigned char* Item::get_type()
+{
+   return (&type);
+}
+void Item::set_anim(Animacion the_anim)
+{
+   anim=the_anim;
+}
+Animacion * Item::get_anim()
+{
+   return (& anim);
+}
 
-#endif

@@ -1,5 +1,22 @@
+/* scene.h, EasyRPG player scene class declaration file.
+   Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
 #ifndef SCENE_H_
 #define SCENE_H_
+
 typedef struct menucomand
 {
 	int des1;
@@ -15,6 +32,8 @@ protected:
    bool desided;
    int delay;
 public: 
+//Menu_Easy();		///constructor
+//~Menu_Easy();		///destructor
    bool desition();
    int getindexY();
    int getindexX(); 
@@ -36,11 +55,13 @@ char stringBuffer[255];
 int falla;
 bool disposing;
 public: 
+//Window_Base();		///constructor
+//~Window_Base();	///destructor
 bool visible;
 void dispose();
 void init(int SizeX,int SizeY,int PosX,int PosY);
 void draw(SDL_Surface* Screen);
-void add_text(char * ctext, int x, int y);
+void add_text(const char * ctext, int x, int y);
 void add_sprite(Sprite * the_sprite, int x, int y);
 };
 
@@ -62,6 +83,8 @@ bool disposing;
 Sprite text;
 
 public: 
+//Window_Select();		///constructor
+//~Window_Select();		///destructor
 bool visible;
 bool on_use;
 void updatekey(); 
@@ -72,7 +95,7 @@ bool desition();
 void dispose();
 void init(Audio * theaudio, bool * run,int ComandX,int ComandY,int SizeX,int SizeY,int PosX,int PosY);
 void draw(SDL_Surface* Screen);
-void add_text(char * ctext, int x, int y);
+void add_text(const char * ctext, int x, int y);
 void set_posx_text(int x);
 void setComands(std:: vector <std::string> * str_Vec);
 };
@@ -96,6 +119,8 @@ bool disposing;
 Sprite text;
 
 public: 
+//Window_Player_Select();		///constructor
+///~Window_Player_Select();		///destructor
 bool visible;
 bool visible_window;
 void updatekey(); 
@@ -107,7 +132,7 @@ void dispose();
 void init_curXY(int x,int y); 
 void init(Audio * theaudio, bool * run,int ComandX,int ComandY,int SizeX,int SizeY,int PosX,int PosY,int curX,int curY);
 void draw(SDL_Surface* Screen);
-void add_text(char * ctext, int x, int y);
+void add_text(const char * ctext, int x, int y);
 void add_sprite(Sprite * the_sprite, int x, int y);
 void set_curY(int y);
 };
@@ -122,16 +147,18 @@ protected:
    Player_Team * myteam;
    int retardo;
 public: 
-  virtual void update(SDL_Surface* Screen);
-  virtual void updatekey(); 
-  virtual void dispose(); 
+//Scene();		///constructor
+//~Scene();		///destructor
+  virtual void update(SDL_Surface*){} ;
+  virtual void updatekey(){} ;
+  virtual void dispose(){} ;
 
 };
 
 class Map_Scene: public Scene {
 private:
  int SCREEN_SIZE_X, SCREEN_SIZE_Y;
-  
+ CActor Actor;
  Chara * player;
  Chara npc;
  Faceset alexface;
@@ -142,8 +169,11 @@ private:
  stMap Map;
   char stringBuffer[255];
 public: 
+//Map_Scene();		///constructor
+//~Map_Scene();		///destructor
    void init(Audio * audio,int SCREEN_X, int SCREEN_Y,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
+void Scroll(); 
    void updatekey(); 
    void slow_move(); 
    void mapnpc();
@@ -156,13 +186,15 @@ private:
    std:: vector <std::string> str_Vector;
    void action();
 public: 
+//Title_Scene();		///constructor
+//~Title_Scene();		///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void init_party();
    void updatekey();
    void dispose();      
 };
-class Batle_Scene: public Scene {
+class Batle_scene: public Scene {
 private:  
    bool * the_run;
    int state;
@@ -181,6 +213,8 @@ private:
    std:: vector <MC> Comands;
    void action();
 public: 
+//Batle_scene();		///constructor
+//~Batle_scene();		///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey();
@@ -207,6 +241,8 @@ private:
    void action2();
    void action3();
 public: 
+//Main_Menu_Scene();		///constructor
+//~Main_Menu_Scene();	///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey(); 
@@ -219,6 +255,8 @@ private:
    std:: vector <std::string> str_Vector;
    void action();
 public: 
+//Objects_Menu_Scene();		///constructor
+//~Objects_Menu_Scene();		///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey();  
@@ -231,6 +269,8 @@ private:
    Window_Base itemwin2;
    void action();
 public: 
+//Item_use_scene();		///constructor
+//~Item_use_scene();		///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey(); 
@@ -244,6 +284,8 @@ private:
    Window_Base Save_pos_2;
    Window_Base Save_pos_3;
 public: 
+//Save_Load_Menu_Scene();		///constructor
+//~Save_Load_Menu_Scene();		///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey();  
@@ -256,6 +298,8 @@ private:
    Window_Base Profesion; 
    Window_Base Aramas; 
 public: 
+//Stats_Menu_Scene();		///constructor
+//~Stats_Menu_Scene();		///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey();  
@@ -272,6 +316,8 @@ private:
     std:: vector <std::string> str_Vector2;
    void action();
 public: 
+//Euip_Menu_Scene();       	///constructor
+//~Euip_Menu_Scene();		///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey();
@@ -288,6 +334,8 @@ private:
    std:: vector <std::string> str_Vector;
    void action();
 public: 
+//Skills_Menu_Scene();		///constructor
+//~Skills_Menu_Scene();	///destructor
    void init(Audio * myaudio,  bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey();  
@@ -298,10 +346,12 @@ private:
    Sprite title;
    void action();
 public: 
+//GO_Scene();		///constructor
+//~GO_Scene();		///destructor
    void init(Audio * theaudio, bool * run,unsigned char * TheScene,Player_Team * TheTeam);
    void update(SDL_Surface* Screen); 
    void updatekey();
-   void dispose();       
+   void dispose();
 };
 
-#endif 
+#endif

@@ -1,15 +1,29 @@
+/* sprite.cpp, sprite routines.
+   Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
 
-#include <SDL/SDL.h>
-#include "SDL_rotozoom.h"
-#include <SDL/SDL_image.h>
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
 #include <stdio.h>
 #include <stdlib.h>
-#define pi2 6.28318
+#include "SDL.h"
+#include "SDL_rotozoom.h"
+#include "SDL_image.h"
 #include "sprite.h"
 
+#define pi2 6.28318
 #define TRUE 1
 #define FALSE 0
-
 
 void Sistem::init_Sistem()//esto es asi porque no se me ocurre aun algo mejor
 {	    
@@ -52,7 +66,7 @@ SDL_Surface * Sistem::Exdraw (int sizeX,int sizeY)
     SDL_Surface * Eximg2;
     double zoomX =((double)sizeX/32);
     double zoomY = (((double)sizeY)/32);
-    Eximg = IMG_Load ("../System/system2.PNG");
+        Eximg =SDL_CreateRGBSurface(SDL_SWSURFACE,32, 32, 16,0, 0,0, 0);// IMG_Load ("../System/system2.PNG");
 	SDL_Rect fuente = {0 , 0,32,32};
 	SDL_Rect rect = {0,0, 0, 0};	
 	SDL_BlitSurface (img, &fuente,	Eximg, &rect);
@@ -93,7 +107,7 @@ SDL_Surface * Sistem::ExdrawT (int sizeX,int sizeY,int tipe)
     SDL_Surface * Eximg2;
     double zoomX =((double)sizeX/32);
     double zoomY = (((double)sizeY)/32);
-    Eximg = IMG_Load ("../System/system2.PNG");
+    Eximg =SDL_CreateRGBSurface(SDL_SWSURFACE,32, 32, 16,0, 0,0, 0);// IMG_Load ("../System/system2.PNG");
 	SDL_Rect fuente = {(32*tipe) , 0,32,32};
 	SDL_Rect rect = {0,0, 0, 0};	
 	SDL_BlitSurface (img, &fuente,	Eximg, &rect);
@@ -172,8 +186,8 @@ void Chara::frame_ori()
 
 void Chara::drawc (SDL_Surface * screen)
 {    int realframe;
-	int w = getw();
-	int h = geth();
+	int w = 24;//getw();
+	int h =32;//geth();
 	realframe=animation [dir][frame];
 	SDL_Rect fuente = {(realframe%cols)* w,(realframe/cols) * h, w, h};
 	SDL_Rect rect = {x, y, 0, 0};	
@@ -287,7 +301,7 @@ void Batler::draw (SDL_Surface * screen)
 }
 */
 
-void Sprite::setimg(char* string)
+void Sprite::setimg(const char* string)
      { visible=true;
      not_clean =true;
      img = IMG_Load (string);

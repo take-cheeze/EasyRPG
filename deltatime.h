@@ -1,4 +1,4 @@
-/* font.h, EasyRPG player font class declaration file.
+/* deltatime.h, EasyRPG player delta time class declaration file.
    Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
 
    This program is free software: you can redistribute it and/or modify
@@ -13,23 +13,28 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   
+#ifndef DELTATIME_H
+#define DELTATIME_H
 
-#ifndef FONT_H_
-#define FONT_H_
+class CDeltaTime {
+    public:
+        // Methods
+	CDeltaTime(int pIdealFPS);
+        void setIdealFPS(int pIdealFPS);
+ 	void clear(); 
+	void update();
+        // Attributes
+        float deltaTime;
+    private:
+        long  idealFPS;
+        float idealTime;
+        float  timePrevious;
+        float  timeCurrent;      
 
-class Font{
-protected:
-          int size;
-          int fR,  fG,  fB,  fU; // fU = unused
-          const char * Fname;
-public:
-      void init_Font();
-      SDL_Surface* drawText(char* string);
-      SDL_Surface* drawText(char* string,int r, int b,int g, int u);
-      SDL_Surface* drawText(const char* string);
-      void draw_temp_Text(SDL_Surface* screen,char* string, int x, int y);
-      void Quit();
-
+        float deltaTimeArray[16];
+        int  deltaCurrentVector;
 };
 
 #endif
+

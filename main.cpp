@@ -14,83 +14,91 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-    #include <stdlib.h>
-    #include <stdio.h>
-    #include <SDL/SDL.h>
-    #include <SDL/SDL_image.h>
-    #include <SDL/SDL_mixer.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <vector>
+#include <string>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_rotozoom.h"
+#include "SDL_mixer.h"
+#include "tools.h"
+#include "map.h"
+#include "sprite.h"
+#include "key.h"
+#include "font.h"
+#include "audio.h"
+#include "skill.h"
+#include "item.h"
+#include "enemy.h"
+#include "player.h"
+#include "actor.h"
+#include "scene.h"
+#include "timer.h"
+#include "deltatime.h"
+#define SCREEN_SIZE_X  320
+#define SCREEN_SIZE_Y  240
 
-    #include "tools.h"
-    #include "map.h"
-    #include "bitmap.h"
-    #include "sprite.h"
-    #include "key.h"
-    #include "font.h"
-    #include "audio.h"
-    #include <vector>
-    #include <string>  
-    #include "skill.h"
-    #include "item.h"
-    #include "enemy.h"     
-    #include "player.h" 
-    #include "scene.h"
-    #define SCREEN_SIZE_X  320
-    #define SCREEN_SIZE_Y  240
-    
-    bool running = true;
-    unsigned char TheScene=0;
-    Mix_Music *musica;
-    SDL_Surface * Screen;
-    unsigned long nextTicks = 0, fps = 0, frames = 0;
-    char stringBuffer[255];
-    unsigned char speed=4,timer=0;
-    unsigned long FRECUENCIA=18;
-    Scene * actual;
-    Map_Scene mapas;
-    Title_Scene titulo;
-    GO_Scene fin;
-    Save_Load_Menu_Scene        Menu_Save_Load;
-    Euip_Menu_Scene             Menu_Euip;
-    Main_Menu_Scene             Menu_Main;
-    Objects_Menu_Scene          Menu_Objects;
-    Stats_Menu_Scene            Menu_Stats;
-    Skills_Menu_Scene           Menu_Skills;
-    Item_use_scene              Menu_item_use;
-    Batle_Scene                 batalla;
-    Player_Team                 team;
-int fps_sincronizar (void)
-{
-	static int t;
-	static int tmp;
-	static int tl = 0;
-    static int fps=0;
-    static unsigned long nextTicks=0;
-     char stringBuffer[255];
-    fps++;
-	t = SDL_GetTicks ();//t tiempo trascurrido tl tiempo anterior
-    if(SDL_GetTicks() > nextTicks)//cada que pase un segudo
-    {nextTicks = SDL_GetTicks() + 1000;
-     sprintf(stringBuffer, "Map test - FPS %lu ", fps);//imprime el numero de frames
-     SDL_WM_SetCaption (stringBuffer, NULL);
-     if(fps<59)
-     FRECUENCIA--;
-     if(fps>59)
-     FRECUENCIA++;
-     fps=0;
-    } 
-    if (t - tl >= FRECUENCIA)// si se tarda mas que la frecuencia
-	{ 
-		tmp = (t - tl) / FRECUENCIA;
-		tl += tmp * FRECUENCIA;//incremente tiempo  pasado
-		return tmp;// retorna temp para que refresque mas la movimientos
-	}
-	else// si se tarda menos
+bool running = true;
+unsigned char TheScene=0;
+Mix_Music *musica;
+SDL_Surface * Screen;
+//unsigned long nextTicks = 0, fps = 0, frames = 0;
+//char stringBuffer[255];
+unsigned char speed=4,timer=0;
+Scene * actual;
+Map_Scene mapas;
+Title_Scene titulo;
+GO_Scene fin;
+Save_Load_Menu_Scene        Menu_Save_Load;
+Euip_Menu_Scene             Menu_Euip;
+Main_Menu_Scene             Menu_Main;
+Objects_Menu_Scene          Menu_Objects;
+Stats_Menu_Scene            Menu_Stats;
+Skills_Menu_Scene           Menu_Skills;
+Item_use_scene              Menu_item_use;
+Batle_scene                 batalla;
+Player_Team                 team;
+CDeltaTime 	System(60);
+bool wind;
+Timer update;  
+Timer fps; 
+
+int fps_sincronizar()
+{      
+        static unsigned  int frames=0;
+        int tiempodesignado, tiempotrascurrido,framesideales, retraso;
+	frames++;
+	if(( update.get_ticks() > 1020 ) ||(frames==60)) { 
+	frames=0;
+	update.start(); 
+	fps.start(); 
+	}else
 	{
-		SDL_Delay (FRECUENCIA - (t - tl));//retardalo la frecuencia menos el tiempo actual
-		tl += FRECUENCIA;//incremente tiempo  pasado
+        tiempodesignado=((1020- update.get_ticks())/(60-frames)); 
+	tiempotrascurrido=fps.get_ticks();
+	
+     if(tiempotrascurrido < tiempodesignado) {  
+		SDL_Delay( tiempodesignado- tiempotrascurrido ); 
+		fps.start(); 
 		return 1;
+		}
+	else{
+		framesideales= (update.get_ticks())/17;//frames que ya deveriamos a ver refrescado
+		retraso=framesideales-frames;
+		fps.start(); 
+			if((retraso)>=1)//si nos retasamos por mas de un frame
+		   	{
+			frames=frames+retraso;
+		//	System.update(); //updates a deltas
+			return (1+retraso);//refresca mas la entrada y salida
+			}
+		}
 	}
+return 1;
 }
+
+
  void CambioScene(Audio myaudio, Scene  ** apuntador) //si no haces esto, te cartgas la memoria donde lo estas ejecutando
  {   unsigned static char LastScene=0; 
       if(TheScene!=LastScene)
@@ -163,24 +171,18 @@ int fps_sincronizar (void)
         *apuntador=& Menu_item_use;
          LastScene=10;
          }   
-                  
       }
  }
- 
- 
-           
- int main(int argc, char** argv)
-    {   Title_Scene titulo;
-        Audio myaudio;
-        
-       
 
-        int repxciclo,i,j;
+int main()
+    {  
+        Audio myaudio;
+        int repxciclo,i;
 	    // ===[ INITIALIZATION ]================================================
         // Start SDL
-        if (SDL_Init (SDL_INIT_VIDEO) < 0) exit(1);
+        if (SDL_Init (SDL_INIT_VIDEO| SDL_INIT_AUDIO) < 0) exit(1);//mod
         atexit (SDL_Quit);
-
+	    myaudio.init();
         const SDL_VideoInfo * videoInfo = SDL_GetVideoInfo();
         unsigned long flags = 0;
 
@@ -198,27 +200,41 @@ int fps_sincronizar (void)
         SDL_Event event;
         titulo.init(& myaudio,& running,& TheScene,& team);
         actual= & titulo;
-
+	    update.start(); 
+	    fps.start(); 
         while (running)
-        {   
+        {
             timer++;
             // Check for events
-            while (SDL_PollEvent (&event));
+            while (SDL_PollEvent (&event))
             {
                 switch (event.type)
                 {
                     case SDL_QUIT:
                         running = false;
                         break;
+                   case SDL_KEYDOWN:  
+                           if( event.key.keysym.sym == SDLK_RETURN )
+                         {     if(wind)
+      {   Screen = SDL_SetVideoMode( SCREEN_SIZE_X, SCREEN_SIZE_Y, 16, SDL_SWSURFACE | SDL_RESIZABLE  );
+         wind=false;
+         }
+         else
+         {    Screen = SDL_SetVideoMode( SCREEN_SIZE_X, SCREEN_SIZE_Y, 16, SDL_SWSURFACE | SDL_RESIZABLE | SDL_FULLSCREEN );
+           wind=true;
+            }
+                 break;
+                }
                     default:
                         break;
                 }
             }
 	repxciclo = fps_sincronizar ();
-   // SDL_FillRect(Screen, NULL, 0x0);// Clear screen  inutil   
-    for (i = 0; i < repxciclo; i ++)//estradas a lectrura de teclado
-	{
 
+   // SDL_FillRect(Screen, NULL, 0x0);// Clear screen  inutil   
+ 
+  for (i = 0; i < repxciclo; i ++)//estradas a lectrura de teclado
+	{	System.update(); //updates a deltas
          actual->updatekey( );
 	}
            
