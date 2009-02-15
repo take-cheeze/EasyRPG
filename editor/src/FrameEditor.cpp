@@ -7,7 +7,7 @@
 // end wxGlade
 
 
-FrameEditor::FrameEditor(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):
+FrameEditor::FrameEditor(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
     wxFrame(parent, id, title, pos, size, wxDEFAULT_FRAME_STYLE)
 {
     // begin wxGlade: FrameEditor::FrameEditor
@@ -103,7 +103,7 @@ void FrameEditor::set_properties()
     // begin wxGlade: FrameEditor::set_properties
     SetTitle(_("EasyRPG"));
     wxIcon _icon;
-    _icon.CopyFromBitmap(wxBitmap(wxT("../src/easyrpg.xpm"), wxBITMAP_TYPE_ANY));
+    _icon.CopyFromBitmap(wxBitmap(wxT("../share/easyrpg.xpm"), wxBITMAP_TYPE_ANY));
     SetIcon(_icon);
     int frmEditorStatusbar_widths[] = { -1 };
     frmEditorStatusbar->SetStatusWidths(1, frmEditorStatusbar_widths);

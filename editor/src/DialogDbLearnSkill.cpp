@@ -7,7 +7,7 @@
 // end wxGlade
 
 
-DialogDbLearnSkill::DialogDbLearnSkill(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):
+DialogDbLearnSkill::DialogDbLearnSkill(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
     wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE)
 {
     // begin wxGlade: DialogDbLearnSkill::DialogDbLearnSkill

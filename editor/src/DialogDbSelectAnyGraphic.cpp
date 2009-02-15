@@ -7,7 +7,7 @@
 // end wxGlade
 
 
-DialogDbSelectAnyGraphic::DialogDbSelectAnyGraphic(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):
+DialogDbSelectAnyGraphic::DialogDbSelectAnyGraphic(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
     wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE)
 {
     // begin wxGlade: DialogDbSelectAnyGraphic::DialogDbSelectAnyGraphic
