@@ -552,7 +552,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     stState = new wxStaticText(pnState, wxID_ANY, _("States"));
     const wxString *listState_choices = NULL;
     listState = new wxListBox(pnState, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, listState_choices, 0);
-    btnStateMaxNumber = new wxButton(pnState, wxID_ANY, _("Max Number..."));
+    btnStateMaxNumber = new wxButton(pnState, wxID_ANY, _("Max number..."));
     tcStateName = new wxTextCtrl(pnState, wxID_ANY, wxEmptyString);
     const wxString *chStateType_choices = NULL;
     chStateType = new wxChoice(pnState, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, chStateType_choices, 0);
@@ -627,7 +627,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     stAnimation = new wxStaticText(pnAnimation, wxID_ANY, _("Animations"));
     const wxString *listAnimation_choices = NULL;
     listAnimation = new wxListBox(pnAnimation, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, listAnimation_choices, 0);
-    btnAnimationMaxNumber = new wxButton(pnAnimation, wxID_ANY, _("Max Number..."));
+    btnAnimationMaxNumber = new wxButton(pnAnimation, wxID_ANY, _("Max number..."));
     stAnimationName = new wxTextCtrl(pnAnimation, wxID_ANY, wxEmptyString);
     tcAnimationGraphic = new wxTextCtrl(pnAnimation, wxID_ANY, wxEmptyString);
     btnAnimationGraphic = new wxButton(pnAnimation, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
@@ -655,7 +655,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     stTerrain = new wxStaticText(pnTerrain, wxID_ANY, _("Terrains"));
     const wxString *listTerrain_choices = NULL;
     listTerrain = new wxListBox(pnTerrain, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, listTerrain_choices, 0);
-    btnTerrainMaxNumber = new wxButton(pnTerrain, wxID_ANY, _("Max Number..."));
+    btnTerrainMaxNumber = new wxButton(pnTerrain, wxID_ANY, _("Max number..."));
     tcTerrainName = new wxTextCtrl(pnTerrain, wxID_ANY, wxEmptyString);
     spinTerrainDamage = new wxSpinCtrl(pnTerrain, wxID_ANY, wxT(""), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 100);
     spinTerrainEncounterRate = new wxSpinCtrl(pnTerrain, wxID_ANY, wxT(""), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 100);
@@ -677,7 +677,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     stTileset = new wxStaticText(pnTileset, wxID_ANY, _("Tilesets"));
     const wxString *listTileset_choices = NULL;
     listTileset = new wxListBox(pnTileset, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, listTileset_choices, 0);
-    btnTilesetMaxNumber = new wxButton(pnTileset, wxID_ANY, _("Max Number..."));
+    btnTilesetMaxNumber = new wxButton(pnTileset, wxID_ANY, _("Max number..."));
     tcTilesetName = new wxTextCtrl(pnTileset, wxID_ANY, wxEmptyString);
     tcTilesetGraphic = new wxTextCtrl(pnTileset, wxID_ANY, wxEmptyString);
     btnTilesetLowerLayerTerrainType = new wxButton(nbTilesetLowerLayer, wxID_ANY, _("Terrain type"));
@@ -930,7 +930,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     stCommonEvent = new wxStaticText(pnCommonEvent, wxID_ANY, _("Common events"));
     const wxString *ListEvent_choices = NULL;
     ListEvent = new wxListBox(pnCommonEvent, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, ListEvent_choices, 0);
-    btnCommonEventMaxNumber = new wxButton(pnCommonEvent, wxID_ANY, _("Max Number..."));
+    btnCommonEventMaxNumber = new wxButton(pnCommonEvent, wxID_ANY, _("Max number..."));
     tcCommonEventName = new wxTextCtrl(pnCommonEvent, wxID_ANY, wxEmptyString);
     const wxString *chCommonEventActivationConditions_choices = NULL;
     chCommonEventActivationConditions = new wxChoice(pnCommonEvent, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, chCommonEventActivationConditions_choices, 0);
