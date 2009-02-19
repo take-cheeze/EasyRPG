@@ -16,7 +16,7 @@ IMPLEMENT_APP(AppEditor)
 bool AppEditor::OnInit()
 {
     wxInitAllImageHandlers();
-    FrameEditor* frmEditor = new FrameEditor(NULL, wxID_ANY, wxEmptyString);
+    FrameEditor* frmEditor = new FrameEditor();
     SetTopWindow(frmEditor);
     frmEditor->Show();
     return true;
