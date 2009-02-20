@@ -3,7 +3,7 @@
 #include "DialogDb.h"
 
 FrameEditor::FrameEditor():
-    wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(700, 400))
+    wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
 {
     swEditor = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_BORDER);
     pnEditorMapTree = new wxPanel(swEditor, wxID_ANY);
@@ -123,12 +123,14 @@ void FrameEditor::do_layout()
     szEditor->Add(swEditor, 0, wxEXPAND, 0);
     szEditor->Add(pnEditorMap, 1, wxEXPAND, 0);
     SetSizer(szEditor);
+    szEditor->Fit(this);
     Layout();
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
     DialogDb *dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
-    dlgDb->SetFocus(); //Non redundant, needed to work Esc key to close it without clicking it before.
+    dlgDb->SetFocus(); //Needed to work Esc key to close it without clicking it before.
     dlgDb->ShowModal();
+    dlgDb->Destroy(); //Don't use delete, use Destroy instead.
 }
