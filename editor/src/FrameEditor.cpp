@@ -130,7 +130,7 @@ void FrameEditor::do_layout()
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
     DialogDb *dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
-    dlgDb->SetFocus(); //Needed to work Esc key to close it without clicking it before.
+    dlgDb->SetFocus();
     dlgDb->ShowModal();
-    dlgDb->Destroy(); //Don't use delete, use Destroy instead.
+    dlgDb->Destroy();
 }

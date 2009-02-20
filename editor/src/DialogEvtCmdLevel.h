@@ -15,21 +15,21 @@
 // end wxGlade
 
 
-class DialogEvtCmdChangeLevel: public wxDialog {
+class DialogEvtCmdLevel: public wxDialog {
 public:
-    // begin wxGlade: DialogEvtCmdChangeLevel::ids
+    // begin wxGlade: DialogEvtCmdLevel::ids
     // end wxGlade
 
-    DialogEvtCmdChangeLevel(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
+    DialogEvtCmdLevel(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
 
 private:
-    // begin wxGlade: DialogEvtCmdChangeLevel::methods
+    // begin wxGlade: DialogEvtCmdLevel::methods
     void set_properties();
     void do_layout();
     // end wxGlade
 
 protected:
-    // begin wxGlade: DialogEvtCmdChangeLevel::attributes
+    // begin wxGlade: DialogEvtCmdLevel::attributes
     wxStaticBox* szOptions_staticbox;
     wxStaticBox* szOperand_staticbox;
     wxStaticBox* szTarget_staticbox;

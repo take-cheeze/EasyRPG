@@ -14,21 +14,21 @@
 // end wxGlade
 
 
-class DialogEvtCmdChangeEscapePlace: public wxDialog {
+class DialogEvtCmdEscapePlace: public wxDialog {
 public:
-    // begin wxGlade: DialogEvtCmdChangeEscapePlace::ids
+    // begin wxGlade: DialogEvtCmdEscapePlace::ids
     // end wxGlade
 
-    DialogEvtCmdChangeEscapePlace(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
+    DialogEvtCmdEscapePlace(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
 
 private:
-    // begin wxGlade: DialogEvtCmdChangeEscapePlace::methods
+    // begin wxGlade: DialogEvtCmdEscapePlace::methods
     void set_properties();
     void do_layout();
     // end wxGlade
 
 protected:
-    // begin wxGlade: DialogEvtCmdChangeEscapePlace::attributes
+    // begin wxGlade: DialogEvtCmdEscapePlace::attributes
     wxStaticBox* szSwitch_staticbox;
     wxStaticBox* szPosition_staticbox;
     wxTextCtrl* tcPosition;

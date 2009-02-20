@@ -3,8 +3,8 @@
 #include <wx/wx.h>
 #include <wx/image.h>
 
-#ifndef DIALOGEVTCMDSTATE_H
-#define DIALOGEVTCMDSTATE_H
+#ifndef DIALOGEVTCMDSTATUS_H
+#define DIALOGEVTCMDSTATUS_H
 
 // begin wxGlade: ::dependencies
 // end wxGlade
@@ -14,22 +14,22 @@
 // end wxGlade
 
 
-class DialogEvtCmdState: public wxDialog {
+class DialogEvtCmdStatus: public wxDialog {
 public:
-    // begin wxGlade: DialogEvtCmdState::ids
+    // begin wxGlade: DialogEvtCmdStatus::ids
     // end wxGlade
 
-    DialogEvtCmdState(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
+    DialogEvtCmdStatus(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
 
 private:
-    // begin wxGlade: DialogEvtCmdState::methods
+    // begin wxGlade: DialogEvtCmdStatus::methods
     void set_properties();
     void do_layout();
     // end wxGlade
 
 protected:
-    // begin wxGlade: DialogEvtCmdState::attributes
-    wxStaticBox* SzState2_staticbox;
+    // begin wxGlade: DialogEvtCmdStatus::attributes
+    wxStaticBox* SzStatus2_staticbox;
     wxStaticBox* szTarget_staticbox;
     wxRadioButton* rbtnTargetParty;
     wxRadioButton* rbtnTargetFixed;
@@ -38,7 +38,7 @@ protected:
     wxTextCtrl* tcTargetVariable;
     wxButton* btnTargetVariable;
     wxRadioBox* rbOperation;
-    wxChoice* chState;
+    wxChoice* chStatus;
     wxButton* btnOK;
     wxButton* btnCancel;
     wxButton* btnHelp;
@@ -46,4 +46,4 @@ protected:
 }; // wxGlade: end class
 
 
-#endif // DIALOGEVTCMDSTATE_H
+#endif // DIALOGEVTCMDSTATUS_H

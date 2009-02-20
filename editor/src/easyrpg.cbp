@@ -74,12 +74,6 @@
 		<Unit filename="DialogEvtCmdBlankScreen.h" />
 		<Unit filename="DialogEvtCmdCallEvent.cpp" />
 		<Unit filename="DialogEvtCmdCallEvent.h" />
-		<Unit filename="DialogEvtCmdChangeEscapePlace.cpp" />
-		<Unit filename="DialogEvtCmdChangeEscapePlace.h" />
-		<Unit filename="DialogEvtCmdChangeLevel.cpp" />
-		<Unit filename="DialogEvtCmdChangeLevel.h" />
-		<Unit filename="DialogEvtCmdChangeVehiclePosition.cpp" />
-		<Unit filename="DialogEvtCmdChangeVehiclePosition.h" />
 		<Unit filename="DialogEvtCmdChoice.cpp" />
 		<Unit filename="DialogEvtCmdChoice.h" />
 		<Unit filename="DialogEvtCmdCommerce.cpp" />
@@ -96,6 +90,8 @@
 		<Unit filename="DialogEvtCmdEquipment.h" />
 		<Unit filename="DialogEvtCmdEscapePermissions.cpp" />
 		<Unit filename="DialogEvtCmdEscapePermissions.h" />
+		<Unit filename="DialogEvtCmdEscapePlace.cpp" />
+		<Unit filename="DialogEvtCmdEscapePlace.h" />
 		<Unit filename="DialogEvtCmdEventMovement.cpp" />
 		<Unit filename="DialogEvtCmdEventMovement.h" />
 		<Unit filename="DialogEvtCmdEventPosition.cpp" />
@@ -128,6 +124,8 @@
 		<Unit filename="DialogEvtCmdKeyAssignment.h" />
 		<Unit filename="DialogEvtCmdLabel.cpp" />
 		<Unit filename="DialogEvtCmdLabel.h" />
+		<Unit filename="DialogEvtCmdLevel.cpp" />
+		<Unit filename="DialogEvtCmdLevel.h" />
 		<Unit filename="DialogEvtCmdMP.cpp" />
 		<Unit filename="DialogEvtCmdMP.h" />
 		<Unit filename="DialogEvtCmdMemorizePlace.cpp" />
@@ -170,8 +168,8 @@
 		<Unit filename="DialogEvtCmdShowScreen.h" />
 		<Unit filename="DialogEvtCmdSkill.cpp" />
 		<Unit filename="DialogEvtCmdSkill.h" />
-		<Unit filename="DialogEvtCmdState.cpp" />
-		<Unit filename="DialogEvtCmdState.h" />
+		<Unit filename="DialogEvtCmdStatus.cpp" />
+		<Unit filename="DialogEvtCmdStatus.h" />
 		<Unit filename="DialogEvtCmdSwapEvents.cpp" />
 		<Unit filename="DialogEvtCmdSwapEvents.h" />
 		<Unit filename="DialogEvtCmdSwitch.cpp" />
@@ -204,6 +202,8 @@
 		<Unit filename="DialogEvtCmdVariable.h" />
 		<Unit filename="DialogEvtCmdVehicleGraphic.cpp" />
 		<Unit filename="DialogEvtCmdVehicleGraphic.h" />
+		<Unit filename="DialogEvtCmdVehiclePosition.cpp" />
+		<Unit filename="DialogEvtCmdVehiclePosition.h" />
 		<Unit filename="DialogEvtCmdWait.cpp" />
 		<Unit filename="DialogEvtCmdWait.h" />
 		<Unit filename="DialogEvtCmdWeather.cpp" />

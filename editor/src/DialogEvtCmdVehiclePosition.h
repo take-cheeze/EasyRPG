@@ -14,21 +14,21 @@
 // end wxGlade
 
 
-class DialogEvtCmdChangeVehiclePosition: public wxDialog {
+class DialogEvtCmdVehiclePosition: public wxDialog {
 public:
-    // begin wxGlade: DialogEvtCmdChangeVehiclePosition::ids
+    // begin wxGlade: DialogEvtCmdVehiclePosition::ids
     // end wxGlade
 
-    DialogEvtCmdChangeVehiclePosition(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
+    DialogEvtCmdVehiclePosition(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
 
 private:
-    // begin wxGlade: DialogEvtCmdChangeVehiclePosition::methods
+    // begin wxGlade: DialogEvtCmdVehiclePosition::methods
     void set_properties();
     void do_layout();
     // end wxGlade
 
 protected:
-    // begin wxGlade: DialogEvtCmdChangeVehiclePosition::attributes
+    // begin wxGlade: DialogEvtCmdVehiclePosition::attributes
     wxStaticBox* szPosition_staticbox;
     wxStaticBox* szPositionVariable_staticbox;
     wxRadioBox* rbVehicle;
