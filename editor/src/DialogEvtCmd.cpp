@@ -66,6 +66,7 @@
 #include "DialogEvtCmdPlayVideo.h"
 #include "DialogEvtCmdLabel.h"
 #include "DialogEvtCmdKeyAssignment.h"
+#include "DialogEvtCmdGoToLabel.h"
 #include "DialogEvtCmdTileset.h"
 #include "DialogEvtCmdPanorama.h"
 #include "DialogEvtCmdEncounterRate.h"
@@ -147,7 +148,7 @@ DialogEvtCmd::DialogEvtCmd(wxWindow* parent, int id, const wxString& title, cons
     btnPlayMusic = new wxButton(pnEvtCmd3, ID_PLAY_MUSIC, _("Play music..."));
     btnSaveMenu = new wxButton(pnEvtCmd3, ID_SAVE_MENU, _("Show save menu"));
     btnFadeMusic = new wxButton(pnEvtCmd3, ID_FADE_MUSIC, _("Fade music..."));
-    btnSaveMenuPermissions = new wxButton(pnEvtCmd3, ID_SAVE_MENU_PERMISSIONS, _("Save permissions..."));
+    btnSavePermissions = new wxButton(pnEvtCmd3, ID_SAVE_PERMISSIONS, _("Save permissions..."));
     btnMemorizeMusic = new wxButton(pnEvtCmd3, ID_MEMORIZE_MUSIC, _("Memorize music"));
     btnSystemMenu = new wxButton(pnEvtCmd3, ID_SYSTEM_MENU, _("Show system menu"));
     btnPlayMemorizedMusic = new wxButton(pnEvtCmd3, ID_PLAY_MEMORIZED_MUSIC, _("Play memorized music"));
@@ -239,6 +240,36 @@ DialogEvtCmd::DialogEvtCmd(wxWindow* parent, int id, const wxString& title, cons
     Connect(ID_STOP_ALL, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnStopAll_click));
     Connect(ID_SHOW_SCREEN, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnShowScreen_click));
     Connect(ID_WAIT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnWait_click));
+    Connect(ID_PLAY_MUSIC, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnPlayMusic_click));
+    Connect(ID_SAVE_MENU, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnSaveMenu_click));
+    Connect(ID_FADE_MUSIC, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnFadeMusic_click));
+    Connect(ID_SAVE_PERMISSIONS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnSavePermissions_click));
+    Connect(ID_MEMORIZE_MUSIC, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnMemorizeMusic_click));
+    Connect(ID_SYSTEM_MENU, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnSystemMenu_click));
+    Connect(ID_PLAY_MEMORIZED_MUSIC, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnPlayMemorizedMusic_click));
+    Connect(ID_SYSTEM_MENU_PERMISSIONS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnSystemMenuPermissions_click));
+    Connect(ID_PLAY_SOUND, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnPlaySound_click));
+    Connect(ID_CONDITIONS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnConditions_click));
+    Connect(ID_PLAY_VIDEO, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnPlayVideo_click));
+    Connect(ID_LABEL, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnLabel_click));
+    Connect(ID_KEY_ASSIGNMENT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnKeyAssignment_click));
+    Connect(ID_GO_TO_LABEL, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnGoToLabel_click));
+    Connect(ID_TILESET, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnTileset_click));
+    Connect(ID_LOOP, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnLoop_click));
+    Connect(ID_PANORAMA, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnPanorama_click));
+    Connect(ID_BREAK_LOOP, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnBreakLoop_click));
+    Connect(ID_ENCOUNTER_RATE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnEncounterRate_click));
+    Connect(ID_STOP_EVENT_PROCESS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnStopEventProcess_click));
+    Connect(ID_TILE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnTile_click));
+    Connect(ID_DELETE_EVENT_TEMPORALLY, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnDeleteEventTemporally_click));
+    Connect(ID_TELEPORT_PLACE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnTeleportPlace_click));
+    Connect(ID_CALL_EVENT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnCallEvent_click));
+    Connect(ID_TELEPORT_PERMISSIONS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnTeleportPermissions_click));
+    Connect(ID_NOTES, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnNotes_click));
+    Connect(ID_ESCAPE_PLACE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnEscapePlace_click));
+    Connect(ID_GAME_OVER, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnGameOver_click));
+    Connect(ID_ESCAPE_PERMISSIONS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnEscapePermissions_click));
+    Connect(ID_GO_TO_TITLE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnGoToTitle_click));
 }
 
 void DialogEvtCmd::set_properties()
@@ -318,7 +349,7 @@ void DialogEvtCmd::do_layout()
     gszEvtCmd3->Add(btnPlayMusic, 0, wxEXPAND, 0);
     gszEvtCmd3->Add(btnSaveMenu, 0, wxEXPAND, 0);
     gszEvtCmd3->Add(btnFadeMusic, 0, wxEXPAND, 0);
-    gszEvtCmd3->Add(btnSaveMenuPermissions, 0, wxEXPAND, 0);
+    gszEvtCmd3->Add(btnSavePermissions, 0, wxEXPAND, 0);
     gszEvtCmd3->Add(btnMemorizeMusic, 0, wxEXPAND, 0);
     gszEvtCmd3->Add(btnSystemMenu, 0, wxEXPAND, 0);
     gszEvtCmd3->Add(btnPlayMemorizedMusic, 0, wxEXPAND, 0);
@@ -823,140 +854,203 @@ void DialogEvtCmd::btnWait_click(wxCommandEvent &WXUNUSED(event))
     dlgEvtCmdWait->ShowModal();
     dlgEvtCmdWait->Destroy();
 }
-/*
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+
+void DialogEvtCmd::btnPlayMusic_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdPlayMusic *dlgEvtCmdPlayMusic = new DialogEvtCmdPlayMusic(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdPlayMusic->SetFocus();
+    dlgEvtCmdPlayMusic->ShowModal();
+    dlgEvtCmdPlayMusic->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnSaveMenu_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnFadeMusic_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdFadeMusic *dlgEvtCmdFadeMusic = new DialogEvtCmdFadeMusic(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdFadeMusic->SetFocus();
+    dlgEvtCmdFadeMusic->ShowModal();
+    dlgEvtCmdFadeMusic->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnSavePermissions_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdSavePermissions *dlgEvtCmdSavePermissions = new DialogEvtCmdSavePermissions(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdSavePermissions->SetFocus();
+    dlgEvtCmdSavePermissions->ShowModal();
+    dlgEvtCmdSavePermissions->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnMemorizeMusic_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnSystemMenu_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnPlayMemorizedMusic_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnSystemMenuPermissions_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdSystemMenuPermissions *dlgEvtCmdSystemMenuPermissions = new DialogEvtCmdSystemMenuPermissions(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdSystemMenuPermissions->SetFocus();
+    dlgEvtCmdSystemMenuPermissions->ShowModal();
+    dlgEvtCmdSystemMenuPermissions->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnPlaySound_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdPlaySound *dlgEvtCmdPlaySound = new DialogEvtCmdPlaySound(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdPlaySound->SetFocus();
+    dlgEvtCmdPlaySound->ShowModal();
+    dlgEvtCmdPlaySound->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnConditions_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdConditions *dlgEvtCmdConditions = new DialogEvtCmdConditions(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdConditions->SetFocus();
+    dlgEvtCmdConditions->ShowModal();
+    dlgEvtCmdConditions->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnPlayVideo_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdPlayVideo *dlgEvtCmdPlayVideo = new DialogEvtCmdPlayVideo(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdPlayVideo->SetFocus();
+    dlgEvtCmdPlayVideo->ShowModal();
+    dlgEvtCmdPlayVideo->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnLabel_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdLabel *dlgEvtCmdLabel = new DialogEvtCmdLabel(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdLabel->SetFocus();
+    dlgEvtCmdLabel->ShowModal();
+    dlgEvtCmdLabel->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnKeyAssignment_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdKeyAssignment *dlgEvtCmdKeyAssignment = new DialogEvtCmdKeyAssignment(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdKeyAssignment->SetFocus();
+    dlgEvtCmdKeyAssignment->ShowModal();
+    dlgEvtCmdKeyAssignment->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnGoToLabel_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdGoToLabel *dlgEvtCmdGoToLabel = new DialogEvtCmdGoToLabel(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdGoToLabel->SetFocus();
+    dlgEvtCmdGoToLabel->ShowModal();
+    dlgEvtCmdGoToLabel->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnTileset_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdTileset *dlgEvtCmdTileset = new DialogEvtCmdTileset(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdTileset->SetFocus();
+    dlgEvtCmdTileset->ShowModal();
+    dlgEvtCmdTileset->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnLoop_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
 }
 
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
+void DialogEvtCmd::btnPanorama_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
+    DialogEvtCmdPanorama *dlgEvtCmdPanorama = new DialogEvtCmdPanorama(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdPanorama->SetFocus();
+    dlgEvtCmdPanorama->ShowModal();
+    dlgEvtCmdPanorama->Destroy();
 }
-*/
+
+void DialogEvtCmd::btnBreakLoop_click(wxCommandEvent &WXUNUSED(event))
+{
+}
+
+void DialogEvtCmd::btnEncounterRate_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdEncounterRate *dlgEvtCmdEncounterRate = new DialogEvtCmdEncounterRate(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdEncounterRate->SetFocus();
+    dlgEvtCmdEncounterRate->ShowModal();
+    dlgEvtCmdEncounterRate->Destroy();
+}
+
+void DialogEvtCmd::btnStopEventProcess_click(wxCommandEvent &WXUNUSED(event))
+{
+}
+
+void DialogEvtCmd::btnTile_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdTile *dlgEvtCmdTile = new DialogEvtCmdTile(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdTile->SetFocus();
+    dlgEvtCmdTile->ShowModal();
+    dlgEvtCmdTile->Destroy();
+}
+
+void DialogEvtCmd::btnDeleteEventTemporally_click(wxCommandEvent &WXUNUSED(event))
+{
+}
+
+void DialogEvtCmd::btnTeleportPlace_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdTeleportPlace *dlgEvtCmdTeleportPlace = new DialogEvtCmdTeleportPlace(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdTeleportPlace->SetFocus();
+    dlgEvtCmdTeleportPlace->ShowModal();
+    dlgEvtCmdTeleportPlace->Destroy();
+}
+
+void DialogEvtCmd::btnCallEvent_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdCallEvent *dlgEvtCmdCallEvent = new DialogEvtCmdCallEvent(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdCallEvent->SetFocus();
+    dlgEvtCmdCallEvent->ShowModal();
+    dlgEvtCmdCallEvent->Destroy();
+}
+
+void DialogEvtCmd::btnTeleportPermissions_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdTeleportPermissions *dlgEvtCmdTeleportPermissions = new DialogEvtCmdTeleportPermissions(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdTeleportPermissions->SetFocus();
+    dlgEvtCmdTeleportPermissions->ShowModal();
+    dlgEvtCmdTeleportPermissions->Destroy();
+}
+
+void DialogEvtCmd::btnNotes_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdNotes *dlgEvtCmdNotes = new DialogEvtCmdNotes(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdNotes->SetFocus();
+    dlgEvtCmdNotes->ShowModal();
+    dlgEvtCmdNotes->Destroy();
+}
+
+void DialogEvtCmd::btnEscapePlace_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdEscapePlace *dlgEvtCmdEscapePlace = new DialogEvtCmdEscapePlace(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdEscapePlace->SetFocus();
+    dlgEvtCmdEscapePlace->ShowModal();
+    dlgEvtCmdEscapePlace->Destroy();
+}
+
+void DialogEvtCmd::btnGameOver_click(wxCommandEvent &WXUNUSED(event))
+{
+}
+
+void DialogEvtCmd::btnEscapePermissions_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdEscapePermissions *dlgEvtCmdEscapePermissions = new DialogEvtCmdEscapePermissions(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdEscapePermissions->SetFocus();
+    dlgEvtCmdEscapePermissions->ShowModal();
+    dlgEvtCmdEscapePermissions->Destroy();
+}
+
+void DialogEvtCmd::btnGoToTitle_click(wxCommandEvent &WXUNUSED(event))
+{
+}

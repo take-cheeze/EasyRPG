@@ -69,6 +69,36 @@ private:
     void btnStopAll_click(wxCommandEvent &WXUNUSED(event));
     void btnShowScreen_click(wxCommandEvent &WXUNUSED(event));
     void btnWait_click(wxCommandEvent &WXUNUSED(event));
+    void btnPlayMusic_click(wxCommandEvent &WXUNUSED(event));
+    void btnSaveMenu_click(wxCommandEvent &WXUNUSED(event));
+    void btnFadeMusic_click(wxCommandEvent &WXUNUSED(event));
+    void btnSavePermissions_click(wxCommandEvent &WXUNUSED(event));
+    void btnMemorizeMusic_click(wxCommandEvent &WXUNUSED(event));
+    void btnSystemMenu_click(wxCommandEvent &WXUNUSED(event));
+    void btnPlayMemorizedMusic_click(wxCommandEvent &WXUNUSED(event));
+    void btnSystemMenuPermissions_click(wxCommandEvent &WXUNUSED(event));
+    void btnPlaySound_click(wxCommandEvent &WXUNUSED(event));
+    void btnConditions_click(wxCommandEvent &WXUNUSED(event));
+    void btnPlayVideo_click(wxCommandEvent &WXUNUSED(event));
+    void btnLabel_click(wxCommandEvent &WXUNUSED(event));
+    void btnKeyAssignment_click(wxCommandEvent &WXUNUSED(event));
+    void btnGoToLabel_click(wxCommandEvent &WXUNUSED(event));
+    void btnTileset_click(wxCommandEvent &WXUNUSED(event));
+    void btnLoop_click(wxCommandEvent &WXUNUSED(event));
+    void btnPanorama_click(wxCommandEvent &WXUNUSED(event));
+    void btnBreakLoop_click(wxCommandEvent &WXUNUSED(event));
+    void btnEncounterRate_click(wxCommandEvent &WXUNUSED(event));
+    void btnStopEventProcess_click(wxCommandEvent &WXUNUSED(event));
+    void btnTile_click(wxCommandEvent &WXUNUSED(event));
+    void btnDeleteEventTemporally_click(wxCommandEvent &WXUNUSED(event));
+    void btnTeleportPlace_click(wxCommandEvent &WXUNUSED(event));
+    void btnCallEvent_click(wxCommandEvent &WXUNUSED(event));
+    void btnTeleportPermissions_click(wxCommandEvent &WXUNUSED(event));
+    void btnNotes_click(wxCommandEvent &WXUNUSED(event));
+    void btnEscapePlace_click(wxCommandEvent &WXUNUSED(event));
+    void btnGameOver_click(wxCommandEvent &WXUNUSED(event));
+    void btnEscapePermissions_click(wxCommandEvent &WXUNUSED(event));
+    void btnGoToTitle_click(wxCommandEvent &WXUNUSED(event));
 protected:
     wxButton* btnMessage;
     wxButton* btnEquipment;
@@ -135,7 +165,7 @@ protected:
     wxButton* btnPlayMusic;
     wxButton* btnSaveMenu;
     wxButton* btnFadeMusic;
-    wxButton* btnSaveMenuPermissions;
+    wxButton* btnSavePermissions;
     wxButton* btnMemorizeMusic;
     wxButton* btnSystemMenu;
     wxButton* btnPlayMemorizedMusic;
@@ -232,7 +262,7 @@ enum
     ID_PLAY_MUSIC,
     ID_SAVE_MENU,
     ID_FADE_MUSIC,
-    ID_SAVE_MENU_PERMISSIONS,
+    ID_SAVE_PERMISSIONS,
     ID_MEMORIZE_MUSIC,
     ID_SYSTEM_MENU,
     ID_PLAY_MEMORIZED_MUSIC,
