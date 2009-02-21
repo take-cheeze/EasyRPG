@@ -9,6 +9,36 @@ public:
 private:
     void set_properties();
     void do_layout();
+    void btnMessage_click(wxCommandEvent &WXUNUSED(event));
+    void btnEquipment_click(wxCommandEvent &WXUNUSED(event));
+    void btnMessageOptions_click(wxCommandEvent &WXUNUSED(event));
+    void btnHP_click(wxCommandEvent &WXUNUSED(event));
+    void btnFaceGraphic_click(wxCommandEvent &WXUNUSED(event));
+    void btnMP_click(wxCommandEvent &WXUNUSED(event));
+    void btnChoice_click(wxCommandEvent &WXUNUSED(event));
+    void btnStatus_click(wxCommandEvent &WXUNUSED(event));
+    void btnNumberInput_click(wxCommandEvent &WXUNUSED(event));
+    void btnRecover_click(wxCommandEvent &WXUNUSED(event));
+    void btnSwitch_click(wxCommandEvent &WXUNUSED(event));
+    void btnDamage_click(wxCommandEvent &WXUNUSED(event));
+    void btnVariable_click(wxCommandEvent &WXUNUSED(event));
+    void btnActorName_click(wxCommandEvent &WXUNUSED(event));
+    void btnTimer_click(wxCommandEvent &WXUNUSED(event));
+    void btnActorTitle_click(wxCommandEvent &WXUNUSED(event));
+    void btnMoney_click(wxCommandEvent &WXUNUSED(event));
+    void btnActorGraphic_click(wxCommandEvent &WXUNUSED(event));
+    void btnItem_click(wxCommandEvent &WXUNUSED(event));
+    void btnActorFaceGraphic_click(wxCommandEvent &WXUNUSED(event));
+    void btnParty_click(wxCommandEvent &WXUNUSED(event));
+    void btnVehicleGraphic_click(wxCommandEvent &WXUNUSED(event));
+    void btnExperience_click(wxCommandEvent &WXUNUSED(event));
+    void btnSystemMusic_click(wxCommandEvent &WXUNUSED(event));
+    void btnLevel_click(wxCommandEvent &WXUNUSED(event));
+    void btnSystemSound_click(wxCommandEvent &WXUNUSED(event));
+    void btnParameter_click(wxCommandEvent &WXUNUSED(event));
+    void btnSystemGraphic_click(wxCommandEvent &WXUNUSED(event));
+    void btnSkill_click(wxCommandEvent &WXUNUSED(event));
+    void btnTransition_click(wxCommandEvent &WXUNUSED(event));
 protected:
     wxButton* btnMessage;
     wxButton* btnEquipment;
@@ -105,6 +135,100 @@ protected:
     wxPanel* pnEvtCmd3;
     wxNotebook* pnEvtCmd;
     wxButton* btnClose;
+};
+
+enum
+{
+    ID_MESSAGE,
+    ID_EQUIPMENT,
+    ID_MESSAGE_OPTIONS,
+    ID_HP,
+    ID_FACE_GRAPHIC,
+    ID_MP,
+    ID_CHOICE,
+    ID_STATUS,
+    ID_NUMBER_INPUT,
+    ID_RECOVER,
+    ID_SWITCH,
+    ID_DAMAGE,
+    ID_VARIABLE,
+    ID_ACTOR_NAME,
+    ID_TIMER,
+    ID_ACTOR_TITLE,
+    ID_MONEY,
+    ID_ACTOR_GRAPHIC,
+    ID_ITEM,
+    ID_ACTOR_FACE_GRAPHIC,
+    ID_PARTY,
+    ID_VEHICLE_GRAPHIC,
+    ID_EXPERIENCE,
+    ID_SYSTEM_MUSIC,
+    ID_LEVEL,
+    ID_SYSTEM_SOUND,
+    ID_PARAMETER,
+    ID_SYSTEM_GRAPHIC,
+    ID_SKILL,
+    ID_TRANSITION,
+    ID_BATTLE,
+    ID_TONE,
+    ID_COMMERCE,
+    ID_FLASH_SCREEN,
+    ID_INN,
+    ID_SHAKE,
+    ID_ACTOR_NAME_INPUT,
+    ID_MOVE_SCREEN,
+    ID_TELEPORT,
+    ID_WEATHER,
+    ID_MEMORIZE_PLACE,
+    ID_PICTURE,
+    ID_GO_TO_MEMORIZED_PLACE,
+    ID_MOVE_PICTURE,
+    ID_VEHICLE,
+    ID_DELETE_PICTURE,
+    ID_VEHICLE_POSITION,
+    ID_ANIMATION,
+    ID_EVENT_POSITION,
+    ID_ACTOR_TRANSPARENCY,
+    ID_SWAP_EVENTS,
+    ID_FLASH_CHARACTER,
+    ID_GET_TERRAIN_ID,
+    ID_EVENT_MOVEMENT,
+    ID_GET_POSITION_ID,
+    ID_MOVE_ALL,
+    ID_BLANK_SCREEN,
+    ID_STOP_ALL,
+    ID_SHOW_SCREEN,
+    ID_WAIT,
+    ID_PLAY_MUSIC,
+    ID_SAVE_MENU,
+    ID_FADE_MUSIC,
+    ID_SAVE_MENU_PERMISSIONS,
+    ID_MEMORIZE_MUSIC,
+    ID_SYSTEM_MENU,
+    ID_PLAY_MEMORIZED_MUSIC,
+    ID_SYSTEM_MENU_PERMISSIONS,
+    ID_PLAY_SOUND,
+    ID_CONDITIONS,
+    ID_PLAY_VIDEO,
+    ID_LABEL,
+    ID_KEY_ASSIGNMENT,
+    ID_GO_TO_LABEL,
+    ID_TILESET,
+    ID_LOOP,
+    ID_PANORAMA,
+    ID_BREAK_LOOP,
+    ID_ENCOUNTER_RATE,
+    ID_STOP_EVENT_PROCESS,
+    ID_TILE,
+    ID_DELETE_EVENT_TEMPORALLY,
+    ID_TELEPORT_PLACE,
+    ID_CALL_EVENT,
+    ID_TELEPORT_PERMISSIONS,
+    ID_NOTES,
+    ID_ESCAPE_PLACE,
+    ID_GAME_OVER,
+    ID_ESCAPE_PERMISSIONS,
+    ID_GO_TO_TITLE
 };
 
 #endif

@@ -18,13 +18,13 @@ FrameEditor::FrameEditor():
     MenuProject->Append(wxID_EXIT, _("&Exit"), _("Exit EasyRPG"), wxITEM_NORMAL);
     frmEditorMenubar->Append(MenuProject, _("&Project"));
     wxMenu* wxglade_tmp_menu_1 = new wxMenu();
-    wxglade_tmp_menu_1->Append(wxID_SAVE, _("&Save"), _("Save all changes in the project maps"), wxITEM_NORMAL);
-    wxglade_tmp_menu_1->Append(wxID_REVERT, _("&Revert"), _("Discard all changes and reload the saved project maps"), wxITEM_NORMAL);
+    wxglade_tmp_menu_1->Append(wxID_SAVE, _("&Save\tCtrl+S"), _("Save all changes in the project maps"), wxITEM_NORMAL);
+    wxglade_tmp_menu_1->Append(wxID_REVERT, _("&Revert\tCtrl+R"), _("Discard all changes and reload the saved project maps"), wxITEM_NORMAL);
     wxglade_tmp_menu_1->AppendSeparator();
     wxMenu* MenuEdit = new wxMenu();
-    MenuEdit->Append(ID_UPPER_LAYER, _("&Lower layer"), _("Switch to the lower layer map editing mode"), wxITEM_RADIO);
-    MenuEdit->Append(ID_LOWER_LAYER, _("&Upper layer"), _("Switch to the upper layer map editing mode"), wxITEM_RADIO);
-    MenuEdit->Append(ID_EVENTS, _("&Events"), _("Switch to the event layer map editing mode"), wxITEM_RADIO);
+    MenuEdit->Append(ID_UPPER_LAYER, _("&Lower layer\tF5"), _("Switch to the lower layer map editing mode"), wxITEM_RADIO);
+    MenuEdit->Append(ID_LOWER_LAYER, _("&Upper layer\tF6"), _("Switch to the upper layer map editing mode"), wxITEM_RADIO);
+    MenuEdit->Append(ID_EVENTS, _("&Events\tF7"), _("Switch to the event layer map editing mode"), wxITEM_RADIO);
     wxglade_tmp_menu_1->Append(wxID_ANY, _("&Edit"), MenuEdit, wxEmptyString);
     wxMenu* MenuScale = new wxMenu();
     MenuScale->Append(wxID_ZOOM_100, _("1:&1"), _("Display the map in 1:1 scale"), wxITEM_RADIO);
@@ -39,7 +39,7 @@ FrameEditor::FrameEditor():
     MenuTools->Append(wxID_ANY, _("Music &player"), _("Play background music while editing"), wxITEM_NORMAL);
     frmEditorMenubar->Append(MenuTools, _("&Tools"));
     wxMenu* MenuGame = new wxMenu();
-    MenuGame->Append(wxID_ANY, _("&Play test"), _("Launch the game project for testing"), wxITEM_NORMAL);
+    MenuGame->Append(wxID_ANY, _("&Play test\tF9"), _("Launch the game project for testing"), wxITEM_NORMAL);
     MenuGame->AppendSeparator();
     MenuGame->Append(ID_FULL_SCREEN, _("&Full screen"), _("Enable or disable full screen in play test"), wxITEM_CHECK);
     MenuGame->Append(ID_SHOW_TITLE, _("&Show title"), _("Enable or disable background and music in the title in play test"), wxITEM_CHECK);
