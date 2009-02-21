@@ -114,7 +114,6 @@ DialogEvtCmd::DialogEvtCmd(wxWindow* parent, int id, const wxString& title, cons
     btnSystemGraphic = new wxButton(pnEvtCmd1, ID_SYSTEM_GRAPHIC, _("Change system graphic..."));
     btnSkill = new wxButton(pnEvtCmd1, ID_SKILL, _("Change skill..."));
     btnTransition = new wxButton(pnEvtCmd1, ID_TRANSITION, _("Change window transition..."));
-    {
     btnBattle = new wxButton(pnEvtCmd2, ID_BATTLE, _("Start battle..."));
     btnTone = new wxButton(pnEvtCmd2, ID_TONE, _("Change screen tone..."));
     btnCommerce = new wxButton(pnEvtCmd2, ID_COMMERCE, _("Visit commerce..."));
@@ -179,7 +178,7 @@ DialogEvtCmd::DialogEvtCmd(wxWindow* parent, int id, const wxString& title, cons
 
     set_properties();
     do_layout();
-    }
+
     Connect(ID_MESSAGE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnMessage_click));
     Connect(ID_EQUIPMENT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnEquipment_click));
     Connect(ID_MESSAGE_OPTIONS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnMessageOptions_click));
@@ -210,6 +209,36 @@ DialogEvtCmd::DialogEvtCmd(wxWindow* parent, int id, const wxString& title, cons
     Connect(ID_SYSTEM_GRAPHIC, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnSystemGraphic_click));
     Connect(ID_SKILL, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnSkill_click));
     Connect(ID_TRANSITION, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnTransition_click));
+    Connect(ID_BATTLE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnBattle_click));
+    Connect(ID_TONE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnTone_click));
+    Connect(ID_COMMERCE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnCommerce_click));
+    Connect(ID_FLASH_SCREEN, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnFlashScreen_click));
+    Connect(ID_INN, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnInn_click));
+    Connect(ID_SHAKE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnShake_click));
+    Connect(ID_ACTOR_NAME_INPUT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnActorNameInput_click));
+    Connect(ID_MOVE_SCREEN, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnMoveScreen_click));
+    Connect(ID_TELEPORT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnTeleport_click));
+    Connect(ID_WEATHER, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnWeather_click));
+    Connect(ID_MEMORIZE_PLACE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnMemorizePlace_click));
+    Connect(ID_PICTURE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnPicture_click));
+    Connect(ID_GO_TO_MEMORIZED_PLACE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnGoToMemorizedPlace_click));
+    Connect(ID_MOVE_PICTURE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnMovePicture_click));
+    Connect(ID_VEHICLE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnVehicle_click));
+    Connect(ID_DELETE_PICTURE, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnDeletePicture_click));
+    Connect(ID_VEHICLE_POSITION, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnVehiclePosition_click));
+    Connect(ID_ANIMATION, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnAnimation_click));
+    Connect(ID_EVENT_POSITION, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnEventPosition_click));
+    Connect(ID_ACTOR_TRANSPARENCY, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnActorTransparency_click));
+    Connect(ID_SWAP_EVENTS, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnSwapEvents_click));
+    Connect(ID_FLASH_CHARACTER, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnFlashCharacter_click));
+    Connect(ID_GET_TERRAIN_ID, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnGetTerrainID_click));
+    Connect(ID_EVENT_MOVEMENT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnEventMovement_click));
+    Connect(ID_GET_POSITION_ID, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnGetPositionID_click));
+    Connect(ID_MOVE_ALL, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnMoveAll_click));
+    Connect(ID_BLANK_SCREEN, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnBlankScreen_click));
+    Connect(ID_STOP_ALL, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnStopAll_click));
+    Connect(ID_SHOW_SCREEN, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnShowScreen_click));
+    Connect(ID_WAIT, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEvtCmd::btnWait_click));
 }
 
 void DialogEvtCmd::set_properties()
@@ -566,247 +595,235 @@ void DialogEvtCmd::btnTransition_click(wxCommandEvent &WXUNUSED(event))
     dlgEvtCmdTransition->ShowModal();
     dlgEvtCmdTransition->Destroy();
 }
+
+void DialogEvtCmd::btnBattle_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdBattle *dlgEvtCmdBattle = new DialogEvtCmdBattle(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdBattle->SetFocus();
+    dlgEvtCmdBattle->ShowModal();
+    dlgEvtCmdBattle->Destroy();
+}
+
+void DialogEvtCmd::btnTone_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdTone *dlgEvtCmdTone = new DialogEvtCmdTone(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdTone->SetFocus();
+    dlgEvtCmdTone->ShowModal();
+    dlgEvtCmdTone->Destroy();
+}
+
+void DialogEvtCmd::btnCommerce_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdCommerce *dlgEvtCmdCommerce = new DialogEvtCmdCommerce(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdCommerce->SetFocus();
+    dlgEvtCmdCommerce->ShowModal();
+    dlgEvtCmdCommerce->Destroy();
+}
+
+void DialogEvtCmd::btnFlashScreen_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdFlashScreen *dlgEvtCmdFlashScreen = new DialogEvtCmdFlashScreen(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdFlashScreen->SetFocus();
+    dlgEvtCmdFlashScreen->ShowModal();
+    dlgEvtCmdFlashScreen->Destroy();
+}
+
+void DialogEvtCmd::btnInn_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdInn *dlgEvtCmdInn = new DialogEvtCmdInn(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdInn->SetFocus();
+    dlgEvtCmdInn->ShowModal();
+    dlgEvtCmdInn->Destroy();
+}
+
+void DialogEvtCmd::btnShake_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdShake *dlgEvtCmdShake = new DialogEvtCmdShake(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdShake->SetFocus();
+    dlgEvtCmdShake->ShowModal();
+    dlgEvtCmdShake->Destroy();
+}
+
+void DialogEvtCmd::btnActorNameInput_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdActorNameInput *dlgEvtCmdActorNameInput = new DialogEvtCmdActorNameInput(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdActorNameInput->SetFocus();
+    dlgEvtCmdActorNameInput->ShowModal();
+    dlgEvtCmdActorNameInput->Destroy();
+}
+
+void DialogEvtCmd::btnMoveScreen_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdMoveScreen *dlgEvtCmdMoveScreen = new DialogEvtCmdMoveScreen(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdMoveScreen->SetFocus();
+    dlgEvtCmdMoveScreen->ShowModal();
+    dlgEvtCmdMoveScreen->Destroy();
+}
+
+void DialogEvtCmd::btnTeleport_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdTeleport *dlgEvtCmdTeleport = new DialogEvtCmdTeleport(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdTeleport->SetFocus();
+    dlgEvtCmdTeleport->ShowModal();
+    dlgEvtCmdTeleport->Destroy();
+}
+
+void DialogEvtCmd::btnWeather_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdWeather *dlgEvtCmdWeather = new DialogEvtCmdWeather(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdWeather->SetFocus();
+    dlgEvtCmdWeather->ShowModal();
+    dlgEvtCmdWeather->Destroy();
+}
+
+void DialogEvtCmd::btnMemorizePlace_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdMemorizePlace *dlgEvtCmdMemorizePlace = new DialogEvtCmdMemorizePlace(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdMemorizePlace->SetFocus();
+    dlgEvtCmdMemorizePlace->ShowModal();
+    dlgEvtCmdMemorizePlace->Destroy();
+}
+
+void DialogEvtCmd::btnPicture_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdPicture *dlgEvtCmdPicture = new DialogEvtCmdPicture(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdPicture->SetFocus();
+    dlgEvtCmdPicture->ShowModal();
+    dlgEvtCmdPicture->Destroy();
+}
+
+void DialogEvtCmd::btnGoToMemorizedPlace_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdGoToMemorizedPlace *dlgEvtCmdGoToMemorizedPlace = new DialogEvtCmdGoToMemorizedPlace(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdGoToMemorizedPlace->SetFocus();
+    dlgEvtCmdGoToMemorizedPlace->ShowModal();
+    dlgEvtCmdGoToMemorizedPlace->Destroy();
+}
+
+void DialogEvtCmd::btnMovePicture_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdMovePicture *dlgEvtCmdMovePicture = new DialogEvtCmdMovePicture(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdMovePicture->SetFocus();
+    dlgEvtCmdMovePicture->ShowModal();
+    dlgEvtCmdMovePicture->Destroy();
+}
+
+void DialogEvtCmd::btnVehicle_click(wxCommandEvent &WXUNUSED(event))
+{
+}
+
+void DialogEvtCmd::btnDeletePicture_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdDeletePicture *dlgEvtCmdDeletePicture = new DialogEvtCmdDeletePicture(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdDeletePicture->SetFocus();
+    dlgEvtCmdDeletePicture->ShowModal();
+    dlgEvtCmdDeletePicture->Destroy();
+}
+
+void DialogEvtCmd::btnVehiclePosition_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdVehiclePosition *dlgEvtCmdVehiclePosition = new DialogEvtCmdVehiclePosition(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdVehiclePosition->SetFocus();
+    dlgEvtCmdVehiclePosition->ShowModal();
+    dlgEvtCmdVehiclePosition->Destroy();
+}
+
+void DialogEvtCmd::btnAnimation_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdAnimation *dlgEvtCmdAnimation = new DialogEvtCmdAnimation(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdAnimation->SetFocus();
+    dlgEvtCmdAnimation->ShowModal();
+    dlgEvtCmdAnimation->Destroy();
+}
+
+void DialogEvtCmd::btnEventPosition_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdEventPosition *dlgEvtCmdEventPosition = new DialogEvtCmdEventPosition(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdEventPosition->SetFocus();
+    dlgEvtCmdEventPosition->ShowModal();
+    dlgEvtCmdEventPosition->Destroy();
+}
+
+void DialogEvtCmd::btnActorTransparency_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdActorTransparency *dlgEvtCmdActorTransparency = new DialogEvtCmdActorTransparency(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdActorTransparency->SetFocus();
+    dlgEvtCmdActorTransparency->ShowModal();
+    dlgEvtCmdActorTransparency->Destroy();
+}
+
+void DialogEvtCmd::btnSwapEvents_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdSwapEvents *dlgEvtCmdSwapEvents = new DialogEvtCmdSwapEvents(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdSwapEvents->SetFocus();
+    dlgEvtCmdSwapEvents->ShowModal();
+    dlgEvtCmdSwapEvents->Destroy();
+}
+
+void DialogEvtCmd::btnFlashCharacter_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdFlashCharacter *dlgEvtCmdFlashCharacter = new DialogEvtCmdFlashCharacter(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdFlashCharacter->SetFocus();
+    dlgEvtCmdFlashCharacter->ShowModal();
+    dlgEvtCmdFlashCharacter->Destroy();
+}
+
+void DialogEvtCmd::btnGetTerrainID_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdGetTerrainID *dlgEvtCmdGetTerrainID = new DialogEvtCmdGetTerrainID(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdGetTerrainID->SetFocus();
+    dlgEvtCmdGetTerrainID->ShowModal();
+    dlgEvtCmdGetTerrainID->Destroy();
+}
+
+void DialogEvtCmd::btnEventMovement_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdEventMovement *dlgEvtCmdEventMovement = new DialogEvtCmdEventMovement(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdEventMovement->SetFocus();
+    dlgEvtCmdEventMovement->ShowModal();
+    dlgEvtCmdEventMovement->Destroy();
+}
+
+void DialogEvtCmd::btnGetPositionID_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdGetPositionID *dlgEvtCmdGetPositionID = new DialogEvtCmdGetPositionID(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdGetPositionID->SetFocus();
+    dlgEvtCmdGetPositionID->ShowModal();
+    dlgEvtCmdGetPositionID->Destroy();
+}
+
+void DialogEvtCmd::btnMoveAll_click(wxCommandEvent &WXUNUSED(event))
+{
+}
+
+void DialogEvtCmd::btnBlankScreen_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdBlankScreen *dlgEvtCmdBlankScreen = new DialogEvtCmdBlankScreen(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdBlankScreen->SetFocus();
+    dlgEvtCmdBlankScreen->ShowModal();
+    dlgEvtCmdBlankScreen->Destroy();
+}
+
+void DialogEvtCmd::btnStopAll_click(wxCommandEvent &WXUNUSED(event))
+{
+}
+
+void DialogEvtCmd::btnShowScreen_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdShowScreen *dlgEvtCmdShowScreen = new DialogEvtCmdShowScreen(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdShowScreen->SetFocus();
+    dlgEvtCmdShowScreen->ShowModal();
+    dlgEvtCmdShowScreen->Destroy();
+}
+
+void DialogEvtCmd::btnWait_click(wxCommandEvent &WXUNUSED(event))
+{
+    DialogEvtCmdWait *dlgEvtCmdWait = new DialogEvtCmdWait(this, wxID_ANY, wxEmptyString);
+    dlgEvtCmdWait->SetFocus();
+    dlgEvtCmdWait->ShowModal();
+    dlgEvtCmdWait->Destroy();
+}
 /*
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
-void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
-{
-    DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
-    dlgEvtCmd->SetFocus();
-    dlgEvtCmd->ShowModal();
-    dlgEvtCmd->Destroy();
-}
-
 void DialogEvtCmd::(wxCommandEvent &WXUNUSED(event))
 {
     DialogEvtCmd *dlgEvtCmd = new DialogEvtCmd(this, wxID_ANY, wxEmptyString);
