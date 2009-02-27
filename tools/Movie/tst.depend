@@ -1,0 +1,164 @@
+# depslib dependency file v1.0
+1235719736 source:/home/memoi/Documents/Progras/tst/src/main.cpp
+	<iostream>
+	"../include/Movie.h"
+
+1235719871 source:/home/memoi/Documents/Progras/tst/src/Movie.cpp
+	<iostream>
+	"../include/Movie.h"
+
+1235707884 /home/memoi/Documents/Progras/tst/include/Movie.h
+	<cstring>
+	<SDL/SDL.h>
+	<SDL/SDL_thread.h>
+	<ffmpeg/avcodec.h>
+	<ffmpeg/avformat.h>
+	<ffmpeg/swscale.h>
+
+1235660276 source:/home/memoi/Documents/Progras/tst/src/tutorial01.c
+	"libavcodec/avcodec.h"
+	"libavformat/avformat.h"
+	<stdio.h>
+
+1235656572 source:/home/memoi/Documents/Progras/ffmpeg/libavcodec/imgconvert.c
+	"avcodec.h"
+	"dsputil.h"
+	"colorspace.h"
+	"x86/mmx.h"
+	"x86/dsputil_mmx.h"
+	"imgconvert_template.c"
+	"imgconvert_template.c"
+	"imgconvert_template.c"
+	"imgconvert_template.c"
+	"imgconvert_template.c"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavcodec/avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/mem.h
+	"common.h"
+
+1235665056 /home/memoi/Documents/Progras/ffmpeg/config.h
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/rational.h
+	<stdint.h>
+	"common.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/log.h
+	<stdarg.h>
+	"avutil.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/pixfmt.h
+
+1235659977 /home/memoi/Documents/Progras/ffmpeg/libavcodec/dsputil.h
+	"libavutil/intreadwrite.h"
+	"avcodec.h"
+
+1235659977 /home/memoi/Documents/Progras/ffmpeg/libavutil/intreadwrite.h
+	<stdint.h>
+	"config.h"
+	"bswap.h"
+
+1235659977 /home/memoi/Documents/Progras/ffmpeg/libavutil/bswap.h
+	<stdint.h>
+	"config.h"
+	"common.h"
+	"arm/bswap.h"
+	"bfin/bswap.h"
+	"sh4/bswap.h"
+	"x86/bswap.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/arm/bswap.h
+	<stdint.h>
+	"config.h"
+	"libavutil/common.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/bfin/bswap.h
+	<stdint.h>
+	"config.h"
+	"libavutil/common.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavutil/sh4/bswap.h
+	<stdint.h>
+	"config.h"
+	"libavutil/common.h"
+
+1235659977 /home/memoi/Documents/Progras/ffmpeg/libavutil/x86/bswap.h
+	<stdint.h>
+	"config.h"
+	"libavutil/common.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavcodec/colorspace.h
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavcodec/x86/mmx.h
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavcodec/x86/dsputil_mmx.h
+	<stdint.h>
+	"libavcodec/dsputil.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavcodec/imgconvert_template.c
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavformat/avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavformat/avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1235656572 /home/memoi/Documents/Progras/ffmpeg/libavcodec/imgconvert.h
+	<stdint.h>
+	"avcodec.h"
+
+1235656759 /home/memoi/Documents/Progras/ffmpeg/libswscale/swscale.h
+	"libavutil/avutil.h"
+
