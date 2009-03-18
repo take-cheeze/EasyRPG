@@ -25,7 +25,7 @@ DialogEvtCmdKeyAssignment::DialogEvtCmdKeyAssignment(wxWindow* parent, int id, c
     chbShift = new wxCheckBox(this, wxID_ANY, _("Shift key (7)"));
     chbUp = new wxCheckBox(this, wxID_ANY, _("Up (4)"));
     btnOK = new wxButton(this, wxID_OK, wxEmptyString);
-    btnCancel = new wxButton(this, wxID_ANY, _("&Cancel"));
+    btnCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"));
     btnHelp = new wxButton(this, wxID_HELP, wxEmptyString);
 
     set_properties();
