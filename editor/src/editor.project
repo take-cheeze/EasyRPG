@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="editor">
+  <Dependencies/>
+  <Settings Type="Executable">
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger">
+      <General OutputFile="$(IntermediateDirectory)/editor" IntermediateDirectory="../bin" Command="./editor" CommandArguments="" WorkingDirectory="$(IntermediateDirectory)"/>
+      <Compiler Required="yes" Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes)">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Required="yes" Options="-O2;$(shell wx-config --debug=yes --libs --unicode=yes);"/>
+      <ResourceCompiler Required="yes" Options="$(shell wx-config --cflags)"/>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <CleanCommand/>
+        <BuildCommand/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger">
+      <General OutputFile="$(IntermediateDirectory)/editor" IntermediateDirectory="../bin" Command="./editor" CommandArguments="" WorkingDirectory="$(IntermediateDirectory)"/>
+      <Compiler Required="yes" Options=";$(shell wx-config --cxxflags --unicode=yes --debug=no)">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Required="yes" Options="-O2;$(shell wx-config --debug=no --libs --unicode=yes);"/>
+      <ResourceCompiler Required="yes" Options="$(shell wx-config --cflags)"/>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <CleanCommand/>
+        <BuildCommand/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+  </Settings>
+  <VirtualDirectory Name="src">
+    <File Name="DialogEvtCmdMemorizePlace.cpp"/>
+    <File Name="DialogEvtCmdBlankScreen.h"/>
+    <File Name="DialogEvtCmdActorTitle.h"/>
+    <File Name="DialogEvtCmdEventMovement.h"/>
+    <File Name="DialogEvtCmdPlayVideo.cpp"/>
+    <File Name="DialogEvtCmdCommerce.cpp"/>
+    <File Name="DialogEvtCmdActorNameInput.h"/>
+    <File Name="DialogEvtCmdShake.cpp"/>
+    <File Name="DialogEvtCmdMessage.cpp"/>
+    <File Name="DialogEvtCmdSwitch.h"/>
+    <File Name="DialogEvtCmd.h"/>
+    <File Name="DialogEvtCmdNotes.h"/>
+    <File Name="FrameEditor.cpp"/>
+    <File Name="DialogEvtCmdEventMovement.cpp"/>
+    <File Name="DialogEvtCmdBattle.h"/>
+    <File Name="DialogEvtCmdTone.cpp"/>
+    <File Name="DialogEvtCmdConditions.h"/>
+    <File Name="DialogDbSelectAnyGraphic.cpp"/>
+    <File Name="DialogEvtCmdSavePermissions.h"/>
+    <File Name="DialogEvtCmdVehicleGraphic.cpp"/>
+    <File Name="DialogEvtCmdBattle.cpp"/>
+    <File Name="DialogEvtCmdPlaySound.cpp"/>
+    <File Name="DialogMaterial.cpp"/>
+    <File Name="DialogEvtCmdBlankScreen.cpp"/>
+    <File Name="DialogEvtCmdSystemMusic.cpp"/>
+    <File Name="DialogEvtCmdWeather.cpp"/>
+    <File Name="DialogEvtCmdSkill.cpp"/>
+    <File Name="DialogEvtCmdConditions.cpp"/>
+    <File Name="DialogEvtCmd.cpp"/>
+    <File Name="DialogEvtCmdDamage.h"/>
+    <File Name="DialogEvtCmdEscapePermissions.cpp"/>
+    <File Name="DialogEvtCmdTone.h"/>
+    <File Name="DialogEvtCmdItem.h"/>
+    <File Name="DialogEvtCmdVariable.cpp"/>
+    <File Name="DialogEvtCmdPlayMusic.h"/>
+    <File Name="DialogEvtCmdMP.cpp"/>
+    <File Name="DialogEvtCmdMessage.h"/>
+    <File Name="DialogEvtCmdItem.cpp"/>
+    <File Name="DialogEvtCmdActorNameInput.cpp"/>
+    <File Name="DialogEvtCmdInn.cpp"/>
+    <File Name="DialogEvtCmdSwitch.cpp"/>
+    <File Name="main.cpp"/>
+    <File Name="DialogEvtCmdEventPosition.cpp"/>
+    <File Name="DialogEvtCmdTeleportPermissions.cpp"/>
+    <File Name="DialogEvtCmdActorGraphic.cpp"/>
+    <File Name="DialogEvtCmdMoney.cpp"/>
+    <File Name="DialogDbMaxNumber.h"/>
+    <File Name="DialogEvtCmdTimer.h"/>
+    <File Name="DialogEvtCmdSystemMusic.h"/>
+    <File Name="DialogEvtCmdWait.h"/>
+    <File Name="FrameEditor.h"/>
+    <File Name="DialogEvtCmdPlayVideo.h"/>
+    <File Name="DialogEvtCmdSavePermissions.cpp"/>
+    <File Name="DialogEvtCmdFlashScreen.h"/>
+    <File Name="DialogEvtCmdFlashCharacter.h"/>
+    <File Name="DialogEvt.cpp"/>
+    <File Name="DialogEvtCmdInn.h"/>
+    <File Name="DialogEvtCmdVehiclePosition.cpp"/>
+    <File Name="DialogEvtCmdPicture.h"/>
+    <File Name="DialogEvtCmdTeleport.cpp"/>
+    <File Name="DialogEvtCmdTileset.h"/>
+    <File Name="DialogEvtCmdSystemMenuPermissions.h"/>
+    <File Name="DialogEvtCmdChoice.cpp"/>
+    <File Name="DialogEvtCmdDamage.cpp"/>
+    <File Name="DialogMaterial.h"/>
+    <File Name="DialogEvtCmdEscapePermissions.h"/>
+    <File Name="DialogEvtCmdSkill.h"/>
+    <File Name="DialogEvtCmdRecover.h"/>
+    <File Name="DialogEvtCmdNumberInput.h"/>
+    <File Name="DialogEvtCmdDeletePicture.h"/>
+    <File Name="DialogEvtCmdActorTransparency.cpp"/>
+    <File Name="DialogEvtCmdTile.h"/>
+    <File Name="DialogEvtCmdExperience.h"/>
+    <File Name="DialogEvtCmdTeleportPlace.h"/>
+    <File Name="DialogEvtCmdFlashCharacter.cpp"/>
+    <File Name="DialogEvtCmdParameter.cpp"/>
+    <File Name="DialogEvtCmdShake.h"/>
+    <File Name="DialogEvtCmdEncounterRate.cpp"/>
+    <File Name="DialogEvtCmdLevel.cpp"/>
+    <File Name="DialogEvtCmdSystemSound.cpp"/>
+    <File Name="DialogEvtCmdSwapEvents.cpp"/>
+    <File Name="DialogEvtCmdActorName.cpp"/>
+    <File Name="DialogEvtCmdKeyAssignment.h"/>
+    <File Name="DialogEvtCmdEscapePlace.cpp"/>
+    <File Name="DialogEvtCmdPlayMusic.cpp"/>
+    <File Name="DialogEvtCmdGetPositionID.cpp"/>
+    <File Name="DialogEvtCmdShowScreen.cpp"/>
+    <File Name="DialogEvtCmdGoToMemorizedPlace.cpp"/>
+    <File Name="DialogEvtCmdLabel.h"/>
+    <File Name="DialogEvtCmdParameter.h"/>
+    <File Name="DialogEvtCmdActorTitle.cpp"/>
+    <File Name="DialogEvtCmdWeather.h"/>
+    <File Name="DialogEvtCmdSystemGraphic.h"/>
+    <File Name="DialogEvtCmdSystemMenuPermissions.cpp"/>
+    <File Name="DialogEvtCmdCommerce.h"/>
+    <File Name="DialogEvtCmdActorName.h"/>
+    <File Name="DialogEvtCmdParty.cpp"/>
+    <File Name="DialogEvtCmdPicture.cpp"/>
+    <File Name="DialogEvtCmdTimer.cpp"/>
+    <File Name="DialogEvtCmdSwapEvents.h"/>
+    <File Name="DialogEvtCmdActorTransparency.h"/>
+    <File Name="DialogEvtCmdEscapePlace.h"/>
+    <File Name="DialogEvtCmdMoney.h"/>
+    <File Name="DialogEvtCmdVariable.h"/>
+    <File Name="DialogEvtCmdPlaySound.h"/>
+    <File Name="DialogEvtCmdMoveScreen.cpp"/>
+    <File Name="DialogEvtCmdEventPosition.h"/>
+    <File Name="DialogDbLearnSkill.h"/>
+    <File Name="DialogEvtCmdSystemSound.h"/>
+    <File Name="DialogEvtCmdLabel.cpp"/>
+    <File Name="DialogEvtCmdTeleportPermissions.h"/>
+    <File Name="DialogEvtCmdGoToLabel.cpp"/>
+    <File Name="DialogEvtCmdStatus.cpp"/>
+    <File Name="DialogEvtCmdFaceGraphic.h"/>
+    <File Name="DialogEvtCmdEncounterRate.h"/>
+    <File Name="DialogEvtCmdFlashScreen.cpp"/>
+    <File Name="DialogEvtCmdKeyAssignment.cpp"/>
+    <File Name="DialogEvtCmdMessageOptions.cpp"/>
+    <File Name="DialogEvtCmdPanorama.cpp"/>
+    <File Name="DialogEvtCmdFadeMusic.cpp"/>
+    <File Name="DialogEvtCmdTransition.cpp"/>
+    <File Name="DialogEvtCmdEquipment.cpp"/>
+    <File Name="DialogEvtCmdAnimation.h"/>
+    <File Name="DialogDb.cpp"/>
+    <File Name="DialogEvtCmdPanorama.h"/>
+    <File Name="DialogDbSelectAnyGraphic.h"/>
+    <File Name="DialogEvtCmdTileset.cpp"/>
+    <File Name="DialogEvtCmdFadeMusic.h"/>
+    <File Name="DialogEvtCmdVehicleGraphic.h"/>
+    <File Name="DialogEvtCmdTile.cpp"/>
+    <File Name="DialogEvtCmdGetTerrainID.h"/>
+    <File Name="DialogEvtCmdGoToMemorizedPlace.h"/>
+    <File Name="DialogEvtCmdMovePicture.h"/>
+    <File Name="DialogEvtCmdChoice.h"/>
+    <File Name="DialogEvtCmdCallEvent.h"/>
+    <File Name="DialogEvtCmdWait.cpp"/>
+    <File Name="DialogEvtCmdGetTerrainID.cpp"/>
+    <File Name="DialogEvtCmdTeleport.h"/>
+    <File Name="DialogEvtCmdGoToLabel.h"/>
+    <File Name="DialogEvtCmdGetPositionID.h"/>
+    <File Name="DialogEvtCmdNotes.cpp"/>
+    <File Name="DialogEvtCmdParty.h"/>
+    <File Name="DialogEvtCmdActorGraphic.h"/>
+    <File Name="DialogEvtCmdTeleportPlace.cpp"/>
+    <File Name="DialogEvtCmdEquipment.h"/>
+    <File Name="DialogEvtCmdShowScreen.h"/>
+    <File Name="DialogEvtCmdHP.h"/>
+    <File Name="DialogEvtCmdStatus.h"/>
+    <File Name="DialogEvtCmdMoveScreen.h"/>
+    <File Name="DialogEvtCmdCallEvent.cpp"/>
+    <File Name="DialogEvtCmdDeletePicture.cpp"/>
+    <File Name="DialogEvtCmdExperience.cpp"/>
+    <File Name="DialogEvtCmdAnimation.cpp"/>
+    <File Name="DialogDb.h"/>
+    <File Name="DialogEvtCmdNumberInput.cpp"/>
+    <File Name="DialogEvtCmdMessageOptions.h"/>
+    <File Name="DialogDbLearnSkill.cpp"/>
+    <File Name="DialogEvtCmdVehiclePosition.h"/>
+    <File Name="DialogMap.h"/>
+    <File Name="DialogEvtCmdFaceGraphic.cpp"/>
+    <File Name="DialogEvtCmdSystemGraphic.cpp"/>
+    <File Name="DialogEvtCmdTransition.h"/>
+    <File Name="DialogEvtCmdActorFaceGraphic.cpp"/>
+    <File Name="DialogEvtCmdMP.h"/>
+    <File Name="DialogEvt.h"/>
+    <File Name="DialogMap.cpp"/>
+    <File Name="DialogEvtCmdLevel.h"/>
+    <File Name="DialogEvtCmdMemorizePlace.h"/>
+    <File Name="DialogDbMaxNumber.cpp"/>
+    <File Name="DialogEvtCmdRecover.cpp"/>
+    <File Name="DialogEvtCmdMovePicture.cpp"/>
+    <File Name="DialogEvtCmdActorFaceGraphic.h"/>
+    <File Name="DialogEvtCmdHP.cpp"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+</CodeLite_Project>
