@@ -214,5 +214,6 @@
     <File Name="DialogEvtCmdActorFaceGraphic.h"/>
     <File Name="DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
+  <Dependencies Name="Release"/>
   <Dependencies Name="Debug"/>
 </CodeLite_Project>
