@@ -15,9 +15,6 @@ DialogEvtCmdAnimation.cpp \
 DialogEvtCmdBattle.cpp \
 DialogEvtCmdBlankScreen.cpp \
 DialogEvtCmdCallEvent.cpp \
-DialogEvtCmdChangeEscapePlace.cpp \
-DialogEvtCmdChangeLevel.cpp \
-DialogEvtCmdChangeVehiclePosition.cpp \
 DialogEvtCmdChoice.cpp \
 DialogEvtCmdCommerce.cpp \
 DialogEvtCmdConditions.cpp \
@@ -27,6 +24,7 @@ DialogEvtCmdDeletePicture.cpp \
 DialogEvtCmdEncounterRate.cpp \
 DialogEvtCmdEquipment.cpp \
 DialogEvtCmdEscapePermissions.cpp \
+DialogEvtCmdEscapePlace.cpp \
 DialogEvtCmdEventMovement.cpp \
 DialogEvtCmdEventPosition.cpp \
 DialogEvtCmdExperience.cpp \
@@ -43,6 +41,7 @@ DialogEvtCmdInn.cpp \
 DialogEvtCmdItem.cpp \
 DialogEvtCmdKeyAssignment.cpp \
 DialogEvtCmdLabel.cpp \
+DialogEvtCmdLevel.cpp \
 DialogEvtCmdMemorizePlace.cpp \
 DialogEvtCmdMessage.cpp \
 DialogEvtCmdMessageOptions.cpp \
@@ -64,7 +63,7 @@ DialogEvtCmdSavePermissions.cpp \
 DialogEvtCmdShake.cpp \
 DialogEvtCmdShowScreen.cpp \
 DialogEvtCmdSkill.cpp \
-DialogEvtCmdState.cpp \
+DialogEvtCmdStatus.cpp \
 DialogEvtCmdSwapEvents.cpp \
 DialogEvtCmdSwitch.cpp \
 DialogEvtCmdSystemGraphic.cpp \
@@ -81,11 +80,12 @@ DialogEvtCmdTone.cpp \
 DialogEvtCmdTransition.cpp \
 DialogEvtCmdVariable.cpp \
 DialogEvtCmdVehicleGraphic.cpp \
+DialogEvtCmdVehiclePosition.cpp \
 DialogEvtCmdWait.cpp \
 DialogEvtCmdWeather.cpp \
 DialogEvt.cpp \
 DialogMap.cpp \
 DialogMaterial.cpp \
-easyrpg.cpp \
 FrameEditor.cpp \
-main.cpp \
+main.cpp
+

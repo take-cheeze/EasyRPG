@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Project Name="editor">
   <Dependencies/>
-  <Settings Type="Executable">
-    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger">
-      <General OutputFile="$(IntermediateDirectory)/editor" IntermediateDirectory="../bin" Command="./editor" CommandArguments="" WorkingDirectory="$(IntermediateDirectory)"/>
-      <Compiler Required="yes" Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes)">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Required="yes" Options="-O2;$(shell wx-config --debug=yes --libs --unicode=yes);"/>
-      <ResourceCompiler Required="yes" Options="$(shell wx-config --cflags)"/>
-      <PreBuild/>
-      <PostBuild/>
-      <CustomBuild Enabled="no">
-        <CleanCommand/>
-        <BuildCommand/>
-      </CustomBuild>
-      <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
-      </AdditionalRules>
-    </Configuration>
-    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger">
-      <General OutputFile="$(IntermediateDirectory)/editor" IntermediateDirectory="../bin" Command="./editor" CommandArguments="" WorkingDirectory="$(IntermediateDirectory)"/>
-      <Compiler Required="yes" Options=";$(shell wx-config --cxxflags --unicode=yes --debug=no)">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Required="yes" Options="-O2;$(shell wx-config --debug=no --libs --unicode=yes);"/>
-      <ResourceCompiler Required="yes" Options="$(shell wx-config --cflags)"/>
-      <PreBuild/>
-      <PostBuild/>
-      <CustomBuild Enabled="no">
-        <CleanCommand/>
-        <BuildCommand/>
-      </CustomBuild>
-      <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
-      </AdditionalRules>
-    </Configuration>
-  </Settings>
   <VirtualDirectory Name="src">
     <File Name="DialogEvtCmdMemorizePlace.cpp"/>
     <File Name="DialogEvtCmdBlankScreen.h"/>
@@ -215,5 +177,68 @@
     <File Name="DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Release"/>
+  <Settings Type="Executable">
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="$(shell wx-config --cxxflags --unicode=yes --debug=yes);-g;" Required="yes"/>
+      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes);" Required="yes"/>
+      <ResourceCompiler Options="" Required="yes"/>
+      <General OutputFile="../bin/editor" IntermediateDirectory="../.obj" Command="../bin/editor" CommandArguments="" WorkingDirectory="../bin/" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands></PostConnectCommands>
+        <StartupCommands></StartupCommands>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <CleanCommand></CleanCommand>
+        <BuildCommand></BuildCommand>
+        <PreprocessFileCommand></PreprocessFileCommand>
+        <SingleFileCommand></SingleFileCommand>
+        <MakefileGenerationCommand></MakefileGenerationCommand>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory></WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild></CustomPostBuild>
+        <CustomPreBuild>
+
+</CustomPreBuild>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes"/>
+      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=no);" Required="yes"/>
+      <ResourceCompiler Options="" Required="yes"/>
+      <General OutputFile="../bin/editor" IntermediateDirectory="../.obj" Command="../bin/editor" CommandArguments="" WorkingDirectory="../bin/" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands></PostConnectCommands>
+        <StartupCommands></StartupCommands>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <CleanCommand></CleanCommand>
+        <BuildCommand></BuildCommand>
+        <PreprocessFileCommand></PreprocessFileCommand>
+        <SingleFileCommand></SingleFileCommand>
+        <MakefileGenerationCommand></MakefileGenerationCommand>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory></WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild></CustomPostBuild>
+        <CustomPreBuild>
+
+</CustomPreBuild>
+      </AdditionalRules>
+    </Configuration>
+    <GlobalSettings>
+      <Compiler Options="-Wall;-Wextra;-ansi;">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2;"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+  </Settings>
   <Dependencies Name="Debug"/>
 </CodeLite_Project>

@@ -1,9 +1,25 @@
+/* This file is part of EasyRPG editor.
+Copyright (C) 2007-2009 EasyRPG Project <http://easyrpg.sourceforge.net/>.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see <http://www.gnu.org/licenses/>.*/
+
 #include <wx/wx.h>
 #include "FrameEditor.h"
 #include "DialogDb.h"
 
 FrameEditor::FrameEditor():
-    wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
+        wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
 {
     swEditor = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_BORDER);
     pnEditorMapTree = new wxPanel(swEditor, wxID_ANY);
@@ -89,7 +105,8 @@ FrameEditor::FrameEditor():
     set_properties();
     do_layout();
 
-   	Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
+    Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
+    Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
 }
 
 void FrameEditor::set_properties()
@@ -103,7 +120,7 @@ void FrameEditor::set_properties()
     const wxString frmEditorStatusbar_fields[] = {
         wxEmptyString
     };
-    for(int i = 0; i < frmEditorStatusbar->GetFieldsCount(); ++i) {
+    for (int i = 0; i < frmEditorStatusbar->GetFieldsCount(); ++i) {
         frmEditorStatusbar->SetStatusText(frmEditorStatusbar_fields[i], i);
     }
     pnEditorTileset->SetMinSize(wxSize(217, 96));
@@ -111,6 +128,24 @@ void FrameEditor::set_properties()
     tcMapTree->SetMinSize(wxSize(212, 128));
     pnEditorMap->SetScrollRate(32, 32);
     SetMinSize(wxSize(700, 400));
+    //Using native stock icons for treectrl for better looking
+    //wxArtProvider does not load native Win32 icons, so we will get from our own technique
+#ifdef __WXMSW__
+    //Win32 TreeCtrl works only with 16x16 images
+    wxImageList* ilMapTree = new wxImageList(16, 16);
+    // The number next filename and semicolon is the resource index number
+    // The returned bitmap is an icon, not resource icon due previous resource index selection
+    // 16x16 is desired size, gets the 16x16 icon version instead of 32x32
+    ilMapTree->Add(wxIcon(_T("shell32.dll;3"), wxBITMAP_TYPE_ICO, 16, 16)); // 3 is closed folder
+    ilMapTree->Add(wxIcon(_T("shell32.dll;4"), wxBITMAP_TYPE_ICO, 16, 16)); // 4 is opened folder
+    ilMapTree->Add(wxIcon(_T("shell32.dll;0"), wxBITMAP_TYPE_ICO, 16, 16)); // 0 is normal file
+#else
+    wxImageList* ilMapTree = new wxImageList;
+    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_FOLDER));
+    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_FILE_OPEN));
+    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_NORMAL_FILE));
+#endif
+    tcMapTree->AssignImageList(ilMapTree);
 }
 
 void FrameEditor::do_layout()
@@ -125,6 +160,11 @@ void FrameEditor::do_layout()
     SetSizer(szEditor);
     szEditor->Fit(this);
     Layout();
+    wxTreeItemId tiMapTreeRoot = tcMapTree->AddRoot(_T("Root"), 1, 0);
+    tcMapTree->AppendItem(tiMapTreeRoot, _T("Node 1"), 2);
+    tcMapTree->AppendItem(tiMapTreeRoot, _T("Node 2"), 2);
+    tcMapTree->AppendItem(tiMapTreeRoot, _T("Node 3"), 2);
+    tcMapTree->ExpandAll();
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
@@ -133,4 +173,9 @@ void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
     dlgDb->SetFocus();
     dlgDb->ShowModal();
     dlgDb->Destroy();
+}
+
+void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
+{
+    Destroy();
 }
