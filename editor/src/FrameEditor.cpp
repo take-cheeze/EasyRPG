@@ -182,6 +182,7 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
     {
         wxMessageBox(dlgOpen->GetPath());
     }
+    dlgOpen->Destroy();
 }
 
 void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
