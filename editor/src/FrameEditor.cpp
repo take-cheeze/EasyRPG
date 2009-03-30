@@ -104,9 +104,10 @@ FrameEditor::FrameEditor():
 
     set_properties();
     do_layout();
-
-    Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
+    
+    Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
+    Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
 }
 
 void FrameEditor::set_properties()
@@ -167,15 +168,31 @@ void FrameEditor::do_layout()
     tcMapTree->ExpandAll();
 }
 
+void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
+{
+    wxFileDialog *dlgOpen = new wxFileDialog(this);
+    dlgOpen->SetMessage(_("Select LcfMapTree file"));
+#ifdef __WXGTK__
+    // GTK+ is file name case sensitive
+    dlgOpen->SetWildcard(_("LMT files (*.lmt)|*.[lL][mM][tT]"));
+#else
+    dlgOpen->SetWildcard(_("LMT files (*.lmt)|*.lmt"));
+#endif
+    if (dlgOpen->ShowModal() == wxID_OK)
+    {
+        wxMessageBox(dlgOpen->GetPath());
+    }
+}
+
+void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
+{
+    Destroy();
+}
+
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
     DialogDb *dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
     dlgDb->SetFocus();
     dlgDb->ShowModal();
     dlgDb->Destroy();
-}
-
-void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
-{
-    Destroy();
 }

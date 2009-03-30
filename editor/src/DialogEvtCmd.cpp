@@ -175,7 +175,7 @@ DialogEvtCmd::DialogEvtCmd(wxWindow* parent, int id, const wxString& title, cons
     btnGameOver = new wxButton(pnEvtCmd3, ID_GAME_OVER, _("Game over"));
     btnEscapePermissions = new wxButton(pnEvtCmd3, ID_ESCAPE_PERMISSIONS, _("Escape permissions..."));
     btnGoToTitle = new wxButton(pnEvtCmd3, ID_GO_TO_TITLE, _("Go to title screen"));
-    btnClose = new wxButton(this, wxID_CANCEL, wxEmptyString);
+    btnClose = new wxButton(this, wxID_CLOSE, wxEmptyString);
 
     set_properties();
     do_layout();
@@ -276,6 +276,7 @@ void DialogEvtCmd::set_properties()
 {
     SetTitle(_("Command list"));
     btnClose->SetDefault();
+    SetEscapeId(wxID_CLOSE);
 }
 
 void DialogEvtCmd::do_layout()

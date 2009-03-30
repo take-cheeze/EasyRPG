@@ -99,6 +99,7 @@ private:
     void btnGameOver_click(wxCommandEvent &WXUNUSED(event));
     void btnEscapePermissions_click(wxCommandEvent &WXUNUSED(event));
     void btnGoToTitle_click(wxCommandEvent &WXUNUSED(event));
+
 protected:
     wxButton* btnMessage;
     wxButton* btnEquipment;

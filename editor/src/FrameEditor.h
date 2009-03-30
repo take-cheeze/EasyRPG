@@ -29,6 +29,7 @@ public:
 private:
     void set_properties();
     void do_layout();
+    void open_click(wxCommandEvent &WXUNUSED(event));
     void exit_click(wxCommandEvent &WXUNUSED(event));
     void database_click(wxCommandEvent &WXUNUSED(event));
 protected:
