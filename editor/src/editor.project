@@ -176,7 +176,6 @@
     <File Name="DialogEvtCmdActorFaceGraphic.h"/>
     <File Name="DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
-  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="$(shell wx-config --cxxflags --unicode=yes --debug=yes);-g;" Required="yes"/>
@@ -237,4 +236,5 @@
     </GlobalSettings>
   </Settings>
   <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>

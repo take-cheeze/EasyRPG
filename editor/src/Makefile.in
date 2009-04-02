@@ -47,7 +47,69 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_easyrpg_OBJECTS = easyrpg.$(OBJEXT)
+am_easyrpg_OBJECTS = DialogDb.$(OBJEXT) DialogDbLearnSkill.$(OBJEXT) \
+	DialogDbMaxNumber.$(OBJEXT) DialogDbSelectAnyGraphic.$(OBJEXT) \
+	DialogEvtCmdActorFaceGraphic.$(OBJEXT) \
+	DialogEvtCmdActorGraphic.$(OBJEXT) \
+	DialogEvtCmdActorName.$(OBJEXT) \
+	DialogEvtCmdActorNameInput.$(OBJEXT) \
+	DialogEvtCmdActorTitle.$(OBJEXT) \
+	DialogEvtCmdActorTransparency.$(OBJEXT) \
+	DialogEvtCmdAnimation.$(OBJEXT) DialogEvtCmdBattle.$(OBJEXT) \
+	DialogEvtCmdBlankScreen.$(OBJEXT) \
+	DialogEvtCmdCallEvent.$(OBJEXT) DialogEvtCmdChoice.$(OBJEXT) \
+	DialogEvtCmdCommerce.$(OBJEXT) \
+	DialogEvtCmdConditions.$(OBJEXT) DialogEvtCmd.$(OBJEXT) \
+	DialogEvtCmdDamage.$(OBJEXT) \
+	DialogEvtCmdDeletePicture.$(OBJEXT) \
+	DialogEvtCmdEncounterRate.$(OBJEXT) \
+	DialogEvtCmdEquipment.$(OBJEXT) \
+	DialogEvtCmdEscapePermissions.$(OBJEXT) \
+	DialogEvtCmdEscapePlace.$(OBJEXT) \
+	DialogEvtCmdEventMovement.$(OBJEXT) \
+	DialogEvtCmdEventPosition.$(OBJEXT) \
+	DialogEvtCmdExperience.$(OBJEXT) \
+	DialogEvtCmdFaceGraphic.$(OBJEXT) \
+	DialogEvtCmdFadeMusic.$(OBJEXT) \
+	DialogEvtCmdFlashCharacter.$(OBJEXT) \
+	DialogEvtCmdFlashScreen.$(OBJEXT) \
+	DialogEvtCmdGetPositionID.$(OBJEXT) \
+	DialogEvtCmdGetTerrainID.$(OBJEXT) \
+	DialogEvtCmdGoToLabel.$(OBJEXT) \
+	DialogEvtCmdGoToMemorizedPlace.$(OBJEXT) \
+	DialogEvtCmdHP.$(OBJEXT) DialogEvtCmdInn.$(OBJEXT) \
+	DialogEvtCmdItem.$(OBJEXT) DialogEvtCmdKeyAssignment.$(OBJEXT) \
+	DialogEvtCmdLabel.$(OBJEXT) DialogEvtCmdLevel.$(OBJEXT) \
+	DialogEvtCmdMemorizePlace.$(OBJEXT) \
+	DialogEvtCmdMessage.$(OBJEXT) \
+	DialogEvtCmdMessageOptions.$(OBJEXT) \
+	DialogEvtCmdMoney.$(OBJEXT) DialogEvtCmdMovePicture.$(OBJEXT) \
+	DialogEvtCmdMoveScreen.$(OBJEXT) DialogEvtCmdMP.$(OBJEXT) \
+	DialogEvtCmdNotes.$(OBJEXT) DialogEvtCmdNumberInput.$(OBJEXT) \
+	DialogEvtCmdPanorama.$(OBJEXT) DialogEvtCmdParameter.$(OBJEXT) \
+	DialogEvtCmdParty.$(OBJEXT) DialogEvtCmdPicture.$(OBJEXT) \
+	DialogEvtCmdPlayMusic.$(OBJEXT) \
+	DialogEvtCmdPlaySound.$(OBJEXT) \
+	DialogEvtCmdPlayVideo.$(OBJEXT) DialogEvtCmdRecover.$(OBJEXT) \
+	DialogEvtCmdSavePermissions.$(OBJEXT) \
+	DialogEvtCmdShake.$(OBJEXT) DialogEvtCmdShowScreen.$(OBJEXT) \
+	DialogEvtCmdSkill.$(OBJEXT) DialogEvtCmdStatus.$(OBJEXT) \
+	DialogEvtCmdSwapEvents.$(OBJEXT) DialogEvtCmdSwitch.$(OBJEXT) \
+	DialogEvtCmdSystemGraphic.$(OBJEXT) \
+	DialogEvtCmdSystemMenuPermissions.$(OBJEXT) \
+	DialogEvtCmdSystemMusic.$(OBJEXT) \
+	DialogEvtCmdSystemSound.$(OBJEXT) \
+	DialogEvtCmdTeleport.$(OBJEXT) \
+	DialogEvtCmdTeleportPermissions.$(OBJEXT) \
+	DialogEvtCmdTeleportPlace.$(OBJEXT) DialogEvtCmdTile.$(OBJEXT) \
+	DialogEvtCmdTileset.$(OBJEXT) DialogEvtCmdTimer.$(OBJEXT) \
+	DialogEvtCmdTone.$(OBJEXT) DialogEvtCmdTransition.$(OBJEXT) \
+	DialogEvtCmdVariable.$(OBJEXT) \
+	DialogEvtCmdVehicleGraphic.$(OBJEXT) \
+	DialogEvtCmdVehiclePosition.$(OBJEXT) \
+	DialogEvtCmdWait.$(OBJEXT) DialogEvtCmdWeather.$(OBJEXT) \
+	DialogEvt.$(OBJEXT) DialogMap.$(OBJEXT) \
+	DialogMaterial.$(OBJEXT) FrameEditor.$(OBJEXT) main.$(OBJEXT)
 easyrpg_OBJECTS = $(am_easyrpg_OBJECTS)
 easyrpg_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -156,7 +218,95 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-easyrpg_SOURCES = easyrpg.cpp
+easyrpg_SOURCES = \
+DialogDb.cpp \
+DialogDbLearnSkill.cpp \
+DialogDbMaxNumber.cpp \
+DialogDbSelectAnyGraphic.cpp \
+DialogEvtCmdActorFaceGraphic.cpp \
+DialogEvtCmdActorGraphic.cpp \
+DialogEvtCmdActorName.cpp \
+DialogEvtCmdActorNameInput.cpp \
+DialogEvtCmdActorTitle.cpp \
+DialogEvtCmdActorTransparency.cpp \
+DialogEvtCmdAnimation.cpp \
+DialogEvtCmdBattle.cpp \
+DialogEvtCmdBlankScreen.cpp \
+DialogEvtCmdCallEvent.cpp \
+DialogEvtCmdChoice.cpp \
+DialogEvtCmdCommerce.cpp \
+DialogEvtCmdConditions.cpp \
+DialogEvtCmd.cpp \
+DialogEvtCmdDamage.cpp \
+DialogEvtCmdDeletePicture.cpp \
+DialogEvtCmdEncounterRate.cpp \
+DialogEvtCmdEquipment.cpp \
+DialogEvtCmdEscapePermissions.cpp \
+DialogEvtCmdEscapePlace.cpp \
+DialogEvtCmdEventMovement.cpp \
+DialogEvtCmdEventPosition.cpp \
+DialogEvtCmdExperience.cpp \
+DialogEvtCmdFaceGraphic.cpp \
+DialogEvtCmdFadeMusic.cpp \
+DialogEvtCmdFlashCharacter.cpp \
+DialogEvtCmdFlashScreen.cpp \
+DialogEvtCmdGetPositionID.cpp \
+DialogEvtCmdGetTerrainID.cpp \
+DialogEvtCmdGoToLabel.cpp \
+DialogEvtCmdGoToMemorizedPlace.cpp \
+DialogEvtCmdHP.cpp \
+DialogEvtCmdInn.cpp \
+DialogEvtCmdItem.cpp \
+DialogEvtCmdKeyAssignment.cpp \
+DialogEvtCmdLabel.cpp \
+DialogEvtCmdLevel.cpp \
+DialogEvtCmdMemorizePlace.cpp \
+DialogEvtCmdMessage.cpp \
+DialogEvtCmdMessageOptions.cpp \
+DialogEvtCmdMoney.cpp \
+DialogEvtCmdMovePicture.cpp \
+DialogEvtCmdMoveScreen.cpp \
+DialogEvtCmdMP.cpp \
+DialogEvtCmdNotes.cpp \
+DialogEvtCmdNumberInput.cpp \
+DialogEvtCmdPanorama.cpp \
+DialogEvtCmdParameter.cpp \
+DialogEvtCmdParty.cpp \
+DialogEvtCmdPicture.cpp \
+DialogEvtCmdPlayMusic.cpp \
+DialogEvtCmdPlaySound.cpp \
+DialogEvtCmdPlayVideo.cpp \
+DialogEvtCmdRecover.cpp \
+DialogEvtCmdSavePermissions.cpp \
+DialogEvtCmdShake.cpp \
+DialogEvtCmdShowScreen.cpp \
+DialogEvtCmdSkill.cpp \
+DialogEvtCmdStatus.cpp \
+DialogEvtCmdSwapEvents.cpp \
+DialogEvtCmdSwitch.cpp \
+DialogEvtCmdSystemGraphic.cpp \
+DialogEvtCmdSystemMenuPermissions.cpp \
+DialogEvtCmdSystemMusic.cpp \
+DialogEvtCmdSystemSound.cpp \
+DialogEvtCmdTeleport.cpp \
+DialogEvtCmdTeleportPermissions.cpp \
+DialogEvtCmdTeleportPlace.cpp \
+DialogEvtCmdTile.cpp \
+DialogEvtCmdTileset.cpp \
+DialogEvtCmdTimer.cpp \
+DialogEvtCmdTone.cpp \
+DialogEvtCmdTransition.cpp \
+DialogEvtCmdVariable.cpp \
+DialogEvtCmdVehicleGraphic.cpp \
+DialogEvtCmdVehiclePosition.cpp \
+DialogEvtCmdWait.cpp \
+DialogEvtCmdWeather.cpp \
+DialogEvt.cpp \
+DialogMap.cpp \
+DialogMaterial.cpp \
+FrameEditor.cpp \
+main.cpp
+
 all: all-am
 
 .SUFFIXES:
@@ -223,7 +373,93 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/easyrpg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogDb.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogDbLearnSkill.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogDbMaxNumber.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogDbSelectAnyGraphic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvt.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmd.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdActorFaceGraphic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdActorGraphic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdActorName.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdActorNameInput.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdActorTitle.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdActorTransparency.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdAnimation.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdBattle.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdBlankScreen.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdCallEvent.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdChoice.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdCommerce.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdConditions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdDamage.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdDeletePicture.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdEncounterRate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdEquipment.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdEscapePermissions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdEscapePlace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdEventMovement.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdEventPosition.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdExperience.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdFaceGraphic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdFadeMusic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdFlashCharacter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdFlashScreen.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdGetPositionID.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdGetTerrainID.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdGoToLabel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdGoToMemorizedPlace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdHP.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdInn.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdItem.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdKeyAssignment.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdLabel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdLevel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdMP.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdMemorizePlace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdMessage.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdMessageOptions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdMoney.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdMovePicture.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdMoveScreen.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdNotes.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdNumberInput.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdPanorama.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdParameter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdParty.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdPicture.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdPlayMusic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdPlaySound.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdPlayVideo.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdRecover.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSavePermissions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdShake.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdShowScreen.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSkill.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdStatus.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSwapEvents.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSwitch.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSystemGraphic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSystemMenuPermissions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSystemMusic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdSystemSound.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTeleport.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTeleportPermissions.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTeleportPlace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTile.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTileset.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTimer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTone.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdTransition.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdVariable.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdVehicleGraphic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdVehiclePosition.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdWait.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogEvtCmdWeather.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogMap.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DialogMaterial.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/FrameEditor.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
