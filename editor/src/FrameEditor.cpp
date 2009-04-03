@@ -187,7 +187,7 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
 
 void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
 {
-    Destroy();
+    Close();
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
