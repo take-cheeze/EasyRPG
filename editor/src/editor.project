@@ -176,13 +176,20 @@
     <File Name="DialogEvtCmdActorFaceGraphic.h"/>
     <File Name="DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
-  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
+    <GlobalSettings>
+      <Compiler Options="-Wall;-Wextra;-ansi;">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2;"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="$(shell wx-config --cxxflags --unicode=yes --debug=yes);-g;" Required="yes"/>
       <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes);" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="../bin/editor" IntermediateDirectory="../.obj/Debug" Command=".editor" CommandArguments="" WorkingDirectory="../bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="../bin/editor" IntermediateDirectory="../.obj/Debug" Command="./editor" CommandArguments="" WorkingDirectory="../bin" PauseExecWhenProcTerminates="yes"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands></PostConnectCommands>
         <StartupCommands></StartupCommands>
@@ -227,18 +234,9 @@
       </CustomBuild>
       <AdditionalRules>
         <CustomPostBuild></CustomPostBuild>
-        <CustomPreBuild>
-
-</CustomPreBuild>
+        <CustomPreBuild></CustomPreBuild>
       </AdditionalRules>
     </Configuration>
-    <GlobalSettings>
-      <Compiler Options="-Wall;-Wextra;-ansi;">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Options="-O2;"/>
-      <ResourceCompiler Options=""/>
-    </GlobalSettings>
   </Settings>
-  <Dependencies Name="Release"/>
+  <Dependencies Name="Debug"/>
 </CodeLite_Project>
