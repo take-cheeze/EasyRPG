@@ -161,10 +161,11 @@ void FrameEditor::set_properties()
     ilMapTree->Add(wxIcon(_T("shell32.dll;4"), wxBITMAP_TYPE_ICO, 16, 16)); // 4 is opened folder
     ilMapTree->Add(wxIcon(_T("shell32.dll;0"), wxBITMAP_TYPE_ICO, 16, 16)); // 0 is normal file
 #else
-    wxImageList* ilMapTree = new wxImageList;
-    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_FOLDER));
-    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_FILE_OPEN));
-    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_NORMAL_FILE));
+    wxImageList* ilMapTree = new wxImageList(16,16);
+    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_FOLDER, wxART_OTHER, wxSize(16, 16)));
+    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_OTHER, wxSize(16, 16)));
+    ilMapTree->Add(wxArtProvider::GetBitmap(wxART_NORMAL_FILE, wxART_OTHER, wxSize(16, 16)));
+    //ilMapTree->Add(wxArtProvider::GetBitmap(wxART_NORMAL_FILE));
 #endif
     tcMapTree->AssignImageList(ilMapTree);
 }

@@ -178,6 +178,13 @@
   </VirtualDirectory>
   <Dependencies Name="Release"/>
   <Settings Type="Executable">
+    <GlobalSettings>
+      <Compiler Options="-Wall;-Wextra;-ansi;">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2;"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="$(shell wx-config --cxxflags --unicode=yes --debug=yes);-g;" Required="yes">
         <IncludePath Value="C:/wxWidgets-2.8.7/include"/>
@@ -234,13 +241,6 @@
 </CustomPreBuild>
       </AdditionalRules>
     </Configuration>
-    <GlobalSettings>
-      <Compiler Options="-Wall;-Wextra;-ansi;">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Options="-O2;"/>
-      <ResourceCompiler Options=""/>
-    </GlobalSettings>
   </Settings>
   <Dependencies Name="Debug"/>
 </CodeLite_Project>

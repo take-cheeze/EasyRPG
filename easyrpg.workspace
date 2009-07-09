@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="easyrpg" Database="./easyrpg.tags">
-  <Project Name="editor" Path="editor/src/editor.project" Active="No"/>
-  <Project Name="player" Path="player/src/player.project" Active="Yes"/>
+  <Project Name="editor" Path="editor/src/editor.project" Active="Yes"/>
+  <Project Name="player" Path="player/src/player.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="editor" ConfigName="Debug"/>
