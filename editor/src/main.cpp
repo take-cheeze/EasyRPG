@@ -20,16 +20,14 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include "FrameEditor.h"
 
 class AppEditor: public wxApp {
+private:
+    void showSplash();
 public:
     bool OnInit();
 };
 
-IMPLEMENT_APP(AppEditor)
-
-bool AppEditor::OnInit()
+void AppEditor::showSplash()
 {
-    wxInitAllImageHandlers();
-    
     wxBitmap bitmap;
     if (bitmap.LoadFile("../share/splash/easyrpg-splash-256.xpm", wxBITMAP_TYPE_XPM))
     {
@@ -39,7 +37,14 @@ bool AppEditor::OnInit()
               wxSIMPLE_BORDER|wxSTAY_ON_TOP);
       }
     wxYield();
+}
 
+IMPLEMENT_APP(AppEditor)
+
+bool AppEditor::OnInit()
+{
+    wxInitAllImageHandlers();
+    showSplash();
     FrameEditor* frmEditor = new FrameEditor();
     SetTopWindow(frmEditor);
     frmEditor->Show();
