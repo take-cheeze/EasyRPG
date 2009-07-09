@@ -44,7 +44,6 @@ void DialogMaterial::set_properties()
     listFolders->SetSelection(0);
     rbFormat->SetSelection(0);
     btnClose->SetDefault();
-    btnClose->SetDefault();
     SetEscapeId(wxID_CLOSE);
 }
 
