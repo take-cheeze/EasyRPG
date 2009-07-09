@@ -17,6 +17,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/wx.h>
 #include "FrameEditor.h"
 #include "DialogDb.h"
+#include "DialogMaterial.h"
 
 FrameEditor::FrameEditor():
         wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
@@ -108,6 +109,7 @@ FrameEditor::FrameEditor():
     Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
     Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
+	Connect(ID_MATERIAL_MANAGER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::material_click));
 
     Connect(wxID_ZOOM_100, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom11_click));
     Connect(ID_ZOOM_12, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom12_click));
@@ -221,4 +223,12 @@ void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
     dlgDb->SetFocus();
     dlgDb->ShowModal();
     dlgDb->Destroy();
+}
+
+void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
+{
+	DialogMaterial *dlgMaterial = new DialogMaterial(this,  wxID_ANY, wxEmptyString);
+	dlgMaterial->SetFocus();
+	dlgMaterial->ShowModal();
+	dlgMaterial->Destroy();
 }

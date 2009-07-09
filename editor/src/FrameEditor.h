@@ -35,6 +35,7 @@ private:
     void open_click(wxCommandEvent &WXUNUSED(event));
     void exit_click(wxCommandEvent &WXUNUSED(event));
     void database_click(wxCommandEvent &WXUNUSED(event));
+	void material_click(wxCommandEvent &WXUNUSED(event));
     void zoom11_click(wxCommandEvent &WXUNUSED(event));
     void zoom12_click(wxCommandEvent &WXUNUSED(event));
     void zoom14_click(wxCommandEvent &WXUNUSED(event));
