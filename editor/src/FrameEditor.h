@@ -22,11 +22,15 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/splitter.h>
 #include <wx/treectrl.h>
 
+#include "DialogDb.h"
+
 class FrameEditor: public wxFrame
 {
 public:
     FrameEditor();
 private:
+
+    DialogDb* dlgDb;
 
     wxMenu* MenuScale;
 

@@ -16,7 +16,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 
 #include <wx/wx.h>
 #include "FrameEditor.h"
-#include "DialogDb.h"
 #include "DialogMaterial.h"
 
 FrameEditor::FrameEditor():
@@ -115,6 +114,8 @@ FrameEditor::FrameEditor():
     Connect(ID_ZOOM_12, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom12_click));
     Connect(ID_ZOOM_14, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom14_click));
     Connect(ID_ZOOM_18, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom18_click));
+
+    dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
 }
 
 void FrameEditor::set_properties()
@@ -194,6 +195,7 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
 
 void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
 {
+    dlgDb->Destroy();
     Close();
 }
 
@@ -219,10 +221,9 @@ void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event))
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
-    DialogDb *dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
+    //DialogDb *dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
     dlgDb->SetFocus();
     dlgDb->ShowModal();
-    dlgDb->Destroy();
 }
 
 void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
