@@ -110,6 +110,9 @@ FrameEditor::FrameEditor():
     Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
 
     Connect(wxID_ZOOM_100, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom11_click));
+    Connect(ID_ZOOM_12, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom12_click));
+    Connect(ID_ZOOM_14, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom14_click));
+    Connect(ID_ZOOM_18, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom18_click));
 }
 
 void FrameEditor::set_properties()
@@ -195,7 +198,21 @@ void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
 void FrameEditor::zoom11_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(wxID_ZOOM_100, true);
+}
 
+void FrameEditor::zoom12_click(wxCommandEvent &WXUNUSED(event)) 
+{
+    MenuScale->Check(ID_ZOOM_12, true);
+}
+
+void FrameEditor::zoom14_click(wxCommandEvent &WXUNUSED(event)) 
+{
+    MenuScale->Check(ID_ZOOM_14, true);
+}
+
+void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event)) 
+{
+    MenuScale->Check(ID_ZOOM_18, true);
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
