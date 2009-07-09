@@ -33,6 +33,7 @@ private:
     DialogDb* dlgDb;
 
     wxMenu* MenuScale;
+    wxMenu* MenuEdit;
 
     void set_properties();
     void do_layout();
@@ -44,6 +45,10 @@ private:
     void zoom12_click(wxCommandEvent &WXUNUSED(event));
     void zoom14_click(wxCommandEvent &WXUNUSED(event));
     void zoom18_click(wxCommandEvent &WXUNUSED(event));
+
+    void upperlayer_click(wxCommandEvent &WXUNUSED(event));
+    void lowerlayer_click(wxCommandEvent &WXUNUSED(event));
+    void eventlayer_click(wxCommandEvent &WXUNUSED(event));
 protected:
     wxMenuBar* frmEditorMenubar;
     wxStatusBar* frmEditorStatusbar;
@@ -57,7 +62,7 @@ protected:
 
 enum
 {
-    ID_UPPER_LAYER,
+    ID_UPPER_LAYER = 1,
     ID_LOWER_LAYER,
     ID_EVENTS,
     ID_ZOOM_12,

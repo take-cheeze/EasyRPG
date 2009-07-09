@@ -850,7 +850,7 @@ protected:
 
 enum
 {
-    ID_COMMON_EVENTS_LIST_EXECUTION
+    ID_COMMON_EVENTS_LIST_EXECUTION = 1
 };
 
 #endif

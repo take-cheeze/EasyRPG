@@ -200,7 +200,7 @@ protected:
 
 enum
 {
-    ID_MESSAGE,
+    ID_MESSAGE = 1,
     ID_EQUIPMENT,
     ID_MESSAGE_OPTIONS,
     ID_HP,

@@ -37,9 +37,9 @@ FrameEditor::FrameEditor():
     wxglade_tmp_menu_1->Append(wxID_SAVE, _("&Save\tCtrl+S"), _("Save all changes in the project maps"), wxITEM_NORMAL);
     wxglade_tmp_menu_1->Append(wxID_REVERT, _("&Revert\tCtrl+R"), _("Discard all changes and reload the saved project maps"), wxITEM_NORMAL);
     wxglade_tmp_menu_1->AppendSeparator();
-    wxMenu* MenuEdit = new wxMenu();
-    MenuEdit->Append(ID_UPPER_LAYER, _("&Lower layer\tF5"), _("Switch to the lower layer map editing mode"), wxITEM_RADIO);
-    MenuEdit->Append(ID_LOWER_LAYER, _("&Upper layer\tF6"), _("Switch to the upper layer map editing mode"), wxITEM_RADIO);
+    MenuEdit = new wxMenu();
+    MenuEdit->Append(ID_LOWER_LAYER, _("&Lower layer\tF5"), _("Switch to the lower layer map editing mode"), wxITEM_RADIO);
+    MenuEdit->Append(ID_UPPER_LAYER, _("&Upper layer\tF6"), _("Switch to the upper layer map editing mode"), wxITEM_RADIO);
     MenuEdit->Append(ID_EVENTS, _("&Events\tF7"), _("Switch to the event layer map editing mode"), wxITEM_RADIO);
     wxglade_tmp_menu_1->Append(wxID_ANY, _("&Edit"), MenuEdit, wxEmptyString);
     MenuScale = new wxMenu();
@@ -78,8 +78,8 @@ FrameEditor::FrameEditor():
     frmEditorToolbar->AddTool(wxID_SAVE, _("Save"), wxBitmap(wxT("../share/toolbar/save.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Save map changes"), _("Save all changes in the project maps"));
     frmEditorToolbar->AddTool(wxID_REVERT, _("Revert"), wxBitmap(wxT("../share/toolbar/revert.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Revert map changes"), _("Discard all changes and reload the saved project maps"));
     frmEditorToolbar->AddSeparator();
-    frmEditorToolbar->AddTool(ID_UPPER_LAYER, _("Lower layer"), wxBitmap(wxT("../share/toolbar/lowerlayer.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_RADIO, _("Lower layer editing"), _("Switch to the lower layer map editing mode"));
-    frmEditorToolbar->AddTool(ID_LOWER_LAYER, _("Upper layer"), wxBitmap(wxT("../share/toolbar/upperlayer.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_RADIO, _("Upper layer editing"), _("Switch to the upper layer map editing mode"));
+    frmEditorToolbar->AddTool(ID_LOWER_LAYER, _("Lower layer"), wxBitmap(wxT("../share/toolbar/lowerlayer.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_RADIO, _("Lower layer editing"), _("Switch to the lower layer map editing mode"));
+    frmEditorToolbar->AddTool(ID_UPPER_LAYER, _("Upper layer"), wxBitmap(wxT("../share/toolbar/upperlayer.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_RADIO, _("Upper layer editing"), _("Switch to the upper layer map editing mode"));
     frmEditorToolbar->AddTool(ID_EVENTS, _("Events"), wxBitmap(wxT("../share/toolbar/eventlayer.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_RADIO, _("Event layer editing"), _("Switch to the event layer map editing mode"));
     frmEditorToolbar->AddSeparator();
     frmEditorToolbar->AddTool(wxID_ZOOM_100, _("1:1"), wxBitmap(wxT("../share/toolbar/11scale.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_RADIO, _("1:1 scale"), _("Display the map in 1:1 scale"));
@@ -104,18 +104,24 @@ FrameEditor::FrameEditor():
 
     set_properties();
     do_layout();
-    
+
     Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
+
+    /* Connect toolbar buttons */
     Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
 	Connect(ID_MATERIAL_MANAGER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::material_click));
-
     Connect(wxID_ZOOM_100, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom11_click));
     Connect(ID_ZOOM_12, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom12_click));
     Connect(ID_ZOOM_14, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom14_click));
     Connect(ID_ZOOM_18, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom18_click));
 
+    Connect(ID_UPPER_LAYER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::upperlayer_click));
+    Connect(ID_LOWER_LAYER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::lowerlayer_click));
+    Connect(ID_EVENTS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::eventlayer_click));
+
     dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
+    dlgDb->CentreOnScreen();
 }
 
 void FrameEditor::set_properties()
@@ -202,28 +208,49 @@ void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
 void FrameEditor::zoom11_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(wxID_ZOOM_100, true);
+    frmEditorToolbar->ToggleTool(wxID_ZOOM_100, true);
 }
 
 void FrameEditor::zoom12_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(ID_ZOOM_12, true);
+    frmEditorToolbar->ToggleTool(ID_ZOOM_12, true);
 }
 
 void FrameEditor::zoom14_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(ID_ZOOM_14, true);
+    frmEditorToolbar->ToggleTool(ID_ZOOM_14, true);
 }
 
 void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(ID_ZOOM_18, true);
+    frmEditorToolbar->ToggleTool(ID_ZOOM_18, true);
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
-    //DialogDb *dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
     dlgDb->SetFocus();
     dlgDb->ShowModal();
+}
+
+void FrameEditor::upperlayer_click(wxCommandEvent &WXUNUSED(event)) 
+{
+    MenuEdit->Check(ID_UPPER_LAYER, true);
+    frmEditorToolbar->ToggleTool(ID_UPPER_LAYER, true);
+}
+
+void FrameEditor::lowerlayer_click(wxCommandEvent &WXUNUSED(event)) 
+{
+    MenuEdit->Check(ID_LOWER_LAYER, true);
+    frmEditorToolbar->ToggleTool(ID_LOWER_LAYER, true);
+}
+
+void FrameEditor::eventlayer_click(wxCommandEvent &WXUNUSED(event)) 
+{
+    MenuEdit->Check(ID_EVENTS, true);
+    frmEditorToolbar->ToggleTool(ID_EVENTS, true);
 }
 
 void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
