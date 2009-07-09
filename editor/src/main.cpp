@@ -16,6 +16,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 
 #include <wx/wx.h>
 #include <wx/image.h>
+#include <wx/splash.h>
 #include "FrameEditor.h"
 
 class AppEditor: public wxApp {
@@ -28,6 +29,17 @@ IMPLEMENT_APP(AppEditor)
 bool AppEditor::OnInit()
 {
     wxInitAllImageHandlers();
+    
+    wxBitmap bitmap;
+    if (bitmap.LoadFile("../share/splash/easyrpg-splash-256.xpm", wxBITMAP_TYPE_XPM))
+    {
+          wxSplashScreen* splash = new wxSplashScreen(bitmap,
+              wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT,
+              2500, NULL, -1, wxDefaultPosition, wxDefaultSize,
+              wxSIMPLE_BORDER|wxSTAY_ON_TOP);
+      }
+    wxYield();
+
     FrameEditor* frmEditor = new FrameEditor();
     SetTopWindow(frmEditor);
     frmEditor->Show();
