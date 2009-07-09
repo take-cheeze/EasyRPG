@@ -34,6 +34,7 @@ private:
 
     wxMenu* MenuScale;
     wxMenu* MenuEdit;
+    wxMenu* MenuGame;
 
     void set_properties();
     void do_layout();
@@ -45,10 +46,12 @@ private:
     void zoom12_click(wxCommandEvent &WXUNUSED(event));
     void zoom14_click(wxCommandEvent &WXUNUSED(event));
     void zoom18_click(wxCommandEvent &WXUNUSED(event));
-
     void upperlayer_click(wxCommandEvent &WXUNUSED(event));
     void lowerlayer_click(wxCommandEvent &WXUNUSED(event));
     void eventlayer_click(wxCommandEvent &WXUNUSED(event));
+    void fullscreen_click(wxCommandEvent& event);
+    void showtitle_click(wxCommandEvent &WXUNUSED(event));
+
 protected:
     wxMenuBar* frmEditorMenubar;
     wxStatusBar* frmEditorStatusbar;
@@ -71,7 +74,9 @@ enum
     ID_DATABASE,
     ID_MATERIAL_MANAGER,
     ID_FULL_SCREEN,
-    ID_SHOW_TITLE
+    ID_FULL_SCREEN2,
+    ID_SHOW_TITLE,
+    ID_SHOW_TITLE2
 };
 
 #endif

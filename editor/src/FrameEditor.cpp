@@ -54,7 +54,7 @@ FrameEditor::FrameEditor():
     MenuTools->Append(ID_MATERIAL_MANAGER, _("&Material manager"), _("Add or remove material from the project"), wxITEM_NORMAL);
     MenuTools->Append(wxID_ANY, _("Music &player"), _("Play background music while editing"), wxITEM_NORMAL);
     frmEditorMenubar->Append(MenuTools, _("&Tools"));
-    wxMenu* MenuGame = new wxMenu();
+    MenuGame = new wxMenu();
     MenuGame->Append(wxID_ANY, _("&Play test\tF9"), _("Launch the game project for testing"), wxITEM_NORMAL);
     MenuGame->AppendSeparator();
     MenuGame->Append(ID_FULL_SCREEN, _("&Full screen"), _("Enable or disable full screen in play test"), wxITEM_CHECK);
@@ -93,8 +93,8 @@ FrameEditor::FrameEditor():
     frmEditorToolbar->AddSeparator();
     frmEditorToolbar->AddTool(wxID_ANY, _("Play test"), wxBitmap(wxT("../share/toolbar/playtest.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Play test"), _("Launch the game project for testing"));
     frmEditorToolbar->AddSeparator();
-    frmEditorToolbar->AddTool(ID_FULL_SCREEN, _("Full screen"), wxBitmap(wxT("../share/toolbar/fullscreen.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_CHECK, _("Full screen"), _("Enable or disable full screen in play test"));
-    frmEditorToolbar->AddTool(ID_SHOW_TITLE, _("Title"), wxBitmap(wxT("../share/toolbar/title.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_CHECK, _("Show title"), _("Enable or disable background and music in the title in play test"));
+    frmEditorToolbar->AddTool(ID_FULL_SCREEN2, _("Full screen"), wxBitmap(wxT("../share/toolbar/fullscreen.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_CHECK, _("Full screen"), _("Enable or disable full screen in play test"));
+    frmEditorToolbar->AddTool(ID_SHOW_TITLE2, _("Title"), wxBitmap(wxT("../share/toolbar/title.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_CHECK, _("Show title"), _("Enable or disable background and music in the title in play test"));
     frmEditorToolbar->AddSeparator();
     frmEditorToolbar->AddTool(wxID_HELP, _("Help"), wxBitmap(wxT("../share/toolbar/help.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Help contents"), _("Display the help index and contents of EasyRPG"));
     frmEditorToolbar->Realize();
@@ -120,8 +120,14 @@ FrameEditor::FrameEditor():
     Connect(ID_LOWER_LAYER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::lowerlayer_click));
     Connect(ID_EVENTS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::eventlayer_click));
 
+    Connect(ID_FULL_SCREEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::fullscreen_click));
+    Connect(ID_FULL_SCREEN2, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::fullscreen_click));
+
+    Connect(ID_SHOW_TITLE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::showtitle_click));
+    Connect(ID_SHOW_TITLE2, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::showtitle_click));
+
     dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
-    dlgDb->CentreOnScreen();
+    dlgDb->CentreOnParent();
 }
 
 void FrameEditor::set_properties()
@@ -251,6 +257,32 @@ void FrameEditor::eventlayer_click(wxCommandEvent &WXUNUSED(event))
 {
     MenuEdit->Check(ID_EVENTS, true);
     frmEditorToolbar->ToggleTool(ID_EVENTS, true);
+}
+
+void FrameEditor::fullscreen_click(wxCommandEvent& event)
+{
+    bool b = MenuGame->IsChecked(ID_FULL_SCREEN); 
+    if (event.GetId() == ID_FULL_SCREEN) 
+    {
+        frmEditorToolbar->ToggleTool(ID_FULL_SCREEN2, b);
+    }
+    else
+    {
+        MenuGame->Check(ID_FULL_SCREEN, !b);
+    }    
+}
+
+void FrameEditor::showtitle_click(wxCommandEvent& event)
+{
+    bool b = MenuGame->IsChecked(ID_SHOW_TITLE); 
+    if (event.GetId() == ID_SHOW_TITLE) 
+    {
+        frmEditorToolbar->ToggleTool(ID_SHOW_TITLE2, b);
+    }
+    else
+    {
+        MenuGame->Check(ID_SHOW_TITLE, !b);
+    }    
 }
 
 void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
