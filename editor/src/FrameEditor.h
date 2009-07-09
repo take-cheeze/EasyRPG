@@ -27,11 +27,18 @@ class FrameEditor: public wxFrame
 public:
     FrameEditor();
 private:
+
+    wxMenu* MenuScale;
+
     void set_properties();
     void do_layout();
     void open_click(wxCommandEvent &WXUNUSED(event));
     void exit_click(wxCommandEvent &WXUNUSED(event));
     void database_click(wxCommandEvent &WXUNUSED(event));
+    void zoom11_click(wxCommandEvent &WXUNUSED(event));
+    void zoom12_click(wxCommandEvent &WXUNUSED(event));
+    void zoom14_click(wxCommandEvent &WXUNUSED(event));
+    void zoom18_click(wxCommandEvent &WXUNUSED(event));
 protected:
     wxMenuBar* frmEditorMenubar;
     wxStatusBar* frmEditorStatusbar;

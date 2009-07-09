@@ -42,7 +42,7 @@ FrameEditor::FrameEditor():
     MenuEdit->Append(ID_LOWER_LAYER, _("&Upper layer\tF6"), _("Switch to the upper layer map editing mode"), wxITEM_RADIO);
     MenuEdit->Append(ID_EVENTS, _("&Events\tF7"), _("Switch to the event layer map editing mode"), wxITEM_RADIO);
     wxglade_tmp_menu_1->Append(wxID_ANY, _("&Edit"), MenuEdit, wxEmptyString);
-    wxMenu* MenuScale = new wxMenu();
+    MenuScale = new wxMenu();
     MenuScale->Append(wxID_ZOOM_100, _("1:&1"), _("Display the map in 1:1 scale"), wxITEM_RADIO);
     MenuScale->Append(ID_ZOOM_12, _("1:&2"), _("Display the map in 1:2 scale"), wxITEM_RADIO);
     MenuScale->Append(ID_ZOOM_14, _("1:&4"), _("Display the map in 1:4 scale"), wxITEM_RADIO);
@@ -108,6 +108,8 @@ FrameEditor::FrameEditor():
     Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
     Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
+
+    Connect(wxID_ZOOM_100, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom11_click));
 }
 
 void FrameEditor::set_properties()
@@ -188,6 +190,12 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
 void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
 {
     Close();
+}
+
+void FrameEditor::zoom11_click(wxCommandEvent &WXUNUSED(event)) 
+{
+    MenuScale->Check(wxID_ZOOM_100, true);
+
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
