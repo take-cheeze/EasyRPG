@@ -29,14 +29,14 @@ public:
 void AppEditor::showSplash()
 {
     wxBitmap bitmap;
-    if (bitmap.LoadFile("../share/splash/easyrpg-splash-256.xpm", wxBITMAP_TYPE_XPM))
+    if (bitmap.LoadFile(wxT("../share/splash/easyrpg-splash-256.xpm"), wxBITMAP_TYPE_XPM))
     {
           wxSplashScreen* splash = new wxSplashScreen(bitmap,
               wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT,
               2500, NULL, -1, wxDefaultPosition, wxDefaultSize,
               wxSIMPLE_BORDER|wxSTAY_ON_TOP);
       }
-    wxYield();
+    Yield();
 }
 
 IMPLEMENT_APP(AppEditor)
