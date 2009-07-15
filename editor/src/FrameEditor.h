@@ -22,12 +22,15 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/splitter.h>
 #include <wx/treectrl.h>
 
+#include "lmtReader.h"
+
 #include "DialogDb.h"
 
 class FrameEditor: public wxFrame
 {
 public:
     FrameEditor();
+    lmt_data my_lmt;
 private:
 
     DialogDb* dlgDb;

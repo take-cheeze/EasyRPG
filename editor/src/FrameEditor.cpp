@@ -201,6 +201,9 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
     if (dlgOpen->ShowModal() == wxID_OK)
     {
         wxMessageBox(dlgOpen->GetPath());
+        lmt_reader lmt_read;
+        std::string fileName = std::string(dlgOpen->GetPath().mb_str());
+        lmt_read.load(fileName, &my_lmt);
     }
     dlgOpen->Destroy();
 }
