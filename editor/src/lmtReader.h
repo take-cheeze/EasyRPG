@@ -19,6 +19,7 @@
 
 #include <string>
 #include <vector>
+#include <wx/string.h>
 
 struct music_data
 {
@@ -32,7 +33,7 @@ struct music_data
 struct node_data
 {
     int id;
-    std::string name;
+    wxString name;
     int parent_id;
     int depth;
     int type;
@@ -42,7 +43,7 @@ struct node_data
     int music;
     music_data music_file;
     int backdrop;
-    std::string backdrop_file;
+    wxString backdrop_file;
     int teleport;
     int escape;
     int save;

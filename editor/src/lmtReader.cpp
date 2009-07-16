@@ -135,7 +135,7 @@ bool lmt_reader::load(std::string filename,lmt_data * data)
 void lmt_reader::clear(node_data *node)
 {
     node->id = 0;
-    node->name = "";
+    node->name = wxEmptyString;
     node->parent_id = 0;
     node->depth = 0;
     node->type = 0;
@@ -149,7 +149,7 @@ void lmt_reader::clear(node_data *node)
     node->music_file.tempo = 100;
     node->music_file.balance = 50;
     node->backdrop = 0;
-    node->backdrop_file = "";
+    node->backdrop_file = wxEmptyString;
     node->teleport = 0;
     node->escape = 0;
     node->save = 0;
@@ -167,6 +167,7 @@ void lmt_reader::read_tree(FILE *file,lmt_data * data)
     char dummy;
     int node_chunk_id;
     int node_chunk_size;
+    std::string tempname;
 
     clear(&node);
 
@@ -178,7 +179,8 @@ void lmt_reader::read_tree(FILE *file,lmt_data * data)
         switch (node_chunk_id) // segun el tipo
         {
         case 1:
-            node.name = ReadString(file, node_chunk_size);
+            tempname = ReadString(file, node_chunk_size);
+            node.name = wxString(tempname.c_str(), wxConvUTF8);
             break;
         case 2:
             node.parent_id = ReadCompressedInteger(file);
@@ -244,7 +246,8 @@ void lmt_reader::read_tree(FILE *file,lmt_data * data)
             node.backdrop = ReadCompressedInteger(file);
             break;
         case 22: //0x16
-            node.backdrop_file = ReadString(file, node_chunk_size);
+            tempname = ReadString(file, node_chunk_size);
+            node.backdrop_file = wxString(tempname.c_str(), wxConvUTF8);
             break;
         case 31: //0x1F
             node.teleport = ReadCompressedInteger(file);
@@ -305,7 +308,8 @@ void lmt_reader::print(lmt_data * data) // muestra de informacion del mapa
     {
         printf("--------------------------------------------------------------------------\n");
         printf("ID:                                                            %d\n", data->tree_list[i].id);
-        printf("Name:                                                          %s\n", data->tree_list[i].name.c_str());
+        std::string str = std::string(data->tree_list[i].name.mb_str());
+        printf("Name:                                                          %s\n", str.c_str());
         printf("Parent ID:                                                     %d\n", data->tree_list[i].parent_id);
         printf("Depth:                                                         %d\n", data->tree_list[i].depth);
         printf("Type (0=root, 1=map, 2=area):                                  %d\n", data->tree_list[i].type);
@@ -318,7 +322,8 @@ void lmt_reader::print(lmt_data * data) // muestra de informacion del mapa
         printf("Music tempo:                                                   %d\n", data->tree_list[i].music_file.tempo);
         printf("Music balance:                                                 %d\n", data->tree_list[i].music_file.balance);
         printf("Has battle background? (0=inherit, 1=don't change, 2=specify): %d\n", data->tree_list[i].backdrop);
-        printf("Battle baground name:                                          %s\n", data->tree_list[i].backdrop_file.c_str());
+        str = std::string(data->tree_list[i].backdrop_file.mb_str());
+        printf("Battle baground name:                                          %s\n", str.c_str());
         printf("Teleport options (0=inherit, 1=don't change, 2=specify):       %d\n", data->tree_list[i].teleport);
         printf("Escape options (0=inherit, 1=don't change, 2=specify):         %d\n", data->tree_list[i].escape);
         printf("Save options (0=inherit, 1=don't change, 2=specify):           %d\n", data->tree_list[i].save);

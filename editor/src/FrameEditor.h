@@ -41,6 +41,7 @@ private:
 
     void set_properties();
     void do_layout();
+    void fill_lmtTree();
     void open_click(wxCommandEvent &WXUNUSED(event));
     void exit_click(wxCommandEvent &WXUNUSED(event));
     void database_click(wxCommandEvent &WXUNUSED(event));

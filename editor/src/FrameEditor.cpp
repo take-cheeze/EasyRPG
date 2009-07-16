@@ -188,6 +188,18 @@ void FrameEditor::do_layout()
     tcMapTree->ExpandAll();
 }
 
+void FrameEditor::fill_lmtTree()
+{
+	tcMapTree->DeleteAllItems();
+	int current_node;
+	wxTreeItemId root = tcMapTree->AddRoot(my_lmt.tree_list[0].name, 1, 0);
+	for (current_node = 1; current_node < my_lmt.total_nodes; current_node++)
+	{
+		tcMapTree->AppendItem(root, my_lmt.tree_list[current_node].name, 2);
+	}
+	tcMapTree->ExpandAll();
+}
+
 void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog *dlgOpen = new wxFileDialog(this);
@@ -200,10 +212,11 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
 #endif
     if (dlgOpen->ShowModal() == wxID_OK)
     {
-        wxMessageBox(dlgOpen->GetPath());
         lmt_reader lmt_read;
         std::string fileName = std::string(dlgOpen->GetPath().mb_str());
         lmt_read.load(fileName, &my_lmt);
+        lmt_read.print(&my_lmt);
+        fill_lmtTree();
     }
     dlgOpen->Destroy();
 }
