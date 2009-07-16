@@ -179,6 +179,24 @@
     <File Name="lmtReader.h"/>
     <File Name="tools.cpp"/>
     <File Name="tools.h"/>
+    <File Name="ldbchunks.h"/>
+    <File Name="ldb_data.cpp"/>
+    <File Name="ldb_data.h"/>
+    <File Name="ldbReader.cpp"/>
+    <File Name="ldbReader.h"/>
+    <File Name="ldbstr.cpp"/>
+    <File Name="ldbstr.h"/>
+    <File Name="easyrpg.cbp"/>
+    <File Name="editor.mk"/>
+    <File Name="editor.project"/>
+    <File Name="ldbReader.cpp~"/>
+    <File Name="ldbReader.h~"/>
+    <File Name="Makefile.am"/>
+    <File Name="Makefile.in"/>
+    <File Name="stevent.cpp"/>
+    <File Name="stevent.h"/>
+    <File Name="stevent.h~"/>
+    <File Name="svn-commit.tmp.save"/>
   </VirtualDirectory>
   <Dependencies Name="Release"/>
   <Settings Type="Executable">

@@ -4,15 +4,17 @@
 #include <wx/spinctrl.h>
 #include <wx/listctrl.h>
 #include <wx/notebook.h>
+#include "ldb_data.h"
 
 class DialogDb: public wxDialog {
 public:
     DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
-private:
+    void fill_data(LDB_data ldbdata);
+//private:
     void set_properties();
     void do_layout();
     void ListCommonEventExecutionContent_doubleclick(wxCommandEvent &WXUNUSED(event));
-protected:
+// Unprotecting protected:
     wxStaticBox* szCommonEventExecutionContents_staticbox;
     wxStaticBox* szCommonEventConditionActivationSwitch_staticbox;
     wxStaticBox* szCommonEventActivationConditions_staticbox;

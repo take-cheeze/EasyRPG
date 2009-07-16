@@ -132,6 +132,7 @@ FrameEditor::FrameEditor():
 
 void FrameEditor::set_properties()
 {
+    ProjectDirectory = wxEmptyString;
     SetTitle(_("EasyRPG"));
     wxIcon _icon;
     _icon.CopyFromBitmap(wxBitmap(wxT("../share/easyrpg.xpm"), wxBITMAP_TYPE_ANY));
@@ -216,6 +217,11 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
         std::string fileName = std::string(dlgOpen->GetPath().mb_str());
         lmt_read.load(fileName, &my_lmt);
         lmt_read.print(&my_lmt);
+        fileName.replace(fileName.length() - 3, fileName.length(),"ldb");
+        //load ldb
+        LDB_reader my_ldb;
+        my_ldb.Load(fileName, &ldbdata);
+        ProjectDirectory = dlgOpen->GetDirectory();
         fill_lmtTree();
     }
     dlgOpen->Destroy();
@@ -253,6 +259,8 @@ void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event))
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
+    if (ProjectDirectory == wxEmptyString) return;
+    dlgDb->fill_data(ldbdata);
     dlgDb->SetFocus();
     dlgDb->ShowModal();
 }

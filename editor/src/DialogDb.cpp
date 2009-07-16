@@ -323,6 +323,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     listActor = new wxListBox(pnActor, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, listActor_choices, 0);
     btnActorMaxNumber = new wxButton(pnActor, wxID_ANY, _("Max number..."));
     tcActorName = new wxTextCtrl(pnActor, wxID_ANY, wxEmptyString);
+    tcActorName = new wxTextCtrl(pnActor, wxID_ANY, wxEmptyString);
     tcActorTitle = new wxTextCtrl(pnActor, wxID_ANY, wxEmptyString);
     bmpWalkingGraphic = new wxStaticBitmap(pnActor, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxSUNKEN_BORDER);
     chbActorWalkingGraphicTranslucent = new wxCheckBox(pnActor, wxID_ANY, _("Translucent"));
@@ -872,6 +873,8 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     tcSystemMusicSmallShip = new wxTextCtrl(pnSystem, wxID_ANY, wxEmptyString);
     btnSystemMusicSmallShip = new wxButton(pnSystem, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     tcSystemMusicBattle = new wxTextCtrl(pnSystem, wxID_ANY, wxEmptyString);
+    //wxString str = wxString(ldbdata.System_dat->Battle_music.Name_of_Music_Background.c_str(), wxConvUTF8);
+    //tcSystemMusicBattle = new wxTextCtrl(pnSystem, wxID_ANY, str);
     btnSystemMusicBattle = new wxButton(pnSystem, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     tcSystemMusicBigShip = new wxTextCtrl(pnSystem, wxID_ANY, wxEmptyString);
     btnSystemMusicBigShip = new wxButton(pnSystem, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
@@ -2703,4 +2706,10 @@ void DialogDb::ListCommonEventExecutionContent_doubleclick(wxCommandEvent &WXUNU
     dlgEvtCmd->SetFocus();
     dlgEvtCmd->ShowModal();
     dlgEvtCmd->Destroy();
+}
+
+void DialogDb::fill_data(LDB_data ldbdata)
+{
+    wxString str = wxString(ldbdata.heros->at(0)->strName.c_str(), wxConvUTF8);
+    tcActorName->ChangeValue(str);
 }
