@@ -948,6 +948,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     do_layout();
 
     Connect(ID_COMMON_EVENTS_LIST_EXECUTION, wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(DialogDb::ListCommonEventExecutionContent_doubleclick));
+    Connect(wxID_ANY, wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(DialogDb::Fill_ActorInfo));
 }
 
 void DialogDb::set_properties()
@@ -2710,6 +2711,25 @@ void DialogDb::ListCommonEventExecutionContent_doubleclick(wxCommandEvent &WXUNU
 
 void DialogDb::fill_data(LDB_data ldbdata)
 {
-    wxString str = wxString(ldbdata.heros->at(0)->strName.c_str(), wxConvUTF8);
-    tcActorName->ChangeValue(str);
+    ldb_tmp = ldbdata;
+    std::string stdstr;
+    wxString str = wxEmptyString;
+    wxArrayString ArrStr;
+    if (ldb_tmp.heros->size() != 0){
+        listActor->Clear();
+        ArrStr.Clear();
+        for (unsigned int i = 0; i < ldb_tmp.heros->size(); i++){
+            stdstr = ldbdata.heros->at(i)->strName.c_str();
+            wxString str = wxString::Format(wxT("%i::"),i);
+            ArrStr.Add(str + wxString(stdstr.c_str(), wxConvUTF8));
+        }
+        listActor->Set(ArrStr);
+        listActor->SetSelection(0);
+    }
+}
+void DialogDb::Fill_ActorInfo(wxCommandEvent &WXUNUSED(event))
+{
+    unsigned int SelectedActor = listActor->GetSelection();
+    std::string str = ldb_tmp.heros->at(SelectedActor)->strName.c_str();
+    tcActorName->ChangeValue(wxString(str.c_str(), wxConvUTF8));
 }
