@@ -121,10 +121,11 @@ bool Movie::isPlaying(){
     return is_playing;
 }
 
-bool Movie::play(SDL_Surface *scr, Sint16 x, Sint16 y){
+bool Movie::play( Sint16 x, Sint16 y ){
     double rate;
     is_playing = true;
     frameFinished = 0;
+    SDL_Surface *scr = SDL_GetVideoSurface(); //obtenemos la superficie de video
 
     rate = mWidth/mHeight;
     //Si ya existía un overlay lo borramos...

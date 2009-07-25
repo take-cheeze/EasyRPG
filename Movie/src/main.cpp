@@ -15,6 +15,7 @@ int main(int argc, char *argv[]){
     }
 
     SDL_Surface *screen;
+
     screen =  SDL_SetVideoMode(320, 240, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
 
     SDL_WM_SetCaption("Visualizador de video...",NULL);
@@ -35,7 +36,7 @@ int main(int argc, char *argv[]){
    // peli.setWidth(screen->w);
    // peli.setHeight(screen->h);
 
-    peli.play(screen);
+    peli.play();
 
     SDL_Event event;
     while( peli.update() ){
@@ -60,6 +61,7 @@ int main(int argc, char *argv[]){
     }
 
     peli.dispose();
+
     SDL_Quit();
     return 0;
 }
