@@ -2,6 +2,10 @@
 #include "../include/Movie.h"
 using namespace std;
 
+long diffTimeb(timeb end, timeb start){
+    return (long) ((1000*(end.time - start.time)) + (end.millitm - start.millitm));
+}
+
 //Creando el Sistema único...
 MovieSystem MovieSystem::myself;
 
@@ -28,9 +32,13 @@ MovieSystem &MovieSystem::getSingleton(){
 
 Movie::Movie(){
     mWidth = 0; mHeight = 0;
+    swsC = (struct SwsContext*) NULL;
+    frameFinished = 0;
+    bmp = (SDL_Overlay *) NULL;
 }
 
 bool Movie::init(std::string nombre){
+    AVRational tb;
     videoStream=-1;
     file_ok = false;
 
@@ -60,6 +68,11 @@ bool Movie::init(std::string nombre){
     //Se obtiene un puntero al codec especifico
     pCodec = avcodec_find_decoder( pCodecCtx->codec_id );
 
+    //obteniendo la base de tiempo...
+
+    tb = pCodecCtx->time_base;
+    timebase = (double) ((tb.num)/((double)(tb.den)));
+
     //si se obtuvo el codec adecuado
     if(!pCodec){
         MovieSystem::getSingleton().setError("Error: No se encontro un codec de video adecuado...");
@@ -88,19 +101,37 @@ bool Movie::init(std::string nombre){
     return true;
 }
 
-int Movie::width(){ return mWidth; }
-int Movie::height(){ return mHeight; }
+int Movie::originalWidth(){ return mWidth; }
+int Movie::originalHeight(){ return mHeight; }
+int Movie::width(){ return dstWidth; }
+int Movie::height(){ return dstHeight; }
 
-void Movie::stretchToFit(){
-   fit_me = true;
+void Movie::setWidth(int w){
+    dstWidth = w;
+}
+void Movie::setHeight(int h){
+    dstHeight = h;
+}
+
+void Movie::stretchToFit(bool estirar){
+   fit_me = estirar;
+}
+
+bool Movie::isPlaying(){
+    return is_playing;
 }
 
 bool Movie::play(SDL_Surface *scr, Sint16 x, Sint16 y){
     double rate;
     is_playing = true;
-    SDL_Event event;
+    frameFinished = 0;
 
     rate = mWidth/mHeight;
+    //Si ya existía un overlay lo borramos...
+    if (bmp) {
+        SDL_FreeYUVOverlay(bmp);
+        bmp = (SDL_Overlay *) NULL;
+    }
 
     if(!fit_me){
         bmp = SDL_CreateYUVOverlay(dstWidth, dstHeight, SDL_YV12_OVERLAY, scr);
@@ -127,72 +158,88 @@ bool Movie::play(SDL_Surface *scr, Sint16 x, Sint16 y){
         MovieSystem::getSingletonPtr()->setError("Error: No se pudo crear el overlay...");
         return false;
     }
+    ftime(&frameTime);
 
-    while( update() && is_playing ){
-        SDL_PollEvent(&event);
-        switch(event.type){
-            case SDL_QUIT:
-                is_playing = false;
-                break;
-            case SDL_KEYDOWN:
-                is_playing = false;
-                break;
-            default : break;
-        }
-    }
+    if(swsC) sws_freeContext(swsC);
+    swsC = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt, rect.w, rect.h, PIX_FMT_YUV420P, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+
     return true;
+}
+
+void Movie::resume(){
+    if(bmp) is_playing = true;
+    ftime(&frameTime); //esto es para reiniciar el temporizador ...
 }
 
 void Movie::stop(){
     is_playing = false;
-    //hay que ver si se borra el overlay...
+    //Si ya existía un overlay lo borramos...
+    if (bmp) {
+        SDL_FreeYUVOverlay(bmp);
+        bmp = (SDL_Overlay *) NULL;
+    }
+    if(swsC) sws_freeContext(swsC);
+    swsC = (struct SwsContext*) NULL;
+}
+
+void Movie::pause(){
+    is_playing = false;
+
+}
+
+void Movie::renderFrame(){
+    ftime(&currentTime);
+    if(diffTimeb (currentTime,frameTime) >= (long)(timebase*1000)) {
+        frameTime = currentTime;
+        SDL_LockYUVOverlay(bmp);
+            AVPicture pict;
+            pict.data[0] = bmp->pixels[0];
+            pict.data[1] = bmp->pixels[2];
+            pict.data[2] = bmp->pixels[1];
+
+            pict.linesize[0] = bmp->pitches[0];
+            pict.linesize[1] = bmp->pitches[2];
+            pict.linesize[2] = bmp->pitches[1];
+
+            if(swsC) sws_scale( swsC, pFrame->data, pFrame->linesize, 0, pCodecCtx->height, pict.data, pict.linesize  );
+            else return;
+        SDL_UnlockYUVOverlay(bmp);
+
+        SDL_DisplayYUVOverlay(bmp, &rect);
+        frameFinished = 0; //es necesario leer un frame nuevo... (ver la declaracion en Movie.h)
+    }
+   return;
 }
 
 bool Movie::update(){
-    int frameFinished;
-    AVPacket packet;
-    struct SwsContext* swsC;
-    bool frame_ok = (av_read_frame(pFormatCtx, &packet)>=0);
-
-    if(frame_ok){
-      // Is this a packet from the video stream?
-      if(packet.stream_index==videoStream) {
-        // decodificando el frame de video...
-        avcodec_decode_video(pCodecCtx, pFrame, &frameFinished,
-                             packet.data, packet.size);
-        // Did we get a video frame?
-        if(frameFinished) {
-            // Aqui se ejecuta lo que se necesite para cada frame...
-
-
-            SDL_LockYUVOverlay(bmp);
-                AVPicture pict;
-                pict.data[0] = bmp->pixels[0];
-                pict.data[1] = bmp->pixels[2];
-                pict.data[2] = bmp->pixels[1];
-
-                pict.linesize[0] = bmp->pitches[0];
-                pict.linesize[1] = bmp->pitches[2];
-                pict.linesize[2] = bmp->pitches[1];
-
-                swsC = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt, rect.w, rect.h, PIX_FMT_YUV420P, SWS_FAST_BILINEAR, NULL, NULL, NULL);
-
-                //Probablemente el problema este en sws_scale...
-                if(swsC) sws_scale( swsC, pFrame->data, pFrame->linesize, 0, pCodecCtx->height, pict.data, pict.linesize  );
-                else return false;
-
-            SDL_UnlockYUVOverlay(bmp);
-            SDL_DisplayYUVOverlay(bmp, &rect);
+    bool frame_ok=true;
+    if(!bmp) return false;
+    if(is_playing) {
+        if (!frameFinished){
+            frame_ok = (av_read_frame(pFormatCtx, &packet)>=0);
+            if(frame_ok){
+                  // Is this a packet from the video stream?
+                  if(packet.stream_index==videoStream ) {
+                        // decodificando el frame de video...
+                                avcodec_decode_video(pCodecCtx, pFrame, &frameFinished,
+                                                     packet.data, packet.size);
+                                // ¿Se logró obtener un frame de video?
+                                if(frameFinished) renderFrame();
+                  }
+                  // Liberando el paquete que se ha leido...
+                  av_free_packet(&packet);
+                }
+        }else{
+            renderFrame();
+            return true;
         }
-      }
-      // Liberando el paquete que se ha leido...
-      av_free_packet(&packet);
     }
     return frame_ok;
 }
 
 void Movie::dumpFormat(){
     dump_format(pFormatCtx,0,url.c_str(),0);
+    cout << "Time Base: " << timebase << endl;
 }
 
 void Movie::dispose(){
@@ -200,4 +247,10 @@ void Movie::dispose(){
     avcodec_close(pCodecCtx); //liberando el contexto de codecs
     av_close_input_file(pFormatCtx); //cerrando el archivo...
     url.clear();
+    if(swsC) sws_freeContext(swsC);        //liberando el contexto de swscale
+    //Si ya existía un overlay lo borramos...
+    if (bmp) {
+        SDL_FreeYUVOverlay(bmp);
+        bmp = (SDL_Overlay *) NULL;
+    }
 }
