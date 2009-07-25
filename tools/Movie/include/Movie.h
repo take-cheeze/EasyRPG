@@ -53,19 +53,17 @@ class Movie {
         */
         bool init(std::string nombre);
 
-        /** Prepara la acción de reproducir el video en la superficie \p scr
-            en la posición  \p x y \p y seleccionada. Necesita de llamadas a la
-            función miembro update(), ya que no inicia ciclo de dibujado autónomo.
-            @param scr Puntero a una superficie SDL_Surface válida donde se desea
-            renderizar el video.
+        /** Prepara la acción de reproducir el video en la posición  \p x y \p y
+            seleccionada. Necesita de llamadas a la función miembro update(), ya
+            que no inicia ciclo de dibujado autónomo.
             @param x Posición horizontal en la superficie
             @param y Posición vertical en la superficie
             @return true en caso de éxito o false si ha ocurrido un error.
             @see update()
         */
-        bool play(SDL_Surface *scr, Sint16 x=0, Sint16 y=0);
+        bool play( Sint16 x=0, Sint16 y=0 );
 
-        /** Detiene la reproducción del video en la superficie, liberando de
+        /** Detiene la reproducción del video en la superficie SDL, liberando de
             memoria los objetos creados por la función play(). Una llamada a la
             función update() retornará false luego de haberse invocado la función
             stop().
@@ -85,8 +83,7 @@ class Movie {
         /// Reanuda la reproducción del video, detenido por medio de pause()
         void resume();
 
-        /** Actualiza el video en la superficie SDL_Surface pasada a la función
-            play().
+        /** Actualiza el frame del video, dibujando el overlay en la pantalla.
             @return true si se logró actualizar el video o false en caso de un
             error, se haya detenido la reproducción por medio de stop() o bien
             se haya acabado el video.
@@ -140,14 +137,14 @@ class Movie {
         int height();
 
         /** Cambia el ancho del video por \p w, tal cual será mostrado en la
-            superficie SDL, únicamente es efectiva si se llama antes de la función
+            pantalla, únicamente es efectiva si se llama antes de la función
             play().
             @param w ancho en píxeles del video.
         */
         void setWidth(int w);
 
         /** Cambia el alto del video por \p h, tal cual será mostrado en la
-            superficie SDL, únicamente es efectiva si se llama antes de la función
+            pantalla, únicamente es efectiva si se llama antes de la función
             play().
             @param h alto en píxeles del video.
         */
