@@ -5,7 +5,6 @@
 #include <wx/listctrl.h>
 #include <wx/notebook.h>
 #include "ldb_data.h"
-#include "DialogDbTools.cpp"
 
 class DialogDb: public wxDialog {
 public:

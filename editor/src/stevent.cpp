@@ -972,7 +972,7 @@ Event_comand * stEvent::EventcommandCall_Shop(int Command,int Depth,FILE * Strea
 
    ChunkInfo.Length= ReadCompressedInteger(Stream); //primera longitud
                            name = ReadString(Stream, ChunkInfo.Length);
-                          printf(name.c_str());
+                          printf("%s", name.c_str());
                             ChunkInfo.Length= ReadCompressedInteger(Stream); //segunda longitud
 
 
