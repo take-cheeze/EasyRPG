@@ -260,7 +260,7 @@ void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event))
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
     if (ProjectDirectory == wxEmptyString) return;
-    dlgDb->fill_data(ldbdata);
+    dlgDb->fill_data(ProjectDirectory);
     dlgDb->SetFocus();
     dlgDb->ShowModal();
 }

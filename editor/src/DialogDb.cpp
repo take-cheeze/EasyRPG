@@ -1,6 +1,7 @@
 #include <wx/wx.h>
 #include "DialogDb.h"
 #include "DialogEvtCmd.h"
+#include "ldbReader.h"
 
 DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
     wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME)
@@ -873,8 +874,6 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     tcSystemMusicSmallShip = new wxTextCtrl(pnSystem, wxID_ANY, wxEmptyString);
     btnSystemMusicSmallShip = new wxButton(pnSystem, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     tcSystemMusicBattle = new wxTextCtrl(pnSystem, wxID_ANY, wxEmptyString);
-    //wxString str = wxString(ldbdata.System_dat->Battle_music.Name_of_Music_Background.c_str(), wxConvUTF8);
-    //tcSystemMusicBattle = new wxTextCtrl(pnSystem, wxID_ANY, str);
     btnSystemMusicBattle = new wxButton(pnSystem, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     tcSystemMusicBigShip = new wxTextCtrl(pnSystem, wxID_ANY, wxEmptyString);
     btnSystemMusicBigShip = new wxButton(pnSystem, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
@@ -943,7 +942,7 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     btnCancel = new wxButton(this, wxID_CANCEL, wxEmptyString);
     btnApply = new wxButton(this, wxID_APPLY, wxEmptyString);
     btnHelp = new wxButton(this, wxID_HELP, wxEmptyString);
-
+	
     set_properties();
     do_layout();
 
@@ -2709,9 +2708,11 @@ void DialogDb::ListCommonEventExecutionContent_doubleclick(wxCommandEvent &WXUNU
     dlgEvtCmd->Destroy();
 }
 
-void DialogDb::fill_data(LDB_data ldbdata)
+void DialogDb::fill_data(wxString Directory)
 {
-    ldb_tmp = ldbdata;
+	LDB_reader my_ldb;
+	std::string filename = std::string(Directory.mb_str());
+	my_ldb.Load(filename + "/RPG_RT.ldb", &ldb_tmp);
     std::string stdstr;
     wxString str = wxEmptyString;
     wxArrayString ArrStr;
@@ -2719,8 +2720,15 @@ void DialogDb::fill_data(LDB_data ldbdata)
         listActor->Clear();
         ArrStr.Clear();
         for (unsigned int i = 0; i < ldb_tmp.heros->size(); i++){
-            stdstr = ldbdata.heros->at(i)->strName.c_str();
-            wxString str = wxString::Format(wxT("%i::"),i);
+            stdstr = ldb_tmp.heros->at(i)->strName.c_str();
+			if (i < 10)
+				str = wxString::Format(wxT("000%i:"),i + 1);
+			else if ( i < 100)
+				str = wxString::Format(wxT("00%i:"),i + 1);
+			else if (i < 1000)
+				str = wxString::Format(wxT("0%i:"),i + 1);
+			else if (i < 10000)
+				str = wxString::Format(wxT("%i:"),i + 1);
             ArrStr.Add(str + wxString(stdstr.c_str(), wxConvUTF8));
         }
         listActor->Set(ArrStr);
