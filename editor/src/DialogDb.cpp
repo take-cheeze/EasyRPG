@@ -321,9 +321,8 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
     szActorName_staticbox = new wxStaticBox(pnActor, -1, _("Name"));
     stActor = new wxStaticText(pnActor, wxID_ANY, _("Actors"));
     const wxString *listActor_choices = NULL;
-    listActor = new wxListBox(pnActor, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, listActor_choices, 0);
+    listActor = new wxListBox(pnActor, ID_ACTOR_LIST, wxDefaultPosition, wxDefaultSize, 0, listActor_choices, 0);
     btnActorMaxNumber = new wxButton(pnActor, wxID_ANY, _("Max number..."));
-    tcActorName = new wxTextCtrl(pnActor, wxID_ANY, wxEmptyString);
     tcActorName = new wxTextCtrl(pnActor, wxID_ANY, wxEmptyString);
     tcActorTitle = new wxTextCtrl(pnActor, wxID_ANY, wxEmptyString);
     bmpWalkingGraphic = new wxStaticBitmap(pnActor, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, wxSUNKEN_BORDER);
@@ -937,17 +936,17 @@ DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoin
         _("<>")
     };
     ListCommonEventExecutionContent = new wxListBox(pnCommonEvent, ID_COMMON_EVENTS_LIST_EXECUTION, wxDefaultPosition, wxDefaultSize, 1, ListCommonEventExecutionContent_choices, 0);
-    button_1 = new wxButton(this, wxID_ANY, _("BGM"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT|wxNO_BORDER);
+    btnBGM = new wxButton(this, wxID_ANY, _("BGM"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT|wxNO_BORDER);
     btnOK = new wxButton(this, wxID_OK, wxEmptyString);
     btnCancel = new wxButton(this, wxID_CANCEL, wxEmptyString);
     btnApply = new wxButton(this, wxID_APPLY, wxEmptyString);
     btnHelp = new wxButton(this, wxID_HELP, wxEmptyString);
-	
+
     set_properties();
     do_layout();
 
+    Connect(ID_ACTOR_LIST, wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler(DialogDb::Fill_ActorInfo));
     Connect(ID_COMMON_EVENTS_LIST_EXECUTION, wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(DialogDb::ListCommonEventExecutionContent_doubleclick));
-    Connect(wxID_ANY, wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(DialogDb::Fill_ActorInfo));
 }
 
 void DialogDb::set_properties()
@@ -1279,7 +1278,7 @@ void DialogDb::set_properties()
     tcCommonEventConditionActivationSwitch->SetMinSize(wxSize(50, -1));
     ListCommonEventExecutionContent->SetMinSize(wxSize(50, 50));
     ListCommonEventExecutionContent->SetSelection(0);
-    button_1->SetMinSize(wxSize(-1, -1));
+    btnBGM->SetMinSize(wxSize(-1, -1));
     btnOK->SetDefault();
 }
 
@@ -2688,7 +2687,7 @@ void DialogDb::do_layout()
     nbDb->AddPage(pnSystem, _("System"));
     nbDb->AddPage(pnCommonEvent, _("Common events"));
     szDb->Add(nbDb, 1, wxALL|wxEXPAND, 1);
-    szBottom->Add(button_1, 0, wxALL, 1);
+    szBottom->Add(btnBGM, 0, wxALL, 1);
     szBottom->Add(0, 0, 1, wxEXPAND, 0);
     szBottom->Add(btnOK, 0, wxALL, 1);
     szBottom->Add(btnCancel, 0, wxALL, 1);
@@ -2710,9 +2709,9 @@ void DialogDb::ListCommonEventExecutionContent_doubleclick(wxCommandEvent &WXUNU
 
 void DialogDb::fill_data(wxString Directory)
 {
-	LDB_reader my_ldb;
-	std::string filename = std::string(Directory.mb_str());
-	my_ldb.Load(filename + "/RPG_RT.ldb", &ldb_tmp);
+    LDB_reader my_ldb;
+    std::string filename = std::string(Directory.mb_str());
+    my_ldb.Load(filename + "/RPG_RT.ldb", &ldb_tmp);
     std::string stdstr;
     wxString str = wxEmptyString;
     wxArrayString ArrStr;
@@ -2721,20 +2720,21 @@ void DialogDb::fill_data(wxString Directory)
         ArrStr.Clear();
         for (unsigned int i = 0; i < ldb_tmp.heros->size(); i++){
             stdstr = ldb_tmp.heros->at(i)->strName.c_str();
-			if (i < 10)
-				str = wxString::Format(wxT("000%i:"),i + 1);
-			else if ( i < 100)
-				str = wxString::Format(wxT("00%i:"),i + 1);
-			else if (i < 1000)
-				str = wxString::Format(wxT("0%i:"),i + 1);
-			else if (i < 10000)
-				str = wxString::Format(wxT("%i:"),i + 1);
+            if (i < 10)
+                str = wxString::Format(wxT("000%i:"),i + 1);
+            else if ( i < 100)
+                str = wxString::Format(wxT("00%i:"),i + 1);
+            else if (i < 1000)
+                str = wxString::Format(wxT("0%i:"),i + 1);
+            else if (i < 10000)
+                str = wxString::Format(wxT("%i:"),i + 1);
             ArrStr.Add(str + wxString(stdstr.c_str(), wxConvUTF8));
         }
         listActor->Set(ArrStr);
         listActor->SetSelection(0);
     }
 }
+
 void DialogDb::Fill_ActorInfo(wxCommandEvent &WXUNUSED(event))
 {
     unsigned int SelectedActor = listActor->GetSelection();

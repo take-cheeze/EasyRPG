@@ -845,7 +845,7 @@ protected:
     wxListBox* ListCommonEventExecutionContent;
     wxPanel* pnCommonEvent;
     wxNotebook* nbDb;
-    wxButton* button_1;
+    wxButton* btnBGM;
     wxButton* btnOK;
     wxButton* btnCancel;
     wxButton* btnApply;
@@ -854,7 +854,8 @@ protected:
 
 enum
 {
-    ID_COMMON_EVENTS_LIST_EXECUTION = 1
+    ID_ACTOR_LIST = 1,
+    ID_COMMON_EVENTS_LIST_EXECUTION
 };
 
 #endif
