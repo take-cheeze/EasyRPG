@@ -98,13 +98,28 @@ FrameEditor::FrameEditor():
     frmEditorToolbar->AddSeparator();
     frmEditorToolbar->AddTool(wxID_HELP, _("Help"), wxBitmap(wxT("../share/toolbar/help.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Help contents"), _("Display the help index and contents of EasyRPG"));
     frmEditorToolbar->Realize();
-    pnEditorTileset = new wxScrolledWindow(swEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+    pnEditorTileset = new ScrolledPalete(this, wxID_ANY);
+	pnEditorTilesetToolbar = new wxToolBar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_FLAT);
+	pnEditorTilesetToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Udo last action"), _("Revert las drawing in the actual Map"));
+	pnEditorTilesetToolbar->AddSeparator();
+	pnEditorTilesetToolbar->Realize();
     tcMapTree = new wxTreeCtrl(pnEditorMapTree, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE|wxSUNKEN_BORDER);
     pnEditorMap = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	pnPaleteConainer = new wxPanel(swEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
     set_properties();
     do_layout();
 
+		/* TESTING */
+			wxArrayString chips;
+			chips.Add(wxT("../../player/ChipSet/basis.png"));
+			if (!pnEditorTileset->load_palete(chips)){
+				wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
+				ErrMsg->ShowModal();
+				ErrMsg->Destroy();
+			}
+		/* END TEST */
+		
     Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
 
@@ -145,8 +160,7 @@ void FrameEditor::set_properties()
     for (int i = 0; i < frmEditorStatusbar->GetFieldsCount(); ++i) {
         frmEditorStatusbar->SetStatusText(frmEditorStatusbar_fields[i], i);
     }
-    pnEditorTileset->SetMinSize(wxSize(217, 96));
-    pnEditorTileset->SetScrollRate(32, 32);
+    pnEditorTileset->SetMinSize(wxSize(212, 96));
     tcMapTree->SetMinSize(wxSize(212, 128));
     pnEditorMap->SetScrollRate(32, 32);
     SetMinSize(wxSize(700, 400));
@@ -174,9 +188,13 @@ void FrameEditor::do_layout()
 {
     wxBoxSizer* szEditor = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* szMapTree = new wxBoxSizer(wxHORIZONTAL);
+	wxBoxSizer* szEditorPalete = new wxBoxSizer(wxVERTICAL);
     szMapTree->Add(tcMapTree, 0, wxEXPAND, 0);
     pnEditorMapTree->SetSizer(szMapTree);
-    swEditor->SplitHorizontally(pnEditorTileset, pnEditorMapTree);
+	szEditorPalete->Add(pnEditorTilesetToolbar, 0, wxEXPAND,0);
+	szEditorPalete->Add(pnEditorTileset, 1, wxEXPAND, 0);
+	pnPaleteConainer->SetSizer(szEditorPalete);
+    swEditor->SplitHorizontally(pnPaleteConainer, pnEditorMapTree);
     szEditor->Add(swEditor, 0, wxEXPAND, 0);
     szEditor->Add(pnEditorMap, 1, wxEXPAND, 0);
     SetSizer(szEditor);
@@ -273,6 +291,7 @@ void FrameEditor::upperlayer_click(wxCommandEvent &WXUNUSED(event))
 
 void FrameEditor::lowerlayer_click(wxCommandEvent &WXUNUSED(event)) 
 {
+
     MenuEdit->Check(ID_LOWER_LAYER, true);
     frmEditorToolbar->ToggleTool(ID_LOWER_LAYER, true);
 }
