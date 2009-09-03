@@ -8,7 +8,7 @@
 
 
 DialogEvtCmdSystemMenuPermissions::DialogEvtCmdSystemMenuPermissions(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
-    wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME)
+    wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX)
 {
     // begin wxGlade: DialogEvtCmdSystemMenuPermissions::DialogEvtCmdSystemMenuPermissions
     const wxString rbOperation_choices[] = {

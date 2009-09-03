@@ -8,10 +8,10 @@
 
 
 DialogEvtCmdMessage::DialogEvtCmdMessage(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
-    wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME)
+    wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX)
 {
     // begin wxGlade: DialogEvtCmdMessage::DialogEvtCmdMessage
-    tcMessage = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_LINEWRAP|wxTE_WORDWRAP);
+    tcMessage = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_WORDWRAP);
     btnOK = new wxButton(this, wxID_OK, wxEmptyString);
     btnCancel = new wxButton(this, wxID_CANCEL, wxEmptyString);
     btnHelp = new wxButton(this, wxID_HELP, wxEmptyString);

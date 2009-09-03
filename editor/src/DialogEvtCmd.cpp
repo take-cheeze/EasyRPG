@@ -79,7 +79,7 @@
 #include "DialogEvtCmdEscapePermissions.h"
 
 DialogEvtCmd::DialogEvtCmd(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
-    wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME)
+    wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX)
 {
     pnEvtCmd = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0);
     pnEvtCmd3 = new wxPanel(pnEvtCmd, wxID_ANY);
