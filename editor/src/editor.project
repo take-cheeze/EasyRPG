@@ -187,13 +187,11 @@
     <File Name="ldbstr.cpp"/>
     <File Name="ldbstr.h"/>
     <File Name="easyrpg.cbp"/>
-    <File Name="editor.project"/>
     <File Name="Makefile.am"/>
     <File Name="Makefile.in"/>
     <File Name="stevent.cpp"/>
     <File Name="stevent.h"/>
   </VirtualDirectory>
-  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="-Wall;-Wextra;-ansi;">
@@ -255,5 +253,6 @@
       </AdditionalRules>
     </Configuration>
   </Settings>
+  <Dependencies Name="Release"/>
   <Dependencies Name="Debug"/>
 </CodeLite_Project>
