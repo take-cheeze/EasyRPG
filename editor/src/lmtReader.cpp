@@ -1,3 +1,18 @@
+/* lmt.cpp, LcfMapTree reader class.
+   Copyright (C) 2007 EasyRPG Project <http://easyrpg.sourceforge.net/>.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -108,7 +123,8 @@ bool lmt_reader::load(std::string filename,lmt_data * data)
             // skip unknown vehicle_chunk_id case
             for (int i = 1 ; i > vehicle_chunk_size; i++)
             {
-                fread(&dummy, 1, 1, file);
+                bool return_value;
+                return_value = fread(&dummy, 1, 1, file);
                 printf("Byte read: %d\n", dummy);
             }
             break;
@@ -235,7 +251,8 @@ void lmt_reader::read_tree(FILE *file,lmt_data * data)
                     // skip unknown node_chunk_id case
                     while (node_chunk_size--)
                     {
-                        fread(&dummy, 1, 1, file);
+                        bool return_value;
+                        return_value = fread(&dummy, 1, 1, file);
                         printf("Byte read: %d\n", dummy);
                     }
                     break;
@@ -277,10 +294,11 @@ void lmt_reader::read_tree(FILE *file,lmt_data * data)
             node.encounter_steps = ReadCompressedInteger(file);
             break;
         case 51: //0x33 Area data
-            fread(&node.area_start_x, 4, 1, file);
-            fread(&node.area_start_y, 4, 1, file);
-            fread(&node.area_end_x, 4, 1, file);
-            fread(&node.area_end_y, 4, 1, file);
+            bool return_value;
+            return_value = fread(&node.area_start_x, 4, 1, file);
+            return_value = fread(&node.area_start_y, 4, 1, file);
+            return_value = fread(&node.area_end_x, 4, 1, file);
+            return_value = fread(&node.area_end_y, 4, 1, file);
             data->tree_list.push_back(node);
             break;
         case 0: //0x00 End of block
@@ -292,7 +310,8 @@ void lmt_reader::read_tree(FILE *file,lmt_data * data)
             // skip unknown node_chunk_id case
             while (node_chunk_size--)
             {
-                fread(&dummy, 1, 1, file);
+                bool return_value;
+                return_value = fread(&dummy, 1, 1, file);
                 printf("Byte read: %d\n", dummy);
             }
             break;

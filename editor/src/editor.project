@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Project Name="editor">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000
+    ]]>
+    </Plugin>
+  </Plugins>
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="DialogEvtCmdMemorizePlace.cpp"/>
@@ -186,24 +192,13 @@
     <File Name="ldbReader.h"/>
     <File Name="ldbstr.cpp"/>
     <File Name="ldbstr.h"/>
-    <File Name="easyrpg.cbp"/>
-    <File Name="Makefile.am"/>
-    <File Name="Makefile.in"/>
     <File Name="stevent.cpp"/>
     <File Name="stevent.h"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
   <Settings Type="Executable">
-    <GlobalSettings>
-      <Compiler Options="-Wall;-Wextra;-ansi;">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Options="-O2;"/>
-      <ResourceCompiler Options=""/>
-    </GlobalSettings>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="$(shell wx-config --cxxflags --unicode=yes --debug=yes);-g;" Required="yes">
-        <IncludePath Value="C:/wxWidgets-2.8.7/include"/>
-      </Compiler>
+      <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes"/>
       <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes);" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
       <General OutputFile="../bin/editor" IntermediateDirectory="../.obj/Debug" Command="./editor" CommandArguments="" WorkingDirectory="../bin" PauseExecWhenProcTerminates="yes"/>
@@ -228,7 +223,7 @@
       </AdditionalRules>
     </Configuration>
     <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="$(shell wx-config --cxxflags --unicode=yes --debug=no);" Required="yes"/>
+      <Compiler Options="-O2 -s $(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes"/>
       <Linker Options="$(shell wx-config --libs --unicode=yes --debug=no);" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
       <General OutputFile="../bin/editor" IntermediateDirectory="../.obj/Release" Command="./editor" CommandArguments="" WorkingDirectory="../bin" PauseExecWhenProcTerminates="yes"/>
@@ -252,7 +247,13 @@
         <CustomPreBuild/>
       </AdditionalRules>
     </Configuration>
+    <GlobalSettings>
+      <Compiler Options="-fno-rtti -fno-exceptions -Wall -Wextra -ansi">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
   </Settings>
   <Dependencies Name="Release"/>
-  <Dependencies Name="Debug"/>
 </CodeLite_Project>
