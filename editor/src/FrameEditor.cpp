@@ -98,14 +98,14 @@ FrameEditor::FrameEditor():
     frmEditorToolbar->AddSeparator();
     frmEditorToolbar->AddTool(wxID_HELP, _("Help"), wxBitmap(wxT("../share/toolbar/help.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Help contents"), _("Display the help index and contents of EasyRPG"));
     frmEditorToolbar->Realize();
-    pnEditorTileset = new ScrolledPalete(this, wxID_ANY);
+    pnEditorTileset = new ScrolledPalette(this, wxID_ANY);
 	pnEditorTilesetToolbar = new wxToolBar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_FLAT);
 	pnEditorTilesetToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Udo last action"), _("Revert las drawing in the actual Map"));
 	pnEditorTilesetToolbar->AddSeparator();
 	pnEditorTilesetToolbar->Realize();
     tcMapTree = new wxTreeCtrl(pnEditorMapTree, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE|wxSUNKEN_BORDER);
     pnEditorMap = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	pnPaleteConainer = new wxPanel(swEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+	pnPaletteConainer = new wxPanel(swEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
     set_properties();
     do_layout();
@@ -113,7 +113,7 @@ FrameEditor::FrameEditor():
 		/* TESTING */
 			wxArrayString chips;
 			chips.Add(wxT("../../player/ChipSet/basis.png"));
-			if (!pnEditorTileset->load_palete(chips)){
+			if (!pnEditorTileset->load_palette(chips)){
 				wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
 				ErrMsg->ShowModal();
 				ErrMsg->Destroy();
@@ -188,13 +188,13 @@ void FrameEditor::do_layout()
 {
     wxBoxSizer* szEditor = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* szMapTree = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer* szEditorPalete = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer* szEditorPalette = new wxBoxSizer(wxVERTICAL);
     szMapTree->Add(tcMapTree, 0, wxEXPAND, 0);
     pnEditorMapTree->SetSizer(szMapTree);
-	szEditorPalete->Add(pnEditorTilesetToolbar, 0, wxEXPAND,0);
-	szEditorPalete->Add(pnEditorTileset, 1, wxEXPAND, 0);
-	pnPaleteConainer->SetSizer(szEditorPalete);
-    swEditor->SplitHorizontally(pnPaleteConainer, pnEditorMapTree);
+	szEditorPalette->Add(pnEditorTilesetToolbar, 0, wxEXPAND,0);
+	szEditorPalette->Add(pnEditorTileset, 1, wxEXPAND, 0);
+	pnPaletteConainer->SetSizer(szEditorPalette);
+    swEditor->SplitHorizontally(pnPaletteConainer, pnEditorMapTree);
     szEditor->Add(swEditor, 0, wxEXPAND, 0);
     szEditor->Add(pnEditorMap, 1, wxEXPAND, 0);
     SetSizer(szEditor);
@@ -334,4 +334,63 @@ void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
 	dlgMaterial->SetFocus();
 	dlgMaterial->ShowModal();
 	dlgMaterial->Destroy();
+}
+
+ScrolledPalette::ScrolledPalette(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
+{
+    /* init scrolled area size, scrolling speed, etc. */
+    SetScrollbars(0, 32, 0, OnScreenPalette.size() / 6, 0, 0);
+}
+ScrolledPalette::ScrolledPalette()
+{
+    OnScreenPalette.clear();
+}
+
+bool ScrolledPalette::load_palette(wxArrayString Chipsets)
+{
+    for (unsigned int chipsetid = 0; chipsetid < Chipsets.GetCount(); chipsetid++)
+    {
+        //if (wxFile::Exists(Chipsets.Item(chipsetid))){
+        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid));
+        wxImage Scaler = Chipset.ConvertToImage();
+        Scaler.Rescale( Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
+        Chipset = wxBitmap::wxBitmap(Scaler);
+        OnScreenPalette.clear();
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 0), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 220), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 448), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(96, 188), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 0), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 128), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 256), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 384), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 0), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 128), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 256), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 384), wxSize(32, 32))));
+        for (int bloq = 0; bloq < 3; bloq++)
+        {
+            for (int row = 0; row < 16; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    int x = 384 + bloq * 96 + col * 32;
+                    int y = row * 32;
+                    OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(x, y), wxSize(32, 32))));
+                }
+            }
+        }
+        SetScrollbars(32, 32, 6, OnScreenPalette.size() / 6, 0, 0);
+    }
+    //else{ SetScrollbars(32,32, 6, OnScreenPalette.size() / 6, 0, 0); return false;}
+    return true;
+}
+
+void ScrolledPalette::OnDraw(wxDC& dc)
+{
+    if (!OnScreenPalette.empty())
+    for (unsigned int id = 0; id < OnScreenPalette.size(); id++)
+    {
+        dc.DrawBitmap(OnScreenPalette.at(id), (id % 6) * 32, (id / 6) * 32, false);
+    }
 }
