@@ -77,7 +77,7 @@ protected:
     wxStatusBar* frmEditorStatusbar;
     wxToolBar* frmEditorToolbar;
 	wxToolBar* pnEditorTilesetToolbar;
-	wxPanel* pnPaletteConainer;
+	wxPanel* pnPaletteContainer;
     ScrolledPalette* pnEditorTileset;
     wxTreeCtrl* tcMapTree;
     wxPanel* pnEditorMapTree;

@@ -4,6 +4,7 @@
     <Plugin Name="qmake">
       <![CDATA[00040001N0005Debug0000000000000001N0007Release0000000000000001N0011Win32 Debug0000000000000001N0013Win32 Release000000000000
     
+    
     ]]>
     </Plugin>
   </Plugins>
@@ -196,7 +197,6 @@
     <File Name="stevent.cpp"/>
     <File Name="stevent.h"/>
   </VirtualDirectory>
-  <Dependencies Name="Release"/>
   <Dependencies Name="Win32 Debug"/>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
@@ -309,4 +309,5 @@
   </Settings>
   <Dependencies Name="Win32 Release"/>
   <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>

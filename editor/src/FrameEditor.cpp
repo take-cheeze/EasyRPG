@@ -100,12 +100,18 @@ FrameEditor::FrameEditor():
     frmEditorToolbar->Realize();
     pnEditorTileset = new ScrolledPalette(this, wxID_ANY);
 	pnEditorTilesetToolbar = new wxToolBar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_FLAT);
-	pnEditorTilesetToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Udo last action"), _("Revert las drawing in the actual Map"));
+	pnEditorTilesetToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Undo last action"), _("Revert last drawing in the actual map"));
 	pnEditorTilesetToolbar->AddSeparator();
+	pnEditorTilesetToolbar->AddTool(-1, _("Select"), wxBitmap(wxT("../share/toolbar/select.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Selection tool"), _("Select a map region by a rectangle selector"));
+	pnEditorTilesetToolbar->AddTool(-1, _("Zoom"), wxBitmap(wxT("../share/toolbar/zoom.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Zoom tool"), _("Zoom in or out by left or right mouse click"));
+	pnEditorTilesetToolbar->AddTool(-1, _("Brush"), wxBitmap(wxT("../share/toolbar/pen.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Pen draw tool"), _("Draw on the map freely by hand"));
+	pnEditorTilesetToolbar->AddTool(-1, _("Rectangle"), wxBitmap(wxT("../share/toolbar/rectangle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Rectangle draw tool"), _("Draw a rectangle on the map"));
+	pnEditorTilesetToolbar->AddTool(-1, _("Circle"), wxBitmap(wxT("../share/toolbar/circle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Circle draw tool"), _("Draw a circle on the map"));
+	pnEditorTilesetToolbar->AddTool(-1, _("Fill"), wxBitmap(wxT("../share/toolbar/fill.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Flood fill draw tool"), _("Draw tiles with same tile type on the map"));
 	pnEditorTilesetToolbar->Realize();
     tcMapTree = new wxTreeCtrl(pnEditorMapTree, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE|wxSUNKEN_BORDER);
     pnEditorMap = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	pnPaletteConainer = new wxPanel(swEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+	pnPaletteContainer = new wxPanel(swEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize);
 
     set_properties();
     do_layout();
@@ -193,8 +199,8 @@ void FrameEditor::do_layout()
     pnEditorMapTree->SetSizer(szMapTree);
 	szEditorPalette->Add(pnEditorTilesetToolbar, 0, wxEXPAND,0);
 	szEditorPalette->Add(pnEditorTileset, 1, wxEXPAND, 0);
-	pnPaletteConainer->SetSizer(szEditorPalette);
-    swEditor->SplitHorizontally(pnPaletteConainer, pnEditorMapTree);
+	pnPaletteContainer->SetSizer(szEditorPalette);
+    swEditor->SplitHorizontally(pnPaletteContainer, pnEditorMapTree);
     szEditor->Add(swEditor, 0, wxEXPAND, 0);
     szEditor->Add(pnEditorMap, 1, wxEXPAND, 0);
     SetSizer(szEditor);
@@ -352,7 +358,7 @@ bool ScrolledPalette::load_palette(wxArrayString Chipsets)
     {
         //if (wxFile::Exists(Chipsets.Item(chipsetid))){
         //wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid));
-        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid), wxBITMAP_TYPE_PNG);
+        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid), wxBITMAP_TYPE_ANY);
         wxImage Scaler = Chipset.ConvertToImage();
         Scaler.Rescale( Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
         Chipset = wxBitmap::wxBitmap(Scaler);
