@@ -351,7 +351,8 @@ bool ScrolledPalette::load_palette(wxArrayString Chipsets)
     for (unsigned int chipsetid = 0; chipsetid < Chipsets.GetCount(); chipsetid++)
     {
         //if (wxFile::Exists(Chipsets.Item(chipsetid))){
-        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid));
+        //wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid));
+        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid), wxBITMAP_TYPE_PNG);
         wxImage Scaler = Chipset.ConvertToImage();
         Scaler.Rescale( Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
         Chipset = wxBitmap::wxBitmap(Scaler);
