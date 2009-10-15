@@ -30,8 +30,8 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 
 class ScrolledPalette : public wxScrolledWindow
 {
-	std::vector<wxBitmap> OnScreenPalette;
 public:
+    std::vector<wxBitmap> OnScreenPalette;
     ScrolledPalette(wxWindow* parent, wxWindowID id);
     ScrolledPalette();
     bool load_palette(wxArrayString Chipsets);
@@ -45,8 +45,8 @@ public:
     lmt_data my_lmt;
     LDB_data ldbdata;
     wxString ProjectDirectory;
-	std::vector<wxImage> MemoryPaltete;
-	std::vector<int> PaletteSelection;
+    std::vector<wxImage> MemoryPaltete;
+    std::vector<int> PaletteSelection;
 private:
 
     DialogDb* dlgDb;
@@ -61,7 +61,7 @@ private:
     void open_click(wxCommandEvent &WXUNUSED(event));
     void exit_click(wxCommandEvent &WXUNUSED(event));
     void database_click(wxCommandEvent &WXUNUSED(event));
-	void material_click(wxCommandEvent &WXUNUSED(event));
+    void material_click(wxCommandEvent &WXUNUSED(event));
     void zoom11_click(wxCommandEvent &WXUNUSED(event));
     void zoom12_click(wxCommandEvent &WXUNUSED(event));
     void zoom14_click(wxCommandEvent &WXUNUSED(event));
@@ -76,13 +76,12 @@ protected:
     wxMenuBar* frmEditorMenubar;
     wxStatusBar* frmEditorStatusbar;
     wxToolBar* frmEditorToolbar;
-	wxToolBar* pnEditorTilesetToolbar;
-	wxPanel* pnPaletteContainer;
-    ScrolledPalette* pnEditorTileset;
-    wxTreeCtrl* tcMapTree;
-    wxPanel* pnEditorMapTree;
+    wxToolBar* pnTilesetToolbar;
     wxSplitterWindow* swEditor;
-    wxScrolledWindow* pnEditorMap;
+    ScrolledPalette* pnTileset;
+    wxPanel* pnMapTree;
+    wxTreeCtrl* tcMapTree;
+    wxScrolledWindow* pnEditorCanvas;
 };
 
 enum
@@ -100,7 +99,5 @@ enum
     ID_SHOW_TITLE,
     ID_SHOW_TITLE2
 };
-
-
 
 #endif

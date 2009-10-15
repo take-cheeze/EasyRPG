@@ -22,7 +22,11 @@ FrameEditor::FrameEditor():
         wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
 {
     swEditor = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_BORDER);
-    pnEditorMapTree = new wxPanel(swEditor, wxID_ANY);
+    pnTileset = new ScrolledPalette(swEditor, wxID_ANY);
+    pnMapTree = new wxPanel(swEditor, wxID_ANY);
+    tcMapTree = new wxTreeCtrl(pnMapTree, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE|wxSUNKEN_BORDER);
+    pnEditorCanvas = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+    
     frmEditorMenubar = new wxMenuBar();
     wxMenu* MenuProject = new wxMenu();
     MenuProject->Append(wxID_NEW, _("&New..."), _("Create a new project"), wxITEM_NORMAL);
@@ -98,40 +102,37 @@ FrameEditor::FrameEditor():
     frmEditorToolbar->AddSeparator();
     frmEditorToolbar->AddTool(wxID_HELP, _("Help"), wxBitmap(wxT("../share/toolbar/help.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Help contents"), _("Display the help index and contents of EasyRPG"));
     frmEditorToolbar->Realize();
-    pnEditorTileset = new ScrolledPalette(this, wxID_ANY);
-	pnEditorTilesetToolbar = new wxToolBar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_FLAT);
-	pnEditorTilesetToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Undo last action"), _("Revert last drawing in the actual map"));
-	pnEditorTilesetToolbar->AddSeparator();
-	pnEditorTilesetToolbar->AddTool(-1, _("Select"), wxBitmap(wxT("../share/toolbar/select.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Selection tool"), _("Select a map region by a rectangle selector"));
-	pnEditorTilesetToolbar->AddTool(-1, _("Zoom"), wxBitmap(wxT("../share/toolbar/zoom.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Zoom tool"), _("Zoom in or out by left or right mouse click"));
-	pnEditorTilesetToolbar->AddTool(-1, _("Brush"), wxBitmap(wxT("../share/toolbar/pen.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Pen draw tool"), _("Draw on the map freely by hand"));
-	pnEditorTilesetToolbar->AddTool(-1, _("Rectangle"), wxBitmap(wxT("../share/toolbar/rectangle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Rectangle draw tool"), _("Draw a rectangle on the map"));
-	pnEditorTilesetToolbar->AddTool(-1, _("Circle"), wxBitmap(wxT("../share/toolbar/circle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Circle draw tool"), _("Draw a circle on the map"));
-	pnEditorTilesetToolbar->AddTool(-1, _("Fill"), wxBitmap(wxT("../share/toolbar/fill.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Flood fill draw tool"), _("Draw tiles with same tile type on the map"));
-	pnEditorTilesetToolbar->Realize();
-    tcMapTree = new wxTreeCtrl(pnEditorMapTree, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE|wxSUNKEN_BORDER);
-    pnEditorMap = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	pnPaletteContainer = new wxPanel(swEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+    pnTilesetToolbar = new wxToolBar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_FLAT);
+    pnTilesetToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Undo last action"), _("Revert last drawing in the actual map"));
+    pnTilesetToolbar->AddSeparator();
+    pnTilesetToolbar->AddTool(-1, _("Select"), wxBitmap(wxT("../share/toolbar/select.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Selection tool"), _("Select a map region by a rectangle selector"));
+    pnTilesetToolbar->AddTool(-1, _("Zoom"), wxBitmap(wxT("../share/toolbar/zoom.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Zoom tool"), _("Zoom in or out by left or right mouse click"));
+    pnTilesetToolbar->AddTool(-1, _("Brush"), wxBitmap(wxT("../share/toolbar/pen.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Pen draw tool"), _("Draw on the map freely by hand"));
+    pnTilesetToolbar->AddTool(-1, _("Rectangle"), wxBitmap(wxT("../share/toolbar/rectangle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Rectangle draw tool"), _("Draw a rectangle on the map"));
+    pnTilesetToolbar->AddTool(-1, _("Circle"), wxBitmap(wxT("../share/toolbar/circle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Circle draw tool"), _("Draw a circle on the map"));
+    pnTilesetToolbar->AddTool(-1, _("Fill"), wxBitmap(wxT("../share/toolbar/fill.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Flood fill draw tool"), _("Draw tiles with same tile type on the map"));
+    pnTilesetToolbar->Realize();
 
     set_properties();
     do_layout();
 
-		/* TESTING */
-			wxArrayString chips;
-			chips.Add(wxT("../../player/ChipSet/basis.png"));
-			if (!pnEditorTileset->load_palette(chips)){
-				wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
-				ErrMsg->ShowModal();
-				ErrMsg->Destroy();
-			}
-		/* END TEST */
-		
+        /* TESTING */
+            wxArrayString chips;
+            chips.Add(wxT("../../player/ChipSet/basis.png"));
+            if (!pnTileset->load_palette(chips))
+            {
+                wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
+                ErrMsg->ShowModal();
+                ErrMsg->Destroy();
+            }
+        /* END TEST */
+        
     Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
 
     /* Connect toolbar buttons */
     Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
-	Connect(ID_MATERIAL_MANAGER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::material_click));
+    Connect(ID_MATERIAL_MANAGER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::material_click));
     Connect(wxID_ZOOM_100, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom11_click));
     Connect(ID_ZOOM_12, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom12_click));
     Connect(ID_ZOOM_14, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom14_click));
@@ -166,9 +167,9 @@ void FrameEditor::set_properties()
     for (int i = 0; i < frmEditorStatusbar->GetFieldsCount(); ++i) {
         frmEditorStatusbar->SetStatusText(frmEditorStatusbar_fields[i], i);
     }
-    pnEditorTileset->SetMinSize(wxSize(212, 96));
-    tcMapTree->SetMinSize(wxSize(212, 128));
-    pnEditorMap->SetScrollRate(32, 32);
+    pnTileset->SetMinSize(wxSize(212, 96));
+    pnMapTree->SetMinSize(wxSize(212, 128));
+    //pnEditorCanvas->SetScrollRate(32, 32);
     SetMinSize(wxSize(700, 400));
     //Using native stock icons for treectrl for better looking
     //wxArtProvider does not load native Win32 icons, so we will get from our own technique
@@ -193,19 +194,23 @@ void FrameEditor::set_properties()
 void FrameEditor::do_layout()
 {
     wxBoxSizer* szEditor = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* szEditorLeft = new wxBoxSizer(wxVERTICAL);
+    
     wxBoxSizer* szMapTree = new wxBoxSizer(wxHORIZONTAL);
-	wxBoxSizer* szEditorPalette = new wxBoxSizer(wxVERTICAL);
-    szMapTree->Add(tcMapTree, 0, wxEXPAND, 0);
-    pnEditorMapTree->SetSizer(szMapTree);
-	szEditorPalette->Add(pnEditorTilesetToolbar, 0, wxEXPAND,0);
-	szEditorPalette->Add(pnEditorTileset, 1, wxEXPAND, 0);
-	pnPaletteContainer->SetSizer(szEditorPalette);
-    swEditor->SplitHorizontally(pnPaletteContainer, pnEditorMapTree);
-    szEditor->Add(swEditor, 0, wxEXPAND, 0);
-    szEditor->Add(pnEditorMap, 1, wxEXPAND, 0);
+    
+    szMapTree->Add(tcMapTree, 1, wxEXPAND, 0);
+    pnMapTree->SetSizer(szMapTree);
+    swEditor->SplitHorizontally(pnTileset, pnMapTree);
+    
+    szEditorLeft->Add(pnTilesetToolbar, 0, wxEXPAND, 0);
+    szEditorLeft->Add(swEditor, 1, wxEXPAND, 0);
+    
+    szEditor->Add(szEditorLeft, 0, wxEXPAND, 0);
+    szEditor->Add(pnEditorCanvas, 1, wxEXPAND, 0);
     SetSizer(szEditor);
     szEditor->Fit(this);
     Layout();
+    
     wxTreeItemId tiMapTreeRoot = tcMapTree->AddRoot(_T("Root"), 1, 0);
     tcMapTree->AppendItem(tiMapTreeRoot, _T("Node 1"), 2);
     tcMapTree->AppendItem(tiMapTreeRoot, _T("Node 2"), 2);
@@ -215,14 +220,14 @@ void FrameEditor::do_layout()
 
 void FrameEditor::fill_lmtTree()
 {
-	tcMapTree->DeleteAllItems();
-	int current_node;
-	wxTreeItemId root = tcMapTree->AddRoot(my_lmt.tree_list[0].name, 1, 0);
-	for (current_node = 1; current_node < my_lmt.total_nodes; current_node++)
-	{
-		tcMapTree->AppendItem(root, my_lmt.tree_list[current_node].name, 2);
-	}
-	tcMapTree->ExpandAll();
+    tcMapTree->DeleteAllItems();
+    int current_node;
+    wxTreeItemId root = tcMapTree->AddRoot(my_lmt.tree_list[0].name, 1, 0);
+    for (current_node = 1; current_node < my_lmt.total_nodes; current_node++)
+    {
+        tcMapTree->AppendItem(root, my_lmt.tree_list[current_node].name, 2);
+    }
+    tcMapTree->ExpandAll();
 }
 
 void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
@@ -336,10 +341,10 @@ void FrameEditor::showtitle_click(wxCommandEvent& event)
 
 void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
 {
-	DialogMaterial *dlgMaterial = new DialogMaterial(this,  wxID_ANY, wxEmptyString);
-	dlgMaterial->SetFocus();
-	dlgMaterial->ShowModal();
-	dlgMaterial->Destroy();
+    DialogMaterial *dlgMaterial = new DialogMaterial(this,  wxID_ANY, wxEmptyString);
+    dlgMaterial->SetFocus();
+    dlgMaterial->ShowModal();
+    dlgMaterial->Destroy();
 }
 
 ScrolledPalette::ScrolledPalette(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
