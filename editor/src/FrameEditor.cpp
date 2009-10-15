@@ -21,7 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 FrameEditor::FrameEditor():
         wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
 {
-    swEditor = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_BORDER);
+    swEditor = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_BORDER|wxSP_LIVE_UPDATE);
     pnTileset = new ScrolledPalette(swEditor, wxID_ANY);
     pnMapTree = new wxPanel(swEditor, wxID_ANY);
     tcMapTree = new wxTreeCtrl(pnMapTree, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE|wxSUNKEN_BORDER);
@@ -168,7 +168,7 @@ void FrameEditor::set_properties()
         frmEditorStatusbar->SetStatusText(frmEditorStatusbar_fields[i], i);
     }
     pnTileset->SetMinSize(wxSize(212, 96));
-    pnMapTree->SetMinSize(wxSize(212, 128));
+    pnMapTree->SetMinSize(wxSize(212, 96));
     //pnEditorCanvas->SetScrollRate(32, 32);
     SetMinSize(wxSize(700, 400));
     //Using native stock icons for treectrl for better looking
@@ -200,6 +200,7 @@ void FrameEditor::do_layout()
     
     szMapTree->Add(tcMapTree, 1, wxEXPAND, 0);
     pnMapTree->SetSizer(szMapTree);
+    swEditor->SetMinimumPaneSize(96);
     swEditor->SplitHorizontally(pnTileset, pnMapTree);
     
     szEditorLeft->Add(pnTilesetToolbar, 0, wxEXPAND, 0);
