@@ -22,10 +22,10 @@ FrameEditor::FrameEditor():
         wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
 {
     swEditor = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_BORDER|wxSP_LIVE_UPDATE);
-    pnTileset = new ScrolledPalette(swEditor, wxID_ANY);
+    pnPalette = new ScrolledPalette(swEditor, wxID_ANY);
     pnMapTree = new wxPanel(swEditor, wxID_ANY);
     tcMapTree = new wxTreeCtrl(pnMapTree, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE|wxSUNKEN_BORDER);
-    pnEditorCanvas = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+    pnCanvas = new ScrolledCanvas(this, wxID_ANY);
     
     frmEditorMenubar = new wxMenuBar();
     wxMenu* MenuProject = new wxMenu();
@@ -102,16 +102,16 @@ FrameEditor::FrameEditor():
     frmEditorToolbar->AddSeparator();
     frmEditorToolbar->AddTool(wxID_HELP, _("Help"), wxBitmap(wxT("../share/toolbar/help.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Help contents"), _("Display the help index and contents of EasyRPG"));
     frmEditorToolbar->Realize();
-    pnTilesetToolbar = new wxToolBar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_FLAT);
-    pnTilesetToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Undo last action"), _("Revert last drawing in the actual map"));
-    pnTilesetToolbar->AddSeparator();
-    pnTilesetToolbar->AddTool(-1, _("Select"), wxBitmap(wxT("../share/toolbar/select.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Selection tool"), _("Select a map region by a rectangle selector"));
-    pnTilesetToolbar->AddTool(-1, _("Zoom"), wxBitmap(wxT("../share/toolbar/zoom.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Zoom tool"), _("Zoom in or out by left or right mouse click"));
-    pnTilesetToolbar->AddTool(-1, _("Brush"), wxBitmap(wxT("../share/toolbar/pen.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Pen draw tool"), _("Draw on the map freely by hand"));
-    pnTilesetToolbar->AddTool(-1, _("Rectangle"), wxBitmap(wxT("../share/toolbar/rectangle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Rectangle draw tool"), _("Draw a rectangle on the map"));
-    pnTilesetToolbar->AddTool(-1, _("Circle"), wxBitmap(wxT("../share/toolbar/circle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Circle draw tool"), _("Draw a circle on the map"));
-    pnTilesetToolbar->AddTool(-1, _("Fill"), wxBitmap(wxT("../share/toolbar/fill.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Flood fill draw tool"), _("Draw tiles with same tile type on the map"));
-    pnTilesetToolbar->Realize();
+    pnPaletteToolbar = new wxToolBar(this, -1, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL|wxTB_FLAT);
+    pnPaletteToolbar->AddTool(wxID_UNDO, _("Undo"), wxBitmap(wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Undo last action"), _("Revert last drawing in the actual map"));
+    pnPaletteToolbar->AddSeparator();
+    pnPaletteToolbar->AddTool(-1, _("Select"), wxBitmap(wxT("../share/toolbar/select.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Selection tool"), _("Select a map region by a rectangle selector"));
+    pnPaletteToolbar->AddTool(-1, _("Zoom"), wxBitmap(wxT("../share/toolbar/zoom.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Zoom tool"), _("Zoom in or out by left or right mouse click"));
+    pnPaletteToolbar->AddTool(-1, _("Brush"), wxBitmap(wxT("../share/toolbar/pen.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Pen draw tool"), _("Draw on the map freely by hand"));
+    pnPaletteToolbar->AddTool(-1, _("Rectangle"), wxBitmap(wxT("../share/toolbar/rectangle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Rectangle draw tool"), _("Draw a rectangle on the map"));
+    pnPaletteToolbar->AddTool(-1, _("Circle"), wxBitmap(wxT("../share/toolbar/circle.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Circle draw tool"), _("Draw a circle on the map"));
+    pnPaletteToolbar->AddTool(-1, _("Fill"), wxBitmap(wxT("../share/toolbar/fill.png"), wxBITMAP_TYPE_ANY), wxNullBitmap, wxITEM_NORMAL, _("Flood fill draw tool"), _("Draw tiles with same tile type on the map"));
+    pnPaletteToolbar->Realize();
 
     set_properties();
     do_layout();
@@ -119,7 +119,13 @@ FrameEditor::FrameEditor():
         /* TESTING */
             wxArrayString chips;
             chips.Add(wxT("../../player/ChipSet/basis.png"));
-            if (!pnTileset->load_palette(chips))
+            if (!pnPalette->load_palette(chips))
+            {
+                wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
+                ErrMsg->ShowModal();
+                ErrMsg->Destroy();
+            }
+            if (!pnCanvas->load_canvas(chips))
             {
                 wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
                 ErrMsg->ShowModal();
@@ -167,9 +173,10 @@ void FrameEditor::set_properties()
     for (int i = 0; i < frmEditorStatusbar->GetFieldsCount(); ++i) {
         frmEditorStatusbar->SetStatusText(frmEditorStatusbar_fields[i], i);
     }
-    pnTileset->SetMinSize(wxSize(212, 96));
+    pnPalette->SetMinSize(wxSize(212, 96));
     pnMapTree->SetMinSize(wxSize(212, 96));
-    //pnEditorCanvas->SetScrollRate(32, 32);
+    //pnCanvas->SetMinSize(wxSize(212,96));
+    //pnCanvas->SetScrollRate(32, 32);
     SetMinSize(wxSize(700, 400));
     //Using native stock icons for treectrl for better looking
     //wxArtProvider does not load native Win32 icons, so we will get from our own technique
@@ -195,19 +202,21 @@ void FrameEditor::do_layout()
 {
     wxBoxSizer* szEditor = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer* szEditorLeft = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* szEditorRight = new wxBoxSizer(wxVERTICAL);
     
     wxBoxSizer* szMapTree = new wxBoxSizer(wxHORIZONTAL);
-    
     szMapTree->Add(tcMapTree, 1, wxEXPAND, 0);
     pnMapTree->SetSizer(szMapTree);
-    swEditor->SetMinimumPaneSize(96);
-    swEditor->SplitHorizontally(pnTileset, pnMapTree);
     
-    szEditorLeft->Add(pnTilesetToolbar, 0, wxEXPAND, 0);
+    swEditor->SetMinimumPaneSize(96);
+    swEditor->SplitHorizontally(pnPalette, pnMapTree);
+    
+    szEditorLeft->Add(pnPaletteToolbar, 0, wxEXPAND, 0);
     szEditorLeft->Add(swEditor, 1, wxEXPAND, 0);
+    szEditorRight->Add(pnCanvas, 1, wxEXPAND, 0);
     
     szEditor->Add(szEditorLeft, 0, wxEXPAND, 0);
-    szEditor->Add(pnEditorCanvas, 1, wxEXPAND, 0);
+    szEditor->Add(szEditorRight, 1, wxEXPAND, 0);
     SetSizer(szEditor);
     szEditor->Fit(this);
     Layout();
@@ -415,5 +424,44 @@ void ScrolledPalette::OnDraw(wxDC& dc)
     for (unsigned int id = 0; id < OnScreenPalette.size(); id++)
     {
         dc.DrawBitmap(OnScreenPalette.at(id), (id % 6) * 32, (id / 6) * 32, false);
+    }
+}
+
+ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
+{
+    /* init scrolled area size, scrolling speed, etc. */
+    SetScrollbars(0, 32, 0, OnScreenCanvas.size() / 6, 0, 0);
+}
+ScrolledCanvas::ScrolledCanvas()
+{
+    OnScreenCanvas.clear();
+}
+
+bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
+{
+    for (unsigned int chipsetid = 0; chipsetid < Chipsets.GetCount(); chipsetid++)
+    {
+        //if (wxFile::Exists(Chipsets.Item(chipsetid))){
+        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid), wxBITMAP_TYPE_ANY);
+        wxImage Scaler = Chipset.ConvertToImage();
+        Scaler.Rescale(Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
+        Chipset = wxBitmap::wxBitmap(Scaler);
+        OnScreenCanvas.clear();
+        for (int i = 0; i < 10000; i++)
+        {
+            OnScreenCanvas.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 128), wxSize(32, 32))));
+        }
+        SetScrollbars(32, 32, 100, OnScreenCanvas.size() / 100, 0, 0);
+    }
+    //else{ SetScrollbars(32,32, 6, OnScreenCanvas.size() / 6, 0, 0); return false;}
+    return true;
+}
+
+void ScrolledCanvas::OnDraw(wxDC& dc)
+{
+    if (!OnScreenCanvas.empty())
+    for (unsigned int id = 0; id < OnScreenCanvas.size(); id++)
+    {
+        dc.DrawBitmap(OnScreenCanvas.at(id), (id % 100) * 32, (id / 100) * 32, false);
     }
 }

@@ -38,6 +38,16 @@ public:
     void OnDraw(wxDC& dc);
 };
 
+class ScrolledCanvas : public wxScrolledWindow
+{
+public:
+    std::vector<wxBitmap> OnScreenCanvas;
+    ScrolledCanvas(wxWindow* parent, wxWindowID id);
+    ScrolledCanvas();
+    bool load_canvas(wxArrayString Chipsets);
+    void OnDraw(wxDC& dc);
+};
+
 class FrameEditor: public wxFrame
 {
 public:
@@ -76,12 +86,12 @@ protected:
     wxMenuBar* frmEditorMenubar;
     wxStatusBar* frmEditorStatusbar;
     wxToolBar* frmEditorToolbar;
-    wxToolBar* pnTilesetToolbar;
+    wxToolBar* pnPaletteToolbar;
     wxSplitterWindow* swEditor;
-    ScrolledPalette* pnTileset;
+    ScrolledPalette* pnPalette;
     wxPanel* pnMapTree;
     wxTreeCtrl* tcMapTree;
-    wxScrolledWindow* pnEditorCanvas;
+    ScrolledCanvas* pnCanvas;
 };
 
 enum
