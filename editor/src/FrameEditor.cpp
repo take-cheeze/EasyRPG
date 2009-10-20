@@ -430,7 +430,7 @@ void ScrolledPalette::OnDraw(wxDC& dc)
 ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
 {
     /* init scrolled area size, scrolling speed, etc. */
-    SetScrollbars(0, 32, 0, OnScreenCanvas.size() / 6, 0, 0);
+    SetScrollbars(0, 32, 0, OnScreenCanvas.size() / 100, 0, 0);
 }
 ScrolledCanvas::ScrolledCanvas()
 {
@@ -443,13 +443,13 @@ bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
     {
         //if (wxFile::Exists(Chipsets.Item(chipsetid))){
         wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid), wxBITMAP_TYPE_ANY);
-        wxImage Scaler = Chipset.ConvertToImage();
-        Scaler.Rescale(Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
-        Chipset = wxBitmap::wxBitmap(Scaler);
+        //wxImage Scaler = Chipset.ConvertToImage();
+        //Scaler.Rescale(Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
+        //Chipset = wxBitmap::wxBitmap(Scaler);
         OnScreenCanvas.clear();
         for (int i = 0; i < 10000; i++)
         {
-            OnScreenCanvas.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 128), wxSize(32, 32))));
+            OnScreenCanvas.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 64), wxSize(16, 16))));
         }
         SetScrollbars(32, 32, 100, OnScreenCanvas.size() / 100, 0, 0);
     }
@@ -462,6 +462,7 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
     if (!OnScreenCanvas.empty())
     for (unsigned int id = 0; id < OnScreenCanvas.size(); id++)
     {
-        dc.DrawBitmap(OnScreenCanvas.at(id), (id % 100) * 32, (id / 100) * 32, false);
+        dc.SetUserScale(2, 2);
+        dc.DrawBitmap(OnScreenCanvas.at(id), (id % 100) * 16, (id / 100) * 16, false);
     }
 }
