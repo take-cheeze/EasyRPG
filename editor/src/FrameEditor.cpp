@@ -276,24 +276,40 @@ void FrameEditor::zoom11_click(wxCommandEvent &WXUNUSED(event))
 {
     MenuScale->Check(wxID_ZOOM_100, true);
     frmEditorToolbar->ToggleTool(wxID_ZOOM_100, true);
+	pnCanvas->SetScale(2);
+	int x, y;
+	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
+	pnCanvas->SetScrollbars(32, 32, 100, 100, x, y);
 }
 
 void FrameEditor::zoom12_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(ID_ZOOM_12, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_12, true);
+	pnCanvas->SetScale(1);
+	int x, y;
+	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
+	pnCanvas->SetScrollbars(16, 16, 100, 100, x, y);
 }
 
 void FrameEditor::zoom14_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(ID_ZOOM_14, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_14, true);
+	pnCanvas->SetScale(0.5);
+	int x, y;
+	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
+	pnCanvas->SetScrollbars(8, 8, 100, 100, x, y);
 }
 
 void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event)) 
 {
     MenuScale->Check(ID_ZOOM_18, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_18, true);
+	pnCanvas->SetScale(0.25);
+	int x, y;
+	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
+	pnCanvas->SetScrollbars(4, 4, 100, 100, x, y);
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
@@ -418,7 +434,7 @@ void ScrolledPalette::OnDraw(wxDC& dc)
 	dc.DrawBitmap(OnScreenPalette, 0, 0, false);
 }
 
-ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
+ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE | wxHSCROLL | wxVSCROLL)
 {
     /* init scrolled area size, scrolling speed, etc. */
     SetScrollbars(0, 32, 0, OnScreenCanvas.size() / 100, 0, 0);
@@ -426,6 +442,7 @@ ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWind
 ScrolledCanvas::ScrolledCanvas()
 {
     OnScreenCanvas.clear();
+	SetScale(2);
 }
 
 bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
@@ -451,9 +468,13 @@ bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
 void ScrolledCanvas::OnDraw(wxDC& dc)
 {
     if (!OnScreenCanvas.empty())
+	dc.SetUserScale(Scale, Scale);
     for (unsigned int id = 0; id < OnScreenCanvas.size(); id++)
     {
-        dc.SetUserScale(2, 2);
         dc.DrawBitmap(OnScreenCanvas.at(id), (id % 100) * 16, (id / 100) * 16, false);
     }
+}
+
+void ScrolledCanvas::SetScale(float zoom){
+	Scale = zoom;
 }

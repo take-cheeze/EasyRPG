@@ -42,6 +42,8 @@ class ScrolledCanvas : public wxScrolledWindow
 {
 public:
     std::vector<wxBitmap> OnScreenCanvas;
+	float Scale;
+	void SetScale(float zoom);
     ScrolledCanvas(wxWindow* parent, wxWindowID id);
     ScrolledCanvas();
     bool load_canvas(wxArrayString Chipsets);
