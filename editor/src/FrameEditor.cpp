@@ -131,6 +131,8 @@ FrameEditor::FrameEditor():
                 ErrMsg->ShowModal();
                 ErrMsg->Destroy();
             }
+	
+	pnCanvas->Refresh();
         /* END TEST */
         
     Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
@@ -280,6 +282,7 @@ void FrameEditor::zoom11_click(wxCommandEvent &WXUNUSED(event))
 	int x, y;
 	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
 	pnCanvas->SetScrollbars(32, 32, 100, 100, x, y);
+	pnCanvas->Refresh();
 }
 
 void FrameEditor::zoom12_click(wxCommandEvent &WXUNUSED(event)) 
@@ -290,6 +293,7 @@ void FrameEditor::zoom12_click(wxCommandEvent &WXUNUSED(event))
 	int x, y;
 	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
 	pnCanvas->SetScrollbars(16, 16, 100, 100, x, y);
+	pnCanvas->Refresh();
 }
 
 void FrameEditor::zoom14_click(wxCommandEvent &WXUNUSED(event)) 
@@ -300,6 +304,7 @@ void FrameEditor::zoom14_click(wxCommandEvent &WXUNUSED(event))
 	int x, y;
 	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
 	pnCanvas->SetScrollbars(8, 8, 100, 100, x, y);
+	pnCanvas->Refresh();
 }
 
 void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event)) 
@@ -310,6 +315,7 @@ void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event))
 	int x, y;
 	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
 	pnCanvas->SetScrollbars(4, 4, 100, 100, x, y);
+	pnCanvas->Refresh();
 }
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
@@ -462,6 +468,7 @@ bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
         SetScrollbars(32, 32, 100, OnScreenCanvas.size() / 100, 0, 0);
     }
     //else{ SetScrollbars(32,32, 6, OnScreenCanvas.size() / 6, 0, 0); return false;}
+	this->Refresh();
     return true;
 }
 
