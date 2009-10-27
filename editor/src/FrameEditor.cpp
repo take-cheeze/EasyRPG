@@ -360,7 +360,7 @@ void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
 ScrolledPalette::ScrolledPalette(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
 {
     /* init scrolled area size, scrolling speed, etc. */
-    SetScrollbars(0, 32, 0, 1632, 0, 0);
+    SetScrollbars(0, 32, 0, 51, 0, 0);
 }
 ScrolledPalette::ScrolledPalette()
 {
@@ -369,73 +369,47 @@ ScrolledPalette::ScrolledPalette()
 
 bool ScrolledPalette::load_palette(wxArrayString Chipsets)
 {
-    for (unsigned int chipsetid = 0; chipsetid < Chipsets.GetCount(); chipsetid++)
-    {
-        //if (wxFile::Exists(Chipsets.Item(chipsetid))){
-        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid), wxBITMAP_TYPE_ANY);
-        wxImage Scaler = Chipset.ConvertToImage();
-        Scaler.Rescale( Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
-        Chipset = wxBitmap::wxBitmap(Scaler);
-        OnScreenPalette = wxBitmap::wxBitmap(1632, 192);
-		wxMemoryDC memDC;
-		memDC.SelectObject(OnScreenPalette);
-        //First tile row
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   0), wxSize(32, 32))), 0, 0, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   0), wxSize(32, 32))), 32, 0, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   192), wxSize(32, 32))), 64, 0, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   128), wxSize(32, 32))), 96, 0, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  128,   128), wxSize(32, 32))), 128, 0, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  160,   128), wxSize(32, 32))), 160, 0, false);
-        /*OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   0), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96,   0), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0, 192), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96, 128), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(128, 128), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(160, 128), wxSize(32, 32))));*/
-        //Second tile row
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   256), wxSize(32, 32))), 0, 32, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   256), wxSize(32, 32))), 32, 32, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   384), wxSize(32, 32))), 64, 32, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   384), wxSize(32, 32))), 96, 32, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  192,   0), wxSize(32, 32))), 128, 32, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  288,   0), wxSize(32, 32))), 160, 32, false);
-        /*OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0, 256), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96, 256), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0, 384), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96, 384), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192,   0), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288,   0), wxSize(32, 32))));*/
-        //Third tile row
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 128), wxSize(32, 32))), 0, 64, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 128), wxSize(32, 32))), 32, 64, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 256), wxSize(32, 32))), 64, 64, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 256), wxSize(32, 32))), 96, 64, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 384), wxSize(32, 32))), 128, 64, false);
-		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 384), wxSize(32, 32))), 160, 64, false);
-        /*OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 128), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 128), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 256), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 256), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 384), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 384), wxSize(32, 32))));
-
-        //3 blocks of 6 subcols each, 16 rows
-        for (int block = 0; block < 3; block++)
-        {
-            for (int row = 0; row < 16; row++)
-            {
-                for (int col = 0; col < 6; col++)
-                {
-                    int x = 384 + block * 192 + col * 32;
-                    int y = row * 32;
-                    OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(x, y), wxSize(32, 32))));
-                }
-            }
-        }
-        SetScrollbars(32, 32, 6, OnScreenPalette.size() / 6, 0, 0);
-    }
-    //else{ SetScrollbars(32,32, 6, OnScreenPalette.size() / 6, 0, 0); return false;}*/
-	memDC.SelectObject(wxNullBitmap);}
+	//Load Image From File
+	wxBitmap Chipset = wxNullBitmap;
+	Chipset = wxBitmap::wxBitmap(Chipsets.Item(0), wxBITMAP_TYPE_ANY);
+	//Scale to x2
+	wxImage Scaler = Chipset.ConvertToImage();
+	Scaler.Rescale( Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
+	Chipset = wxNullBitmap;
+	Chipset = wxBitmap::wxBitmap(Scaler);
+	//Create a Bitmap to Save the Palete
+	OnScreenPalette = wxBitmap::wxBitmap(192, 2560);
+	//Link the Bitmap to a DC
+	wxMemoryDC memDC;
+	memDC.SelectObject(OnScreenPalette);
+	//Start Drawing
+	//First tile row
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   0), wxSize(32, 32))), 0, 0, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   0), wxSize(32, 32))), 32, 0, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   192), wxSize(32, 32))), 64, 0, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   128), wxSize(32, 32))), 96, 0, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  128,   128), wxSize(32, 32))), 128, 0, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  160,   128), wxSize(32, 32))), 160, 0, false);
+	//Second tile row
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   256), wxSize(32, 32))), 0, 32, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   256), wxSize(32, 32))), 32, 32, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   384), wxSize(32, 32))), 64, 32, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   384), wxSize(32, 32))), 96, 32, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  192,   0), wxSize(32, 32))), 128, 32, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  288,   0), wxSize(32, 32))), 160, 32, false);
+	//Third tile row
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 128), wxSize(32, 32))), 0, 64, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 128), wxSize(32, 32))), 32, 64, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 256), wxSize(32, 32))), 64, 64, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 256), wxSize(32, 32))), 96, 64, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 384), wxSize(32, 32))), 128, 64, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 384), wxSize(32, 32))), 160, 64, false);
+	//3 blocks of 6 subcols each, 16 rows
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 384, 0), wxSize(192, 512))), 0, 96, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 576, 0), wxSize(192, 512))), 0, 608, false);
+	memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 768, 0), wxSize(192, 512))), 0, 1120, false);
+	//Release Bitmap
+	memDC.SelectObject(wxNullBitmap);
     return true;
 }
 
