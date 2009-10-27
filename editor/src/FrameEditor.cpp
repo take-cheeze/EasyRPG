@@ -360,11 +360,11 @@ void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
 ScrolledPalette::ScrolledPalette(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
 {
     /* init scrolled area size, scrolling speed, etc. */
-    SetScrollbars(0, 32, 0, OnScreenPalette.size() / 6, 0, 0);
+    SetScrollbars(0, 32, 0, 1632, 0, 0);
 }
 ScrolledPalette::ScrolledPalette()
 {
-    OnScreenPalette.clear();
+    OnScreenPalette = wxNullBitmap;
 }
 
 bool ScrolledPalette::load_palette(wxArrayString Chipsets)
@@ -376,23 +376,43 @@ bool ScrolledPalette::load_palette(wxArrayString Chipsets)
         wxImage Scaler = Chipset.ConvertToImage();
         Scaler.Rescale( Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
         Chipset = wxBitmap::wxBitmap(Scaler);
-        OnScreenPalette.clear();
+        OnScreenPalette = wxBitmap::wxBitmap(1632, 192);
+		wxMemoryDC memDC;
+		memDC.SelectObject(OnScreenPalette);
         //First tile row
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   0), wxSize(32, 32))));
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   0), wxSize(32, 32))), 0, 0, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   0), wxSize(32, 32))), 32, 0, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   192), wxSize(32, 32))), 64, 0, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   128), wxSize(32, 32))), 96, 0, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  128,   128), wxSize(32, 32))), 128, 0, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  160,   128), wxSize(32, 32))), 160, 0, false);
+        /*OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   0), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96,   0), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0, 192), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96, 128), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(128, 128), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(160, 128), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(160, 128), wxSize(32, 32))));*/
         //Second tile row
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0, 256), wxSize(32, 32))));
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   256), wxSize(32, 32))), 0, 32, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   256), wxSize(32, 32))), 32, 32, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  0,   384), wxSize(32, 32))), 64, 32, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  96,   384), wxSize(32, 32))), 96, 32, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  192,   0), wxSize(32, 32))), 128, 32, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint(  288,   0), wxSize(32, 32))), 160, 32, false);
+        /*OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0, 256), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96, 256), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(  0, 384), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint( 96, 384), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192,   0), wxSize(32, 32))));
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288,   0), wxSize(32, 32))));
+        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288,   0), wxSize(32, 32))));*/
         //Third tile row
-        OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 128), wxSize(32, 32))));
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 128), wxSize(32, 32))), 0, 64, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 128), wxSize(32, 32))), 32, 64, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 256), wxSize(32, 32))), 64, 64, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 256), wxSize(32, 32))), 96, 64, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 192, 384), wxSize(32, 32))), 128, 64, false);
+		memDC.DrawBitmap(Chipset.GetSubBitmap(wxRect(wxPoint( 288, 384), wxSize(32, 32))), 160, 64, false);
+        /*OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 128), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 128), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(192, 256), wxSize(32, 32))));
         OnScreenPalette.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(288, 256), wxSize(32, 32))));
@@ -414,17 +434,14 @@ bool ScrolledPalette::load_palette(wxArrayString Chipsets)
         }
         SetScrollbars(32, 32, 6, OnScreenPalette.size() / 6, 0, 0);
     }
-    //else{ SetScrollbars(32,32, 6, OnScreenPalette.size() / 6, 0, 0); return false;}
+    //else{ SetScrollbars(32,32, 6, OnScreenPalette.size() / 6, 0, 0); return false;}*/
+	memDC.SelectObject(wxNullBitmap);}
     return true;
 }
 
 void ScrolledPalette::OnDraw(wxDC& dc)
 {
-    if (!OnScreenPalette.empty())
-    for (unsigned int id = 0; id < OnScreenPalette.size(); id++)
-    {
-        dc.DrawBitmap(OnScreenPalette.at(id), (id % 6) * 32, (id / 6) * 32, false);
-    }
+	dc.DrawBitmap(OnScreenPalette, 0, 0, false);
 }
 
 ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)

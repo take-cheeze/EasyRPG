@@ -21,7 +21,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/imaglist.h>
 #include <wx/splitter.h>
 #include <wx/treectrl.h>
-#include <wx/dcclient.h>
+#include <wx/dcmemory.h>
 
 #include "lmtReader.h"
 #include "ldbReader.h"
@@ -31,7 +31,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 class ScrolledPalette : public wxScrolledWindow
 {
 public:
-    std::vector<wxBitmap> OnScreenPalette;
+    wxBitmap OnScreenPalette;
     ScrolledPalette(wxWindow* parent, wxWindowID id);
     ScrolledPalette();
     bool load_palette(wxArrayString Chipsets);
