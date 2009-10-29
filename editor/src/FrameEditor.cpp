@@ -461,7 +461,7 @@ bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
         //Scaler.Rescale(Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
         //Chipset = wxBitmap::wxBitmap(Scaler);
         OnScreenCanvas.clear();
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 1000; i++)
         {
             OnScreenCanvas.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 64), wxSize(16, 16))));
         }
