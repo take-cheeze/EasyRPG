@@ -22,9 +22,11 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/splitter.h>
 #include <wx/treectrl.h>
 #include <wx/dcmemory.h>
+#include <wx/file.h>
 
 #include "lmtReader.h"
 #include "ldbReader.h"
+#include "map.h"
 
 #include "DialogDb.h"
 
@@ -41,13 +43,24 @@ public:
 class ScrolledCanvas : public wxScrolledWindow
 {
 public:
-    std::vector<wxBitmap> OnScreenCanvas;
 	float Scale;
 	void SetScale(float zoom);
     ScrolledCanvas(wxWindow* parent, wxWindowID id);
     ScrolledCanvas();
-    bool load_canvas(wxArrayString Chipsets);
+	bool load_canvas(wxArrayString Chipsets);
+	bool load_map(wxString FileName);
+	map_reader m_reader;
+	map_data m_data;
     void OnDraw(wxDC& dc);
+	bool MapLoaded;
+	bool generate_chipset();
+	wxBitmap base_chipset;
+	wxBitmap real_chipset;
+	wxBitmap draw_water(int Frame, int Border, int Water, int Combination);
+	wxBitmap draw_deep_water(int Frame, int Depth, int DepthCombination);
+	wxBitmap draw_animationtile(unsigned short TileID);
+	wxBitmap draw_autotile(int Terrain, int Combination);
+	wxBitmap RenderTile(unsigned short Tile, int Frame);
 };
 
 class FrameEditor: public wxFrame

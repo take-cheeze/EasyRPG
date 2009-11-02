@@ -132,6 +132,7 @@ FrameEditor::FrameEditor():
                 ErrMsg->Destroy();
             }
 	
+	pnCanvas->load_map(wxT("."));
 	pnCanvas->Refresh();
         /* END TEST */
         
@@ -278,10 +279,9 @@ void FrameEditor::zoom11_click(wxCommandEvent &WXUNUSED(event))
 {
     MenuScale->Check(wxID_ZOOM_100, true);
     frmEditorToolbar->ToggleTool(wxID_ZOOM_100, true);
-	pnCanvas->SetScale(2);
-	int x, y;
-	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
-	pnCanvas->SetScrollbars(32, 32, 100, 100, x, y);
+	pnCanvas->SetScale(2.0);
+	pnCanvas->SetScrollbars(32, 32, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
+	//pnCanvas->SetScrollbars(32, 32, 100, 100, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -289,10 +289,9 @@ void FrameEditor::zoom12_click(wxCommandEvent &WXUNUSED(event))
 {
     MenuScale->Check(ID_ZOOM_12, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_12, true);
-	pnCanvas->SetScale(1);
-	int x, y;
-	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
-	pnCanvas->SetScrollbars(16, 16, 100, 100, x, y);
+	pnCanvas->SetScale(1.0);
+	pnCanvas->SetScrollbars(16, 16, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
+	//pnCanvas->SetScrollbars(32, 32, 100, 100, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -301,9 +300,7 @@ void FrameEditor::zoom14_click(wxCommandEvent &WXUNUSED(event))
     MenuScale->Check(ID_ZOOM_14, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_14, true);
 	pnCanvas->SetScale(0.5);
-	int x, y;
-	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
-	pnCanvas->SetScrollbars(8, 8, 100, 100, x, y);
+	pnCanvas->SetScrollbars(8, 8, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -312,9 +309,7 @@ void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event))
     MenuScale->Check(ID_ZOOM_18, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_18, true);
 	pnCanvas->SetScale(0.25);
-	int x, y;
-	pnCanvas->CalcScrolledPosition(0, 0, &x, &y);
-	pnCanvas->SetScrollbars(4, 4, 100, 100, x, y);
+	pnCanvas->SetScrollbars(4, 4, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -443,45 +438,476 @@ void ScrolledPalette::OnDraw(wxDC& dc)
 ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE | wxHSCROLL | wxVSCROLL)
 {
     /* init scrolled area size, scrolling speed, etc. */
-    SetScrollbars(0, 32, 0, OnScreenCanvas.size() / 100, 0, 0);
+    SetScrollbars(0, 32, 0, 0, 0, 0);
 }
 ScrolledCanvas::ScrolledCanvas()
 {
-    OnScreenCanvas.clear();
 	SetScale(2);
+	m_data.MapHeight = 15;
+	m_data.MapWidth = 20;
+	m_data.clear_events();
+	MapLoaded = false;
 }
 
 bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
 {
-    for (unsigned int chipsetid = 0; chipsetid < Chipsets.GetCount(); chipsetid++)
-    {
-        //if (wxFile::Exists(Chipsets.Item(chipsetid))){
-        wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(chipsetid), wxBITMAP_TYPE_ANY);
-        //wxImage Scaler = Chipset.ConvertToImage();
-        //Scaler.Rescale(Chipset.GetWidth() * 2, Chipset.GetHeight() * 2);
-        //Chipset = wxBitmap::wxBitmap(Scaler);
-        OnScreenCanvas.clear();
-        for (int i = 0; i < 1000; i++)
-        {
-            OnScreenCanvas.push_back(Chipset.GetSubBitmap(wxRect(wxPoint(0, 64), wxSize(16, 16))));
-        }
-        SetScrollbars(32, 32, 100, OnScreenCanvas.size() / 100, 0, 0);
-    }
-    //else{ SetScrollbars(32,32, 6, OnScreenCanvas.size() / 6, 0, 0); return false;}
-	this->Refresh();
-    return true;
+
+	if (wxFile::Exists(Chipsets.Item(0))){
+	wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(0), wxBITMAP_TYPE_ANY);
+	SetScrollbars(32, 32, 100, 100, 0, 0);
+    return true;}
+	
+    else{ SetScrollbars(32,32, 6, 6, 0, 0); return false;}
+
 }
 
 void ScrolledCanvas::OnDraw(wxDC& dc)
 {
-    if (!OnScreenCanvas.empty())
 	dc.SetUserScale(Scale, Scale);
-    for (unsigned int id = 0; id < OnScreenCanvas.size(); id++)
-    {
-        dc.DrawBitmap(OnScreenCanvas.at(id), (id % 100) * 16, (id / 100) * 16, false);
-    }
+	
+	//Initialize variables;
+	wxBitmap TileToDraw;
+	
+	unsigned short* TilePointer;
+	
+	//Draw LowerLayer
+	TilePointer = &m_data.LowerLayer[0];
+ 	
+	for (int y = 0; y < m_data.MapHeight; y++)
+		for (int x = 0; x < m_data.MapWidth ; x++, TilePointer++){
+			TileToDraw = RenderTile(*TilePointer, 0);
+			if (!TileToDraw.IsOk()) continue;
+		dc.DrawBitmap(TileToDraw, x*16, y*16); }
+		
+		/*this line works to show the pre_chipset*/
+	//dc.DrawBitmap(real_chipset, 0, 0);   
 }
 
 void ScrolledCanvas::SetScale(float zoom){
 	Scale = zoom;
+}
+
+bool ScrolledCanvas::load_map(wxString FileName)
+{
+	if (wxFile::Exists(wxT("../../player/Map0005.lmu"))){
+		std::string s = "../../player/Map0005.lmu";
+		m_reader.Load(s, &m_data);
+		std::cerr << "Map Loaded: " << FileName << std::endl;
+		//Change Canvas Dimentions
+		this->SetScrollbars(16, 16, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+		// Load Chipset File
+		base_chipset.LoadFile(wxT("../../player/ChipSet/basis.png"), wxBITMAP_TYPE_PNG);
+		// Create Chipset data base
+		real_chipset = wxBitmap(32*16, 45*16);
+		// Prepare for drawing
+		wxMemoryDC dc;
+		dc.SelectObject(real_chipset);
+		dc.SetPen(wxPen(0x010101));
+		dc.SetBrush(wxBrush(0x010101));
+		dc.DrawRectangle(0,0,32*16,45*16);
+		
+		// Start Tile Generation
+		int CurrentTile = 0;
+		
+		// Generate water A
+        for (int j=0; j<3; j++)
+            for (int i=0; i<47; i++, CurrentTile++)
+				dc.DrawBitmap(draw_water(j, 0, 0, i), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
+				
+		// Generate water B
+        for (int j=0; j<3; j++)
+            for (int i=0; i<47; i++, CurrentTile++)
+				dc.DrawBitmap(draw_water(j, 1, 0, i), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
+				
+		// Generate water C
+        for (int j=0; j<3; j++)
+            for (int i=0; i<47; i++, CurrentTile++)
+				dc.DrawBitmap(draw_water(j, 0, 3, i), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
+				
+		// Generate water depth tiles
+        for (int i=0; i<48; i++, CurrentTile++)
+            dc.DrawBitmap(draw_deep_water(i/16, 2, i%16), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
+			
+		for (int i=0; i<48; i++, CurrentTile++)
+			dc.DrawBitmap(draw_deep_water(i/16, 1, i%16), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
+			
+        // Generate animated tiles
+        for (int j=0; j<3; j++)
+            for (int i=0; i<4; i++, CurrentTile++)
+				dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(48+j*16, 64+i*16, 16, 16)), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
+		
+        // Generate terrain tiles
+        for (int j=0; j<12; j++)
+            for (int i=0; i<50; i++, CurrentTile++)
+                dc.DrawBitmap(draw_autotile(j, i), (CurrentTile%32)*16, (CurrentTile/32)*16);
+				
+        // Generate common tiles
+        for (int i=0; i<288; i++, CurrentTile++)
+				dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(192+((i%6)*16)+(i/96)*96, ((i/6)%16)*16, 16, 16)), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
+
+        // Done
+        return true;}
+		
+	else return false;
+}
+
+wxBitmap ScrolledCanvas::draw_water(int Frame, int Border, int Water, int Combination)
+{
+	//Create returned bitmap
+	wxBitmap pretile = wxBitmap(16, 16);
+	//Prepare bitmap to be drawn on
+	wxMemoryDC dc;
+	dc.SelectObject(pretile);
+	dc.SetPen(wxPen(0x010101));
+	dc.SetBrush(wxBrush(0x010101));
+	dc.DrawRectangle(0,0,16,16);
+	
+	/* INITIALIZE DRAWING */
+	
+	int SFrame = Frame*16, SBorder = Border*48;
+	
+	Combination &= 0x3F;
+	
+        // Since this function isn't meant to be used in realtime, we can allow
+        // use nasty code here. First off, draw the water tile, for the background.
+		dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame, 64+(Water*16), 16, 16)), 0, 0, false);
+		
+		        // Now, get the combination from the tile and draw it using this stupidly
+        // hard coded routine. I've found out that this was easier than just find
+        // out a damn algorithm.
+        if (Combination & 0x20)
+        {
+            // This is where it gets nasty :S
+            if (Combination > 0x29)
+            {
+                // Multiple edge possibilities
+                switch(Combination)
+                {
+                    case 0x2A:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 0, 16, 8)), 0, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 24, 16, 18)), 0, 0, false);
+                        break;
+                    case 0x2B:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 0, 8, 16)), 0, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 32, 8, 16)), 8, 0, false);
+                        break;
+                    case 0x2C:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 8, 16, 8)), 0, 8, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 16, 16, 8)), 0, 0, false);
+                        break;
+                    case 0x2D:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 0, 8, 16)), 8, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 32, 8, 16)), 0, 0, false);
+                        break;
+                    case 0x2E:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 0, 16, 16)), 0, 0, false);
+                        break;
+                }
+            } else {
+                // Wall + inner edges
+                switch((Combination>>1)&0x07)
+                {
+                    case 0x00:
+                        if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 32, 16, 16)), 0, 0, false);
+                        else 				  dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 16, 16, 16)), 0, 0, false);
+                        break;
+                    case 0x01:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 0, 8, 8)), 0, 0, false);		// Corner
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 24, 8, 8)), 0, 8, false);	// Left/Right frame
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 32, 8, 8)), 8, 0, false);	// Top/Bottom frame
+
+                        if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48+8, 8, 8)), 8, 8, false);
+                        break;
+                    case 0x02:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 0, 8, 8)), 8, 0, false);	// Corner
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 24, 8, 8)), 8, 8, false);	// Left/Right frame
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 32, 8, 8)), 0, 0, false);	// Top/Bottom frame
+
+                        if (Combination&0x01)
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48+8, 8, 8)), 0, 8, false);
+                        break;
+                    case 0x03:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 8, 8, 8)), 8, 8, false);		// Corner
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 16, 8, 8)), 8, 0, false);	// Left/Right frame
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 40, 8, 8)), 0, 8, false);	// Top/Bottom frame
+
+                        if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48, 8, 8)), 0, 0, false);
+                        break;
+                    case 0x04:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 8, 8, 8)), 0, 8, false);		// Corner
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 16, 8, 8)), 0, 0, false);	// Left/Right frame
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 40, 8, 8)), 8, 8, false);	// Top/Bottom frame
+
+                        if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48, 8, 8)), 8, 0, false);
+                        break;
+                }
+            }
+        } else if (Combination & 0x10)
+        {
+            // Wall + inner edge cases. They're also easier to find out the
+            // values here too
+            switch((Combination>>2)&0x03)
+            {
+                case 0x00:
+                    // Render left wall
+					dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 16, 8, 16)), 0, 0, false);
+
+                    // Render top right corner and bottom right corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48, 8, 8)), 8, 0, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48+8, 8, 8)), 8, 8, false);
+                    break;
+                case 0x01:
+                    // Render top wall
+					dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 32, 16, 8)), 0, 0, false);
+
+                    // Render bottom right corner and bottom left corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48+8, 8, 8)), 8, 8, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48+8, 8, 8)), 0, 8, false);
+                    break;
+                case 0x02:
+                    // Right wall
+                    dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 16, 8, 16)), 8, 0, false);
+
+                    // Render bottom left corner and top left corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48+8, 8, 8)), 0, 8, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48, 8, 8)), 0, 0, false);
+                    break;
+                case 0x03:
+                    // Bottom wall
+					dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 32+8, 16, 8)), 0, 8, false);
+
+                    // Render top left corner and top right corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48, 8, 8)), 0, 0, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48, 8, 8)), 8, 0, false);
+                    break;
+            }
+        } else {
+            // Single inner edge cases. They're easier to find out the values
+            // this way.
+            if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48, 8, 8)), 0, 0, false);
+            if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48, 8, 8)), 8, 0, false);
+            if (Combination&0x04) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder+8, 48+8, 8, 8)), 8, 8, false);
+            if (Combination&0x08) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48+8, 8, 8)), 0, 8, false);
+        }
+		
+		/* End of Drawing. Reselase and return bitmap*/
+		
+		dc.SelectObject(wxNullBitmap);
+		return (pretile);
+}
+
+wxBitmap ScrolledCanvas::draw_deep_water(int Frame, int Depth, int DepthCombination)
+{
+	//Create returned bitmap
+	wxBitmap pretile = wxBitmap(16, 16);
+	//Prepare bitmap to be drawn on
+	wxMemoryDC dc;
+	dc.SelectObject(pretile);
+		dc.SetPen(wxPen(0x010101));
+		dc.SetBrush(wxBrush(0x010101));
+		dc.DrawRectangle(0,0,16,16);
+	/* INITIALIZE DRAWING */
+	
+	int SFrame = Frame*16;
+
+	// Now render the depth part
+	if (DepthCombination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame, 64+(Depth*16), 8, 8)), 0, 0, false);
+	if (DepthCombination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+8, 64+(Depth*16), 8, 8)), 8, 0, false);
+	if (DepthCombination&0x04) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame, 64+(Depth*16)+8, 8, 8)), 0, 8, false);
+	if (DepthCombination&0x08) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+8, 64+(Depth*16)+8, 8, 8)), 8, 8, false);
+
+		/* End of Drawing. Reselase and return bitmap*/
+		
+		dc.SelectObject(wxNullBitmap);
+		return (pretile);
+
+}
+
+wxBitmap ScrolledCanvas::draw_autotile(int Terrain, int Combination)
+{
+	//Create returned bitmap
+	wxBitmap pretile = wxBitmap(16, 16);
+	//Prepare bitmap to be drawn on
+	wxMemoryDC dc;
+	dc.SelectObject(pretile);
+	
+	/* INITIALIZE DRAWING */
+	
+	Terrain += 4;
+	int XTerrain = ((Terrain%2)*48)+(Terrain/8)*96, YTerrain = ((Terrain/2)%4)*64;
+	
+	
+	// Since this function isn't meant to be used in realtime, we can allow
+	// use nasty code here. First off, draw the water tile, for the background.
+	dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+16, YTerrain+32, 16, 16)), 0, 0, false);
+        // Now, get the combination from the tile and draw it using this stupidly
+        // hard coded routine. I've found out that this was easier than just find
+        // out a damn algorithm.
+        if (Combination & 0x20)
+        {
+            // This is where it gets nasty :S
+            if (Combination > 0x29)
+            {
+                // Multiple edge possibilities
+                switch(Combination)
+                {
+                    case 0x2A:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+16, 8, 16)), 0, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+16, 8, 16)), 8, 0, false);
+                        break;
+                    case 0x2B:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+16, 16, 8)), 0, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+56, 16, 8)), 0, 8, false);
+                        break;
+                    case 0x2C:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+48, 8, 16)), 0, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+48, 8, 16)), 8, 0, false);
+                        break;
+                    case 0x2D:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+16, 16, 8)), 0, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+56, 16, 8)), 0, 8, false);
+                        break;
+                    case 0x2E:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+16, 8, 8)), 0, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+16, 8, 8)), 8, 0, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+56, 8, 8)), 0, 8, false);
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+56, 8, 8)), 8, 8, false);
+                        break;
+                    case 0x31:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain, 16, 16)), 0, 0, false);
+                        break;
+                }
+            } else {
+                // Wall + inner edges
+                switch((Combination>>1)&0x07)
+                {
+                    case 0x00:
+                        if (Combination&0x01)
+                        {
+							dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+16, YTerrain+16, 16, 8)), 0, 0, false);
+							dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+16, YTerrain+56, 16, 8)), 0, 8, false);
+                        } else {
+							dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+32, 8, 16)), 0, 0, false);
+							dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+32, 8, 16)), 8, 0, false);
+                        }
+                        break;
+                    case 0x01:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+16, 16, 16)), 0, 0, false);
+                        if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+8, 8, 8)), 8, 8, false);
+                        break;
+                    case 0x02:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+16, 16, 16)), 0, 0, false);
+                        if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+8, 8, 8)), 0, 8, false);
+                        break;
+                    case 0x03:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+48, 16, 16)), 0, 0, false);
+                        if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain, 8, 8)), 0, 0, false);
+                        break;
+                    case 0x04:
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+48, 16, 16)), 0, 0, false);
+                        if (Combination&0x01) 
+						dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain, 8, 8)), 8, 0, false);
+                        break;
+                }
+            }
+        } else if (Combination & 0x10)
+        {
+            // Wall + inner edge cases. They're also easier to find out the
+            // values here too
+            switch((Combination>>2)&0x03)
+            {
+                case 0x00:
+                    // Render left wall
+					dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain, YTerrain+32, 16, 16)), 0, 0, false);
+
+                    // Render top right corner and bottom right corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain, 8, 8)), 8, 0, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+8, 8, 8)), 8, 8, false);
+                    break;
+                case 0x01:
+                    // Render top wall
+					dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+16, YTerrain+16, 16, 16)), 0, 0, false);
+
+                    // Render bottom right corner and bottom left corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+8, 8, 8)), 8, 8, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+8, 8, 8)), 0, 8, false);
+                    break;
+                case 0x02:
+                    // Right wall
+					dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+32, 16, 16)), 0, 0, false);
+
+                    // Render bottom left corner and top left corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+8, 8, 8)), 0, 8, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain, 8, 8)), 0, 0, false);
+                    break;
+                case 0x03:
+                    // Bottom wall
+					dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+16, YTerrain+48, 16, 16)), 0, 0, false);
+
+                    // Render top left corner and top right corner
+                    if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain, 8, 8)), 0, 0, false);
+                    if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain, 8, 8)), 8, 0, false);
+                    break;
+            }
+        } else {
+            // Single inner edge cases. They're easier to find out the values
+            // this way.
+            if (Combination&0x01) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain, 8, 8)), 0, 0, false);
+            if (Combination&0x02) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain, 8, 8)), 8, 0, false);
+            if (Combination&0x04) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+40, YTerrain+8, 8, 8)), 8, 8, false);
+            if (Combination&0x08) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+8, 8, 8)), 0, 8, false);
+        }
+		
+		/* End of Drawing. Reselase and return bitmap*/
+		
+		dc.SelectObject(wxNullBitmap);
+		return (pretile);
+}
+
+wxBitmap ScrolledCanvas::RenderTile(unsigned short Tile, int Frame)
+{
+	//Create Object to be returned
+	wxBitmap Returned = wxNullBitmap;
+	
+	if (Tile >= 0x2710) // Upper layer tiles
+    {
+        Tile -= 0x2710;
+        Tile += 0x04FB;
+		Returned = real_chipset.GetSubBitmap(wxRect(((Tile & 0x1F) << 4), ((Tile >> 5) << 4), 16, 16));
+    }
+    else if (Tile >= 0x1388) // Lower layer tiles
+    {
+        Tile -= 0x1388;
+        Tile += 0x046B;
+		Returned = real_chipset.GetSubBitmap(wxRect(((Tile & 0x1F) << 4), ((Tile >> 5) << 4), 16, 16));
+    }
+    else if (Tile >= 0x0FA0) // Terrain tiles
+    {
+        Tile -= 0x0FA0;
+        Tile += 0x0213;
+		Returned = real_chipset.GetSubBitmap(wxRect(((Tile & 0x1F) << 4), ((Tile >> 5) << 4), 16, 16));
+    }
+    else if (Tile >= 0x0BB8) // Animated tiles
+    {
+        Frame %= 4;
+        Tile = 0x0207 + (((Tile - 0x0BB8) / 50) << 2) + Frame;
+		Returned = real_chipset.GetSubBitmap(wxRect(((Tile & 0x1F) << 4), ((Tile >> 5) << 4), 16, 16));
+    }
+    else // Water tiles
+    {
+
+        Frame %= 3;
+        int WaterTile = Tile % 50;
+        int WaterType = (Tile / 50) / 20;
+        int Shadow = Tile / 50;
+
+        Tile = WaterType * 141 + WaterTile + (Frame * 47);
+		Returned = real_chipset.GetSubBitmap(wxRect((Tile & 0x1F) << 4, (Tile >> 5) << 4, 16, 16));
+        Tile = 3 * 141 + Shadow - (20 * WaterType) + (Frame * 16) + 48;
+        if (WaterType == 2) Tile -= 48; // if is a deph water title redraw the shadow.
+		Returned = real_chipset.GetSubBitmap(wxRect((Tile & 0x1F) << 4, (Tile >> 5) << 4, 16, 16));;
+    }
+	
+	//Done
+	return Returned;
 }
