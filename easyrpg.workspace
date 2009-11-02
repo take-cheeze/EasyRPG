@@ -4,7 +4,7 @@
   <Project Name="player" Path="player/src/player.project" Active="No"/>
   <Project Name="player2" Path="player2/src/player2.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Debug" Selected="no">
       <Project Name="editor" ConfigName="Debug"/>
       <Project Name="player" ConfigName="Debug"/>
       <Project Name="player2" ConfigName="Debug"/>
@@ -15,7 +15,7 @@
       <Project Name="player2" ConfigName="Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
-      <Project Name="player2" ConfigName="Debug MingW"/>
+      <Project Name="player2" ConfigName="Debug"/>
       <Project Name="player" ConfigName="Win32 Debug"/>
       <Project Name="editor" ConfigName="Win32 Debug"/>
     </WorkspaceConfiguration>
@@ -23,6 +23,11 @@
       <Project Name="player2" ConfigName="Debug MingW"/>
       <Project Name="player" ConfigName="Win32 Release"/>
       <Project Name="editor" ConfigName="Win32 Release"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Mingw Debug" Selected="yes">
+      <Project Name="player2" ConfigName="Debug MingW"/>
+      <Project Name="player" ConfigName="Debug"/>
+      <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
