@@ -479,6 +479,15 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
 			if (!TileToDraw.IsOk()) continue;
 		dc.DrawBitmap(TileToDraw, x*16, y*16); }
 		
+	//Draw UpperLayer
+	TilePointer = &m_data.UpperLayer[0];
+ 	
+	for (int y = 0; y < m_data.MapHeight; y++)
+		for (int x = 0; x < m_data.MapWidth ; x++, TilePointer++){
+			TileToDraw = RenderTile(*TilePointer, 0);
+			if (!TileToDraw.IsOk()) continue;
+		dc.DrawBitmap(TileToDraw, x*16, y*16); }
+		
 		/*this line works to show the pre_chipset*/
 	//dc.DrawBitmap(real_chipset, 0, 0);   
 }
@@ -501,7 +510,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
 		wxImage img;
 		img = base_chipset.ConvertToImage();
 		unsigned char r = img.GetRed(368,112), g = img.GetGreen(368,112), b = img.GetBlue(368,112);
-		KeyColor = 0x010000 * r + 0x000100 * g + b;
+		KeyColor = 0x000001 * r + 0x000100 * g + b * 0x010000;
 		// Create Chipset data base
 		real_chipset = wxBitmap(32*16, 45*16);
 		
@@ -560,7 +569,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
 					if (r == r2) if (g == g2) if (b == b2)
 						img.SetAlpha(x,y, 0);
 				}
-			
+		real_chipset = wxBitmap(img);
         // Done
         return true;}
 		
@@ -574,9 +583,9 @@ wxBitmap ScrolledCanvas::draw_water(int Frame, int Border, int Water, int Combin
 	//Prepare bitmap to be drawn on
 	wxMemoryDC dc;
 	dc.SelectObject(pretile);
-	/*dc.SetPen(wxPen(0x010101));
-	dc.SetBrush(wxBrush(0x010101));
-	dc.DrawRectangle(0,0,16,16);*/
+	dc.SetPen(wxPen(KeyColor));
+	dc.SetBrush(wxBrush(KeyColor));
+	dc.DrawRectangle(0,0,16,16);
 	
 	/* INITIALIZE DRAWING */
 	
@@ -719,9 +728,9 @@ wxBitmap ScrolledCanvas::draw_deep_water(int Frame, int Depth, int DepthCombinat
 	//Prepare bitmap to be drawn on
 	wxMemoryDC dc;
 	dc.SelectObject(pretile);
-		/*dc.SetPen(wxPen(0x010101));
-		dc.SetBrush(wxBrush(0x010101));
-		dc.DrawRectangle(0,0,16,16);*/
+	dc.SetPen(wxPen(KeyColor));
+	dc.SetBrush(wxBrush(KeyColor));
+	dc.DrawRectangle(0,0,16,16);
 	/* INITIALIZE DRAWING */
 	
 	int SFrame = Frame*16;
@@ -921,7 +930,10 @@ wxBitmap ScrolledCanvas::RenderTile(unsigned short Tile, int Frame)
 		Returned = real_chipset.GetSubBitmap(wxRect((Tile & 0x1F) << 4, (Tile >> 5) << 4, 16, 16));
         Tile = 3 * 141 + Shadow - (20 * WaterType) + (Frame * 16) + 48;
         if (WaterType == 2) Tile -= 48; // if is a deph water title redraw the shadow.
-		Returned = real_chipset.GetSubBitmap(wxRect((Tile & 0x1F) << 4, (Tile >> 5) << 4, 16, 16));;
+		wxMemoryDC dc;
+		dc.SelectObject(Returned);
+		dc.DrawBitmap(real_chipset.GetSubBitmap(wxRect((Tile & 0x1F) << 4, (Tile >> 5) << 4, 16, 16)), 0, 0);
+		dc.SelectObject(wxNullBitmap);
     }
 	
 	//Done
