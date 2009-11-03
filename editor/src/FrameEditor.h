@@ -45,6 +45,7 @@ class ScrolledCanvas : public wxScrolledWindow
 public:
 	float Scale;
 	void SetScale(float zoom);
+	unsigned int KeyColor;
     ScrolledCanvas(wxWindow* parent, wxWindowID id);
     ScrolledCanvas();
 	bool load_canvas(wxArrayString Chipsets);

@@ -497,13 +497,19 @@ bool ScrolledCanvas::load_map(wxString FileName)
 		this->SetScrollbars(16, 16, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 		// Load Chipset File
 		base_chipset.LoadFile(wxT("../../player/ChipSet/basis.png"), wxBITMAP_TYPE_PNG);
+		//Get the Key Color
+		wxImage img;
+		img = base_chipset.ConvertToImage();
+		unsigned char r = img.GetRed(368,112), g = img.GetGreen(368,112), b = img.GetBlue(368,112);
+		KeyColor = 0x010000 * r + 0x000100 * g + b;
 		// Create Chipset data base
 		real_chipset = wxBitmap(32*16, 45*16);
+		
 		// Prepare for drawing
 		wxMemoryDC dc;
 		dc.SelectObject(real_chipset);
-		dc.SetPen(wxPen(0x010101));
-		dc.SetBrush(wxBrush(0x010101));
+		dc.SetPen(wxPen(KeyColor));
+		dc.SetBrush(wxBrush(KeyColor));
 		dc.DrawRectangle(0,0,32*16,45*16);
 		
 		// Start Tile Generation
@@ -545,6 +551,16 @@ bool ScrolledCanvas::load_map(wxString FileName)
         for (int i=0; i<288; i++, CurrentTile++)
 				dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(192+((i%6)*16)+(i/96)*96, ((i/6)%16)*16, 16, 16)), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
 
+		img = real_chipset.ConvertToImage();
+		img.InitAlpha();
+		for (int x = 0; x < img.GetWidth(); x++)
+			for (int y = 0; y < img.GetHeight(); y++)
+				{
+					unsigned char r2 = img.GetRed(x,y), g2 = img.GetGreen(x,y), b2 = img.GetBlue(x,y);
+					if (r == r2) if (g == g2) if (b == b2)
+						img.SetAlpha(x,y, 0);
+				}
+			
         // Done
         return true;}
 		
@@ -558,9 +574,9 @@ wxBitmap ScrolledCanvas::draw_water(int Frame, int Border, int Water, int Combin
 	//Prepare bitmap to be drawn on
 	wxMemoryDC dc;
 	dc.SelectObject(pretile);
-	dc.SetPen(wxPen(0x010101));
+	/*dc.SetPen(wxPen(0x010101));
 	dc.SetBrush(wxBrush(0x010101));
-	dc.DrawRectangle(0,0,16,16);
+	dc.DrawRectangle(0,0,16,16);*/
 	
 	/* INITIALIZE DRAWING */
 	
@@ -703,9 +719,9 @@ wxBitmap ScrolledCanvas::draw_deep_water(int Frame, int Depth, int DepthCombinat
 	//Prepare bitmap to be drawn on
 	wxMemoryDC dc;
 	dc.SelectObject(pretile);
-		dc.SetPen(wxPen(0x010101));
+		/*dc.SetPen(wxPen(0x010101));
 		dc.SetBrush(wxBrush(0x010101));
-		dc.DrawRectangle(0,0,16,16);
+		dc.DrawRectangle(0,0,16,16);*/
 	/* INITIALIZE DRAWING */
 	
 	int SFrame = Frame*16;

@@ -13,15 +13,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     ]]>
     </Plugin>
   </Plugins>
@@ -213,8 +204,20 @@
     <File Name="ldbstr.h"/>
     <File Name="stevent.cpp"/>
     <File Name="stevent.h"/>
+    <File Name="project.cpp"/>
+    <File Name="project.h"/>
+    <File Name="strProject.h"/>
+    <File Name="strProject.cpp"/>
+    <File Name="map.cpp"/>
+    <File Name="map.h"/>
+    <File Name="mapchunks.h"/>
+    <File Name="strmap.cpp"/>
+    <File Name="strmap.h"/>
+    <File Name="eventchunks.h"/>
   </VirtualDirectory>
   <Dependencies Name="Win32 Debug"/>
+  <Dependencies Name="Win32 Release"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes"/>
@@ -324,7 +327,5 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
   </Settings>
-  <Dependencies Name="Win32 Release"/>
-  <Dependencies Name="Release"/>
   <Dependencies Name="Debug"/>
 </CodeLite_Project>
