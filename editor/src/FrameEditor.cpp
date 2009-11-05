@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 
 #include <wx/wx.h>
+#include <iostream>
 #include "FrameEditor.h"
 #include "DialogMaterial.h"
 
@@ -489,7 +490,7 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
 
 void ScrolledCanvas::SetScale(float zoom){
 	Scale = zoom;
-	this->SetScrollbars(16*zoom, 16*zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+	this->SetScrollbars(16*(int)zoom, 16*(int)zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 }
 
 bool ScrolledCanvas::load_map(wxString FileName)
