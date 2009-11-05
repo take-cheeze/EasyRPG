@@ -280,8 +280,6 @@ void FrameEditor::zoom11_click(wxCommandEvent &WXUNUSED(event))
     MenuScale->Check(wxID_ZOOM_100, true);
     frmEditorToolbar->ToggleTool(wxID_ZOOM_100, true);
 	pnCanvas->SetScale(2.0);
-	pnCanvas->SetScrollbars(32, 32, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
-	//pnCanvas->SetScrollbars(32, 32, 100, 100, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -290,8 +288,6 @@ void FrameEditor::zoom12_click(wxCommandEvent &WXUNUSED(event))
     MenuScale->Check(ID_ZOOM_12, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_12, true);
 	pnCanvas->SetScale(1.0);
-	pnCanvas->SetScrollbars(16, 16, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
-	//pnCanvas->SetScrollbars(32, 32, 100, 100, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -300,7 +296,6 @@ void FrameEditor::zoom14_click(wxCommandEvent &WXUNUSED(event))
     MenuScale->Check(ID_ZOOM_14, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_14, true);
 	pnCanvas->SetScale(0.5);
-	pnCanvas->SetScrollbars(8, 8, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -309,7 +304,6 @@ void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event))
     MenuScale->Check(ID_ZOOM_18, true);
     frmEditorToolbar->ToggleTool(ID_ZOOM_18, true);
 	pnCanvas->SetScale(0.25);
-	pnCanvas->SetScrollbars(4, 4, pnCanvas->m_data.MapWidth, pnCanvas->m_data.MapHeight, 0, 0);
 	pnCanvas->Refresh();
 }
 
@@ -455,6 +449,7 @@ bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
 	if (wxFile::Exists(Chipsets.Item(0))){
 	wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(0), wxBITMAP_TYPE_ANY);
 	SetScrollbars(32, 32, 100, 100, 0, 0);
+	Scale = 2;
     return true;}
 	
     else{ SetScrollbars(32,32, 6, 6, 0, 0); return false;}
@@ -494,16 +489,17 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
 
 void ScrolledCanvas::SetScale(float zoom){
 	Scale = zoom;
+	this->SetScrollbars(16*zoom, 16*zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 }
 
 bool ScrolledCanvas::load_map(wxString FileName)
 {
-	if (wxFile::Exists(wxT("../../player/Map0005.lmu"))){
-		std::string s = "../../player/Map0005.lmu";
+	if (wxFile::Exists(wxT("../../player/Map0008.lmu"))){
+		std::string s = "../../player/Map0008.lmu";
 		m_reader.Load(s, &m_data);
 		std::cerr << "Map Loaded: " << FileName << std::endl;
 		//Change Canvas Dimentions
-		this->SetScrollbars(16, 16, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+		this->SetScrollbars(32, 32, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 		// Load Chipset File
 		base_chipset.LoadFile(wxT("../../player/ChipSet/basis.png"), wxBITMAP_TYPE_PNG);
 		//Get the Key Color
