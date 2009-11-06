@@ -511,7 +511,8 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
 
 void ScrolledCanvas::SetScale(float zoom){
 	Scale = zoom;
-	this->SetScrollbars((int) (16.0*zoom), (int)(16.0*zoom), this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+	zoom *= 16;
+	this->SetScrollbars(zoom, zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 }
 
 bool ScrolledCanvas::load_map(wxString FileName)
@@ -528,7 +529,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
 		wxImage img;
 		img = base_chipset.ConvertToImage();
 		unsigned char r = img.GetRed(368,112), g = img.GetGreen(368,112), b = img.GetBlue(368,112);
-		KeyColor = wxColour(r, g,b);
+		KeyColor = r * 0x010000 + b * 0x000100 + g;
 		// Create Chipset data base
 		real_chipset = wxBitmap(32*16, 45*16);
 		
@@ -579,7 +580,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
 				dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(192+((i%6)*16)+(i/96)*96, ((i/6)%16)*16, 16, 16)), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
 		
 		//Deprecated, for alpha channel, not working in 16bits or lower
-		/*img = real_chipset.ConvertToImage();
+		img = real_chipset.ConvertToImage();
 		img.InitAlpha();
 		for (int x = 0; x < img.GetWidth(); x++)
 			for (int y = 0; y < img.GetHeight(); y++)
@@ -588,9 +589,9 @@ bool ScrolledCanvas::load_map(wxString FileName)
 					if (r == r2) if (g == g2) if (b == b2)
 						img.SetAlpha(x,y, 0);
 				}
-		real_chipset = wxBitmap(img);*/
-		Mask.Create(real_chipset, KeyColor);
-		real_chipset.SetMask(&Mask);
+		real_chipset = wxBitmap(img);
+		/*Mask.Create(real_chipset, KeyColor);
+		real_chipset.SetMask(&Mask);*/
         // Done
         return true;}
 		
