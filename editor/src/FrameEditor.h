@@ -45,7 +45,8 @@ class ScrolledCanvas : public wxScrolledWindow
 public:
 	float Scale;
 	void SetScale(float zoom);
-	unsigned int KeyColor;
+	wxColour KeyColor;
+	wxMask Mask;
     ScrolledCanvas(wxWindow* parent, wxWindowID id);
     ScrolledCanvas();
 	bool load_canvas(wxArrayString Chipsets);
@@ -53,6 +54,7 @@ public:
 	map_reader m_reader;
 	map_data m_data;
     void OnDraw(wxDC& dc);
+	void OnEraseBackground(wxEraseEvent& event);
 	bool MapLoaded;
 	bool generate_chipset();
 	wxBitmap base_chipset;

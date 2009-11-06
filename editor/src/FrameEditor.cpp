@@ -457,6 +457,11 @@ bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
 
 }
 
+// Empty implementation, to prevent flicker
+void ScrolledCanvas::OnEraseBackground(wxEraseEvent& event)
+{
+}
+
 void ScrolledCanvas::OnDraw(wxDC& dc)
 {
 	dc.SetUserScale(Scale, Scale);
@@ -466,23 +471,39 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
 	
 	unsigned short* TilePointer;
 	
+	//Drawing the VisibleArea:
+	int xStart, xEnd, yStart, yEnd, ClientWidth, ClientHeight;
+	this->GetViewStart(&xStart, &yStart);
+	this->GetClientSize(&ClientWidth, &ClientHeight);
+	ClientWidth /= (16*Scale);
+	ClientHeight /= (16*Scale);
+	xEnd = xStart + ClientWidth +1;
+	yEnd = yStart + ClientHeight +1;
+	if (xStart > 0) xStart -= 1;
+	if (yStart > 0) yStart -= 1;
+	unsigned long StepPerY;
+	
+	if (xEnd > m_data.MapWidth) xEnd = m_data.MapWidth;
+    if (yEnd > m_data.MapHeight) yEnd = m_data.MapHeight;
+	
 	//Draw LowerLayer
-	TilePointer = &m_data.LowerLayer[0];
- 	
-	for (int y = 0; y < m_data.MapHeight; y++)
-		for (int x = 0; x < m_data.MapWidth ; x++, TilePointer++){
+	TilePointer = &m_data.LowerLayer[m_data.MapWidth * yStart + xStart];
+ 	StepPerY = m_data.MapWidth - (xEnd - xStart);
+	
+	for (int y = yStart; y < yEnd; y++, TilePointer += StepPerY)
+		for (int x = xStart; x < xEnd ; x++, TilePointer++){
 			TileToDraw = RenderTile(*TilePointer, 0);
 			if (!TileToDraw.IsOk()) continue;
-		dc.DrawBitmap(TileToDraw, x*16, y*16); }
+		dc.DrawBitmap(TileToDraw, x*16, y*16, true); }
 		
 	//Draw UpperLayer
-	TilePointer = &m_data.UpperLayer[0];
+	TilePointer = &m_data.UpperLayer[m_data.MapWidth * yStart + xStart];
  	
-	for (int y = 0; y < m_data.MapHeight; y++)
-		for (int x = 0; x < m_data.MapWidth ; x++, TilePointer++){
+	for (int y = yStart; y < yEnd; y++, TilePointer += StepPerY)
+		for (int x = xStart; x < xEnd ; x++, TilePointer++){
 			TileToDraw = RenderTile(*TilePointer, 0);
 			if (!TileToDraw.IsOk()) continue;
-		dc.DrawBitmap(TileToDraw, x*16, y*16); }
+		dc.DrawBitmap(TileToDraw, x*16, y*16, true); }
 		
 		/*this line works to show the pre_chipset*/
 	//dc.DrawBitmap(real_chipset, 0, 0);   
@@ -490,7 +511,7 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
 
 void ScrolledCanvas::SetScale(float zoom){
 	Scale = zoom;
-	this->SetScrollbars(16*(int)zoom, 16*(int)zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+	this->SetScrollbars((int) (16.0*zoom), (int)(16.0*zoom), this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 }
 
 bool ScrolledCanvas::load_map(wxString FileName)
@@ -507,7 +528,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
 		wxImage img;
 		img = base_chipset.ConvertToImage();
 		unsigned char r = img.GetRed(368,112), g = img.GetGreen(368,112), b = img.GetBlue(368,112);
-		KeyColor = 0x000001 * r + 0x000100 * g + b * 0x010000;
+		KeyColor = wxColour(r, g,b);
 		// Create Chipset data base
 		real_chipset = wxBitmap(32*16, 45*16);
 		
@@ -556,8 +577,9 @@ bool ScrolledCanvas::load_map(wxString FileName)
         // Generate common tiles
         for (int i=0; i<288; i++, CurrentTile++)
 				dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(192+((i%6)*16)+(i/96)*96, ((i/6)%16)*16, 16, 16)), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
-
-		img = real_chipset.ConvertToImage();
+		
+		//Deprecated, for alpha channel, not working in 16bits or lower
+		/*img = real_chipset.ConvertToImage();
 		img.InitAlpha();
 		for (int x = 0; x < img.GetWidth(); x++)
 			for (int y = 0; y < img.GetHeight(); y++)
@@ -566,7 +588,9 @@ bool ScrolledCanvas::load_map(wxString FileName)
 					if (r == r2) if (g == g2) if (b == b2)
 						img.SetAlpha(x,y, 0);
 				}
-		real_chipset = wxBitmap(img);
+		real_chipset = wxBitmap(img);*/
+		Mask.Create(real_chipset, KeyColor);
+		real_chipset.SetMask(&Mask);
         // Done
         return true;}
 		
