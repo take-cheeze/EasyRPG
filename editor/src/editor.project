@@ -2,18 +2,7 @@
 <CodeLite_Project Name="editor">
   <Plugins>
     <Plugin Name="qmake">
-      <![CDATA[00040001N0005Debug0000000000000001N0007Release0000000000000001N0011Win32 Debug0000000000000001N0013Win32 Release000000000000
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    ]]>
+      <![CDATA[00040001N0005Debug0000000000000001N0007Release0000000000000001N0011Win32 Debug0000000000000001N0013Win32 Release000000000000]]>
     </Plugin>
   </Plugins>
   <Dependencies/>
@@ -215,9 +204,6 @@
     <File Name="strmap.h"/>
     <File Name="eventchunks.h"/>
   </VirtualDirectory>
-  <Dependencies Name="Win32 Debug"/>
-  <Dependencies Name="Win32 Release"/>
-  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes"/>
@@ -328,4 +314,7 @@
     </GlobalSettings>
   </Settings>
   <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Win32 Debug"/>
+  <Dependencies Name="Win32 Release"/>
 </CodeLite_Project>
