@@ -21,6 +21,7 @@
 #include <algorithm>
 #include "tools.h"
 #include "lmtReader.h"
+#include "wx/wx.h"
 
 bool lmt_reader::load(std::string filename,lmt_data * data)
 {
@@ -39,7 +40,8 @@ bool lmt_reader::load(std::string filename,lmt_data * data)
     //Read header
     if (ReadString(file) != "LcfMapTree")
     {
-        printf("Reading error: File is not a valid RPG Maker 2000/2003 map tree.\n");
+        wxMessageBox(_("Reading error: File is not a valid RPG Maker 2000/2003 map tree."),
+            _("LMT Reading error"));
         fclose(file);
         return 2;
     }
