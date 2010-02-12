@@ -17,17 +17,12 @@
     <WorkspaceConfiguration Name="Win32 Debug" Selected="yes">
       <Project Name="player" ConfigName="Win32 Debug"/>
       <Project Name="editor" ConfigName="Win32 Debug"/>
-      <Project Name="player2" ConfigName="Debug"/>
+      <Project Name="player2" ConfigName="Win32 Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Win32 Release" Selected="yes">
       <Project Name="player" ConfigName="Win32 Release"/>
       <Project Name="editor" ConfigName="Win32 Release"/>
-      <Project Name="player2" ConfigName="Debug"/>
-    </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Mingw Debug" Selected="yes">
-      <Project Name="player" ConfigName="Debug"/>
-      <Project Name="editor" ConfigName="Debug"/>
-      <Project Name="player2" ConfigName="Debug"/>
+      <Project Name="player2" ConfigName="Win32 Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
