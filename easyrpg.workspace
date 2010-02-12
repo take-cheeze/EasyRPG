@@ -5,11 +5,10 @@
   <Project Name="player2" Path="player2/src/player2.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
-      <Project Name="editor" ConfigName="Debug"/>
       <Project Name="player" ConfigName="Debug"/>
-      <Project Name="player2" ConfigName="Debug"/>
+      <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="yes">
+    <WorkspaceConfiguration Name="Release" Selected="no">
       <Project Name="editor" ConfigName="Release"/>
       <Project Name="player" ConfigName="Release"/>
       <Project Name="player2" ConfigName="Release"/>
