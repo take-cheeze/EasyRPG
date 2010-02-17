@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="easyrpg" Database="./easyrpg.tags">
-  <Project Name="editor" Path="editor/src/editor.project" Active="Yes"/>
-  <Project Name="player" Path="player/src/player.project" Active="No"/>
+  <Project Name="editor" Path="editor/editor.project" Active="Yes"/>
+  <Project Name="player" Path="player/player.project" Active="No"/>
   <Project Name="player2" Path="player2/src/player2.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project Name="player2" ConfigName="Debug"/>
       <Project Name="player" ConfigName="Debug"/>
       <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
@@ -13,15 +14,15 @@
       <Project Name="player" ConfigName="Release"/>
       <Project Name="player2" ConfigName="Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Win32 Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
       <Project Name="player" ConfigName="Win32 Debug"/>
       <Project Name="editor" ConfigName="Win32 Debug"/>
       <Project Name="player2" ConfigName="Win32 Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Win32 Release" Selected="yes">
+    <WorkspaceConfiguration Name="Win32 Release" Selected="no">
+      <Project Name="player2" ConfigName="Win32 Release"/>
       <Project Name="player" ConfigName="Win32 Release"/>
       <Project Name="editor" ConfigName="Win32 Release"/>
-      <Project Name="player2" ConfigName="Win32 Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
