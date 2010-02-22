@@ -4,7 +4,7 @@
   <Project Name="player" Path="player/player.project" Active="No"/>
   <Project Name="player2" Path="player2/player2.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Debug" Selected="no">
       <Project Name="player2" ConfigName="Debug"/>
       <Project Name="player" ConfigName="Debug"/>
       <Project Name="editor" ConfigName="Debug"/>
@@ -14,7 +14,7 @@
       <Project Name="player" ConfigName="Release"/>
       <Project Name="player2" ConfigName="Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
+    <WorkspaceConfiguration Name="Win32 Debug" Selected="yes">
       <Project Name="player" ConfigName="Win32 Debug"/>
       <Project Name="editor" ConfigName="Win32 Debug"/>
       <Project Name="player2" ConfigName="Win32 Debug"/>

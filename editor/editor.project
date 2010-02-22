@@ -209,16 +209,10 @@
     <File Name="src/DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Release"/>
-  <Dependencies Name="Win32 Debug"/>
   <Dependencies Name="Win32 Release"/>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Win32 Debug"/>
   <Settings Type="Executable">
-    <GlobalSettings>
-      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Options="-O2"/>
-      <ResourceCompiler Options=""/>
-    </GlobalSettings>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes) -Wextra" Required="yes"/>
@@ -275,7 +269,7 @@
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=yes)" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="bin/editor" IntermediateDirectory=".obj/Debug" Command="./editor" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="bin/editor.exe" IntermediateDirectory=".obj/Debug" Command="./editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
@@ -301,7 +295,7 @@
       <Compiler Options="-O3 -s $(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="bin/editor" IntermediateDirectory=".obj/Release" Command="./editor" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="bin/editor.exe" IntermediateDirectory=".obj/Release" Command="./editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
@@ -323,6 +317,12 @@
         <CustomPreBuild/>
       </AdditionalRules>
     </Configuration>
+    <GlobalSettings>
+      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
   </Settings>
-  <Dependencies Name="Debug"/>
 </CodeLite_Project>
