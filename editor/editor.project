@@ -208,11 +208,14 @@
     <File Name="src/DialogEvtCmdActorFaceGraphic.h"/>
     <File Name="src/DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
-  <Dependencies Name="Release"/>
-  <Dependencies Name="Win32 Release"/>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Win32 Debug"/>
   <Settings Type="Executable">
+    <GlobalSettings>
+      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes) -Wextra" Required="yes"/>
@@ -317,12 +320,9 @@
         <CustomPreBuild/>
       </AdditionalRules>
     </Configuration>
-    <GlobalSettings>
-      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Options="-O2"/>
-      <ResourceCompiler Options=""/>
-    </GlobalSettings>
   </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Win32 Debug"/>
+  <Dependencies Name="Win32 Release"/>
 </CodeLite_Project>
