@@ -2,7 +2,7 @@
 <CodeLite_Workspace Name="easyrpg" Database="./easyrpg.tags">
   <Project Name="editor" Path="editor/editor.project" Active="No"/>
   <Project Name="player" Path="player/player.project" Active="No"/>
-  <Project Name="player2" Path="player2/builds/codelite/player2.project" Active="No"/>
+  <Project Name="player2" Path="player2/builds/codelite/player2.project" Active="no"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="no">
       <Project Name="player" ConfigName="Debug"/>
@@ -34,7 +34,7 @@
       <Project Name="player2" ConfigName="Dingux-Debug"/>
       <Project Name="player2" ConfigName="Dingux-Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Dingux-Release" Selected="yes">
+    <WorkspaceConfiguration Name="Dingux-Release" Selected="no">
       <Project Name="player" ConfigName="Release"/>
       <Project Name="editor" ConfigName="Release"/>
       <Project Name="player2" ConfigName="Dingux-Release"/>
