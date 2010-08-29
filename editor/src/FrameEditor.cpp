@@ -119,7 +119,7 @@ FrameEditor::FrameEditor():
 
         /* TESTING */
             wxArrayString chips;
-            chips.Add(wxT("../../player/ChipSet/basis.png"));
+            chips.Add(wxT("../../player2/bin/testgame/ChipSet/basis.png"));
             if (!pnPalette->load_palette(chips))
             {
                 wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
@@ -166,9 +166,15 @@ void FrameEditor::set_properties()
 {
     ProjectDirectory = wxEmptyString;
     SetTitle(_("EasyRPG"));
+
+#ifdef __WXMSW__
+    SetIcon(wxICON(aaaa));
+#else
     wxIcon _icon;
-    _icon.CopyFromBitmap(wxBitmap(wxT("../share/easyrpg.xpm"), wxBITMAP_TYPE_ANY));
+    _icon.CopyFromBitmap(wxBitmap(wxT("../share/easyrpg.xpm"), wxBITMAP_TYPE_XPM));
     SetIcon(_icon);
+#endif    
+
     int frmEditorStatusbar_widths[] = { -1 };
     frmEditorStatusbar->SetStatusWidths(1, frmEditorStatusbar_widths);
     const wxString frmEditorStatusbar_fields[] = {
@@ -524,7 +530,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
 		//Change Canvas Dimentions
 		this->SetScrollbars(32, 32, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 		// Load Chipset File
-		base_chipset.LoadFile(wxT("../../player/ChipSet/basis.png"), wxBITMAP_TYPE_PNG);
+		base_chipset.LoadFile(wxT("../../player2/bin/testgame/ChipSet/basis.png"), wxBITMAP_TYPE_PNG);
 		//Get the Key Color
 		wxImage img;
 		img = base_chipset.ConvertToImage();

@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug wx2.8|Win32">
+      <Configuration>Debug wx2.8</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug wx2.9|Win32">
+      <Configuration>Debug wx2.9</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release wx2.8|Win32">
+      <Configuration>Release wx2.8</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release wx2.9|Win32">
+      <Configuration>Release wx2.9</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}</ProjectGuid>
+    <RootNamespace>Editor</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'">$(SolutionDir)..\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'">$(SolutionDir)..\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'">$(SolutionDir)..\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'">$(SolutionDir)..\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'">$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug wx2.9|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x400;__WXMSW__;_WINDOWS;wxUSE_GUI=1;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_DEBUG;__WXDEBUG__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw29ud_core.lib;wxbase29ud.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release wx2.9|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x400;__WXMSW__;_WINDOWS;wxUSE_GUI=1;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw29u_core.lib;wxbase29u.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug wx2.8|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x400;__WXMSW__;_WINDOWS;wxUSE_GUI=1;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_DEBUG;__WXDEBUG__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw28ud_core.lib;wxbase28ud.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release wx2.8|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WINVER=0x400;__WXMSW__;_WINDOWS;wxUSE_GUI=1;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>wxmsw28u_core.lib;wxbase28u.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\DialogDb.cpp" />
+    <ClCompile Include="..\..\src\DialogDbLearnSkill.cpp" />
+    <ClCompile Include="..\..\src\DialogDbMaxNumber.cpp" />
+    <ClCompile Include="..\..\src\DialogDbSelectAnyGraphic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvt.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmd.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdActorFaceGraphic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdActorGraphic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdActorName.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdActorNameInput.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdActorTitle.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdActorTransparency.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdAnimation.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdBattle.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdBlankScreen.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdCallEvent.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdChoice.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdCommerce.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdConditions.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdDamage.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdDeletePicture.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdEncounterRate.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdEquipment.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdEscapePermissions.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdEscapePlace.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdEventMovement.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdEventPosition.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdExperience.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdFaceGraphic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdFadeMusic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdFlashCharacter.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdFlashScreen.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdGetPositionID.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdGetTerrainID.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdGoToLabel.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdGoToMemorizedPlace.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdHP.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdInn.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdItem.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdKeyAssignment.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdLabel.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdLevel.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdMemorizePlace.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdMessage.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdMessageOptions.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdMoney.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdMovePicture.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdMoveScreen.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdMP.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdNotes.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdNumberInput.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdPanorama.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdParameter.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdParty.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdPicture.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdPlayMusic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdPlaySound.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdPlayVideo.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdRecover.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSavePermissions.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdShake.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdShowScreen.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSkill.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdStatus.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSwapEvents.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSwitch.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSystemGraphic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSystemMenuPermissions.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSystemMusic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdSystemSound.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTeleport.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTeleportPermissions.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTeleportPlace.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTile.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTileset.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTimer.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTone.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdTransition.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdVariable.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdVehicleGraphic.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdVehiclePosition.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdWait.cpp" />
+    <ClCompile Include="..\..\src\DialogEvtCmdWeather.cpp" />
+    <ClCompile Include="..\..\src\DialogMap.cpp" />
+    <ClCompile Include="..\..\src\DialogMaterial.cpp" />
+    <ClCompile Include="..\..\src\FrameEditor.cpp" />
+    <ClCompile Include="..\..\src\ldb_data.cpp" />
+    <ClCompile Include="..\..\src\ldbReader.cpp" />
+    <ClCompile Include="..\..\src\ldbstr.cpp" />
+    <ClCompile Include="..\..\src\lmtReader.cpp" />
+    <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\map.cpp" />
+    <ClCompile Include="..\..\src\project.cpp" />
+    <ClCompile Include="..\..\src\stevent.cpp" />
+    <ClCompile Include="..\..\src\strmap.cpp" />
+    <ClCompile Include="..\..\src\strProject.cpp" />
+    <ClCompile Include="..\..\src\tools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\DialogDb.h" />
+    <ClInclude Include="..\..\src\DialogDbLearnSkill.h" />
+    <ClInclude Include="..\..\src\DialogDbMaxNumber.h" />
+    <ClInclude Include="..\..\src\DialogDbSelectAnyGraphic.h" />
+    <ClInclude Include="..\..\src\DialogEvt.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmd.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdActorFaceGraphic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdActorGraphic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdActorName.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdActorNameInput.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdActorTitle.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdActorTransparency.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdAnimation.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdBattle.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdBlankScreen.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdCallEvent.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdChoice.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdCommerce.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdConditions.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdDamage.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdDeletePicture.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdEncounterRate.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdEquipment.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdEscapePermissions.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdEscapePlace.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdEventMovement.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdEventPosition.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdExperience.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdFaceGraphic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdFadeMusic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdFlashCharacter.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdFlashScreen.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdGetPositionID.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdGetTerrainID.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdGoToLabel.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdGoToMemorizedPlace.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdHP.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdInn.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdItem.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdKeyAssignment.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdLabel.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdLevel.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdMemorizePlace.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdMessage.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdMessageOptions.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdMoney.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdMovePicture.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdMoveScreen.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdMP.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdNotes.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdNumberInput.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdPanorama.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdParameter.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdParty.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdPicture.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdPlayMusic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdPlaySound.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdPlayVideo.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdRecover.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSavePermissions.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdShake.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdShowScreen.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSkill.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdStatus.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSwapEvents.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSwitch.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSystemGraphic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSystemMenuPermissions.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSystemMusic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdSystemSound.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTeleport.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTeleportPermissions.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTeleportPlace.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTile.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTileset.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTimer.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTone.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdTransition.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdVariable.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdVehicleGraphic.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdVehiclePosition.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdWait.h" />
+    <ClInclude Include="..\..\src\DialogEvtCmdWeather.h" />
+    <ClInclude Include="..\..\src\DialogMap.h" />
+    <ClInclude Include="..\..\src\DialogMaterial.h" />
+    <ClInclude Include="..\..\src\eventchunks.h" />
+    <ClInclude Include="..\..\src\FrameEditor.h" />
+    <ClInclude Include="..\..\src\ldb_data.h" />
+    <ClInclude Include="..\..\src\ldbchunks.h" />
+    <ClInclude Include="..\..\src\ldbReader.h" />
+    <ClInclude Include="..\..\src\ldbstr.h" />
+    <ClInclude Include="..\..\src\lmtReader.h" />
+    <ClInclude Include="..\..\src\map.h" />
+    <ClInclude Include="..\..\src\mapchunks.h" />
+    <ClInclude Include="..\..\src\project.h" />
+    <ClInclude Include="..\..\src\stevent.h" />
+    <ClInclude Include="..\..\src\strmap.h" />
+    <ClInclude Include="..\..\src\strProject.h" />
+    <ClInclude Include="..\..\src\tools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\win32\easyrpg.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor.vcproj", "{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug wx2.8|Win32 = Debug wx2.8|Win32
+		Debug wx2.9|Win32 = Debug wx2.9|Win32
+		Release wx2.8|Win32 = Release wx2.8|Win32
+		Release wx2.9|Win32 = Release wx2.9|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Debug wx2.8|Win32.ActiveCfg = Release wx2.9|Win32
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Debug wx2.8|Win32.Build.0 = Release wx2.9|Win32
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Debug wx2.9|Win32.ActiveCfg = Debug wx2.9|Win32
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Debug wx2.9|Win32.Build.0 = Debug wx2.9|Win32
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Release wx2.8|Win32.ActiveCfg = Release wx2.8|Win32
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Release wx2.8|Win32.Build.0 = Release wx2.8|Win32
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Release wx2.9|Win32.ActiveCfg = Release wx2.9|Win32
+		{FEB8C3EC-8CC6-4E3B-9F6F-9EB8D0EA98CC}.Release wx2.9|Win32.Build.0 = Release wx2.9|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

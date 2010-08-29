@@ -18,7 +18,9 @@
     #include <stdlib.h>
     #include <stdio.h>
     #include <string.h>
+#ifndef _MSC_VER
     #include <dirent.h>
+#endif
     #include <ctype.h>
     #include <iostream>
     #include "tools.h"
