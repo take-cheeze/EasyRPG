@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="easyrpg" Database="./easyrpg.tags">
-  <Project Name="editor" Path="editor/editor.project" Active="No"/>
+  <Project Name="editor" Path="editor/editor.project" Active="Yes"/>
   <Project Name="player" Path="player/player.project" Active="No"/>
   <Project Name="player2" Path="player2/builds/codelite/player2.project" Active="no"/>
   <BuildMatrix>
