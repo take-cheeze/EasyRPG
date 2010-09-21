@@ -119,7 +119,7 @@ FrameEditor::FrameEditor():
 
         /* TESTING */
             wxArrayString chips;
-            chips.Add(wxT("../../player2/bin/testgame/ChipSet/basis.png"));
+            chips.Add(wxT("../../player2/bin/testgame/ChipSet/Basis.png"));
             if (!pnPalette->load_palette(chips))
             {
                 wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);

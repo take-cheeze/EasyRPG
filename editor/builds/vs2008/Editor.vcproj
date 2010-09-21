@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug wx2.9|Win32"
-			OutputDirectory="$(SolutionDir).."
+			OutputDirectory="$(SolutionDir)..\..\bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -91,7 +91,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release wx2.9|Win32"
-			OutputDirectory="$(SolutionDir).."
+			OutputDirectory="$(SolutionDir)..\..\bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -168,7 +168,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug wx2.8|Win32"
-			OutputDirectory="$(SolutionDir).."
+			OutputDirectory="$(SolutionDir)..\..\bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -242,7 +242,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release wx2.8|Win32"
-			OutputDirectory="$(SolutionDir).."
+			OutputDirectory="$(SolutionDir)..\..\bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
