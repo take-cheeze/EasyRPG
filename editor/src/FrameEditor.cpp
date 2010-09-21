@@ -126,14 +126,14 @@ FrameEditor::FrameEditor():
                 ErrMsg->ShowModal();
                 ErrMsg->Destroy();
             }
-            if (!pnCanvas->load_canvas(chips))
+ /*           if (!pnCanvas->load_canvas(chips))
             {
                 wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
                 ErrMsg->ShowModal();
                 ErrMsg->Destroy();
             }
-	
-	pnCanvas->load_map(wxT("."));
+*/
+	pnCanvas->load_map(wxT("../../player2/bin/testgame/Map0001.lmu"));
 	pnCanvas->Refresh();
         /* END TEST */
         
@@ -443,13 +443,13 @@ ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWind
 }
 ScrolledCanvas::ScrolledCanvas()
 {
-	SetScale(2);
-	m_data.MapHeight = 15;
-	m_data.MapWidth = 20;
-	m_data.clear_events();
 	MapLoaded = false;
+	SetScale(2);
+	m_data.MapHeight = 0;
+	m_data.MapWidth = 0;
+	m_data.clear_events();
 }
-
+/* DEPRECATED
 bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
 {
 
@@ -461,56 +461,46 @@ bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
 	
     else{ SetScrollbars(32,32, 6, 6, 0, 0); return false;}
 
-}
+}*/
 
 // Empty implementation, to prevent flicker
 void ScrolledCanvas::OnEraseBackground(wxEraseEvent& event)
 {
 }
 
-void ScrolledCanvas::OnDraw(wxDC& dc)
+void ScrolledCanvas::DrawLayer(wxDC& dc, int layer)
 {
-	dc.SetUserScale(Scale, Scale);
-	
 	//Initialize variables;
-	wxBitmap TileToDraw;
 	
+	wxBitmap TileToDraw = wxBitmap(16 , 16);
 	unsigned short* TilePointer;
+	int xEnd, yEnd;
+
+	xEnd = m_data.MapWidth;  //Draw the hole Layer
+    yEnd = m_data.MapHeight; //Draw the hole Layer
 	
-	//Drawing the VisibleArea:
-	int xStart, xEnd, yStart, yEnd, ClientWidth, ClientHeight;
-	this->GetViewStart(&xStart, &yStart);
-	this->GetClientSize(&ClientWidth, &ClientHeight);
-	ClientWidth /= (16*Scale);
-	ClientHeight /= (16*Scale);
-	xEnd = xStart + ClientWidth +1;
-	yEnd = yStart + ClientHeight +1;
-	if (xStart > 0) xStart -= 1;
-	if (yStart > 0) yStart -= 1;
-	unsigned long StepPerY;
-	
-	if (xEnd > m_data.MapWidth) xEnd = m_data.MapWidth;
-    if (yEnd > m_data.MapHeight) yEnd = m_data.MapHeight;
-	
-	//Draw LowerLayer
-	TilePointer = &m_data.LowerLayer[m_data.MapWidth * yStart + xStart];
- 	StepPerY = m_data.MapWidth - (xEnd - xStart);
-	
-	for (int y = yStart; y < yEnd; y++, TilePointer += StepPerY)
-		for (int x = xStart; x < xEnd ; x++, TilePointer++){
-			TileToDraw = RenderTile(*TilePointer, 0);
-			if (!TileToDraw.IsOk()) continue;
-		dc.DrawBitmap(TileToDraw, x*16, y*16, true); }
+	if (!layer) {//Case Lower Layer
+		TilePointer = &m_data.LowerLayer[0]; //Select first tile
+		//StepPerY = m_data.MapWidth - (xEnd - xStart);
 		
-	//Draw UpperLayer
-	TilePointer = &m_data.UpperLayer[m_data.MapWidth * yStart + xStart];
- 	
-	for (int y = yStart; y < yEnd; y++, TilePointer += StepPerY)
-		for (int x = xStart; x < xEnd ; x++, TilePointer++){
-			TileToDraw = RenderTile(*TilePointer, 0);
-			if (!TileToDraw.IsOk()) continue;
-		dc.DrawBitmap(TileToDraw, x*16, y*16, true); }
+		for (int y = 0; y < yEnd; y++)
+			for (int x = 0; x < xEnd ; x++, TilePointer++){
+				TileToDraw = RenderTile(*TilePointer, 0);
+				if (!TileToDraw.IsOk()) continue;
+				dc.DrawBitmap(TileToDraw, x * 16, y * 16 , false); }}
+	else {       //Case Upper Layer
+		//Draw UpperLayer
+		TilePointer = &m_data.UpperLayer[0];
 		
+		for (int y = 0; y < yEnd; y++)
+			for (int x = 0; x < xEnd ; x++, TilePointer++){
+				TileToDraw = RenderTile(*TilePointer, 0);
+				if (!TileToDraw.IsOk()) continue;
+				dc.DrawBitmap(TileToDraw, x * 16 , y * 16 , false); }
+				
+				}
+				
+			
 		/*this line works to show the pre_chipset*/
 	//dc.DrawBitmap(real_chipset, 0, 0);   
 }
@@ -518,30 +508,88 @@ void ScrolledCanvas::OnDraw(wxDC& dc)
 void ScrolledCanvas::SetScale(float zoom){
 	Scale = zoom;
 	zoom *= 16;
+	if (MapLoaded == false) return;
 	this->SetScrollbars(zoom, zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+	
+	
+	// Prepare for drawing
+	wxMemoryDC dc;
+		/* Renerate lower & upper layers */
+		//Draw Layers on cache bitmaps */
+		bm_lower_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
+		bm_upper_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
+		
+		// Prepare for drawing
+		dc.SelectObject(bm_lower_layer);  //First draw lower layer
+		dc.DrawRectangle(0, 0, m_data.MapWidth * 16, m_data.MapHeight * 16);  //Clear the bitmap before drawing
+		
+		DrawLayer(dc, 0); //Draw Lower layer
+		
+		dc.SelectObject(bm_upper_layer);  //Then draw upper layer
+		dc.DrawRectangle(0, 0, m_data.MapWidth * 16, m_data.MapHeight * 16);  //Clear the bitmap before drawing
+		
+		DrawLayer(dc, 1); //Draw Lower layer
+		
+		/*Now Make Zoom*/
+		dc.SelectObject(wxNullBitmap);
+		
+		wxImage img;
+		//Lower Layer
+		img = bm_lower_layer.ConvertToImage();
+		img.Rescale(m_data.MapWidth * 16 * Scale, m_data.MapHeight * 16 * Scale);
+		bm_lower_layer = wxBitmap(img);
+		//UpperLayer
+		img = bm_upper_layer.ConvertToImage();
+		img.Rescale(m_data.MapWidth * 16 * Scale, m_data.MapHeight * 16 * Scale);
+		bm_upper_layer = wxBitmap(img);
+		Mask.Create(bm_upper_layer, KeyColor);
+		bm_upper_layer.SetMask(&Mask);
+		
+		
 }
 
 bool ScrolledCanvas::load_map(wxString FileName)
 {
-	if (wxFile::Exists(wxT("../../player/Map0008.lmu"))){
-		std::string s = "../../player/Map0008.lmu";
+	if (wxFile::Exists(FileName)){
+		std::string s = std::string(FileName.mb_str());
 		m_reader.Load(s, &m_data);
 		std::cerr << "Map Loaded: " << FileName << std::endl;
 		//Change Canvas Dimentions
-		this->SetScrollbars(32, 32, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+		this->SetScrollbars(16 * Scale, 16 * Scale, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 		// Load Chipset File
-		base_chipset.LoadFile(wxT("../../player2/bin/testgame/ChipSet/basis.png"), wxBITMAP_TYPE_PNG);
-		//Get the Key Color
-		wxImage img;
-		img = base_chipset.ConvertToImage();
-		unsigned char r = img.GetRed(368,112), g = img.GetGreen(368,112), b = img.GetBlue(368,112);
-		KeyColor = r * 0x010000 + b * 0x000100 + g;
+		base_chipset.LoadFile( wxT("../../player2/bin/testgame/ChipSet/Basis.png"), wxBITMAP_TYPE_PNG);
+		
 		// Create Chipset data base
 		real_chipset = wxBitmap(32*16, 45*16);
 		
 		// Prepare for drawing
 		wxMemoryDC dc;
 		dc.SelectObject(real_chipset);
+		
+		/* Generate real_chipset */
+		DrawRealChipset(dc);
+		dc.SelectObject(wxNullBitmap);
+		/* Now generate lower & upper layers */
+		//Draw Layers on cache bitmaps */
+
+		MapLoaded = true;
+		/*Now Generate Scaled Layers*/
+		SetScale(2);
+
+        return true;}
+		
+	else return false;
+}
+
+void ScrolledCanvas::DrawRealChipset(wxDC & dc)
+{
+		//Find Key Color
+		wxImage img;
+		img = base_chipset.ConvertToImage();
+		unsigned char r = img.GetRed(368,112), g = img.GetGreen(368,112), b = img.GetBlue(368,112);
+		KeyColor = wxColour(r,g,b);
+		
+		//Clear Surface
 		dc.SetPen(wxPen(KeyColor));
 		dc.SetBrush(wxBrush(KeyColor));
 		dc.DrawRectangle(0,0,32*16,45*16);
@@ -585,23 +633,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
         for (int i=0; i<288; i++, CurrentTile++)
 				dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(192+((i%6)*16)+(i/96)*96, ((i/6)%16)*16, 16, 16)), (CurrentTile%32)*16, (CurrentTile/32)*16, false);
 		
-		//Deprecated, for alpha channel, not working in 16bits or lower
-		img = real_chipset.ConvertToImage();
-		img.InitAlpha();
-		for (int x = 0; x < img.GetWidth(); x++)
-			for (int y = 0; y < img.GetHeight(); y++)
-				{
-					unsigned char r2 = img.GetRed(x,y), g2 = img.GetGreen(x,y), b2 = img.GetBlue(x,y);
-					if (r == r2) if (g == g2) if (b == b2)
-						img.SetAlpha(x,y, 0);
-				}
-		real_chipset = wxBitmap(img);
-		/*Mask.Create(real_chipset, KeyColor);
-		real_chipset.SetMask(&Mask);*/
         // Done
-        return true;}
-		
-	else return false;
 }
 
 wxBitmap ScrolledCanvas::draw_water(int Frame, int Border, int Water, int Combination)
@@ -966,4 +998,10 @@ wxBitmap ScrolledCanvas::RenderTile(unsigned short Tile, int Frame)
 	
 	//Done
 	return Returned;
+}
+
+void ScrolledCanvas::OnDraw(wxDC&dc)
+{
+	dc.DrawBitmap(bm_lower_layer, wxPoint(0,0), false);
+	dc.DrawBitmap(bm_upper_layer, wxPoint(0,0), true);
 }
