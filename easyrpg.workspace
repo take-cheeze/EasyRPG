@@ -4,7 +4,7 @@
   <Project Name="player" Path="player/player.project" Active="No"/>
   <Project Name="player2" Path="player2/builds/codelite/player2.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="no">
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="player" ConfigName="Debug"/>
       <Project Name="editor" ConfigName="Debug"/>
       <Project Name="player2" ConfigName="Debug"/>
