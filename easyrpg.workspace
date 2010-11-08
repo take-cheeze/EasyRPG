@@ -1,47 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="easyrpg" Database="./easyrpg.tags">
   <Project Name="editor" Path="editor/editor.project" Active="No"/>
-  <Project Name="player" Path="player/player.project" Active="No"/>
-  <Project Name="player2" Path="player2/builds/codelite/player2.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="GTK+ Debug" Selected="yes">
-      <Project Name="player2" ConfigName="GTK+ Debug"/>
-      <Project Name="player" ConfigName="Debug"/>
+      <Project Name="player" ConfigName="GTK+ Debug"/>
       <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="GTK+ Release" Selected="no">
-      <Project Name="player2" ConfigName="GTK+ Release"/>
-      <Project Name="player" ConfigName="Release"/>
+      <Project Name="player" ConfigName="GTK+ Release"/>
       <Project Name="editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
-      <Project Name="player" ConfigName="Win32 Debug"/>
       <Project Name="editor" ConfigName="Win32 Debug"/>
-      <Project Name="player2" ConfigName="Win32 Debug"/>
+      <Project Name="player" ConfigName="Win32 Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Win32 Release" Selected="no">
       <Project Name="player" ConfigName="Win32 Release"/>
       <Project Name="editor" ConfigName="Win32 Release"/>
-      <Project Name="player2" ConfigName="Win32 Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Dingux-Debug" Selected="no">
-      <Project Name="player2" ConfigName="Dingux-Debug"/>
-      <Project Name="player" ConfigName="Debug"/>
+      <Project Name="player" ConfigName="Dingux-Debug"/>
       <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Dingux-Release" Selected="no">
-      <Project Name="player2" ConfigName="Dingux-Release"/>
-      <Project Name="player" ConfigName="Release"/>
+      <Project Name="player" ConfigName="Dingux-Release"/>
       <Project Name="editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="UNIX Debug" Selected="no">
-      <Project Name="player2" ConfigName="UNIX Debug"/>
-      <Project Name="player" ConfigName="Debug"/>
+      <Project Name="player" ConfigName="UNIX Debug"/>
       <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="UNIX Release" Selected="no">
-      <Project Name="player2" ConfigName="UNIX Release"/>
-      <Project Name="player" ConfigName="Release"/>
+      <Project Name="player" ConfigName="UNIX Release"/>
       <Project Name="editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
