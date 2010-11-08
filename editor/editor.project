@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CodeLite_Project Name="editor">
-  <Plugins>
-    <Plugin Name="qmake">
-      <![CDATA[00040001N0005Debug0000000000000001N0007Release0000000000000001N0011Win32 Debug0000000000000001N0013Win32 Release000000000000]]>
-    </Plugin>
-  </Plugins>
-  <Dependencies/>
+<CodeLite_Project Name="Editor">
   <File Name="src/FrameEditor.cpp"/>
   <File Name="src/DialogMaterial.cpp"/>
   <File Name="src/main.cpp"/>
@@ -272,7 +266,7 @@
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=yes)" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="bin/editor.exe" IntermediateDirectory=".obj/Debug" Command="./editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="bin/Editor.exe" IntermediateDirectory=".obj/Debug" Command="./Editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
@@ -298,7 +292,7 @@
       <Compiler Options="-O3 -s $(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="bin/editor.exe" IntermediateDirectory=".obj/Release" Command="./editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="bin/Editor.exe" IntermediateDirectory=".obj/Release" Command="./Editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
