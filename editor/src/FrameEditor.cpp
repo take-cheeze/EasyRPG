@@ -553,7 +553,6 @@ bool ScrolledCanvas::load_map(wxString FileName)
 	if (wxFile::Exists(FileName)){
 		std::string s = std::string(FileName.mb_str());
 		m_reader.Load(s, &m_data);
-		std::cerr << "Map Loaded: " << FileName << std::endl;
 		//Change Canvas Dimentions
 		this->SetScrollbars(16 * Scale, 16 * Scale, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 		// Load Chipset File

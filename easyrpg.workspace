@@ -3,11 +3,11 @@
   <Project Name="Player" Path="player/builds/codelite/player.project" Active="Yes"/>
   <Project Name="Editor" Path="editor/editor.project" Active="No"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="GTK+ Debug" Selected="no">
+    <WorkspaceConfiguration Name="GTK+ Debug" Selected="yes">
       <Project Name="Player" ConfigName="GTK+ Debug"/>
       <Project Name="Editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="GTK+ Release" Selected="yes">
+    <WorkspaceConfiguration Name="GTK+ Release" Selected="no">
       <Project Name="Player" ConfigName="GTK+ Release"/>
       <Project Name="Editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
