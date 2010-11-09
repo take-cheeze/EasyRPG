@@ -119,7 +119,7 @@ FrameEditor::FrameEditor():
 
         /* TESTING */
             wxArrayString chips;
-            chips.Add(wxT("../../player2/bin/testgame/ChipSet/Basis.png"));
+            chips.Add(wxT("../../player/bin/testgame/ChipSet/Basis.png"));
             if (!pnPalette->load_palette(chips))
             {
                 wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
@@ -133,7 +133,7 @@ FrameEditor::FrameEditor():
                 ErrMsg->Destroy();
             }
 */
-	pnCanvas->load_map(wxT("../../player2/bin/testgame/Map0001.lmu"));
+	pnCanvas->load_map(wxT("../../player/bin/testgame/Map0001.lmu"));
 	pnCanvas->Refresh();
         /* END TEST */
         
@@ -557,7 +557,7 @@ bool ScrolledCanvas::load_map(wxString FileName)
 		//Change Canvas Dimentions
 		this->SetScrollbars(16 * Scale, 16 * Scale, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 		// Load Chipset File
-		base_chipset.LoadFile( wxT("../../player2/bin/testgame/ChipSet/Basis.png"), wxBITMAP_TYPE_PNG);
+		base_chipset.LoadFile( wxT("../../player/bin/testgame/ChipSet/Basis.png"), wxBITMAP_TYPE_PNG);
 		
 		// Create Chipset data base
 		real_chipset = wxBitmap(32*16, 45*16);
