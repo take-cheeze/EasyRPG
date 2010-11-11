@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="EasyRPG" Database="./easyrpg.tags">
   <Project Name="Player" Path="player/builds/codelite/player.project" Active="Yes"/>
-  <Project Name="Editor" Path="editor/editor.project" Active="No"/>
+  <Project Name="Editor" Path="editor/builds/codelite/editor.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="GTK+ Debug" Selected="yes">
       <Project Name="Player" ConfigName="GTK+ Debug"/>

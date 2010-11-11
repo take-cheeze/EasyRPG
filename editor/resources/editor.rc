@@ -1,6 +1,5 @@
-aaaa ICON "easyrpg.ico"
+A ICON "editor.ico"
 #include <wx/msw/wx.rc>
-#include <windows.h>
 1 VERSIONINFO
 FILEVERSION 0,0,0,0
 PRODUCTVERSION 0,0,0,0
@@ -10,13 +9,13 @@ FILETYPE VFT_APP
 	 {
 		 BLOCK "000004E4"
 		 {
-			 VALUE "Comments", "Licensed under the GNU GPL license"
-			 VALUE "CompanyName", "http://easyrpg.sourceforge.net/"
+			 VALUE "Comments", "http://easyrpg.sourceforge.net/"
+			 VALUE "CompanyName", "EasyRPG Project"
 			 VALUE "FileVersion", "0.0.0.0"
-			 VALUE "FileDescription", "EasyRPG"
-			 VALUE "InternalName", "easyrpg"
-			 VALUE "LegalCopyright", "2006 EasyRPG Project. GPL license"
-			 VALUE "OriginalFilename", "easyrpg.exe"
+			 VALUE "FileDescription", "EasyRPG Editor"
+			 VALUE "InternalName", "editor"
+			 VALUE "LegalCopyright", "2005-2010 EasyRPG Project"
+			 VALUE "OriginalFilename", "Editor.exe"
 			 VALUE "ProductName", "EasyRPG"
 			 VALUE "ProductVersion", "0.0.0.0"
 		 }

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="Editor">
+  <File Name="../../src/FrameEditor.cpp"/>
+  <File Name="../../src/DialogMaterial.cpp"/>
+  <File Name="../../src/main.cpp"/>
+  <File Name="../../src/FrameEditor.h"/>
+  <File Name="../../src/DialogMaterial.h"/>
+  <File Name="../../src/DialogMap.h"/>
+  <File Name="../../src/DialogMap.cpp"/>
+  <File Name="../../src/project.cpp"/>
+  <File Name="../../src/project.h"/>
+  <File Name="../../src/strProject.h"/>
+  <File Name="../../src/strProject.cpp"/>
+  <VirtualDirectory Name="LcfReader">
+    <File Name="../../src/tools.cpp"/>
+    <File Name="../../src/tools.h"/>
+    <File Name="../../src/lmtReader.cpp"/>
+    <File Name="../../src/lmtReader.h"/>
+    <File Name="../../src/ldbchunks.h"/>
+    <File Name="../../src/ldb_data.cpp"/>
+    <File Name="../../src/ldb_data.h"/>
+    <File Name="../../src/ldbReader.cpp"/>
+    <File Name="../../src/ldbReader.h"/>
+    <File Name="../../src/ldbstr.cpp"/>
+    <File Name="../../src/ldbstr.h"/>
+    <File Name="../../src/stevent.cpp"/>
+    <File Name="../../src/stevent.h"/>
+    <File Name="../../src/map.cpp"/>
+    <File Name="../../src/map.h"/>
+    <File Name="../../src/mapchunks.h"/>
+    <File Name="../../src/strmap.cpp"/>
+    <File Name="../../src/strmap.h"/>
+    <File Name="../../src/eventchunks.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="DialogDb">
+    <File Name="../../src/DialogDb.cpp"/>
+    <File Name="../../src/DialogDb.h"/>
+    <File Name="../../src/DialogDbLearnSkill.cpp"/>
+    <File Name="../../src/DialogDbLearnSkill.h"/>
+    <File Name="../../src/DialogDbMaxNumber.cpp"/>
+    <File Name="../../src/DialogDbMaxNumber.h"/>
+    <File Name="../../src/DialogDbSelectAnyGraphic.cpp"/>
+    <File Name="../../src/DialogDbSelectAnyGraphic.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="DialogEvt">
+    <File Name="../../src/DialogEvt.cpp"/>
+    <File Name="../../src/DialogEvt.h"/>
+    <File Name="../../src/DialogEvtCmd.cpp"/>
+    <File Name="../../src/DialogEvtCmd.h"/>
+    <File Name="../../src/DialogEvtCmdMemorizePlace.cpp"/>
+    <File Name="../../src/DialogEvtCmdBlankScreen.h"/>
+    <File Name="../../src/DialogEvtCmdActorTitle.h"/>
+    <File Name="../../src/DialogEvtCmdEventMovement.h"/>
+    <File Name="../../src/DialogEvtCmdPlayVideo.cpp"/>
+    <File Name="../../src/DialogEvtCmdCommerce.cpp"/>
+    <File Name="../../src/DialogEvtCmdActorNameInput.h"/>
+    <File Name="../../src/DialogEvtCmdShake.cpp"/>
+    <File Name="../../src/DialogEvtCmdMessage.cpp"/>
+    <File Name="../../src/DialogEvtCmdSwitch.h"/>
+    <File Name="../../src/DialogEvtCmdNotes.h"/>
+    <File Name="../../src/DialogEvtCmdEventMovement.cpp"/>
+    <File Name="../../src/DialogEvtCmdBattle.h"/>
+    <File Name="../../src/DialogEvtCmdTone.cpp"/>
+    <File Name="../../src/DialogEvtCmdConditions.h"/>
+    <File Name="../../src/DialogEvtCmdSavePermissions.h"/>
+    <File Name="../../src/DialogEvtCmdVehicleGraphic.cpp"/>
+    <File Name="../../src/DialogEvtCmdBattle.cpp"/>
+    <File Name="../../src/DialogEvtCmdPlaySound.cpp"/>
+    <File Name="../../src/DialogEvtCmdBlankScreen.cpp"/>
+    <File Name="../../src/DialogEvtCmdSystemMusic.cpp"/>
+    <File Name="../../src/DialogEvtCmdWeather.cpp"/>
+    <File Name="../../src/DialogEvtCmdSkill.cpp"/>
+    <File Name="../../src/DialogEvtCmdConditions.cpp"/>
+    <File Name="../../src/DialogEvtCmdDamage.h"/>
+    <File Name="../../src/DialogEvtCmdEscapePermissions.cpp"/>
+    <File Name="../../src/DialogEvtCmdTone.h"/>
+    <File Name="../../src/DialogEvtCmdItem.h"/>
+    <File Name="../../src/DialogEvtCmdVariable.cpp"/>
+    <File Name="../../src/DialogEvtCmdPlayMusic.h"/>
+    <File Name="../../src/DialogEvtCmdMP.cpp"/>
+    <File Name="../../src/DialogEvtCmdMessage.h"/>
+    <File Name="../../src/DialogEvtCmdItem.cpp"/>
+    <File Name="../../src/DialogEvtCmdActorNameInput.cpp"/>
+    <File Name="../../src/DialogEvtCmdInn.cpp"/>
+    <File Name="../../src/DialogEvtCmdSwitch.cpp"/>
+    <File Name="../../src/DialogEvtCmdEventPosition.cpp"/>
+    <File Name="../../src/DialogEvtCmdTeleportPermissions.cpp"/>
+    <File Name="../../src/DialogEvtCmdActorGraphic.cpp"/>
+    <File Name="../../src/DialogEvtCmdMoney.cpp"/>
+    <File Name="../../src/DialogEvtCmdTimer.h"/>
+    <File Name="../../src/DialogEvtCmdSystemMusic.h"/>
+    <File Name="../../src/DialogEvtCmdWait.h"/>
+    <File Name="../../src/DialogEvtCmdPlayVideo.h"/>
+    <File Name="../../src/DialogEvtCmdSavePermissions.cpp"/>
+    <File Name="../../src/DialogEvtCmdFlashScreen.h"/>
+    <File Name="../../src/DialogEvtCmdFlashCharacter.h"/>
+    <File Name="../../src/DialogEvtCmdInn.h"/>
+    <File Name="../../src/DialogEvtCmdVehiclePosition.cpp"/>
+    <File Name="../../src/DialogEvtCmdPicture.h"/>
+    <File Name="../../src/DialogEvtCmdTeleport.cpp"/>
+    <File Name="../../src/DialogEvtCmdTileset.h"/>
+    <File Name="../../src/DialogEvtCmdSystemMenuPermissions.h"/>
+    <File Name="../../src/DialogEvtCmdChoice.cpp"/>
+    <File Name="../../src/DialogEvtCmdDamage.cpp"/>
+    <File Name="../../src/DialogEvtCmdEscapePermissions.h"/>
+    <File Name="../../src/DialogEvtCmdSkill.h"/>
+    <File Name="../../src/DialogEvtCmdRecover.h"/>
+    <File Name="../../src/DialogEvtCmdNumberInput.h"/>
+    <File Name="../../src/DialogEvtCmdDeletePicture.h"/>
+    <File Name="../../src/DialogEvtCmdActorTransparency.cpp"/>
+    <File Name="../../src/DialogEvtCmdTile.h"/>
+    <File Name="../../src/DialogEvtCmdExperience.h"/>
+    <File Name="../../src/DialogEvtCmdTeleportPlace.h"/>
+    <File Name="../../src/DialogEvtCmdFlashCharacter.cpp"/>
+    <File Name="../../src/DialogEvtCmdParameter.cpp"/>
+    <File Name="../../src/DialogEvtCmdShake.h"/>
+    <File Name="../../src/DialogEvtCmdEncounterRate.cpp"/>
+    <File Name="../../src/DialogEvtCmdLevel.cpp"/>
+    <File Name="../../src/DialogEvtCmdSystemSound.cpp"/>
+    <File Name="../../src/DialogEvtCmdSwapEvents.cpp"/>
+    <File Name="../../src/DialogEvtCmdActorName.cpp"/>
+    <File Name="../../src/DialogEvtCmdKeyAssignment.h"/>
+    <File Name="../../src/DialogEvtCmdEscapePlace.cpp"/>
+    <File Name="../../src/DialogEvtCmdPlayMusic.cpp"/>
+    <File Name="../../src/DialogEvtCmdGetPositionID.cpp"/>
+    <File Name="../../src/DialogEvtCmdShowScreen.cpp"/>
+    <File Name="../../src/DialogEvtCmdGoToMemorizedPlace.cpp"/>
+    <File Name="../../src/DialogEvtCmdLabel.h"/>
+    <File Name="../../src/DialogEvtCmdParameter.h"/>
+    <File Name="../../src/DialogEvtCmdActorTitle.cpp"/>
+    <File Name="../../src/DialogEvtCmdWeather.h"/>
+    <File Name="../../src/DialogEvtCmdSystemGraphic.h"/>
+    <File Name="../../src/DialogEvtCmdSystemMenuPermissions.cpp"/>
+    <File Name="../../src/DialogEvtCmdCommerce.h"/>
+    <File Name="../../src/DialogEvtCmdActorName.h"/>
+    <File Name="../../src/DialogEvtCmdParty.cpp"/>
+    <File Name="../../src/DialogEvtCmdPicture.cpp"/>
+    <File Name="../../src/DialogEvtCmdTimer.cpp"/>
+    <File Name="../../src/DialogEvtCmdSwapEvents.h"/>
+    <File Name="../../src/DialogEvtCmdActorTransparency.h"/>
+    <File Name="../../src/DialogEvtCmdEscapePlace.h"/>
+    <File Name="../../src/DialogEvtCmdMoney.h"/>
+    <File Name="../../src/DialogEvtCmdVariable.h"/>
+    <File Name="../../src/DialogEvtCmdPlaySound.h"/>
+    <File Name="../../src/DialogEvtCmdMoveScreen.cpp"/>
+    <File Name="../../src/DialogEvtCmdEventPosition.h"/>
+    <File Name="../../src/DialogEvtCmdSystemSound.h"/>
+    <File Name="../../src/DialogEvtCmdLabel.cpp"/>
+    <File Name="../../src/DialogEvtCmdTeleportPermissions.h"/>
+    <File Name="../../src/DialogEvtCmdGoToLabel.cpp"/>
+    <File Name="../../src/DialogEvtCmdStatus.cpp"/>
+    <File Name="../../src/DialogEvtCmdFaceGraphic.h"/>
+    <File Name="../../src/DialogEvtCmdEncounterRate.h"/>
+    <File Name="../../src/DialogEvtCmdFlashScreen.cpp"/>
+    <File Name="../../src/DialogEvtCmdKeyAssignment.cpp"/>
+    <File Name="../../src/DialogEvtCmdMessageOptions.cpp"/>
+    <File Name="../../src/DialogEvtCmdPanorama.cpp"/>
+    <File Name="../../src/DialogEvtCmdFadeMusic.cpp"/>
+    <File Name="../../src/DialogEvtCmdTransition.cpp"/>
+    <File Name="../../src/DialogEvtCmdEquipment.cpp"/>
+    <File Name="../../src/DialogEvtCmdAnimation.h"/>
+    <File Name="../../src/DialogEvtCmdPanorama.h"/>
+    <File Name="../../src/DialogEvtCmdTileset.cpp"/>
+    <File Name="../../src/DialogEvtCmdFadeMusic.h"/>
+    <File Name="../../src/DialogEvtCmdVehicleGraphic.h"/>
+    <File Name="../../src/DialogEvtCmdTile.cpp"/>
+    <File Name="../../src/DialogEvtCmdGetTerrainID.h"/>
+    <File Name="../../src/DialogEvtCmdGoToMemorizedPlace.h"/>
+    <File Name="../../src/DialogEvtCmdMovePicture.h"/>
+    <File Name="../../src/DialogEvtCmdChoice.h"/>
+    <File Name="../../src/DialogEvtCmdCallEvent.h"/>
+    <File Name="../../src/DialogEvtCmdWait.cpp"/>
+    <File Name="../../src/DialogEvtCmdGetTerrainID.cpp"/>
+    <File Name="../../src/DialogEvtCmdTeleport.h"/>
+    <File Name="../../src/DialogEvtCmdGoToLabel.h"/>
+    <File Name="../../src/DialogEvtCmdGetPositionID.h"/>
+    <File Name="../../src/DialogEvtCmdNotes.cpp"/>
+    <File Name="../../src/DialogEvtCmdParty.h"/>
+    <File Name="../../src/DialogEvtCmdActorGraphic.h"/>
+    <File Name="../../src/DialogEvtCmdTeleportPlace.cpp"/>
+    <File Name="../../src/DialogEvtCmdEquipment.h"/>
+    <File Name="../../src/DialogEvtCmdShowScreen.h"/>
+    <File Name="../../src/DialogEvtCmdHP.h"/>
+    <File Name="../../src/DialogEvtCmdStatus.h"/>
+    <File Name="../../src/DialogEvtCmdMoveScreen.h"/>
+    <File Name="../../src/DialogEvtCmdCallEvent.cpp"/>
+    <File Name="../../src/DialogEvtCmdDeletePicture.cpp"/>
+    <File Name="../../src/DialogEvtCmdExperience.cpp"/>
+    <File Name="../../src/DialogEvtCmdAnimation.cpp"/>
+    <File Name="../../src/DialogEvtCmdNumberInput.cpp"/>
+    <File Name="../../src/DialogEvtCmdMessageOptions.h"/>
+    <File Name="../../src/DialogEvtCmdVehiclePosition.h"/>
+    <File Name="../../src/DialogEvtCmdFaceGraphic.cpp"/>
+    <File Name="../../src/DialogEvtCmdSystemGraphic.cpp"/>
+    <File Name="../../src/DialogEvtCmdTransition.h"/>
+    <File Name="../../src/DialogEvtCmdActorFaceGraphic.cpp"/>
+    <File Name="../../src/DialogEvtCmdMP.h"/>
+    <File Name="../../src/DialogEvtCmdLevel.h"/>
+    <File Name="../../src/DialogEvtCmdMemorizePlace.h"/>
+    <File Name="../../src/DialogEvtCmdRecover.cpp"/>
+    <File Name="../../src/DialogEvtCmdMovePicture.cpp"/>
+    <File Name="../../src/DialogEvtCmdActorFaceGraphic.h"/>
+    <File Name="../../src/DialogEvtCmdHP.cpp"/>
+  </VirtualDirectory>
+  <Settings Type="Executable">
+    <GlobalSettings>
+      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes) -Wextra" Required="yes"/>
+      <ResourceCompiler Options="" Required="yes"/>
+      <General OutputFile="bin/editor" IntermediateDirectory=".obj/Debug" Command="./editor" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O3 -s $(shell wx-config --cxxflags --unicode=yes --debug=no) -Wextra" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
+      <ResourceCompiler Options="" Required="yes"/>
+      <General OutputFile="bin/editor" IntermediateDirectory=".obj/Release" Command="./editor" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Win32 Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=yes)" Required="yes"/>
+      <ResourceCompiler Options="" Required="yes"/>
+      <General OutputFile="bin/Editor.exe" IntermediateDirectory=".obj/Debug" Command="./Editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Win32 Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O3 -s $(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
+      <ResourceCompiler Options="" Required="yes"/>
+      <General OutputFile="bin/Editor.exe" IntermediateDirectory=".obj/Release" Command="./Editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+  </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Win32 Debug"/>
+  <Dependencies Name="Win32 Release"/>
+</CodeLite_Project>
