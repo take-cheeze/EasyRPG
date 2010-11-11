@@ -28,8 +28,6 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 //#include "ldbReader.h"
 //#include "map.h"
 
-#include "DialogDb.h"
-
 class ScrolledPalette : public wxScrolledWindow
 {
 public:
@@ -80,9 +78,6 @@ public:
     std::vector<wxImage> MemoryPaltete;
     std::vector<int> PaletteSelection;
 private:
-
-    DialogDb* dlgDb;
-
     wxMenu* MenuScale;
     wxMenu* MenuEdit;
     wxMenu* MenuGame;

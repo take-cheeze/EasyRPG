@@ -17,6 +17,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/wx.h>
 #include <iostream>
 #include "FrameEditor.h"
+#include "DialogDb.h"
 #include "DialogMaterial.h"
 #include "../../player/src/lmt_reader.h"
 #include "../../player/src/rpg_treemap.h"
@@ -159,14 +160,10 @@ FrameEditor::FrameEditor():
 
     Connect(ID_SHOW_TITLE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::showtitle_click));
     Connect(ID_SHOW_TITLE2, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::showtitle_click));
-
-    dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
-    dlgDb->CentreOnParent();
 }
 
 void FrameEditor::set_properties()
 {
-    ProjectDirectory = wxEmptyString;
     SetTitle(_("EasyRPG"));
 
 #ifdef __WXMSW__
@@ -269,7 +266,6 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
         //load ldb
 //        LDB_reader my_ldb;
 //        my_ldb.Load(fileName, &ldbdata);
-        ProjectDirectory = dlgOpen->GetDirectory();
         fill_lmtTree();
     }
     dlgOpen->Destroy();
@@ -277,7 +273,6 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
 
 void FrameEditor::exit_click(wxCommandEvent &WXUNUSED(event))
 {
-    dlgDb->Destroy();
     Close();
 }
 
@@ -315,10 +310,10 @@ void FrameEditor::zoom18_click(wxCommandEvent &WXUNUSED(event))
 
 void FrameEditor::database_click(wxCommandEvent &WXUNUSED(event))
 {
-    if (ProjectDirectory == wxEmptyString) return;
-    dlgDb->fill_data(ProjectDirectory);
+	DialogDb *dlgDb = new DialogDb(this, wxID_ANY, wxEmptyString);
     dlgDb->SetFocus();
     dlgDb->ShowModal();
+	dlgDb->Destroy();
 }
 
 void FrameEditor::upperlayer_click(wxCommandEvent &WXUNUSED(event)) 
