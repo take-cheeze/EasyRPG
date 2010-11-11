@@ -24,9 +24,9 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/dcmemory.h>
 #include <wx/file.h>
 
-#include "lmtReader.h"
-#include "ldbReader.h"
-#include "map.h"
+#include "../../player/src/rpg_treemap.h"
+//#include "ldbReader.h"
+//#include "map.h"
 
 #include "DialogDb.h"
 
@@ -51,8 +51,8 @@ public:
     ScrolledCanvas();
 	//bool load_canvas(wxArrayString Chipsets);
 	bool load_map(wxString FileName);
-	map_reader m_reader;
-	map_data m_data;
+//	map_reader m_reader;
+//	map_data m_data;
     void DrawLayer(wxDC& dc, int layer);
 	void OnDraw(wxDC&dc);
 	void DrawRealChipset(wxDC & dc);
@@ -74,8 +74,8 @@ class FrameEditor: public wxFrame
 {
 public:
     FrameEditor();
-    lmt_data my_lmt;
-    LDB_data ldbdata;
+    RPG::TreeMap maptree;
+//    LDB_data ldbdata;
     wxString ProjectDirectory;
     std::vector<wxImage> MemoryPaltete;
     std::vector<int> PaletteSelection;

@@ -1,5 +1,5 @@
 /* XPM */
-static const char * easyrpg_splash_256_xpm[] = {
+static const char * splash_xpm[] = {
 "512 256 256 2",
 "  	c #000000",
 ". 	c #212121",

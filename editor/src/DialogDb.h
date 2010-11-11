@@ -4,13 +4,13 @@
 #include <wx/spinctrl.h>
 #include <wx/listctrl.h>
 #include <wx/notebook.h>
-#include "ldb_data.h"
+//#include "ldb_data.h"
 
 class DialogDb: public wxDialog {
 public:
     DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoint& pos=wxDefaultPosition, const wxSize& size=wxDefaultSize, long style=wxDEFAULT_DIALOG_STYLE);
     void fill_data(wxString Directory);
-    LDB_data ldb_tmp;
+//    LDB_data ldb_tmp;
 private:
     void set_properties();
     void do_layout();

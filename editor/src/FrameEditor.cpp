@@ -18,6 +18,8 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <iostream>
 #include "FrameEditor.h"
 #include "DialogMaterial.h"
+#include "../../player/src/lmt_reader.h"
+#include "../../player/src/rpg_treemap.h"
 
 FrameEditor::FrameEditor():
         wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
@@ -241,11 +243,10 @@ void FrameEditor::do_layout()
 void FrameEditor::fill_lmtTree()
 {
     tcMapTree->DeleteAllItems();
-    int current_node;
-    wxTreeItemId root = tcMapTree->AddRoot(my_lmt.tree_list[0].name, 1, 0);
-    for (current_node = 1; current_node < my_lmt.total_nodes; current_node++)
-    {
-        tcMapTree->AppendItem(root, my_lmt.tree_list[current_node].name, 2);
+    unsigned int current_node;
+	wxTreeItemId root = tcMapTree->AddRoot(wxString(maptree.maps[0].name.c_str(), wxConvUTF8), 1, 0);
+    for (current_node = 1; current_node < maptree.maps.size(); current_node++) {
+        tcMapTree->AppendItem(root, wxString(maptree.maps[current_node].name.c_str(), wxConvUTF8), 2);
     }
     tcMapTree->ExpandAll();
 }
@@ -262,14 +263,12 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
 #endif
     if (dlgOpen->ShowModal() == wxID_OK)
     {
-        lmt_reader lmt_read;
         std::string fileName = std::string(dlgOpen->GetPath().mb_str());
-        lmt_read.load(fileName, &my_lmt);
-        lmt_read.print(&my_lmt);
-        fileName.replace(fileName.length() - 3, fileName.length(),"ldb");
+		LMT_Reader::Load(fileName);
+//        fileName.replace(fileName.length() - 3, fileName.length(),"ldb");
         //load ldb
-        LDB_reader my_ldb;
-        my_ldb.Load(fileName, &ldbdata);
+//        LDB_reader my_ldb;
+//        my_ldb.Load(fileName, &ldbdata);
         ProjectDirectory = dlgOpen->GetDirectory();
         fill_lmtTree();
     }
@@ -445,9 +444,9 @@ ScrolledCanvas::ScrolledCanvas()
 {
 	MapLoaded = false;
 	SetScale(2);
-	m_data.MapHeight = 0;
-	m_data.MapWidth = 0;
-	m_data.clear_events();
+//	m_data.MapHeight = 0;
+//	m_data.MapWidth = 0;
+//	m_data.clear_events();
 }
 /* DEPRECATED
 bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
@@ -476,11 +475,11 @@ void ScrolledCanvas::DrawLayer(wxDC& dc, int layer)
 	unsigned short* TilePointer;
 	int xEnd, yEnd;
 
-	xEnd = m_data.MapWidth;  //Draw the hole Layer
-    yEnd = m_data.MapHeight; //Draw the hole Layer
+//	xEnd = m_data.MapWidth;  //Draw the hole Layer
+//	yEnd = m_data.MapHeight; //Draw the hole Layer
 	
 	if (!layer) {//Case Lower Layer
-		TilePointer = &m_data.LowerLayer[0]; //Select first tile
+//		TilePointer = &m_data.LowerLayer[0]; //Select first tile
 		//StepPerY = m_data.MapWidth - (xEnd - xStart);
 		
 		for (int y = 0; y < yEnd; y++)
@@ -490,7 +489,7 @@ void ScrolledCanvas::DrawLayer(wxDC& dc, int layer)
 				dc.DrawBitmap(TileToDraw, x * 16, y * 16 , false); }}
 	else {       //Case Upper Layer
 		//Draw UpperLayer
-		TilePointer = &m_data.UpperLayer[0];
+//		TilePointer = &m_data.UpperLayer[0];
 		
 		for (int y = 0; y < yEnd; y++)
 			for (int x = 0; x < xEnd ; x++, TilePointer++){
@@ -509,24 +508,24 @@ void ScrolledCanvas::SetScale(float zoom){
 	Scale = zoom;
 	zoom *= 16;
 	if (MapLoaded == false) return;
-	this->SetScrollbars(zoom, zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+//	this->SetScrollbars(zoom, zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 	
 	
 	// Prepare for drawing
 	wxMemoryDC dc;
 		/* Renerate lower & upper layers */
 		//Draw Layers on cache bitmaps */
-		bm_lower_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
-		bm_upper_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
+//		bm_lower_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
+//		bm_upper_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
 		
 		// Prepare for drawing
 		dc.SelectObject(bm_lower_layer);  //First draw lower layer
-		dc.DrawRectangle(0, 0, m_data.MapWidth * 16, m_data.MapHeight * 16);  //Clear the bitmap before drawing
+//		dc.DrawRectangle(0, 0, m_data.MapWidth * 16, m_data.MapHeight * 16);  //Clear the bitmap before drawing
 		
 		DrawLayer(dc, 0); //Draw Lower layer
 		
 		dc.SelectObject(bm_upper_layer);  //Then draw upper layer
-		dc.DrawRectangle(0, 0, m_data.MapWidth * 16, m_data.MapHeight * 16);  //Clear the bitmap before drawing
+//		dc.DrawRectangle(0, 0, m_data.MapWidth * 16, m_data.MapHeight * 16);  //Clear the bitmap before drawing
 		
 		DrawLayer(dc, 1); //Draw Lower layer
 		
@@ -536,11 +535,11 @@ void ScrolledCanvas::SetScale(float zoom){
 		wxImage img;
 		//Lower Layer
 		img = bm_lower_layer.ConvertToImage();
-		img.Rescale(m_data.MapWidth * 16 * Scale, m_data.MapHeight * 16 * Scale);
+//		img.Rescale(m_data.MapWidth * 16 * Scale, m_data.MapHeight * 16 * Scale);
 		bm_lower_layer = wxBitmap(img);
 		//UpperLayer
 		img = bm_upper_layer.ConvertToImage();
-		img.Rescale(m_data.MapWidth * 16 * Scale, m_data.MapHeight * 16 * Scale);
+//		img.Rescale(m_data.MapWidth * 16 * Scale, m_data.MapHeight * 16 * Scale);
 		bm_upper_layer = wxBitmap(img);
 		Mask.Create(bm_upper_layer, KeyColor);
 		bm_upper_layer.SetMask(&Mask);
@@ -552,9 +551,9 @@ bool ScrolledCanvas::load_map(wxString FileName)
 {
 	if (wxFile::Exists(FileName)){
 		std::string s = std::string(FileName.mb_str());
-		m_reader.Load(s, &m_data);
+//		m_reader.Load(s, &m_data);
 		//Change Canvas Dimentions
-		this->SetScrollbars(16 * Scale, 16 * Scale, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
+//		this->SetScrollbars(16 * Scale, 16 * Scale, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
 		// Load Chipset File
 		base_chipset.LoadFile( wxT("../../player/bin/testgame/ChipSet/Basis.png"), wxBITMAP_TYPE_PNG);
 		

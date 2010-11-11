@@ -7,31 +7,6 @@
   <File Name="../../src/DialogMaterial.h"/>
   <File Name="../../src/DialogMap.h"/>
   <File Name="../../src/DialogMap.cpp"/>
-  <File Name="../../src/project.cpp"/>
-  <File Name="../../src/project.h"/>
-  <File Name="../../src/strProject.h"/>
-  <File Name="../../src/strProject.cpp"/>
-  <VirtualDirectory Name="LcfReader">
-    <File Name="../../src/tools.cpp"/>
-    <File Name="../../src/tools.h"/>
-    <File Name="../../src/lmtReader.cpp"/>
-    <File Name="../../src/lmtReader.h"/>
-    <File Name="../../src/ldbchunks.h"/>
-    <File Name="../../src/ldb_data.cpp"/>
-    <File Name="../../src/ldb_data.h"/>
-    <File Name="../../src/ldbReader.cpp"/>
-    <File Name="../../src/ldbReader.h"/>
-    <File Name="../../src/ldbstr.cpp"/>
-    <File Name="../../src/ldbstr.h"/>
-    <File Name="../../src/stevent.cpp"/>
-    <File Name="../../src/stevent.h"/>
-    <File Name="../../src/map.cpp"/>
-    <File Name="../../src/map.h"/>
-    <File Name="../../src/mapchunks.h"/>
-    <File Name="../../src/strmap.cpp"/>
-    <File Name="../../src/strmap.h"/>
-    <File Name="../../src/eventchunks.h"/>
-  </VirtualDirectory>
   <VirtualDirectory Name="DialogDb">
     <File Name="../../src/DialogDb.cpp"/>
     <File Name="../../src/DialogDb.h"/>
@@ -202,19 +177,17 @@
     <File Name="../../src/DialogEvtCmdActorFaceGraphic.h"/>
     <File Name="../../src/DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Win32 Debug"/>
+  <Dependencies Name="Win32 Release"/>
   <Settings Type="Executable">
-    <GlobalSettings>
-      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
-        <Preprocessor Value="__WX__"/>
-      </Compiler>
-      <Linker Options="-O2"/>
-      <ResourceCompiler Options=""/>
-    </GlobalSettings>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes) -Wextra" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="bin/editor" IntermediateDirectory=".obj/Debug" Command="./editor" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="../../bin/editor" IntermediateDirectory=".obj/Debug" Command="./editor" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
@@ -240,7 +213,8 @@
       <Compiler Options="-O3 -s $(shell wx-config --cxxflags --unicode=yes --debug=no) -Wextra" Required="yes" PreCompiledHeader=""/>
       <Linker Options="$(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="bin/editor" IntermediateDirectory=".obj/Release" Command="./editor" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="../../bin/editor" IntermediateDirectory=".obj/Release" Command="./editor" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
@@ -266,7 +240,8 @@
       <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
       <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=yes)" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
-      <General OutputFile="bin/Editor.exe" IntermediateDirectory=".obj/Debug" Command="./Editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="../../bin/Editor.exe" IntermediateDirectory=".obj/Debug" Command="./Editor.exe" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
@@ -293,6 +268,7 @@
       <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
       <ResourceCompiler Options="" Required="yes"/>
       <General OutputFile="bin/Editor.exe" IntermediateDirectory=".obj/Release" Command="./Editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
         <StartupCommands/>
@@ -314,9 +290,26 @@
         <CustomPreBuild/>
       </AdditionalRules>
     </Configuration>
+    <GlobalSettings>
+      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
+        <Preprocessor Value="__WX__"/>
+      </Compiler>
+      <Linker Options="-O2"/>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
-  <Dependencies Name="Win32 Debug"/>
-  <Dependencies Name="Win32 Release"/>
+  <VirtualDirectory Name="Player code">
+    <VirtualDirectory Name="RPG"/>
+    <VirtualDirectory Name="Reader">
+      <File Name="../../../player/src/reader.cpp"/>
+      <File Name="../../../player/src/reader.h"/>
+      <VirtualDirectory Name="LMT">
+        <File Name="../../../player/src/lmt_reader.cpp"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Tools">
+      <File Name="../../../player/src/output.cpp"/>
+      <File Name="../../../player/src/output.h"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
 </CodeLite_Project>

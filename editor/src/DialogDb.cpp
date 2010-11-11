@@ -1,7 +1,7 @@
 #include <wx/wx.h>
 #include "DialogDb.h"
 #include "DialogEvtCmd.h"
-#include "ldbReader.h"
+//#include "ldbReader.h"
 
 DialogDb::DialogDb(wxWindow* parent, int id, const wxString& title, const wxPoint& pos, const wxSize& size, long WXUNUSED(style)):
     wxDialog(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX)
@@ -2709,13 +2709,13 @@ void DialogDb::ListCommonEventExecutionContent_doubleclick(wxCommandEvent &WXUNU
 
 void DialogDb::fill_data(wxString Directory)
 {
-    LDB_reader my_ldb;
+//    LDB_reader my_ldb;
     std::string filename = std::string(Directory.mb_str());
-    my_ldb.Load(filename + "/RPG_RT.ldb", &ldb_tmp);
+//    my_ldb.Load(filename + "/RPG_RT.ldb", &ldb_tmp);
     std::string stdstr;
     wxString str = wxEmptyString;
     wxArrayString ArrStr;
-    if (ldb_tmp.heros->size() != 0){
+/*	if (ldb_tmp.heros->size() != 0) {
         listActor->Clear();
         ArrStr.Clear();
         for (unsigned int i = 0; i < ldb_tmp.heros->size(); i++){
@@ -2732,12 +2732,12 @@ void DialogDb::fill_data(wxString Directory)
         }
         listActor->Set(ArrStr);
         listActor->SetSelection(0);
-    }
+    }*/
 }
 
 void DialogDb::Fill_ActorInfo(wxCommandEvent &WXUNUSED(event))
 {
-    unsigned int SelectedActor = listActor->GetSelection();
-    std::string str = ldb_tmp.heros->at(SelectedActor)->strName.c_str();
-    tcActorName->ChangeValue(wxString(str.c_str(), wxConvUTF8));
+//    unsigned int SelectedActor = listActor->GetSelection();
+//    std::string str = ldb_tmp.heros->at(SelectedActor)->strName.c_str();
+//    tcActorName->ChangeValue(wxString(str.c_str(), wxConvUTF8));
 }
