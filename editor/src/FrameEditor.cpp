@@ -15,12 +15,11 @@ You should have received a copy of the GNU General Public License
 along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 
 #include <wx/wx.h>
-#include <iostream>
 #include "FrameEditor.h"
 #include "DialogDb.h"
 #include "DialogMaterial.h"
-#include "../../player/src/lmt_reader.h"
-#include "../../player/src/rpg_treemap.h"
+//#include "../../player/src/lmt_reader.h"
+//#include "../../player/src/rpg_treemap.h"
 
 FrameEditor::FrameEditor():
         wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize)
@@ -119,8 +118,7 @@ FrameEditor::FrameEditor():
 
     set_properties();
     do_layout();
-
-        /* TESTING */
+        // TESTING
             wxArrayString chips;
             chips.Add(wxT("../../player/bin/testgame/ChipSet/Basis.png"));
             if (!pnPalette->load_palette(chips))
@@ -129,21 +127,22 @@ FrameEditor::FrameEditor():
                 ErrMsg->ShowModal();
                 ErrMsg->Destroy();
             }
- /*           if (!pnCanvas->load_canvas(chips))
+/*
+            if (!pnCanvas->load_canvas(chips))
             {
                 wxMessageDialog* ErrMsg = new wxMessageDialog(this, _("Error: One or more Chipset Files are Lost"), _("Error"), wxOK);
                 ErrMsg->ShowModal();
                 ErrMsg->Destroy();
             }
-*/
 	pnCanvas->load_map(wxT("../../player/bin/testgame/Map0001.lmu"));
 	pnCanvas->Refresh();
-        /* END TEST */
+    // END TEST
+*/
         
     Connect(wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::open_click));
     Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::exit_click));
 
-    /* Connect toolbar buttons */
+    // Connect toolbar buttons
     Connect(ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::database_click));
     Connect(ID_MATERIAL_MANAGER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::material_click));
     Connect(wxID_ZOOM_100, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::zoom11_click));
@@ -167,11 +166,11 @@ void FrameEditor::set_properties()
     SetTitle(_("EasyRPG"));
 
 #ifdef __WXMSW__
-    SetIcon(wxICON(aaaa));
+    SetIcon(wxICON(a));
 #else
-    wxIcon _icon;
-    _icon.CopyFromBitmap(wxBitmap(wxT("../share/easyrpg.xpm"), wxBITMAP_TYPE_XPM));
-    SetIcon(_icon);
+//    wxIcon _icon;
+//    _icon.CopyFromBitmap(wxBitmap(wxT("../share/easyrpg.xpm"), wxBITMAP_TYPE_XPM));
+//    SetIcon(_icon);
 #endif    
 
     int frmEditorStatusbar_widths[] = { -1 };
@@ -185,7 +184,7 @@ void FrameEditor::set_properties()
     pnPalette->SetMinSize(wxSize(212, 96));
     pnMapTree->SetMinSize(wxSize(212, 96));
     //pnCanvas->SetMinSize(wxSize(212,96));
-    //pnCanvas->SetScrollRate(32, 32);
+    //pnCanvas->SetScrollRate(32, 32); // using setscrollbars below
     SetMinSize(wxSize(700, 400));
     //Using native stock icons for treectrl for better looking
     //wxArtProvider does not load native Win32 icons, so we will get from our own technique
@@ -240,11 +239,11 @@ void FrameEditor::do_layout()
 void FrameEditor::fill_lmtTree()
 {
     tcMapTree->DeleteAllItems();
-    unsigned int current_node;
-	wxTreeItemId root = tcMapTree->AddRoot(wxString(maptree.maps[0].name.c_str(), wxConvUTF8), 1, 0);
-    for (current_node = 1; current_node < maptree.maps.size(); current_node++) {
-        tcMapTree->AppendItem(root, wxString(maptree.maps[current_node].name.c_str(), wxConvUTF8), 2);
-    }
+//    unsigned int current_node;
+//	wxTreeItemId root = tcMapTree->AddRoot(wxString(maptree.maps[0].name.c_str(), wxConvUTF8), 1, 0);
+//    for (current_node = 1; current_node < maptree.maps.size(); current_node++) {
+//        tcMapTree->AppendItem(root, wxString(maptree.maps[current_node].name.c_str(), wxConvUTF8), 2);
+//    }
     tcMapTree->ExpandAll();
 }
 
@@ -261,7 +260,7 @@ void FrameEditor::open_click(wxCommandEvent &WXUNUSED(event))
     if (dlgOpen->ShowModal() == wxID_OK)
     {
         std::string fileName = std::string(dlgOpen->GetPath().mb_str());
-		LMT_Reader::Load(fileName);
+//		LMT_Reader::Load(fileName);
 //        fileName.replace(fileName.length() - 3, fileName.length(),"ldb");
         //load ldb
 //        LDB_reader my_ldb;
@@ -371,7 +370,7 @@ void FrameEditor::material_click(wxCommandEvent &WXUNUSED(event))
 
 ScrolledPalette::ScrolledPalette(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id)
 {
-    /* init scrolled area size, scrolling speed, etc. */
+    // init scrolled area size, scrolling speed, etc.
     SetScrollbars(0, 32, 0, 51, 0, 0);
 }
 ScrolledPalette::ScrolledPalette()
@@ -432,7 +431,7 @@ void ScrolledPalette::OnDraw(wxDC& dc)
 
 ScrolledCanvas::ScrolledCanvas(wxWindow* parent, wxWindowID id) : wxScrolledWindow(parent, id, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE | wxHSCROLL | wxVSCROLL)
 {
-    /* init scrolled area size, scrolling speed, etc. */
+    // init scrolled area size, scrolling speed, etc.
     SetScrollbars(0, 32, 0, 0, 0, 0);
 }
 ScrolledCanvas::ScrolledCanvas()
@@ -443,19 +442,6 @@ ScrolledCanvas::ScrolledCanvas()
 //	m_data.MapWidth = 0;
 //	m_data.clear_events();
 }
-/* DEPRECATED
-bool ScrolledCanvas::load_canvas(wxArrayString Chipsets)
-{
-
-	if (wxFile::Exists(Chipsets.Item(0))){
-	wxBitmap Chipset = wxBitmap::wxBitmap(Chipsets.Item(0), wxBITMAP_TYPE_ANY);
-	SetScrollbars(32, 32, 100, 100, 0, 0);
-	Scale = 2;
-    return true;}
-	
-    else{ SetScrollbars(32,32, 6, 6, 0, 0); return false;}
-
-}*/
 
 // Empty implementation, to prevent flicker
 void ScrolledCanvas::OnEraseBackground(wxEraseEvent& event)
@@ -464,6 +450,7 @@ void ScrolledCanvas::OnEraseBackground(wxEraseEvent& event)
 
 void ScrolledCanvas::DrawLayer(wxDC& dc, int layer)
 {
+/*
 	//Initialize variables;
 	
 	wxBitmap TileToDraw = wxBitmap(16 , 16);
@@ -494,13 +481,13 @@ void ScrolledCanvas::DrawLayer(wxDC& dc, int layer)
 				
 				}
 				
-			
-		/*this line works to show the pre_chipset*/
-	//dc.DrawBitmap(real_chipset, 0, 0);   
+	// this line works to show the pre_chipset
+	//dc.DrawBitmap(real_chipset, 0, 0);
+*/
 }
 
 void ScrolledCanvas::SetScale(float zoom){
-	Scale = zoom;
+/*	Scale = zoom;
 	zoom *= 16;
 	if (MapLoaded == false) return;
 //	this->SetScrollbars(zoom, zoom, this->m_data.MapWidth, this->m_data.MapHeight, 0, 0);
@@ -508,8 +495,8 @@ void ScrolledCanvas::SetScale(float zoom){
 	
 	// Prepare for drawing
 	wxMemoryDC dc;
-		/* Renerate lower & upper layers */
-		//Draw Layers on cache bitmaps */
+		// Regenerate lower & upper layers
+		//Draw Layers on cache bitmaps
 //		bm_lower_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
 //		bm_upper_layer = wxBitmap(m_data.MapWidth * 16, m_data.MapHeight * 16);
 		
@@ -524,7 +511,7 @@ void ScrolledCanvas::SetScale(float zoom){
 		
 		DrawLayer(dc, 1); //Draw Lower layer
 		
-		/*Now Make Zoom*/
+		// Now Make Zoom
 		dc.SelectObject(wxNullBitmap);
 		
 		wxImage img;
@@ -538,8 +525,7 @@ void ScrolledCanvas::SetScale(float zoom){
 		bm_upper_layer = wxBitmap(img);
 		Mask.Create(bm_upper_layer, KeyColor);
 		bm_upper_layer.SetMask(&Mask);
-		
-		
+*/
 }
 
 bool ScrolledCanvas::load_map(wxString FileName)
@@ -559,17 +545,18 @@ bool ScrolledCanvas::load_map(wxString FileName)
 		wxMemoryDC dc;
 		dc.SelectObject(real_chipset);
 		
-		/* Generate real_chipset */
+		// Generate real_chipset
 		DrawRealChipset(dc);
 		dc.SelectObject(wxNullBitmap);
-		/* Now generate lower & upper layers */
-		//Draw Layers on cache bitmaps */
+		// Now generate lower & upper layers
+		//Draw Layers on cache bitmaps
 
 		MapLoaded = true;
-		/*Now Generate Scaled Layers*/
+		// Now Generate Scaled Layers
 		SetScale(2);
 
-        return true;}
+        return true;
+	}
 		
 	else return false;
 }
@@ -640,7 +627,7 @@ wxBitmap ScrolledCanvas::draw_water(int Frame, int Border, int Water, int Combin
 	dc.SetBrush(wxBrush(KeyColor));
 	dc.DrawRectangle(0,0,16,16);
 	
-	/* INITIALIZE DRAWING */
+	// INITIALIZE DRAWING
 	
 	int SFrame = Frame*16, SBorder = Border*48;
 	
@@ -768,7 +755,7 @@ wxBitmap ScrolledCanvas::draw_water(int Frame, int Border, int Water, int Combin
             if (Combination&0x08) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+SBorder, 48+8, 8, 8)), 0, 8, false);
         }
 		
-		/* End of Drawing. Reselase and return bitmap*/
+		// End of Drawing. Reselase and return bitmap
 		
 		dc.SelectObject(wxNullBitmap);
 		return (pretile);
@@ -784,7 +771,7 @@ wxBitmap ScrolledCanvas::draw_deep_water(int Frame, int Depth, int DepthCombinat
 	dc.SetPen(wxPen(KeyColor));
 	dc.SetBrush(wxBrush(KeyColor));
 	dc.DrawRectangle(0,0,16,16);
-	/* INITIALIZE DRAWING */
+	// INITIALIZE DRAWING
 	
 	int SFrame = Frame*16;
 
@@ -794,7 +781,7 @@ wxBitmap ScrolledCanvas::draw_deep_water(int Frame, int Depth, int DepthCombinat
 	if (DepthCombination&0x04) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame, 64+(Depth*16)+8, 8, 8)), 0, 8, false);
 	if (DepthCombination&0x08) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(SFrame+8, 64+(Depth*16)+8, 8, 8)), 8, 8, false);
 
-		/* End of Drawing. Reselase and return bitmap*/
+		// End of Drawing. Reselase and return bitmap
 		
 		dc.SelectObject(wxNullBitmap);
 		return (pretile);
@@ -809,7 +796,7 @@ wxBitmap ScrolledCanvas::draw_autotile(int Terrain, int Combination)
 	wxMemoryDC dc;
 	dc.SelectObject(pretile);
 	
-	/* INITIALIZE DRAWING */
+	// INITIALIZE DRAWING
 	
 	Terrain += 4;
 	int XTerrain = ((Terrain%2)*48)+(Terrain/8)*96, YTerrain = ((Terrain/2)%4)*64;
@@ -936,7 +923,7 @@ wxBitmap ScrolledCanvas::draw_autotile(int Terrain, int Combination)
             if (Combination&0x08) dc.DrawBitmap(base_chipset.GetSubBitmap(wxRect(XTerrain+32, YTerrain+8, 8, 8)), 0, 8, false);
         }
 		
-		/* End of Drawing. Reselase and return bitmap*/
+		// End of Drawing. Reselase and return bitmap
 		
 		dc.SelectObject(wxNullBitmap);
 		return (pretile);
@@ -995,6 +982,6 @@ wxBitmap ScrolledCanvas::RenderTile(unsigned short Tile, int Frame)
 
 void ScrolledCanvas::OnDraw(wxDC&dc)
 {
-	dc.DrawBitmap(bm_lower_layer, wxPoint(0,0), false);
-	dc.DrawBitmap(bm_upper_layer, wxPoint(0,0), true);
+//	dc.DrawBitmap(bm_lower_layer, wxPoint(0,0), false);
+//	dc.DrawBitmap(bm_upper_layer, wxPoint(0,0), true);
 }

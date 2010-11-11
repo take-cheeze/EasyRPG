@@ -30,7 +30,8 @@ public:
 
 void AppEditor::showSplash()
 {
-	wxBitmap bitmap(splash_xpm, wxBITMAP_TYPE_XPM);
+	wxBitmap bitmap(splash_xpm);
+	
 	wxSplashScreen* splash;
 	splash = new wxSplashScreen(bitmap, wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT, 2500, NULL, -1, wxDefaultPosition, wxDefaultSize, wxSIMPLE_BORDER|wxSTAY_ON_TOP);
 	wxYield();

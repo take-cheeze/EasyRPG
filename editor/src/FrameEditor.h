@@ -24,7 +24,7 @@ along with this program.If not, see <http://www.gnu.org/licenses/>.*/
 #include <wx/dcmemory.h>
 #include <wx/file.h>
 
-#include "../../player/src/rpg_treemap.h"
+//#include "../../player/src/rpg_treemap.h"
 //#include "ldbReader.h"
 //#include "map.h"
 
@@ -72,11 +72,11 @@ class FrameEditor: public wxFrame
 {
 public:
     FrameEditor();
-    RPG::TreeMap maptree;
+//    RPG::TreeMap maptree;
 //    LDB_data ldbdata;
     wxString ProjectDirectory;
-    std::vector<wxImage> MemoryPaltete;
-    std::vector<int> PaletteSelection;
+//    std::vector<wxImage> MemoryPaltete;
+//    std::vector<int> PaletteSelection;
 private:
     wxMenu* MenuScale;
     wxMenu* MenuEdit;

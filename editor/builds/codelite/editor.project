@@ -298,18 +298,4 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
   </Settings>
-  <VirtualDirectory Name="Player code">
-    <VirtualDirectory Name="RPG"/>
-    <VirtualDirectory Name="Reader">
-      <File Name="../../../player/src/reader.cpp"/>
-      <File Name="../../../player/src/reader.h"/>
-      <VirtualDirectory Name="LMT">
-        <File Name="../../../player/src/lmt_reader.cpp"/>
-      </VirtualDirectory>
-    </VirtualDirectory>
-    <VirtualDirectory Name="Tools">
-      <File Name="../../../player/src/output.cpp"/>
-      <File Name="../../../player/src/output.h"/>
-    </VirtualDirectory>
-  </VirtualDirectory>
 </CodeLite_Project>
