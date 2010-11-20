@@ -15,36 +15,28 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _GAME_SWITCHES_H_
-#define _GAME_SWITCHES_H_
+#ifndef _LMU_READER_H_
+#define _LMU_READER_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <vector>
+#include <string>
+#include <iostream>
 #include "main_data.h"
-#include "output.h"
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
-/// Game_Switches class
+/// LMU Reader namespace
 ////////////////////////////////////////////////////////////
-class Game_Switches_Class {
-public:
-	std::vector<bool>::reference operator[](int switch_id) {
-		if ((size_t)switch_id < Main_Data::data_switches.size())
-			Output::Error("Switch index %d is invalid.", switch_id);
-
-		if ((size_t)switch_id > data.size())
-			data.resize(switch_id, false);
-
-		return data[switch_id];
-	}
-
-private:
-	std::vector<bool> data;
-};
-
-// Global variable
-extern Game_Switches_Class Game_Switches;
+namespace LMU_Reader {
+	RPG::Map* LoadMap(const std::string &filename);
+	RPG::Map* ReadMapData(Reader& stream);
+	RPG::Event ReadEvent(Reader& stream);
+	RPG::EventPage ReadEventPage(Reader& stream);
+	RPG::EventPageCondition ReadEventPageCondition(Reader& stream);
+	RPG::MoveRoute ReadMoveRoute(Reader& stream);
+	RPG::MoveCommand ReadMoveCommand(Reader& stream);
+}
 
 #endif

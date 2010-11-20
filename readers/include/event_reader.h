@@ -15,36 +15,22 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _GAME_SWITCHES_H_
-#define _GAME_SWITCHES_H_
+#ifndef _EVENT_READER_H_
+#define _EVENT_READER_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <vector>
+#include <string>
+#include <iostream>
 #include "main_data.h"
-#include "output.h"
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
-/// Game_Switches class
+/// Event Reader namespace
 ////////////////////////////////////////////////////////////
-class Game_Switches_Class {
-public:
-	std::vector<bool>::reference operator[](int switch_id) {
-		if ((size_t)switch_id < Main_Data::data_switches.size())
-			Output::Error("Switch index %d is invalid.", switch_id);
-
-		if ((size_t)switch_id > data.size())
-			data.resize(switch_id, false);
-
-		return data[switch_id];
-	}
-
-private:
-	std::vector<bool> data;
-};
-
-// Global variable
-extern Game_Switches_Class Game_Switches;
+namespace Event_Reader {
+	RPG::EventCommand ReadEventCommand(Reader& stream);
+}
 
 #endif
