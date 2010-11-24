@@ -9,12 +9,12 @@
       <Project Name="Player" ConfigName="GTK+ Debug"/>
       <Project Name="Editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="GTK+ Release" Selected="yes">
+    <WorkspaceConfiguration Name="GTK+ Release" Selected="no">
       <Project Name="Readers" ConfigName="Release"/>
       <Project Name="Player" ConfigName="GTK+ Release"/>
       <Project Name="Editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
+    <WorkspaceConfiguration Name="Win32 Debug" Selected="yes">
       <Project Name="Readers" ConfigName="Win32 Debug"/>
       <Project Name="Player" ConfigName="Win32 Debug"/>
       <Project Name="Editor" ConfigName="Win32 Debug"/>
