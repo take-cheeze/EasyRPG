@@ -183,10 +183,14 @@
   <File Name="../../src/DialogMap.h"/>
   <File Name="../../src/DialogMap.cpp"/>
   <File Name="../../resources/editor.rc"/>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Win32 Debug"/>
+  <Dependencies Name="Win32 Release"/>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
-      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes) -Wextra" Required="yes"/>
+      <Compiler Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes)" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="../../bin/editor" IntermediateDirectory=".obj/Debug" Command="./editor" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
@@ -212,8 +216,8 @@
       </AdditionalRules>
     </Configuration>
     <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O3 -s $(shell wx-config --cxxflags --unicode=yes --debug=no) -Wextra" Required="yes" PreCompiledHeader=""/>
-      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
+      <Compiler Options="-O3;$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="-s;$(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="../../bin/editor" IntermediateDirectory=".obj/Release" Command="./editor" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
@@ -239,7 +243,9 @@
       </AdditionalRules>
     </Configuration>
     <Configuration Name="Win32 Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g $(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
+      <Compiler Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader="">
+        <Preprocessor Value="_GNU_SOURCE"/>
+      </Compiler>
       <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=yes)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
       <General OutputFile="../../bin/Editor.exe" IntermediateDirectory=".obj/Debug" Command="./Editor.exe" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
@@ -266,10 +272,10 @@
       </AdditionalRules>
     </Configuration>
     <Configuration Name="Win32 Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O3 -s $(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader=""/>
-      <Linker Options="-mwindows $(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
+      <Compiler Options="-O3;$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="-s;-mwindows;$(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="yes"/>
-      <General OutputFile="bin/Editor.exe" IntermediateDirectory=".obj/Release" Command="./Editor.exe" CommandArguments="" WorkingDirectory="bin" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="../../bin/Editor.exe" IntermediateDirectory=".obj/Release" Command="./Editor.exe" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
@@ -293,15 +299,11 @@
       </AdditionalRules>
     </Configuration>
     <GlobalSettings>
-      <Compiler Options="-fno-rtti -fno-exceptions -Wall">
+      <Compiler Options="-pedantic;-Wall;-Wextra;-Wno-long-long;-fno-rtti;-fno-exceptions;--std=gnu99">
         <Preprocessor Value="__WX__"/>
       </Compiler>
       <Linker Options="-O2"/>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
-  <Dependencies Name="Win32 Debug"/>
-  <Dependencies Name="Win32 Release"/>
 </CodeLite_Project>
