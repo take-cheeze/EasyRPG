@@ -2,7 +2,7 @@
 <CodeLite_Workspace Name="EasyRPG" Database="./easyrpg.tags">
   <Project Name="Player" Path="player/builds/codelite/player.project" Active="Yes"/>
   <Project Name="Editor" Path="editor/builds/codelite/editor.project" Active="No"/>
-  <Project Name="Readers" Path="readers/builds/codelite/Readers.project" Active="No"/>
+  <Project Name="Readers" Path="readers/builds/codelite/readers.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="GTK+ Debug" Selected="no">
       <Project Name="Readers" ConfigName="Debug"/>
