@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="EasyRPG" Database="./easyrpg.tags">
-  <Project Name="Player" Path="player/builds/codelite/player.project" Active="Yes"/>
-  <Project Name="Editor" Path="editor/builds/codelite/editor.project" Active="No"/>
+  <Project Name="Player" Path="player/builds/codelite/player.project" Active="No"/>
+  <Project Name="Editor" Path="editor/builds/codelite/editor.project" Active="Yes"/>
   <Project Name="Readers" Path="readers/builds/codelite/readers.project" Active="No"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="GTK+ Debug" Selected="yes">
+    <WorkspaceConfiguration Name="GTK+ Debug" Selected="no">
       <Project Name="Readers" ConfigName="Debug"/>
       <Project Name="Player" ConfigName="GTK+ Debug"/>
       <Project Name="Editor" ConfigName="Debug"/>
@@ -14,7 +14,7 @@
       <Project Name="Player" ConfigName="GTK+ Release"/>
       <Project Name="Editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
+    <WorkspaceConfiguration Name="Win32 Debug" Selected="yes">
       <Project Name="Readers" ConfigName="Win32 Debug"/>
       <Project Name="Player" ConfigName="Win32 Debug"/>
       <Project Name="Editor" ConfigName="Win32 Debug"/>
