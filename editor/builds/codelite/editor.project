@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Project Name="Editor">
-  <Plugins>
-    <Plugin Name="qmake">
-      <![CDATA[00040001N0005Debug0000000000000001N0007Release0000000000000001N0011Win32 Debug0000000000000001N0013Win32 Release000000000000]]>
-    </Plugin>
-  </Plugins>
   <VirtualDirectory Name="DialogDb">
     <File Name="../../src/DialogDb.cpp"/>
     <File Name="../../src/DialogDb.h"/>
@@ -183,10 +178,7 @@
   <File Name="../../src/DialogMap.h"/>
   <File Name="../../src/DialogMap.cpp"/>
   <File Name="../../resources/editor.rc"/>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
-  <Dependencies Name="Win32 Debug"/>
-  <Dependencies Name="Win32 Release"/>
+  <File Name="editor.fbp"/>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
@@ -296,6 +288,73 @@
         <CustomPreBuild/>
       </AdditionalRules>
     </Configuration>
+    <Configuration Name="Mac OS X Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes);-arch i386" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="$(shell wx-config --libs --unicode=yes --debug=yes);-arch i386" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="../../bin/$(ProjectName).app/Contents/MacOS/$(ProjectName)" IntermediateDirectory=".obj/Debug" Command="./$(ProjectName).app/Contents/MacOS/$(ProjectName)" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/Editor.icns
+## rule to copy the Info.plist file into the bundle
+../../bin/$(ProjectName).app/Contents/Info.plist: ../resources/osx/Info.plist
+	mkdir -p '../../bin/$(ProjectName).app/Contents' &amp;&amp; cp -f ../resources/osx/Info.plist '../../bin/$(ProjectName).app/Contents/Info.plist'
+## rule to copy the icon file into the bundle
+../../bin/$(ProjectName).app/Contents/Resources/Editor.icns: ../resources/osx/Editor.icns
+	mkdir -p '../../bin/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f ../resources/osx/Editor.icns '../../bin/$(ProjectName).app/Contents/Resources/Editor.icns'
+</CustomPreBuild>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Mac OS X Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O3;$(shell wx-config --cxxflags --unicode=yes --debug=no)" Required="yes" PreCompiledHeader=""/>
+      <Linker Options="-s;$(shell wx-config --libs --unicode=yes --debug=no)" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName).app/Contents/MacOS/$(ProjectName)" IntermediateDirectory=".obj/Release" Command="./$(ProjectName).app/Contents/MacOS/$(ProjectName)" CommandArguments="" WorkingDirectory="../../bin" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/Editor.icns
+## rule to copy the Info.plist file into the bundle
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
+## rule to copy the icon file into the bundle
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/Editor.icns: Editor.icns
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f Editor.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/Editor.icns'</CustomPreBuild>
+      </AdditionalRules>
+    </Configuration>
     <GlobalSettings>
       <Compiler Options="-pedantic;-Wall;-Wextra;-Wno-long-long;-fno-rtti;-fno-exceptions">
         <Preprocessor Value="__WX__"/>
@@ -304,4 +363,10 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
   </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Win32 Debug"/>
+  <Dependencies Name="Win32 Release"/>
+  <Dependencies Name="Mac OS X Debug"/>
+  <Dependencies Name="Mac OS X Release"/>
 </CodeLite_Project>
