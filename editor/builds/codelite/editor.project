@@ -170,6 +170,9 @@
     <File Name="../../src/DialogEvtCmdActorFaceGraphic.h"/>
     <File Name="../../src/DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
+  <VirtualDirectory Name="wxFormBuilder projects">
+    <File Name="../../resources/gui/editor.fbp"/>
+  </VirtualDirectory>
   <File Name="../../src/FrameEditor.cpp"/>
   <File Name="../../src/DialogMaterial.cpp"/>
   <File Name="../../src/main.cpp"/>
@@ -178,7 +181,6 @@
   <File Name="../../src/DialogMap.h"/>
   <File Name="../../src/DialogMap.cpp"/>
   <File Name="../../resources/editor.rc"/>
-  <File Name="editor.fbp"/>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;$(shell wx-config --cxxflags --unicode=yes --debug=yes)" Required="yes" PreCompiledHeader=""/>
