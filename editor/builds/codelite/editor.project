@@ -171,7 +171,24 @@
     <File Name="../../src/DialogEvtCmdHP.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="wxFormBuilder projects">
-    <File Name="../../resources/gui/editor.fbp"/>
+    <File Name="../../resources/gui/gui_database.fbp"/>
+    <File Name="../../resources/gui/gui_database_actors.fbp"/>
+    <File Name="../../resources/gui/gui_database_animations.fbp"/>
+    <File Name="../../resources/gui/gui_database_attributes.fbp"/>
+    <File Name="../../resources/gui/gui_database_common_events.fbp"/>
+    <File Name="../../resources/gui/gui_database_enemies.fbp"/>
+    <File Name="../../resources/gui/gui_database_items.fbp"/>
+    <File Name="../../resources/gui/gui_database_skills.fbp"/>
+    <File Name="../../resources/gui/gui_database_system.fbp"/>
+    <File Name="../../resources/gui/gui_database_terrains.fbp"/>
+    <File Name="../../resources/gui/gui_database_texts.fbp"/>
+    <File Name="../../resources/gui/gui_database_tilesets.fbp"/>
+    <File Name="../../resources/gui/gui_database_troops.fbp"/>
+    <File Name="../../resources/gui/gui_editor.fbp"/>
+    <File Name="../../resources/gui/gui_events.fbp"/>
+    <File Name="../../resources/gui/gui_events_page_1.fbp"/>
+    <File Name="../../resources/gui/gui_events_page_2.fbp"/>
+    <File Name="../../resources/gui/gui_events_page_3.fbp"/>
   </VirtualDirectory>
   <File Name="../../src/FrameEditor.cpp"/>
   <File Name="../../src/DialogMaterial.cpp"/>
