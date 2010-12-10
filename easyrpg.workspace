@@ -20,9 +20,9 @@
       <Project Name="editor" ConfigName="Win32 Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Win32 Release" Selected="no">
-      <Project Name="readers" ConfigName="Mac OS X Release"/>
-      <Project Name="player" ConfigName="Mac OS X Release"/>
-      <Project Name="editor" ConfigName="Mac OS X Release"/>
+      <Project Name="readers" ConfigName="Win32 Release"/>
+      <Project Name="player" ConfigName="Win32 Release"/>
+      <Project Name="editor" ConfigName="Win32 Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Mac OS X Debug" Selected="no">
       <Project Name="readers" ConfigName="Debug"/>
