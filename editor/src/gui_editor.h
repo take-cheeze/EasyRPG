@@ -155,7 +155,7 @@ class dlgMap_Base : public wxDialog
 	
 	public:
 		
-		dlgMap_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Map Properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME );
+		dlgMap_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Map Properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
 		~dlgMap_Base();
 	
 };
