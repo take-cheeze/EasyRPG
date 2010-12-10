@@ -21,7 +21,7 @@
     <File Name="../../resources/gui/gui_events_page_3.fbp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
-    <File Name="../../resources/editor.rc"/>
+    <File Name="../../resources/win/editor.rc"/>
     <File Name="../../src/gui_editor.cpp"/>
     <File Name="../../src/gui_editor.h"/>
     <File Name="../../src/frmEditor.cpp"/>
