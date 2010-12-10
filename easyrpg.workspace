@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="EasyRPG" Database="./easyrpg.tags">
-  <Project Name="Player" Path="player/builds/codelite/player.project" Active="Yes"/>
-  <Project Name="Editor" Path="editor/builds/codelite/editor.project" Active="No"/>
-  <Project Name="Readers" Path="readers/builds/codelite/readers.project" Active="No"/>
+  <Project Name="player" Path="player/builds/codelite/player.project" Active="Yes"/>
+  <Project Name="editor" Path="editor/builds/codelite/editor.project" Active="No"/>
+  <Project Name="readers" Path="readers/builds/codelite/readers.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="GTK+ Debug" Selected="no">
-      <Project Name="Readers" ConfigName="Debug"/>
-      <Project Name="Player" ConfigName="GTK+ Debug"/>
-      <Project Name="Editor" ConfigName="Debug"/>
+      <Project Name="readers" ConfigName="Debug"/>
+      <Project Name="player" ConfigName="GTK+ Debug"/>
+      <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="GTK+ Release" Selected="no">
-      <Project Name="Readers" ConfigName="Release"/>
-      <Project Name="Player" ConfigName="GTK+ Release"/>
-      <Project Name="Editor" ConfigName="Release"/>
+      <Project Name="readers"  ConfigName="Release"/>
+      <Project Name="player"  ConfigName="GTK+ Release"/>
+      <Project Name="editor"  ConfigName="Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
-      <Project Name="Readers" ConfigName="Win32 Debug"/>
-      <Project Name="Player" ConfigName="Win32 Debug"/>
-      <Project Name="Editor" ConfigName="Win32 Debug"/>
+      <Project Name="readers"  ConfigName="Win32 Debug"/>
+      <Project Name="player"  ConfigName="Win32 Debug"/>
+      <Project Name="editor"  ConfigName="Win32 Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Win32 Release" Selected="no">
-      <Project Name="Readers" ConfigName="Mac OS X Release"/>
-      <Project Name="Player" ConfigName="Mac OS X Release"/>
-      <Project Name="Editor" ConfigName="Mac OS X Release"/>
+      <Project Name="readers"  ConfigName="Mac OS X Release"/>
+      <Project Name="player"  ConfigName="Mac OS X Release"/>
+      <Project Name="editor"  ConfigName="Mac OS X Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Mac OS X Debug" Selected="no">
-      <Project Name="Readers" ConfigName="Debug"/>
-      <Project Name="Player" ConfigName="Mac OS X Debug"/>
-      <Project Name="Editor" ConfigName="Mac OS X Debug"/>
+      <Project Name="readers"  ConfigName="Debug"/>
+      <Project Name="player"  ConfigName="Mac OS X Debug"/>
+      <Project Name="editor"  ConfigName="Mac OS X Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Mac OS X Release" Selected="no">
-      <Project Name="Readers" ConfigName="Release"/>
-      <Project Name="Player" ConfigName="Mac OS X Release"/>
-      <Project Name="Editor" ConfigName="Mac OS X Release"/>
+      <Project Name="readers"  ConfigName="Release"/>
+      <Project Name="player"  ConfigName="Mac OS X Release"/>
+      <Project Name="editor"  ConfigName="Mac OS X Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Dingux Debug" Selected="no">
-      <Project Name="Readers" ConfigName="Dingux Debug"/>
-      <Project Name="Player" ConfigName="Dingux Debug"/>
-      <Project Name="Editor" ConfigName="Debug"/>
+      <Project Name="readers"  ConfigName="Dingux Debug"/>
+      <Project Name="player"  ConfigName="Dingux Debug"/>
+      <Project Name="editor"  ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Dingux Release" Selected="no">
-      <Project Name="Readers" ConfigName="Dingux Release"/>
-      <Project Name="Player" ConfigName="Dingux Release"/>
-      <Project Name="Editor" ConfigName="Release"/>
+      <Project Name="readers"  ConfigName="Dingux Release"/>
+      <Project Name="player"  ConfigName="Dingux Release"/>
+      <Project Name="editor"  ConfigName="Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="UNIX Debug" Selected="no">
-      <Project Name="Readers" ConfigName="Debug"/>
-      <Project Name="Player" ConfigName="UNIX Debug"/>
-      <Project Name="Editor" ConfigName="Debug"/>
+      <Project Name="readers"  ConfigName="Debug"/>
+      <Project Name="player"  ConfigName="UNIX Debug"/>
+      <Project Name="editor"  ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="UNIX Release" Selected="yes">
-      <Project Name="Readers" ConfigName="Release"/>
-      <Project Name="Player" ConfigName="UNIX Release"/>
-      <Project Name="Editor" ConfigName="Release"/>
+      <Project Name="readers"  ConfigName="Release"/>
+      <Project Name="player"  ConfigName="UNIX Release"/>
+      <Project Name="editor"  ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
