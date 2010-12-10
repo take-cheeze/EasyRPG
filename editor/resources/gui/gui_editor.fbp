@@ -19,7 +19,7 @@
         <property name="relative_path">1</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Frame" expanded="0">
+        <object class="Frame" expanded="1">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -36,7 +36,7 @@
             <property name="size"></property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass">; </property>
-            <property name="title">EasyRPG</property>
+            <property name="title">EasyRPG Editor</property>
             <property name="tooltip"></property>
             <property name="validator_data_type"></property>
             <property name="validator_style">wxFILTER_NONE</property>
@@ -75,7 +75,7 @@
             <event name="OnSetFocus"></event>
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
-            <object class="wxMenuBar" expanded="1">
+            <object class="wxMenuBar" expanded="0">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="enabled">1</property>
@@ -173,7 +173,7 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
-                        <property name="name">m_separator1</property>
+                        <property name="name">SeparatorProject</property>
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -192,7 +192,7 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
-                        <property name="name">m_separator2</property>
+                        <property name="name">SeparatorProject2</property>
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -213,7 +213,7 @@
                 </object>
                 <object class="wxMenu" expanded="1">
                     <property name="label">&amp;Map</property>
-                    <property name="name">m_menu2</property>
+                    <property name="name">MenuMap</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="1">
                         <property name="bitmap"></property>
@@ -246,7 +246,7 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
-                        <property name="name">m_separator3</property>
+                        <property name="name">SeparatorMap</property>
                         <property name="permission">none</property>
                     </object>
                     <object class="submenu" expanded="1">
@@ -558,7 +558,7 @@
                 <event name="OnSize"></event>
                 <event name="OnUpdateUI"></event>
             </object>
-            <object class="wxToolBar" expanded="1">
+            <object class="wxToolBar" expanded="0">
                 <property name="bg"></property>
                 <property name="bitmapsize"></property>
                 <property name="context_help"></property>
@@ -610,11 +610,11 @@
                 <event name="OnSize"></event>
                 <event name="OnUpdateUI"></event>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/new.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/new.png; Load From File</property>
+                    <property name="id">wxID_NEW</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">New</property>
-                    <property name="name">wxID_NEW</property>
+                    <property name="name">ToolNew</property>
                     <property name="statusbar">Create a new project</property>
                     <property name="tooltip">New project</property>
                     <event name="OnMenuSelection"></event>
@@ -624,11 +624,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/open.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/open.png; Load From File</property>
+                    <property name="id">wxID_OPEN</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Open</property>
-                    <property name="name">wxID_OPEN</property>
+                    <property name="name">ToolOpen</property>
                     <property name="statusbar">Open an existing project</property>
                     <property name="tooltip">Open project</property>
                     <event name="OnMenuSelection"></event>
@@ -638,11 +638,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/close.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/close.png; Load From File</property>
+                    <property name="id">wxID_CLOSE</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Close</property>
-                    <property name="name">wxID_CLOSE</property>
+                    <property name="name">ToolClose</property>
                     <property name="statusbar">Close the current project</property>
                     <property name="tooltip">Close project</property>
                     <event name="OnMenuSelection"></event>
@@ -653,11 +653,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/makegamedisk.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/makegamedisk.png; Load From File</property>
+                    <property name="id">ID_MAKE_GAME_DISK</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Make game disk</property>
-                    <property name="name">m_tool4</property>
+                    <property name="name">ToolMakeGameDisk</property>
                     <property name="statusbar">Make a redistributable package from the current project</property>
                     <property name="tooltip">Make game disk </property>
                     <event name="OnMenuSelection"></event>
@@ -668,11 +668,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/save.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/save.png; Load From File</property>
+                    <property name="id">wxID_SAVE</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Save</property>
-                    <property name="name">wxID_SAVE</property>
+                    <property name="name">ToolSave</property>
                     <property name="statusbar">Save all changes in the project maps</property>
                     <property name="tooltip">Save map changes</property>
                     <event name="OnMenuSelection"></event>
@@ -682,11 +682,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/revert.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/revert.png; Load From File</property>
+                    <property name="id">wxID_REVERT</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Revert</property>
-                    <property name="name">wxID_REVERT</property>
+                    <property name="name">ToolRevert</property>
                     <property name="statusbar">Discard all changes and reload the saved project maps</property>
                     <property name="tooltip">Revert map changes</property>
                     <event name="OnMenuSelection"></event>
@@ -697,11 +697,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/lowerlayer.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/lowerlayer.png; Load From File</property>
+                    <property name="id">ID_LOWER_LAYER</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">Lower layer</property>
-                    <property name="name">m_tool7</property>
+                    <property name="name">ToolLowerLayer</property>
                     <property name="statusbar">Switch to the lower layer map editing mode</property>
                     <property name="tooltip">Lower layer editing</property>
                     <event name="OnMenuSelection"></event>
@@ -711,11 +711,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/upperlayer.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/upperlayer.png; Load From File</property>
+                    <property name="id">ID_UPPER_LAYER</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">Upper layer</property>
-                    <property name="name">m_tool8</property>
+                    <property name="name">ToolUpperLayer</property>
                     <property name="statusbar">Switch to the upper layer map editing mode</property>
                     <property name="tooltip">Upper layer editing</property>
                     <event name="OnMenuSelection"></event>
@@ -725,11 +725,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/eventlayer.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/eventlayer.png; Load From File</property>
+                    <property name="id">ID_EVENTS</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">Events</property>
-                    <property name="name">m_tool9</property>
+                    <property name="name">ToolEvents</property>
                     <property name="statusbar">Switch to the event layer map editing mode</property>
                     <property name="tooltip">Event layer editing</property>
                     <event name="OnMenuSelection"></event>
@@ -740,11 +740,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/11scale.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/11scale.png; Load From File</property>
+                    <property name="id">wxID_ZOOM_100</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:1</property>
-                    <property name="name">wxID_ZOOM_100</property>
+                    <property name="name">ToolZoom11</property>
                     <property name="statusbar">Display the map in 1:1 scale</property>
                     <property name="tooltip">1:1 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -754,11 +754,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/12scale.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/12scale.png; Load From File</property>
+                    <property name="id">ID_ZOOM_12</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:2</property>
-                    <property name="name">m_tool11</property>
+                    <property name="name">ToolZoom12</property>
                     <property name="statusbar">Display the map in 1:2 scale</property>
                     <property name="tooltip">1:2 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -768,11 +768,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/14scale.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/14scale.png; Load From File</property>
+                    <property name="id">ID_ZOOM_14</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:4</property>
-                    <property name="name">m_tool12</property>
+                    <property name="name">ToolZoom14</property>
                     <property name="statusbar">Display the map in 1:4 scale</property>
                     <property name="tooltip">1:4 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -782,11 +782,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/18scale.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/18scale.png; Load From File</property>
+                    <property name="id">ID_ZOOM_18</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:8</property>
-                    <property name="name">m_tool13</property>
+                    <property name="name">ToolZoom18</property>
                     <property name="statusbar">Display the map in 1:8 scale</property>
                     <property name="tooltip">1:8 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -797,11 +797,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/database.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/database.png; Load From File</property>
+                    <property name="id">ID_DATABASE</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Database</property>
-                    <property name="name">m_tool14</property>
+                    <property name="name">ToolDatabase</property>
                     <property name="statusbar">Open the project database editor window</property>
                     <property name="tooltip">Database editor</property>
                     <event name="OnMenuSelection"></event>
@@ -811,11 +811,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/material.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/material.png; Load From File</property>
+                    <property name="id">ID_MATERIAL_MANAGER</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Material</property>
-                    <property name="name">m_tool15</property>
+                    <property name="name">ToolMaterial</property>
                     <property name="statusbar">Add or remove material from the project</property>
                     <property name="tooltip">Material manager</property>
                     <event name="OnMenuSelection"></event>
@@ -825,11 +825,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/music.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/music.png; Load From File</property>
+                    <property name="id">ID_MUSIC_PLAYER</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Music</property>
-                    <property name="name">m_tool16</property>
+                    <property name="name">ToolMusic</property>
                     <property name="statusbar">Play background music while editing</property>
                     <property name="tooltip">Music player</property>
                     <event name="OnMenuSelection"></event>
@@ -840,11 +840,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/playtest.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/playtest.png; Load From File</property>
+                    <property name="id">ID_PLAY_TEST</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Play test</property>
-                    <property name="name">m_tool17</property>
+                    <property name="name">ToolPlayTest</property>
                     <property name="statusbar">Launch the game project for testing</property>
                     <property name="tooltip">Play test</property>
                     <event name="OnMenuSelection"></event>
@@ -855,11 +855,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/fullscreen.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/fullscreen.png; Load From File</property>
+                    <property name="id">ID_FULL_SCREEN</property>
                     <property name="kind">wxITEM_CHECK</property>
                     <property name="label">Full screen</property>
-                    <property name="name">m_tool18</property>
+                    <property name="name">ToolFullScreen</property>
                     <property name="statusbar">Enable or disable full screen in play test</property>
                     <property name="tooltip">Full screen</property>
                     <event name="OnMenuSelection"></event>
@@ -869,11 +869,11 @@
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/title.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/title.png; Load From File</property>
+                    <property name="id">ID_SHOW_TITLE</property>
                     <property name="kind">wxITEM_CHECK</property>
                     <property name="label">Title</property>
-                    <property name="name">m_tool19</property>
+                    <property name="name">ToolShowTitle</property>
                     <property name="statusbar">Enable or disable background and music in the title in play test</property>
                     <property name="tooltip">Show title</property>
                     <event name="OnMenuSelection"></event>
@@ -884,11 +884,11 @@
                 </object>
                 <object class="toolSeparator" expanded="1" />
                 <object class="tool" expanded="1">
-                    <property name="bitmap">../share/toolbar/help.png; Load From File</property>
-                    <property name="id">wxID_ANY</property>
+                    <property name="bitmap">../../share/toolbar/help.png; Load From File</property>
+                    <property name="id">wxID_HELP</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Help</property>
-                    <property name="name">m_tool20</property>
+                    <property name="name">ToolHelp</property>
                     <property name="statusbar">Display the help index and contents of EasyRPG</property>
                     <property name="tooltip">Help contents</property>
                     <event name="OnMenuSelection"></event>
@@ -900,86 +900,41 @@
             </object>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer166</property>
+                <property name="name">szEditor</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
-                    <property name="border">0</property>
+                    <property name="border">5</property>
                     <property name="flag">wxEXPAND</property>
-                    <property name="proportion">0</property>
-                    <object class="wxSplitterWindow" expanded="1">
-                        <property name="bg"></property>
-                        <property name="context_help"></property>
-                        <property name="enabled">1</property>
-                        <property name="fg"></property>
-                        <property name="font"></property>
-                        <property name="hidden"></property>
-                        <property name="id">wxID_ANY</property>
-                        <property name="maximum_size"></property>
-                        <property name="min_pane_size">0</property>
+                    <property name="proportion">1</property>
+                    <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">swEditor</property>
-                        <property name="permission">protected</property>
-                        <property name="pos"></property>
-                        <property name="sashgravity">0.0</property>
-                        <property name="sashpos">0</property>
-                        <property name="sashsize">-1</property>
-                        <property name="size"></property>
-                        <property name="splitmode">wxSPLIT_HORIZONTAL</property>
-                        <property name="style">wxSP_3D|wxSP_BORDER</property>
-                        <property name="subclass"></property>
-                        <property name="tooltip"></property>
-                        <property name="validator_data_type"></property>
-                        <property name="validator_style">wxFILTER_NONE</property>
-                        <property name="validator_type">wxDefaultValidator</property>
-                        <property name="validator_variable"></property>
-                        <property name="window_extra_style"></property>
-                        <property name="window_name"></property>
-                        <property name="window_style"></property>
-                        <event name="OnChar"></event>
-                        <event name="OnEnterWindow"></event>
-                        <event name="OnEraseBackground"></event>
-                        <event name="OnKeyDown"></event>
-                        <event name="OnKeyUp"></event>
-                        <event name="OnKillFocus"></event>
-                        <event name="OnLeaveWindow"></event>
-                        <event name="OnLeftDClick"></event>
-                        <event name="OnLeftDown"></event>
-                        <event name="OnLeftUp"></event>
-                        <event name="OnMiddleDClick"></event>
-                        <event name="OnMiddleDown"></event>
-                        <event name="OnMiddleUp"></event>
-                        <event name="OnMotion"></event>
-                        <event name="OnMouseEvents"></event>
-                        <event name="OnMouseWheel"></event>
-                        <event name="OnPaint"></event>
-                        <event name="OnRightDClick"></event>
-                        <event name="OnRightDown"></event>
-                        <event name="OnRightUp"></event>
-                        <event name="OnSetFocus"></event>
-                        <event name="OnSize"></event>
-                        <event name="OnSplitterDClick"></event>
-                        <event name="OnSplitterSashPosChanged"></event>
-                        <event name="OnSplitterSashPosChanging"></event>
-                        <event name="OnSplitterUnsplit"></event>
-                        <event name="OnUpdateUI"></event>
-                        <object class="splitteritem" expanded="1">
-                            <object class="wxScrolledWindow" expanded="1">
+                        <property name="name">szEditorLeft</property>
+                        <property name="orient">wxVERTICAL</property>
+                        <property name="permission">none</property>
+                        <object class="sizeritem" expanded="1">
+                            <property name="border">5</property>
+                            <property name="flag">wxEXPAND</property>
+                            <property name="proportion">0</property>
+                            <object class="wxToolBar" expanded="1">
                                 <property name="bg"></property>
+                                <property name="bitmapsize"></property>
                                 <property name="context_help"></property>
                                 <property name="enabled">1</property>
                                 <property name="fg"></property>
                                 <property name="font"></property>
-                                <property name="hidden"></property>
+                                <property name="hidden">0</property>
                                 <property name="id">wxID_ANY</property>
+                                <property name="margins"></property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">pnEditorTileset</property>
+                                <property name="name">frmEditorToolbar2</property>
+                                <property name="packing">1</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
-                                <property name="scroll_rate_x">5</property>
-                                <property name="scroll_rate_y">5</property>
-                                <property name="size">217, -1</property>
+                                <property name="separation">5</property>
+                                <property name="size"></property>
+                                <property name="style">wxTB_HORIZONTAL</property>
                                 <property name="subclass"></property>
                                 <property name="tooltip"></property>
                                 <property name="validator_data_type"></property>
@@ -988,7 +943,7 @@
                                 <property name="validator_variable"></property>
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
-                                <property name="window_style">wxHSCROLL|wxVSCROLL</property>
+                                <property name="window_style"></property>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -1012,10 +967,112 @@
                                 <event name="OnSetFocus"></event>
                                 <event name="OnSize"></event>
                                 <event name="OnUpdateUI"></event>
+                                <object class="tool" expanded="1">
+                                    <property name="bitmap">../../share/toolbar/undo.png; Load From File</property>
+                                    <property name="id">wxID_UNDO</property>
+                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="label">Undo</property>
+                                    <property name="name">ToolUndo</property>
+                                    <property name="statusbar">Revert last drawing in the actual map</property>
+                                    <property name="tooltip">Undo the last action</property>
+                                    <event name="OnMenuSelection"></event>
+                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolEnter"></event>
+                                    <event name="OnToolRClicked"></event>
+                                    <event name="OnUpdateUI"></event>
+                                </object>
+                                <object class="toolSeparator" expanded="1" />
+                                <object class="tool" expanded="1">
+                                    <property name="bitmap">../../share/toolbar/select.png; Load From File</property>
+                                    <property name="id">ID_SELECT</property>
+                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="label">Select</property>
+                                    <property name="name">ToolSelect</property>
+                                    <property name="statusbar">Select a map region by a rectangle selector</property>
+                                    <property name="tooltip">Selection tool</property>
+                                    <event name="OnMenuSelection"></event>
+                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolEnter"></event>
+                                    <event name="OnToolRClicked"></event>
+                                    <event name="OnUpdateUI"></event>
+                                </object>
+                                <object class="tool" expanded="1">
+                                    <property name="bitmap">../../share/toolbar/zoom.png; Load From File</property>
+                                    <property name="id">wxID_ZOOM_FIT</property>
+                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="label">Zoom</property>
+                                    <property name="name">ToolZoom</property>
+                                    <property name="statusbar">Zoom in or out by left or right mouse click</property>
+                                    <property name="tooltip">Zoom tool</property>
+                                    <event name="OnMenuSelection"></event>
+                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolEnter"></event>
+                                    <event name="OnToolRClicked"></event>
+                                    <event name="OnUpdateUI"></event>
+                                </object>
+                                <object class="tool" expanded="1">
+                                    <property name="bitmap">../../share/toolbar/pen.png; Load From File</property>
+                                    <property name="id">ID_PEN</property>
+                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="label">Pen</property>
+                                    <property name="name">ToolPen</property>
+                                    <property name="statusbar">Draw on the map freely by hand</property>
+                                    <property name="tooltip">Pen draw tool</property>
+                                    <event name="OnMenuSelection"></event>
+                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolEnter"></event>
+                                    <event name="OnToolRClicked"></event>
+                                    <event name="OnUpdateUI"></event>
+                                </object>
+                                <object class="tool" expanded="1">
+                                    <property name="bitmap">../../share/toolbar/rectangle.png; Load From File</property>
+                                    <property name="id">ID_RECTANGLE</property>
+                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="label">Rectangle</property>
+                                    <property name="name">ToolRectangle</property>
+                                    <property name="statusbar">Draw a rectangle on the map</property>
+                                    <property name="tooltip">Rectangle draw tool</property>
+                                    <event name="OnMenuSelection"></event>
+                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolEnter"></event>
+                                    <event name="OnToolRClicked"></event>
+                                    <event name="OnUpdateUI"></event>
+                                </object>
+                                <object class="tool" expanded="1">
+                                    <property name="bitmap">../../share/toolbar/circle.png; Load From File</property>
+                                    <property name="id">ID_CIRCLE</property>
+                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="label">Circle</property>
+                                    <property name="name">ToolCircle</property>
+                                    <property name="statusbar">Draw a circle on the map</property>
+                                    <property name="tooltip">Circle draw tool</property>
+                                    <event name="OnMenuSelection"></event>
+                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolEnter"></event>
+                                    <event name="OnToolRClicked"></event>
+                                    <event name="OnUpdateUI"></event>
+                                </object>
+                                <object class="tool" expanded="1">
+                                    <property name="bitmap">../../share/toolbar/fill.png; Load From File</property>
+                                    <property name="id">ID_FILL</property>
+                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="label">Fill</property>
+                                    <property name="name">ToolFill</property>
+                                    <property name="statusbar">Draw tiles with same tile type on the map</property>
+                                    <property name="tooltip">Flood fill draw tool</property>
+                                    <event name="OnMenuSelection"></event>
+                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolEnter"></event>
+                                    <event name="OnToolRClicked"></event>
+                                    <event name="OnUpdateUI"></event>
+                                </object>
                             </object>
                         </object>
-                        <object class="splitteritem" expanded="1">
-                            <object class="wxPanel" expanded="1">
+                        <object class="sizeritem" expanded="1">
+                            <property name="border">0</property>
+                            <property name="flag">wxEXPAND</property>
+                            <property name="proportion">1</property>
+                            <object class="wxSplitterWindow" expanded="1">
                                 <property name="bg"></property>
                                 <property name="context_help"></property>
                                 <property name="enabled">1</property>
@@ -1024,11 +1081,17 @@
                                 <property name="hidden"></property>
                                 <property name="id">wxID_ANY</property>
                                 <property name="maximum_size"></property>
+                                <property name="min_pane_size">96</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">pnEditorMapTree</property>
+                                <property name="name">swEditor</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
+                                <property name="sashgravity">0.0</property>
+                                <property name="sashpos">6</property>
+                                <property name="sashsize">-1</property>
                                 <property name="size"></property>
+                                <property name="splitmode">wxSPLIT_HORIZONTAL</property>
+                                <property name="style">wxSP_3D|wxSP_BORDER|wxSP_LIVE_UPDATE</property>
                                 <property name="subclass"></property>
                                 <property name="tooltip"></property>
                                 <property name="validator_data_type"></property>
@@ -1037,7 +1100,7 @@
                                 <property name="validator_variable"></property>
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
-                                <property name="window_style">wxTAB_TRAVERSAL</property>
+                                <property name="window_style"></property>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -1060,84 +1123,188 @@
                                 <event name="OnRightUp"></event>
                                 <event name="OnSetFocus"></event>
                                 <event name="OnSize"></event>
+                                <event name="OnSplitterDClick"></event>
+                                <event name="OnSplitterSashPosChanged"></event>
+                                <event name="OnSplitterSashPosChanging"></event>
+                                <event name="OnSplitterUnsplit"></event>
                                 <event name="OnUpdateUI"></event>
-                                <object class="wxBoxSizer" expanded="1">
-                                    <property name="minimum_size"></property>
-                                    <property name="name">bSizer167</property>
-                                    <property name="orient">wxHORIZONTAL</property>
-                                    <property name="permission">none</property>
-                                    <object class="sizeritem" expanded="1">
-                                        <property name="border">0</property>
-                                        <property name="flag">wxEXPAND</property>
-                                        <property name="proportion">0</property>
-                                        <object class="wxTreeCtrl" expanded="1">
-                                            <property name="bg"></property>
-                                            <property name="context_help"></property>
-                                            <property name="enabled">1</property>
-                                            <property name="fg"></property>
-                                            <property name="font"></property>
-                                            <property name="hidden"></property>
-                                            <property name="id">wxID_ANY</property>
-                                            <property name="maximum_size"></property>
+                                <object class="splitteritem" expanded="1">
+                                    <object class="wxScrolledWindow" expanded="1">
+                                        <property name="bg"></property>
+                                        <property name="context_help"></property>
+                                        <property name="enabled">1</property>
+                                        <property name="fg"></property>
+                                        <property name="font"></property>
+                                        <property name="hidden"></property>
+                                        <property name="id">wxID_ANY</property>
+                                        <property name="maximum_size"></property>
+                                        <property name="minimum_size"></property>
+                                        <property name="name">pnEditorTileset</property>
+                                        <property name="permission">protected</property>
+                                        <property name="pos"></property>
+                                        <property name="scroll_rate_x">16</property>
+                                        <property name="scroll_rate_y">16</property>
+                                        <property name="size">217, -1</property>
+                                        <property name="subclass"></property>
+                                        <property name="tooltip"></property>
+                                        <property name="validator_data_type"></property>
+                                        <property name="validator_style">wxFILTER_NONE</property>
+                                        <property name="validator_type">wxDefaultValidator</property>
+                                        <property name="validator_variable"></property>
+                                        <property name="window_extra_style"></property>
+                                        <property name="window_name"></property>
+                                        <property name="window_style">wxHSCROLL|wxVSCROLL</property>
+                                        <event name="OnChar"></event>
+                                        <event name="OnEnterWindow"></event>
+                                        <event name="OnEraseBackground"></event>
+                                        <event name="OnKeyDown"></event>
+                                        <event name="OnKeyUp"></event>
+                                        <event name="OnKillFocus"></event>
+                                        <event name="OnLeaveWindow"></event>
+                                        <event name="OnLeftDClick"></event>
+                                        <event name="OnLeftDown"></event>
+                                        <event name="OnLeftUp"></event>
+                                        <event name="OnMiddleDClick"></event>
+                                        <event name="OnMiddleDown"></event>
+                                        <event name="OnMiddleUp"></event>
+                                        <event name="OnMotion"></event>
+                                        <event name="OnMouseEvents"></event>
+                                        <event name="OnMouseWheel"></event>
+                                        <event name="OnPaint"></event>
+                                        <event name="OnRightDClick"></event>
+                                        <event name="OnRightDown"></event>
+                                        <event name="OnRightUp"></event>
+                                        <event name="OnSetFocus"></event>
+                                        <event name="OnSize"></event>
+                                        <event name="OnUpdateUI"></event>
+                                    </object>
+                                </object>
+                                <object class="splitteritem" expanded="1">
+                                    <object class="wxPanel" expanded="1">
+                                        <property name="bg"></property>
+                                        <property name="context_help"></property>
+                                        <property name="enabled">1</property>
+                                        <property name="fg"></property>
+                                        <property name="font"></property>
+                                        <property name="hidden"></property>
+                                        <property name="id">wxID_ANY</property>
+                                        <property name="maximum_size"></property>
+                                        <property name="minimum_size"></property>
+                                        <property name="name">pnEditorMapTree</property>
+                                        <property name="permission">protected</property>
+                                        <property name="pos"></property>
+                                        <property name="size"></property>
+                                        <property name="subclass"></property>
+                                        <property name="tooltip"></property>
+                                        <property name="validator_data_type"></property>
+                                        <property name="validator_style">wxFILTER_NONE</property>
+                                        <property name="validator_type">wxDefaultValidator</property>
+                                        <property name="validator_variable"></property>
+                                        <property name="window_extra_style"></property>
+                                        <property name="window_name"></property>
+                                        <property name="window_style">wxTAB_TRAVERSAL</property>
+                                        <event name="OnChar"></event>
+                                        <event name="OnEnterWindow"></event>
+                                        <event name="OnEraseBackground"></event>
+                                        <event name="OnKeyDown"></event>
+                                        <event name="OnKeyUp"></event>
+                                        <event name="OnKillFocus"></event>
+                                        <event name="OnLeaveWindow"></event>
+                                        <event name="OnLeftDClick"></event>
+                                        <event name="OnLeftDown"></event>
+                                        <event name="OnLeftUp"></event>
+                                        <event name="OnMiddleDClick"></event>
+                                        <event name="OnMiddleDown"></event>
+                                        <event name="OnMiddleUp"></event>
+                                        <event name="OnMotion"></event>
+                                        <event name="OnMouseEvents"></event>
+                                        <event name="OnMouseWheel"></event>
+                                        <event name="OnPaint"></event>
+                                        <event name="OnRightDClick"></event>
+                                        <event name="OnRightDown"></event>
+                                        <event name="OnRightUp"></event>
+                                        <event name="OnSetFocus"></event>
+                                        <event name="OnSize"></event>
+                                        <event name="OnUpdateUI"></event>
+                                        <object class="wxBoxSizer" expanded="1">
                                             <property name="minimum_size"></property>
-                                            <property name="name">tcMapTree</property>
-                                            <property name="permission">protected</property>
-                                            <property name="pos"></property>
-                                            <property name="size">212, 150</property>
-                                            <property name="style">wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE</property>
-                                            <property name="subclass"></property>
-                                            <property name="tooltip"></property>
-                                            <property name="validator_data_type"></property>
-                                            <property name="validator_style">wxFILTER_NONE</property>
-                                            <property name="validator_type">wxDefaultValidator</property>
-                                            <property name="validator_variable"></property>
-                                            <property name="window_extra_style"></property>
-                                            <property name="window_name"></property>
-                                            <property name="window_style">wxSUNKEN_BORDER</property>
-                                            <event name="OnChar"></event>
-                                            <event name="OnEnterWindow"></event>
-                                            <event name="OnEraseBackground"></event>
-                                            <event name="OnKeyDown"></event>
-                                            <event name="OnKeyUp"></event>
-                                            <event name="OnKillFocus"></event>
-                                            <event name="OnLeaveWindow"></event>
-                                            <event name="OnLeftDClick"></event>
-                                            <event name="OnLeftDown"></event>
-                                            <event name="OnLeftUp"></event>
-                                            <event name="OnMiddleDClick"></event>
-                                            <event name="OnMiddleDown"></event>
-                                            <event name="OnMiddleUp"></event>
-                                            <event name="OnMotion"></event>
-                                            <event name="OnMouseEvents"></event>
-                                            <event name="OnMouseWheel"></event>
-                                            <event name="OnPaint"></event>
-                                            <event name="OnRightDClick"></event>
-                                            <event name="OnRightDown"></event>
-                                            <event name="OnRightUp"></event>
-                                            <event name="OnSetFocus"></event>
-                                            <event name="OnSize"></event>
-                                            <event name="OnTreeBeginDrag"></event>
-                                            <event name="OnTreeBeginLabelEdit"></event>
-                                            <event name="OnTreeBeginRDrag"></event>
-                                            <event name="OnTreeDeleteItem"></event>
-                                            <event name="OnTreeEndDrag"></event>
-                                            <event name="OnTreeEndLabelEdit"></event>
-                                            <event name="OnTreeGetInfo"></event>
-                                            <event name="OnTreeItemActivated"></event>
-                                            <event name="OnTreeItemCollapsed"></event>
-                                            <event name="OnTreeItemCollapsing"></event>
-                                            <event name="OnTreeItemExpanded"></event>
-                                            <event name="OnTreeItemExpanding"></event>
-                                            <event name="OnTreeItemGetTooltip"></event>
-                                            <event name="OnTreeItemMenu"></event>
-                                            <event name="OnTreeItemMiddleClick"></event>
-                                            <event name="OnTreeItemRightClick"></event>
-                                            <event name="OnTreeKeyDown"></event>
-                                            <event name="OnTreeSelChanged"></event>
-                                            <event name="OnTreeSelChanging"></event>
-                                            <event name="OnTreeSetInfo"></event>
-                                            <event name="OnTreeStateImageClick"></event>
-                                            <event name="OnUpdateUI"></event>
+                                            <property name="name">szMapTree</property>
+                                            <property name="orient">wxHORIZONTAL</property>
+                                            <property name="permission">none</property>
+                                            <object class="sizeritem" expanded="1">
+                                                <property name="border">0</property>
+                                                <property name="flag">wxEXPAND</property>
+                                                <property name="proportion">0</property>
+                                                <object class="wxTreeCtrl" expanded="1">
+                                                    <property name="bg"></property>
+                                                    <property name="context_help"></property>
+                                                    <property name="enabled">1</property>
+                                                    <property name="fg"></property>
+                                                    <property name="font"></property>
+                                                    <property name="hidden"></property>
+                                                    <property name="id">wxID_ANY</property>
+                                                    <property name="maximum_size"></property>
+                                                    <property name="minimum_size"></property>
+                                                    <property name="name">tcMapTree</property>
+                                                    <property name="permission">protected</property>
+                                                    <property name="pos"></property>
+                                                    <property name="size">212, 150</property>
+                                                    <property name="style">wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE</property>
+                                                    <property name="subclass"></property>
+                                                    <property name="tooltip"></property>
+                                                    <property name="validator_data_type"></property>
+                                                    <property name="validator_style">wxFILTER_NONE</property>
+                                                    <property name="validator_type">wxDefaultValidator</property>
+                                                    <property name="validator_variable"></property>
+                                                    <property name="window_extra_style"></property>
+                                                    <property name="window_name"></property>
+                                                    <property name="window_style">wxSUNKEN_BORDER</property>
+                                                    <event name="OnChar"></event>
+                                                    <event name="OnEnterWindow"></event>
+                                                    <event name="OnEraseBackground"></event>
+                                                    <event name="OnKeyDown"></event>
+                                                    <event name="OnKeyUp"></event>
+                                                    <event name="OnKillFocus"></event>
+                                                    <event name="OnLeaveWindow"></event>
+                                                    <event name="OnLeftDClick"></event>
+                                                    <event name="OnLeftDown"></event>
+                                                    <event name="OnLeftUp"></event>
+                                                    <event name="OnMiddleDClick"></event>
+                                                    <event name="OnMiddleDown"></event>
+                                                    <event name="OnMiddleUp"></event>
+                                                    <event name="OnMotion"></event>
+                                                    <event name="OnMouseEvents"></event>
+                                                    <event name="OnMouseWheel"></event>
+                                                    <event name="OnPaint"></event>
+                                                    <event name="OnRightDClick"></event>
+                                                    <event name="OnRightDown"></event>
+                                                    <event name="OnRightUp"></event>
+                                                    <event name="OnSetFocus"></event>
+                                                    <event name="OnSize"></event>
+                                                    <event name="OnTreeBeginDrag"></event>
+                                                    <event name="OnTreeBeginLabelEdit"></event>
+                                                    <event name="OnTreeBeginRDrag"></event>
+                                                    <event name="OnTreeDeleteItem"></event>
+                                                    <event name="OnTreeEndDrag"></event>
+                                                    <event name="OnTreeEndLabelEdit"></event>
+                                                    <event name="OnTreeGetInfo"></event>
+                                                    <event name="OnTreeItemActivated"></event>
+                                                    <event name="OnTreeItemCollapsed"></event>
+                                                    <event name="OnTreeItemCollapsing"></event>
+                                                    <event name="OnTreeItemExpanded"></event>
+                                                    <event name="OnTreeItemExpanding"></event>
+                                                    <event name="OnTreeItemGetTooltip"></event>
+                                                    <event name="OnTreeItemMenu"></event>
+                                                    <event name="OnTreeItemMiddleClick"></event>
+                                                    <event name="OnTreeItemRightClick"></event>
+                                                    <event name="OnTreeKeyDown"></event>
+                                                    <event name="OnTreeSelChanged"></event>
+                                                    <event name="OnTreeSelChanging"></event>
+                                                    <event name="OnTreeSetInfo"></event>
+                                                    <event name="OnTreeStateImageClick"></event>
+                                                    <event name="OnUpdateUI"></event>
+                                                </object>
+                                            </object>
                                         </object>
                                     </object>
                                 </object>
@@ -1839,7 +2006,7 @@
                                                         <property name="font"></property>
                                                         <property name="hidden"></property>
                                                         <property name="id">wxID_ANY</property>
-                                                        <property name="initial"></property>
+                                                        <property name="initial">25</property>
                                                         <property name="max">0</property>
                                                         <property name="maximum_size"></property>
                                                         <property name="min">0</property>
@@ -2332,7 +2499,7 @@
                                                                         <property name="font"></property>
                                                                         <property name="hidden"></property>
                                                                         <property name="id">wxID_ANY</property>
-                                                                        <property name="initial"></property>
+                                                                        <property name="initial">1</property>
                                                                         <property name="max">0</property>
                                                                         <property name="maximum_size"></property>
                                                                         <property name="min">0</property>
@@ -2663,7 +2830,7 @@
                                                                         <property name="font"></property>
                                                                         <property name="hidden"></property>
                                                                         <property name="id">wxID_ANY</property>
-                                                                        <property name="initial"></property>
+                                                                        <property name="initial">1</property>
                                                                         <property name="max">0</property>
                                                                         <property name="maximum_size"></property>
                                                                         <property name="min">0</property>

@@ -21,14 +21,13 @@
     <File Name="../../resources/gui/gui_events_page_3.fbp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
-    <File Name="../../src/FrameEditor.cpp"/>
-    <File Name="../../src/FrameEditor.h"/>
-    <File Name="../../src/DialogDb.cpp"/>
-    <File Name="../../src/DialogDb.h"/>
-    <File Name="../../src/DialogEvtCmd.cpp"/>
-    <File Name="../../src/DialogEvtCmd.h"/>
-    <File Name="../../src/main.cpp"/>
     <File Name="../../resources/editor.rc"/>
+    <File Name="../../src/gui_editor.cpp"/>
+    <File Name="../../src/gui_editor.h"/>
+    <File Name="../../src/frmEditor.cpp"/>
+    <File Name="../../src/frmEditor.h"/>
+    <File Name="../../src/appEditor.cpp"/>
+    <File Name="../../src/appEditor.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
