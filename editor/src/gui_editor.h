@@ -48,20 +48,23 @@
 #define ID_LOWER_LAYER 1001
 #define ID_UPPER_LAYER 1002
 #define ID_EVENTS 1003
-#define ID_ZOOM_12 1004
-#define ID_ZOOM_14 1005
-#define ID_ZOOM_18 1006
+#define SCALE_12 1004
+#define SCALE_14 1005
+#define SCALE_18 1006
 #define ID_DATABASE 1007
-#define ID_MATERIAL_MANAGER 1008
-#define ID_MUSIC_PLAYER 1009
+#define ID_MATERIAL 1008
+#define ID_MUSIC 1009
 #define ID_PLAY_TEST 1010
 #define ID_FULL_SCREEN 1011
 #define ID_SHOW_TITLE 1012
-#define ID_SELECT 1013
-#define ID_PEN 1014
-#define ID_RECTANGLE 1015
-#define ID_CIRCLE 1016
-#define ID_FILL 1017
+#define ID_SCALE_12 1013
+#define ID_SCALE_14 1014
+#define ID_SCALE_18 1015
+#define ID_SELECT 1016
+#define ID_PEN 1017
+#define ID_RECTANGLE 1018
+#define ID_CIRCLE 1019
+#define ID_FILL 1020
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class frmEditor_Base
@@ -104,13 +107,21 @@ class frmEditor_Base : public wxFrame
 		virtual void Scale14_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Scale18_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Database_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void MaterialManager_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void MusicPlayer_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Material_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Music_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void PlayTest_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void FullScreen_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ShowTitle_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void HelpIndex_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void About_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void New_Click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Undo_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Select_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Zoom_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Pen_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Rectangle_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Circle_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Fill_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

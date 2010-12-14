@@ -128,11 +128,11 @@
                     <property name="name">MenuProject</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/new.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Create a new project</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_NEW</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;New...</property>
                         <property name="name">MenuitemNew</property>
@@ -143,11 +143,11 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/open.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Open an existing project</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_OPEN</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Open...</property>
                         <property name="name">MenuitemOpen</property>
@@ -158,11 +158,11 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/close.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Close the current project</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_CLOSE</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Close</property>
                         <property name="name">MenuitemClose</property>
@@ -177,11 +177,11 @@
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/makegamedisk.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Compress game data and create a distributable file</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">ID_MAKE_GAME_DISK</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Make game disk...</property>
                         <property name="name">MenuitemMakeGameDisk</property>
@@ -200,7 +200,7 @@
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Exit EasyRPG</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_EXIT</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Exit</property>
                         <property name="name">MenuitemExit</property>
@@ -216,31 +216,31 @@
                     <property name="name">MenuMap</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/save.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Save all changes in the project maps</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_SAVE</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Save</property>
                         <property name="name">MenuitemSave</property>
                         <property name="permission">none</property>
-                        <property name="shortcut"></property>
+                        <property name="shortcut">Ctrl+S</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">Save_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/revert.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Discard all changes and reload the saved project maps</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_REVERT</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Revert</property>
                         <property name="name">MenuitemRevert</property>
                         <property name="permission">none</property>
-                        <property name="shortcut"></property>
+                        <property name="shortcut">Ctrl+R</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">Revert_click</event>
                         <event name="OnUpdateUI"></event>
@@ -254,46 +254,46 @@
                         <property name="name">MenuEdit</property>
                         <property name="permission">protected</property>
                         <object class="wxMenuItem" expanded="1">
-                            <property name="bitmap"></property>
+                            <property name="bitmap">; Load From File</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help">Switch to the lower layer map editing mode</property>
-                            <property name="id">wxID_ANY</property>
-                            <property name="kind">wxITEM_NORMAL</property>
+                            <property name="id">ID_LOWER_LAYER</property>
+                            <property name="kind">wxITEM_RADIO</property>
                             <property name="label">&amp;Lower layer</property>
                             <property name="name">MenuitemLowerLayer</property>
                             <property name="permission">none</property>
-                            <property name="shortcut"></property>
+                            <property name="shortcut">F5</property>
                             <property name="unchecked_bitmap"></property>
                             <event name="OnMenuSelection">LowerLayer_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
-                            <property name="bitmap"></property>
+                            <property name="bitmap">; Load From File</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help">Switch to the upper layer map editing mode</property>
-                            <property name="id">wxID_ANY</property>
-                            <property name="kind">wxITEM_NORMAL</property>
+                            <property name="id">ID_UPPER_LAYER</property>
+                            <property name="kind">wxITEM_RADIO</property>
                             <property name="label">&amp;Upper layer</property>
                             <property name="name">MenuitemUpperLayer</property>
                             <property name="permission">none</property>
-                            <property name="shortcut"></property>
+                            <property name="shortcut">F6</property>
                             <property name="unchecked_bitmap"></property>
                             <event name="OnMenuSelection">UpperLayer_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
-                            <property name="bitmap"></property>
+                            <property name="bitmap">; Load From File</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help">Switch to the event layer map editing mode</property>
-                            <property name="id">wxID_ANY</property>
-                            <property name="kind">wxITEM_NORMAL</property>
+                            <property name="id">ID_EVENTS</property>
+                            <property name="kind">wxITEM_RADIO</property>
                             <property name="label">&amp;Events</property>
                             <property name="name">MenuitemEvents</property>
                             <property name="permission">none</property>
-                            <property name="shortcut"></property>
+                            <property name="shortcut">F7</property>
                             <property name="unchecked_bitmap"></property>
                             <event name="OnMenuSelection">Events_click</event>
                             <event name="OnUpdateUI"></event>
@@ -304,12 +304,12 @@
                         <property name="name">MenuScale</property>
                         <property name="permission">protected</property>
                         <object class="wxMenuItem" expanded="1">
-                            <property name="bitmap"></property>
+                            <property name="bitmap">; Load From File</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help">Display the map in 1:1 scale</property>
-                            <property name="id">wxID_ANY</property>
-                            <property name="kind">wxITEM_NORMAL</property>
+                            <property name="id">wxID_ZOOM_100</property>
+                            <property name="kind">wxITEM_RADIO</property>
                             <property name="label">1:&amp;1</property>
                             <property name="name">MenuitemScale11</property>
                             <property name="permission">none</property>
@@ -319,12 +319,12 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
-                            <property name="bitmap"></property>
+                            <property name="bitmap">; Load From File</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help">Display the map in 1:2 scale</property>
-                            <property name="id">wxID_ANY</property>
-                            <property name="kind">wxITEM_NORMAL</property>
+                            <property name="id">SCALE_12</property>
+                            <property name="kind">wxITEM_RADIO</property>
                             <property name="label">1:&amp;2</property>
                             <property name="name">MenuitemScale12</property>
                             <property name="permission">none</property>
@@ -334,12 +334,12 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
-                            <property name="bitmap"></property>
+                            <property name="bitmap">; Load From File</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help">Display the map in 1:4 scale</property>
-                            <property name="id">wxID_ANY</property>
-                            <property name="kind">wxITEM_NORMAL</property>
+                            <property name="id">SCALE_14</property>
+                            <property name="kind">wxITEM_RADIO</property>
                             <property name="label">1:&amp;4</property>
                             <property name="name">MenuitemScale14</property>
                             <property name="permission">none</property>
@@ -349,12 +349,12 @@
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
-                            <property name="bitmap"></property>
+                            <property name="bitmap">; Load From File</property>
                             <property name="checked">0</property>
                             <property name="enabled">1</property>
                             <property name="help">Display the map in 1:8 scale</property>
-                            <property name="id">wxID_ANY</property>
-                            <property name="kind">wxITEM_NORMAL</property>
+                            <property name="id">SCALE_18</property>
+                            <property name="kind">wxITEM_RADIO</property>
                             <property name="label">1:&amp;8</property>
                             <property name="name">MenuitemScale18</property>
                             <property name="permission">none</property>
@@ -370,48 +370,48 @@
                     <property name="name">MenuTools</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/database.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Open the project database editor window</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">ID_DATABASE</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Database</property>
                         <property name="name">MenuitemDatabase</property>
                         <property name="permission">none</property>
-                        <property name="shortcut"></property>
+                        <property name="shortcut">F8</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">Database_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/material.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Add or remove material from the project</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">ID_MATERIAL</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Material manager</property>
-                        <property name="name">MenuitemMaterialManager</property>
+                        <property name="name">MenuitemMaterial</property>
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection">MaterialManager_click</event>
+                        <event name="OnMenuSelection">Material_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/music.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Play background music while editing</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">ID_MUSIC</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">Music &amp;player</property>
-                        <property name="name">MenuitemMusicPlayer</property>
+                        <property name="name">MenuitemMusic</property>
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection">MusicPlayer_click</event>
+                        <event name="OnMenuSelection">Music_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -420,16 +420,16 @@
                     <property name="name">MenuGame</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/playtest.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Launch the game project for testing</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">ID_PLAY_TEST</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Play test</property>
                         <property name="name">MenuitemPlayTest</property>
                         <property name="permission">none</property>
-                        <property name="shortcut"></property>
+                        <property name="shortcut">F9</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">PlayTest_click</event>
                         <event name="OnUpdateUI"></event>
@@ -439,12 +439,12 @@
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Enable or disable full screen in play test</property>
-                        <property name="id">wxID_ANY</property>
-                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="id">ID_FULL_SCREEN</property>
+                        <property name="kind">wxITEM_CHECK</property>
                         <property name="label">&amp;Full screen</property>
                         <property name="name">MenuitemFullScreen</property>
                         <property name="permission">none</property>
@@ -454,12 +454,12 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Enable or disable background and music in the title in play test</property>
-                        <property name="id">wxID_ANY</property>
-                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="id">ID_SHOW_TITLE</property>
+                        <property name="kind">wxITEM_CHECK</property>
                         <property name="label">&amp;Show title</property>
                         <property name="name">MenuitemShowTitle</property>
                         <property name="permission">none</property>
@@ -474,18 +474,18 @@
                     <property name="name">MenuHelp</property>
                     <property name="permission">protected</property>
                     <object class="wxMenuItem" expanded="1">
-                        <property name="bitmap"></property>
+                        <property name="bitmap">../../share/toolbar/help.png; Load From File</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">Display the help index and contents of EasyRPG</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_HELP</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Index</property>
-                        <property name="name">MenuitemHelpIndex</property>
+                        <property name="name">MenuitemHelp</property>
                         <property name="permission">none</property>
-                        <property name="shortcut"></property>
+                        <property name="shortcut">F1</property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection">HelpIndex_click</event>
+                        <event name="OnMenuSelection">Help_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
@@ -497,7 +497,7 @@
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
                         <property name="help">About EasyRPG Editor</property>
-                        <property name="id">wxID_ANY</property>
+                        <property name="id">wxID_ABOUT</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;About</property>
                         <property name="name">MenuitemAbout</property>
@@ -618,7 +618,7 @@
                     <property name="statusbar">Create a new project</property>
                     <property name="tooltip">New project</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">New_Click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -632,7 +632,7 @@
                     <property name="statusbar">Open an existing project</property>
                     <property name="tooltip">Open project</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Open_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -646,7 +646,7 @@
                     <property name="statusbar">Close the current project</property>
                     <property name="tooltip">Close project</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Close_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -661,7 +661,7 @@
                     <property name="statusbar">Make a redistributable package from the current project</property>
                     <property name="tooltip">Make game disk </property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">MakeGameDisk_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -676,7 +676,7 @@
                     <property name="statusbar">Save all changes in the project maps</property>
                     <property name="tooltip">Save map changes</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Save_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -690,7 +690,7 @@
                     <property name="statusbar">Discard all changes and reload the saved project maps</property>
                     <property name="tooltip">Revert map changes</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Revert_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -705,7 +705,7 @@
                     <property name="statusbar">Switch to the lower layer map editing mode</property>
                     <property name="tooltip">Lower layer editing</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">LowerLayer_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -719,7 +719,7 @@
                     <property name="statusbar">Switch to the upper layer map editing mode</property>
                     <property name="tooltip">Upper layer editing</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">UpperLayer_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -733,7 +733,7 @@
                     <property name="statusbar">Switch to the event layer map editing mode</property>
                     <property name="tooltip">Event layer editing</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Events_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -748,49 +748,49 @@
                     <property name="statusbar">Display the map in 1:1 scale</property>
                     <property name="tooltip">1:1 scale</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Scale11_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
                     <property name="bitmap">../../share/toolbar/12scale.png; Load From File</property>
-                    <property name="id">ID_ZOOM_12</property>
+                    <property name="id">ID_SCALE_12</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:2</property>
                     <property name="name">ToolScale12</property>
                     <property name="statusbar">Display the map in 1:2 scale</property>
                     <property name="tooltip">1:2 scale</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Scale12_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
                     <property name="bitmap">../../share/toolbar/14scale.png; Load From File</property>
-                    <property name="id">ID_ZOOM_14</property>
+                    <property name="id">ID_SCALE_14</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:4</property>
                     <property name="name">ToolScale14</property>
                     <property name="statusbar">Display the map in 1:4 scale</property>
                     <property name="tooltip">1:4 scale</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Scale14_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
                     <property name="bitmap">../../share/toolbar/18scale.png; Load From File</property>
-                    <property name="id">ID_ZOOM_18</property>
+                    <property name="id">ID_SCALE_18</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:8</property>
                     <property name="name">ToolScale18</property>
                     <property name="statusbar">Display the map in 1:8 scale</property>
                     <property name="tooltip">1:8 scale</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Scale18_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -805,35 +805,35 @@
                     <property name="statusbar">Open the project database editor window</property>
                     <property name="tooltip">Database editor</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Database_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
                     <property name="bitmap">../../share/toolbar/material.png; Load From File</property>
-                    <property name="id">ID_MATERIAL_MANAGER</property>
+                    <property name="id">ID_MATERIAL</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Material</property>
                     <property name="name">ToolMaterial</property>
                     <property name="statusbar">Add or remove material from the project</property>
                     <property name="tooltip">Material manager</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Material_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
                 </object>
                 <object class="tool" expanded="1">
                     <property name="bitmap">../../share/toolbar/music.png; Load From File</property>
-                    <property name="id">ID_MUSIC_PLAYER</property>
+                    <property name="id">ID_MUSIC</property>
                     <property name="kind">wxITEM_NORMAL</property>
                     <property name="label">Music</property>
                     <property name="name">ToolMusic</property>
                     <property name="statusbar">Play background music while editing</property>
                     <property name="tooltip">Music player</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Music_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -848,7 +848,7 @@
                     <property name="statusbar">Launch the game project for testing</property>
                     <property name="tooltip">Play test</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">PlayTest_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -863,7 +863,7 @@
                     <property name="statusbar">Enable or disable full screen in play test</property>
                     <property name="tooltip">Full screen</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">FullScreen_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -877,7 +877,7 @@
                     <property name="statusbar">Enable or disable background and music in the title in play test</property>
                     <property name="tooltip">Show title</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">ShowTitle_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -892,7 +892,7 @@
                     <property name="statusbar">Display the help index and contents of EasyRPG</property>
                     <property name="tooltip">Help contents</property>
                     <event name="OnMenuSelection"></event>
-                    <event name="OnToolClicked"></event>
+                    <event name="OnToolClicked">Help_click</event>
                     <event name="OnToolEnter"></event>
                     <event name="OnToolRClicked"></event>
                     <event name="OnUpdateUI"></event>
@@ -976,7 +976,7 @@
                                     <property name="statusbar">Revert last drawing in the actual map</property>
                                     <property name="tooltip">Undo the last action</property>
                                     <event name="OnMenuSelection"></event>
-                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolClicked">Undo_click</event>
                                     <event name="OnToolEnter"></event>
                                     <event name="OnToolRClicked"></event>
                                     <event name="OnUpdateUI"></event>
@@ -985,13 +985,13 @@
                                 <object class="tool" expanded="1">
                                     <property name="bitmap">../../share/toolbar/select.png; Load From File</property>
                                     <property name="id">ID_SELECT</property>
-                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="kind">wxITEM_RADIO</property>
                                     <property name="label">Select</property>
                                     <property name="name">ToolSelect</property>
                                     <property name="statusbar">Select a map region by a rectangle selector</property>
                                     <property name="tooltip">Selection tool</property>
                                     <event name="OnMenuSelection"></event>
-                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolClicked">Select_click</event>
                                     <event name="OnToolEnter"></event>
                                     <event name="OnToolRClicked"></event>
                                     <event name="OnUpdateUI"></event>
@@ -999,13 +999,13 @@
                                 <object class="tool" expanded="1">
                                     <property name="bitmap">../../share/toolbar/zoom.png; Load From File</property>
                                     <property name="id">wxID_ZOOM_FIT</property>
-                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="kind">wxITEM_RADIO</property>
                                     <property name="label">Zoom</property>
                                     <property name="name">ToolZoom</property>
                                     <property name="statusbar">Zoom in or out by left or right mouse click</property>
                                     <property name="tooltip">Zoom tool</property>
                                     <event name="OnMenuSelection"></event>
-                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolClicked">Zoom_click</event>
                                     <event name="OnToolEnter"></event>
                                     <event name="OnToolRClicked"></event>
                                     <event name="OnUpdateUI"></event>
@@ -1013,13 +1013,13 @@
                                 <object class="tool" expanded="1">
                                     <property name="bitmap">../../share/toolbar/pen.png; Load From File</property>
                                     <property name="id">ID_PEN</property>
-                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="kind">wxITEM_RADIO</property>
                                     <property name="label">Pen</property>
                                     <property name="name">ToolPen</property>
                                     <property name="statusbar">Draw on the map freely by hand</property>
                                     <property name="tooltip">Pen draw tool</property>
                                     <event name="OnMenuSelection"></event>
-                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolClicked">Pen_click</event>
                                     <event name="OnToolEnter"></event>
                                     <event name="OnToolRClicked"></event>
                                     <event name="OnUpdateUI"></event>
@@ -1027,13 +1027,13 @@
                                 <object class="tool" expanded="1">
                                     <property name="bitmap">../../share/toolbar/rectangle.png; Load From File</property>
                                     <property name="id">ID_RECTANGLE</property>
-                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="kind">wxITEM_RADIO</property>
                                     <property name="label">Rectangle</property>
                                     <property name="name">ToolRectangle</property>
                                     <property name="statusbar">Draw a rectangle on the map</property>
                                     <property name="tooltip">Rectangle draw tool</property>
                                     <event name="OnMenuSelection"></event>
-                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolClicked">Rectangle_click</event>
                                     <event name="OnToolEnter"></event>
                                     <event name="OnToolRClicked"></event>
                                     <event name="OnUpdateUI"></event>
@@ -1041,13 +1041,13 @@
                                 <object class="tool" expanded="1">
                                     <property name="bitmap">../../share/toolbar/circle.png; Load From File</property>
                                     <property name="id">ID_CIRCLE</property>
-                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="kind">wxITEM_RADIO</property>
                                     <property name="label">Circle</property>
                                     <property name="name">ToolCircle</property>
                                     <property name="statusbar">Draw a circle on the map</property>
                                     <property name="tooltip">Circle draw tool</property>
                                     <event name="OnMenuSelection"></event>
-                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolClicked">Circle_click</event>
                                     <event name="OnToolEnter"></event>
                                     <event name="OnToolRClicked"></event>
                                     <event name="OnUpdateUI"></event>
@@ -1055,13 +1055,13 @@
                                 <object class="tool" expanded="1">
                                     <property name="bitmap">../../share/toolbar/fill.png; Load From File</property>
                                     <property name="id">ID_FILL</property>
-                                    <property name="kind">wxITEM_NORMAL</property>
+                                    <property name="kind">wxITEM_RADIO</property>
                                     <property name="label">Fill</property>
                                     <property name="name">ToolFill</property>
                                     <property name="statusbar">Draw tiles with same tile type on the map</property>
                                     <property name="tooltip">Flood fill draw tool</property>
                                     <event name="OnMenuSelection"></event>
-                                    <event name="OnToolClicked"></event>
+                                    <event name="OnToolClicked">Fill_click</event>
                                     <event name="OnToolEnter"></event>
                                     <event name="OnToolRClicked"></event>
                                     <event name="OnUpdateUI"></event>
