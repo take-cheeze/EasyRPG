@@ -30,7 +30,7 @@
             <property name="hidden"></property>
             <property name="id">wxID_ANY</property>
             <property name="maximum_size"></property>
-            <property name="minimum_size"></property>
+            <property name="minimum_size">700,400</property>
             <property name="name">frmEditor_Base</property>
             <property name="pos"></property>
             <property name="size"></property>
@@ -75,7 +75,7 @@
             <event name="OnSetFocus"></event>
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
-            <object class="wxMenuBar" expanded="0">
+            <object class="wxMenuBar" expanded="1">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="enabled">1</property>
@@ -139,7 +139,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">New_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -154,7 +154,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">Open_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -169,7 +169,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">Close_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
@@ -184,11 +184,11 @@
                         <property name="id">wxID_ANY</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">&amp;Make game disk...</property>
-                        <property name="name">MenuitemCompressGameData</property>
+                        <property name="name">MenuitemMakeGameDisk</property>
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">MakeGameDisk_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
@@ -207,7 +207,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">Exit_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -227,7 +227,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">Save_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -242,7 +242,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">Revert_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
@@ -265,7 +265,7 @@
                             <property name="permission">none</property>
                             <property name="shortcut"></property>
                             <property name="unchecked_bitmap"></property>
-                            <event name="OnMenuSelection"></event>
+                            <event name="OnMenuSelection">LowerLayer_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
@@ -280,7 +280,7 @@
                             <property name="permission">none</property>
                             <property name="shortcut"></property>
                             <property name="unchecked_bitmap"></property>
-                            <event name="OnMenuSelection"></event>
+                            <event name="OnMenuSelection">UpperLayer_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
@@ -295,7 +295,7 @@
                             <property name="permission">none</property>
                             <property name="shortcut"></property>
                             <property name="unchecked_bitmap"></property>
-                            <event name="OnMenuSelection"></event>
+                            <event name="OnMenuSelection">Events_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                     </object>
@@ -311,11 +311,11 @@
                             <property name="id">wxID_ANY</property>
                             <property name="kind">wxITEM_NORMAL</property>
                             <property name="label">1:&amp;1</property>
-                            <property name="name">Menuitem11Scale</property>
+                            <property name="name">MenuitemScale11</property>
                             <property name="permission">none</property>
                             <property name="shortcut"></property>
                             <property name="unchecked_bitmap"></property>
-                            <event name="OnMenuSelection"></event>
+                            <event name="OnMenuSelection">Scale11_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
@@ -326,11 +326,11 @@
                             <property name="id">wxID_ANY</property>
                             <property name="kind">wxITEM_NORMAL</property>
                             <property name="label">1:&amp;2</property>
-                            <property name="name">Menuitem12Scale</property>
+                            <property name="name">MenuitemScale12</property>
                             <property name="permission">none</property>
                             <property name="shortcut"></property>
                             <property name="unchecked_bitmap"></property>
-                            <event name="OnMenuSelection"></event>
+                            <event name="OnMenuSelection">Scale12_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
@@ -341,11 +341,11 @@
                             <property name="id">wxID_ANY</property>
                             <property name="kind">wxITEM_NORMAL</property>
                             <property name="label">1:&amp;4</property>
-                            <property name="name">Menuitem14Scale</property>
+                            <property name="name">MenuitemScale14</property>
                             <property name="permission">none</property>
                             <property name="shortcut"></property>
                             <property name="unchecked_bitmap"></property>
-                            <event name="OnMenuSelection"></event>
+                            <event name="OnMenuSelection">Scale14_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                         <object class="wxMenuItem" expanded="1">
@@ -356,11 +356,11 @@
                             <property name="id">wxID_ANY</property>
                             <property name="kind">wxITEM_NORMAL</property>
                             <property name="label">1:&amp;8</property>
-                            <property name="name">Menuitem18Scale</property>
+                            <property name="name">MenuitemScale18</property>
                             <property name="permission">none</property>
                             <property name="shortcut"></property>
                             <property name="unchecked_bitmap"></property>
-                            <event name="OnMenuSelection"></event>
+                            <event name="OnMenuSelection">Scale18_click</event>
                             <event name="OnUpdateUI"></event>
                         </object>
                     </object>
@@ -381,7 +381,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">Database_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -396,7 +396,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">MaterialManager_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -411,7 +411,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">MusicPlayer_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -431,11 +431,11 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">PlayTest_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
-                        <property name="name">m_separator4</property>
+                        <property name="name">SeparatorGame</property>
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -450,7 +450,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">FullScreen_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -465,7 +465,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">ShowTitle_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -485,11 +485,11 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">HelpIndex_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                     <object class="separator" expanded="1">
-                        <property name="name">m_separator5</property>
+                        <property name="name">SeparatorHelp</property>
                         <property name="permission">none</property>
                     </object>
                     <object class="wxMenuItem" expanded="1">
@@ -504,7 +504,7 @@
                         <property name="permission">none</property>
                         <property name="shortcut"></property>
                         <property name="unchecked_bitmap"></property>
-                        <event name="OnMenuSelection"></event>
+                        <event name="OnMenuSelection">About_click</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -744,7 +744,7 @@
                     <property name="id">wxID_ZOOM_100</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:1</property>
-                    <property name="name">ToolZoom11</property>
+                    <property name="name">ToolScale11</property>
                     <property name="statusbar">Display the map in 1:1 scale</property>
                     <property name="tooltip">1:1 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -758,7 +758,7 @@
                     <property name="id">ID_ZOOM_12</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:2</property>
-                    <property name="name">ToolZoom12</property>
+                    <property name="name">ToolScale12</property>
                     <property name="statusbar">Display the map in 1:2 scale</property>
                     <property name="tooltip">1:2 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -772,7 +772,7 @@
                     <property name="id">ID_ZOOM_14</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:4</property>
-                    <property name="name">ToolZoom14</property>
+                    <property name="name">ToolScale14</property>
                     <property name="statusbar">Display the map in 1:4 scale</property>
                     <property name="tooltip">1:4 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -786,7 +786,7 @@
                     <property name="id">ID_ZOOM_18</property>
                     <property name="kind">wxITEM_RADIO</property>
                     <property name="label">1:8</property>
-                    <property name="name">ToolZoom18</property>
+                    <property name="name">ToolScale18</property>
                     <property name="statusbar">Display the map in 1:8 scale</property>
                     <property name="tooltip">1:8 scale</property>
                     <event name="OnMenuSelection"></event>
@@ -904,9 +904,9 @@
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
-                    <property name="border">5</property>
+                    <property name="border">0</property>
                     <property name="flag">wxEXPAND</property>
-                    <property name="proportion">1</property>
+                    <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
                         <property name="name">szEditorLeft</property>

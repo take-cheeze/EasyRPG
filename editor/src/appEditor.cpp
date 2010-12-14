@@ -32,9 +32,9 @@ bool appEditor::OnInit()
 {
 	wxInitAllImageHandlers();
 	frmEditor *FrameEditor = new frmEditor(NULL);
+	FrameEditor->Show();
 	wxBitmap bitmap(splash_xpm);
 	new wxSplashScreen(bitmap, wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT, 2500, FrameEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSIMPLE_BORDER|wxSTAY_ON_TOP);
 	wxYield();
-	FrameEditor->Show();
 	return true;
 }

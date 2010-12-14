@@ -11,7 +11,7 @@
 
 frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetSizeHints( wxSize( 700,400 ), wxDefaultSize );
 	
 	frmEditorMenubar = new wxMenuBar( 0 );
 	MenuProject = new wxMenu();
@@ -30,9 +30,9 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	wxMenuItem* SeparatorProject;
 	SeparatorProject = MenuProject->AppendSeparator();
 	
-	wxMenuItem* MenuitemCompressGameData;
-	MenuitemCompressGameData = new wxMenuItem( MenuProject, wxID_ANY, wxString( _("&Make game disk...") ) , _("Compress game data and create a distributable file"), wxITEM_NORMAL );
-	MenuProject->Append( MenuitemCompressGameData );
+	wxMenuItem* MenuitemMakeGameDisk;
+	MenuitemMakeGameDisk = new wxMenuItem( MenuProject, wxID_ANY, wxString( _("&Make game disk...") ) , _("Compress game data and create a distributable file"), wxITEM_NORMAL );
+	MenuProject->Append( MenuitemMakeGameDisk );
 	
 	wxMenuItem* SeparatorProject2;
 	SeparatorProject2 = MenuProject->AppendSeparator();
@@ -71,21 +71,21 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	MenuMap->Append( -1, _("&Edit"), MenuEdit );
 	
 	MenuScale = new wxMenu();
-	wxMenuItem* Menuitem11Scale;
-	Menuitem11Scale = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&1") ) , _("Display the map in 1:1 scale"), wxITEM_NORMAL );
-	MenuScale->Append( Menuitem11Scale );
+	wxMenuItem* MenuitemScale11;
+	MenuitemScale11 = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&1") ) , _("Display the map in 1:1 scale"), wxITEM_NORMAL );
+	MenuScale->Append( MenuitemScale11 );
 	
-	wxMenuItem* Menuitem12Scale;
-	Menuitem12Scale = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&2") ) , _("Display the map in 1:2 scale"), wxITEM_NORMAL );
-	MenuScale->Append( Menuitem12Scale );
+	wxMenuItem* MenuitemScale12;
+	MenuitemScale12 = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&2") ) , _("Display the map in 1:2 scale"), wxITEM_NORMAL );
+	MenuScale->Append( MenuitemScale12 );
 	
-	wxMenuItem* Menuitem14Scale;
-	Menuitem14Scale = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&4") ) , _("Display the map in 1:4 scale"), wxITEM_NORMAL );
-	MenuScale->Append( Menuitem14Scale );
+	wxMenuItem* MenuitemScale14;
+	MenuitemScale14 = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&4") ) , _("Display the map in 1:4 scale"), wxITEM_NORMAL );
+	MenuScale->Append( MenuitemScale14 );
 	
-	wxMenuItem* Menuitem18Scale;
-	Menuitem18Scale = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&8") ) , _("Display the map in 1:8 scale"), wxITEM_NORMAL );
-	MenuScale->Append( Menuitem18Scale );
+	wxMenuItem* MenuitemScale18;
+	MenuitemScale18 = new wxMenuItem( MenuScale, wxID_ANY, wxString( _("1:&8") ) , _("Display the map in 1:8 scale"), wxITEM_NORMAL );
+	MenuScale->Append( MenuitemScale18 );
 	
 	MenuMap->Append( -1, _("&Scale"), MenuScale );
 	
@@ -111,8 +111,8 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	MenuitemPlayTest = new wxMenuItem( MenuGame, wxID_ANY, wxString( _("&Play test") ) , _("Launch the game project for testing"), wxITEM_NORMAL );
 	MenuGame->Append( MenuitemPlayTest );
 	
-	wxMenuItem* m_separator4;
-	m_separator4 = MenuGame->AppendSeparator();
+	wxMenuItem* SeparatorGame;
+	SeparatorGame = MenuGame->AppendSeparator();
 	
 	wxMenuItem* MenuitemFullScreen;
 	MenuitemFullScreen = new wxMenuItem( MenuGame, wxID_ANY, wxString( _("&Full screen") ) , _("Enable or disable full screen in play test"), wxITEM_NORMAL );
@@ -129,8 +129,8 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	MenuitemHelpIndex = new wxMenuItem( MenuHelp, wxID_ANY, wxString( _("&Index") ) , _("Display the help index and contents of EasyRPG"), wxITEM_NORMAL );
 	MenuHelp->Append( MenuitemHelpIndex );
 	
-	wxMenuItem* m_separator5;
-	m_separator5 = MenuHelp->AppendSeparator();
+	wxMenuItem* SeparatorHelp;
+	SeparatorHelp = MenuHelp->AppendSeparator();
 	
 	wxMenuItem* MenuitemAbout;
 	MenuitemAbout = new wxMenuItem( MenuHelp, wxID_ANY, wxString( _("&About") ) , _("About EasyRPG Editor"), wxITEM_NORMAL );
@@ -211,7 +211,7 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	swEditor->SplitHorizontally( pnEditorTileset, pnEditorMapTree, 6 );
 	szEditorLeft->Add( swEditor, 1, wxEXPAND, 0 );
 	
-	szEditor->Add( szEditorLeft, 1, wxEXPAND, 5 );
+	szEditor->Add( szEditorLeft, 0, wxEXPAND, 0 );
 	
 	pnEditorMap = new wxScrolledWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL );
 	pnEditorMap->SetScrollRate( 5, 5 );
@@ -220,10 +220,57 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	this->SetSizer( szEditor );
 	this->Layout();
 	szEditor->Fit( this );
+	
+	// Connect Events
+	this->Connect( MenuitemNew->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::New_click ) );
+	this->Connect( MenuitemOpen->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Open_click ) );
+	this->Connect( MenuitemClose->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Close_click ) );
+	this->Connect( MenuitemMakeGameDisk->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MakeGameDisk_click ) );
+	this->Connect( MenuitemExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Exit_click ) );
+	this->Connect( MenuitemSave->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Save_click ) );
+	this->Connect( MenuitemRevert->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Revert_click ) );
+	this->Connect( MenuitemLowerLayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::LowerLayer_click ) );
+	this->Connect( MenuitemUpperLayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::UpperLayer_click ) );
+	this->Connect( MenuitemEvents->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Events_click ) );
+	this->Connect( MenuitemScale11->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale11_click ) );
+	this->Connect( MenuitemScale12->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale12_click ) );
+	this->Connect( MenuitemScale14->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale14_click ) );
+	this->Connect( MenuitemScale18->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale18_click ) );
+	this->Connect( MenuitemDatabase->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Database_click ) );
+	this->Connect( MenuitemMaterialManager->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MaterialManager_click ) );
+	this->Connect( MenuitemMusicPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MusicPlayer_click ) );
+	this->Connect( MenuitemPlayTest->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::PlayTest_click ) );
+	this->Connect( MenuitemFullScreen->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::FullScreen_click ) );
+	this->Connect( MenuitemShowTitle->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::ShowTitle_click ) );
+	this->Connect( MenuitemHelpIndex->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::HelpIndex_click ) );
+	this->Connect( MenuitemAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::About_click ) );
 }
 
 frmEditor_Base::~frmEditor_Base()
 {
+	// Disconnect Events
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::New_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Open_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Close_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MakeGameDisk_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Exit_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Save_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Revert_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::LowerLayer_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::UpperLayer_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Events_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale11_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale12_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale14_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale18_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Database_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MaterialManager_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MusicPlayer_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::PlayTest_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::FullScreen_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::ShowTitle_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::HelpIndex_click ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::About_click ) );
 }
 
 dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )

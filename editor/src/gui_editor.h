@@ -87,6 +87,31 @@ class frmEditor_Base : public wxFrame
 		wxPanel* pnEditorMapTree;
 		wxTreeCtrl* tcMapTree;
 		wxScrolledWindow* pnEditorMap;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void New_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Open_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Close_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void MakeGameDisk_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Exit_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Save_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Revert_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void LowerLayer_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void UpperLayer_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Events_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Scale11_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Scale12_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Scale14_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Scale18_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Database_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void MaterialManager_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void MusicPlayer_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void PlayTest_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void FullScreen_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ShowTitle_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void HelpIndex_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void About_click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		

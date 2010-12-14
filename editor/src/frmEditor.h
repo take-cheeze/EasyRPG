@@ -30,6 +30,9 @@ class frmEditor : public frmEditor_Base {
 public:
 	/// Constructor
 	frmEditor(wxWindow* parent);
+protected:
+	/// Exits app on menu exit
+	void Exit_click(wxCommandEvent& WXUNUSED(event));
 };
 
 #endif

@@ -20,3 +20,7 @@
 frmEditor::frmEditor(wxWindow* parent) : frmEditor_Base(parent) {
 
 }
+
+void frmEditor::Exit_click(wxCommandEvent& WXUNUSED(event)) {
+	Destroy();
+}
