@@ -24,10 +24,14 @@
     <File Name="../../resources/win/editor.rc"/>
     <File Name="../../src/gui_editor.cpp"/>
     <File Name="../../src/gui_editor.h"/>
+    <File Name="../../src/dlgMap.cpp"/>
+    <File Name="../../src/dlgMap.h"/>
     <File Name="../../src/frmEditor.cpp"/>
     <File Name="../../src/frmEditor.h"/>
     <File Name="../../src/appEditor.cpp"/>
     <File Name="../../src/appEditor.h"/>
+    <File Name="../../src/dlgMaterial.cpp"/>
+    <File Name="../../src/dlgMaterial.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">

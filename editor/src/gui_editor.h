@@ -122,15 +122,16 @@ class frmEditor_Base : public wxFrame
 		virtual void Rectangle_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Circle_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Fill_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void MapTree_menu_click( wxMouseEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		frmEditor_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("EasyRPG Editor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_FRAME_STYLE );
+		frmEditor_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("EasyRPG Editor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 768,576 ), long style = wxDEFAULT_FRAME_STYLE );
 		~frmEditor_Base();
 		void swEditorOnIdle( wxIdleEvent& )
 		{
-		swEditor->SetSashPosition( 6 );
+		swEditor->SetSashPosition( 0 );
 		swEditor->Disconnect( wxEVT_IDLE, wxIdleEventHandler( frmEditor_Base::swEditorOnIdle ), NULL, this );
 		}
 		
@@ -154,7 +155,7 @@ class dlgMap_Base : public wxDialog
 		wxListCtrl* lcTroopEncounters;
 		wxStaticText* stEncounterSteps;
 		wxSpinCtrl* spinEncounterSteps;
-		wxCheckBox* chbUsePanorama;
+		wxCheckBox* chbPanorama;
 		wxStaticBitmap* bmpPanoramaGraphic;
 		wxButton* btnPanoramaGraphic;
 		
@@ -188,6 +189,12 @@ class dlgMap_Base : public wxDialog
 		wxButton* wxID_OK;
 		wxButton* wxID_CANCEL;
 		wxButton* wxID_HELP;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		
@@ -210,9 +217,20 @@ class dlgMaterial_Base : public wxDialog
 		wxButton* btnExport;
 		wxButton* btnDelete;
 		
-		wxRadioBox* rbFormat;
+		wxRadioBox* rbImportAs;
 		wxButton* wxID_CLOSE;
 		wxButton* wxID_HELP;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void Folder_selected( wxCommandEvent& event ) { event.Skip(); }
+		virtual void File_selected( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Import_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Export_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Delete_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ImportAs_selected( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Close_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		

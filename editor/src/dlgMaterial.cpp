@@ -15,25 +15,11 @@
 // along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/splash.h>
-#include "appEditor.h"
-#include "frmEditor.h"
-#include "splash.xpm"
+#include "dlgMaterial.h"
 
-IMPLEMENT_APP(appEditor)
-
-appEditor::appEditor() {
+dlgMaterial::dlgMaterial(wxWindow* parent) : dlgMaterial_Base(parent) {
 }
 
-appEditor::~appEditor() {
-}
-
-bool appEditor::OnInit() {
-	wxInitAllImageHandlers();
-	frmEditor *FrameEditor = new frmEditor(NULL);
-	FrameEditor->Show();
-	wxBitmap bitmap(splash_xpm);
-	new wxSplashScreen(bitmap, wxSPLASH_CENTRE_ON_SCREEN|wxSPLASH_TIMEOUT, 2500, FrameEditor, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSIMPLE_BORDER|wxSTAY_ON_TOP);
-	wxYield();
-	return true;
+void dlgMaterial::Close_click(wxCommandEvent& WXUNUSED(event)) {
+	Close();
 }

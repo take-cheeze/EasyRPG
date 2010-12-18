@@ -106,11 +106,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\gui_editor.cpp" />
+    <ClCompile Include="..\..\src\dlgMap.cpp" />
+    <ClCompile Include="..\..\src\dlgMaterial.cpp" />
     <ClCompile Include="..\..\src\frmEditor.cpp" />
     <ClCompile Include="..\..\src\appEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\gui_editor.h" />
+    <ClCompile Include="..\..\src\dlgMap.h" />
+    <ClCompile Include="..\..\src\dlgMaterial.h" />
     <ClInclude Include="..\..\src\frmEditor.h" />
     <ClInclude Include="..\..\src\appEditor.h" />
   </ItemGroup>

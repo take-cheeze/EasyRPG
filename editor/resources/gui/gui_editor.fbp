@@ -19,7 +19,7 @@
         <property name="relative_path">1</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Frame" expanded="1">
+        <object class="Frame" expanded="0">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -30,10 +30,10 @@
             <property name="hidden"></property>
             <property name="id">wxID_ANY</property>
             <property name="maximum_size"></property>
-            <property name="minimum_size">700,400</property>
+            <property name="minimum_size">660,400</property>
             <property name="name">frmEditor_Base</property>
             <property name="pos"></property>
-            <property name="size"></property>
+            <property name="size">768,576</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass">; </property>
             <property name="title">EasyRPG Editor</property>
@@ -1086,8 +1086,8 @@
                                 <property name="name">swEditor</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
-                                <property name="sashgravity">0.0</property>
-                                <property name="sashpos">6</property>
+                                <property name="sashgravity">1</property>
+                                <property name="sashpos">0</property>
                                 <property name="sashsize">-1</property>
                                 <property name="size"></property>
                                 <property name="splitmode">wxSPLIT_HORIZONTAL</property>
@@ -1130,7 +1130,7 @@
                                 <event name="OnUpdateUI"></event>
                                 <object class="splitteritem" expanded="1">
                                     <object class="wxScrolledWindow" expanded="1">
-                                        <property name="bg"></property>
+                                        <property name="bg">wxSYS_COLOUR_BACKGROUND</property>
                                         <property name="context_help"></property>
                                         <property name="enabled">1</property>
                                         <property name="fg"></property>
@@ -1248,7 +1248,7 @@
                                                     <property name="name">tcMapTree</property>
                                                     <property name="permission">protected</property>
                                                     <property name="pos"></property>
-                                                    <property name="size">212, 150</property>
+                                                    <property name="size">212,96</property>
                                                     <property name="style">wxTR_HAS_BUTTONS|wxTR_NO_LINES|wxTR_DEFAULT_STYLE</property>
                                                     <property name="subclass"></property>
                                                     <property name="tooltip"></property>
@@ -1277,7 +1277,7 @@
                                                     <event name="OnMouseWheel"></event>
                                                     <event name="OnPaint"></event>
                                                     <event name="OnRightDClick"></event>
-                                                    <event name="OnRightDown"></event>
+                                                    <event name="OnRightDown">MapTree_menu_click</event>
                                                     <event name="OnRightUp"></event>
                                                     <event name="OnSetFocus"></event>
                                                     <event name="OnSize"></event>
@@ -1317,7 +1317,7 @@
                     <property name="flag">wxEXPAND</property>
                     <property name="proportion">1</property>
                     <object class="wxScrolledWindow" expanded="1">
-                        <property name="bg"></property>
+                        <property name="bg">wxSYS_COLOUR_BACKGROUND</property>
                         <property name="context_help"></property>
                         <property name="enabled">1</property>
                         <property name="fg"></property>
@@ -1426,7 +1426,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer191</property>
+                <property name="name">szMap</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -1435,7 +1435,7 @@
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer192</property>
+                        <property name="name">szMapTop</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -1444,7 +1444,7 @@
                             <property name="proportion">1</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer193</property>
+                                <property name="name">szMapTopLeft</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -1455,7 +1455,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Name</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer103</property>
+                                        <property name="name">szName</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1528,7 +1528,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Graphics</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer104</property>
+                                        <property name="name">szGraphics</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1597,7 +1597,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Size</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer105</property>
+                                        <property name="name">szSize</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1784,7 +1784,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Loop time</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer106</property>
+                                        <property name="name">szLoopTime</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1853,7 +1853,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Troop encounters</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer107</property>
+                                        <property name="name">szTroopEncounters</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1936,7 +1936,7 @@
                                             <property name="proportion">0</property>
                                             <object class="wxBoxSizer" expanded="1">
                                                 <property name="minimum_size"></property>
-                                                <property name="name">bSizer194</property>
+                                                <property name="name">szEncounterSteps</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <object class="sizeritem" expanded="1">
@@ -2065,7 +2065,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer195</property>
+                                <property name="name">szTopRight</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -2076,7 +2076,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Panorama</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer108</property>
+                                        <property name="name">szPanorama</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -2096,7 +2096,7 @@
                                                 <property name="label">Use panorama</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">chbUsePanorama</property>
+                                                <property name="name">chbPanorama</property>
                                                 <property name="permission">protected</property>
                                                 <property name="pos"></property>
                                                 <property name="size"></property>
@@ -2142,7 +2142,7 @@
                                             <property name="proportion">0</property>
                                             <object class="wxBoxSizer" expanded="1">
                                                 <property name="minimum_size"></property>
-                                                <property name="name">bSizer196</property>
+                                                <property name="name">szUsePanorama</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <object class="sizeritem" expanded="1">
@@ -2153,7 +2153,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Panorama graphic</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer109</property>
+                                                        <property name="name">szPanoramaGraphic</property>
                                                         <property name="orient">wxVERTICAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -2276,7 +2276,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Parallax options</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer110</property>
+                                                        <property name="name">szParallaxOptions</property>
                                                         <property name="orient">wxVERTICAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -2352,7 +2352,7 @@
                                                             <property name="proportion">0</property>
                                                             <object class="wxBoxSizer" expanded="1">
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">bSizer197</property>
+                                                                <property name="name">szParallaxHorizontalAutomatic</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <object class="sizeritem" expanded="1">
@@ -2429,7 +2429,7 @@
                                                             <property name="proportion">0</property>
                                                             <object class="wxBoxSizer" expanded="1">
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">bSizer198</property>
+                                                                <property name="name">szParallaxHorizontalSpeed</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <object class="sizeritem" expanded="1">
@@ -2683,7 +2683,7 @@
                                                             <property name="proportion">0</property>
                                                             <object class="wxBoxSizer" expanded="1">
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">bSizer199</property>
+                                                                <property name="name">szParallaxVerticalAutomatic</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <object class="sizeritem" expanded="1">
@@ -2760,7 +2760,7 @@
                                                             <property name="proportion">0</property>
                                                             <object class="wxBoxSizer" expanded="1">
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">bSizer200</property>
+                                                                <property name="name">szParallaxVerticalSpeed</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <object class="sizeritem" expanded="1">
@@ -2901,7 +2901,7 @@
                                     <property name="proportion">0</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer201</property>
+                                        <property name="name">szTopRightMiddle</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -2912,7 +2912,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Map music</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer111</property>
+                                                <property name="name">szMapMusic</property>
                                                 <property name="orient">wxVERTICAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3090,7 +3090,7 @@
                                                     <property name="proportion">1</property>
                                                     <object class="wxBoxSizer" expanded="1">
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">bSizer202</property>
+                                                        <property name="name">szMapMusicSelect</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <object class="sizeritem" expanded="1">
@@ -3220,7 +3220,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Battle background</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer112</property>
+                                                <property name="name">szBattleBackground</property>
                                                 <property name="orient">wxVERTICAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3398,7 +3398,7 @@
                                                     <property name="proportion">1</property>
                                                     <object class="wxBoxSizer" expanded="1">
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">bSizer203</property>
+                                                        <property name="name">szBattleBackgroundSelect</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <object class="sizeritem" expanded="1">
@@ -3528,7 +3528,7 @@
                                     <property name="proportion">0</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer204</property>
+                                        <property name="name">szTopRightBottom</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -3717,7 +3717,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer205</property>
+                        <property name="name">szBottom</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -3733,7 +3733,7 @@
                                 <property name="font"></property>
                                 <property name="hidden"></property>
                                 <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="label">&amp;OK</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
                                 <property name="name">wxID_OK</property>
@@ -3750,7 +3750,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">OK_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -3789,7 +3789,7 @@
                                 <property name="font"></property>
                                 <property name="hidden"></property>
                                 <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="label">&amp;Cancel</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
                                 <property name="name">wxID_CANCEL</property>
@@ -3806,7 +3806,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">Cancel_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -3845,7 +3845,7 @@
                                 <property name="font"></property>
                                 <property name="hidden"></property>
                                 <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="label">&amp;Help</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
                                 <property name="name">wxID_HELP</property>
@@ -3862,7 +3862,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">Help_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -3950,7 +3950,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer338</property>
+                <property name="name">szMaterial</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -3959,7 +3959,7 @@
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer339</property>
+                        <property name="name">szMaterialTop</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -4001,7 +4001,7 @@
                                 <event name="OnLeftDClick"></event>
                                 <event name="OnLeftDown"></event>
                                 <event name="OnLeftUp"></event>
-                                <event name="OnListBox"></event>
+                                <event name="OnListBox">Folder_selected</event>
                                 <event name="OnListBoxDClick"></event>
                                 <event name="OnMiddleDClick"></event>
                                 <event name="OnMiddleDown"></event>
@@ -4057,7 +4057,7 @@
                                 <event name="OnLeftDClick"></event>
                                 <event name="OnLeftDown"></event>
                                 <event name="OnLeftUp"></event>
-                                <event name="OnListBox"></event>
+                                <event name="OnListBox">File_selected</event>
                                 <event name="OnListBoxDClick"></event>
                                 <event name="OnMiddleDClick"></event>
                                 <event name="OnMiddleDown"></event>
@@ -4080,7 +4080,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer340</property>
+                                <property name="name">szMaterialTopRight</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -4113,7 +4113,7 @@
                                         <property name="window_extra_style"></property>
                                         <property name="window_name"></property>
                                         <property name="window_style"></property>
-                                        <event name="OnButtonClick"></event>
+                                        <event name="OnButtonClick">Import_click</event>
                                         <event name="OnChar"></event>
                                         <event name="OnEnterWindow"></event>
                                         <event name="OnEraseBackground"></event>
@@ -4169,7 +4169,7 @@
                                         <property name="window_extra_style"></property>
                                         <property name="window_name"></property>
                                         <property name="window_style"></property>
-                                        <event name="OnButtonClick"></event>
+                                        <event name="OnButtonClick">Export_click</event>
                                         <event name="OnChar"></event>
                                         <event name="OnEnterWindow"></event>
                                         <event name="OnEraseBackground"></event>
@@ -4225,7 +4225,7 @@
                                         <property name="window_extra_style"></property>
                                         <property name="window_name"></property>
                                         <property name="window_style"></property>
-                                        <event name="OnButtonClick"></event>
+                                        <event name="OnButtonClick">Delete_click</event>
                                         <event name="OnChar"></event>
                                         <event name="OnEnterWindow"></event>
                                         <event name="OnEraseBackground"></event>
@@ -4274,11 +4274,11 @@
                                         <property name="font"></property>
                                         <property name="hidden"></property>
                                         <property name="id">wxID_ANY</property>
-                                        <property name="label">Import/export as</property>
+                                        <property name="label">Import as</property>
                                         <property name="majorDimension">1</property>
                                         <property name="maximum_size"></property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">rbFormat</property>
+                                        <property name="name">rbImportAs</property>
                                         <property name="permission">protected</property>
                                         <property name="pos"></property>
                                         <property name="selection">0</property>
@@ -4310,7 +4310,7 @@
                                         <event name="OnMouseEvents"></event>
                                         <event name="OnMouseWheel"></event>
                                         <event name="OnPaint"></event>
-                                        <event name="OnRadioBox"></event>
+                                        <event name="OnRadioBox">ImportAs_selected</event>
                                         <event name="OnRightDClick"></event>
                                         <event name="OnRightDown"></event>
                                         <event name="OnRightUp"></event>
@@ -4329,7 +4329,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer341</property>
+                        <property name="name">szMaterialBottom</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -4345,7 +4345,7 @@
                                 <property name="font"></property>
                                 <property name="hidden"></property>
                                 <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="label">&amp;Close</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
                                 <property name="name">wxID_CLOSE</property>
@@ -4362,7 +4362,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">Close_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -4401,7 +4401,7 @@
                                 <property name="font"></property>
                                 <property name="hidden"></property>
                                 <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="label">&amp;Help</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
                                 <property name="name">wxID_HELP</property>
@@ -4418,7 +4418,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">Help_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>

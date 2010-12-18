@@ -16,11 +16,24 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "frmEditor.h"
+#include "dlgMaterial.h"
+#include "dlgMap.h"
 
 frmEditor::frmEditor(wxWindow* parent) : frmEditor_Base(parent) {
-
 }
 
 void frmEditor::Exit_click(wxCommandEvent& WXUNUSED(event)) {
-	Destroy();
+	Close();
+}
+
+void frmEditor::Material_click(wxCommandEvent& WXUNUSED(event)) {
+	dlgMaterial *DialogMaterial = new dlgMaterial(NULL);
+	DialogMaterial->ShowModal();
+	DialogMaterial->Destroy();
+}
+
+void frmEditor::MapTree_menu_click(wxMouseEvent& WXUNUSED(event)) {
+	dlgMap *DialogMap = new dlgMap(NULL);
+	DialogMap->ShowModal();
+	DialogMap->Destroy();
 }
