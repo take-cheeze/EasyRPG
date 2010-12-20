@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 21 2009)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -128,13 +128,14 @@ class frmEditor_Base : public wxFrame
 	public:
 		
 		frmEditor_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("EasyRPG Editor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 768,576 ), long style = wxDEFAULT_FRAME_STYLE );
+		
 		~frmEditor_Base();
+		
 		void swEditorOnIdle( wxIdleEvent& )
 		{
-		swEditor->SetSashPosition( 0 );
-		swEditor->Disconnect( wxEVT_IDLE, wxIdleEventHandler( frmEditor_Base::swEditorOnIdle ), NULL, this );
+			swEditor->SetSashPosition( 0 );
+			swEditor->Disconnect( wxEVT_IDLE, wxIdleEventHandler( frmEditor_Base::swEditorOnIdle ), NULL, this );
 		}
-		
 	
 };
 
@@ -198,7 +199,7 @@ class dlgMap_Base : public wxDialog
 	
 	public:
 		
-		dlgMap_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Map Properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		dlgMap_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Map Properties"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~dlgMap_Base();
 	
 };
@@ -234,7 +235,7 @@ class dlgMaterial_Base : public wxDialog
 	
 	public:
 		
-		dlgMaterial_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Material Manager"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME );
+		dlgMaterial_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Material Manager"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME ); 
 		~dlgMaterial_Base();
 	
 };

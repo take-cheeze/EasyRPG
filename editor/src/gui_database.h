@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 21 2009)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -12,10 +12,10 @@
 
 #include <wx/gdicmn.h>
 #include <wx/notebook.h>
+#include <wx/string.h>
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
-#include <wx/string.h>
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/dialog.h>
@@ -58,7 +58,7 @@ class dlgDb_Base : public wxDialog
 	
 	public:
 		
-		dlgDb_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Database"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME );
+		dlgDb_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Database"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME ); 
 		~dlgDb_Base();
 	
 };
@@ -78,7 +78,7 @@ class dlgDbMaxNumber_Base : public wxDialog
 	
 	public:
 		
-		dlgDbMaxNumber_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Max number"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME );
+		dlgDbMaxNumber_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Max number"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME ); 
 		~dlgDbMaxNumber_Base();
 	
 };
@@ -99,7 +99,7 @@ class dlgDbLearnSkill_Base : public wxDialog
 	
 	public:
 		
-		dlgDbLearnSkill_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Learn a skill..."), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
+		dlgDbLearnSkill_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Learn a skill..."), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~dlgDbLearnSkill_Base();
 	
 };
@@ -119,7 +119,7 @@ class dlgDbSelectAnyGraphic_Base : public wxDialog
 	
 	public:
 		
-		dlgDbSelectAnyGraphic_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Graphic of Type..."), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
+		dlgDbSelectAnyGraphic_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Graphic of Type..."), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~dlgDbSelectAnyGraphic_Base();
 	
 };

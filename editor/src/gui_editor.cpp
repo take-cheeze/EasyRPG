@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 21 2009)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -61,7 +61,7 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	MenuitemExit = new wxMenuItem( MenuProject, wxID_EXIT, wxString( _("&Exit") ) , _("Exit EasyRPG"), wxITEM_NORMAL );
 	MenuProject->Append( MenuitemExit );
 	
-	frmEditorMenubar->Append( MenuProject, _("&Project") );
+	frmEditorMenubar->Append( MenuProject, _("&Project") ); 
 	
 	MenuMap = new wxMenu();
 	wxMenuItem* MenuitemSave;
@@ -119,7 +119,7 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	
 	MenuMap->Append( -1, _("&Scale"), MenuScale );
 	
-	frmEditorMenubar->Append( MenuMap, _("&Map") );
+	frmEditorMenubar->Append( MenuMap, _("&Map") ); 
 	
 	MenuTools = new wxMenu();
 	wxMenuItem* MenuitemDatabase;
@@ -149,7 +149,7 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	#endif
 	MenuTools->Append( MenuitemMusic );
 	
-	frmEditorMenubar->Append( MenuTools, _("&Tools") );
+	frmEditorMenubar->Append( MenuTools, _("&Tools") ); 
 	
 	MenuGame = new wxMenu();
 	wxMenuItem* MenuitemPlayTest;
@@ -172,7 +172,7 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	MenuitemShowTitle = new wxMenuItem( MenuGame, ID_SHOW_TITLE, wxString( _("&Show title") ) , _("Enable or disable background and music in the title in play test"), wxITEM_CHECK );
 	MenuGame->Append( MenuitemShowTitle );
 	
-	frmEditorMenubar->Append( MenuGame, _("&Game") );
+	frmEditorMenubar->Append( MenuGame, _("&Game") ); 
 	
 	MenuHelp = new wxMenu();
 	wxMenuItem* MenuitemHelp;
@@ -191,7 +191,7 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	MenuitemAbout = new wxMenuItem( MenuHelp, wxID_ABOUT, wxString( _("&About") ) , _("About EasyRPG Editor"), wxITEM_NORMAL );
 	MenuHelp->Append( MenuitemAbout );
 	
-	frmEditorMenubar->Append( MenuHelp, _("&Help") );
+	frmEditorMenubar->Append( MenuHelp, _("&Help") ); 
 	
 	this->SetMenuBar( frmEditorMenubar );
 	
@@ -199,35 +199,35 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	frmEditorToolbar = this->CreateToolBar( wxTB_FLAT|wxTB_HORIZONTAL, wxID_ANY );
 	frmEditorToolbar->SetToolSeparation( 0 );
 	frmEditorToolbar->SetToolPacking( 0 );
-	frmEditorToolbar->AddTool( wxID_NEW, _("New"), wxBitmap( wxT("../share/toolbar/new.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("New project"), _("Create a new project") );
-	frmEditorToolbar->AddTool( wxID_OPEN, _("Open"), wxBitmap( wxT("../share/toolbar/open.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Open project"), _("Open an existing project") );
-	frmEditorToolbar->AddTool( wxID_CLOSE, _("Close"), wxBitmap( wxT("../share/toolbar/close.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Close project"), _("Close the current project") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( ID_MAKE_GAME_DISK, _("Make game disk"), wxBitmap( wxT("../share/toolbar/makegamedisk.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Make game disk "), _("Make a redistributable package from the current project") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( wxID_SAVE, _("Save"), wxBitmap( wxT("../share/toolbar/save.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Save map changes"), _("Save all changes in the project maps") );
-	frmEditorToolbar->AddTool( wxID_REVERT, _("Revert"), wxBitmap( wxT("../share/toolbar/revert.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Revert map changes"), _("Discard all changes and reload the saved project maps") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( ID_LOWER_LAYER, _("Lower layer"), wxBitmap( wxT("../share/toolbar/lowerlayer.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Lower layer editing"), _("Switch to the lower layer map editing mode") );
-	frmEditorToolbar->AddTool( ID_UPPER_LAYER, _("Upper layer"), wxBitmap( wxT("../share/toolbar/upperlayer.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Upper layer editing"), _("Switch to the upper layer map editing mode") );
-	frmEditorToolbar->AddTool( ID_EVENTS, _("Events"), wxBitmap( wxT("../share/toolbar/eventlayer.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Event layer editing"), _("Switch to the event layer map editing mode") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( wxID_ZOOM_100, _("1:1"), wxBitmap( wxT("../share/toolbar/11scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:1 scale"), _("Display the map in 1:1 scale") );
-	frmEditorToolbar->AddTool( ID_SCALE_12, _("1:2"), wxBitmap( wxT("../share/toolbar/12scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:2 scale"), _("Display the map in 1:2 scale") );
-	frmEditorToolbar->AddTool( ID_SCALE_14, _("1:4"), wxBitmap( wxT("../share/toolbar/14scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:4 scale"), _("Display the map in 1:4 scale") );
-	frmEditorToolbar->AddTool( ID_SCALE_18, _("1:8"), wxBitmap( wxT("../share/toolbar/18scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:8 scale"), _("Display the map in 1:8 scale") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( ID_DATABASE, _("Database"), wxBitmap( wxT("../share/toolbar/database.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Database editor"), _("Open the project database editor window") );
-	frmEditorToolbar->AddTool( ID_MATERIAL, _("Material"), wxBitmap( wxT("../share/toolbar/material.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Material manager"), _("Add or remove material from the project") );
-	frmEditorToolbar->AddTool( ID_MUSIC, _("Music"), wxBitmap( wxT("../share/toolbar/music.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Music player"), _("Play background music while editing") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( ID_PLAY_TEST, _("Play test"), wxBitmap( wxT("../share/toolbar/playtest.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Play test"), _("Launch the game project for testing") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( ID_FULL_SCREEN, _("Full screen"), wxBitmap( wxT("../share/toolbar/fullscreen.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_CHECK, _("Full screen"), _("Enable or disable full screen in play test") );
-	frmEditorToolbar->AddTool( ID_SHOW_TITLE, _("Title"), wxBitmap( wxT("../share/toolbar/title.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_CHECK, _("Show title"), _("Enable or disable background and music in the title in play test") );
-	frmEditorToolbar->AddSeparator();
-	frmEditorToolbar->AddTool( wxID_HELP, _("Help"), wxBitmap( wxT("../share/toolbar/help.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Help contents"), _("Display the help index and contents of EasyRPG") );
-	frmEditorToolbar->Realize();
+	frmEditorToolbar->AddTool( wxID_NEW, _("New"), wxBitmap( wxT("../share/toolbar/new.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("New project"), _("Create a new project"), NULL ); 
+	frmEditorToolbar->AddTool( wxID_OPEN, _("Open"), wxBitmap( wxT("../share/toolbar/open.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Open project"), _("Open an existing project"), NULL ); 
+	frmEditorToolbar->AddTool( wxID_CLOSE, _("Close"), wxBitmap( wxT("../share/toolbar/close.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Close project"), _("Close the current project"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( ID_MAKE_GAME_DISK, _("Make game disk"), wxBitmap( wxT("../share/toolbar/makegamedisk.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Make game disk "), _("Make a redistributable package from the current project"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( wxID_SAVE, _("Save"), wxBitmap( wxT("../share/toolbar/save.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Save map changes"), _("Save all changes in the project maps"), NULL ); 
+	frmEditorToolbar->AddTool( wxID_REVERT, _("Revert"), wxBitmap( wxT("../share/toolbar/revert.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Revert map changes"), _("Discard all changes and reload the saved project maps"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( ID_LOWER_LAYER, _("Lower layer"), wxBitmap( wxT("../share/toolbar/lowerlayer.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Lower layer editing"), _("Switch to the lower layer map editing mode"), NULL ); 
+	frmEditorToolbar->AddTool( ID_UPPER_LAYER, _("Upper layer"), wxBitmap( wxT("../share/toolbar/upperlayer.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Upper layer editing"), _("Switch to the upper layer map editing mode"), NULL ); 
+	frmEditorToolbar->AddTool( ID_EVENTS, _("Events"), wxBitmap( wxT("../share/toolbar/eventlayer.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Event layer editing"), _("Switch to the event layer map editing mode"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( wxID_ZOOM_100, _("1:1"), wxBitmap( wxT("../share/toolbar/11scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:1 scale"), _("Display the map in 1:1 scale"), NULL ); 
+	frmEditorToolbar->AddTool( ID_SCALE_12, _("1:2"), wxBitmap( wxT("../share/toolbar/12scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:2 scale"), _("Display the map in 1:2 scale"), NULL ); 
+	frmEditorToolbar->AddTool( ID_SCALE_14, _("1:4"), wxBitmap( wxT("../share/toolbar/14scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:4 scale"), _("Display the map in 1:4 scale"), NULL ); 
+	frmEditorToolbar->AddTool( ID_SCALE_18, _("1:8"), wxBitmap( wxT("../share/toolbar/18scale.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("1:8 scale"), _("Display the map in 1:8 scale"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( ID_DATABASE, _("Database"), wxBitmap( wxT("../share/toolbar/database.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Database editor"), _("Open the project database editor window"), NULL ); 
+	frmEditorToolbar->AddTool( ID_MATERIAL, _("Material"), wxBitmap( wxT("../share/toolbar/material.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Material manager"), _("Add or remove material from the project"), NULL ); 
+	frmEditorToolbar->AddTool( ID_MUSIC, _("Music"), wxBitmap( wxT("../share/toolbar/music.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Music player"), _("Play background music while editing"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( ID_PLAY_TEST, _("Play test"), wxBitmap( wxT("../share/toolbar/playtest.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Play test"), _("Launch the game project for testing"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( ID_FULL_SCREEN, _("Full screen"), wxBitmap( wxT("../share/toolbar/fullscreen.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_CHECK, _("Full screen"), _("Enable or disable full screen in play test"), NULL ); 
+	frmEditorToolbar->AddTool( ID_SHOW_TITLE, _("Title"), wxBitmap( wxT("../share/toolbar/title.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_CHECK, _("Show title"), _("Enable or disable background and music in the title in play test"), NULL ); 
+	frmEditorToolbar->AddSeparator(); 
+	frmEditorToolbar->AddTool( wxID_HELP, _("Help"), wxBitmap( wxT("../share/toolbar/help.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Help contents"), _("Display the help index and contents of EasyRPG"), NULL ); 
+	frmEditorToolbar->Realize(); 
 	
 	wxBoxSizer* szEditor;
 	szEditor = new wxBoxSizer( wxHORIZONTAL );
@@ -236,22 +236,23 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	szEditorLeft = new wxBoxSizer( wxVERTICAL );
 	
 	frmEditorToolbar2 = new wxToolBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL ); 
-	frmEditorToolbar2->AddTool( wxID_UNDO, _("Undo"), wxBitmap( wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Undo the last action"), _("Revert last drawing in the actual map") );
-	frmEditorToolbar2->AddSeparator();
-	frmEditorToolbar2->AddTool( ID_SELECT, _("Select"), wxBitmap( wxT("../share/toolbar/select.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Selection tool"), _("Select a map region by a rectangle selector") );
-	frmEditorToolbar2->AddTool( wxID_ZOOM_FIT, _("Zoom"), wxBitmap( wxT("../share/toolbar/zoom.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Zoom tool"), _("Zoom in or out by left or right mouse click") );
-	frmEditorToolbar2->AddTool( ID_PEN, _("Pen"), wxBitmap( wxT("../share/toolbar/pen.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Pen draw tool"), _("Draw on the map freely by hand") );
-	frmEditorToolbar2->AddTool( ID_RECTANGLE, _("Rectangle"), wxBitmap( wxT("../share/toolbar/rectangle.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Rectangle draw tool"), _("Draw a rectangle on the map") );
-	frmEditorToolbar2->AddTool( ID_CIRCLE, _("Circle"), wxBitmap( wxT("../share/toolbar/circle.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Circle draw tool"), _("Draw a circle on the map") );
-	frmEditorToolbar2->AddTool( ID_FILL, _("Fill"), wxBitmap( wxT("../share/toolbar/fill.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Flood fill draw tool"), _("Draw tiles with same tile type on the map") );
-	frmEditorToolbar2->Realize();
+	frmEditorToolbar2->AddTool( wxID_UNDO, _("Undo"), wxBitmap( wxT("../share/toolbar/undo.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_NORMAL, _("Undo the last action"), _("Revert last drawing in the actual map"), NULL ); 
+	frmEditorToolbar2->AddSeparator(); 
+	frmEditorToolbar2->AddTool( ID_SELECT, _("Select"), wxBitmap( wxT("../share/toolbar/select.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Selection tool"), _("Select a map region by a rectangle selector"), NULL ); 
+	frmEditorToolbar2->AddTool( wxID_ZOOM_FIT, _("Zoom"), wxBitmap( wxT("../share/toolbar/zoom.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Zoom tool"), _("Zoom in or out by left or right mouse click"), NULL ); 
+	frmEditorToolbar2->AddTool( ID_PEN, _("Pen"), wxBitmap( wxT("../share/toolbar/pen.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Pen draw tool"), _("Draw on the map freely by hand"), NULL ); 
+	frmEditorToolbar2->AddTool( ID_RECTANGLE, _("Rectangle"), wxBitmap( wxT("../share/toolbar/rectangle.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Rectangle draw tool"), _("Draw a rectangle on the map"), NULL ); 
+	frmEditorToolbar2->AddTool( ID_CIRCLE, _("Circle"), wxBitmap( wxT("../share/toolbar/circle.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Circle draw tool"), _("Draw a circle on the map"), NULL ); 
+	frmEditorToolbar2->AddTool( ID_FILL, _("Fill"), wxBitmap( wxT("../share/toolbar/fill.png"), wxBITMAP_TYPE_ANY ), wxNullBitmap, wxITEM_RADIO, _("Flood fill draw tool"), _("Draw tiles with same tile type on the map"), NULL ); 
+	frmEditorToolbar2->Realize(); 
 	
 	szEditorLeft->Add( frmEditorToolbar2, 0, wxEXPAND, 5 );
 	
 	swEditor = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_BORDER|wxSP_LIVE_UPDATE );
 	swEditor->SetSashGravity( 1 );
-	swEditor->SetMinimumPaneSize( 96 );
 	swEditor->Connect( wxEVT_IDLE, wxIdleEventHandler( frmEditor_Base::swEditorOnIdle ), NULL, this );
+	swEditor->SetMinimumPaneSize( 96 );
+	
 	pnEditorTileset = new wxScrolledWindow( swEditor, wxID_ANY, wxDefaultPosition, wxSize( 217, -1 ), wxHSCROLL|wxVSCROLL );
 	pnEditorTileset->SetScrollRate( 16, 16 );
 	pnEditorTileset->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
@@ -336,28 +337,28 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 frmEditor_Base::~frmEditor_Base()
 {
 	// Disconnect Events
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::New_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Open_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Close_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MakeGameDisk_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Exit_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Save_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Revert_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::LowerLayer_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::UpperLayer_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Events_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale11_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale12_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale14_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale18_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Database_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Material_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Music_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::PlayTest_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::FullScreen_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::ShowTitle_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Help_click ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::About_click ) );
+	this->Disconnect( wxID_NEW, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::New_click ) );
+	this->Disconnect( wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Open_click ) );
+	this->Disconnect( wxID_CLOSE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Close_click ) );
+	this->Disconnect( ID_MAKE_GAME_DISK, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::MakeGameDisk_click ) );
+	this->Disconnect( wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Exit_click ) );
+	this->Disconnect( wxID_SAVE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Save_click ) );
+	this->Disconnect( wxID_REVERT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Revert_click ) );
+	this->Disconnect( ID_LOWER_LAYER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::LowerLayer_click ) );
+	this->Disconnect( ID_UPPER_LAYER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::UpperLayer_click ) );
+	this->Disconnect( ID_EVENTS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Events_click ) );
+	this->Disconnect( wxID_ZOOM_100, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale11_click ) );
+	this->Disconnect( SCALE_12, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale12_click ) );
+	this->Disconnect( SCALE_14, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale14_click ) );
+	this->Disconnect( SCALE_18, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Scale18_click ) );
+	this->Disconnect( ID_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Database_click ) );
+	this->Disconnect( ID_MATERIAL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Material_click ) );
+	this->Disconnect( ID_MUSIC, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Music_click ) );
+	this->Disconnect( ID_PLAY_TEST, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::PlayTest_click ) );
+	this->Disconnect( ID_FULL_SCREEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::FullScreen_click ) );
+	this->Disconnect( ID_SHOW_TITLE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::ShowTitle_click ) );
+	this->Disconnect( wxID_HELP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::Help_click ) );
+	this->Disconnect( wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( frmEditor_Base::About_click ) );
 	this->Disconnect( wxID_NEW, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::New_Click ) );
 	this->Disconnect( wxID_OPEN, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Open_click ) );
 	this->Disconnect( wxID_CLOSE, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Close_click ) );
@@ -386,6 +387,7 @@ frmEditor_Base::~frmEditor_Base()
 	this->Disconnect( ID_CIRCLE, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Circle_click ) );
 	this->Disconnect( ID_FILL, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Fill_click ) );
 	tcMapTree->Disconnect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( frmEditor_Base::MapTree_menu_click ), NULL, this );
+	
 }
 
 dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -694,6 +696,7 @@ dlgMap_Base::~dlgMap_Base()
 	btnOk->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
 	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
 	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
+	
 }
 
 dlgMaterial_Base::dlgMaterial_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -793,4 +796,5 @@ dlgMaterial_Base::~dlgMaterial_Base()
 	rbImportAs->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( dlgMaterial_Base::ImportAs_selected ), NULL, this );
 	btnClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Close_click ), NULL, this );
 	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Help_click ), NULL, this );
+	
 }
