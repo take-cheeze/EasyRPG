@@ -35,8 +35,6 @@ protected:
 	void OK_click(wxCommandEvent& WXUNUSED(event));
 	/// Cancels dialog on click
 	void Cancel_click(wxCommandEvent& WXUNUSED(event));
-	/// Applies dialog on click
-	void Apply_click(wxCommandEvent& WXUNUSED(event));
 };
 
 #endif

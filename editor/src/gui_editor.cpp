@@ -664,17 +664,17 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	wxBoxSizer* szBottom;
 	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	szBottom->Add( wxID_OK, 0, wxALL, 1 );
+	btnOk = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOk->SetDefault(); 
+	szBottom->Add( btnOk, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	szBottom->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	szBottom->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
 	szMap->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
@@ -683,17 +683,17 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	szMap->Fit( this );
 	
 	// Connect Events
-	wxID_OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
-	wxID_CANCEL->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
-	wxID_HELP->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
+	btnOk->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
+	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
+	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
 }
 
 dlgMap_Base::~dlgMap_Base()
 {
 	// Disconnect Events
-	wxID_OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
-	wxID_CANCEL->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
-	wxID_HELP->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
+	btnOk->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
+	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
+	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
 }
 
 dlgMaterial_Base::dlgMaterial_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -737,7 +737,7 @@ dlgMaterial_Base::dlgMaterial_Base( wxWindow* parent, wxWindowID id, const wxStr
 	btnExport->SetDefault(); 
 	szMaterialTopRight->Add( btnExport, 0, wxALL|wxEXPAND, 1 );
 	
-	btnDelete = new wxButton( this, wxID_ANY, _("Delete..."), wxDefaultPosition, wxDefaultSize, 0 );
+	btnDelete = new wxButton( this, wxID_DELETE, _("Delete..."), wxDefaultPosition, wxDefaultSize, 0 );
 	btnDelete->SetDefault(); 
 	szMaterialTopRight->Add( btnDelete, 0, wxALL|wxEXPAND, 1 );
 	
@@ -757,13 +757,13 @@ dlgMaterial_Base::dlgMaterial_Base( wxWindow* parent, wxWindowID id, const wxStr
 	wxBoxSizer* szMaterialBottom;
 	szMaterialBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_CLOSE = new wxButton( this, wxID_ANY, _("&Close"), wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CLOSE->SetDefault(); 
-	szMaterialBottom->Add( wxID_CLOSE, 0, wxALL, 1 );
+	btnClose = new wxButton( this, wxID_CLOSE, _("&Close"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnClose->SetDefault(); 
+	szMaterialBottom->Add( btnClose, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	szMaterialBottom->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szMaterialBottom->Add( btnHelp, 0, wxALL, 1 );
 	
 	szMaterial->Add( szMaterialBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
@@ -778,8 +778,8 @@ dlgMaterial_Base::dlgMaterial_Base( wxWindow* parent, wxWindowID id, const wxStr
 	btnExport->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Export_click ), NULL, this );
 	btnDelete->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Delete_click ), NULL, this );
 	rbImportAs->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( dlgMaterial_Base::ImportAs_selected ), NULL, this );
-	wxID_CLOSE->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Close_click ), NULL, this );
-	wxID_HELP->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Help_click ), NULL, this );
+	btnClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Close_click ), NULL, this );
+	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Help_click ), NULL, this );
 }
 
 dlgMaterial_Base::~dlgMaterial_Base()
@@ -791,6 +791,6 @@ dlgMaterial_Base::~dlgMaterial_Base()
 	btnExport->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Export_click ), NULL, this );
 	btnDelete->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Delete_click ), NULL, this );
 	rbImportAs->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( dlgMaterial_Base::ImportAs_selected ), NULL, this );
-	wxID_CLOSE->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Close_click ), NULL, this );
-	wxID_HELP->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Help_click ), NULL, this );
+	btnClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Close_click ), NULL, this );
+	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMaterial_Base::Help_click ), NULL, this );
 }

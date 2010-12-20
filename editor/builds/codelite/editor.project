@@ -32,6 +32,10 @@
     <File Name="../../src/appEditor.h"/>
     <File Name="../../src/dlgMaterial.cpp"/>
     <File Name="../../src/dlgMaterial.h"/>
+    <File Name="../../src/gui_database.h"/>
+    <File Name="../../src/gui_database.cpp"/>
+    <File Name="../../src/dlgDb.h"/>
+    <File Name="../../src/dlgDb.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">

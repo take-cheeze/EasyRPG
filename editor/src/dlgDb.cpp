@@ -15,32 +15,19 @@
 // along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "frmEditor.h"
 #include "dlgDb.h"
-#include "dlgMaterial.h"
-#include "dlgMap.h"
 
-frmEditor::frmEditor(wxWindow* parent) : frmEditor_Base(parent) {
+dlgDb::dlgDb(wxWindow* parent) : dlgDb_Base(parent) {
 }
 
-void frmEditor::Exit_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgDb::OK_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }
 
-void frmEditor::Database_click(wxCommandEvent& WXUNUSED(event)) {
-	dlgDb *DialogDb = new dlgDb(NULL);
-	DialogDb->ShowModal();
-	DialogDb->Destroy();
+void dlgDb::Cancel_click(wxCommandEvent& WXUNUSED(event)) {
+	Close();
 }
 
-void frmEditor::Material_click(wxCommandEvent& WXUNUSED(event)) {
-	dlgMaterial *DialogMaterial = new dlgMaterial(NULL);
-	DialogMaterial->ShowModal();
-	DialogMaterial->Destroy();
-}
-
-void frmEditor::MapTree_menu_click(wxMouseEvent& WXUNUSED(event)) {
-	dlgMap *DialogMap = new dlgMap(NULL);
-	DialogMap->ShowModal();
-	DialogMap->Destroy();
+void dlgDb::Apply_click(wxCommandEvent& WXUNUSED(event)) {
+	Close();
 }

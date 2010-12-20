@@ -186,9 +186,9 @@ class dlgMap_Base : public wxDialog
 		wxRadioBox* rbTeleport;
 		wxRadioBox* rbEscape;
 		wxRadioBox* rbSave;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOk;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
@@ -218,8 +218,8 @@ class dlgMaterial_Base : public wxDialog
 		wxButton* btnDelete;
 		
 		wxRadioBox* rbImportAs;
-		wxButton* wxID_CLOSE;
-		wxButton* wxID_HELP;
+		wxButton* btnClose;
+		wxButton* btnHelp;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void Folder_selected( wxCommandEvent& event ) { event.Skip(); }

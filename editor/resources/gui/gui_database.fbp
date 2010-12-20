@@ -19,7 +19,7 @@
         <property name="relative_path">1</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -77,7 +77,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer342</property>
+                <property name="name">szDb</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -142,7 +142,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer460</property>
+                        <property name="name">szBottom</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -161,7 +161,7 @@
                                 <property name="label">BGM</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">button_1</property>
+                                <property name="name">btnBGM</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
                                 <property name="size">-1, -1</property>
@@ -175,7 +175,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style">wxNO_BORDER</property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">BGM_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -223,11 +223,11 @@
                                 <property name="fg"></property>
                                 <property name="font"></property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_OK</property>
+                                <property name="label">&amp;OK</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">wxID_OK</property>
+                                <property name="name">btnOK</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
                                 <property name="size"></property>
@@ -241,7 +241,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">OK_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -279,11 +279,11 @@
                                 <property name="fg"></property>
                                 <property name="font"></property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_CANCEL</property>
+                                <property name="label">&amp;Cancel</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">wxID_CANCEL</property>
+                                <property name="name">btnCancel</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
                                 <property name="size"></property>
@@ -297,7 +297,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">Cancel_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -335,11 +335,11 @@
                                 <property name="fg"></property>
                                 <property name="font"></property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_APPLY</property>
+                                <property name="label">&amp;Apply</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">wxID_APPLY</property>
+                                <property name="name">btnApply</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
                                 <property name="size"></property>
@@ -353,7 +353,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">Apply_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -391,11 +391,11 @@
                                 <property name="fg"></property>
                                 <property name="font"></property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_HELP</property>
+                                <property name="label">&amp;Help</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">wxID_HELP</property>
+                                <property name="name">btnHelp</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
                                 <property name="size"></property>
@@ -409,7 +409,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick"></event>
+                                <event name="OnButtonClick">Help_click</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>
@@ -439,7 +439,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -497,7 +497,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer275</property>
+                <property name="name">szDbMaxNumber</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -506,7 +506,7 @@
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer276</property>
+                        <property name="name">szTop</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -576,7 +576,7 @@
                                 <property name="font"></property>
                                 <property name="hidden"></property>
                                 <property name="id">wxID_ANY</property>
-                                <property name="initial"></property>
+                                <property name="initial">0</property>
                                 <property name="max"> 5000</property>
                                 <property name="maximum_size"></property>
                                 <property name="min">1</property>
@@ -592,7 +592,7 @@
                                 <property name="validator_style">wxFILTER_NONE</property>
                                 <property name="validator_type">wxDefaultValidator</property>
                                 <property name="validator_variable"></property>
-                                <property name="value"></property>
+                                <property name="value">1</property>
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
@@ -631,7 +631,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer277</property>
+                        <property name="name">szBottom</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -646,11 +646,11 @@
                                 <property name="fg"></property>
                                 <property name="font"></property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_OK</property>
+                                <property name="label">&amp;OK</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">wxID_OK</property>
+                                <property name="name">btnOK</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
                                 <property name="size"></property>
@@ -702,11 +702,11 @@
                                 <property name="fg"></property>
                                 <property name="font"></property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_CANCEL</property>
+                                <property name="label">&amp;Cancel</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimum_size"></property>
-                                <property name="name">wxID_CANCEL</property>
+                                <property name="name">btnCancel</property>
                                 <property name="permission">protected</property>
                                 <property name="pos"></property>
                                 <property name="size"></property>
