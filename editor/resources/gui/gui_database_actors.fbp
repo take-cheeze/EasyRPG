@@ -53,7 +53,7 @@
             <property name="minimize_button">0</property>
             <property name="minimum_size"></property>
             <property name="moveable">1</property>
-            <property name="name">pnActor</property>
+            <property name="name">pnActor_Base</property>
             <property name="pane_border">1</property>
             <property name="pane_position"></property>
             <property name="pane_size"></property>
@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer343</property>
+                <property name="name">szActor</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -109,7 +109,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer344</property>
+                        <property name="name">szLeft</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -379,7 +379,7 @@
                         <property name="growablerows">1</property>
                         <property name="hgap">0</property>
                         <property name="minimum_size"></property>
-                        <property name="name">fgSizer41</property>
+                        <property name="name">szRight</property>
                         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
                         <property name="permission">none</property>
                         <property name="rows">2</property>
@@ -390,7 +390,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer345</property>
+                                <property name="name">szRightTopLeft</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -399,35 +399,35 @@
                                     <property name="proportion">0</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer346</property>
+                                        <property name="name">szRightTopLeftTop</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
-                                        <object class="sizeritem" expanded="1">
+                                        <object class="sizeritem" expanded="0">
                                             <property name="border">0</property>
                                             <property name="flag">wxEXPAND</property>
                                             <property name="proportion">1</property>
-                                            <object class="wxBoxSizer" expanded="1">
+                                            <object class="wxBoxSizer" expanded="0">
                                                 <property name="minimum_size"></property>
-                                                <property name="name">bSizer347</property>
+                                                <property name="name">szRightTopLeftTopLeft</property>
                                                 <property name="orient">wxVERTICAL</property>
                                                 <property name="permission">none</property>
-                                                <object class="sizeritem" expanded="1">
+                                                <object class="sizeritem" expanded="0">
                                                     <property name="border">1</property>
                                                     <property name="flag">wxLEFT|wxRIGHT|wxEXPAND</property>
                                                     <property name="proportion">0</property>
-                                                    <object class="wxStaticBoxSizer" expanded="1">
+                                                    <object class="wxStaticBoxSizer" expanded="0">
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Name</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer180</property>
+                                                        <property name="name">szActorName</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
-                                                        <object class="sizeritem" expanded="1">
+                                                        <object class="sizeritem" expanded="0">
                                                             <property name="border">0</property>
                                                             <property name="flag">wxALIGN_CENTER_VERTICAL</property>
                                                             <property name="proportion">1</property>
-                                                            <object class="wxTextCtrl" expanded="1">
+                                                            <object class="wxTextCtrl" expanded="0">
                                                                 <property name="BottomDockable">1</property>
                                                                 <property name="LeftDockable">1</property>
                                                                 <property name="RightDockable">1</property>
@@ -513,23 +513,23 @@
                                                         </object>
                                                     </object>
                                                 </object>
-                                                <object class="sizeritem" expanded="1">
+                                                <object class="sizeritem" expanded="0">
                                                     <property name="border">1</property>
                                                     <property name="flag">wxLEFT|wxRIGHT|wxEXPAND</property>
                                                     <property name="proportion">0</property>
-                                                    <object class="wxStaticBoxSizer" expanded="1">
+                                                    <object class="wxStaticBoxSizer" expanded="0">
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Title</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer181</property>
+                                                        <property name="name">szActorTitle</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
-                                                        <object class="sizeritem" expanded="1">
+                                                        <object class="sizeritem" expanded="0">
                                                             <property name="border">0</property>
                                                             <property name="flag">wxALIGN_CENTER_VERTICAL</property>
                                                             <property name="proportion">1</property>
-                                                            <object class="wxTextCtrl" expanded="1">
+                                                            <object class="wxTextCtrl" expanded="0">
                                                                 <property name="BottomDockable">1</property>
                                                                 <property name="LeftDockable">1</property>
                                                                 <property name="RightDockable">1</property>
@@ -617,23 +617,23 @@
                                                 </object>
                                             </object>
                                         </object>
-                                        <object class="sizeritem" expanded="1">
+                                        <object class="sizeritem" expanded="0">
                                             <property name="border">1</property>
                                             <property name="flag">wxLEFT|wxRIGHT|wxEXPAND</property>
                                             <property name="proportion">0</property>
-                                            <object class="wxStaticBoxSizer" expanded="1">
+                                            <object class="wxStaticBoxSizer" expanded="0">
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Walking graphic</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer182</property>
+                                                <property name="name">szWalkingGraphic</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="sizeritem" expanded="1">
+                                                <object class="sizeritem" expanded="0">
                                                     <property name="border">1</property>
                                                     <property name="flag">wxRIGHT|wxALIGN_BOTTOM</property>
                                                     <property name="proportion">0</property>
-                                                    <object class="wxStaticBitmap" expanded="1">
+                                                    <object class="wxStaticBitmap" expanded="0">
                                                         <property name="BottomDockable">1</property>
                                                         <property name="LeftDockable">1</property>
                                                         <property name="RightDockable">1</property>
@@ -711,20 +711,20 @@
                                                         <event name="OnUpdateUI"></event>
                                                     </object>
                                                 </object>
-                                                <object class="sizeritem" expanded="1">
+                                                <object class="sizeritem" expanded="0">
                                                     <property name="border">0</property>
                                                     <property name="flag">wxEXPAND</property>
                                                     <property name="proportion">1</property>
-                                                    <object class="wxBoxSizer" expanded="1">
+                                                    <object class="wxBoxSizer" expanded="0">
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">bSizer348</property>
+                                                        <property name="name">szWalkingGraphicOptions</property>
                                                         <property name="orient">wxVERTICAL</property>
                                                         <property name="permission">none</property>
-                                                        <object class="sizeritem" expanded="1">
+                                                        <object class="sizeritem" expanded="0">
                                                             <property name="border">1</property>
                                                             <property name="flag">wxLEFT|wxBOTTOM</property>
                                                             <property name="proportion">1</property>
-                                                            <object class="wxCheckBox" expanded="1">
+                                                            <object class="wxCheckBox" expanded="0">
                                                                 <property name="BottomDockable">1</property>
                                                                 <property name="LeftDockable">1</property>
                                                                 <property name="RightDockable">1</property>
@@ -805,11 +805,11 @@
                                                                 <event name="OnUpdateUI"></event>
                                                             </object>
                                                         </object>
-                                                        <object class="sizeritem" expanded="1">
+                                                        <object class="sizeritem" expanded="0">
                                                             <property name="border">1</property>
                                                             <property name="flag">wxLEFT|wxTOP|wxALIGN_BOTTOM</property>
                                                             <property name="proportion">0</property>
-                                                            <object class="wxButton" expanded="1">
+                                                            <object class="wxButton" expanded="0">
                                                                 <property name="BottomDockable">1</property>
                                                                 <property name="LeftDockable">1</property>
                                                                 <property name="RightDockable">1</property>
@@ -902,7 +902,7 @@
                                     <property name="proportion">1</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer349</property>
+                                        <property name="name">szTopLeftBottom</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -913,7 +913,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Initial level</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer183</property>
+                                                <property name="name">szActorInitialLevel</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -1015,7 +1015,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Max level</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer184</property>
+                                                <property name="name">szActorMaxLevel</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -1117,7 +1117,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Critical hit rate</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer185</property>
+                                                <property name="name">szActorCriticalHitRate</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -1308,7 +1308,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Initial equipment</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer186</property>
+                                <property name="name">szInitialEquipment</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -1323,7 +1323,7 @@
                                         <property name="growablerows"></property>
                                         <property name="hgap">2</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">fgSizer42</property>
+                                        <property name="name">szInitialEquipmentGrid</property>
                                         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
                                         <property name="permission">none</property>
                                         <property name="rows">5</property>
@@ -2178,7 +2178,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer350</property>
+                                <property name="name">szRightBottomLeft</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -2187,7 +2187,7 @@
                                     <property name="proportion">0</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer351</property>
+                                        <property name="name">szRightBottomLeftTop</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -2196,7 +2196,7 @@
                                             <property name="proportion">0</property>
                                             <object class="wxBoxSizer" expanded="1">
                                                 <property name="minimum_size"></property>
-                                                <property name="name">bSizer352</property>
+                                                <property name="name">sxRightBottomLeftTopLeft</property>
                                                 <property name="orient">wxVERTICAL</property>
                                                 <property name="permission">none</property>
                                                 <object class="sizeritem" expanded="1">
@@ -2207,7 +2207,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Face graphic</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer187</property>
+                                                        <property name="name">szActorFaceGraphic</property>
                                                         <property name="orient">wxVERTICAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -2388,7 +2388,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Options</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer188</property>
+                                                        <property name="name">szActorOptions</property>
                                                         <property name="orient">wxVERTICAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -2744,7 +2744,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Capacity curves</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer189</property>
+                                                <property name="name">szCapacityCurves</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2756,7 +2756,7 @@
                                                         <property name="cols">2</property>
                                                         <property name="hgap">2</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">gSizer7</property>
+                                                        <property name="name">szCapacityCurvesGrid</property>
                                                         <property name="permission">none</property>
                                                         <property name="rows">3</property>
                                                         <property name="vgap">0</property>
@@ -2768,7 +2768,7 @@
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Max HP</property>
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">sbSizer190</property>
+                                                                <property name="name">szActorMaxHP</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <event name="OnUpdateUI"></event>
@@ -2864,7 +2864,7 @@
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Max MP</property>
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">sbSizer191</property>
+                                                                <property name="name">szActorMaxMP</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <event name="OnUpdateUI"></event>
@@ -2960,7 +2960,7 @@
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Attack</property>
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">sbSizer192</property>
+                                                                <property name="name">szActorAttack</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <event name="OnUpdateUI"></event>
@@ -3056,7 +3056,7 @@
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Defense</property>
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">sbSizer193</property>
+                                                                <property name="name">szActorDefense</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <event name="OnUpdateUI"></event>
@@ -3152,7 +3152,7 @@
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Intelligence</property>
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">sbSizer194</property>
+                                                                <property name="name">szActorIntelligence</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <event name="OnUpdateUI"></event>
@@ -3248,7 +3248,7 @@
                                                                 <property name="id">wxID_ANY</property>
                                                                 <property name="label">Agility</property>
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">sbSizer195</property>
+                                                                <property name="name">szActorAgility</property>
                                                                 <property name="orient">wxHORIZONTAL</property>
                                                                 <property name="permission">none</property>
                                                                 <event name="OnUpdateUI"></event>
@@ -3350,7 +3350,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Experience curve</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer196</property>
+                                        <property name="name">szActorExperienceCurve</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -3537,7 +3537,7 @@
                             <property name="proportion">1</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer353</property>
+                                <property name="name">szRightBottomRight</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -3548,7 +3548,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Animation without weapons</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer197</property>
+                                        <property name="name">szActorAnimationWithoutWeapons</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -3646,7 +3646,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Skills</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer198</property>
+                                        <property name="name">szRightBottomRightMiddle</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -3758,7 +3758,7 @@
                                             <property name="proportion">0</property>
                                             <object class="wxBoxSizer" expanded="1">
                                                 <property name="minimum_size"></property>
-                                                <property name="name">bSizer354</property>
+                                                <property name="name">szActorSkillsBattleCommand</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <object class="sizeritem" expanded="1">
@@ -3944,7 +3944,7 @@
                                     <property name="proportion">1</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer355</property>
+                                        <property name="name">szRightBottomRightBottom</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -3955,7 +3955,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">State rates</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer199</property>
+                                                <property name="name">szActorStateRates</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4054,7 +4054,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Attribute rates</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer200</property>
+                                                <property name="name">szActorAttributeRates</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>

@@ -105,8 +105,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\gui_database_actors.cpp" />
+    <ClCompile Include="..\..\src\gui_database_skills.cpp" />
     <ClCompile Include="..\..\src\gui_database.cpp" />
     <ClCompile Include="..\..\src\gui_editor.cpp" />
+    <ClCompile Include="..\..\src\pnActor.cpp" />
+    <ClCompile Include="..\..\src\pnSkill.cpp" />
     <ClCompile Include="..\..\src\dlgDb.cpp" />
     <ClCompile Include="..\..\src\dlgMap.cpp" />
     <ClCompile Include="..\..\src\dlgMaterial.cpp" />
@@ -114,8 +118,12 @@
     <ClCompile Include="..\..\src\appEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\gui_database_actors.h" />
+    <ClInclude Include="..\..\src\gui_database_skills.h" />
     <ClInclude Include="..\..\src\gui_database.h" />
     <ClInclude Include="..\..\src\gui_editor.h" />
+    <ClCompile Include="..\..\src\pnActor.h" />
+    <ClCompile Include="..\..\src\pnSkill.h" />
     <ClCompile Include="..\..\src\dlgDb.h" />
     <ClCompile Include="..\..\src\dlgMap.h" />
     <ClCompile Include="..\..\src\dlgMaterial.h" />

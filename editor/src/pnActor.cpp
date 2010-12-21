@@ -15,28 +15,7 @@
 // along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "dlgDb.h"
-#include "gui_database_actors.h"
-#include "gui_database_skills.h"
 #include "pnActor.h"
-#include "pnSkill.h"
 
-dlgDb::dlgDb(wxWindow* parent) : dlgDb_Base(parent) {
-	pnActor *panelActor = new pnActor(nbDb);
-	pnSkill *panelSkill = new pnSkill(nbDb);
-	nbDb->AddPage(panelActor, _("Actors"));
-	nbDb->AddPage(panelSkill, _("Skills"));
-	Fit();
-}
-
-void dlgDb::OK_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
-}
-
-void dlgDb::Cancel_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
-}
-
-void dlgDb::Apply_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
+pnActor::pnActor(wxWindow* parent) : pnActor_Base(parent) {
 }

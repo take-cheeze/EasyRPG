@@ -16,6 +16,10 @@
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
+#include <wx/bitmap.h>
+#include <wx/image.h>
+#include <wx/icon.h>
+#include <wx/bmpbuttn.h>
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/dialog.h>
@@ -24,9 +28,6 @@
 #include <wx/choice.h>
 #include <wx/statbox.h>
 #include <wx/listbox.h>
-#include <wx/bitmap.h>
-#include <wx/image.h>
-#include <wx/icon.h>
 #include <wx/statbmp.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -41,7 +42,7 @@ class dlgDb_Base : public wxDialog
 	
 	protected:
 		wxNotebook* nbDb;
-		wxButton* btnBGM;
+		wxBitmapButton* btnBGM;
 		
 		wxButton* btnOK;
 		wxButton* btnCancel;
@@ -49,7 +50,6 @@ class dlgDb_Base : public wxDialog
 		wxButton* btnHelp;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void BGM_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Apply_click( wxCommandEvent& event ) { event.Skip(); }

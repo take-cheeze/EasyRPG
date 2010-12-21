@@ -23,8 +23,7 @@ dlgDb_Base::dlgDb_Base( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* szBottom;
 	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	btnBGM = new wxButton( this, wxID_ANY, _("BGM"), wxDefaultPosition, wxSize( -1, -1 ), wxBU_EXACTFIT|wxNO_BORDER );
-	btnBGM->SetDefault(); 
+	btnBGM = new wxBitmapButton( this, wxID_ANY, wxBitmap( wxT("../share/toolbar/music.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0|wxNO_BORDER );
 	szBottom->Add( btnBGM, 0, wxALL, 1 );
 	
 	
@@ -53,7 +52,6 @@ dlgDb_Base::dlgDb_Base( wxWindow* parent, wxWindowID id, const wxString& title, 
 	szDb->Fit( this );
 	
 	// Connect Events
-	btnBGM->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::BGM_click ), NULL, this );
 	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::OK_click ), NULL, this );
 	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Cancel_click ), NULL, this );
 	btnApply->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Apply_click ), NULL, this );
@@ -63,7 +61,6 @@ dlgDb_Base::dlgDb_Base( wxWindow* parent, wxWindowID id, const wxString& title, 
 dlgDb_Base::~dlgDb_Base()
 {
 	// Disconnect Events
-	btnBGM->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::BGM_click ), NULL, this );
 	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::OK_click ), NULL, this );
 	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Cancel_click ), NULL, this );
 	btnApply->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Apply_click ), NULL, this );
