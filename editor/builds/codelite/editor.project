@@ -41,11 +41,19 @@
       <File Name="../../src/gui_editor.h"/>
       <File Name="../../src/gui_database_skills.cpp"/>
       <File Name="../../src/gui_database_skills.h"/>
+      <File Name="../../src/gui_database_enemies.cpp"/>
+      <File Name="../../src/gui_database_enemies.h"/>
+      <File Name="../../src/gui_database_items.h"/>
+      <File Name="../../src/gui_database_items.cpp"/>
     </VirtualDirectory>
     <File Name="../../src/pnActor.h"/>
     <File Name="../../src/pnActor.cpp"/>
     <File Name="../../src/pnSkill.h"/>
     <File Name="../../src/pnSkill.cpp"/>
+    <File Name="../../src/pnItem.h"/>
+    <File Name="../../src/pnItem.cpp"/>
+    <File Name="../../src/pnEnemy.h"/>
+    <File Name="../../src/pnEnemy.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">

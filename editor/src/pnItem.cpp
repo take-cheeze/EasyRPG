@@ -15,36 +15,7 @@
 // along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "dlgDb.h"
-#include "gui_database_actors.h"
-#include "gui_database_skills.h"
-#include "gui_database_items.h"
-#include "gui_database_enemies.h"
-#include "pnActor.h"
-#include "pnSkill.h"
 #include "pnItem.h"
-#include "pnEnemy.h"
 
-dlgDb::dlgDb(wxWindow* parent) : dlgDb_Base(parent) {
-	pnActor *panelActor = new pnActor(nbDb);
-	pnSkill *panelSkill = new pnSkill(nbDb);
-	pnItem *panelItem = new pnItem(nbDb);
-	pnEnemy *panelEnemy = new pnEnemy(nbDb);
-	nbDb->AddPage(panelActor, _("Actors"));
-	nbDb->AddPage(panelSkill, _("Skills"));
-	nbDb->AddPage(panelItem, _("Items"));
-	nbDb->AddPage(panelEnemy, _("Enemies"));
-	Fit();
-}
-
-void dlgDb::OK_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
-}
-
-void dlgDb::Cancel_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
-}
-
-void dlgDb::Apply_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
+pnItem::pnItem(wxWindow* parent) : pnItem_Base(parent) {
 }
