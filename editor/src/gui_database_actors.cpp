@@ -95,7 +95,7 @@ pnActor_Base::pnActor_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szActorInitialLevel;
 	szActorInitialLevel = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Initial level") ), wxHORIZONTAL );
 	
-	spinActorInitialLevel = new wxSpinCtrl( this, wxID_ANY, wxT("1"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  50, 1 );
+	spinActorInitialLevel = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  50, 1 );
 	szActorInitialLevel->Add( spinActorInitialLevel, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szTopLeftBottom->Add( szActorInitialLevel, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
@@ -103,7 +103,7 @@ pnActor_Base::pnActor_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szActorMaxLevel;
 	szActorMaxLevel = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Max level") ), wxHORIZONTAL );
 	
-	spinActorMaxLevel = new wxSpinCtrl( this, wxID_ANY, wxT("50"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  50, 50 );
+	spinActorMaxLevel = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  50, 50 );
 	szActorMaxLevel->Add( spinActorMaxLevel, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szTopLeftBottom->Add( szActorMaxLevel, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
@@ -115,7 +115,7 @@ pnActor_Base::pnActor_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	chbActorCriticalHitRate->SetValue(true); 
 	szActorCriticalHitRate->Add( chbActorCriticalHitRate, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	spinActorCriticalHitRate = new wxSpinCtrl( this, wxID_ANY, wxT("30"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  100, 30 );
+	spinActorCriticalHitRate = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  100, 30 );
 	szActorCriticalHitRate->Add( spinActorCriticalHitRate, 1, wxALIGN_CENTER_VERTICAL, 1 );
 	
 	szTopLeftBottom->Add( szActorCriticalHitRate, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );

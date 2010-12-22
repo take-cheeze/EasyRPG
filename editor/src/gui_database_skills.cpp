@@ -60,7 +60,7 @@ pnSkill_Base::pnSkill_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szSkillMPCost;
 	szSkillMPCost = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("MP cost") ), wxHORIZONTAL );
 	
-	spinSkillMPCost = new wxSpinCtrl( this, wxID_ANY, wxT("0"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0,  999, 0 );
+	spinSkillMPCost = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, 0, 999, 0 );
 	szSkillMPCost->Add( spinSkillMPCost, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szRightTop->Add( szSkillMPCost, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
@@ -202,7 +202,7 @@ pnSkill_Base::pnSkill_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szSkillEffectRate;
 	szSkillEffectRate = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Effect rate") ), wxHORIZONTAL );
 	
-	spinSkillEffectRate = new wxSpinCtrl( this, wxID_ANY, wxT("0"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0,  999, 0 );
+	spinSkillEffectRate = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0,  999, 0 );
 	szSkillEffectRate->Add( spinSkillEffectRate, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szSkillRightBottomMiddleLeft->Add( szSkillEffectRate, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
@@ -252,7 +252,7 @@ pnSkill_Base::pnSkill_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szSkillSuccessRate;
 	szSkillSuccessRate = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Success rate") ), wxHORIZONTAL );
 	
-	spinSkillSuccessRate = new wxSpinCtrl( this, wxID_ANY, wxT("100"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0,  100, 100 );
+	spinSkillSuccessRate = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0,  100, 100 );
 	szSkillSuccessRate->Add( spinSkillSuccessRate, 1, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stSkillSuccessRate = new wxStaticText( this, wxID_ANY, _("%"), wxDefaultPosition, wxDefaultSize, 0 );

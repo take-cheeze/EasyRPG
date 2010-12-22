@@ -53,7 +53,7 @@
             <property name="minimize_button">0</property>
             <property name="minimum_size"></property>
             <property name="moveable">1</property>
-            <property name="name">pnAttribute</property>
+            <property name="name">pnAttribute_Base</property>
             <property name="pane_border">1</property>
             <property name="pane_position"></property>
             <property name="pane_size"></property>
@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer399</property>
+                <property name="name">szAttribute</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -109,7 +109,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer400</property>
+                        <property name="name">szLeft</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -374,7 +374,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer401</property>
+                        <property name="name">szRight</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -385,7 +385,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Name</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer249</property>
+                                <property name="name">szAttributeName</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -574,7 +574,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Effect rate</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer250</property>
+                                <property name="name">szEffectRate</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -589,7 +589,7 @@
                                         <property name="growablerows"></property>
                                         <property name="hgap">2</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">fgSizer44</property>
+                                        <property name="name">szEffectRateGrid</property>
                                         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
                                         <property name="permission">none</property>
                                         <property name="rows">5</property>
@@ -706,9 +706,9 @@
                                                 <property name="gripper">0</property>
                                                 <property name="hidden"></property>
                                                 <property name="id">wxID_ANY</property>
-                                                <property name="initial"></property>
+                                                <property name="initial">0</property>
                                                 <property name="layer"></property>
-                                                <property name="max">0</property>
+                                                <property name="max">100</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -735,7 +735,7 @@
                                                 <property name="validator_style">wxFILTER_NONE</property>
                                                 <property name="validator_type">wxDefaultValidator</property>
                                                 <property name="validator_variable"></property>
-                                                <property name="value"></property>
+                                                <property name="value">0</property>
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
@@ -964,7 +964,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="initial"></property>
                                                 <property name="layer"></property>
-                                                <property name="max">0</property>
+                                                <property name="max">100</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -991,7 +991,7 @@
                                                 <property name="validator_style">wxFILTER_NONE</property>
                                                 <property name="validator_type">wxDefaultValidator</property>
                                                 <property name="validator_variable"></property>
-                                                <property name="value"></property>
+                                                <property name="value">0</property>
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
@@ -1220,7 +1220,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="initial"></property>
                                                 <property name="layer"></property>
-                                                <property name="max">0</property>
+                                                <property name="max">100</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -1247,7 +1247,7 @@
                                                 <property name="validator_style">wxFILTER_NONE</property>
                                                 <property name="validator_type">wxDefaultValidator</property>
                                                 <property name="validator_variable"></property>
-                                                <property name="value"></property>
+                                                <property name="value">0</property>
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
@@ -1476,7 +1476,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="initial"></property>
                                                 <property name="layer"></property>
-                                                <property name="max">0</property>
+                                                <property name="max">100</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -1503,7 +1503,7 @@
                                                 <property name="validator_style">wxFILTER_NONE</property>
                                                 <property name="validator_type">wxDefaultValidator</property>
                                                 <property name="validator_variable"></property>
-                                                <property name="value"></property>
+                                                <property name="value">0</property>
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
@@ -1732,7 +1732,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="initial"></property>
                                                 <property name="layer"></property>
-                                                <property name="max">0</property>
+                                                <property name="max">100</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -1759,7 +1759,7 @@
                                                 <property name="validator_style">wxFILTER_NONE</property>
                                                 <property name="validator_type">wxDefaultValidator</property>
                                                 <property name="validator_variable"></property>
-                                                <property name="value"></property>
+                                                <property name="value">0</property>
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>

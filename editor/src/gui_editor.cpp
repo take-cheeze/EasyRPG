@@ -424,14 +424,14 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	wxStaticBoxSizer* szSize;
 	szSize = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Size") ), wxHORIZONTAL );
 	
-	spinSizeWidth = new wxSpinCtrl( this, wxID_ANY, wxT("20"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 20,  500, 20 );
+	spinSizeWidth = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 20,  500, 20 );
 	szSize->Add( spinSizeWidth, 1, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stSize = new wxStaticText( this, wxID_ANY, _("X"), wxDefaultPosition, wxDefaultSize, 0 );
 	stSize->Wrap( -1 );
 	szSize->Add( stSize, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	spinSizeHeight = new wxSpinCtrl( this, wxID_ANY, wxT("15"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 15,  500, 15 );
+	spinSizeHeight = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 15,  500, 15 );
 	szSize->Add( spinSizeHeight, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	szMapTopLeft->Add( szSize, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
@@ -459,7 +459,7 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	stEncounterSteps->Wrap( -1 );
 	szEncounterSteps->Add( stEncounterSteps, 0, wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	spinEncounterSteps = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 0, 25 );
+	spinEncounterSteps = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 99, 25 );
 	szEncounterSteps->Add( spinEncounterSteps, 1, wxLEFT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	szTroopEncounters->Add( szEncounterSteps, 0, wxEXPAND, 0 );
@@ -522,7 +522,7 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	stParallaxHorizontalSpeed->Wrap( -1 );
 	szParallaxHorizontalSpeed->Add( stParallaxHorizontalSpeed, 0, wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	spinParallaxHorizontalSpeed = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 0, 1 );
+	spinParallaxHorizontalSpeed = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 99, 1 );
 	szParallaxHorizontalSpeed->Add( spinParallaxHorizontalSpeed, 1, wxLEFT|wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	szParallaxOptions->Add( szParallaxHorizontalSpeed, 0, wxEXPAND, 0 );
@@ -559,7 +559,7 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	stParallaxVerticalSpeed->Wrap( -1 );
 	szParallaxVerticalSpeed->Add( stParallaxVerticalSpeed, 0, wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	spinParallaxVerticalSpeed = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 0, 1 );
+	spinParallaxVerticalSpeed = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 99, 1 );
 	szParallaxVerticalSpeed->Add( spinParallaxVerticalSpeed, 1, wxLEFT|wxTOP, 1 );
 	
 	szParallaxOptions->Add( szParallaxVerticalSpeed, 0, wxEXPAND, 0 );

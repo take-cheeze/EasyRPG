@@ -53,7 +53,7 @@
             <property name="minimize_button">0</property>
             <property name="minimum_size"></property>
             <property name="moveable">1</property>
-            <property name="name">pnTileset</property>
+            <property name="name">pnTileset_Base</property>
             <property name="pane_border">1</property>
             <property name="pane_position"></property>
             <property name="pane_size"></property>
@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer427</property>
+                <property name="name">szTileset</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -109,7 +109,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer428</property>
+                        <property name="name">szLeft</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -374,7 +374,7 @@
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer429</property>
+                        <property name="name">szRight</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -383,7 +383,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer430</property>
+                                <property name="name">szRightTop</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -394,7 +394,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Name</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer287</property>
+                                        <property name="name">szTilesetName</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -496,7 +496,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Tileset graphic</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer288</property>
+                                        <property name="name">szTilesetGraphic</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -756,7 +756,7 @@
                                         <event name="OnUpdateUI"></event>
                                         <object class="wxBoxSizer" expanded="1">
                                             <property name="minimum_size"></property>
-                                            <property name="name">bSizer431</property>
+                                            <property name="name">szTilesetLowerLayer</property>
                                             <property name="orient">wxHORIZONTAL</property>
                                             <property name="permission">none</property>
                                             <object class="sizeritem" expanded="1">
@@ -765,7 +765,7 @@
                                                 <property name="proportion">0</property>
                                                 <object class="wxBoxSizer" expanded="1">
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">bSizer432</property>
+                                                    <property name="name">szTilesetLowerLayerLeft</property>
                                                     <property name="orient">wxVERTICAL</property>
                                                     <property name="permission">none</property>
                                                     <object class="sizeritem" expanded="1">
@@ -776,7 +776,7 @@
                                                             <property name="id">wxID_ANY</property>
                                                             <property name="label">Modify</property>
                                                             <property name="minimum_size"></property>
-                                                            <property name="name">sbSizer289</property>
+                                                            <property name="name">szModifyLower</property>
                                                             <property name="orient">wxVERTICAL</property>
                                                             <property name="permission">none</property>
                                                             <event name="OnUpdateUI"></event>
@@ -1130,7 +1130,7 @@
                                                             <property name="id">wxID_ANY</property>
                                                             <property name="label">Water animation</property>
                                                             <property name="minimum_size"></property>
-                                                            <property name="name">sbSizer290</property>
+                                                            <property name="name">szWaterAnimation</property>
                                                             <property name="orient">wxVERTICAL</property>
                                                             <property name="permission">none</property>
                                                             <event name="OnUpdateUI"></event>
@@ -1487,7 +1487,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Terrain</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer291</property>
+                                                    <property name="name">szTilesetLowerLayerTerrain</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -1662,7 +1662,7 @@
                                         <event name="OnUpdateUI"></event>
                                         <object class="wxBoxSizer" expanded="1">
                                             <property name="minimum_size"></property>
-                                            <property name="name">bSizer433</property>
+                                            <property name="name">szTilesetUpperLayer</property>
                                             <property name="orient">wxHORIZONTAL</property>
                                             <property name="permission">none</property>
                                             <object class="sizeritem" expanded="1">
@@ -1673,7 +1673,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Modify</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer292</property>
+                                                    <property name="name">szModifyUpper</property>
                                                     <property name="orient">wxVERTICAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>

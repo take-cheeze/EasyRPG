@@ -53,7 +53,7 @@
             <property name="minimize_button">0</property>
             <property name="minimum_size"></property>
             <property name="moveable">1</property>
-            <property name="name">pnCommonEvent</property>
+            <property name="name">pnCommonEvent_Base</property>
             <property name="pane_border">1</property>
             <property name="pane_position"></property>
             <property name="pane_size"></property>
@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer456</property>
+                <property name="name">szCommonEvent</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -109,7 +109,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer457</property>
+                        <property name="name">szLeft</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -374,7 +374,7 @@
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer458</property>
+                        <property name="name">szRight</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -383,7 +383,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer459</property>
+                                <property name="name">szRightTop</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -394,7 +394,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Name</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer464</property>
+                                        <property name="name">szCommonEventName</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -496,7 +496,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Activation conditions</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer465</property>
+                                        <property name="name">szCommonEventActivationConditions</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -594,7 +594,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Condition event activation switch</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer466</property>
+                                        <property name="name">szCommonEventConditionActivationSwitch</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -868,7 +868,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Event execution contents</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer467</property>
+                                <property name="name">szCommonEventExecutionContent</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>

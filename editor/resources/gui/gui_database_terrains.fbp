@@ -53,7 +53,7 @@
             <property name="minimize_button">0</property>
             <property name="minimum_size"></property>
             <property name="moveable">1</property>
-            <property name="name">pnTerrain</property>
+            <property name="name">pnTerrain_Base</property>
             <property name="pane_border">1</property>
             <property name="pane_position"></property>
             <property name="pane_size"></property>
@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer421</property>
+                <property name="name">szTerrain</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -109,7 +109,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer422</property>
+                        <property name="name">szLeft</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -374,7 +374,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer423</property>
+                        <property name="name">szRight</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -383,7 +383,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer424</property>
+                                <property name="name">szRightTop</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -394,7 +394,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Name</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer282</property>
+                                        <property name="name">szTerrainName</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -496,7 +496,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Damage</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer283</property>
+                                        <property name="name">szTerrainDamage</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -598,7 +598,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Encounter %</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer284</property>
+                                        <property name="name">szTerrainEncounterRate</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -786,7 +786,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Battle background graphic</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer285</property>
+                                <property name="name">szTerrainBattleBackground</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -878,7 +878,7 @@
                                     <property name="proportion">0</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer425</property>
+                                        <property name="name">szTerrainBattleBackgroundGraphic</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -1071,7 +1071,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Vehicle permissions</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer286</property>
+                                        <property name="name">szRightBottom</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>

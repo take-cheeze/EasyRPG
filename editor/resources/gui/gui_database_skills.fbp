@@ -628,7 +628,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="initial">0</property>
                                                 <property name="layer"></property>
-                                                <property name="max"> 999</property>
+                                                <property name="max">999</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -646,7 +646,7 @@
                                                 <property name="resize">Resizable</property>
                                                 <property name="row"></property>
                                                 <property name="show">1</property>
-                                                <property name="size">50, -1</property>
+                                                <property name="size">60,-1</property>
                                                 <property name="style">wxSP_ARROW_KEYS</property>
                                                 <property name="subclass"></property>
                                                 <property name="toolbar_pane">0</property>
@@ -655,7 +655,7 @@
                                                 <property name="validator_style">wxFILTER_NONE</property>
                                                 <property name="validator_type">wxDefaultValidator</property>
                                                 <property name="validator_variable"></property>
-                                                <property name="value">0</property>
+                                                <property name="value"></property>
                                                 <property name="window_extra_style"></property>
                                                 <property name="window_name"></property>
                                                 <property name="window_style"></property>
@@ -2301,7 +2301,7 @@
                                                         <property name="validator_style">wxFILTER_NONE</property>
                                                         <property name="validator_type">wxDefaultValidator</property>
                                                         <property name="validator_variable"></property>
-                                                        <property name="value">0</property>
+                                                        <property name="value"></property>
                                                         <property name="window_extra_style"></property>
                                                         <property name="window_name"></property>
                                                         <property name="window_style"></property>
@@ -3108,7 +3108,7 @@
                                                         <property name="validator_style">wxFILTER_NONE</property>
                                                         <property name="validator_type">wxDefaultValidator</property>
                                                         <property name="validator_variable"></property>
-                                                        <property name="value">100</property>
+                                                        <property name="value"></property>
                                                         <property name="window_extra_style"></property>
                                                         <property name="window_name"></property>
                                                         <property name="window_style"></property>

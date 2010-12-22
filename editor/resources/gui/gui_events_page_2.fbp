@@ -66,7 +66,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Start battle</property>
             <property name="toolbar_pane">0</property>
@@ -1537,7 +1537,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Visit commerce</property>
             <property name="toolbar_pane">0</property>
@@ -2566,7 +2566,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Visit inn</property>
             <property name="toolbar_pane">0</property>
@@ -3236,7 +3236,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Actor name input</property>
             <property name="toolbar_pane">0</property>
@@ -3891,7 +3891,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Teleport</property>
             <property name="toolbar_pane">0</property>
@@ -4707,7 +4707,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Memorize place</property>
             <property name="toolbar_pane">0</property>
@@ -5903,7 +5903,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Go to memorized place</property>
             <property name="toolbar_pane">0</property>
@@ -7099,7 +7099,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Change vehicle position</property>
             <property name="toolbar_pane">0</property>
@@ -8750,7 +8750,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Change event position</property>
             <property name="toolbar_pane">0</property>
@@ -10144,7 +10144,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Swap events</property>
             <property name="toolbar_pane">0</property>
@@ -10711,7 +10711,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Get terrain ID</property>
             <property name="toolbar_pane">0</property>
@@ -12194,7 +12194,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Get position ID</property>
             <property name="toolbar_pane">0</property>
@@ -13677,7 +13677,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Blank screen</property>
             <property name="toolbar_pane">0</property>
@@ -14135,7 +14135,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Show screen</property>
             <property name="toolbar_pane">0</property>
@@ -14593,7 +14593,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Change screen tone</property>
             <property name="toolbar_pane">0</property>
@@ -17134,7 +17134,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Flash screen</property>
             <property name="toolbar_pane">0</property>
@@ -19235,7 +19235,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Shake screen</property>
             <property name="toolbar_pane">0</property>
@@ -20706,7 +20706,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Move screen</property>
             <property name="toolbar_pane">0</property>
@@ -21892,7 +21892,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Weather effect</property>
             <property name="toolbar_pane">0</property>
@@ -22437,7 +22437,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Show picture</property>
             <property name="toolbar_pane">0</property>
@@ -25023,7 +25023,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Move picture</property>
             <property name="toolbar_pane">0</property>
@@ -27474,7 +27474,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Delete picture</property>
             <property name="toolbar_pane">0</property>
@@ -27936,7 +27936,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Show animation</property>
             <property name="toolbar_pane">0</property>
@@ -28780,7 +28780,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Change actor transparency</property>
             <property name="toolbar_pane">0</property>
@@ -29227,7 +29227,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Flash character</property>
             <property name="toolbar_pane">0</property>
@@ -31426,7 +31426,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Event movement</property>
             <property name="toolbar_pane">0</property>
@@ -36041,7 +36041,7 @@
             <property name="row"></property>
             <property name="show">1</property>
             <property name="size"></property>
-            <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxTHICK_FRAME</property>
+            <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Wait</property>
             <property name="toolbar_pane">0</property>
