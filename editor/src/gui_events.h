@@ -81,6 +81,8 @@ class dlgEvt_Base : public wxDialog
 		wxCheckBox* chbGraphicTranslucent;
 		wxButton* btnGraphic;
 		wxChoice* chMovement;
+		wxStaticText* stMovementRate;
+		wxChoice* chMovementRate;
 		wxButton* btnMovementCreatePath;
 		wxChoice* chTrigger;
 		wxChoice* chPriority;

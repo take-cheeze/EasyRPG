@@ -228,6 +228,20 @@ dlgEvt_Base::dlgEvt_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	chMovement->SetSelection( 0 );
 	szMovement->Add( chMovement, 0, wxBOTTOM|wxEXPAND, 1 );
 	
+	wxBoxSizer* szMovementRate;
+	szMovementRate = new wxBoxSizer( wxHORIZONTAL );
+	
+	stMovementRate = new wxStaticText( pnPage, wxID_ANY, _("Rate:"), wxDefaultPosition, wxDefaultSize, 0 );
+	stMovementRate->Wrap( -1 );
+	szMovementRate->Add( stMovementRate, 0, wxRIGHT|wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
+	
+	wxArrayString chMovementRateChoices;
+	chMovementRate = new wxChoice( pnPage, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chMovementRateChoices, 0 );
+	chMovementRate->SetSelection( 0 );
+	szMovementRate->Add( chMovementRate, 1, wxLEFT|wxTOP|wxBOTTOM, 1 );
+	
+	szMovement->Add( szMovementRate, 0, wxEXPAND, 0 );
+	
 	btnMovementCreatePath = new wxButton( pnPage, wxID_ANY, _("Create path"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnMovementCreatePath->SetDefault(); 
 	szMovement->Add( btnMovementCreatePath, 0, wxTOP|wxEXPAND, 1 );
