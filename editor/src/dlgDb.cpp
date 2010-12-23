@@ -20,20 +20,56 @@
 #include "gui_database_skills.h"
 #include "gui_database_items.h"
 #include "gui_database_enemies.h"
+#include "gui_database_troops.h"
+#include "gui_database_attributes.h"
+#include "gui_database_states.h"
+#include "gui_database_animations.h"
+#include "gui_database_terrains.h"
+#include "gui_database_tilesets.h"
+#include "gui_database_texts.h"
+#include "gui_database_system.h"
+#include "gui_database_common_events.h"
 #include "pnActor.h"
 #include "pnSkill.h"
 #include "pnItem.h"
 #include "pnEnemy.h"
+#include "pnTroop.h"
+#include "pnAttribute.h"
+#include "pnState.h"
+#include "pnAnimation.h"
+#include "pnTerrain.h"
+#include "pnTileset.h"
+#include "pnText.h"
+#include "pnSystem.h"
+#include "pnCommonEvent.h"
 
 dlgDb::dlgDb(wxWindow* parent) : dlgDb_Base(parent) {
 	pnActor *panelActor = new pnActor(nbDb);
 	pnSkill *panelSkill = new pnSkill(nbDb);
 	pnItem *panelItem = new pnItem(nbDb);
 	pnEnemy *panelEnemy = new pnEnemy(nbDb);
+	pnTroop *panelTroop = new pnTroop(nbDb);
+	pnAttribute *panelAttribute = new pnAttribute(nbDb);
+	pnState *panelState = new pnState(nbDb);
+	pnAnimation *panelAnimation = new pnAnimation(nbDb);
+	pnTerrain *panelTerrain = new pnTerrain(nbDb);
+	pnTileset *panelTileset = new pnTileset(nbDb);
+	pnText *panelText = new pnText(nbDb);
+	pnSystem *panelSystem = new pnSystem(nbDb);
+	pnCommonEvent *panelCommonEvent = new pnCommonEvent(nbDb);
 	nbDb->AddPage(panelActor, _("Actors"));
 	nbDb->AddPage(panelSkill, _("Skills"));
 	nbDb->AddPage(panelItem, _("Items"));
 	nbDb->AddPage(panelEnemy, _("Enemies"));
+	nbDb->AddPage(panelTroop, _("Troops"));
+	nbDb->AddPage(panelAttribute, _("Attributes"));
+	nbDb->AddPage(panelState, _("States"));
+	nbDb->AddPage(panelAnimation, _("Animations"));
+	nbDb->AddPage(panelTerrain, _("Terrains"));
+	nbDb->AddPage(panelTileset, _("Tilesets"));
+	nbDb->AddPage(panelText, _("Texts"));
+	nbDb->AddPage(panelSystem, _("System"));
+	nbDb->AddPage(panelCommonEvent, _("Common events"));
 	Fit();
 }
 

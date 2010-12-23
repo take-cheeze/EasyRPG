@@ -833,9 +833,9 @@
                                                         <property name="gripper">0</property>
                                                         <property name="hidden"></property>
                                                         <property name="id">wxID_ANY</property>
-                                                        <property name="initial"></property>
+                                                        <property name="initial">0</property>
                                                         <property name="layer"></property>
-                                                        <property name="max">0</property>
+                                                        <property name="max">99</property>
                                                         <property name="maximize_button">0</property>
                                                         <property name="maximum_size"></property>
                                                         <property name="min">0</property>

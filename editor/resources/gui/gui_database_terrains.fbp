@@ -528,9 +528,9 @@
                                                 <property name="gripper">0</property>
                                                 <property name="hidden"></property>
                                                 <property name="id">wxID_ANY</property>
-                                                <property name="initial"></property>
+                                                <property name="initial">0</property>
                                                 <property name="layer"></property>
-                                                <property name="max">0</property>
+                                                <property name="max">99999</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -630,9 +630,9 @@
                                                 <property name="gripper">0</property>
                                                 <property name="hidden"></property>
                                                 <property name="id">wxID_ANY</property>
-                                                <property name="initial"></property>
+                                                <property name="initial">0</property>
                                                 <property name="layer"></property>
-                                                <property name="max">0</property>
+                                                <property name="max">100</property>
                                                 <property name="maximize_button">0</property>
                                                 <property name="maximum_size"></property>
                                                 <property name="min">0</property>
@@ -1060,7 +1060,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer426</property>
+                                <property name="name">szRightBottom</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -1071,7 +1071,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Vehicle permissions</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">szRightBottom</property>
+                                        <property name="name">szTerrainVehiclePermissions</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>

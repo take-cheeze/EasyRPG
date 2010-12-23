@@ -1929,7 +1929,7 @@
                                                         <event name="OnUpdateUI"></event>
                                                         <object class="wxBoxSizer" expanded="1">
                                                             <property name="minimum_size"></property>
-                                                            <property name="name">szTroopBattleEvents</property>
+                                                            <property name="name">szTroopBattleEventsConditions</property>
                                                             <property name="orient">wxVERTICAL</property>
                                                             <property name="permission">none</property>
                                                             <object class="sizeritem" expanded="1">
@@ -1938,7 +1938,7 @@
                                                                 <property name="proportion">0</property>
                                                                 <object class="wxBoxSizer" expanded="1">
                                                                     <property name="minimum_size"></property>
-                                                                    <property name="name">szTroopBattleEventsConditions</property>
+                                                                    <property name="name">szTroopBattleEventsConditionsSelect</property>
                                                                     <property name="orient">wxHORIZONTAL</property>
                                                                     <property name="permission">none</property>
                                                                     <object class="sizeritem" expanded="1">
