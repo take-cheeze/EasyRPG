@@ -88,8 +88,14 @@ pnCommonEvent_Base::pnCommonEvent_Base( wxWindow* parent, wxWindowID id, const w
 	this->SetSizer( szCommonEvent );
 	this->Layout();
 	szCommonEvent->Fit( this );
+	
+	// Connect Events
+	ListCommonEventExecutionContent->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( pnCommonEvent_Base::EvtCmd_dclick ), NULL, this );
 }
 
 pnCommonEvent_Base::~pnCommonEvent_Base()
 {
+	// Disconnect Events
+	ListCommonEventExecutionContent->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( pnCommonEvent_Base::EvtCmd_dclick ), NULL, this );
+	
 }

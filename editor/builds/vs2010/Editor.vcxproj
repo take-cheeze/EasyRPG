@@ -23,6 +23,8 @@
     <ClCompile Include="..\..\src\dlgDb.cpp" />
     <ClCompile Include="..\..\src\dlgMap.cpp" />
     <ClCompile Include="..\..\src\dlgMaterial.cpp" />
+    <ClCompile Include="..\..\src\dlgEvt.cpp" />
+    <ClCompile Include="..\..\src\dlgEvtCmd.cpp" />
     <ClCompile Include="..\..\src\frmEditor.cpp" />
     <ClCompile Include="..\..\src\gui_database.cpp" />
     <ClCompile Include="..\..\src\gui_database_actors.cpp" />
@@ -58,6 +60,8 @@
     <ClInclude Include="..\..\src\dlgDb.h" />
     <ClInclude Include="..\..\src\dlgMap.h" />
     <ClInclude Include="..\..\src\dlgMaterial.h" />
+    <ClInclude Include="..\..\src\dlgEvt.h" />
+    <ClInclude Include="..\..\src\dlgEvtCmd.h" />
     <ClInclude Include="..\..\src\frmEditor.h" />
     <ClInclude Include="..\..\src\gui_database.h" />
     <ClInclude Include="..\..\src\gui_database_actors.h" />

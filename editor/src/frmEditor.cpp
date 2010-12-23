@@ -19,6 +19,7 @@
 #include "dlgDb.h"
 #include "dlgMaterial.h"
 #include "dlgMap.h"
+#include "dlgEvt.h"
 
 frmEditor::frmEditor(wxWindow* parent) : frmEditor_Base(parent) {
 }
@@ -43,4 +44,10 @@ void frmEditor::MapTree_menu_click(wxMouseEvent& WXUNUSED(event)) {
 	dlgMap *DialogMap = new dlgMap(NULL);
 	DialogMap->ShowModal();
 	DialogMap->Destroy();
+}
+
+void frmEditor::EditorMap_menu_click(wxMouseEvent& WXUNUSED(event)) {
+	dlgEvt *DialogEvt = new dlgEvt(NULL);
+	DialogEvt->ShowModal();
+	DialogEvt->Destroy();
 }

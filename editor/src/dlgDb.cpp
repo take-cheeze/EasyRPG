@@ -80,7 +80,3 @@ void dlgDb::OK_click(wxCommandEvent& WXUNUSED(event)) {
 void dlgDb::Cancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }
-
-void dlgDb::Apply_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
-}

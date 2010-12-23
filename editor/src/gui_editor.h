@@ -123,6 +123,7 @@ class frmEditor_Base : public wxFrame
 		virtual void Circle_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Fill_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void MapTree_menu_click( wxMouseEvent& event ) { event.Skip(); }
+		virtual void EditorMap_menu_click( wxMouseEvent& event ) { event.Skip(); }
 		
 	
 	public:

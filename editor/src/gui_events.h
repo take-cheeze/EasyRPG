@@ -81,8 +81,6 @@ class dlgEvt_Base : public wxDialog
 		wxCheckBox* chbGraphicTranslucent;
 		wxButton* btnGraphic;
 		wxChoice* chMovement;
-		wxStaticText* stMovementRate;
-		wxChoice* chMovementRate;
 		wxButton* btnMovementCreatePath;
 		wxChoice* chTrigger;
 		wxChoice* chPriority;
@@ -94,6 +92,10 @@ class dlgEvt_Base : public wxDialog
 		wxButton* btnCancel;
 		wxButton* btnApply;
 		wxButton* btnHelp;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void EvtCmd_dclick( wxMouseEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		
@@ -205,6 +207,10 @@ class dlgEvtCmd_Base : public wxDialog
 		wxButton* btnEscapePermissions;
 		wxButton* btnGoToTitle;
 		wxButton* btnClose;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void Close_click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		

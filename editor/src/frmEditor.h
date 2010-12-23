@@ -37,8 +37,10 @@ protected:
 	void Database_click(wxCommandEvent& WXUNUSED(event));
 	/// Show material window
 	void Material_click(wxCommandEvent& WXUNUSED(event));
-	/// Secondary click on tree map
+	/// Secondary click on map tree
 	void MapTree_menu_click(wxMouseEvent& WXUNUSED(event));
+	/// Secondary click on editor map
+	void EditorMap_menu_click(wxMouseEvent& WXUNUSED(event));
 };
 
 #endif

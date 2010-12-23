@@ -15,14 +15,11 @@
 // along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "pnCommonEvent.h"
 #include "dlgEvtCmd.h"
 
-pnCommonEvent::pnCommonEvent(wxWindow* parent) : pnCommonEvent_Base(parent) {
+dlgEvtCmd::dlgEvtCmd(wxWindow* parent) : dlgEvtCmd_Base(parent) {
 }
 
-void pnCommonEvent::EvtCmd_dclick(wxMouseEvent& WXUNUSED(event)) {
-	dlgEvtCmd *DialogEvtCmd = new dlgEvtCmd(NULL);
-	DialogEvtCmd->ShowModal();
-	DialogEvtCmd->Destroy();
+void dlgEvtCmd::Close_click(wxCommandEvent& WXUNUSED(event)) {
+	Close();
 }

@@ -45,6 +45,10 @@ class pnCommonEvent_Base : public wxPanel
 		wxTextCtrl* tcCommonEventConditionActivationSwitch;
 		wxButton* btnCommonEventConditionActivationSwitch;
 		wxListBox* ListCommonEventExecutionContent;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void EvtCmd_dclick( wxMouseEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		

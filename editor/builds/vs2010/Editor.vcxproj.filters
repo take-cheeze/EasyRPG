@@ -13,6 +13,12 @@
     <ClCompile Include="..\..\src\dlgMaterial.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\dlgEvt.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dlgEvtCmd.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\frmEditor.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -115,6 +121,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\dlgMaterial.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\dlgEvt.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\dlgEvtCmd.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\gui_editor.h">

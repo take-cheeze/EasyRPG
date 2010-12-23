@@ -332,6 +332,7 @@ frmEditor_Base::frmEditor_Base( wxWindow* parent, wxWindowID id, const wxString&
 	this->Connect( ID_CIRCLE, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Circle_click ) );
 	this->Connect( ID_FILL, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Fill_click ) );
 	tcMapTree->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( frmEditor_Base::MapTree_menu_click ), NULL, this );
+	pnEditorMap->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( frmEditor_Base::EditorMap_menu_click ), NULL, this );
 }
 
 frmEditor_Base::~frmEditor_Base()
@@ -387,6 +388,7 @@ frmEditor_Base::~frmEditor_Base()
 	this->Disconnect( ID_CIRCLE, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Circle_click ) );
 	this->Disconnect( ID_FILL, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( frmEditor_Base::Fill_click ) );
 	tcMapTree->Disconnect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( frmEditor_Base::MapTree_menu_click ), NULL, this );
+	pnEditorMap->Disconnect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( frmEditor_Base::EditorMap_menu_click ), NULL, this );
 	
 }
 

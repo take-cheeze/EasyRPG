@@ -53,6 +53,8 @@
       <File Name="../../src/gui_database.h"/>
       <File Name="../../src/gui_editor.cpp"/>
       <File Name="../../src/gui_editor.h"/>
+      <File Name="../../src/gui_events.cpp"/>
+      <File Name="../../src/gui_events.h"/>
     </VirtualDirectory>
     <File Name="../../resources/win/editor.rc"/>
     <File Name="../../src/dlgMap.cpp"/>
@@ -91,6 +93,10 @@
     <File Name="../../src/pnSystem.cpp"/>
     <File Name="../../src/pnCommonEvent.h"/>
     <File Name="../../src/pnCommonEvent.cpp"/>
+    <File Name="../../src/dlgEvt.h"/>
+    <File Name="../../src/dlgEvt.cpp"/>
+    <File Name="../../src/dlgEvtCmd.h"/>
+    <File Name="../../src/dlgEvtCmd.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
