@@ -24,12 +24,14 @@
 ////////////////////////////////////////////////////////////
 
 #include "gui_editor.h"
+#include "dlgDb.h"
 
 /// Implementing frmEditor_Base
 class frmEditor : public frmEditor_Base {
 public:
 	/// Constructor
 	frmEditor(wxWindow* parent);
+	~frmEditor();
 protected:
 	/// Exits app on menu exit
 	void Exit_click(wxCommandEvent& WXUNUSED(event));
@@ -41,6 +43,7 @@ protected:
 	void MapTree_menu_click(wxMouseEvent& WXUNUSED(event));
 	/// Secondary click on editor map
 	void EditorMap_menu_click(wxMouseEvent& WXUNUSED(event));
+	dlgDb *DialogDb;
 };
 
 #endif

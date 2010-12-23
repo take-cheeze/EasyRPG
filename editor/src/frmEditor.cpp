@@ -22,6 +22,11 @@
 #include "dlgEvt.h"
 
 frmEditor::frmEditor(wxWindow* parent) : frmEditor_Base(parent) {
+	DialogDb = new dlgDb(NULL);
+}
+
+frmEditor::~frmEditor() {
+	delete DialogDb;
 }
 
 void frmEditor::Exit_click(wxCommandEvent& WXUNUSED(event)) {
@@ -29,9 +34,7 @@ void frmEditor::Exit_click(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void frmEditor::Database_click(wxCommandEvent& WXUNUSED(event)) {
-	dlgDb *DialogDb = new dlgDb(NULL);
 	DialogDb->ShowModal();
-	DialogDb->Destroy();
 }
 
 void frmEditor::Material_click(wxCommandEvent& WXUNUSED(event)) {
