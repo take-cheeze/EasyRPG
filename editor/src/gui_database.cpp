@@ -23,7 +23,7 @@ dlgDb_Base::dlgDb_Base( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* szBottom;
 	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	btnBGM = new wxBitmapButton( this, wxID_ANY, wxBitmap( wxT("../share/toolbar/music.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0|wxNO_BORDER );
+	btnBGM = new wxBitmapButton( this, wxID_ANY, wxBitmap( wxT("../share/toolbar/music.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW|wxNO_BORDER );
 	szBottom->Add( btnBGM, 0, wxALL, 1 );
 	
 	
@@ -82,7 +82,7 @@ dlgDbMaxNumber_Base::dlgDbMaxNumber_Base( wxWindow* parent, wxWindowID id, const
 	stMaxNumber->Wrap( -1 );
 	szTop->Add( stMaxNumber, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	spinMaxNumber = new wxSpinCtrl( this, wxID_ANY, wxT("1"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  5000, 0 );
+	spinMaxNumber = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  5000, 1 );
 	szTop->Add( spinMaxNumber, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	szDbMaxNumber->Add( szTop, 1, wxBOTTOM|wxEXPAND, 1 );
@@ -103,104 +103,130 @@ dlgDbMaxNumber_Base::dlgDbMaxNumber_Base( wxWindow* parent, wxWindowID id, const
 	this->SetSizer( szDbMaxNumber );
 	this->Layout();
 	szDbMaxNumber->Fit( this );
+	
+	// Connect Events
+	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::OK_click ), NULL, this );
+	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::Cancel_click ), NULL, this );
 }
 
 dlgDbMaxNumber_Base::~dlgDbMaxNumber_Base()
 {
+	// Disconnect Events
+	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::OK_click ), NULL, this );
+	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::Cancel_click ), NULL, this );
+	
 }
 
 dlgDbLearnSkill_Base::dlgDbLearnSkill_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer139;
-	bSizer139 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szDbLearnSkill;
+	szDbLearnSkill = new wxBoxSizer( wxVERTICAL );
 	
-	wxBoxSizer* bSizer140;
-	bSizer140 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTop;
+	szTop = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer75;
-	sbSizer75 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Skill") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szSkill;
+	szSkill = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Skill") ), wxHORIZONTAL );
 	
 	wxArrayString chSkillChoices;
 	chSkill = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chSkillChoices, 0 );
 	chSkill->SetSelection( 0 );
-	sbSizer75->Add( chSkill, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szSkill->Add( chSkill, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer140->Add( sbSizer75, 2, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTop->Add( szSkill, 2, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer76;
-	sbSizer76 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Level") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szLevel;
+	szLevel = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Level") ), wxHORIZONTAL );
 	
-	spinLevel = new wxSpinCtrl( this, wxID_ANY, wxT("1"), wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  50, 1 );
-	sbSizer76->Add( spinLevel, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	spinLevel = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1,  50, 1 );
+	szLevel->Add( spinLevel, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer140->Add( sbSizer76, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTop->Add( szLevel, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	bSizer139->Add( bSizer140, 1, wxEXPAND, 0 );
+	szDbLearnSkill->Add( szTop, 1, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer141;
-	bSizer141 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer141->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer141->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer141->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	bSizer139->Add( bSizer141, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szDbLearnSkill->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer139 );
+	this->SetSizer( szDbLearnSkill );
 	this->Layout();
-	bSizer139->Fit( this );
+	szDbLearnSkill->Fit( this );
+	
+	// Connect Events
+	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::OK_click ), NULL, this );
+	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Cancel_click ), NULL, this );
+	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Help_click ), NULL, this );
 }
 
 dlgDbLearnSkill_Base::~dlgDbLearnSkill_Base()
 {
+	// Disconnect Events
+	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::OK_click ), NULL, this );
+	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Cancel_click ), NULL, this );
+	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Help_click ), NULL, this );
+	
 }
 
 dlgDbSelectAnyGraphic_Base::dlgDbSelectAnyGraphic_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer123;
-	bSizer123 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* SelectAnyGraphic;
+	SelectAnyGraphic = new wxBoxSizer( wxVERTICAL );
 	
-	wxBoxSizer* bSizer124;
-	bSizer124 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTop;
+	szTop = new wxBoxSizer( wxHORIZONTAL );
 	
 	listGraphic = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
-	bSizer124->Add( listGraphic, 1, wxALL|wxEXPAND, 1 );
+	szTop->Add( listGraphic, 1, wxALL|wxEXPAND, 1 );
 	
 	bmpGraphic = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 480, 480 ), wxSUNKEN_BORDER );
-	bSizer124->Add( bmpGraphic, 0, wxALL, 1 );
+	szTop->Add( bmpGraphic, 0, wxALL, 1 );
 	
-	bSizer123->Add( bSizer124, 1, wxEXPAND, 0 );
+	SelectAnyGraphic->Add( szTop, 1, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer125;
-	bSizer125 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer125->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
 	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	wxID_CANCEL->SetDefault(); 
-	bSizer125->Add( wxID_CANCEL, 0, wxALL, 1 );
+	szBottom->Add( wxID_CANCEL, 0, wxALL, 1 );
 	
-	bSizer123->Add( bSizer125, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	SelectAnyGraphic->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer123 );
+	this->SetSizer( SelectAnyGraphic );
 	this->Layout();
-	bSizer123->Fit( this );
+	SelectAnyGraphic->Fit( this );
+	
+	// Connect Events
+	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::OK_click ), NULL, this );
+	wxID_CANCEL->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::Cancel_click ), NULL, this );
 }
 
 dlgDbSelectAnyGraphic_Base::~dlgDbSelectAnyGraphic_Base()
 {
+	// Disconnect Events
+	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::OK_click ), NULL, this );
+	wxID_CANCEL->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::Cancel_click ), NULL, this );
+	
 }

@@ -75,6 +75,11 @@ class dlgDbMaxNumber_Base : public wxDialog
 		wxSpinCtrl* spinMaxNumber;
 		wxButton* btnOK;
 		wxButton* btnCancel;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		
@@ -93,9 +98,15 @@ class dlgDbLearnSkill_Base : public wxDialog
 	protected:
 		wxChoice* chSkill;
 		wxSpinCtrl* spinLevel;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		
@@ -114,8 +125,13 @@ class dlgDbSelectAnyGraphic_Base : public wxDialog
 	protected:
 		wxListBox* listGraphic;
 		wxStaticBitmap* bmpGraphic;
-		wxButton* wxID_OK;
+		wxButton* btnOK;
 		wxButton* wxID_CANCEL;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		

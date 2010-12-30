@@ -476,9 +476,9 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	wxStaticBoxSizer* szPanorama;
 	szPanorama = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Panorama") ), wxVERTICAL );
 	
-	chbPanorama = new wxCheckBox( this, wxID_ANY, _("Use panorama"), wxDefaultPosition, wxDefaultSize, 0 );
-	chbPanorama->SetValue(true); 
-	szPanorama->Add( chbPanorama, 0, wxEXPAND, 0 );
+	chbUsePanorama = new wxCheckBox( this, wxID_ANY, _("Use panorama"), wxDefaultPosition, wxDefaultSize, 0 );
+	chbUsePanorama->SetValue(true); 
+	szPanorama->Add( chbUsePanorama, 0, wxEXPAND, 0 );
 	
 	wxBoxSizer* szUsePanorama;
 	szUsePanorama = new wxBoxSizer( wxHORIZONTAL );
@@ -687,6 +687,9 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	szMap->Fit( this );
 	
 	// Connect Events
+	chbUsePanorama->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( dlgMap_Base::UsePanorama_click ), NULL, this );
+	bmpPanoramaGraphic->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
+	btnPanoramaGraphic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
 	btnOk->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
 	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
 	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
@@ -695,6 +698,9 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 dlgMap_Base::~dlgMap_Base()
 {
 	// Disconnect Events
+	chbUsePanorama->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( dlgMap_Base::UsePanorama_click ), NULL, this );
+	bmpPanoramaGraphic->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
+	btnPanoramaGraphic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
 	btnOk->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
 	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
 	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );

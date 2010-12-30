@@ -21,7 +21,7 @@
         <property name="skip_python_events">1</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -110,14 +110,14 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer273</property>
+                <property name="name">szMessage</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
-                <object class="sizeritem" expanded="1">
+                <object class="sizeritem" expanded="0">
                     <property name="border">1</property>
                     <property name="flag">wxALL|wxEXPAND</property>
                     <property name="proportion">1</property>
-                    <object class="wxTextCtrl" expanded="1">
+                    <object class="wxTextCtrl" expanded="0">
                         <property name="BottomDockable">1</property>
                         <property name="LeftDockable">1</property>
                         <property name="RightDockable">1</property>
@@ -201,20 +201,20 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
-                <object class="sizeritem" expanded="1">
+                <object class="sizeritem" expanded="0">
                     <property name="border">3</property>
                     <property name="flag">wxRIGHT|wxBOTTOM|wxALIGN_RIGHT</property>
                     <property name="proportion">0</property>
-                    <object class="wxBoxSizer" expanded="1">
+                    <object class="wxBoxSizer" expanded="0">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer274</property>
+                        <property name="name">szBottom</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
-                        <object class="sizeritem" expanded="1">
+                        <object class="sizeritem" expanded="0">
                             <property name="border">1</property>
                             <property name="flag">wxALL</property>
                             <property name="proportion">0</property>
-                            <object class="wxButton" expanded="1">
+                            <object class="wxButton" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
                                 <property name="RightDockable">1</property>
@@ -238,15 +238,15 @@
                                 <property name="font"></property>
                                 <property name="gripper">0</property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_OK</property>
+                                <property name="label">&amp;OK</property>
                                 <property name="layer"></property>
                                 <property name="maximize_button">0</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">wxID_OK</property>
+                                <property name="name">btnOK</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>
@@ -295,11 +295,11 @@
                                 <event name="OnUpdateUI"></event>
                             </object>
                         </object>
-                        <object class="sizeritem" expanded="1">
+                        <object class="sizeritem" expanded="0">
                             <property name="border">1</property>
                             <property name="flag">wxALL</property>
                             <property name="proportion">0</property>
-                            <object class="wxButton" expanded="1">
+                            <object class="wxButton" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
                                 <property name="RightDockable">1</property>
@@ -323,15 +323,15 @@
                                 <property name="font"></property>
                                 <property name="gripper">0</property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_CANCEL</property>
+                                <property name="label">&amp;Cancel</property>
                                 <property name="layer"></property>
                                 <property name="maximize_button">0</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">wxID_CANCEL</property>
+                                <property name="name">btnCancel</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>
@@ -380,11 +380,11 @@
                                 <event name="OnUpdateUI"></event>
                             </object>
                         </object>
-                        <object class="sizeritem" expanded="1">
+                        <object class="sizeritem" expanded="0">
                             <property name="border">1</property>
                             <property name="flag">wxALL</property>
                             <property name="proportion">0</property>
-                            <object class="wxButton" expanded="1">
+                            <object class="wxButton" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
                                 <property name="RightDockable">1</property>
@@ -408,15 +408,15 @@
                                 <property name="font"></property>
                                 <property name="gripper">0</property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_APPLY</property>
+                                <property name="label">&amp;Apply</property>
                                 <property name="layer"></property>
                                 <property name="maximize_button">0</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">wxID_HELP</property>
+                                <property name="name">btnApply</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>
@@ -469,7 +469,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -558,7 +558,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer238</property>
+                <property name="name">szMessageOptions</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -567,7 +567,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer239</property>
+                        <property name="name">szTop</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -754,7 +754,7 @@
                         <property name="id">wxID_ANY</property>
                         <property name="label">Options</property>
                         <property name="minimum_size"></property>
-                        <property name="name">sbSizer123</property>
+                        <property name="name">szMiddle</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <event name="OnUpdateUI"></event>
@@ -932,16 +932,16 @@
                 </object>
                 <object class="sizeritem" expanded="1">
                     <property name="border">3</property>
-                    <property name="flag">wxRIGHT|wxBOTTOM|wxALIGN_RIGHT</property>
+                    <property name="flag">wxALIGN_RIGHT|wxBOTTOM|wxRIGHT</property>
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer240</property>
+                        <property name="name">szBottom</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
                             <property name="border">1</property>
-                            <property name="flag">wxALL|wxALIGN_BOTTOM</property>
+                            <property name="flag">wxALL</property>
                             <property name="proportion">0</property>
                             <object class="wxButton" expanded="1">
                                 <property name="BottomDockable">1</property>
@@ -967,15 +967,15 @@
                                 <property name="font"></property>
                                 <property name="gripper">0</property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_OK</property>
+                                <property name="label">&amp;OK</property>
                                 <property name="layer"></property>
                                 <property name="maximize_button">0</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">wxID_OK</property>
+                                <property name="name">btnOK</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>
@@ -1026,7 +1026,7 @@
                         </object>
                         <object class="sizeritem" expanded="1">
                             <property name="border">1</property>
-                            <property name="flag">wxALL|wxALIGN_BOTTOM</property>
+                            <property name="flag">wxALL</property>
                             <property name="proportion">0</property>
                             <object class="wxButton" expanded="1">
                                 <property name="BottomDockable">1</property>
@@ -1052,15 +1052,15 @@
                                 <property name="font"></property>
                                 <property name="gripper">0</property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_CANCEL</property>
+                                <property name="label">&amp;Cancel</property>
                                 <property name="layer"></property>
                                 <property name="maximize_button">0</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">wxID_CANCEL</property>
+                                <property name="name">btnCancel</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>
@@ -1111,7 +1111,7 @@
                         </object>
                         <object class="sizeritem" expanded="1">
                             <property name="border">1</property>
-                            <property name="flag">wxALL|wxALIGN_BOTTOM</property>
+                            <property name="flag">wxALL</property>
                             <property name="proportion">0</property>
                             <object class="wxButton" expanded="1">
                                 <property name="BottomDockable">1</property>
@@ -1137,15 +1137,15 @@
                                 <property name="font"></property>
                                 <property name="gripper">0</property>
                                 <property name="hidden"></property>
-                                <property name="id">wxID_ANY</property>
-                                <property name="label"></property>
+                                <property name="id">wxID_APPLY</property>
+                                <property name="label">&amp;Apply</property>
                                 <property name="layer"></property>
                                 <property name="maximize_button">0</property>
                                 <property name="maximum_size"></property>
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">wxID_HELP</property>
+                                <property name="name">btnApply</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>

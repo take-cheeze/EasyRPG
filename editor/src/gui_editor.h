@@ -157,7 +157,7 @@ class dlgMap_Base : public wxDialog
 		wxListCtrl* lcTroopEncounters;
 		wxStaticText* stEncounterSteps;
 		wxSpinCtrl* spinEncounterSteps;
-		wxCheckBox* chbPanorama;
+		wxCheckBox* chbUsePanorama;
 		wxStaticBitmap* bmpPanoramaGraphic;
 		wxButton* btnPanoramaGraphic;
 		
@@ -193,6 +193,9 @@ class dlgMap_Base : public wxDialog
 		wxButton* btnHelp;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void UsePanorama_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void PanoramaGraphic_click( wxMouseEvent& event ) { event.Skip(); }
+		virtual void PanoramaGraphic_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }
