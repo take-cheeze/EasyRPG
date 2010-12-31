@@ -41,6 +41,7 @@
     <ClCompile Include="..\..\src\gui_database_tilesets.cpp" />
     <ClCompile Include="..\..\src\gui_database_troops.cpp" />
     <ClCompile Include="..\..\src\gui_editor.cpp" />
+    <ClCompile Include="..\..\src\gui_events.cpp" />
     <ClCompile Include="..\..\src\pnActor.cpp" />
     <ClCompile Include="..\..\src\pnAnimation.cpp" />
     <ClCompile Include="..\..\src\pnAttribute.cpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="..\..\src\gui_database_tilesets.h" />
     <ClInclude Include="..\..\src\gui_database_troops.h" />
     <ClInclude Include="..\..\src\gui_editor.h" />
+    <ClInclude Include="..\..\src\gui_events.h" />
     <ClInclude Include="..\..\src\pnActor.h" />
     <ClInclude Include="..\..\src\pnAnimation.h" />
     <ClInclude Include="..\..\src\pnAttribute.h" />
