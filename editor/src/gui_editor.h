@@ -194,8 +194,8 @@ class dlgMap_Base : public wxDialog
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void UsePanorama_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void PanoramaGraphic_click( wxMouseEvent& event ) { event.Skip(); }
-		virtual void PanoramaGraphic_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void bmpPanoramaGraphic_click( wxMouseEvent& event ) { event.Skip(); }
+		virtual void btnPanoramaGraphic_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }

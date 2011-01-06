@@ -688,8 +688,8 @@ dlgMap_Base::dlgMap_Base( wxWindow* parent, wxWindowID id, const wxString& title
 	
 	// Connect Events
 	chbUsePanorama->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( dlgMap_Base::UsePanorama_click ), NULL, this );
-	bmpPanoramaGraphic->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
-	btnPanoramaGraphic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
+	bmpPanoramaGraphic->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( dlgMap_Base::bmpPanoramaGraphic_click ), NULL, this );
+	btnPanoramaGraphic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::btnPanoramaGraphic_click ), NULL, this );
 	btnOk->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
 	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
 	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
@@ -699,8 +699,8 @@ dlgMap_Base::~dlgMap_Base()
 {
 	// Disconnect Events
 	chbUsePanorama->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( dlgMap_Base::UsePanorama_click ), NULL, this );
-	bmpPanoramaGraphic->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
-	btnPanoramaGraphic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::PanoramaGraphic_click ), NULL, this );
+	bmpPanoramaGraphic->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( dlgMap_Base::bmpPanoramaGraphic_click ), NULL, this );
+	btnPanoramaGraphic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::btnPanoramaGraphic_click ), NULL, this );
 	btnOk->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::OK_click ), NULL, this );
 	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Cancel_click ), NULL, this );
 	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgMap_Base::Help_click ), NULL, this );
