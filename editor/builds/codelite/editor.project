@@ -305,13 +305,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/Editor.icns: Edit
       </AdditionalRules>
     </Configuration>
   </Settings>
-  <Dependencies Name="Release">
-    <Project Name="readers"/>
-  </Dependencies>
-  <Dependencies Name="Win32 Debug">
-    <Project Name="readers"/>
-  </Dependencies>
-  <Dependencies Name="Win32 Release">
+  <Dependencies Name="Debug">
     <Project Name="readers"/>
   </Dependencies>
   <Dependencies Name="Mac OS X Debug">
@@ -320,7 +314,13 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/Editor.icns: Edit
   <Dependencies Name="Mac OS X Release">
     <Project Name="readers"/>
   </Dependencies>
-  <Dependencies Name="Debug">
+  <Dependencies Name="Release">
+    <Project Name="readers"/>
+  </Dependencies>
+  <Dependencies Name="Win32 Debug">
+    <Project Name="readers"/>
+  </Dependencies>
+  <Dependencies Name="Win32 Release">
     <Project Name="readers"/>
   </Dependencies>
 </CodeLite_Project>
