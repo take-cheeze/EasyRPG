@@ -4,35 +4,35 @@
   <Project Name="readers" Path="readers/builds/codelite/readers.project" Active="No"/>
   <Project Name="player" Path="player/builds/codelite/player.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="GTK+ Debug" Selected="yes">
-      <Project Name="editor" ConfigName="Debug"/>
+    <WorkspaceConfiguration Name="GTK+ Debug" Selected="no">
       <Project Name="readers" ConfigName="Debug"/>
       <Project Name="player" ConfigName="GTK+ Debug"/>
+      <Project Name="editor" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="GTK+ Release" Selected="yes">
-      <Project Name="editor" ConfigName="Release"/>
-      <Project Name="readers" ConfigName="Debug"/>
+      <Project Name="readers" ConfigName="Release"/>
       <Project Name="player" ConfigName="GTK+ Release"/>
+      <Project Name="editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Win32 Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Win32 Debug" Selected="no">
       <Project Name="editor" ConfigName="Win32 Debug"/>
       <Project Name="readers" ConfigName="Win32 Debug"/>
       <Project Name="player" ConfigName="Win32 Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Win32 Release" Selected="yes">
+    <WorkspaceConfiguration Name="Win32 Release" Selected="no">
       <Project Name="editor" ConfigName="Win32 Release"/>
       <Project Name="readers" ConfigName="Win32 Release"/>
       <Project Name="player" ConfigName="Win32 Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Mac OS X Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Mac OS X Debug" Selected="no">
       <Project Name="editor" ConfigName="Mac OS X Debug"/>
       <Project Name="readers" ConfigName="Debug"/>
       <Project Name="player" ConfigName="Mac OS X Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Mac OS X Release" Selected="yes">
-      <Project Name="editor" ConfigName="Mac OS X Release"/>
-      <Project Name="readers" ConfigName="Debug"/>
+      <Project Name="readers" ConfigName="Release"/>
       <Project Name="player" ConfigName="Mac OS X Release"/>
+      <Project Name="editor" ConfigName="Mac OS X Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Dingux Debug" Selected="yes">
       <Project Name="editor" ConfigName="Debug"/>
@@ -50,9 +50,9 @@
       <Project Name="player" ConfigName="UNIX Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="UNIX Release" Selected="yes">
-      <Project Name="editor" ConfigName="Release"/>
-      <Project Name="readers" ConfigName="Debug"/>
+      <Project Name="readers" ConfigName="Release"/>
       <Project Name="player" ConfigName="UNIX Release"/>
+      <Project Name="editor" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
