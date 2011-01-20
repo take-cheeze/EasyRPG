@@ -27,7 +27,7 @@
     <File Name="../../resources/gui/gui_events_page_3.fbp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
-    <VirtualDirectory Name="GUI">
+    <VirtualDirectory Name="GUI (do not edit)">
       <File Name="../../src/gui_database_actors.cpp"/>
       <File Name="../../src/gui_database_actors.h"/>
       <File Name="../../src/gui_database_skills.cpp"/>
@@ -60,6 +60,8 @@
       <File Name="../../src/gui_editor.h"/>
       <File Name="../../src/gui_events.cpp"/>
       <File Name="../../src/gui_events.h"/>
+      <File Name="../../src/gui_events_page_1.cpp"/>
+      <File Name="../../src/gui_events_page_1.h"/>
     </VirtualDirectory>
     <File Name="../../resources/win/editor.rc"/>
     <File Name="../../src/dlgMap.cpp"/>
@@ -72,36 +74,38 @@
     <File Name="../../src/dlgMaterial.h"/>
     <File Name="../../src/dlgDb.h"/>
     <File Name="../../src/dlgDb.cpp"/>
-    <File Name="../../src/pnActor.h"/>
-    <File Name="../../src/pnActor.cpp"/>
-    <File Name="../../src/pnSkill.h"/>
-    <File Name="../../src/pnSkill.cpp"/>
-    <File Name="../../src/pnItem.h"/>
-    <File Name="../../src/pnItem.cpp"/>
-    <File Name="../../src/pnEnemy.h"/>
-    <File Name="../../src/pnEnemy.cpp"/>
-    <File Name="../../src/pnTroop.h"/>
-    <File Name="../../src/pnTroop.cpp"/>
-    <File Name="../../src/pnAttribute.h"/>
-    <File Name="../../src/pnAttribute.cpp"/>
-    <File Name="../../src/pnState.h"/>
-    <File Name="../../src/pnState.cpp"/>
-    <File Name="../../src/pnAnimation.h"/>
-    <File Name="../../src/pnAnimation.cpp"/>
-    <File Name="../../src/pnTerrain.h"/>
-    <File Name="../../src/pnTerrain.cpp"/>
-    <File Name="../../src/pnTileset.h"/>
-    <File Name="../../src/pnTileset.cpp"/>
-    <File Name="../../src/pnText.h"/>
-    <File Name="../../src/pnText.cpp"/>
-    <File Name="../../src/pnSystem.h"/>
-    <File Name="../../src/pnSystem.cpp"/>
-    <File Name="../../src/pnCommonEvent.h"/>
-    <File Name="../../src/pnCommonEvent.cpp"/>
     <File Name="../../src/dlgEvt.h"/>
     <File Name="../../src/dlgEvt.cpp"/>
     <File Name="../../src/dlgEvtCmd.h"/>
     <File Name="../../src/dlgEvtCmd.cpp"/>
+    <VirtualDirectory Name="Database">
+      <File Name="../../src/pnActor.cpp"/>
+      <File Name="../../src/pnActor.h"/>
+      <File Name="../../src/pnAnimation.cpp"/>
+      <File Name="../../src/pnAnimation.h"/>
+      <File Name="../../src/pnAttribute.cpp"/>
+      <File Name="../../src/pnAttribute.h"/>
+      <File Name="../../src/pnCommonEvent.cpp"/>
+      <File Name="../../src/pnCommonEvent.h"/>
+      <File Name="../../src/pnEnemy.cpp"/>
+      <File Name="../../src/pnEnemy.h"/>
+      <File Name="../../src/pnItem.cpp"/>
+      <File Name="../../src/pnItem.h"/>
+      <File Name="../../src/pnSkill.cpp"/>
+      <File Name="../../src/pnSkill.h"/>
+      <File Name="../../src/pnState.cpp"/>
+      <File Name="../../src/pnState.h"/>
+      <File Name="../../src/pnSystem.cpp"/>
+      <File Name="../../src/pnSystem.h"/>
+      <File Name="../../src/pnTerrain.cpp"/>
+      <File Name="../../src/pnTerrain.h"/>
+      <File Name="../../src/pnText.cpp"/>
+      <File Name="../../src/pnText.h"/>
+      <File Name="../../src/pnTileset.cpp"/>
+      <File Name="../../src/pnTileset.h"/>
+      <File Name="../../src/pnTroop.cpp"/>
+      <File Name="../../src/pnTroop.h"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
