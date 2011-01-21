@@ -468,9 +468,9 @@ class dlgEvtCmdSkill_Base : public wxDialog
 		wxRadioButton* rbtnOperandVariable;
 		wxTextCtrl* tcOperandVariable;
 		wxButton* btnOperandVariable;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -501,9 +501,9 @@ class dlgEvtCmdEquipment_Base : public wxDialog
 		wxTextCtrl* tcOperandVariable;
 		wxButton* btnOperandVariable;
 		wxRadioBox* rbRemove;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -534,9 +534,9 @@ class dlgEvtCmdHP_Base : public wxDialog
 		wxTextCtrl* tcOperandVariable;
 		wxButton* btnOperandVariable;
 		wxCheckBox* chbAllowNoBattle;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -566,9 +566,9 @@ class dlgEvtCmdMP_Base : public wxDialog
 		wxRadioButton* rbtnOperandVariable;
 		wxTextCtrl* tcOperandVariable;
 		wxButton* btnOperandVariable;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -594,9 +594,9 @@ class dlgEvtCmdState_Base : public wxDialog
 		wxButton* btnTargetVariable;
 		wxRadioBox* rbOperation;
 		wxChoice* chState;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -620,9 +620,9 @@ class dlgEvtCmdRecover_Base : public wxDialog
 		wxRadioButton* rbtnTargetVariable;
 		wxTextCtrl* tcTargetVariable;
 		wxButton* btnTargetVariable;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -655,9 +655,9 @@ class dlgEvtCmdDamage_Base : public wxDialog
 		wxCheckBox* chbVariableEnable;
 		wxTextCtrl* tcVariable;
 		wxButton* btnVariable;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btmOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -676,9 +676,9 @@ class dlgEvtCmdActorName_Base : public wxDialog
 	protected:
 		wxChoice* chActor;
 		wxTextCtrl* tcName;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -697,9 +697,9 @@ class dlgEvtCmdActorTitle_Base : public wxDialog
 	protected:
 		wxChoice* chActor;
 		wxTextCtrl* tcTitle;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -720,9 +720,9 @@ class dlgEvtCmdActorGraphic_Base : public wxDialog
 		wxStaticBitmap* bmpGraphic;
 		wxCheckBox* chbTranslucent;
 		wxButton* btnGraphic;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -742,9 +742,9 @@ class dlgEvtCmdActorFaceGraphic_Base : public wxDialog
 		wxChoice* chActor;
 		wxStaticBitmap* bmpFaceGraphic;
 		wxButton* btnFaceGraphic;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -762,11 +762,11 @@ class dlgEvtCmdVehicleGraphic_Base : public wxDialog
 	
 	protected:
 		wxRadioBox* rbOperation;
-		wxStaticBitmap* bmpVehicle;
-		wxButton* btnVehicle;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxStaticBitmap* bmpVehicleGraphic;
+		wxButton* btnVehicleGraphic;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -786,9 +786,9 @@ class dlgEvtCmdSystemMusic_Base : public wxDialog
 		wxChoice* chSystemMusic;
 		wxTextCtrl* tcMusic;
 		wxButton* btnMusic;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -808,9 +808,9 @@ class dlgEvtCmdSystemSound_Base : public wxDialog
 		wxChoice* chSystemSound;
 		wxTextCtrl* tcSound;
 		wxButton* btnSound;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -831,9 +831,9 @@ class dlgEvtCmdSystemGraphic_Base : public wxDialog
 		wxStaticBitmap* bmpSystem;
 		wxRadioBox* rbBackground;
 		wxRadioBox* rbFont;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
@@ -852,9 +852,9 @@ class dlgEvtCmdTransition_Base : public wxDialog
 	protected:
 		wxChoice* chIn;
 		wxChoice* chOut;
-		wxButton* wxID_OK;
-		wxButton* wxID_CANCEL;
-		wxButton* wxID_HELP;
+		wxButton* btnOK;
+		wxButton* btnCancel;
+		wxButton* btnHelp;
 	
 	public:
 		
