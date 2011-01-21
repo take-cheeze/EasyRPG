@@ -62,6 +62,10 @@
       <File Name="../../src/gui_events.h"/>
       <File Name="../../src/gui_events_page_1.cpp"/>
       <File Name="../../src/gui_events_page_1.h"/>
+      <File Name="../../src/gui_events_page_2.cpp"/>
+      <File Name="../../src/gui_events_page_2.h"/>
+      <File Name="../../src/gui_events_page_3.cpp"/>
+      <File Name="../../src/gui_events_page_3.h"/>
     </VirtualDirectory>
     <File Name="../../resources/win/editor.rc"/>
     <File Name="../../src/dlgMap.cpp"/>
