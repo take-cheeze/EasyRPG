@@ -13,182 +13,182 @@ dlgEvtCmdPlayMusic_Base::dlgEvtCmdPlayMusic_Base( wxWindow* parent, wxWindowID i
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer63;
-	bSizer63 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szPlayMusic;
+	szPlayMusic = new wxBoxSizer( wxVERTICAL );
 	
-	wxBoxSizer* bSizer64;
-	bSizer64 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTop;
+	szTop = new wxBoxSizer( wxHORIZONTAL );
 	
 	listMusic = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxSize( 150,-1 ), 0, NULL, 0 ); 
-	bSizer64->Add( listMusic, 1, wxALL|wxEXPAND, 1 );
+	szTop->Add( listMusic, 1, wxALL|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer65;
-	bSizer65 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szRight;
+	szRight = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer35;
-	sbSizer35 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Fade in") ), wxVERTICAL );
+	wxStaticBoxSizer* szFadeIn;
+	szFadeIn = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Fade in") ), wxVERTICAL );
 	
 	slFadeIn = new wxSlider( this, wxID_ANY, 0, 0,  10, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer35->Add( slFadeIn, 0, wxEXPAND, 0 );
+	szFadeIn->Add( slFadeIn, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer66;
-	bSizer66 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szFadeInBottom;
+	szFadeInBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stFadeInNone = new wxStaticText( this, wxID_ANY, _("None"), wxDefaultPosition, wxDefaultSize, 0 );
 	stFadeInNone->Wrap( -1 );
-	bSizer66->Add( stFadeInNone, 0, wxRIGHT, 1 );
+	szFadeInBottom->Add( stFadeInNone, 0, wxRIGHT, 1 );
 	
 	
-	bSizer66->Add( 0,  0, 1, wxEXPAND, 0 );
+	szFadeInBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stFadeIn5Seconds = new wxStaticText( this, wxID_ANY, _("5 sec."), wxDefaultPosition, wxDefaultSize, 0 );
 	stFadeIn5Seconds->Wrap( -1 );
-	bSizer66->Add( stFadeIn5Seconds, 0, wxLEFT|wxRIGHT, 1 );
+	szFadeInBottom->Add( stFadeIn5Seconds, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer66->Add( 0,  0, 1, wxEXPAND, 0 );
+	szFadeInBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stFadeIn10Seconds = new wxStaticText( this, wxID_ANY, _("10 sec."), wxDefaultPosition, wxDefaultSize, 0 );
 	stFadeIn10Seconds->Wrap( -1 );
-	bSizer66->Add( stFadeIn10Seconds, 0, wxLEFT, 1 );
+	szFadeInBottom->Add( stFadeIn10Seconds, 0, wxLEFT, 1 );
 	
-	sbSizer35->Add( bSizer66, 0, wxEXPAND, 0 );
+	szFadeIn->Add( szFadeInBottom, 0, wxEXPAND, 0 );
 	
-	bSizer65->Add( sbSizer35, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szRight->Add( szFadeIn, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer36;
-	sbSizer36 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Volume") ), wxVERTICAL );
+	wxStaticBoxSizer* szVolume;
+	szVolume = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Volume") ), wxVERTICAL );
 	
 	slVolume = new wxSlider( this, wxID_ANY, 10, 0,  10, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer36->Add( slVolume, 0, wxEXPAND, 0 );
+	szVolume->Add( slVolume, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer67;
-	bSizer67 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVolumeBottom;
+	szVolumeBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stVolume0Percent = new wxStaticText( this, wxID_ANY, _("0%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVolume0Percent->Wrap( -1 );
-	bSizer67->Add( stVolume0Percent, 0, wxRIGHT, 1 );
+	szVolumeBottom->Add( stVolume0Percent, 0, wxRIGHT, 1 );
 	
 	
-	bSizer67->Add( 0,  0, 1, wxEXPAND, 0 );
+	szVolumeBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stVolume50Percent = new wxStaticText( this, wxID_ANY, _("50%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVolume50Percent->Wrap( -1 );
-	bSizer67->Add( stVolume50Percent, 0, wxLEFT|wxRIGHT, 1 );
+	szVolumeBottom->Add( stVolume50Percent, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer67->Add( 0,  0, 1, wxEXPAND, 0 );
+	szVolumeBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stVolume100Percent = new wxStaticText( this, wxID_ANY, _("100%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVolume100Percent->Wrap( -1 );
-	bSizer67->Add( stVolume100Percent, 0, wxLEFT, 1 );
+	szVolumeBottom->Add( stVolume100Percent, 0, wxLEFT, 1 );
 	
-	sbSizer36->Add( bSizer67, 0, wxEXPAND, 0 );
+	szVolume->Add( szVolumeBottom, 0, wxEXPAND, 0 );
 	
-	bSizer65->Add( sbSizer36, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szRight->Add( szVolume, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer37;
-	sbSizer37 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Tempo") ), wxVERTICAL );
+	wxStaticBoxSizer* szTempo;
+	szTempo = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Tempo") ), wxVERTICAL );
 	
 	slTempo = new wxSlider( this, wxID_ANY, 5, 0,  10, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer37->Add( slTempo, 0, wxEXPAND, 0 );
+	szTempo->Add( slTempo, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer68;
-	bSizer68 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTempoBottom;
+	szTempoBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stTempo50Percent = new wxStaticText( this, wxID_ANY, _("50%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTempo50Percent->Wrap( -1 );
-	bSizer68->Add( stTempo50Percent, 0, wxRIGHT, 1 );
+	szTempoBottom->Add( stTempo50Percent, 0, wxRIGHT, 1 );
 	
 	
-	bSizer68->Add( 0,  0, 1, wxEXPAND, 0 );
+	szTempoBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTempo100Percent = new wxStaticText( this, wxID_ANY, _("100%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTempo100Percent->Wrap( -1 );
-	bSizer68->Add( stTempo100Percent, 0, wxLEFT|wxRIGHT, 1 );
+	szTempoBottom->Add( stTempo100Percent, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer68->Add( 0,  0, 1, wxEXPAND, 0 );
+	szTempoBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTempo150Percent = new wxStaticText( this, wxID_ANY, _("150%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTempo150Percent->Wrap( -1 );
-	bSizer68->Add( stTempo150Percent, 0, wxLEFT, 1 );
+	szTempoBottom->Add( stTempo150Percent, 0, wxLEFT, 1 );
 	
-	sbSizer37->Add( bSizer68, 0, wxEXPAND, 0 );
+	szTempo->Add( szTempoBottom, 0, wxEXPAND, 0 );
 	
-	bSizer65->Add( sbSizer37, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szRight->Add( szTempo, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer38;
-	sbSizer38 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Balance") ), wxVERTICAL );
+	wxStaticBoxSizer* szBalance;
+	szBalance = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Balance") ), wxVERTICAL );
 	
 	slBalance = new wxSlider( this, wxID_ANY, 0, -5,  5, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer38->Add( slBalance, 0, wxEXPAND, 0 );
+	szBalance->Add( slBalance, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer69;
-	bSizer69 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBalanceBottom;
+	szBalanceBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stBalanceLeft = new wxStaticText( this, wxID_ANY, _("Left"), wxDefaultPosition, wxDefaultSize, 0 );
 	stBalanceLeft->Wrap( -1 );
-	bSizer69->Add( stBalanceLeft, 0, wxRIGHT, 1 );
+	szBalanceBottom->Add( stBalanceLeft, 0, wxRIGHT, 1 );
 	
 	
-	bSizer69->Add( 0,  0, 1, wxEXPAND, 0 );
+	szBalanceBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stBalanceCenter = new wxStaticText( this, wxID_ANY, _("Center"), wxDefaultPosition, wxDefaultSize, 0 );
 	stBalanceCenter->Wrap( -1 );
-	bSizer69->Add( stBalanceCenter, 0, wxLEFT|wxRIGHT, 1 );
+	szBalanceBottom->Add( stBalanceCenter, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer69->Add( 0,  0, 1, wxEXPAND, 0 );
+	szBalanceBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stBalanceRight = new wxStaticText( this, wxID_ANY, _("Right"), wxDefaultPosition, wxDefaultSize, 0 );
 	stBalanceRight->Wrap( -1 );
-	bSizer69->Add( stBalanceRight, 0, wxLEFT, 1 );
+	szBalanceBottom->Add( stBalanceRight, 0, wxLEFT, 1 );
 	
-	sbSizer38->Add( bSizer69, 0, wxEXPAND, 0 );
+	szBalance->Add( szBalanceBottom, 0, wxEXPAND, 0 );
 	
-	bSizer65->Add( sbSizer38, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szRight->Add( szBalance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer70;
-	bSizer70 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szRightBottom;
+	szRightBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	btnPlay = new wxButton( this, wxID_ANY, _("Play"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnPlay->SetDefault(); 
-	bSizer70->Add( btnPlay, 0, wxALL, 1 );
+	szRightBottom->Add( btnPlay, 0, wxALL, 1 );
 	
 	btnStop = new wxButton( this, wxID_ANY, _("Stop"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnStop->SetDefault(); 
-	bSizer70->Add( btnStop, 0, wxALL, 1 );
+	szRightBottom->Add( btnStop, 0, wxALL, 1 );
 	
-	bSizer65->Add( bSizer70, 0, wxEXPAND, 0 );
+	szRight->Add( szRightBottom, 0, wxEXPAND, 0 );
 	
-	bSizer64->Add( bSizer65, 0, wxEXPAND, 0 );
+	szTop->Add( szRight, 0, wxEXPAND, 0 );
 	
-	bSizer63->Add( bSizer64, 1, wxEXPAND, 0 );
+	szPlayMusic->Add( szTop, 1, wxEXPAND, 0 );
 	
 	linePlayMusic = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	bSizer63->Add( linePlayMusic, 0, wxALL|wxEXPAND, 1 );
+	szPlayMusic->Add( linePlayMusic, 0, wxALL|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer71;
-	bSizer71 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer71->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer71->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer71->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	bSizer63->Add( bSizer71, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szPlayMusic->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer63 );
+	this->SetSizer( szPlayMusic );
 	this->Layout();
-	bSizer63->Fit( this );
+	szPlayMusic->Fit( this );
 }
 
 dlgEvtCmdPlayMusic_Base::~dlgEvtCmdPlayMusic_Base()
@@ -199,87 +199,87 @@ dlgEvtCmdFadeMusic_Base::dlgEvtCmdFadeMusic_Base( wxWindow* parent, wxWindowID i
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer84;
-	bSizer84 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szFadeMusic;
+	szFadeMusic = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer48;
-	sbSizer48 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Fade time") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTime;
+	szTime = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Fade time") ), wxHORIZONTAL );
 	
-	wxBoxSizer* bSizer85;
-	bSizer85 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szLeft;
+	szLeft = new wxBoxSizer( wxVERTICAL );
 	
 	slTime = new wxSlider( this, wxID_ANY, 5, 0,  20, wxDefaultPosition, wxSize( 200, -1 ), wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	bSizer85->Add( slTime, 0, wxEXPAND, 0 );
+	szLeft->Add( slTime, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer86;
-	bSizer86 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szLeftBottom;
+	szLeftBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stTime0Seconds = new wxStaticText( this, wxID_ANY, _("0 sec"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTime0Seconds->Wrap( -1 );
-	bSizer86->Add( stTime0Seconds, 0, wxRIGHT, 1 );
+	szLeftBottom->Add( stTime0Seconds, 0, wxRIGHT, 1 );
 	
 	
-	bSizer86->Add( 0,  0, 1, wxEXPAND, 0 );
+	szLeftBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTime5Seconds = new wxStaticText( this, wxID_ANY, _("5 sec"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTime5Seconds->Wrap( -1 );
-	bSizer86->Add( stTime5Seconds, 0, wxLEFT|wxRIGHT, 1 );
+	szLeftBottom->Add( stTime5Seconds, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer86->Add( 0,  0, 1, wxEXPAND, 0 );
+	szLeftBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTime10Seconds = new wxStaticText( this, wxID_ANY, _("10 sec"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTime10Seconds->Wrap( -1 );
-	bSizer86->Add( stTime10Seconds, 0, wxLEFT|wxRIGHT, 1 );
+	szLeftBottom->Add( stTime10Seconds, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer86->Add( 0,  0, 1, wxEXPAND, 0 );
+	szLeftBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTime15Seconds = new wxStaticText( this, wxID_ANY, _("15 sec"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTime15Seconds->Wrap( -1 );
-	bSizer86->Add( stTime15Seconds, 0, wxLEFT|wxRIGHT, 1 );
+	szLeftBottom->Add( stTime15Seconds, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer86->Add( 0,  0, 1, wxEXPAND, 0 );
+	szLeftBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTime20Seconds = new wxStaticText( this, wxID_ANY, _("20 sec"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTime20Seconds->Wrap( -1 );
-	bSizer86->Add( stTime20Seconds, 0, wxLEFT, 1 );
+	szLeftBottom->Add( stTime20Seconds, 0, wxLEFT, 1 );
 	
-	bSizer85->Add( bSizer86, 0, wxEXPAND, 0 );
+	szLeft->Add( szLeftBottom, 0, wxEXPAND, 0 );
 	
-	sbSizer48->Add( bSizer85, 1, wxEXPAND, 0 );
+	szTime->Add( szLeft, 1, wxEXPAND, 0 );
 	
 	btnFade = new wxButton( this, wxID_ANY, _("Fade"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnFade->SetDefault(); 
-	sbSizer48->Add( btnFade, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTime->Add( btnFade, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	btnPlay = new wxButton( this, wxID_ANY, _("Play"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnPlay->SetDefault(); 
-	sbSizer48->Add( btnPlay, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTime->Add( btnPlay, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	bSizer84->Add( sbSizer48, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szFadeMusic->Add( szTime, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer87;
-	bSizer87 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer87->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer87->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer87->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer84->Add( bSizer87, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szFadeMusic->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer84 );
+	this->SetSizer( szFadeMusic );
 	this->Layout();
-	bSizer84->Fit( this );
+	szFadeMusic->Fit( this );
 }
 
 dlgEvtCmdFadeMusic_Base::~dlgEvtCmdFadeMusic_Base()
@@ -290,182 +290,182 @@ dlgEvtCmdPlaySound_Base::dlgEvtCmdPlaySound_Base( wxWindow* parent, wxWindowID i
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer126;
-	bSizer126 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szPlaySound;
+	szPlaySound = new wxBoxSizer( wxVERTICAL );
 	
-	wxBoxSizer* bSizer127;
-	bSizer127 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTop;
+	szTop = new wxBoxSizer( wxHORIZONTAL );
 	
 	listSound = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxSize( 150,-1 ), 0, NULL, 0 ); 
-	bSizer127->Add( listSound, 1, wxALL|wxEXPAND, 1 );
+	szTop->Add( listSound, 1, wxALL|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer128;
-	bSizer128 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szRight;
+	szRight = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer69;
-	sbSizer69 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Fade in") ), wxVERTICAL );
+	wxStaticBoxSizer* szFadeIn;
+	szFadeIn = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Fade in") ), wxVERTICAL );
 	
 	slFadeIn = new wxSlider( this, wxID_ANY, 0, 0,  10, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer69->Add( slFadeIn, 0, wxEXPAND, 0 );
+	szFadeIn->Add( slFadeIn, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer129;
-	bSizer129 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szFadeInBottom;
+	szFadeInBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stFadeInNone = new wxStaticText( this, wxID_ANY, _("None"), wxDefaultPosition, wxDefaultSize, 0 );
 	stFadeInNone->Wrap( -1 );
-	bSizer129->Add( stFadeInNone, 0, wxRIGHT, 1 );
+	szFadeInBottom->Add( stFadeInNone, 0, wxRIGHT, 1 );
 	
 	
-	bSizer129->Add( 0,  0, 1, wxEXPAND, 0 );
+	szFadeInBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stFadeIn5Seconds = new wxStaticText( this, wxID_ANY, _("5 sec."), wxDefaultPosition, wxDefaultSize, 0 );
 	stFadeIn5Seconds->Wrap( -1 );
-	bSizer129->Add( stFadeIn5Seconds, 0, wxLEFT|wxRIGHT, 1 );
+	szFadeInBottom->Add( stFadeIn5Seconds, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer129->Add( 0,  0, 1, wxEXPAND, 0 );
+	szFadeInBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stFadeIn10Seconds = new wxStaticText( this, wxID_ANY, _("10 sec."), wxDefaultPosition, wxDefaultSize, 0 );
 	stFadeIn10Seconds->Wrap( -1 );
-	bSizer129->Add( stFadeIn10Seconds, 0, wxLEFT, 1 );
+	szFadeInBottom->Add( stFadeIn10Seconds, 0, wxLEFT, 1 );
 	
-	sbSizer69->Add( bSizer129, 0, wxEXPAND, 0 );
+	szFadeIn->Add( szFadeInBottom, 0, wxEXPAND, 0 );
 	
-	bSizer128->Add( sbSizer69, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szRight->Add( szFadeIn, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer70;
-	sbSizer70 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Volume") ), wxVERTICAL );
+	wxStaticBoxSizer* szVolume;
+	szVolume = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Volume") ), wxVERTICAL );
 	
 	slVolume = new wxSlider( this, wxID_ANY, 10, 0,  10, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer70->Add( slVolume, 0, wxEXPAND, 0 );
+	szVolume->Add( slVolume, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer130;
-	bSizer130 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVolumeBottom;
+	szVolumeBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stVolume0Percent = new wxStaticText( this, wxID_ANY, _("0%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVolume0Percent->Wrap( -1 );
-	bSizer130->Add( stVolume0Percent, 0, wxRIGHT, 1 );
+	szVolumeBottom->Add( stVolume0Percent, 0, wxRIGHT, 1 );
 	
 	
-	bSizer130->Add( 0,  0, 1, wxEXPAND, 0 );
+	szVolumeBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stVolume50Percent = new wxStaticText( this, wxID_ANY, _("50%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVolume50Percent->Wrap( -1 );
-	bSizer130->Add( stVolume50Percent, 0, wxLEFT|wxRIGHT, 1 );
+	szVolumeBottom->Add( stVolume50Percent, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer130->Add( 0,  0, 1, wxEXPAND, 0 );
+	szVolumeBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stVolume100Percent = new wxStaticText( this, wxID_ANY, _("100%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVolume100Percent->Wrap( -1 );
-	bSizer130->Add( stVolume100Percent, 0, wxLEFT, 1 );
+	szVolumeBottom->Add( stVolume100Percent, 0, wxLEFT, 1 );
 	
-	sbSizer70->Add( bSizer130, 0, wxEXPAND, 0 );
+	szVolume->Add( szVolumeBottom, 0, wxEXPAND, 0 );
 	
-	bSizer128->Add( sbSizer70, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szRight->Add( szVolume, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer71;
-	sbSizer71 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Tempo") ), wxVERTICAL );
+	wxStaticBoxSizer* szTempo;
+	szTempo = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Tempo") ), wxVERTICAL );
 	
 	slTempo = new wxSlider( this, wxID_ANY, 5, 0,  10, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer71->Add( slTempo, 0, wxEXPAND, 0 );
+	szTempo->Add( slTempo, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer131;
-	bSizer131 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTempoBottom;
+	szTempoBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stTempo50Percent = new wxStaticText( this, wxID_ANY, _("50%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTempo50Percent->Wrap( -1 );
-	bSizer131->Add( stTempo50Percent, 0, wxRIGHT, 1 );
+	szTempoBottom->Add( stTempo50Percent, 0, wxRIGHT, 1 );
 	
 	
-	bSizer131->Add( 0,  0, 1, wxEXPAND, 0 );
+	szTempoBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTempo100Percent = new wxStaticText( this, wxID_ANY, _("100%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTempo100Percent->Wrap( -1 );
-	bSizer131->Add( stTempo100Percent, 0, wxLEFT|wxRIGHT, 1 );
+	szTempoBottom->Add( stTempo100Percent, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer131->Add( 0,  0, 1, wxEXPAND, 0 );
+	szTempoBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stTempo150Percent = new wxStaticText( this, wxID_ANY, _("150%"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTempo150Percent->Wrap( -1 );
-	bSizer131->Add( stTempo150Percent, 0, wxLEFT, 1 );
+	szTempoBottom->Add( stTempo150Percent, 0, wxLEFT, 1 );
 	
-	sbSizer71->Add( bSizer131, 0, wxEXPAND, 0 );
+	szTempo->Add( szTempoBottom, 0, wxEXPAND, 0 );
 	
-	bSizer128->Add( sbSizer71, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szRight->Add( szTempo, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer72;
-	sbSizer72 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Balance") ), wxVERTICAL );
+	wxStaticBoxSizer* szBalance;
+	szBalance = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Balance") ), wxVERTICAL );
 	
 	slBalance = new wxSlider( this, wxID_ANY, 0, -5,  5, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_AUTOTICKS );
-	sbSizer72->Add( slBalance, 0, wxEXPAND, 0 );
+	szBalance->Add( slBalance, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer132;
-	bSizer132 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBalanceBottom;
+	szBalanceBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	stBalanceLeft = new wxStaticText( this, wxID_ANY, _("Left"), wxDefaultPosition, wxDefaultSize, 0 );
 	stBalanceLeft->Wrap( -1 );
-	bSizer132->Add( stBalanceLeft, 0, wxRIGHT, 1 );
+	szBalanceBottom->Add( stBalanceLeft, 0, wxRIGHT, 1 );
 	
 	
-	bSizer132->Add( 0,  0, 1, wxEXPAND, 0 );
+	szBalanceBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stBalanceCenter = new wxStaticText( this, wxID_ANY, _("Center"), wxDefaultPosition, wxDefaultSize, 0 );
 	stBalanceCenter->Wrap( -1 );
-	bSizer132->Add( stBalanceCenter, 0, wxLEFT|wxRIGHT, 1 );
+	szBalanceBottom->Add( stBalanceCenter, 0, wxLEFT|wxRIGHT, 1 );
 	
 	
-	bSizer132->Add( 0,  0, 1, wxEXPAND, 0 );
+	szBalanceBottom->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stBalanceRight = new wxStaticText( this, wxID_ANY, _("Right"), wxDefaultPosition, wxDefaultSize, 0 );
 	stBalanceRight->Wrap( -1 );
-	bSizer132->Add( stBalanceRight, 0, wxLEFT, 1 );
+	szBalanceBottom->Add( stBalanceRight, 0, wxLEFT, 1 );
 	
-	sbSizer72->Add( bSizer132, 0, wxEXPAND, 0 );
+	szBalance->Add( szBalanceBottom, 0, wxEXPAND, 0 );
 	
-	bSizer128->Add( sbSizer72, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szRight->Add( szBalance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer133;
-	bSizer133 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szRightBottom;
+	szRightBottom = new wxBoxSizer( wxHORIZONTAL );
 	
 	btnPlay = new wxButton( this, wxID_ANY, _("Play"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnPlay->SetDefault(); 
-	bSizer133->Add( btnPlay, 0, wxALL, 1 );
+	szRightBottom->Add( btnPlay, 0, wxALL, 1 );
 	
 	btnStop = new wxButton( this, wxID_ANY, _("Stop"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnStop->SetDefault(); 
-	bSizer133->Add( btnStop, 0, wxALL, 1 );
+	szRightBottom->Add( btnStop, 0, wxALL, 1 );
 	
-	bSizer128->Add( bSizer133, 0, wxEXPAND, 0 );
+	szRight->Add( szRightBottom, 0, wxEXPAND, 0 );
 	
-	bSizer127->Add( bSizer128, 0, wxEXPAND, 0 );
+	szTop->Add( szRight, 0, wxEXPAND, 0 );
 	
-	bSizer126->Add( bSizer127, 1, wxEXPAND, 0 );
+	szPlaySound->Add( szTop, 1, wxEXPAND, 0 );
 	
 	linePlayMusic = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	bSizer126->Add( linePlayMusic, 0, wxALL|wxEXPAND, 1 );
+	szPlaySound->Add( linePlayMusic, 0, wxALL|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer134;
-	bSizer134 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer134->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer134->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer134->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	bSizer126->Add( bSizer134, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szPlaySound->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer126 );
+	this->SetSizer( szPlaySound );
 	this->Layout();
-	bSizer126->Fit( this );
+	szPlaySound->Fit( this );
 }
 
 dlgEvtCmdPlaySound_Base::~dlgEvtCmdPlaySound_Base()
@@ -476,134 +476,134 @@ dlgEvtCmdPlayVideo_Base::dlgEvtCmdPlayVideo_Base( wxWindow* parent, wxWindowID i
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer257;
-	bSizer257 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szPlayVideo;
+	szPlayVideo = new wxBoxSizer( wxVERTICAL );
 	
-	wxBoxSizer* bSizer258;
-	bSizer258 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTop;
+	szTop = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer131;
-	sbSizer131 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Video file") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szFile;
+	szFile = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Video file") ), wxHORIZONTAL );
 	
 	stVideo = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer131->Add( stVideo, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szFile->Add( stVideo, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnVideo = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnVideo->SetDefault(); 
-	sbSizer131->Add( btnVideo, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szFile->Add( btnVideo, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer258->Add( sbSizer131, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szTop->Add( szFile, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer132;
-	sbSizer132 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Size in window") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szSize;
+	szSize = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Size in window") ), wxHORIZONTAL );
 	
 	spinSizeX = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 320, 0 );
-	sbSizer132->Add( spinSizeX, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSize->Add( spinSizeX, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stSize = new wxStaticText( this, wxID_ANY, _("X"), wxDefaultPosition, wxDefaultSize, 0 );
 	stSize->Wrap( -1 );
-	sbSizer132->Add( stSize, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSize->Add( stSize, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	spinSizeY = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 240, 0 );
-	sbSizer132->Add( spinSizeY, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSize->Add( spinSizeY, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	bSizer258->Add( sbSizer132, 0, wxEXPAND, 0 );
+	szTop->Add( szSize, 0, wxEXPAND, 0 );
 	
-	bSizer257->Add( bSizer258, 0, wxEXPAND, 0 );
+	szPlayVideo->Add( szTop, 0, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer133;
-	sbSizer133 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Move to position (coordinates)") ), wxVERTICAL );
+	wxStaticBoxSizer* szPosition;
+	szPosition = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Move to position (coordinates)") ), wxVERTICAL );
 	
-	wxFlexGridSizer* fgSizer29;
-	fgSizer29 = new wxFlexGridSizer( 4, 3, 2, 2 );
-	fgSizer29->AddGrowableCol( 2 );
-	fgSizer29->SetFlexibleDirection( wxBOTH );
-	fgSizer29->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxFlexGridSizer* szPosition2;
+	szPosition2 = new wxFlexGridSizer( 4, 3, 2, 2 );
+	szPosition2->AddGrowableCol( 2 );
+	szPosition2->SetFlexibleDirection( wxBOTH );
+	szPosition2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	rbtnSpecify = new wxRadioButton( this, wxID_ANY, _("Specify"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnSpecify->SetValue( true ); 
-	fgSizer29->Add( rbtnSpecify, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition2->Add( rbtnSpecify, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szSpecifyX = new wxStaticText( this, wxID_ANY, _("X:"), wxDefaultPosition, wxDefaultSize, 0 );
 	szSpecifyX->Wrap( -1 );
-	fgSizer29->Add( szSpecifyX, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition2->Add( szSpecifyX, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	spinSpecifyX = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 320, 0 );
-	fgSizer29->Add( spinSpecifyX, 1, wxRIGHT|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szPosition2->Add( spinSpecifyX, 1, wxRIGHT|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	
-	fgSizer29->Add( 0,  0, 1, wxEXPAND, 0 );
+	szPosition2->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stSpecifyY = new wxStaticText( this, wxID_ANY, _("Y:"), wxDefaultPosition, wxDefaultSize, 0 );
 	stSpecifyY->Wrap( -1 );
-	fgSizer29->Add( stSpecifyY, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition2->Add( stSpecifyY, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	spinSpecifyY = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 240, 0 );
-	fgSizer29->Add( spinSpecifyY, 1, wxRIGHT|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szPosition2->Add( spinSpecifyY, 1, wxRIGHT|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	rbtnVariable = new wxRadioButton( this, wxID_ANY, _("Variable"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnVariable->SetValue( true ); 
-	fgSizer29->Add( rbtnVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition2->Add( rbtnVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	stVariableX = new wxStaticText( this, wxID_ANY, _("X:"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVariableX->Wrap( -1 );
-	fgSizer29->Add( stVariableX, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition2->Add( stVariableX, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	wxBoxSizer* bSizer259;
-	bSizer259 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVariableX;
+	szVariableX = new wxBoxSizer( wxHORIZONTAL );
 	
 	tcVariableX = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	bSizer259->Add( tcVariableX, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariableX->Add( tcVariableX, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnVariableX = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnVariableX->SetDefault(); 
-	bSizer259->Add( btnVariableX, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariableX->Add( btnVariableX, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	fgSizer29->Add( bSizer259, 1, wxEXPAND, 0 );
+	szPosition2->Add( szVariableX, 1, wxEXPAND, 0 );
 	
 	
-	fgSizer29->Add( 0,  0, 1, wxEXPAND, 0 );
+	szPosition2->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	stVariableY = new wxStaticText( this, wxID_ANY, _("Y:"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVariableY->Wrap( -1 );
-	fgSizer29->Add( stVariableY, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition2->Add( stVariableY, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	wxBoxSizer* bSizer260;
-	bSizer260 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVariableY;
+	szVariableY = new wxBoxSizer( wxHORIZONTAL );
 	
 	tcVariableY = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	bSizer260->Add( tcVariableY, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariableY->Add( tcVariableY, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnVariableY = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnVariableY->SetDefault(); 
-	bSizer260->Add( btnVariableY, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariableY->Add( btnVariableY, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	fgSizer29->Add( bSizer260, 1, wxEXPAND, 0 );
+	szPosition2->Add( szVariableY, 1, wxEXPAND, 0 );
 	
-	sbSizer133->Add( fgSizer29, 1, wxBOTTOM|wxEXPAND, 1 );
+	szPosition->Add( szPosition2, 1, wxBOTTOM|wxEXPAND, 1 );
 	
-	bSizer257->Add( sbSizer133, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szPlayVideo->Add( szPosition, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer261;
-	bSizer261 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer261->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer261->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer261->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer257->Add( bSizer261, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szPlayVideo->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer257 );
+	this->SetSizer( szPlayVideo );
 	this->Layout();
-	bSizer257->Fit( this );
+	szPlayVideo->Fit( this );
 }
 
 dlgEvtCmdPlayVideo_Base::~dlgEvtCmdPlayVideo_Base()
@@ -614,101 +614,101 @@ dlgEvtCmdKeyAssignment_Base::dlgEvtCmdKeyAssignment_Base( wxWindow* parent, wxWi
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer162;
-	bSizer162 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szKeyAssignment;
+	szKeyAssignment = new wxBoxSizer( wxVERTICAL );
 	
-	wxBoxSizer* bSizer163;
-	bSizer163 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTop;
+	szTop = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxBoxSizer* bSizer164;
-	bSizer164 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szLeft;
+	szLeft = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer86;
-	sbSizer86 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Store value in variable") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szVariable;
+	szVariable = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Store value in variable") ), wxHORIZONTAL );
 	
 	tcVariable = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70, -1 ), 0 );
-	sbSizer86->Add( tcVariable, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariable->Add( tcVariable, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnVariable = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxSize( 25, -1 ), wxBU_EXACTFIT );
 	btnVariable->SetDefault(); 
-	sbSizer86->Add( btnVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariable->Add( btnVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer164->Add( sbSizer86, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szLeft->Add( szVariable, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer87;
-	sbSizer87 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Options") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szOptions;
+	szOptions = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Options") ), wxHORIZONTAL );
 	
 	chbWait = new wxCheckBox( this, wxID_ANY, _("Wait for key press"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbWait->SetValue(true); 
-	sbSizer87->Add( chbWait, 0, 0, 0 );
+	szOptions->Add( chbWait, 0, 0, 0 );
 	
-	bSizer164->Add( sbSizer87, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szLeft->Add( szOptions, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	bSizer163->Add( bSizer164, 1, wxEXPAND, 0 );
+	szTop->Add( szLeft, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer88;
-	sbSizer88 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Keys to assign") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szKeys;
+	szKeys = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Keys to assign") ), wxHORIZONTAL );
 	
-	wxGridSizer* gSizer1;
-	gSizer1 = new wxGridSizer( 4, 2, 2, 2 );
+	wxGridSizer* szKeys2;
+	szKeys2 = new wxGridSizer( 4, 2, 2, 2 );
 	
 	chbDown = new wxCheckBox( this, wxID_ANY, _("Down (1)"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbDown->SetValue(true); 
-	gSizer1->Add( chbDown, 0, 0, 0 );
+	szKeys2->Add( chbDown, 0, 0, 0 );
 	
 	chbDecision = new wxCheckBox( this, wxID_ANY, _("Decision key (5)"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbDecision->SetValue(true); 
-	gSizer1->Add( chbDecision, 0, 0, 0 );
+	szKeys2->Add( chbDecision, 0, 0, 0 );
 	
 	chbLeft = new wxCheckBox( this, wxID_ANY, _("Left (2)"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbLeft->SetValue(true); 
-	gSizer1->Add( chbLeft, 0, 0, 0 );
+	szKeys2->Add( chbLeft, 0, 0, 0 );
 	
 	chbCancel = new wxCheckBox( this, wxID_ANY, _("Cancel key (6)"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbCancel->SetValue(true); 
-	gSizer1->Add( chbCancel, 0, 0, 0 );
+	szKeys2->Add( chbCancel, 0, 0, 0 );
 	
 	chbRight = new wxCheckBox( this, wxID_ANY, _("Right (3)"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbRight->SetValue(true); 
-	gSizer1->Add( chbRight, 0, 0, 0 );
+	szKeys2->Add( chbRight, 0, 0, 0 );
 	
 	chbShift = new wxCheckBox( this, wxID_ANY, _("Shift key (7)"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbShift->SetValue(true); 
-	gSizer1->Add( chbShift, 0, 0, 0 );
+	szKeys2->Add( chbShift, 0, 0, 0 );
 	
 	chbUp = new wxCheckBox( this, wxID_ANY, _("Up (4)"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbUp->SetValue(true); 
-	gSizer1->Add( chbUp, 0, 0, 0 );
+	szKeys2->Add( chbUp, 0, 0, 0 );
 	
 	
-	gSizer1->Add( 0,  0, 1, wxEXPAND, 0 );
+	szKeys2->Add( 0,  0, 1, wxEXPAND, 0 );
 	
-	sbSizer88->Add( gSizer1, 1, 0, 0 );
+	szKeys->Add( szKeys2, 1, 0, 0 );
 	
-	bSizer163->Add( sbSizer88, 0, wxLEFT|wxRIGHT|wxBOTTOM, 1 );
+	szTop->Add( szKeys, 0, wxLEFT|wxRIGHT|wxBOTTOM, 1 );
 	
-	bSizer162->Add( bSizer163, 0, wxEXPAND, 0 );
+	szKeyAssignment->Add( szTop, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer165;
-	bSizer165 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer165->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	btnCancel = new wxButton( this, wxID_ANY, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnCancel->SetDefault(); 
-	bSizer165->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer165->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer162->Add( bSizer165, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szKeyAssignment->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer162 );
+	this->SetSizer( szKeyAssignment );
 	this->Layout();
-	bSizer162->Fit( this );
+	szKeyAssignment->Fit( this );
 }
 
 dlgEvtCmdKeyAssignment_Base::~dlgEvtCmdKeyAssignment_Base()
@@ -719,39 +719,39 @@ dlgEvtCmdTileset_Base::dlgEvtCmdTileset_Base( wxWindow* parent, wxWindowID id, c
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer42;
-	bSizer42 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szTileset;
+	szTileset = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer23;
-	sbSizer23 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("ChipSet") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szChipSet;
+	szChipSet = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("ChipSet") ), wxHORIZONTAL );
 	
 	wxArrayString chChipSetChoices;
 	chChipSet = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, chChipSetChoices, 0 );
 	chChipSet->SetSelection( 0 );
-	sbSizer23->Add( chChipSet, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szChipSet->Add( chChipSet, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer42->Add( sbSizer23, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTileset->Add( szChipSet, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer43;
-	bSizer43 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer43->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer43->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer43->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	bSizer42->Add( bSizer43, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szTileset->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer42 );
+	this->SetSizer( szTileset );
 	this->Layout();
-	bSizer42->Fit( this );
+	szTileset->Fit( this );
 }
 
 dlgEvtCmdTileset_Base::~dlgEvtCmdTileset_Base()
@@ -762,122 +762,122 @@ dlgEvtCmdPanorama_Base::dlgEvtCmdPanorama_Base( wxWindow* parent, wxWindowID id,
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer1;
-	bSizer1 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szPanorama;
+	szPanorama = new wxBoxSizer( wxVERTICAL );
 	
-	wxBoxSizer* bSizer2;
-	bSizer2 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTop;
+	szTop = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer1;
-	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Background") ), wxVERTICAL );
+	wxStaticBoxSizer* szBackground;
+	szBackground = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Background") ), wxVERTICAL );
 	
 	bmpBackground = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 160, 120 ), wxSUNKEN_BORDER );
-	sbSizer1->Add( bmpBackground, 0, wxBOTTOM, 1 );
+	szBackground->Add( bmpBackground, 0, wxBOTTOM, 1 );
 	
 	btnBackground = new wxButton( this, wxID_ANY, _("Select..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnBackground->SetDefault(); 
-	sbSizer1->Add( btnBackground, 0, wxTOP|wxALIGN_RIGHT, 1 );
+	szBackground->Add( btnBackground, 0, wxTOP|wxALIGN_RIGHT, 1 );
 	
-	bSizer2->Add( sbSizer1, 0, wxRIGHT|wxEXPAND, 1 );
+	szTop->Add( szBackground, 0, wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer2;
-	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Options") ), wxVERTICAL );
+	wxStaticBoxSizer* szOptions;
+	szOptions = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Options") ), wxVERTICAL );
 	
 	
-	sbSizer2->Add( 0,  0, 1, wxEXPAND, 0 );
+	szOptions->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	btnHScroll = new wxCheckBox( this, wxID_ANY, _("Horizontal scroll"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnHScroll->SetValue(true); 
-	sbSizer2->Add( btnHScroll, 0, wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szOptions->Add( btnHScroll, 0, wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxBoxSizer* bSizer3;
-	bSizer3 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szHScrollAuto;
+	szHScrollAuto = new wxBoxSizer( wxHORIZONTAL );
 	
 	
-	bSizer3->Add( 15,  15, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
+	szHScrollAuto->Add( 15,  15, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
 	
 	chbHScrollAuto = new wxCheckBox( this, wxID_ANY, _("Automatic"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbHScrollAuto->SetValue(true); 
-	bSizer3->Add( chbHScrollAuto, 1, wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
+	szHScrollAuto->Add( chbHScrollAuto, 1, wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer2->Add( bSizer3, 0, wxEXPAND, 0 );
+	szOptions->Add( szHScrollAuto, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer4;
-	bSizer4 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szHScrollSpeed;
+	szHScrollSpeed = new wxBoxSizer( wxHORIZONTAL );
 	
 	stHScrollSpeed = new wxStaticText( this, wxID_ANY, _("Speed"), wxDefaultPosition, wxDefaultSize, 0 );
 	stHScrollSpeed->Wrap( -1 );
-	bSizer4->Add( stHScrollSpeed, 0, wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
+	szHScrollSpeed->Add( stHScrollSpeed, 0, wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	spinHScrollSpeed = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 999, 0 );
-	bSizer4->Add( spinHScrollSpeed, 1, wxLEFT|wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
+	szHScrollSpeed->Add( spinHScrollSpeed, 1, wxLEFT|wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer2->Add( bSizer4, 0, wxEXPAND, 0 );
+	szOptions->Add( szHScrollSpeed, 0, wxEXPAND, 0 );
 	
 	
-	sbSizer2->Add( 0,  0, 1, wxEXPAND, 0 );
+	szOptions->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	lineOptions = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	sbSizer2->Add( lineOptions, 0, wxTOP|wxBOTTOM|wxEXPAND, 1 );
+	szOptions->Add( lineOptions, 0, wxTOP|wxBOTTOM|wxEXPAND, 1 );
 	
 	
-	sbSizer2->Add( 0,  0, 1, wxEXPAND, 0 );
+	szOptions->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	btnVScroll = new wxCheckBox( this, wxID_ANY, _("Vertical scroll"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnVScroll->SetValue(true); 
-	sbSizer2->Add( btnVScroll, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szOptions->Add( btnVScroll, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxBoxSizer* bSizer5;
-	bSizer5 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVScrollAuto;
+	szVScrollAuto = new wxBoxSizer( wxHORIZONTAL );
 	
 	
-	bSizer5->Add( 15,  15, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
+	szVScrollAuto->Add( 15,  15, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
 	
 	chbVScrollAuto = new wxCheckBox( this, wxID_ANY, _("Automatic"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbVScrollAuto->SetValue(true); 
-	bSizer5->Add( chbVScrollAuto, 1, wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
+	szVScrollAuto->Add( chbVScrollAuto, 1, wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer2->Add( bSizer5, 0, wxEXPAND, 0 );
+	szOptions->Add( szVScrollAuto, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer6;
-	bSizer6 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVScrollSpeed;
+	szVScrollSpeed = new wxBoxSizer( wxHORIZONTAL );
 	
-	stVcrollSpeed = new wxStaticText( this, wxID_ANY, _("Speed"), wxDefaultPosition, wxDefaultSize, 0 );
-	stVcrollSpeed->Wrap( -1 );
-	bSizer6->Add( stVcrollSpeed, 0, wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
+	stVScrollSpeed = new wxStaticText( this, wxID_ANY, _("Speed"), wxDefaultPosition, wxDefaultSize, 0 );
+	stVScrollSpeed->Wrap( -1 );
+	szVScrollSpeed->Add( stVScrollSpeed, 0, wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	spinVScrollSpeed = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 999, 0 );
-	bSizer6->Add( spinVScrollSpeed, 1, wxLEFT|wxTOP, 1 );
+	szVScrollSpeed->Add( spinVScrollSpeed, 1, wxLEFT|wxTOP, 1 );
 	
-	sbSizer2->Add( bSizer6, 0, wxEXPAND, 0 );
+	szOptions->Add( szVScrollSpeed, 0, wxEXPAND, 0 );
 	
 	
-	sbSizer2->Add( 0,  0, 1, wxEXPAND, 0 );
+	szOptions->Add( 0,  0, 1, wxEXPAND, 0 );
 	
-	bSizer2->Add( sbSizer2, 1, wxLEFT|wxEXPAND, 1 );
+	szTop->Add( szOptions, 1, wxLEFT|wxEXPAND, 1 );
 	
-	bSizer1->Add( bSizer2, 1, wxEXPAND, 0 );
+	szPanorama->Add( szTop, 1, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer7;
-	bSizer7 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer7->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer7->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer7->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	bSizer1->Add( bSizer7, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szPanorama->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer1 );
+	this->SetSizer( szPanorama );
 	this->Layout();
-	bSizer1->Fit( this );
+	szPanorama->Fit( this );
 }
 
 dlgEvtCmdPanorama_Base::~dlgEvtCmdPanorama_Base()
@@ -888,37 +888,37 @@ dlgEvtCmdEncounterRate_Base::dlgEvtCmdEncounterRate_Base( wxWindow* parent, wxWi
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer271;
-	bSizer271 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szEncounterRate;
+	szEncounterRate = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer141;
-	sbSizer141 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Number of steps") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szSteps;
+	szSteps = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Number of steps") ), wxHORIZONTAL );
 	
 	spinSteps = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 999, 25 );
-	sbSizer141->Add( spinSteps, 1, wxALIGN_CENTER_VERTICAL, 1 );
+	szSteps->Add( spinSteps, 1, wxALIGN_CENTER_VERTICAL, 1 );
 	
-	bSizer271->Add( sbSizer141, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szEncounterRate->Add( szSteps, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer272;
-	bSizer272 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer272->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer272->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer272->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	bSizer271->Add( bSizer272, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szEncounterRate->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer271 );
+	this->SetSizer( szEncounterRate );
 	this->Layout();
-	bSizer271->Fit( this );
+	szEncounterRate->Fit( this );
 }
 
 dlgEvtCmdEncounterRate_Base::~dlgEvtCmdEncounterRate_Base()
@@ -929,64 +929,64 @@ dlgEvtCmdTile_Base::dlgEvtCmdTile_Base( wxWindow* parent, wxWindowID id, const w
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer168;
-	bSizer168 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szTile;
+	szTile = new wxBoxSizer( wxVERTICAL );
 	
 	wxString rbOptionsChoices[] = { _("Lower"), _("Upper") };
 	int rbOptionsNChoices = sizeof( rbOptionsChoices ) / sizeof( wxString );
 	rbOptions = new wxRadioBox( this, wxID_ANY, _("Tile type"), wxDefaultPosition, wxDefaultSize, rbOptionsNChoices, rbOptionsChoices, 1, wxRA_SPECIFY_ROWS );
 	rbOptions->SetSelection( 0 );
-	bSizer168->Add( rbOptions, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szTile->Add( rbOptions, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer169;
-	bSizer169 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szMiddle;
+	szMiddle = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer89;
-	sbSizer89 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Tile to replace") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szOriginal;
+	szOriginal = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Tile to replace") ), wxHORIZONTAL );
 	
 	bmpOriginal = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 32, 32 ), wxSUNKEN_BORDER );
-	sbSizer89->Add( bmpOriginal, 0, wxRIGHT, 1 );
+	szOriginal->Add( bmpOriginal, 0, wxRIGHT, 1 );
 	
 	btnOriginal = new wxButton( this, wxID_ANY, _("Select..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnOriginal->SetDefault(); 
-	sbSizer89->Add( btnOriginal, 0, wxLEFT, 1 );
+	szOriginal->Add( btnOriginal, 0, wxLEFT, 1 );
 	
-	bSizer169->Add( sbSizer89, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szMiddle->Add( szOriginal, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer90;
-	sbSizer90 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Replace with") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szReplacer;
+	szReplacer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Replace with") ), wxHORIZONTAL );
 	
 	bmpReplacer = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 32, 32 ), wxSUNKEN_BORDER );
-	sbSizer90->Add( bmpReplacer, 0, wxRIGHT, 1 );
+	szReplacer->Add( bmpReplacer, 0, wxRIGHT, 1 );
 	
 	btnReplacer = new wxButton( this, wxID_ANY, _("Select..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnReplacer->SetDefault(); 
-	sbSizer90->Add( btnReplacer, 0, wxLEFT, 1 );
+	szReplacer->Add( btnReplacer, 0, wxLEFT, 1 );
 	
-	bSizer169->Add( sbSizer90, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szMiddle->Add( szReplacer, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	bSizer168->Add( bSizer169, 0, wxEXPAND, 0 );
+	szTile->Add( szMiddle, 0, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer170;
-	bSizer170 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer170->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer170->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer170->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer168->Add( bSizer170, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szTile->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer168 );
+	this->SetSizer( szTile );
 	this->Layout();
-	bSizer168->Fit( this );
+	szTile->Fit( this );
 }
 
 dlgEvtCmdTile_Base::~dlgEvtCmdTile_Base()
@@ -997,63 +997,63 @@ dlgEvtCmdTeleportPlace_Base::dlgEvtCmdTeleportPlace_Base( wxWindow* parent, wxWi
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer299;
-	bSizer299 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szTeleportPlace;
+	szTeleportPlace = new wxBoxSizer( wxVERTICAL );
 	
 	wxString rbOperationChoices[] = { _("Add teleport"), _("Remove teleport") };
 	int rbOperationNChoices = sizeof( rbOperationChoices ) / sizeof( wxString );
 	rbOperation = new wxRadioBox( this, wxID_ANY, _("Operation"), wxDefaultPosition, wxDefaultSize, rbOperationNChoices, rbOperationChoices, 1, wxRA_SPECIFY_ROWS );
 	rbOperation->SetSelection( 0 );
-	bSizer299->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szTeleportPlace->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer154;
-	sbSizer154 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Teleport position") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szPosition;
+	szPosition = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Teleport position") ), wxHORIZONTAL );
 	
 	tcPosition = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 125, -1 ), 0 );
-	sbSizer154->Add( tcPosition, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition->Add( tcPosition, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnPosition = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnPosition->SetDefault(); 
-	sbSizer154->Add( btnPosition, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition->Add( btnPosition, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer299->Add( sbSizer154, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szTeleportPlace->Add( szPosition, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer155;
-	sbSizer155 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Enable switch after teleporting") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szSwitch;
+	szSwitch = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Enable switch after teleporting") ), wxHORIZONTAL );
 	
 	chbSwitch = new wxCheckBox( this, wxID_ANY, _("Enable"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbSwitch->SetValue(true); 
-	sbSizer155->Add( chbSwitch, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSwitch->Add( chbSwitch, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcSwitch = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 125, -1 ), 0 );
-	sbSizer155->Add( tcSwitch, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSwitch->Add( tcSwitch, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	btnSwitch = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnSwitch->SetDefault(); 
-	sbSizer155->Add( btnSwitch, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szSwitch->Add( btnSwitch, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer299->Add( sbSizer155, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTeleportPlace->Add( szSwitch, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer300;
-	bSizer300 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer300->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer300->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer300->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer299->Add( bSizer300, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szTeleportPlace->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer299 );
+	this->SetSizer( szTeleportPlace );
 	this->Layout();
-	bSizer299->Fit( this );
+	szTeleportPlace->Fit( this );
 }
 
 dlgEvtCmdTeleportPlace_Base::~dlgEvtCmdTeleportPlace_Base()
@@ -1064,35 +1064,35 @@ dlgEvtCmdTeleportPermissions_Base::dlgEvtCmdTeleportPermissions_Base( wxWindow* 
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer75;
-	bSizer75 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szTeleportPermissions;
+	szTeleportPermissions = new wxBoxSizer( wxVERTICAL );
 	
 	wxString rbOperationChoices[] = { _("Forbid teleporting"), _("Alllow teleporting") };
 	int rbOperationNChoices = sizeof( rbOperationChoices ) / sizeof( wxString );
 	rbOperation = new wxRadioBox( this, wxID_ANY, _("Operation"), wxDefaultPosition, wxDefaultSize, rbOperationNChoices, rbOperationChoices, 1, wxRA_SPECIFY_ROWS );
 	rbOperation->SetSelection( 0 );
-	bSizer75->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTeleportPermissions->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer76;
-	bSizer76 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer76->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer76->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer76->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer75->Add( bSizer76, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szTeleportPermissions->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer75 );
+	this->SetSizer( szTeleportPermissions );
 	this->Layout();
-	bSizer75->Fit( this );
+	szTeleportPermissions->Fit( this );
 }
 
 dlgEvtCmdTeleportPermissions_Base::~dlgEvtCmdTeleportPermissions_Base()
@@ -1103,57 +1103,57 @@ dlgEvtCmdEscapePlace_Base::dlgEvtCmdEscapePlace_Base( wxWindow* parent, wxWindow
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer234;
-	bSizer234 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szEscapePlace;
+	szEscapePlace = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer121;
-	sbSizer121 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Escape position") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szPosition;
+	szPosition = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Escape position") ), wxHORIZONTAL );
 	
 	tcPosition = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 125, -1 ), 0 );
-	sbSizer121->Add( tcPosition, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition->Add( tcPosition, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnPosition = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnPosition->SetDefault(); 
-	sbSizer121->Add( btnPosition, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPosition->Add( btnPosition, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer234->Add( sbSizer121, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szEscapePlace->Add( szPosition, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer122;
-	sbSizer122 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Enable switch after escape") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szSwitch;
+	szSwitch = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Enable switch after escape") ), wxHORIZONTAL );
 	
 	chbSwitch = new wxCheckBox( this, wxID_ANY, _("Enable"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbSwitch->SetValue(true); 
-	sbSizer122->Add( chbSwitch, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSwitch->Add( chbSwitch, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcSwitch = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 125, -1 ), 0 );
-	sbSizer122->Add( tcSwitch, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSwitch->Add( tcSwitch, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	btnSwitch = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnSwitch->SetDefault(); 
-	sbSizer122->Add( btnSwitch, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szSwitch->Add( btnSwitch, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer234->Add( sbSizer122, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szEscapePlace->Add( szSwitch, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer235;
-	bSizer235 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer235->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer235->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer235->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer234->Add( bSizer235, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szEscapePlace->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer234 );
+	this->SetSizer( szEscapePlace );
 	this->Layout();
-	bSizer234->Fit( this );
+	szEscapePlace->Fit( this );
 }
 
 dlgEvtCmdEscapePlace_Base::~dlgEvtCmdEscapePlace_Base()
@@ -1164,35 +1164,35 @@ dlgEvtCmdEscapePermissions_Base::dlgEvtCmdEscapePermissions_Base( wxWindow* pare
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer278;
-	bSizer278 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szEscapePermissions;
+	szEscapePermissions = new wxBoxSizer( wxVERTICAL );
 	
 	wxString rbOperationChoices[] = { _("Forbid escape"), _("Alllow escape") };
 	int rbOperationNChoices = sizeof( rbOperationChoices ) / sizeof( wxString );
 	rbOperation = new wxRadioBox( this, wxID_ANY, _("Operation"), wxDefaultPosition, wxDefaultSize, rbOperationNChoices, rbOperationChoices, 1, wxRA_SPECIFY_ROWS );
 	rbOperation->SetSelection( 0 );
-	bSizer278->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szEscapePermissions->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer279;
-	bSizer279 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer279->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer279->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer279->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer278->Add( bSizer279, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szEscapePermissions->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer278 );
+	this->SetSizer( szEscapePermissions );
 	this->Layout();
-	bSizer278->Fit( this );
+	szEscapePermissions->Fit( this );
 }
 
 dlgEvtCmdEscapePermissions_Base::~dlgEvtCmdEscapePermissions_Base()
@@ -1203,35 +1203,35 @@ dlgEvtCmdSavePermissions_Base::dlgEvtCmdSavePermissions_Base( wxWindow* parent, 
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer283;
-	bSizer283 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szSavePermissions;
+	szSavePermissions = new wxBoxSizer( wxVERTICAL );
 	
 	wxString rbOperationChoices[] = { _("Forbid saving"), _("Alllow saving") };
 	int rbOperationNChoices = sizeof( rbOperationChoices ) / sizeof( wxString );
 	rbOperation = new wxRadioBox( this, wxID_ANY, _("Operation"), wxDefaultPosition, wxDefaultSize, rbOperationNChoices, rbOperationChoices, 1, wxRA_SPECIFY_ROWS );
 	rbOperation->SetSelection( 0 );
-	bSizer283->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szSavePermissions->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer284;
-	bSizer284 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer284->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer284->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer284->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer283->Add( bSizer284, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szSavePermissions->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer283 );
+	this->SetSizer( szSavePermissions );
 	this->Layout();
-	bSizer283->Fit( this );
+	szSavePermissions->Fit( this );
 }
 
 dlgEvtCmdSavePermissions_Base::~dlgEvtCmdSavePermissions_Base()
@@ -1242,35 +1242,35 @@ dlgEvtCmdSystemMenuPermissions_Base::dlgEvtCmdSystemMenuPermissions_Base( wxWind
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer236;
-	bSizer236 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szSystemMenuPermissions;
+	szSystemMenuPermissions = new wxBoxSizer( wxVERTICAL );
 	
 	wxString rbOperationChoices[] = { _("Forbid menu"), _("Alllow menu") };
 	int rbOperationNChoices = sizeof( rbOperationChoices ) / sizeof( wxString );
 	rbOperation = new wxRadioBox( this, wxID_ANY, _("Operation"), wxDefaultPosition, wxDefaultSize, rbOperationNChoices, rbOperationChoices, 1, wxRA_SPECIFY_ROWS );
 	rbOperation->SetSelection( 0 );
-	bSizer236->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szSystemMenuPermissions->Add( rbOperation, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer237;
-	bSizer237 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer237->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer237->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer237->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer236->Add( bSizer237, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szSystemMenuPermissions->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer236 );
+	this->SetSizer( szSystemMenuPermissions );
 	this->Layout();
-	bSizer236->Fit( this );
+	szSystemMenuPermissions->Fit( this );
 }
 
 dlgEvtCmdSystemMenuPermissions_Base::~dlgEvtCmdSystemMenuPermissions_Base()
@@ -1281,313 +1281,313 @@ dlgEvtCmdConditions_Base::dlgEvtCmdConditions_Base( wxWindow* parent, wxWindowID
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer88;
-	bSizer88 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szConditions;
+	szConditions = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer49;
-	sbSizer49 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Conditions") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szConditionsTop;
+	szConditionsTop = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Conditions") ), wxHORIZONTAL );
 	
 	nbConditions = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	pnConditions1 = new wxPanel( nbConditions, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxFlexGridSizer* fgSizer11;
-	fgSizer11 = new wxFlexGridSizer( 6, 2, 2, 2 );
-	fgSizer11->AddGrowableCol( 1 );
-	fgSizer11->SetFlexibleDirection( wxBOTH );
-	fgSizer11->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxFlexGridSizer* szConditions1;
+	szConditions1 = new wxFlexGridSizer( 6, 2, 2, 2 );
+	szConditions1->AddGrowableCol( 1 );
+	szConditions1->SetFlexibleDirection( wxBOTH );
+	szConditions1->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	rbtnSwitch = new wxRadioButton( pnConditions1, wxID_ANY, _("Switch"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnSwitch->SetValue( true ); 
-	fgSizer11->Add( rbtnSwitch, 0, wxLEFT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
+	szConditions1->Add( rbtnSwitch, 0, wxLEFT|wxTOP|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxBoxSizer* bSizer89;
-	bSizer89 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szSwitch;
+	szSwitch = new wxBoxSizer( wxHORIZONTAL );
 	
 	tcSwitch = new wxTextCtrl( pnConditions1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100, -1 ), 0 );
-	bSizer89->Add( tcSwitch, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szSwitch->Add( tcSwitch, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnSwitch = new wxButton( pnConditions1, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnSwitch->SetDefault(); 
-	bSizer89->Add( btnSwitch, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSwitch->Add( btnSwitch, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stSwitch = new wxStaticText( pnConditions1, wxID_ANY, _(":"), wxDefaultPosition, wxDefaultSize, 0 );
 	stSwitch->Wrap( -1 );
-	bSizer89->Add( stSwitch, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSwitch->Add( stSwitch, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	wxArrayString chSwitchChoices;
 	chSwitch = new wxChoice( pnConditions1, wxID_ANY, wxDefaultPosition, wxSize( 90, -1 ), chSwitchChoices, 0 );
 	chSwitch->SetSelection( 0 );
-	bSizer89->Add( chSwitch, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szSwitch->Add( chSwitch, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	fgSizer11->Add( bSizer89, 1, wxTOP|wxBOTTOM|wxEXPAND, 1 );
+	szConditions1->Add( szSwitch, 1, wxTOP|wxBOTTOM|wxEXPAND, 1 );
 	
 	rbtnVariable = new wxRadioButton( pnConditions1, wxID_ANY, _("Variable"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnVariable->SetValue( true ); 
-	fgSizer11->Add( rbtnVariable, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szConditions1->Add( rbtnVariable, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxBoxSizer* bSizer90;
-	bSizer90 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVariable;
+	szVariable = new wxBoxSizer( wxHORIZONTAL );
 	
 	tcVariable = new wxTextCtrl( pnConditions1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100, -1 ), 0 );
-	bSizer90->Add( tcVariable, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariable->Add( tcVariable, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnVariable = new wxButton( pnConditions1, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnVariable->SetDefault(); 
-	bSizer90->Add( btnVariable, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szVariable->Add( btnVariable, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stVariable = new wxStaticText( pnConditions1, wxID_ANY, _(":"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVariable->Wrap( -1 );
-	bSizer90->Add( stVariable, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szVariable->Add( stVariable, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	
-	bSizer90->Add( 90,  0, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szVariable->Add( 90,  0, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	fgSizer11->Add( bSizer90, 1, wxTOP|wxEXPAND, 1 );
+	szConditions1->Add( szVariable, 1, wxTOP|wxEXPAND, 1 );
 	
 	
-	fgSizer11->Add( 0,  0, 1, wxEXPAND, 0 );
+	szConditions1->Add( 0,  0, 1, wxEXPAND, 0 );
 	
-	wxFlexGridSizer* fgSizer12;
-	fgSizer12 = new wxFlexGridSizer( 2, 2, 2, 2 );
-	fgSizer12->AddGrowableCol( 1 );
-	fgSizer12->SetFlexibleDirection( wxBOTH );
-	fgSizer12->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxFlexGridSizer* szVariable2;
+	szVariable2 = new wxFlexGridSizer( 2, 2, 2, 2 );
+	szVariable2->AddGrowableCol( 1 );
+	szVariable2->SetFlexibleDirection( wxBOTH );
+	szVariable2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	rbtnVariableFixed = new wxRadioButton( pnConditions1, wxID_ANY, _("Fixed"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnVariableFixed->SetValue( true ); 
-	fgSizer12->Add( rbtnVariableFixed, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariable2->Add( rbtnVariableFixed, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	spinVariableFiexd = new wxSpinCtrl( pnConditions1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 9999999, 0 );
-	fgSizer12->Add( spinVariableFiexd, 1, wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szVariable2->Add( spinVariableFiexd, 1, wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	rbtnVariableVariable = new wxRadioButton( pnConditions1, wxID_ANY, _("Variable"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnVariableVariable->SetValue( true ); 
-	fgSizer12->Add( rbtnVariableVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariable2->Add( rbtnVariableVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	wxBoxSizer* bSizer91;
-	bSizer91 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVariableVariable;
+	szVariableVariable = new wxBoxSizer( wxHORIZONTAL );
 	
 	tcVariableVariable = new wxTextCtrl( pnConditions1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	bSizer91->Add( tcVariableVariable, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariableVariable->Add( tcVariableVariable, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnVariableVariable = new wxButton( pnConditions1, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnVariableVariable->SetDefault(); 
-	bSizer91->Add( btnVariableVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szVariableVariable->Add( btnVariableVariable, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	fgSizer12->Add( bSizer91, 1, wxEXPAND, 0 );
+	szVariable2->Add( szVariableVariable, 1, wxEXPAND, 0 );
 	
-	fgSizer11->Add( fgSizer12, 1, wxALL|wxEXPAND, 1 );
+	szConditions1->Add( szVariable2, 1, wxALL|wxEXPAND, 1 );
 	
 	
-	fgSizer11->Add( 0,  0, 1, wxEXPAND, 0 );
+	szConditions1->Add( 0,  0, 1, wxEXPAND, 0 );
 	
 	wxArrayString chVariableChoices;
 	chVariable = new wxChoice( pnConditions1, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chVariableChoices, 0 );
 	chVariable->SetSelection( 0 );
-	fgSizer11->Add( chVariable, 0, wxRIGHT|wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szConditions1->Add( chVariable, 0, wxRIGHT|wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	rbtnTimer = new wxRadioButton( pnConditions1, wxID_ANY, _("Timer"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnTimer->SetValue( true ); 
-	fgSizer11->Add( rbtnTimer, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szConditions1->Add( rbtnTimer, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxBoxSizer* bSizer92;
-	bSizer92 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTimer;
+	szTimer = new wxBoxSizer( wxHORIZONTAL );
 	
 	spinTimerMinutes = new wxSpinCtrl( pnConditions1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 99, 0 );
-	bSizer92->Add( spinTimerMinutes, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTimer->Add( spinTimerMinutes, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stTimerMinutes = new wxStaticText( pnConditions1, wxID_ANY, _(":"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTimerMinutes->Wrap( -1 );
-	bSizer92->Add( stTimerMinutes, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTimer->Add( stTimerMinutes, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	spinTimerSeconds = new wxSpinCtrl( pnConditions1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 0, 59, 0 );
-	bSizer92->Add( spinTimerSeconds, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTimer->Add( spinTimerSeconds, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stTimerSeconds = new wxStaticText( pnConditions1, wxID_ANY, _("sec."), wxDefaultPosition, wxDefaultSize, 0 );
 	stTimerSeconds->Wrap( -1 );
-	bSizer92->Add( stTimerSeconds, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTimer->Add( stTimerSeconds, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	wxArrayString chTimerChoices;
 	chTimer = new wxChoice( pnConditions1, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chTimerChoices, 0 );
 	chTimer->SetSelection( 0 );
-	bSizer92->Add( chTimer, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTimer->Add( chTimer, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	fgSizer11->Add( bSizer92, 1, wxTOP|wxBOTTOM|wxEXPAND, 1 );
+	szConditions1->Add( szTimer, 1, wxTOP|wxBOTTOM|wxEXPAND, 1 );
 	
 	rbtnMoney = new wxRadioButton( pnConditions1, wxID_ANY, _("Money"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnMoney->SetValue( true ); 
-	fgSizer11->Add( rbtnMoney, 0, wxLEFT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
+	szConditions1->Add( rbtnMoney, 0, wxLEFT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxBoxSizer* bSizer93;
-	bSizer93 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szMoney;
+	szMoney = new wxBoxSizer( wxHORIZONTAL );
 	
 	spinMoney = new wxSpinCtrl( pnConditions1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60, -1 ), wxSP_ARROW_KEYS, 0, 9999999, 0 );
-	bSizer93->Add( spinMoney, 0, wxRIGHT|wxBOTTOM, 1 );
+	szMoney->Add( spinMoney, 0, wxRIGHT|wxBOTTOM, 1 );
 	
 	wxArrayString chMoneyChoices;
 	chMoney = new wxChoice( pnConditions1, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chMoneyChoices, 0 );
 	chMoney->SetSelection( 0 );
-	bSizer93->Add( chMoney, 3, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
+	szMoney->Add( chMoney, 3, wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	fgSizer11->Add( bSizer93, 1, wxTOP|wxBOTTOM|wxEXPAND, 1 );
+	szConditions1->Add( szMoney, 1, wxTOP|wxBOTTOM|wxEXPAND, 1 );
 	
-	pnConditions1->SetSizer( fgSizer11 );
+	pnConditions1->SetSizer( szConditions1 );
 	pnConditions1->Layout();
-	fgSizer11->Fit( pnConditions1 );
+	szConditions1->Fit( pnConditions1 );
 	nbConditions->AddPage( pnConditions1, _("1"), true );
-	nbConditions2 = new wxPanel( nbConditions, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* bSizer94;
-	bSizer94 = new wxBoxSizer( wxVERTICAL );
+	pnConditions2 = new wxPanel( nbConditions, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* szConditions2;
+	szConditions2 = new wxBoxSizer( wxVERTICAL );
 	
-	wxFlexGridSizer* fgSizer13;
-	fgSizer13 = new wxFlexGridSizer( 5, 2, 3, 2 );
-	fgSizer13->AddGrowableCol( 1 );
-	fgSizer13->SetFlexibleDirection( wxBOTH );
-	fgSizer13->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxFlexGridSizer* szConditions2Top;
+	szConditions2Top = new wxFlexGridSizer( 5, 2, 3, 2 );
+	szConditions2Top->AddGrowableCol( 1 );
+	szConditions2Top->SetFlexibleDirection( wxBOTH );
+	szConditions2Top->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	rbtnItem = new wxRadioButton( nbConditions2, wxID_ANY, _("Item"), wxDefaultPosition, wxDefaultSize, 0 );
+	rbtnItem = new wxRadioButton( pnConditions2, wxID_ANY, _("Item"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnItem->SetValue( true ); 
-	fgSizer13->Add( rbtnItem, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szConditions2Top->Add( rbtnItem, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	wxBoxSizer* bSizer95;
-	bSizer95 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szItem;
+	szItem = new wxBoxSizer( wxHORIZONTAL );
 	
 	wxArrayString chItemChoices;
-	chItem = new wxChoice( nbConditions2, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chItemChoices, 0 );
+	chItem = new wxChoice( pnConditions2, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chItemChoices, 0 );
 	chItem->SetSelection( 0 );
-	bSizer95->Add( chItem, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szItem->Add( chItem, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	wxArrayString chItem2Choices;
-	chItem2 = new wxChoice( nbConditions2, wxID_ANY, wxDefaultPosition, wxSize( 90, -1 ), chItem2Choices, 0 );
+	chItem2 = new wxChoice( pnConditions2, wxID_ANY, wxDefaultPosition, wxSize( 90, -1 ), chItem2Choices, 0 );
 	chItem2->SetSelection( 0 );
-	bSizer95->Add( chItem2, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szItem->Add( chItem2, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	fgSizer13->Add( bSizer95, 1, wxEXPAND, 0 );
+	szConditions2Top->Add( szItem, 1, wxEXPAND, 0 );
 	
-	rbtnoActor = new wxRadioButton( nbConditions2, wxID_ANY, _("Actor"), wxDefaultPosition, wxDefaultSize, 0 );
+	rbtnoActor = new wxRadioButton( pnConditions2, wxID_ANY, _("Actor"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnoActor->SetValue( true ); 
-	fgSizer13->Add( rbtnoActor, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szConditions2Top->Add( rbtnoActor, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	wxBoxSizer* bSizer96;
-	bSizer96 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szActor;
+	szActor = new wxBoxSizer( wxHORIZONTAL );
 	
 	wxArrayString chActorChoices;
-	chActor = new wxChoice( nbConditions2, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chActorChoices, 0 );
+	chActor = new wxChoice( pnConditions2, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chActorChoices, 0 );
 	chActor->SetSelection( 0 );
-	bSizer96->Add( chActor, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szActor->Add( chActor, 1, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	
-	bSizer96->Add( 90,  0, 0, wxEXPAND, 0 );
+	szActor->Add( 90,  0, 0, wxEXPAND, 0 );
 	
-	fgSizer13->Add( bSizer96, 1, wxEXPAND, 0 );
+	szConditions2Top->Add( szActor, 1, wxEXPAND, 0 );
 	
 	
-	fgSizer13->Add( 0,  0, 1, wxEXPAND, 0 );
+	szConditions2Top->Add( 0,  0, 1, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer97;
-	bSizer97 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szActor2;
+	szActor2 = new wxBoxSizer( wxHORIZONTAL );
 	
-	tcActor2 = new wxTextCtrl( nbConditions2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	bSizer97->Add( tcActor2, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	tcActor2 = new wxTextCtrl( pnConditions2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
+	szActor2->Add( tcActor2, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	btnActor = new wxButton( nbConditions2, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+	btnActor = new wxButton( pnConditions2, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnActor->SetDefault(); 
-	bSizer97->Add( btnActor, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szActor2->Add( btnActor, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	fgSizer13->Add( bSizer97, 1, wxEXPAND, 0 );
+	szConditions2Top->Add( szActor2, 1, wxEXPAND, 0 );
 	
-	rbtnGroup = new wxRadioButton( nbConditions2, wxID_ANY, _("Group"), wxDefaultPosition, wxDefaultSize, 0 );
+	rbtnGroup = new wxRadioButton( pnConditions2, wxID_ANY, _("Group"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnGroup->SetValue( true ); 
-	fgSizer13->Add( rbtnGroup, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szConditions2Top->Add( rbtnGroup, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	wxBoxSizer* bSizer98;
-	bSizer98 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szGroup;
+	szGroup = new wxBoxSizer( wxHORIZONTAL );
 	
 	wxArrayString chGroupChoices;
-	chGroup = new wxChoice( nbConditions2, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chGroupChoices, 0 );
+	chGroup = new wxChoice( pnConditions2, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chGroupChoices, 0 );
 	chGroup->SetSelection( 0 );
-	bSizer98->Add( chGroup, 1, wxLEFT|wxRIGHT|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szGroup->Add( chGroup, 1, wxLEFT|wxRIGHT|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	stGroup = new wxStaticText( nbConditions2, wxID_ANY, _(":"), wxDefaultPosition, wxDefaultSize, 0 );
+	stGroup = new wxStaticText( pnConditions2, wxID_ANY, _(":"), wxDefaultPosition, wxDefaultSize, 0 );
 	stGroup->Wrap( -1 );
-	bSizer98->Add( stGroup, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szGroup->Add( stGroup, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	wxArrayString chGroup2Choices;
-	chGroup2 = new wxChoice( nbConditions2, wxID_ANY, wxDefaultPosition, wxSize( 90, -1 ), chGroup2Choices, 0 );
+	chGroup2 = new wxChoice( pnConditions2, wxID_ANY, wxDefaultPosition, wxSize( 90, -1 ), chGroup2Choices, 0 );
 	chGroup2->SetSelection( 0 );
-	bSizer98->Add( chGroup2, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szGroup->Add( chGroup2, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	stGroup2 = new wxStaticText( nbConditions2, wxID_ANY, _("direction"), wxDefaultPosition, wxDefaultSize, 0 );
+	stGroup2 = new wxStaticText( pnConditions2, wxID_ANY, _("direction"), wxDefaultPosition, wxDefaultSize, 0 );
 	stGroup2->Wrap( -1 );
-	bSizer98->Add( stGroup2, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szGroup->Add( stGroup2, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	fgSizer13->Add( bSizer98, 1, wxEXPAND, 0 );
+	szConditions2Top->Add( szGroup, 1, wxEXPAND, 0 );
 	
-	rbtnVehicle = new wxRadioButton( nbConditions2, wxID_ANY, _("Vehicle"), wxDefaultPosition, wxDefaultSize, 0 );
+	rbtnVehicle = new wxRadioButton( pnConditions2, wxID_ANY, _("Vehicle"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnVehicle->SetValue( true ); 
-	fgSizer13->Add( rbtnVehicle, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szConditions2Top->Add( rbtnVehicle, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	wxBoxSizer* bSizer99;
-	bSizer99 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szVehicle;
+	szVehicle = new wxBoxSizer( wxHORIZONTAL );
 	
 	wxArrayString chVehicleChoices;
-	chVehicle = new wxChoice( nbConditions2, wxID_ANY, wxDefaultPosition, wxSize( 90, -1 ), chVehicleChoices, 0 );
+	chVehicle = new wxChoice( pnConditions2, wxID_ANY, wxDefaultPosition, wxSize( 90, -1 ), chVehicleChoices, 0 );
 	chVehicle->SetSelection( 0 );
-	bSizer99->Add( chVehicle, 0, wxLEFT|wxRIGHT, 1 );
+	szVehicle->Add( chVehicle, 0, wxLEFT|wxRIGHT, 1 );
 	
-	stVehicle = new wxStaticText( nbConditions2, wxID_ANY, _("boarded"), wxDefaultPosition, wxDefaultSize, 0 );
+	stVehicle = new wxStaticText( pnConditions2, wxID_ANY, _("boarded"), wxDefaultPosition, wxDefaultSize, 0 );
 	stVehicle->Wrap( -1 );
-	bSizer99->Add( stVehicle, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szVehicle->Add( stVehicle, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	fgSizer13->Add( bSizer99, 1, wxEXPAND, 0 );
+	szConditions2Top->Add( szVehicle, 1, wxEXPAND, 0 );
 	
-	bSizer94->Add( fgSizer13, 0, wxALL|wxEXPAND, 1 );
+	szConditions2->Add( szConditions2Top, 0, wxALL|wxEXPAND, 1 );
 	
-	rbtnKey = new wxRadioButton( nbConditions2, wxID_ANY, _("Pressed decision key"), wxDefaultPosition, wxDefaultSize, 0 );
+	rbtnKey = new wxRadioButton( pnConditions2, wxID_ANY, _("Pressed decision key"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnKey->SetValue( true ); 
-	bSizer94->Add( rbtnKey, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szConditions2->Add( rbtnKey, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	rbtnMusic = new wxRadioButton( nbConditions2, wxID_ANY, _("Playing music"), wxDefaultPosition, wxDefaultSize, 0 );
+	rbtnMusic = new wxRadioButton( pnConditions2, wxID_ANY, _("Playing music"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnMusic->SetValue( true ); 
-	bSizer94->Add( rbtnMusic, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szConditions2->Add( rbtnMusic, 0, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	nbConditions2->SetSizer( bSizer94 );
-	nbConditions2->Layout();
-	bSizer94->Fit( nbConditions2 );
-	nbConditions->AddPage( nbConditions2, _("2"), false );
+	pnConditions2->SetSizer( szConditions2 );
+	pnConditions2->Layout();
+	szConditions2->Fit( pnConditions2 );
+	nbConditions->AddPage( pnConditions2, _("2"), false );
 	
-	sbSizer49->Add( nbConditions, 1, wxEXPAND, 0 );
+	szConditionsTop->Add( nbConditions, 1, wxEXPAND, 0 );
 	
-	bSizer88->Add( sbSizer49, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szConditions->Add( szConditionsTop, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer50;
-	sbSizer50 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Options") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szOptions;
+	szOptions = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Options") ), wxHORIZONTAL );
 	
 	chbElse = new wxCheckBox( this, wxID_ANY, _("Exception if conditions are insatisfied"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbElse->SetValue(true); 
-	sbSizer50->Add( chbElse, 0, 0, 0 );
+	szOptions->Add( chbElse, 0, 0, 0 );
 	
-	bSizer88->Add( sbSizer50, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szConditions->Add( szOptions, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer100;
-	bSizer100 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer100->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer100->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer100->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer88->Add( bSizer100, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szConditions->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer88 );
+	this->SetSizer( szConditions );
 	this->Layout();
-	bSizer88->Fit( this );
+	szConditions->Fit( this );
 }
 
 dlgEvtCmdConditions_Base::~dlgEvtCmdConditions_Base()
@@ -1598,37 +1598,37 @@ dlgEvtCmdLabel_Base::dlgEvtCmdLabel_Base( wxWindow* parent, wxWindowID id, const
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer34;
-	bSizer34 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szLabel;
+	szLabel = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer18;
-	sbSizer18 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Label number") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szNumber;
+	szNumber = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Label number") ), wxHORIZONTAL );
 	
 	spinNumber = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1, 9999, 1 );
-	sbSizer18->Add( spinNumber, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szNumber->Add( spinNumber, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer34->Add( sbSizer18, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szLabel->Add( szNumber, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer35;
-	bSizer35 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer35->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer35->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer35->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer34->Add( bSizer35, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szLabel->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer34 );
+	this->SetSizer( szLabel );
 	this->Layout();
-	bSizer34->Fit( this );
+	szLabel->Fit( this );
 }
 
 dlgEvtCmdLabel_Base::~dlgEvtCmdLabel_Base()
@@ -1639,37 +1639,37 @@ dlgEvtCmdGoToLabel_Base::dlgEvtCmdGoToLabel_Base( wxWindow* parent, wxWindowID i
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer32;
-	bSizer32 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szGoToLabel;
+	szGoToLabel = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer17;
-	sbSizer17 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Label number") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szNumber;
+	szNumber = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Label number") ), wxHORIZONTAL );
 	
 	spinNumber = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1, 9999, 1 );
-	sbSizer17->Add( spinNumber, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szNumber->Add( spinNumber, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer32->Add( sbSizer17, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szGoToLabel->Add( szNumber, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer33;
-	bSizer33 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer33->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer33->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer33->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer32->Add( bSizer33, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szGoToLabel->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer32 );
+	this->SetSizer( szGoToLabel );
 	this->Layout();
-	bSizer32->Fit( this );
+	szGoToLabel->Fit( this );
 }
 
 dlgEvtCmdGoToLabel_Base::~dlgEvtCmdGoToLabel_Base()
@@ -1680,98 +1680,98 @@ dlgEvtCmdCallEvent_Base::dlgEvtCmdCallEvent_Base( wxWindow* parent, wxWindowID i
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer296;
-	bSizer296 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szCallEvent;
+	szCallEvent = new wxBoxSizer( wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer153;
-	sbSizer153 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Event to call") ), wxVERTICAL );
+	wxStaticBoxSizer* szEvent;
+	szEvent = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Event to call") ), wxVERTICAL );
 	
 	rbtnCommonEvent = new wxRadioButton( this, wxID_ANY, _("Common event"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnCommonEvent->SetValue( true ); 
-	sbSizer153->Add( rbtnCommonEvent, 0, wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szEvent->Add( rbtnCommonEvent, 0, wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	wxArrayString chCommonEventChoices;
 	chCommonEvent = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chCommonEventChoices, 0 );
 	chCommonEvent->SetSelection( 0 );
-	sbSizer153->Add( chCommonEvent, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szEvent->Add( chCommonEvent, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	rbtnMapEvent = new wxRadioButton( this, wxID_ANY, _("Map event"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnMapEvent->SetValue( true ); 
-	sbSizer153->Add( rbtnMapEvent, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szEvent->Add( rbtnMapEvent, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxBoxSizer* bSizer297;
-	bSizer297 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szMapEvent;
+	szMapEvent = new wxBoxSizer( wxHORIZONTAL );
 	
 	wxArrayString chMapEventChoices;
 	chMapEvent = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chMapEventChoices, 0 );
 	chMapEvent->SetSelection( 0 );
-	bSizer297->Add( chMapEvent, 1, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szMapEvent->Add( chMapEvent, 1, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	spinMapEvent = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxSP_ARROW_KEYS, 1, 9999, 1 );
-	bSizer297->Add( spinMapEvent, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szMapEvent->Add( spinMapEvent, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stMapEvent = new wxStaticText( this, wxID_ANY, _("page"), wxDefaultPosition, wxDefaultSize, 0 );
 	stMapEvent->Wrap( -1 );
-	bSizer297->Add( stMapEvent, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szMapEvent->Add( stMapEvent, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer153->Add( bSizer297, 0, wxTOP|wxBOTTOM|wxEXPAND, 1 );
+	szEvent->Add( szMapEvent, 0, wxTOP|wxBOTTOM|wxEXPAND, 1 );
 	
 	rbtnMapEventVariable = new wxRadioButton( this, wxID_ANY, _("Map event by variable"), wxDefaultPosition, wxDefaultSize, 0 );
 	rbtnMapEventVariable->SetValue( true ); 
-	sbSizer153->Add( rbtnMapEventVariable, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
+	szEvent->Add( rbtnMapEventVariable, 0, wxTOP|wxBOTTOM|wxEXPAND|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	wxFlexGridSizer* fgSizer34;
-	fgSizer34 = new wxFlexGridSizer( 2, 3, 2, 0 );
-	fgSizer34->AddGrowableCol( 0 );
-	fgSizer34->SetFlexibleDirection( wxBOTH );
-	fgSizer34->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxFlexGridSizer* szMapEventVariable;
+	szMapEventVariable = new wxFlexGridSizer( 2, 3, 2, 0 );
+	szMapEventVariable->AddGrowableCol( 0 );
+	szMapEventVariable->SetFlexibleDirection( wxBOTH );
+	szMapEventVariable->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	tcMapEventVariableEvent = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	fgSizer34->Add( tcMapEventVariableEvent, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
+	szMapEventVariable->Add( tcMapEventVariableEvent, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnMapEventVariableEvent = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnMapEventVariableEvent->SetDefault(); 
-	fgSizer34->Add( btnMapEventVariableEvent, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szMapEventVariable->Add( btnMapEventVariableEvent, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stMapEventVariableEvent = new wxStaticText( this, wxID_ANY, _("event to call"), wxDefaultPosition, wxDefaultSize, 0 );
 	stMapEventVariableEvent->Wrap( -1 );
-	fgSizer34->Add( stMapEventVariableEvent, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szMapEventVariable->Add( stMapEventVariableEvent, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcMapEventVariablePage = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	fgSizer34->Add( tcMapEventVariablePage, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
+	szMapEventVariable->Add( tcMapEventVariablePage, 0, wxEXPAND|wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnMapEventVariablePage = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnMapEventVariablePage->SetDefault(); 
-	fgSizer34->Add( btnMapEventVariablePage, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szMapEventVariable->Add( btnMapEventVariablePage, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stMapEventVariablePage = new wxStaticText( this, wxID_ANY, _("page"), wxDefaultPosition, wxDefaultSize, 0 );
 	stMapEventVariablePage->Wrap( -1 );
-	fgSizer34->Add( stMapEventVariablePage, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szMapEventVariable->Add( stMapEventVariablePage, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer153->Add( fgSizer34, 1, wxTOP|wxEXPAND, 1 );
+	szEvent->Add( szMapEventVariable, 1, wxTOP|wxEXPAND, 1 );
 	
-	bSizer296->Add( sbSizer153, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szCallEvent->Add( szEvent, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer298;
-	bSizer298 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer298->Add( wxID_OK, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer298->Add( wxID_CANCEL, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer298->Add( wxID_HELP, 0, wxALL|wxALIGN_BOTTOM, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL|wxALIGN_BOTTOM, 1 );
 	
-	bSizer296->Add( bSizer298, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szCallEvent->Add( szBottom, 1, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer296 );
+	this->SetSizer( szCallEvent );
 	this->Layout();
-	bSizer296->Fit( this );
+	szCallEvent->Fit( this );
 }
 
 dlgEvtCmdCallEvent_Base::~dlgEvtCmdCallEvent_Base()
@@ -1782,32 +1782,32 @@ dlgEvtCmdNotes_Base::dlgEvtCmdNotes_Base( wxWindow* parent, wxWindowID id, const
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer251;
-	bSizer251 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szNotes;
+	szNotes = new wxBoxSizer( wxVERTICAL );
 	
 	tcNotes = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_LINEWRAP|wxTE_WORDWRAP );
-	bSizer251->Add( tcNotes, 1, wxALL|wxEXPAND, 1 );
+	szNotes->Add( tcNotes, 1, wxALL|wxEXPAND, 1 );
 	
-	wxBoxSizer* bSizer252;
-	bSizer252 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szBottom;
+	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxID_OK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_OK->SetDefault(); 
-	bSizer252->Add( wxID_OK, 0, wxALL, 1 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK->SetDefault(); 
+	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	bSizer252->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
-	wxID_HELP = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_HELP->SetDefault(); 
-	bSizer252->Add( wxID_HELP, 0, wxALL, 1 );
+	btnHelp = new wxButton( this, wxID_HELP, _("&Help"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnHelp->SetDefault(); 
+	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	bSizer251->Add( bSizer252, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szNotes->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( bSizer251 );
+	this->SetSizer( szNotes );
 	this->Layout();
-	bSizer251->Fit( this );
+	szNotes->Fit( this );
 }
 
 dlgEvtCmdNotes_Base::~dlgEvtCmdNotes_Base()
