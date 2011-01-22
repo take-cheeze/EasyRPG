@@ -22603,7 +22603,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Picture</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">szPicture</property>
+                                <property name="name">szPicture2</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>

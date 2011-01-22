@@ -1821,17 +1821,17 @@ dlgEvtCmdPicture_Base::dlgEvtCmdPicture_Base( wxWindow* parent, wxWindowID id, c
 	
 	szTop->Add( szNumber, 0, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* szPicture;
-	szPicture = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Picture") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szPicture2;
+	szPicture2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Picture") ), wxHORIZONTAL );
 	
 	tcPicture = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	szPicture->Add( tcPicture, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szPicture2->Add( tcPicture, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnPicture = new wxButton( this, wxID_ANY, _("..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnPicture->SetDefault(); 
-	szPicture->Add( btnPicture, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szPicture2->Add( btnPicture, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	szTop->Add( szPicture, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szTop->Add( szPicture2, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
 	szPicture->Add( szTop, 0, wxEXPAND, 0 );
 	
