@@ -415,9 +415,9 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	btnDamage->SetDefault(); 
 	szEvtCmd1->Add( btnDamage, 0, wxEXPAND, 0 );
 	
-	btnVariable_click = new wxButton( pnEvtCmd1, wxID_ANY, _("Variable operations..."), wxDefaultPosition, wxDefaultSize, 0 );
-	btnVariable_click->SetDefault(); 
-	szEvtCmd1->Add( btnVariable_click, 0, wxEXPAND, 0 );
+	btnVariable = new wxButton( pnEvtCmd1, wxID_ANY, _("Variable operations..."), wxDefaultPosition, wxDefaultSize, 0 );
+	btnVariable->SetDefault(); 
+	szEvtCmd1->Add( btnVariable, 0, wxEXPAND, 0 );
 	
 	btnActorName = new wxButton( pnEvtCmd1, wxID_ANY, _("Change actor name..."), wxDefaultPosition, wxDefaultSize, 0 );
 	btnActorName->SetDefault(); 
@@ -771,7 +771,7 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	btnRecover->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnRecover_click ), NULL, this );
 	btnSwitch->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSwitch_click ), NULL, this );
 	btnDamage->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnDamage_click ), NULL, this );
-	btnVariable_click->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnVariable ), NULL, this );
+	btnVariable->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnVariable_click ), NULL, this );
 	btnActorName->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnActorName_click ), NULL, this );
 	btnTimer->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnTimer_click ), NULL, this );
 	btnActorTitle->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnActorTitle_click ), NULL, this );
@@ -867,7 +867,7 @@ dlgEvtCmd_Base::~dlgEvtCmd_Base()
 	btnRecover->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnRecover_click ), NULL, this );
 	btnSwitch->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSwitch_click ), NULL, this );
 	btnDamage->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnDamage_click ), NULL, this );
-	btnVariable_click->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnVariable ), NULL, this );
+	btnVariable->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnVariable_click ), NULL, this );
 	btnActorName->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnActorName_click ), NULL, this );
 	btnTimer->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnTimer_click ), NULL, this );
 	btnActorTitle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnActorTitle_click ), NULL, this );

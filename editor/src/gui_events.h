@@ -128,7 +128,7 @@ class dlgEvtCmd_Base : public wxDialog
 		wxButton* btnRecover;
 		wxButton* btnSwitch;
 		wxButton* btnDamage;
-		wxButton* btnVariable_click;
+		wxButton* btnVariable;
 		wxButton* btnActorName;
 		wxButton* btnTimer;
 		wxButton* btnActorTitle;
@@ -223,7 +223,7 @@ class dlgEvtCmd_Base : public wxDialog
 		virtual void btnRecover_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnSwitch_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnDamage_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void btnVariable( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnVariable_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnActorName_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnTimer_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnActorTitle_click( wxCommandEvent& event ) { event.Skip(); }
