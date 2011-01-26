@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_temp.h"
-#include "game_system.h"
-#include "input.h"
-#include "scene_name.h"
+#include "game_temp.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "scene_name.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Name::Scene_Name() :
@@ -60,13 +60,13 @@ void Scene_Name::Update() {
 
 	if (Input::IsTriggered(Input::CANCEL)) {
 		if (name_window->Get().size() > 0) {
-			Game_System::SePlay(Data::system.cancel_se);
+			Game_System::SePlay(Main_Data::cancelSE());
 			name_window->Erase();
 		}
 		else
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Main_Data::buzzerSE());
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 		std::string s(kbd_window->GetSelected());
 		if (s == "Done") {
 			Game_Temp::hero_name = name_window->Get();

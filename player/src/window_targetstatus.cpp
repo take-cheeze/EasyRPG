@@ -19,8 +19,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <sstream>
-#include "window_targetstatus.h"
-#include "game_party.h"
+#include "window_targetstatus.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_TargetStatus::Window_TargetStatus(int ix, int iy, int iwidth, int iheight) :
@@ -45,16 +45,16 @@ void Window_TargetStatus::Refresh() {
 	contents->GetFont()->color = 1;
 
 	if (use_item) {
-		contents->TextDraw(0, 0, Data::terms.possessed_items);
+		contents->TextDraw(0, 0, Main_Data::vocabulary(92));
 	} else {
-		contents->TextDraw(0, 0, Data::terms.sp_cost);
+		contents->TextDraw(0, 0, Main_Data::vocabulary(131));
 	}
 
 	std::stringstream ss;
 	if (use_item) {
 		ss << Game_Party::ItemNumber(id);
 	} else {
-		ss << Data::skills[id - 1].sp_cost;
+		ss << Main_Data::project->getLDB().skill()[id][11].to<int>();
 	}
 
 	contents->GetFont()->color = Font::ColorDefault;

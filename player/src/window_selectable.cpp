@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_selectable.h"
-#include "game_system.h"
-#include "input.h"
-#include "util_macro.h"
+#include "window_selectable.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Constructor
@@ -142,25 +142,25 @@ void Window_Selectable::Update() {
 	if (active && item_max > 0 && index >= 0) {
 		if (Input::IsRepeated(Input::DOWN)) {
 			if ((column_max == 1 && Input::IsTriggered(Input::DOWN)) || index < item_max - column_max) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				index = (index + column_max) % item_max;
 			}
 		}
 		if (Input::IsRepeated(Input::UP)) {
 			if ((column_max == 1 && Input::IsTriggered(Input::UP)) || index >= column_max) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				index = (index - column_max + item_max) % item_max;
 			}
 		}
 		if (Input::IsRepeated(Input::RIGHT)) {
 			if (column_max >= 2 && index < item_max - 1) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				index += 1;
 			}
 		}
 		if (Input::IsRepeated(Input::LEFT)) {
 			if (column_max >= 2 && index > 0) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				index -= 1;
 			}
 		}

@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_skill.h"
-#include "game_actor.h"
-#include "game_actors.h"
+#include "window_skill.hpp"
+#include "game_actor.hpp"
+#include "game_actors.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Skill::Window_Skill(int ix, int iy, int iwidth, int iheight) :
@@ -80,9 +80,9 @@ void Window_Skill::DrawItem(int index) {
 	int skill_id = data[index];
 
 	if (skill_id > 0) {
-		int costs = Data::skills[skill_id - 1].sp_cost;
-		bool enabled = Game_Actors::GetActor(actor_id)->IsSkillUsable(skill_id);
-		DrawSkillName(&Data::skills[skill_id - 1], rect.x, rect.y, enabled);
+		int const costs = Main_Data::project->getLDB().skill()[skill_id][11].to<int>();
+		bool const enabled = Game_Actors::GetActor(actor_id)->IsSkillUsable(skill_id);
+		DrawSkillName(&Main_Data::project->getLDB().skill()[skill_id], rect.x, rect.y, enabled);
 		
 		std::stringstream ss;
 		ss << std::setfill(' ') << std::setw(21) << "-" << std::setfill(' ') << std::setw(3) << costs;
@@ -92,6 +92,6 @@ void Window_Skill::DrawItem(int index) {
 
 ////////////////////////////////////////////////////////////
 void Window_Skill::UpdateHelp() {
-	help_window->SetText(GetSkillId() == 0 ? "" : 
-		Data::skills[GetSkillId() - 1].description);
+	help_window->SetText(GetSkillId() == 0 ? ""
+	: Main_Data::project->getLDB().skill()[GetSkillId()][2].toString().toSystem());
 }

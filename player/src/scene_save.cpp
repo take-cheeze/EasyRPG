@@ -18,13 +18,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "data.h"
-#include "scene_save.h"
-#include "scene_file.h"
+// #include "data.hpp"
+#include "scene_save.hpp"
+#include "scene_file.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Save::Scene_Save() :
-	Scene_File(Data::terms.save_game_message) {
+	Scene_File(Main_Data::vocabulary(146)) {
 	Scene::type = Scene::Save;
 }
 

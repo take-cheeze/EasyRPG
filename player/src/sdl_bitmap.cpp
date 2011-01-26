@@ -20,21 +20,21 @@
 ////////////////////////////////////////////////////////////
 #include <cassert>
 #include <cmath>
-#include "sdl_bitmap.h"
-#include "cache.h"
-#include "filefinder.h"
-#include "graphics.h"
-#include "hslrgb.h"
-#include "main_data.h"
-#include "options.h"
-#include "output.h"
-#include "player.h"
+#include "sdl_bitmap.hpp"
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "graphics.hpp"
+#include "hslrgb.hpp"
+#include "main_data.hpp"
+#include "options.hpp"
+#include "output.hpp"
+#include "player.hpp"
 #include "SDL_image.h"
 //#include "SDL_rotozoom.h"
 #include "SDL_ttf.h"
-#include "sdl_ui.h"
-#include "system.h"
-#include "util_macro.h"
+#include "sdl_ui.hpp"
+#include "system.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 #ifdef USE_ALPHA
@@ -328,12 +328,12 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 	if (font->italic) style |= TTF_STYLE_ITALIC;
 	TTF_SetFontStyle(ttf_font, style);
 
-	Bitmap* text_surface; // Complete text will be on this surface
-	Bitmap* text_surface_aux;
-	Bitmap* mask;
+	std::auto_ptr<Bitmap> text_surface; // Complete text will be on this surface
+	std::auto_ptr<Bitmap> text_surface_aux;
+	std::auto_ptr<Bitmap> mask;
 
-	Bitmap* char_surface; // Single char
-	Bitmap* char_shadow; // Drop shadow of char
+	std::auto_ptr<Bitmap> char_surface; // Single char
+	std::auto_ptr<Bitmap> char_shadow; // Drop shadow of char
 
 	text_surface = CreateBitmap(dst_rect.width, TTF_FontHeight(ttf_font));
 	text_surface_aux = CreateBitmap(dst_rect.width, TTF_FontHeight(ttf_font));
@@ -347,7 +347,7 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 	char text2[2]; text2[1] = '\0';
 
 	// Load the system file for the shadow and text color
-	Bitmap* system = Cache::System(Data::system.system_name);
+	Bitmap* system = Cache::System(Main_Data::project->getLDB().system()[19].toString().toSystem() );
 	// Load the exfont-file
 	Bitmap* exfont = Cache::ExFont();
 
@@ -438,7 +438,7 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 			char_surface->Blit(6, 0, system, clip_system, 255);
 
 			// Blit black mask onto color background
-			char_surface->Blit(0, 0, mask, mask->GetRect(), 255);
+			char_surface->Blit(0, 0, mask.get(), mask->GetRect(), 255);
 			char_surface->SetTransparentColor(black_color);
 
 			// Paint char shadow surface of shadow color
@@ -451,11 +451,11 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 			mask->SetTransparentColor(white_color);
 
 			// Paste mask onto char_shadow
-			char_shadow->Blit(0, 0, mask, mask->GetRect(), 255);
+			char_shadow->Blit(0, 0, mask.get(), mask->GetRect(), 255);
 
 			// Blit first shadow and then text
-			text_surface->Blit(next_glyph_rect.x + 1, next_glyph_rect.y + 1, char_shadow, char_shadow->GetRect(), 255);
-			text_surface->Blit(next_glyph_rect.x, next_glyph_rect.y, char_surface, char_surface->GetRect(), 255);
+			text_surface->Blit(next_glyph_rect.x + 1, next_glyph_rect.y + 1, char_shadow.get(), char_shadow->GetRect(), 255);
+			text_surface->Blit(next_glyph_rect.x, next_glyph_rect.y, char_surface.get(), char_surface->GetRect(), 255);
 		#endif
 		} else {
 			// No ExFont, draw normal text
@@ -497,19 +497,16 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 			// ToDo: Remove SDL-Dependency (use FreeType directly?)
 			SDL_Color white_color2 = {white_color.red, white_color.green, white_color.blue, 0};
 			SDL_Color c_tmp2 = {shadow_color.red, shadow_color.green, shadow_color.blue, 0};
-			char_surface = new SdlBitmap(TTF_RenderUTF8_Solid(ttf_font, text2, white_color2));
-			char_shadow = new SdlBitmap(TTF_RenderUTF8_Solid(ttf_font, text2, c_tmp2));
+			char_surface.reset( new SdlBitmap(TTF_RenderUTF8_Solid(ttf_font, text2, white_color2)) );
+			char_shadow.reset( new SdlBitmap(TTF_RenderUTF8_Solid(ttf_font, text2, c_tmp2)) );
 
-			if (!((SdlBitmap*)char_surface)->bitmap || !((SdlBitmap*)char_shadow)->bitmap) {
+			if (!((SdlBitmap*)char_surface.get())->bitmap || !((SdlBitmap*)char_shadow.get())->bitmap) {
 				Output::Debug("Couldn't render char %c (%d). Skipping...", text[c], (int)text[c]);
-				delete char_surface;
-				delete char_shadow;
-				continue;
 			}
 
 			// Create a black mask
 			mask = CreateBitmap(char_surface->GetWidth(), char_surface->GetHeight());
-			mask->Blit(0, 0, char_surface, char_surface->GetRect(), 255);
+			mask->Blit(0, 0, char_surface.get(), char_surface->GetRect(), 255);
 			mask->SetTransparentColor(white_color);
 
 			// Get color region from system graphic
@@ -518,17 +515,13 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 			// Blit color background
 			text_surface_aux->Blit(next_glyph_rect.x, next_glyph_rect.y, system, clip_system, 255);
 			// Blit mask onto background
-			text_surface_aux->Blit(next_glyph_rect.x, next_glyph_rect.y, mask, mask->GetRect(), 255);
+			text_surface_aux->Blit(next_glyph_rect.x, next_glyph_rect.y, mask.get(), mask->GetRect(), 255);
 
 			// Blit first shadow and then text
-			text_surface->Blit(next_glyph_pos+1, 1, char_shadow, char_shadow->GetRect(), 255);
-			text_surface->Blit(0, 0, text_surface_aux, text_surface_aux->GetRect(), 255);
+			text_surface->Blit(next_glyph_pos+1, 1, char_shadow.get(), char_shadow->GetRect(), 255);
+			text_surface->Blit(0, 0, text_surface_aux.get(), text_surface_aux->GetRect(), 255);
 		#endif
 		}
-
-		delete mask;
-		delete char_surface;
-		delete char_shadow;
 
 		// If it's a full size glyph, add the size of a half-size glypth twice
 		if (is_full_glyph) {
@@ -540,10 +533,10 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 				++c;
 			}
 		}
-		next_glyph_pos += 6;	
+		next_glyph_pos += 6;
 	}
 	
-	Bitmap* text_bmp = CreateBitmap(text_surface, text_surface->GetRect());
+	std::auto_ptr<Bitmap> text_bmp = CreateBitmap(text_surface.get(), text_surface->GetRect());
 	
 	Rect src_rect(0, 0, dst_rect.width, dst_rect.height);
 	int iy = dst_rect.y;
@@ -561,11 +554,7 @@ void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
 		}
 	}
 
-	Blit(ix, iy, text_bmp, src_rect, SDL_ALPHA_OPAQUE);
-
-	delete text_bmp;
-	delete text_surface;
-	delete text_surface_aux;
+	Blit(ix, iy, text_bmp.get(), src_rect, SDL_ALPHA_OPAQUE);
 }
 
 ////////////////////////////////////////////////////////////

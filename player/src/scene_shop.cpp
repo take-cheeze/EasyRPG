@@ -18,13 +18,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_temp.h"
-#include "game_system.h"
-#include "game_party.h"
-#include "input.h"
-#include "scene_shop.h"
-#include "output.h"
-#include "time.h"
+#include "game_temp.hpp"
+#include "game_system.hpp"
+#include "game_party.hpp"
+#include "input.hpp"
+#include "scene_shop.hpp"
+#include "output.hpp"
+#include "time.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Shop::Scene_Shop() :
@@ -199,68 +199,66 @@ void Scene_Shop::Update() {
 				}
 			}
 			if (Input::IsTriggered(Input::CANCEL)) {
-				Game_System::SePlay(Data::system.cancel_se);
+				Game_System::SePlay(Main_Data::cancelSE());
 				Scene::Pop();
 			}
 			break;
 		case Buy:
 			if (Input::IsTriggered(Input::CANCEL)) {
-				Game_System::SePlay(Data::system.cancel_se);
+				Game_System::SePlay(Main_Data::cancelSE());
 				SetMode(BuySellLeave2);
 			}
 			if (Input::IsTriggered(Input::DECISION)) {
 				int item_id = buy_window->GetSelected();
 				//checks the money and number of items possessed before buy
 				if (buy_window->CheckEnable(item_id)) {
-					Game_System::SePlay(Data::system.decision_se);
-					RPG::Item& item = Data::items[item_id - 1];
-					int value = item.price;
+					Game_System::SePlay(Main_Data::decisionSE());
+					RPG::Item const& item = Main_Data::project->getLDB().item()[item_id];
+					int value = item[5].to<int>();
 					int limit = std::min(99, Game_Party::GetGold() / value);
-					const std::string& name = item.name;
 					count_window->SetRange(1, limit);
 					count_window->SetNumber(1);
 					count_window->SetItemValue(value);
-					count_window->SetItemName(name);
+					count_window->SetItemName( item[1].toString().toSystem() );
 					SetMode(BuyHowMany);
 				}
 				else {
-					Game_System::SePlay(Data::system.buzzer_se);
+					Game_System::SePlay(Main_Data::buzzerSE());
 				}
 			}
 			break;
 		case Sell:
 			if (Input::IsTriggered(Input::CANCEL)) {
-				Game_System::SePlay(Data::system.cancel_se);
+				Game_System::SePlay(Main_Data::cancelSE());
 				SetMode(BuySellLeave2);
 			}
 			if (Input::IsTriggered(Input::DECISION)) {
 				int item_id = sell_window->GetItemId();
 				// checks if the item has a valid id
 				if (item_id > 0) {
-					Game_System::SePlay(Data::system.decision_se);
-					RPG::Item& item = Data::items[item_id - 1];
-					int value = item.price;
-					const std::string& name = item.name;
+					Game_System::SePlay(Main_Data::decisionSE());
+					RPG::Item const& item = Main_Data::project->getLDB().item()[item_id];
+					int value = item[5].to<int>();
 					int possessed = Game_Party::ItemNumber(item_id);
 					count_window->SetRange(1, possessed);
 					count_window->SetNumber(1);
 					count_window->SetItemValue(value);
-					count_window->SetItemName(name);
+					count_window->SetItemName( item[1].toString().toSystem() );
 					SetMode(SellHowMany);
 				}
 				else {
-					Game_System::SePlay(Data::system.buzzer_se);
+					Game_System::SePlay(Main_Data::buzzerSE());
 				}
 				
 			}
 			break;
 		case BuyHowMany:
 			if (Input::IsTriggered(Input::CANCEL)) {
-				Game_System::SePlay(Data::system.cancel_se);
+				Game_System::SePlay(Main_Data::cancelSE());
 				SetMode(Buy);
 			}
 			if (Input::IsTriggered(Input::DECISION)) {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Main_Data::decisionSE());
 				int item_id = buy_window->GetSelected();
 				Game_Party::GainGold(-count_window->GetTotal());
 				Game_Party::GainItem(item_id, count_window->GetNumber());
@@ -272,11 +270,11 @@ void Scene_Shop::Update() {
 			break;
 		case SellHowMany:
 			if (Input::IsTriggered(Input::CANCEL)) {
-				Game_System::SePlay(Data::system.cancel_se);
+				Game_System::SePlay(Main_Data::cancelSE());
 				SetMode(Sell);
 			}
 			if (Input::IsTriggered(Input::DECISION)) {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Main_Data::decisionSE());
 				int item_id = sell_window->GetItemId();
 				Game_Party::GainGold(count_window->GetTotal());
 				Game_Party::LoseItem(item_id, count_window->GetNumber());

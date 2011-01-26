@@ -21,14 +21,14 @@
 #include <algorithm>
 #include <sstream>
 #include <vector>
-#include "graphics.h"
-#include "bitmap_screen.h"
-#include "cache.h"
-#include "baseui.h"
-#include "drawable.h"
-#include "time.h"
-#include "util_macro.h"
-#include "player.h"
+#include "graphics.hpp"
+#include "bitmap_screen.hpp"
+#include "cache.hpp"
+#include "baseui.hpp"
+#include "drawable.hpp"
+#include "time.hpp"
+#include "util_macro.hpp"
+#include "player.hpp"
 
 ////////////////////////////////////////////////////////////
 namespace Graphics {
@@ -50,10 +50,10 @@ namespace Graphics {
 
 	void UpdateTransition();
 
-	BitmapScreen* frozen_screen;
-	BitmapScreen* black_screen;
-	BitmapScreen* screen1;
-	BitmapScreen* screen2;
+	std::auto_ptr<BitmapScreen> frozen_screen;
+	std::auto_ptr<BitmapScreen> black_screen;
+	std::auto_ptr<BitmapScreen> screen1;
+	std::auto_ptr<BitmapScreen> screen2;
 	bool frozen;
 	TransitionType transition_type;
 	int transition_duration;
@@ -82,10 +82,10 @@ void Graphics::Init() {
 	framecount = 0;
 	fps_mode = 0;
 	timer_wait = 0;
-	frozen_screen = BitmapScreen::CreateBitmapScreen(true);
+	frozen_screen.reset( BitmapScreen::CreateBitmapScreen(true).release() );
 
-	black_screen = BitmapScreen::CreateBitmapScreen(true);
-	Bitmap* black_bitmap = Bitmap::CreateBitmap(DisplayUi->GetWidth(), DisplayUi->GetHeight(), false);
+	black_screen.reset( BitmapScreen::CreateBitmapScreen(true).release() );
+	std::auto_ptr<Bitmap> black_bitmap = Bitmap::CreateBitmap(DisplayUi->GetWidth(), DisplayUi->GetHeight(), false);
 	black_bitmap->Fill(Color());
 	black_screen->SetBitmap(black_bitmap);
 
@@ -113,15 +113,8 @@ void Graphics::Quit() {
 
 	zlist.clear();
 
-	if (frozen_screen) {
-		delete frozen_screen;
-		frozen_screen = NULL;
-	}
-
-	if (black_screen) {
-		delete black_screen;
-		black_screen = NULL;
-	}
+	frozen_screen.reset();
+	black_screen.reset();
 
 	Cache::Clear();
 }
@@ -195,8 +188,8 @@ void Graphics::InternUpdate1(bool reset) {
 void Graphics::InternUpdate2(bool reset) {
 	// FIXME: This method needs more comments. Why two InternUpdates?
 	static const int MAXIMUM_FRAME_RATE = framerate;
-	static const int MINIMUM_FRAME_RATE = max(framerate / 4, 1);
-	static const int MAX_CYCLES_PER_FRAME = MAXIMUM_FRAME_RATE / MINIMUM_FRAME_RATE;
+	// static const int MINIMUM_FRAME_RATE = max(framerate / 4, 1);
+	// static const int MAX_CYCLES_PER_FRAME = MAXIMUM_FRAME_RATE / MINIMUM_FRAME_RATE;
 	static const double UPDATE_INTERVAL = 1.0 / MAXIMUM_FRAME_RATE;
 	static double last_frame_time = 0.0;
 	static double cycles_leftover = 0.0;

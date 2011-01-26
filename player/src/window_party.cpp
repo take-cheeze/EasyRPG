@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "bitmap.h"
-#include "cache.h"
-#include "game_party.h"
-#include "game_actor.h"
-#include "window_party.h"
+#include "bitmap.hpp"
+#include "cache.hpp"
+#include "game_party.hpp"
+#include "game_actor.hpp"
+#include "window_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Party::Window_Party(int ix, int iy, int iwidth, int iheight) :
@@ -47,7 +47,7 @@ Window_Party::Window_Party(int ix, int iy, int iwidth, int iheight) :
 			int sy = ((sprite_id / 4) * 4 + 2) * height;
 			Rect src(sx, sy, width, height);
 			for (int k = 0; k < 2; k++) {
-				Bitmap *bm2 = Bitmap::CreateBitmap(width, height, true);
+				std::auto_ptr<Bitmap> bm2 = Bitmap::CreateBitmap(width, height, true);
 				#ifndef USE_ALPHA
 				bm2->SetTransparentColor(bm->GetTransparentColor());
 				bm2->Clear();
@@ -55,7 +55,7 @@ Window_Party::Window_Party(int ix, int iy, int iwidth, int iheight) :
 				bm2->Blit(0, 0, bm, src, 255);
 				if (k == 0)
 					bm2->ToneChange(Tone(0, 0, 0, 255));
-				bitmaps[i][j][k] = bm2;
+				bitmaps[i][j][k] = bm2.release();
 			}
 		}
 	}

@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <sstream>
-#include "window_shopstatus.h"
+#include "window_shopstatus.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopStatus::Window_ShopStatus(int ix, int iy, int iwidth, int iheight) :
@@ -49,7 +49,7 @@ void Window_ShopStatus::Refresh() {
 	const std::string& possessed_str = possessed_ss.str();
 	int possessed_w = contents->GetTextSize(possessed_str).width;
 
-	contents->TextDraw(2, 2, Data::terms.possessed_items);
+	contents->TextDraw(2, 2, Main_Data::vocabulary(92));
 	contents->TextDraw(contents->GetWidth() - 2 - possessed_w, 2, possessed_str);
 
 	std::stringstream equipped_ss;
@@ -57,7 +57,7 @@ void Window_ShopStatus::Refresh() {
 	const std::string& equipped_str = equipped_ss.str();
 	int equipped_w = contents->GetTextSize(equipped_str).width;
 
-	contents->TextDraw(2, 18, Data::terms.equipped_items);
+	contents->TextDraw(2, 18, Main_Data::vocabulary(93));
 	contents->TextDraw(contents->GetWidth() - 2 - equipped_w, 18, equipped_str);
 }
 

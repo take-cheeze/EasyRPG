@@ -18,21 +18,20 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "plane.h"
-#include "graphics.h"
-#include "player.h"
+#include "plane.hpp"
+#include "graphics.hpp"
+#include "player.hpp"
 
 ////////////////////////////////////////////////////////////
 Plane::Plane() :
 	type(TypePlane),
 	ID(Graphics::drawable_id++),
 	bitmap(NULL),
+	bitmap_screen( BitmapScreen::CreateBitmapScreen(false) ),
 	visible(true),
 	z(0),
 	ox(0),
 	oy(0) {
-	
-	bitmap_screen = BitmapScreen::CreateBitmapScreen(false);
 	
 	zobj = Graphics::RegisterZObj(0, ID);
 	Graphics::RegisterDrawable(ID, this);
@@ -42,7 +41,6 @@ Plane::Plane() :
 Plane::~Plane() {
 	Graphics::RemoveZObj(ID);
 	Graphics::RemoveDrawable(ID);
-	delete bitmap_screen;
 }
 
 ////////////////////////////////////////////////////////////
@@ -63,11 +61,11 @@ void Plane::Draw(int z_order) {
 
 ////////////////////////////////////////////////////////////
 Bitmap* Plane::GetBitmap() const {
-	return bitmap;
+	return bitmap.get();
 }
-void Plane::SetBitmap(Bitmap* nbitmap) {
-	bitmap = nbitmap;
-	bitmap_screen->SetBitmap(nbitmap);
+void Plane::SetBitmap(std::auto_ptr<Bitmap> nbitmap) {
+	bitmap.reset( nbitmap.release() );
+	bitmap_screen->SetBitmap(bitmap.get());
 }
 
 bool Plane::GetVisible() const {

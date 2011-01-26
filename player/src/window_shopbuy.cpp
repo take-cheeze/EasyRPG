@@ -21,11 +21,11 @@
 #include <algorithm>
 #include <sstream>
 #include <string>
-#include "window_shopbuy.h"
-#include "game_system.h"
-#include "game_temp.h"
-#include "game_party.h"
-#include "input.h"
+#include "window_shopbuy.hpp"
+#include "game_system.hpp"
+#include "game_temp.hpp"
+#include "game_party.hpp"
+#include "input.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopBuy::Window_ShopBuy(int ix, int iy, int iwidth, int iheight) : 
@@ -84,9 +84,10 @@ void Window_ShopBuy::Refresh() {
 		else {
 			contents->GetFont()->color = Font::ColorDisabled;
 		}
-		const std::string& s = Data::items[item_id - 1].name;
+		RPG::Item const& item = Main_Data::project->getLDB().item()[item_id];
+		const std::string s = item[1].toString().toSystem();
 		std::stringstream p;
-		p << Data::items[item_id - 1].price;
+		p << item[5].to<int>();
 		contents->TextDraw(border_x + 4, border_y + 2 + i * row_spacing, s);
 		int price_x = (contents->GetWidth() - 2 * border_x) - contents->GetTextSize(p.str()).width - 4;
 		int price_y = border_y + 2 + i * row_spacing;
@@ -99,13 +100,13 @@ void Window_ShopBuy::Update() {
 	Window_Base::Update();
 	if (active) {
 		if (Input::IsRepeated(Input::DOWN)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			index++;
 			if ((size_t) index >= Game_Temp::shop_goods.size())
 				index = 0;
 		}
 		else if (Input::IsRepeated(Input::UP)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			index--;
 			if (index < 0)
 				index = Game_Temp::shop_goods.size() - 1;
@@ -121,7 +122,7 @@ void Window_ShopBuy::Update() {
 		int item_id = GetSelected();
 
 		if (help_window)
-			help_window->SetText(Data::items[item_id - 1].description);
+			help_window->SetText(Main_Data::project->getLDB().item()[item_id][2].toString().toSystem());
 
 		if (party_window)
 			party_window->SetItem(item_id);
@@ -165,7 +166,7 @@ void Window_ShopBuy::SetPartyWindow(Window_Party* w) {
 
 ////////////////////////////////////////////////////////////
 bool Window_ShopBuy::CheckEnable(int item_id) {
-	int item_price = Data::items[item_id - 1].price;
+	int item_price = Main_Data::project->getLDB().item()[item_id][5].to<int>();
 	int party_gold = Game_Party::GetGold();
 	int item_number = Game_Party::ItemNumber(item_id);
 	

@@ -20,10 +20,10 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_base.h"
-#include "cache.h"
-#include "data.h"
-#include "game_system.h"
+#include "window_base.hpp"
+#include "cache.hpp"
+// #include "data.hpp"
+#include "game_system.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Base::Window_Base(int x, int y, int width, int height) {
@@ -65,10 +65,9 @@ void Window_Base::DrawFace(std::string face_name, int face_index, int cx, int cy
 	);
 
 	if (flip) {
-		Bitmap* faceflip = Bitmap::CreateBitmap(faceset, src_rect, false);
+		std::auto_ptr<Bitmap> faceflip = Bitmap::CreateBitmap(faceset, src_rect, false);
 		faceflip->Flip(true, false);
-		contents->Blit(cx, cy, faceflip, Rect(0, 0, 48, 48), 255);
-		delete faceflip;
+		contents->Blit(cx, cy, faceflip.get(), Rect(0, 0, 48, 48), 255);
 	} else {
 		contents->Blit(cx, cy, faceset, src_rect, 255);
 	}
@@ -95,7 +94,7 @@ void Window_Base::DrawActorClass(Game_Actor* actor, int cx, int cy) {
 void Window_Base::DrawActorLevel(Game_Actor* actor, int cx, int cy) {
 	// Draw LV-String
 	contents->GetFont()->color = 1;
-	contents->TextDraw(cx, cy, Data::terms.lvl_short);
+	contents->TextDraw(cx, cy, Main_Data::vocabulary(128)); // level short
 
 	// Draw Level of the Actor
 	std::stringstream ss;
@@ -110,20 +109,20 @@ void Window_Base::DrawActorState(Game_Actor* actor, int cx, int cy) {
 	// Unit has Normal state if no state is set
 	if (states.size() == 0) {
 		contents->GetFont()->color = Font::ColorDefault;
-		contents->TextDraw(cx, cy, Data::terms.normal_status);
+		contents->TextDraw(cx, cy, Main_Data::vocabulary(126)); // normal state
 	} else {
 		int highest_priority = 0;
 		int state = 0;
 
 		// Display the state with the highest priority
 		for (size_t i = 0; i < states.size(); ++i) {
-			if (Data::states[states[i]].priority > highest_priority) {
+			if (Main_Data::project->getLDB().condition()[states[i]][4].to<int>() > highest_priority) {
 				state = i;
 			}
 		}
 
-		contents->GetFont()->color = Data::states[state].color;
-		contents->TextDraw(cx, cy, Data::states[state].name);
+		contents->GetFont()->color = Main_Data::project->getLDB().condition()[state][3].to<int>();
+		contents->TextDraw(cx, cy, Main_Data::project->getLDB().condition()[state][1].toString().toSystem());
 	}
 }
 
@@ -134,7 +133,7 @@ void Window_Base::DrawActorState(Game_Actor* actor, int cx, int cy, int width) {
 void Window_Base::DrawActorExp(Game_Actor* actor, int cx, int cy) {
 	// Draw EXP-String
 	contents->GetFont()->color = 1;
-	contents->TextDraw(cx, cy, Data::terms.exp_short);
+	contents->TextDraw(cx, cy, Main_Data::vocabulary(127)); // exp short
 
 	// Current Exp of the Actor
 	// ------/------
@@ -153,7 +152,7 @@ void Window_Base::DrawActorExp(Game_Actor* actor, int cx, int cy) {
 void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy) {
 	// Draw HP-String
 	contents->GetFont()->color = 1;
-	contents->TextDraw(cx, cy, Data::terms.hp_short);
+	contents->TextDraw(cx, cy, Main_Data::vocabulary(129)); // HP short
 
 	// Draw Current HP of the Actor
 	cx += 12;
@@ -188,7 +187,7 @@ void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy, int width) {
 void Window_Base::DrawActorSp(Game_Actor* actor, int cx, int cy) {
 	// Draw SP-String
 	contents->GetFont()->color = 1;
-	contents->TextDraw(cx, cy, Data::terms.sp_short);
+	contents->TextDraw(cx, cy, Main_Data::vocabulary(130)); // MP short
 
 	// Draw Current SP of the Actor
 	cx += 12;
@@ -224,19 +223,19 @@ void Window_Base::DrawActorParameter(Game_Actor* actor, int cx, int cy, int type
 	
 	switch (type) {
 	case 0:
-		name = Data::terms.attack;
+		name = Main_Data::vocabulary(132); // attack
 		value = actor->GetAtk();
 		break;
 	case 1:
-		name = Data::terms.defense;
+		name = Main_Data::vocabulary(133); // defence
 		value = actor->GetDef();
 		break;
 	case 2:
-		name = Data::terms.spirit;
+		name = Main_Data::vocabulary(134); // mental
 		value = actor->GetSpi();
 		break;
 	case 3:
-		name = Data::terms.agility;
+		name = Main_Data::vocabulary(135); // speed
 		value = actor->GetAgi();
 		break;
 	default:
@@ -260,23 +259,23 @@ void Window_Base::DrawEquipmentType(Game_Actor* actor, int cx, int cy, int type)
 	
 	switch (type) {
 	case 0:
-		name = Data::terms.weapon;
+		name = Main_Data::vocabulary(136); // weapon
 		break;
 	case 1:
 		if (actor->GetTwoSwordsStyle()) {
-			name = Data::terms.weapon;
+			name = Main_Data::vocabulary(136); // weapon
 		} else {
-			name = Data::terms.shield;
+			name = Main_Data::vocabulary(137); // shield
 		}
 		break;
 	case 2:
-		name = Data::terms.armor;
+		name = Main_Data::vocabulary(138); // armor
 		break;
 	case 3:
-		name = Data::terms.helmet;
+		name = Main_Data::vocabulary(139); // helmet
 		break;
 	case 4:
-		name = Data::terms.accessory;
+		name = Main_Data::vocabulary(140); // other
 		break;
 	default:
 		return;
@@ -288,10 +287,10 @@ void Window_Base::DrawEquipmentType(Game_Actor* actor, int cx, int cy, int type)
 
 void Window_Base::DrawItemName(RPG::Item* item, int cx, int cy, bool enabled) {
 	contents->GetFont()->color = enabled ? Font::ColorDefault : Font::ColorDisabled;
-	contents->TextDraw(cx, cy, item->name);
+	contents->TextDraw(cx, cy, (*item)[1].toString().toSystem());
 }
 
 void Window_Base::DrawSkillName(RPG::Skill* skill, int cx, int cy, bool enabled) {
 	contents->GetFont()->color = enabled ? Font::ColorDefault : Font::ColorDisabled;
-	contents->TextDraw(cx, cy, skill->name);
+	contents->TextDraw(cx, cy, (*skill)[1].toString().toSystem());
 }

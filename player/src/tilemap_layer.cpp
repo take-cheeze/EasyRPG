@@ -19,11 +19,11 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <math.h>
-#include "tilemap_layer.h"
-#include "player.h"
-#include "graphics.h"
+#include "tilemap_layer.hpp"
+#include "player.hpp"
+#include "graphics.hpp"
 #include <cstring> // GCC COMPILATION FIX
-#include "output.h"
+#include "output.hpp"
 
 ////////////////////////////////////////////////////////////
 // BlockD subtiles IDs
@@ -169,7 +169,7 @@ TilemapLayer::TilemapLayer(int ilayer) :
 	layer(ilayer),
 	have_invisible_tile(false) {
 
-	chipset_screen = BitmapScreen::CreateBitmapScreen(false);
+	chipset_screen.reset( BitmapScreen::CreateBitmapScreen(false).release() );
 
 	memset(autotiles_ab, NULL, sizeof(autotiles_ab));
 	memset(autotiles_d, NULL, sizeof(autotiles_d));
@@ -197,8 +197,6 @@ TilemapLayer::~TilemapLayer() {
 	for (int i = 0; i < 12; i++)
 		for (int j = 0; j < 50; j++)
 				delete autotiles_d[i][j];
-
-	delete chipset_screen;
 }
 
 ////////////////////////////////////////////////////////////
@@ -431,7 +429,7 @@ void TilemapLayer::GenerateAutotileAB(short ID, short animID) {
 	}
 
 	// generate the tile
-	Bitmap* tile = Bitmap::CreateBitmap(16, 16);
+	std::auto_ptr<Bitmap> tile = Bitmap::CreateBitmap(16, 16);
 
 	Rect rect;
 	rect.width = 8;
@@ -445,9 +443,9 @@ void TilemapLayer::GenerateAutotileAB(short ID, short animID) {
 		}
 	}
 
-	BitmapScreen* screen = BitmapScreen::CreateBitmapScreen(tile);
-	autotiles_ab_map[quarters_hash] = screen;
-	autotiles_ab[animID][block][b_subtile][a_subtile] = screen;
+	std::auto_ptr<BitmapScreen> screen = BitmapScreen::CreateBitmapScreen(tile.get());
+	autotiles_ab_map[quarters_hash] = screen.get();
+	autotiles_ab[animID][block][b_subtile][a_subtile] = screen.release();
 }
 
 ////////////////////////////////////////////////////////////
@@ -461,7 +459,7 @@ void TilemapLayer::GenerateAutotileD(short ID) {
 	if(autotiles_d[block][subtile])
 		return;
 
-	Bitmap* tile = Bitmap::CreateBitmap(16, 16);
+	std::auto_ptr<Bitmap> tile = Bitmap::CreateBitmap(16, 16);
 
 	// Get Block chipset coords
 	short block_x, block_y;
@@ -491,7 +489,7 @@ void TilemapLayer::GenerateAutotileD(short ID) {
 		}
 	}
 
-	autotiles_d[block][subtile] = BitmapScreen::CreateBitmapScreen(tile);
+	autotiles_d[block][subtile] = BitmapScreen::CreateBitmapScreen(tile.get()).release();
 }
 
 

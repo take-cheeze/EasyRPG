@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_SOFT_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -27,12 +27,12 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_BITMAP_H
-#include "cache.h"
-#include "filefinder.h"
-#include "options.h"
-#include "data.h"
-#include "output.h"
-#include "soft_bitmap.h"
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+// #include "data.hpp"
+#include "output.hpp"
+#include "soft_bitmap.hpp"
 
 ////////////////////////////////////////////////////////////
 void SoftBitmap::Init(int width, int height) {

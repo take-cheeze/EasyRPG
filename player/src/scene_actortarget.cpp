@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_actortarget.h"
-#include "game_system.h"
-#include "input.h"
-#include "main_data.h"
-#include "scene_item.h"
-#include "scene_skill.h"
+#include "scene_actortarget.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "main_data.hpp"
+#include "scene_item.hpp"
+#include "scene_skill.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_ActorTarget::Scene_ActorTarget(int item_id, int item_index) :
@@ -51,6 +51,28 @@ void Scene_ActorTarget::Start() {
 	target_window->SetIndex(0);
 
 	if (use_item) {
+		RPG::Item const& item = Main_Data::project->getLDB().item()[id];
+		if (item[31].to<int>() == 1) {
+			target_window->SetIndex(-100);
+		}
+		status_window->SetData(id, true);
+		help_window->SetText(item[1].toString());
+	} else {
+		RPG::Skill const& skill = Main_Data::project->getLDB().skill()[id];
+		switch( skill[12].to<int>() ) {
+		case 3:
+			target_window->SetIndex(-actor_index);
+			break;
+		case 4:
+			target_window->SetIndex(-100);
+			break;
+		}
+
+		status_window->SetData(id, false);
+		help_window->SetText(skill[1].toString());
+	}
+	/*
+	if (use_item) {
 		if (Data::items[id - 1].entire_party) {
 			target_window->SetIndex(-100);
 		}
@@ -66,6 +88,7 @@ void Scene_ActorTarget::Start() {
 		status_window->SetData(id, false);
 		help_window->SetText(Data::skills[id - 1].name);
 	}
+	*/
 }
 
 ////////////////////////////////////////////////////////////
@@ -91,7 +114,7 @@ void Scene_ActorTarget::Update() {
 ////////////////////////////////////////////////////////////
 void Scene_ActorTarget::UpdateItem() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	}
 }
@@ -99,7 +122,7 @@ void Scene_ActorTarget::UpdateItem() {
 ////////////////////////////////////////////////////////////
 void Scene_ActorTarget::UpdateSkill() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	}
 }

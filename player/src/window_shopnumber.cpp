@@ -19,9 +19,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <sstream>
-#include "game_system.h"
-#include "input.h"
-#include "window_shopnumber.h"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "window_shopnumber.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopNumber::Window_ShopNumber(int ix, int iy, int iwidth, int iheight) : 
@@ -66,8 +66,9 @@ void Window_ShopNumber::Refresh() {
 	contents->TextDraw(138 + 2, 40 + 2, numstr.str());
 
 	contents->GetFont()->color = 1;
-	int cx = contents->GetWidth() - (Data::terms.gold.size() + 1) * 6;
-	contents->TextDraw(cx, 72 + 2, Data::terms.gold);
+	rpg2k::SystemString const goldSuffix = Main_Data::vocabulary(95);
+	int cx = contents->GetWidth() - (goldSuffix.size() + 1) * 6;
+	contents->TextDraw(cx, 72 + 2, goldSuffix);
 
 	contents->GetFont()->color = Font::ColorDefault;
 	cx -=  (valstr.str().size()) * 6;
@@ -105,7 +106,7 @@ void Window_ShopNumber::Update() {
 	if (active) {
 		if (Input::IsRepeated(Input::LEFT)) {
 			if (number > lo) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				number--;
 			}
 			else {
@@ -116,7 +117,7 @@ void Window_ShopNumber::Update() {
 
 		if (Input::IsRepeated(Input::RIGHT)) {
 			if (number < hi) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				number++;
 			}
 			else {
@@ -127,14 +128,14 @@ void Window_ShopNumber::Update() {
 		}
 		if (Input::IsRepeated(Input::UP)) {
 			if (number < hi) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				number = hi;
 			}
 			Refresh();
 		}
 		if (Input::IsRepeated(Input::DOWN)) {
 			if (number > lo) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				number = lo;
 			}
 			Refresh();

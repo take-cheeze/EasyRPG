@@ -21,20 +21,20 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-#include "bitmap.h"
-#include "bitmap_screen.h"
+#include "bitmap.hpp"
+#include "bitmap_screen.hpp"
 
 #if defined(USE_SDL_BITMAP)
-	#include "sdl_bitmap.h"
+	#include "sdl_bitmap.hpp"
 #elif defined(USE_OPENGL)
-	#include "gl_bitmap.h"
+	#include "gl_bitmap.hpp"
 #elif defined(USE_SOFT_BITMAP)
-	#include "soft_bitmap.h"
+	#include "soft_bitmap.hpp"
 #else
 	#error "No bitmap implementation selected"
 #endif
 
-#include "util_macro.h"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 static int GetMaskByte(uint32 mask) {
@@ -51,49 +51,49 @@ static int GetMaskByte(uint32 mask) {
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Bitmap::CreateBitmap(int width, int height, bool transparent) {
+std::auto_ptr<Bitmap> Bitmap::CreateBitmap(int width, int height, bool transparent) {
 	#if defined(USE_SDL_BITMAP)
-		return (Bitmap*)new SdlBitmap(width, height, transparent);
+		return std::auto_ptr<Bitmap>( new SdlBitmap(width, height, transparent) );
 	#elif defined(USE_OPENGL)
-		return (Bitmap*)new GlBitmap(width, height, transparent);
+		return std::auto_ptr<Bitmap>( new GlBitmap(width, height, transparent) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (Bitmap*)new SoftBitmap(width, height, transparent);
+		return std::auto_ptr<Bitmap>( new SoftBitmap(width, height, transparent) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
-Bitmap* Bitmap::CreateBitmap(const std::string filename, bool transparent) {
+	std::auto_ptr<Bitmap> Bitmap::CreateBitmap(const std::string filename, bool transparent) {
 	#if defined(USE_SDL_BITMAP)
-		return (Bitmap*)new SdlBitmap(filename, transparent);
+		return std::auto_ptr<Bitmap>( new SdlBitmap(filename, transparent) );
 	#elif defined(USE_OPENGL)
-		return (Bitmap*)new GlBitmap(filename, transparent);
+		return std::auto_ptr<Bitmap>( new GlBitmap(filename, transparent) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (Bitmap*)new SoftBitmap(filename, transparent);
+		return std::auto_ptr<Bitmap>( new SoftBitmap(filename, transparent) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
-Bitmap* Bitmap::CreateBitmap(const uint8* data, uint bytes, bool transparent) {
+	std::auto_ptr<Bitmap> Bitmap::CreateBitmap(const uint8* data, uint bytes, bool transparent) {
 	#if defined(USE_SDL_BITMAP)
-		return (Bitmap*)new SdlBitmap(data, bytes, transparent);
+		return std::auto_ptr<Bitmap>( new SdlBitmap(data, bytes, transparent) );
 	#elif defined(USE_OPENGL)
-		return (Bitmap*)new GlBitmap(data, bytes, transparent);
+		return std::auto_ptr<Bitmap>( new GlBitmap(data, bytes, transparent) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (Bitmap*)new SoftBitmap(data, bytes, transparent);
+		return std::auto_ptr<Bitmap>( new SoftBitmap(data, bytes, transparent) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
-Bitmap* Bitmap::CreateBitmap(Bitmap* source, Rect src_rect, bool transparent) {
+	std::auto_ptr<Bitmap> Bitmap::CreateBitmap(Bitmap* source, Rect src_rect, bool transparent) {
 	#if defined(USE_SDL_BITMAP)
-		return (Bitmap*)new SdlBitmap(source, src_rect, transparent);
+		return std::auto_ptr<Bitmap>( new SdlBitmap(source, src_rect, transparent) );
 	#elif defined(USE_OPENGL)
-		return (Bitmap*)new GlBitmap(source, src_rect, transparent);
+		return std::auto_ptr<Bitmap>( new GlBitmap(source, src_rect, transparent) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (Bitmap*)new SoftBitmap(source, src_rect, transparent);
+		return std::auto_ptr<Bitmap>( new SoftBitmap(source, src_rect, transparent) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
@@ -101,14 +101,8 @@ Bitmap* Bitmap::CreateBitmap(Bitmap* source, Rect src_rect, bool transparent) {
 
 ////////////////////////////////////////////////////////////
 Bitmap::Bitmap() :
+	font( new Font() ),
 	editing(false) {
-
-	font = new Font();
-}
-
-////////////////////////////////////////////////////////////
-Bitmap::~Bitmap() {
-	delete font;
 }
 
 ////////////////////////////////////////////////////////////
@@ -401,11 +395,9 @@ void Bitmap::StretchBlit(Rect dst_rect, Bitmap* src, Rect src_rect, int opacity)
 
 		if (dst_rect.IsOutOfBounds(width(), height())) return;
 
-		Bitmap* resampled = src->Resample(dst_rect.width, dst_rect.height, src_rect);
+		std::auto_ptr<Bitmap> resampled = src->Resample(dst_rect.width, dst_rect.height, src_rect);
 
-		Blit(dst_rect.x, dst_rect.y, resampled, resampled->GetRect(), opacity);
-
-		delete resampled;
+		Blit(dst_rect.x, dst_rect.y, resampled.get(), resampled->GetRect(), opacity);
 	}
 }
 
@@ -677,11 +669,11 @@ void Bitmap::HSLChange(double h, double s, double l, double lo, Rect dst_rect) {
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Bitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
+std::auto_ptr<Bitmap> Bitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
 	double zoom_x = (double)(scale_w) / src_rect.width;
 	double zoom_y = (double)(scale_h) / src_rect.height;
 
-	Bitmap* resampled = CreateBitmap(scale_w, scale_h, transparent);
+	std::auto_ptr<Bitmap> resampled = CreateBitmap(scale_w, scale_h, transparent);
 	if (transparent)
 		resampled->SetTransparentColor(GetTransparentColor());
 
@@ -933,7 +925,7 @@ void Bitmap::Flip(bool horizontal, bool vertical) {
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
+std::auto_ptr<Bitmap> Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	double c = cos(angle);
 	double s = sin(angle);
 	int w = width();
@@ -972,7 +964,7 @@ Bitmap* Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	double ix0 = -(c * fx0 - s * fy0) / sx;
 	double iy0 = -(s * fx0 + c * fy0) / sy;
 
-	Bitmap* result = CreateBitmap(dst_w, dst_h, true);
+	std::auto_ptr<Bitmap> result = CreateBitmap(dst_w, dst_h, true);
 	const Color& trans = transparent ? GetTransparentColor() : Color(255,0,255,0);
 	result->SetTransparentColor(trans);
 	result->Fill(trans);
@@ -1111,11 +1103,11 @@ Rect Bitmap::GetRect() const {
 }
 
 Font* Bitmap::GetFont() const {
-	return font;
+	return font.get();
 }
 
-void Bitmap::SetFont(Font* new_font) {
-	font = new_font;
+void Bitmap::SetFont(std::auto_ptr<Font> new_font) {
+	font.reset( new_font.release() );
 }
 
 bool Bitmap::GetTransparent() const {

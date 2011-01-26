@@ -18,17 +18,17 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "main_data.h"
-#include "game_actors.h"
-#include "game_party.h"
-#include "game_player.h"
-#include "game_screen.h"
-#include "game_troop.h"
-#include "game_message.h"
-#include "game_map.h"
-#include "game_variables.h"
-#include "game_switches.h"
-#include "font.h"
+#include "main_data.hpp"
+#include "game_actors.hpp"
+#include "game_party.hpp"
+#include "game_player.hpp"
+#include "game_screen.hpp"
+#include "game_troop.hpp"
+#include "game_message.hpp"
+#include "game_map.hpp"
+#include "game_variables.hpp"
+#include "game_switches.hpp"
+#include "font.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Global Variables
@@ -38,9 +38,10 @@ Game_Switches_Class Game_Switches;
 
 namespace Main_Data {
 	// Dynamic Game Data
-	Game_Screen* game_screen = NULL;
-	Game_Player* game_player = NULL;
-	Game_Troop* game_troop = NULL;
+	boost::scoped_ptr<Game_Screen> game_screen;
+	boost::scoped_ptr<Game_Player> game_player;
+	boost::scoped_ptr<Game_Troop> game_troop;
+	boost::scoped_ptr<rpg2k::model::Project> project;
 }
 
 void Main_Data::Cleanup() {
@@ -48,10 +49,9 @@ void Main_Data::Cleanup() {
 	Game_Actors::Dispose();
 	Font::Dispose();
 
-	delete game_screen;
-	delete game_troop;
-	delete game_player;
-	game_screen = NULL;
-	game_troop = NULL;
-	game_player = NULL;
+	game_screen.reset();
+	game_troop.reset();
+	game_player.reset();
+
+	Main_Data::project.reset();
 }

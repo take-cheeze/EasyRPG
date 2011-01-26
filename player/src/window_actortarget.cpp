@@ -18,9 +18,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_actortarget.h"
-#include "baseui.h"
-#include "game_party.h"
+#include "window_actortarget.hpp"
+#include "baseui.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ActorTarget::Window_ActorTarget(int ix, int iy, int iwidth, int iheight) :

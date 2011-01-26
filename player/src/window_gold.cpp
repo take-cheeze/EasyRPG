@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_gold.h"
-#include "game_party.h"
-#include "main_data.h"
+#include "window_gold.hpp"
+#include "game_party.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Gold::Window_Gold(int ix, int iy, int iwidth, int iheight) :
@@ -45,8 +45,9 @@ void Window_Gold::Refresh() {
 	gold << std::setfill(' ') << std::setw(6) << Game_Party::GetGold();
 
 	contents->GetFont()->color = 1;
-	Rect gold_text_size = contents->GetTextSize(Data::terms.gold);
-	contents->TextDraw(contents->GetWidth() - gold_text_size.width, 2, Data::terms.gold);
+	rpg2k::SystemString const goldSuffix = Main_Data::vocabulary(95);
+	Rect gold_text_size = contents->GetTextSize(goldSuffix);
+	contents->TextDraw(contents->GetWidth() - gold_text_size.width, 2, goldSuffix);
 
 	contents->GetFont()->color = Font::ColorDefault;
 	contents->TextDraw(contents->GetWidth() - gold_text_size.width - 6 * 6, 2, gold.str(), Bitmap::TextAlignRight);

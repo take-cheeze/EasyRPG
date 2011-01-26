@@ -17,7 +17,7 @@
 
 #include <string>
 
-#include "utils.h"
+#include "utils.hpp"
 
 std::wstring Utils::DecodeUTF(const std::string& str) {
 	std::wstring wstr;

@@ -19,40 +19,40 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <cmath>
-#include "bitmap_screen.h"
-#include "util_macro.h"
+#include "bitmap_screen.hpp"
+#include "util_macro.hpp"
 
 #if defined(USE_SDL_BITMAP)
-	#include "sdl_bitmap_screen.h"
+	#include "sdl_bitmap_screen.hpp"
 #elif defined(USE_OPENGL)
-	#include "gl_bitmap_screen.h"
+	#include "gl_bitmap_screen.hpp"
 #elif defined(USE_SOFT_BITMAP)
-	#include "soft_bitmap_screen.h"
+	#include "soft_bitmap_screen.hpp"
 #else
 	#error "No bitmap implementation selected"
 #endif
 
 ////////////////////////////////////////////////////////////
-BitmapScreen* BitmapScreen::CreateBitmapScreen(Bitmap* source) {
+std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen(Bitmap* source) {
 	#if defined(USE_SDL_BITMAP)
-		return (BitmapScreen*)new SdlBitmapScreen(source);
+		return std::auto_ptr<BitmapScreen>( new SdlBitmapScreen(source) );
 	#elif defined(USE_OPENGL)
-		return (BitmapScreen*)new GlBitmapScreen(source);
+		return std::auto_ptr<BitmapScreen>( new GlBitmapScreen(source) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (BitmapScreen*)new SoftBitmapScreen(source);
+		return std::auto_ptr<BitmapScreen>( new SoftBitmapScreen(source) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
 ////////////////////////////////////////////////////////////
-BitmapScreen* BitmapScreen::CreateBitmapScreen(bool delete_bitmap) {
+	std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen(bool delete_bitmap) {
 	#if defined(USE_SDL_BITMAP)
-		return (BitmapScreen*)new SdlBitmapScreen(delete_bitmap);
+		return std::auto_ptr<BitmapScreen>( new SdlBitmapScreen(delete_bitmap) );
 	#elif defined(USE_OPENGL)
-		return (BitmapScreen*)new GlBitmapScreen(delete_bitmap);
+		return std::auto_ptr<BitmapScreen>( new GlBitmapScreen(delete_bitmap) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (BitmapScreen*)new SoftBitmapScreen(delete_bitmap);
+		return std::auto_ptr<BitmapScreen>( new SoftBitmapScreen(delete_bitmap) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
@@ -81,10 +81,9 @@ BitmapScreen::BitmapScreen(bool delete_bitmap) :
 
 ////////////////////////////////////////////////////////////
 BitmapScreen::~BitmapScreen() {
-	if (delete_bitmap && bitmap != NULL) {
-		delete bitmap;
-	} else if (bitmap != NULL) {
+	if (!delete_bitmap) {
 		bitmap->DetachBitmapScreen(this);
+		bitmap.release();
 	}
 }
 
@@ -94,16 +93,35 @@ void BitmapScreen::SetDirty() {
 }
 
 ////////////////////////////////////////////////////////////
-void BitmapScreen::SetBitmap(Bitmap* source) {
-	if (delete_bitmap && bitmap != NULL) {
-		delete bitmap;
-	} else if (bitmap != NULL)
+void BitmapScreen::SetBitmap(std::auto_ptr<Bitmap> source) {
+	if (!delete_bitmap) {
 		bitmap->DetachBitmapScreen(this);
+		bitmap.release();
+	}
 
-	bitmap = source;
+	bitmap.reset( source.release() );
 	needs_refresh = true;
 
-	if (bitmap) {
+	if (bitmap.get()) {
+		bitmap->AttachBitmapScreen(this);
+		src_rect_effect = Rect(0, 0, bitmap->width(), bitmap->height());
+	} else {
+		src_rect_effect = Rect();
+	}
+}
+
+////////////////////////////////////////////////////////////
+void BitmapScreen::SetBitmap(Bitmap* source) {
+	if (!delete_bitmap) {
+		bitmap->DetachBitmapScreen(this);
+		bitmap.release();
+	}
+
+	bitmap.reset(source);
+	delete_bitmap = false;
+	needs_refresh = true;
+
+	if (bitmap.get()) {
 		bitmap->AttachBitmapScreen(this);
 		src_rect_effect = Rect(0, 0, bitmap->width(), bitmap->height());
 	} else {
@@ -113,7 +131,7 @@ void BitmapScreen::SetBitmap(Bitmap* source) {
 
 ////////////////////////////////////////////////////////////
 Bitmap* BitmapScreen::GetBitmap() {
-	return bitmap;
+	return bitmap.get();
 }
 
 ////////////////////////////////////////////////////////////

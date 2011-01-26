@@ -19,13 +19,13 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "audio.h"
-#include "game_system.h"
-#include "input.h"
-#include "scene_end.h"
-#include "scene_menu.h"
-#include "scene_title.h"
-#include "util_macro.h"
+#include "audio.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "scene_end.hpp"
+#include "scene_menu.hpp"
+#include "scene_title.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_End::Scene_End() :
@@ -51,10 +51,10 @@ void Scene_End::Update() {
 	command_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop(); // Select End Game
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 		switch (command_window->GetIndex()) {
 		case 0: // Yes
 			Audio::BGM_Fade(800);
@@ -73,11 +73,11 @@ void Scene_End::Update() {
 void Scene_End::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Data::terms.yes);
-	options.push_back(Data::terms.no);
+	options.push_back(Main_Data::vocabulary(152)); // yes
+	options.push_back(Main_Data::vocabulary(153)); // no
 
 	// TODO: Calculate window width from max text length from options
-	int text_size = max(Data::terms.yes.size() * 6, Data::terms.no.size() * 6);
+	int text_size = max(options[0].size() * 6, options[1].size() * 6);
 	command_window = new Window_Command(text_size + 24, options);
 	command_window->SetX(160 - command_window->GetWidth() / 2);
 	command_window->SetY(72 + 48);
@@ -85,11 +85,12 @@ void Scene_End::CreateCommandWindow() {
 
 ////////////////////////////////////////////////////////////
 void Scene_End::CreateHelpWindow() {
-	int text_size = Data::terms.exit_game_message.size() * 6;
+	std::string const exitMessage = Main_Data::vocabulary(151);
+	int text_size = exitMessage.size() * 6;
 
 	help_window = new Window_Help(160 - (text_size + 16)/ 2,
 		72, text_size + 16, 32);
-	help_window->SetText(Data::terms.exit_game_message);
+	help_window->SetText(exitMessage);
 
 	command_window->SetHelpWindow(help_window);
 }

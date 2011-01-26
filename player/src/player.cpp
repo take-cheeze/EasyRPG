@@ -18,17 +18,17 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "player.h"
-#include "system.h"
-#include "output.h"
-#include "audio.h"
-#include "graphics.h"
-#include "input.h"
-#include "cache.h"
-#include "main_data.h"
-#include "scene_logo.h"
-#include "scene_title.h"
-#include "scene_battle.h"
+#include "player.hpp"
+#include "system.hpp"
+#include "output.hpp"
+#include "audio.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "cache.hpp"
+#include "main_data.hpp"
+#include "scene_logo.hpp"
+#include "scene_title.hpp"
+#include "scene_battle.hpp"
 #include <cstring>
 #include <cstdlib>
 #ifdef GEKKO

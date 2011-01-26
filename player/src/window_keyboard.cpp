@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <algorithm>
 #include <string>
-#include "window_keyboard.h"
-#include "game_system.h"
-#include "input.h"
+#include "window_keyboard.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
 
 ////////////////////////////////////////////////////////////
 const char * const Window_Keyboard::items[2][9][10] = {
@@ -123,15 +123,15 @@ void Window_Keyboard::Update() {
 	Window_Base::Update();
 	if (active) {
 		if (Input::IsRepeated(Input::DOWN)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			row = (row + 1) % row_max;
 		}
 		if (Input::IsRepeated(Input::UP)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			row = (row + row_max - 1) % row_max;
 		}
 		if (Input::IsRepeated(Input::RIGHT)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			col += 1;
 			if (col >= col_max) {
 				col = 0;
@@ -139,7 +139,7 @@ void Window_Keyboard::Update() {
 			}
 		}
 		if (Input::IsRepeated(Input::LEFT)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			col -= 1;
 			if (col < 0) {
 				col = col_max - 1;
