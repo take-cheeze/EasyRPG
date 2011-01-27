@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="EasyRPG" Database="./easyrpg.tags">
-  <Project Name="editor" Path="editor/builds/codelite/editor.project" Active="No"/>
+  <Project Name="editor" Path="editor/builds/codelite/editor.project" Active="Yes"/>
   <Project Name="readers" Path="readers/builds/codelite/readers.project" Active="No"/>
-  <Project Name="player" Path="player/builds/codelite/player.project" Active="Yes"/>
+  <Project Name="player" Path="player/builds/codelite/player.project" Active="No"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="GTK+ Debug" Selected="no">
+    <WorkspaceConfiguration Name="GTK+ Debug" Selected="yes">
       <Project Name="readers" ConfigName="Debug"/>
       <Project Name="player" ConfigName="GTK+ Debug"/>
       <Project Name="editor" ConfigName="Debug"/>
@@ -44,7 +44,7 @@
       <Project Name="readers" ConfigName="Dingux Release"/>
       <Project Name="player" ConfigName="Dingux Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="UNIX Debug" Selected="yes">
+    <WorkspaceConfiguration Name="UNIX Debug" Selected="no">
       <Project Name="editor" ConfigName="Debug"/>
       <Project Name="readers" ConfigName="Debug"/>
       <Project Name="player" ConfigName="UNIX Debug"/>

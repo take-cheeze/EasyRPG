@@ -15,11 +15,11 @@
 // along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "dlgEvtCmdActorTitle.h"
+#include "dlgEvtCmdState.h"
 
-dlgEvtCmdActorTitle::dlgEvtCmdActorTitle(wxWindow* parent) : dlgEvtCmdActorTitle_Base(parent) {
+dlgEvtCmdState::dlgEvtCmdState(wxWindow* parent) : dlgEvtCmdState_Base(parent) {
 }
 
-void dlgEvtCmdActorTitle::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdState::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

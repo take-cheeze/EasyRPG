@@ -20,8 +20,6 @@
 dlgEvtCmdMessage::dlgEvtCmdMessage(wxWindow* parent) : dlgEvtCmdMessage_Base(parent) {
 }
 
-
-
 void dlgEvtCmdMessage::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }
