@@ -60,7 +60,7 @@ void Game_Party::SetupStartingMembers() {
 		Game_Actor* actor = Game_Actors::GetActor(id);
 
 		if (actor == NULL) {
-			Output::Error("Invalid actor (Id: %d) in initial party at index %d.", id, i);
+			Output::Warning("Invalid actor (Id: %d) in initial party at index %d.", id, i);
 		} else {
 			actors.push_back(actor);
 		}

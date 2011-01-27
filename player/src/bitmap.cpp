@@ -274,8 +274,10 @@ std::auto_ptr<Bitmap> Bitmap::RotateScale(double angle, int scale_w, int scale_h
 ////////////////////////////////////////////////////////////
 std::auto_ptr<Bitmap> Bitmap::Waver(int depth, double phase) {
 	std::auto_ptr<Surface> resampled = Surface::CreateSurface(width() + 2 * depth, height(), true);
+
 	if (transparent)
 		resampled->SetTransparentColor(GetTransparentColor());
+
 	resampled->Clear();
 
 	Lock();

@@ -62,9 +62,10 @@ void Scene_Map::Terminate() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Map::Update() {
+	Game_Map::GetInterpreter().Update();
+
 	UpdateTeleportPlayer();
 
-	Game_Map::GetInterpreter().Update();
 	Game_Map::Update();
 	Main_Data::game_player->Update();
 	Main_Data::game_screen->Update();
@@ -134,10 +135,10 @@ void Scene_Map::UpdateTeleportPlayer() {
 	delete spriteset;
 	Main_Data::game_player->PerformTeleport();
 	Game_Map::Autoplay();
-	Game_Map::Update();
-	//Graphics::Wait(15);
 
 	spriteset = new Spriteset_Map();
+
+	Game_Map::Update();
 
 	Scene::TransitionIn();
 

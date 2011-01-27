@@ -395,9 +395,9 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	btnChoice->SetDefault(); 
 	szEvtCmd1->Add( btnChoice, 0, wxEXPAND, 0 );
 	
-	btnStatus = new wxButton( pnEvtCmd1, wxID_ANY, _("Change status..."), wxDefaultPosition, wxDefaultSize, 0 );
-	btnStatus->SetDefault(); 
-	szEvtCmd1->Add( btnStatus, 0, wxEXPAND, 0 );
+	btnState = new wxButton( pnEvtCmd1, wxID_ANY, _("Change state..."), wxDefaultPosition, wxDefaultSize, 0 );
+	btnState->SetDefault(); 
+	szEvtCmd1->Add( btnState, 0, wxEXPAND, 0 );
 	
 	btnNumberInput = new wxButton( pnEvtCmd1, wxID_ANY, _("Show number input..."), wxDefaultPosition, wxDefaultSize, 0 );
 	btnNumberInput->SetDefault(); 
@@ -618,7 +618,7 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	pnEvtCmd2->SetSizer( szEvtCmd2 );
 	pnEvtCmd2->Layout();
 	szEvtCmd2->Fit( pnEvtCmd2 );
-	pnEvtCmd->AddPage( pnEvtCmd2, _("2"), true );
+	pnEvtCmd->AddPage( pnEvtCmd2, _("2"), false );
 	pnEvtCmd3 = new wxPanel( pnEvtCmd, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridSizer* szEvtCmd3;
 	szEvtCmd3 = new wxGridSizer( 15, 2, 0, 0 );
@@ -766,7 +766,7 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	btnFaceGraphic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnFaceGraphic_click ), NULL, this );
 	btnMP->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnMP_click ), NULL, this );
 	btnChoice->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnChoice_click ), NULL, this );
-	btnStatus->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnStatus_click ), NULL, this );
+	btnState->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnState_click ), NULL, this );
 	btnNumberInput->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnNumberInput_click ), NULL, this );
 	btnRecover->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnRecover_click ), NULL, this );
 	btnSwitch->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSwitch_click ), NULL, this );
@@ -862,7 +862,7 @@ dlgEvtCmd_Base::~dlgEvtCmd_Base()
 	btnFaceGraphic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnFaceGraphic_click ), NULL, this );
 	btnMP->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnMP_click ), NULL, this );
 	btnChoice->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnChoice_click ), NULL, this );
-	btnStatus->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnStatus_click ), NULL, this );
+	btnState->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnState_click ), NULL, this );
 	btnNumberInput->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnNumberInput_click ), NULL, this );
 	btnRecover->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnRecover_click ), NULL, this );
 	btnSwitch->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSwitch_click ), NULL, this );

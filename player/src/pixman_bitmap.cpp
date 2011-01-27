@@ -24,6 +24,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
+<<<<<<< HEAD
 #include "cache.hpp"
 #include "filefinder.hpp"
 #include "options.hpp"
@@ -33,6 +34,19 @@
 #include "image.hpp"
 #include "text.hpp"
 #include "pixman_bitmap.hpp"
+=======
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+#include "data.hpp"
+#include "output.hpp"
+#include "utils.hpp"
+#include "image.hpp"
+#include "text.hpp"
+#include "pixel_format.hpp"
+#include "bitmap_utils.hpp"
+#include "pixman_bitmap.hpp"
+>>>>>>> master
 
 ////////////////////////////////////////////////////////////
 static void destroy_func(pixman_image_t *image, void *data) {
@@ -61,7 +75,7 @@ static void ConvertImage(int& width, int& height, void*& pixels) {
 			uint32 r = src[x * 4 + 0] * a / 0xFF;
 			uint32 g = src[x * 4 + 1] * a / 0xFF;
 			uint32 b = src[x * 4 + 2] * a / 0xFF;
-			#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+			#ifndef USE_BIG_ENDIAN
 			dst[x] = (a<<24) | (r<<16) | (g<<8) | (b<<0);
 			#else
 			dst[x] = (b<<24) | (g<<16) | (r<<8) | (a<<0);
@@ -186,19 +200,19 @@ uint16 PixmanBitmap::pitch() const {
 }
 
 uint32 PixmanBitmap::rmask() const {
-	return RMASK;
+	return pixel_format::rmask;
 }
 
 uint32 PixmanBitmap::gmask() const {
-	return GMASK;
+	return pixel_format::gmask;
 }
 
 uint32 PixmanBitmap::bmask() const {
-	return BMASK;
+	return pixel_format::bmask;
 }
 
 uint32 PixmanBitmap::amask() const {
-	return AMASK;
+	return pixel_format::amask;
 }
 
 uint32 PixmanBitmap::colorkey() const {
@@ -467,6 +481,10 @@ Bitmap* PixmanBitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	return resampled;
 }
 
+Bitmap* PixmanBitmap::Waver(int depth, double phase) {
+	return BitmapUtils<pixel_format>::Waver(this, depth, phase);
+}
+
 void PixmanBitmap::OpacityChange(int opacity, const Rect& dst_rect) {
 	if (opacity == 255)
 		return;
@@ -591,7 +609,7 @@ uint32 PixmanBitmap::GetUint32Color(uint8 _r, uint8 _g, uint8 _b, uint8 _a) cons
 	uint32 r = _r * a / 0xFF;
 	uint32 g = _g * a / 0xFF;
 	uint32 b = _b * a / 0xFF;
-	#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+	#ifndef USE_BIG_ENDIAN
 	return (a<<24) | (r<<16) | (g<<8) | (b<<0);
 	#else
 	return (b<<24) | (g<<16) | (r<<8) | (a<<0);
@@ -599,7 +617,7 @@ uint32 PixmanBitmap::GetUint32Color(uint8 _r, uint8 _g, uint8 _b, uint8 _a) cons
 }
 
 void PixmanBitmap::GetColorComponents(uint32 color, uint8 &r, uint8 &g, uint8 &b, uint8 &a) const {
-	#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+	#ifndef USE_BIG_ENDIAN
 	uint32 _a = (color >> 24) & 0xFF;
 	uint32 _r = (color >> 16) & 0xFF;
 	uint32 _g = (color >>  8) & 0xFF;

@@ -33,6 +33,9 @@
 
 class BitmapScreen;
 
+template <class T>
+class BitmapUtils;
+
 ////////////////////////////////////////////////////////////
 /// Base Bitmap class.
 ////////////////////////////////////////////////////////////
@@ -125,6 +128,7 @@ protected:
 	friend class Surface;
 	friend class BitmapScreen;
 	friend class GlBitmapScreen;
+	template <class T> friend class BitmapUtils;
 
 	Bitmap();
 

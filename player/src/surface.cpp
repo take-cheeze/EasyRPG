@@ -88,13 +88,8 @@ std::auto_ptr<Surface> Surface::CreateSurface(int width, int height, bool transp
 
 ////////////////////////////////////////////////////////////
 Surface::Surface() :
+	font( Font::CreateFont().release() ),
 	editing(false) {
-	font = Font::CreateFont();
-}
-
-////////////////////////////////////////////////////////////
-Surface::~Surface() {
-	delete font;
 }
 
 ////////////////////////////////////////////////////////////
@@ -960,11 +955,11 @@ Rect Surface::GetTextSize(std::wstring text) const {
 }
 
 Font* Surface::GetFont() const {
-	return font;
+	return font.get();
 }
 
-void Surface::SetFont(Font* new_font) {
-	font = new_font;
+void Surface::SetFont(std::auto_ptr<Font> new_font) {
+	font.reset( new_font.release() );
 }
 
 void Surface::TextDraw(int x, int y, int width, int height, std::wstring wtext, TextAlignment align) {

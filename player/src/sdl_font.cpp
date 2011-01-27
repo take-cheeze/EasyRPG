@@ -96,7 +96,7 @@ int SdlFont::GetHeight() {
 	return TTF_FontHeight(ttf_font);
 }
 
-Bitmap* SdlFont::Render(int c) {
+std::auto_ptr<Bitmap> SdlFont::Render(int c) {
 	GetTTF();
 	SDL_Color color = {255, 255, 255, 255};
 	uint16 text[2] = {(uint16) c, 0};
@@ -105,7 +105,7 @@ Bitmap* SdlFont::Render(int c) {
 	SDL_SetColorKey(temp, SDL_SRCCOLORKEY, SDL_MapRGB(temp->format, colorkey.r, colorkey.g, colorkey.b));
 	SDL_Surface* surf = DisplayFormat(temp);
 	SDL_FreeSurface(temp);
-	return new SdlBitmap(surf);
+	return std::auto_ptr<Bitmap>( new SdlBitmap(surf) );
 }
 
 ////////////////////////////////////////////////////////////

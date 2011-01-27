@@ -126,8 +126,6 @@
         <File Name="../../src/dlgEvtCmdMP.cpp"/>
         <File Name="../../src/dlgEvtCmdChoice.h"/>
         <File Name="../../src/dlgEvtCmdChoice.cpp"/>
-        <File Name="../../src/dlgEvtCmdStatus.cpp"/>
-        <File Name="../../src/dlgEvtCmdStatus.h"/>
         <File Name="../../src/dlgEvtCmdNumberInput.h"/>
         <File Name="../../src/dlgEvtCmdNumberInput.cpp"/>
         <File Name="../../src/dlgEvtCmdRecover.h"/>
@@ -172,6 +170,8 @@
         <File Name="../../src/dlgEvtCmdSkill.h"/>
         <File Name="../../src/dlgEvtCmdTransition.h"/>
         <File Name="../../src/dlgEvtCmdTransition.cpp"/>
+        <File Name="../../src/dlgEvtCmdState.cpp"/>
+        <File Name="../../src/dlgEvtCmdState.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="Page 2">
         <File Name="../../src/dlgEvtCmdBattle.h"/>

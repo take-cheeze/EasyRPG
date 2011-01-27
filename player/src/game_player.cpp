@@ -66,10 +66,13 @@ bool Game_Player::IsPassable(int x, int y, int d) const {
 }
 
 void Game_Player::ReserveTeleport(int map_id, int x, int y) {
-	teleporting = true;
 	new_map_id = map_id;
 	new_x = x;
 	new_y = y;
+}
+
+void Game_Player::StartTeleport() {
+	teleporting = true;
 }
 
 void Game_Player::PerformTeleport() {
@@ -79,6 +82,7 @@ void Game_Player::PerformTeleport() {
 
 	if (Game_Map::GetMapId() != new_map_id) {
 		move_route_owner = NULL;
+		Refresh(); // Reset sprite if it was changed by a move
 		Game_Map::Setup(new_map_id);
 	}
 

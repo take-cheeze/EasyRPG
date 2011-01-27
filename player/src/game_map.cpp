@@ -144,6 +144,8 @@ void Game_Map::Setup(int _id) {
 
 	SetChipset(map->chipset_id);
 
+	events.clear();
+
 	for (size_t i = 0; i < map->events.size(); i++) {
 		events.insert(std::pair<int, Game_Event*>(map->events[i].ID, new Game_Event(map_id, map->events[i])));
 	}
@@ -442,7 +444,7 @@ void Game_Map::Update() {
 	if (need_refresh) Refresh();
 	UpdateScroll();
 	UpdatePan();
-	
+
 	for (tEventHash::iterator i = events.begin(); i != events.end(); i++) {
 		i->second->Update();
 	}

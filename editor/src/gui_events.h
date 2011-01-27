@@ -123,7 +123,7 @@ class dlgEvtCmd_Base : public wxDialog
 		wxButton* btnFaceGraphic;
 		wxButton* btnMP;
 		wxButton* btnChoice;
-		wxButton* btnStatus;
+		wxButton* btnState;
 		wxButton* btnNumberInput;
 		wxButton* btnRecover;
 		wxButton* btnSwitch;
@@ -218,7 +218,7 @@ class dlgEvtCmd_Base : public wxDialog
 		virtual void btnFaceGraphic_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnMP_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnChoice_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void btnStatus_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnState_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnNumberInput_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnRecover_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnSwitch_click( wxCommandEvent& event ) { event.Skip(); }

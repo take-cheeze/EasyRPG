@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 #include "game_character.hpp"
-// // #include "rpg_eventcommand.hpp"
+// #include "rpg_eventcommand.hpp"
 #include "system.hpp"
 
 ////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@ public:
 	~Game_Interpreter();
 
 	void Clear();
-	void Setup(rpg2k::structure::Event const& _list, int _event_id);
+	void Setup(rpg2k::structure::Event const& _list, int _event_id, int dbg_x = -1, int dbg_y = -1);
 	bool IsRunning() const;
 	void Update();
 
@@ -187,8 +187,14 @@ private:
 	RPG::MoveCommand DecodeMove(std::vector<int>::const_iterator& it);
 	*/
 
-	std::vector<RPG::MoveRoute*> pending;
+	int debug_x;
+	int debug_y;
 
+	bool teleport_pending;
+
+	typedef std::pair<RPG::MoveRoute*,Game_Character*> pending_move_route;
+
+	std::vector<pending_move_route> pending;
 };
 
 #endif

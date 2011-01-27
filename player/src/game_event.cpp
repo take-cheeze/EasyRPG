@@ -235,9 +235,19 @@ int Game_Event::GetTrigger() const {
 	return trigger;
 }
 
+////////////////////////////////////////////////////////////
+void Game_Event::SetDisabled(bool dis_flag) {
+	erased = dis_flag;
+}
+
+bool Game_Event::GetDisabled() const {
+	return erased;
+}
+////////////////////////////////////////////////////////////
+
 void Game_Event::Start() {
 	// RGSS scripts consider list empty if size <= 1. Why?
-	if (list.empty()) 
+	if (list.empty() || erased) 
 		return;
 
 	starting = true;
@@ -276,6 +286,8 @@ bool Game_Event::CheckEventTriggerTouch(int x, int y) {
 	return true;
 }
 
+
+
 void Game_Event::Update() {
 	Game_Character::Update();
 
@@ -283,7 +295,7 @@ void Game_Event::Update() {
 
 	if (interpreter != NULL) {
 		if (!interpreter->IsRunning()) {
-			interpreter->Setup(list, event->index());
+			interpreter->Setup(list, event->index(), (*event)[2].to<int>(), (*event)[3].to<int>());
 		}
 		interpreter->Update();
 	}

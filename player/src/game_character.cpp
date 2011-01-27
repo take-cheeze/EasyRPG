@@ -207,22 +207,6 @@ void Game_Character::Update() {
 	} else if (!locked) {
 		UpdateSelfMovement();
 	}
-
-	/*
-	if (starting || IsLock()) return;
-	
-	if (stop_count > (40 - move_frequency * 2) * (6 - move_frequency)) {
-		switch (move_type) {
-			case 1: // Random
-				MoveTypeRandom();
-				break;
-			case 2: // Approach
-				MoveTypeTowardPlayer();
-				break;
-			case 3: // Custom
-				MoveTypeCustom();
-		}
-	}*/
 }
 
 ////////////////////////////////////////////////////////////
@@ -563,6 +547,12 @@ void Game_Character::ForceMoveRoute(RPG::MoveRoute* new_route,
 	MoveTypeCustom();
 
 	move_commands.str( (*new_route)[12].toBinary() );
+}
+
+void Game_Character::DetachMoveRouteOwner(Game_Interpreter* owner) {
+	if (owner == move_route_owner) {
+		move_route_owner = NULL;
+	}
 }
 
 ////////////////////////////////////////////////////////////

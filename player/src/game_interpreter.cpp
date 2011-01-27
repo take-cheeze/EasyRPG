@@ -178,6 +178,7 @@ Game_Interpreter::Game_Interpreter(int _depth, bool _main_flag) {
 	depth = _depth;
 	main_flag = _main_flag;
 	active = false;
+	teleport_pending = false;
 
 	if (depth > 100) {
 		Output::Warning("Too many event calls (over 9000)");
@@ -187,6 +188,10 @@ Game_Interpreter::Game_Interpreter(int _depth, bool _main_flag) {
 }
 
 Game_Interpreter::~Game_Interpreter() {
+	std::vector<pending_move_route>::iterator it;
+	for (it = pending.begin(); it != pending.end(); it++) {
+		(*it).second->DetachMoveRouteOwner(this);
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -214,13 +219,17 @@ bool Game_Interpreter::IsRunning() const {
 ////////////////////////////////////////////////////////////
 /// Setup
 ////////////////////////////////////////////////////////////
-void Game_Interpreter::Setup(rpg2k::structure::Event const& _list, int _event_id) {
+void Game_Interpreter::Setup(rpg2k::structure::Event const& _list, int _event_id, int dbg_x, int dbg_y) {
 
 	Clear();
 
 	map_id = Game_Map::GetMapId();
 	event_id = _event_id;
 	list = _list;
+
+	debug_x = dbg_x;
+	debug_y = dbg_y;
+
 	index = 0;
 
 	CancelMenuCall();
@@ -283,7 +292,7 @@ void Game_Interpreter::Update() {
 				
 			Game_Event* g_event;
 			for (size_t i = 0; i < Game_Map::GetEvents().size(); i++) {
-				g_event = Game_Map::GetEvents()[i];
+				g_event = Game_Map::GetEvents().find(i)->second;
 
 				if (g_event->GetMoveRouteForcing()) {
 					return;
@@ -328,7 +337,7 @@ void Game_Interpreter::Update() {
 		}
 
 		if (list.empty()) {
-			if (main_flag) {
+			if (!Main_Data::game_player->IsTeleporting() && main_flag) {
 				SetupStartingEvent();
 			}
 
@@ -368,7 +377,7 @@ void Game_Interpreter::SetupStartingEvent() {
 		
 		if (_event->GetStarting()) {
 			_event->ClearStarting();
-			Setup(_event->GetList(), _event->GetId());
+			Setup(_event->GetList(), _event->GetId(), _event->GetX(), _event->GetY());
 			return;
 		}
 	}
@@ -641,6 +650,7 @@ bool Game_Interpreter::CommandTeleport() { // Code 10810
 	int y = list[index][2];
 
 	Main_Data::game_player->ReserveTeleport(map_id, x, y);
+	teleport_pending = true;
 
 	if (Game_Message::visible) {
 		Game_Message::visible = false;
@@ -745,8 +755,13 @@ void Game_Interpreter::CommandEnd() {
 	CloseMessageWindow();
 	// list.clear();
 
+	if (teleport_pending) {
+		teleport_pending = false;
+		Main_Data::game_player->StartTeleport();
+	}
+
 	if ((main_flag) && (event_id > 0)) {
-		Game_Map::GetEvents()[event_id]->Unlock();
+		Game_Map::GetEvents().find(event_id)->second->Unlock();
 	}
 }
 
@@ -1270,10 +1285,10 @@ Game_Character* Game_Interpreter::GetCharacter(int character_id) {
 			return Game_Map::GetVehicle(Game_Vehicle::Airship);
 		case CharThisEvent:
 			// This event
-			return (Game_Map::GetEvents().empty()) ? NULL : Game_Map::GetEvents()[event_id];
+			return (Game_Map::GetEvents().empty()) ? NULL : Game_Map::GetEvents().find(event_id)->second;
 		default:
 			// Other events
-			return (Game_Map::GetEvents().empty()) ? NULL : Game_Map::GetEvents()[character_id];
+			return (Game_Map::GetEvents().empty()) ? NULL : Game_Map::GetEvents().find(character_id)->second;
 	}
 }
 
@@ -1872,7 +1887,7 @@ bool Game_Interpreter::CommandConditionalBranch() { // Code 12010
 			break;
 		case 6:
 			// Orientation of char
-			character = GetCharacter(list[index][3]);
+			character = GetCharacter(list[index][1]);
 			if (character != NULL) {
 				switch (list[index][2]) {
 					case 0:
@@ -2831,16 +2846,15 @@ bool Game_Interpreter::CommandMoveEvent() { // code 11330
 		route->move_commands.push_back(DecodeMove(it));
 
 	event->ForceMoveRoute(route, move_freq, this);
-	pending.push_back(route);
+	pending.push_back(pending_move_route(route, event));
 	*/
 	return true;
 }
 
 void Game_Interpreter::EndMoveRoute(RPG::MoveRoute const& route) {
-	/*
-	std::vector<RPG::MoveRoute*>::iterator it;
+	std::vector<pending_move_route>::iterator it;
 	for (it = pending.begin(); it != pending.end(); it++) {
-		if (*it == route) {
+		if ((*it).first == &route) {
 			break;
 		}
 	}
@@ -2848,7 +2862,6 @@ void Game_Interpreter::EndMoveRoute(RPG::MoveRoute const& route) {
 	if (it != pending.end()) {
 		pending.erase(it);
 	}
-	*/
 }
 
 bool Game_Interpreter::CommandFlashSprite() { // code 11320
@@ -2899,7 +2912,7 @@ bool Game_Interpreter::CommandEraseEvent() { // code 12320
 		return true;
 
 	tEventHash& events = Game_Map::GetEvents();
-	events.erase(event_id);
+	events[event_id]->SetDisabled(true);
 
 	return true;
 }
@@ -2909,8 +2922,10 @@ bool Game_Interpreter::CommandChangeMapTileset() { // code 11710
 	Game_Map::SetChipset(chipset_id);
 
 	Scene_Map* scene = (Scene_Map*) Scene::Find(Scene::Map);
+
 	if (!scene)
 		return true;
+
 	scene->spriteset->ChipsetUpdated();
 
 	return true;
@@ -2928,7 +2943,7 @@ bool Game_Interpreter::CommandCallEvent() { // code 12330
 	switch (list[index][0]) {
 		case 0: // Common Event
 			event_id = list[index][1];
-			child_interpreter->Setup(Main_Data::commonEvent(event_id)[22].toEvent(), 0);
+			child_interpreter->Setup(Main_Data::commonEvent(event_id)[22].toEvent(), 0, event_id, -2);
 			return true;
 		case 1: // Map Event
 			event_id = list[index][1];
@@ -2944,7 +2959,7 @@ bool Game_Interpreter::CommandCallEvent() { // code 12330
 
 	Game_Event* event = Game_Map::GetEvents()[event_id];
 	RPG::EventPage const& page = event->GetEvent()[5].toArray2D()[event_page];
-	child_interpreter->Setup(page[52].toEvent(), event_id);
+	child_interpreter->Setup(page[52].toEvent(), event_id, event->GetX(), event->GetY());
 
 	return true;
 }
