@@ -24,8 +24,8 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <cstring>
 #include <string>
-#include <cctype>
 #include <dirent.h>
 #include <unistd.h>
 
@@ -35,6 +35,7 @@
 #endif
 
 #include <errno.h>
+#include "utils.hpp"
 #include "filefinder.hpp"
 #include "output.hpp"
 
@@ -55,7 +56,7 @@ namespace FileFinder {
 
 	std::string Find(const std::string& _dir,
 					 const std::string& _file,
-					 const std::string exts[]);
+					 const char* const exts[]);
 	std::string FindDefault(const std::string& dir, const std::string& file);
 	std::string FindImage(const std::string& dir, const std::string& file);
 	std::string FindSound(const std::string& dir, const std::string& file);
@@ -68,14 +69,6 @@ namespace FileFinder {
 ////////////////////////////////////////////////////////////
 /// Utility functions
 ////////////////////////////////////////////////////////////
-static std::string lower(const std::string& str) {
-	std::string result = str;
-	std::string::iterator it;
-	for (it = result.begin(); it != result.end(); it++)
-		*it = tolower(*it);
-	return result;
-}
-
 static bool isdir(const std::string& path) {
 #ifdef GEKKO
 	DIR* dir = opendir(path.c_str());
@@ -104,10 +97,10 @@ static string_map scandir(const std::string& path, bool dirs = false) {
 	while ((dirent = readdir(dir)) != NULL) {
 		if (dirent->d_name[0] == '.')
 			continue;
-		if (dirs && !isdir(path + "/" + dirent->d_name))
+		if (dirs != isdir(path + "/" + dirent->d_name))
 			continue;
 		std::string name = dirent->d_name;
-		std::string lname = lower(name);
+		std::string lname = Utils::LowerCase(name);
 		result[lname] = name;
 	}
 
@@ -121,6 +114,7 @@ static Tree* scandirs(const std::string& root) {
 
 	tree->root = root;
 	tree->dirs = scandir(root, true);
+	tree->dirs["."] = ".";
 
 	string_map::const_iterator it;
 	for (it = tree->dirs.begin(); it != tree->dirs.end(); it++) {
@@ -140,14 +134,24 @@ void FileFinder::Init() {
 	trees.push_back(scandirs("."));
 }
 
+////////////////////////////////////////////////////////
+/// Quit FileFinder.
+////////////////////////////////////////////////////////
+void FileFinder::Quit() {
+	std::vector<Tree*>::iterator it;
+	for (it = trees.begin(); it != trees.end(); ++it) {
+		delete *it;
+	}
+}
+
 ////////////////////////////////////////////////////////////
 /// Check if file exists
 ////////////////////////////////////////////////////////////
 std::string FileFinder::Find(const std::string& _dir,
 							 const std::string& _file,
-							 const std::string exts[]) {
-	std::string dir = lower(_dir);
-	std::string file = lower(_file);
+							 const char* const exts[]) {
+	std::string dir = Utils::LowerCase(_dir);
+	std::string file = Utils::LowerCase(_file);
 	std::vector<Tree*>::const_iterator it;
 	for (it = trees.begin(); it != trees.end(); it++) {
 		Tree* tree = *it;
@@ -155,7 +159,7 @@ std::string FileFinder::Find(const std::string& _dir,
 		if (dirname.empty())
 			continue;
 		std::string dirpath = tree->root + "/" + dirname;
-		for (const std::string* pext = exts; !pext->empty(); pext++) {
+		for (const char*const* pext = exts; *pext != NULL; pext++) {
 			std::string& filename = tree->files[dir][file + *pext];
 			if (!filename.empty())
 				return dirpath + "/" + filename;
@@ -169,7 +173,7 @@ std::string FileFinder::Find(const std::string& _dir,
 /// Find file
 ////////////////////////////////////////////////////////////
 std::string FileFinder::FindDefault(const std::string& dir, const std::string& file) {
-	static const std::string no_exts[] = {""};
+	static const char* no_exts[] = {"", NULL};
 	return Find(dir, file, no_exts);
 }
 

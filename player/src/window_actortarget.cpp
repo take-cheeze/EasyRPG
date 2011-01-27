@@ -20,13 +20,14 @@
 ////////////////////////////////////////////////////////////
 #include "window_actortarget.hpp"
 #include "baseui.hpp"
+#include "cache.hpp"
 #include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ActorTarget::Window_ActorTarget(int ix, int iy, int iwidth, int iheight) :
 	Window_Selectable(ix, iy, iwidth, iheight) {
 
-	SetContents(Bitmap::CreateBitmap(width - 16, height - 16));
+	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
 	Refresh();
@@ -40,7 +41,7 @@ Window_ActorTarget::~Window_ActorTarget() {
 void Window_ActorTarget::Refresh() {
 	contents->Clear();
 
-	DisplayUi->SetBackcolor(windowskin->GetPixel(0, 32));
+	DisplayUi->SetBackcolor(Cache::system_info.bg_color);
 
 	item_max = Game_Party::GetActors().size();
 

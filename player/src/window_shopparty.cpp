@@ -19,16 +19,17 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "bitmap.hpp"
+#include "surface.hpp"
 #include "cache.hpp"
 #include "game_party.hpp"
 #include "game_actor.hpp"
-#include "window_party.hpp"
+#include "window_shopparty.hpp"
 
 ////////////////////////////////////////////////////////////
-Window_Party::Window_Party(int ix, int iy, int iwidth, int iheight) :
+Window_ShopParty::Window_ShopParty(int ix, int iy, int iwidth, int iheight) :
 	Window_Base(ix, iy, iwidth, iheight) {
 
-	SetContents(Bitmap::CreateBitmap(width - 16, height - 16));
+	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
 	cycle = 0;
@@ -47,7 +48,7 @@ Window_Party::Window_Party(int ix, int iy, int iwidth, int iheight) :
 			int sy = ((sprite_id / 4) * 4 + 2) * height;
 			Rect src(sx, sy, width, height);
 			for (int k = 0; k < 2; k++) {
-				std::auto_ptr<Bitmap> bm2 = Bitmap::CreateBitmap(width, height, true);
+				std::auto_ptr<Surface> bm2 = Surface::CreateSurface(width, height, true);
 				#ifndef USE_ALPHA
 				bm2->SetTransparentColor(bm->GetTransparentColor());
 				bm2->Clear();
@@ -64,7 +65,7 @@ Window_Party::Window_Party(int ix, int iy, int iwidth, int iheight) :
 }
 
 ////////////////////////////////////////////////////////////
-Window_Party::~Window_Party() {
+Window_ShopParty::~Window_ShopParty() {
 	for (size_t i = 0; i < Game_Party::GetActors().size() && i < 4; i++)
 		for (int j = 0; j < 3; j++)
 			for (int k = 0; k < 2; k++)
@@ -72,27 +73,37 @@ Window_Party::~Window_Party() {
 }
 
 ////////////////////////////////////////////////////////////
-void Window_Party::Refresh() {
+void Window_ShopParty::Refresh() {
 	contents->Clear();
 
 	const std::vector<Game_Actor*>& actors = Game_Party::GetActors();
 	for (size_t i = 0; i < actors.size() && i < 4; i++) {
 		Game_Actor *actor = actors[i];
-		int phase = (cycle / anim_rate) % 3;
+		int phase = (cycle / anim_rate) % 4;
+		if (phase == 3) {
+			phase = 1;
+		}
 		bool equippable = item_id == 0 || actor->IsEquippable(item_id);
 		Bitmap *bm = bitmaps[i][phase][equippable ? 1 : 0];
 		contents->Blit(i * 32, 0, bm, bm->GetRect(), 255);
+		bool is_equipped = false;
+		//check if item is equipped by any member
+		for (int j = 0; j < 5; ++j)
+			is_equipped |= (actor->GetEquipment(j) == item_id);
+		if (is_equipped) 
+			contents->TextDraw(i * 32 + 18, 22, "E");
 	}
 }
 
-void Window_Party::SetItem(int nitem_id) {
-	item_id = nitem_id;
-	Refresh();
+void Window_ShopParty::SetItemId(int nitem_id) {
+	if (nitem_id != item_id) {
+		item_id = nitem_id;
+		Refresh();
+	}
 }
 
-void Window_Party::Update() {
+void Window_ShopParty::Update() {
 	cycle++;
 	if (cycle % anim_rate == 0)
 		Refresh();
 }
-

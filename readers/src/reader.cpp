@@ -20,6 +20,11 @@
 ////////////////////////////////////////////////////////////
 #include "reader.h"
 #include <cstdarg>
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <iconv.h>
+#endif
 
 ////////////////////////////////////////////////////////////
 /// Statics
@@ -27,14 +32,16 @@
 std::string Reader::error_str;
 
 ////////////////////////////////////////////////////////////
-Reader::Reader(char* filename) {
+Reader::Reader(char* filename, std::string encoding) {
 	stream = fopen(filename, "rb");
+	this->encoding = encoding;
 	this->filename = std::string(filename);
 }
 
 ////////////////////////////////////////////////////////////
-Reader::Reader(const std::string& filename) {
+Reader::Reader(const std::string& filename, std::string encoding) {
 	stream = fopen(filename.c_str(), "rb");
+	this->encoding = encoding;
 	this->filename = std::string(filename);
 }
 
@@ -207,8 +214,12 @@ std::string Reader::ReadString(size_t size) {
 #else
 	fread(chars, 1, size, stream);
 #endif
-	std::string str = std::string(chars, size);
-	delete [] chars;
+
+	std::string str;
+	str = Encode(std::string(chars));
+
+	delete[] chars;
+
 	return str;
 }
 
@@ -301,6 +312,58 @@ void Reader::SetError(const char* fmt, ...) {
 ////////////////////////////////////////////////////////////
 const std::string& Reader::GetError() {
 	return error_str;
+}
+
+////////////////////////////////////////////////////////////
+std::string Reader::Encode(const std::string& str_to_encode) {
+	size_t strsize = str_to_encode.size();
+#ifdef _WIN32
+	wchar_t* widechar = new wchar_t[strsize * 5 + 1];
+	char* utf8char = new char[strsize * 5 + 1];
+
+	// To Utf16
+	// Default codepage is 0, so we dont need a check here
+	int res = MultiByteToWideChar(atoi(encoding.c_str()), 0, str_to_encode.c_str(), strsize, widechar, strsize * 5 + 1);
+	if (res == 0) {
+		// Invalid codepage
+		delete [] widechar;
+		delete [] utf8char;
+		return str_to_encode;
+	}
+	widechar[res] = '\0';
+	// Back to Utf8 ...
+	res = WideCharToMultiByte(CP_UTF8, 0, widechar, res, utf8char, strsize * 5 + 1, NULL, NULL);
+	utf8char[res] = '\0';
+
+	// Result in str
+	std::string str = std::string(utf8char, res);
+
+	delete [] widechar;
+	delete [] utf8char;
+
+	return str;
+#else
+	iconv_t cd = iconv_open("UTF-8", encoding.c_str());
+	if (cd == (iconv_t)-1)
+		return str_to_encode;
+	char *src = (char *) str_to_encode.c_str();
+	size_t src_left = str_to_encode.size();
+	size_t dst_size = str_to_encode.size() * 5 + 10;
+	char *dst = new char[dst_size];
+	size_t dst_left = dst_size;
+	char *p = src;
+	char *q = dst;
+	size_t status = iconv(cd, &p, &src_left, &q, &dst_left);
+	iconv_close(cd);
+	if (status == (size_t) -1 || src_left > 0) {
+		delete[] dst;
+		return "";
+	}
+	*q++ = '\0';
+	std::string result(dst);
+	delete[] dst;
+	return result;
+#endif
 }
 
 ////////////////////////////////////////////////////////////

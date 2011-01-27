@@ -26,29 +26,40 @@
 #include "bitmap.hpp"
 
 ////////////////////////////////////////////////////////////
+// Structs
+////////////////////////////////////////////////////////////
+typedef struct {
+	Color bg_color;
+	Color sh_color;
+} tSystemInfo;
+
+////////////////////////////////////////////////////////////
 /// Cache namespace
 ////////////////////////////////////////////////////////////
 namespace Cache {
-	Bitmap* LoadBitmap(std::string const& folder_name, std::string const& filename, bool transparent);
-	Bitmap* Backdrop(std::string const& filename);
-	Bitmap* Battle(std::string const& filename);
-	Bitmap* Battle2(std::string const& filename);
-	Bitmap* BattleCharset(std::string const& filename);
-	Bitmap* BattleWeapon(std::string const& filename);
-	Bitmap* Charset(std::string const& filename);
+	Bitmap* LoadBitmap(const std::string& folder_name, const std::string& filename,
+					   bool transparent = true, uint32 flags = 0);
+	Bitmap* Backdrop(const std::string& filename);
+	Bitmap* Battle(const std::string& filename);
+	Bitmap* Battle2(const std::string& filename);
+	Bitmap* BattleCharset(const std::string& filename);
+	Bitmap* BattleWeapon(const std::string& filename);
+	Bitmap* Charset(const std::string& filename);
 	Bitmap* ExFont();
-	Bitmap* Faceset(std::string const& filename);
-	Bitmap* Frame(std::string const& filename);
-	Bitmap* Gameover(std::string const& filename);
-	Bitmap* Monster(std::string const& filename);
-	Bitmap* Panorama(std::string const& filename);
-	Bitmap* Picture(std::string const& filename);
-	Bitmap* Chipset(std::string const& filename);
-	Bitmap* Title(std::string const& filename);
-	Bitmap* System(std::string const& filename);
-	Bitmap* System2(std::string const& filename);
-	Bitmap* Tile(std::string const& filename, int tile_id);
+	Bitmap* Faceset(const std::string& filename);
+	Bitmap* Frame(const std::string& filename);
+	Bitmap* Gameover(const std::string& filename);
+	Bitmap* Monster(const std::string& filename);
+	Bitmap* Panorama(const std::string& filename);
+	Bitmap* Picture(const std::string& filename);
+	Bitmap* Chipset(const std::string& filename);
+	Bitmap* Title(const std::string& filename);
+	Bitmap* System(const std::string& filename);
+	Bitmap* System2(const std::string& filename);
+	Bitmap* Tile(const std::string& filename, int tile_id);
 	void Clear();
+
+	extern tSystemInfo system_info;
 }
 
 #endif

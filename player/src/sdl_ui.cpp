@@ -37,6 +37,9 @@
 #include "player.hpp"
 #include "sdl_bitmap.hpp"
 #include "soft_bitmap.hpp"
+#ifdef USE_SDL_TTF
+#include <SDL_ttf.h>
+#endif
 #include <cstdlib>
 
 ///////////////////////////////////////////////////////////
@@ -88,7 +91,7 @@ SdlUi::SdlUi(long width, long height, const std::string title, bool fs_flag) :
 #endif
 
 	uint32 flags = SDL_INIT_VIDEO | SDL_INIT_TIMER;
-#ifdef DEBUG
+#if (defined(_DEBUG) || defined(_WIN32))
 	flags |= SDL_INIT_NOPARACHUTE;
 #endif
 
@@ -99,7 +102,7 @@ SdlUi::SdlUi(long width, long height, const std::string title, bool fs_flag) :
 	// Tell SDL to use DirectDraw port
 	// in release mode
 #ifndef DEBUG
-	putenv("SDL_VIDEODRIVER=directx");
+	//putenv("SDL_VIDEODRIVER=directx"); // Disables Vsync and Aero under Vista and higher
 	putenv("SDL_AUDIODRIVER=dsound");
 #endif
 
@@ -351,9 +354,9 @@ bool SdlUi::RefreshDisplayMode() {
 		);
 		main_surface = new SdlBitmap(surface, false);
 		#else
-		main_surface = Bitmap::CreateBitmap(current_display_mode.width,
-											current_display_mode.height,
-											false);
+		main_surface = Surface::CreateSurface(current_display_mode.width,
+											  current_display_mode.height,
+											  false);
 		#endif
 
 		if (!main_surface) 
@@ -364,9 +367,9 @@ bool SdlUi::RefreshDisplayMode() {
 		// Drawing surface will be the window itself
 		main_surface = new SdlBitmap(main_window, false);
 		#else
-		main_surface = Bitmap::CreateBitmap(current_display_mode.width,
-											current_display_mode.height,
-											false);
+		main_surface = Surface::CreateSurface(current_display_mode.width,
+											  current_display_mode.height,
+											  false);
 		#endif
 	}
 
@@ -499,17 +502,84 @@ bool SdlUi::ShowCursor(bool flag) {
 }
 
 ///////////////////////////////////////////////////////////
+#ifndef USE_SDL_BITMAP
+int rshift, gshift, bshift;
+#endif
+
 inline void stretch16(uint16* s, uint16* d, int w) {
+#ifdef USE_SDL_BITMAP
 	for(int i = 0; i < w; i++) {
 		const uint16 &pixel = *s++;
 		*d++ = pixel;
 		*d++ = pixel;
 	}
+#endif
+#ifdef USE_SOFT_BITMAP
+	for(int i = 0; i < w; i++) {
+		const uint8* src = (const uint8*) (s++);
+		uint16 pixel;
+		pixel  = *src++ << bshift;
+		pixel += *src++ << gshift;
+		pixel += *src++ << rshift;
+		src++;
+		*d++ = pixel;
+		*d++ = pixel;
+	}
+#endif
+#ifdef USE_PIXMAN_BITMAP
+	for(int i = 0; i < w; i++) {
+		const uint32 src = *s++;
+		const uint32 r = (src>>16) & 0xFF;
+		const uint32 g = (src>> 8) & 0xFF;
+		const uint32 b = (src>> 0) & 0xFF;
+		uint16 pixel = (r<<rshift) | (g<<gshift) | (b<<bshift);
+		*d++ = pixel;
+		*d++ = pixel;
+	}
+#endif
 }
 
-#ifndef USE_SDL_BITMAP
-int rshift, gshift, bshift;
+inline void stretch24(uint8* s, uint8* d, int w) {
+#ifdef USE_SDL_BITMAP
+	for(int i = 0; i < w; i++) {
+		const uint8* pixel = (const uint8*) s;
+		s += 3;
+		*d++ = pixel[0];
+		*d++ = pixel[1];
+		*d++ = pixel[2];
+		*d++ = pixel[0];
+		*d++ = pixel[1];
+		*d++ = pixel[2];
+	}
 #endif
+#ifdef USE_SOFT_BITMAP
+	for(int i = 0; i < w; i++) {
+		const uint8* pixel = (const uint8*) s;
+		s += 4;
+		*d++ = pixel[2];
+		*d++ = pixel[1];
+		*d++ = pixel[0];
+		*d++ = pixel[2];
+		*d++ = pixel[1];
+		*d++ = pixel[0];
+	}
+#endif
+#ifdef USE_PIXMAN_BITMAP
+	for(int i = 0; i < w; i++) {
+		const uint32 src = *(const uint32*) s;
+		s += 4;
+		const uint32 r = (src>>16) & 0xFF;
+		const uint32 g = (src>> 8) & 0xFF;
+		const uint32 b = (src>> 0) & 0xFF;
+		*d++ = r;
+		*d++ = g;
+		*d++ = b;
+		*d++ = r;
+		*d++ = g;
+		*d++ = b;
+	}
+#endif
+}
 
 inline void stretch32(uint32* s, uint32* d, int w) {
 #ifdef USE_SDL_BITMAP
@@ -518,21 +588,32 @@ inline void stretch32(uint32* s, uint32* d, int w) {
 		*d++ = pixel;
 		*d++ = pixel;
 	}
-#else
+#endif
+#ifdef USE_SOFT_BITMAP
 	for(int i = 0; i < w; i++) {
 		const uint8* src = (const uint8*) (s++);
 		uint32 pixel;
-		src++;
-		pixel  = *src++ << rshift;
+		pixel  = *src++ << bshift;
 		pixel += *src++ << gshift;
-		pixel += *src++ << bshift;
+		pixel += *src++ << rshift;
+		*d++ = pixel;
+		*d++ = pixel;
+	}
+#endif
+#ifdef USE_PIXMAN_BITMAP
+	for(int i = 0; i < w; i++) {
+		const uint32 src = *s++;
+		const uint32 r = (src>>16) & 0xFF;
+		const uint32 g = (src>> 8) & 0xFF;
+		const uint32 b = (src>> 0) & 0xFF;
+		uint32 pixel = (r<<rshift) | (g<<gshift) | (b<<bshift);
 		*d++ = pixel;
 		*d++ = pixel;
 	}
 #endif
 }
 
-void SdlUi::Blit2X(Bitmap* src, SDL_Surface* dst) {
+void SdlUi::Blit2X(Surface* src, SDL_Surface* dst) {
 	#ifdef USE_SDL_BITMAP
 	if (((SdlBitmap*)src)->bitmap == dst) return;
 	#else
@@ -557,6 +638,17 @@ void SdlUi::Blit2X(Bitmap* src, SDL_Surface* dst) {
 			stretch16(src_pixels, dst_pixels, src->width());
 			src_pixels += src_pitch;
 			dst_pixels += dst_pitch;
+		}
+	} else if (current_display_mode.bpp == 24) {
+		uint8* src_pixels = (uint8*)src->pixels();
+		uint8* dst_pixels = (uint8*)dst->pixels;
+
+		for (register int i = 0; i < src->height(); i++) {
+			stretch24(src_pixels, dst_pixels, src->width());
+			dst_pixels += dst_pitch;
+			stretch24(src_pixels, dst_pixels, src->width());
+			src_pixels += src->pitch();
+			dst_pixels += dst->pitch;
 		}
 	} else {
 		uint32* src_pixels = (uint32*)src->pixels();
@@ -879,7 +971,7 @@ int SdlUi::GetMousePosY() {
 	return mouse_y;
 }
 
-Bitmap* SdlUi::GetDisplaySurface() {
+Surface* SdlUi::GetDisplaySurface() {
 	return main_surface;
 }
 

@@ -30,7 +30,6 @@
 Sprite::Sprite() :
 	type(TypeSprite),
 	ID(Graphics::drawable_id++),
-	bitmap(NULL),
 	visible(true),
 	x(0),
 	y(0),
@@ -40,7 +39,7 @@ Sprite::Sprite() :
 	flash_duration(0),
 	flash_frame(0) {
 
-	bitmap_screen.reset( BitmapScreen::CreateBitmapScreen(false).release() );
+	bitmap_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
 
 	zobj = Graphics::RegisterZObj(0, ID);
 	Graphics::RegisterDrawable(ID, this);
@@ -102,28 +101,14 @@ void Sprite::Flash(Color color, int duration){
 
 ////////////////////////////////////////////////////////////
 Bitmap* Sprite::GetBitmap() const {
-	return bitmap;
+	return bitmap_screen->GetBitmap();
 }
 
 void Sprite::SetBitmap(Bitmap* nbitmap) {
-	bitmap = nbitmap;
-	if (!bitmap) {
-		src_rect = Rect();
-	} else {
-		src_rect = bitmap->GetRect();
-	}
-	bitmap_screen->SetBitmap(bitmap);
-	bitmap_screen->SetSrcRect(src_rect);
+	bitmap_screen->SetBitmap(nbitmap);
 }
 void Sprite::SetBitmap(std::auto_ptr<Bitmap> nbitmap) {
-	bitmap = nbitmap.get();
-	if (!bitmap) {
-		src_rect = Rect();
-	} else {
-		src_rect = bitmap->GetRect();
-	}
-	bitmap_screen->SetBitmap(bitmap);
-	bitmap_screen->SetSrcRect(src_rect);
+	bitmap_screen->SetBitmap(nbitmap);
 }
 Rect Sprite::GetSrcRect() const {
 	return src_rect;
@@ -247,6 +232,20 @@ Tone Sprite::GetTone() const {
 }
 void Sprite::SetTone(Tone tone) {
 	bitmap_screen->SetToneEffect(tone);
+}
+
+int Sprite::GetWaverDepth() const {
+	return bitmap_screen->GetWaverEffectDepth();
+}
+void Sprite::SetWaverDepth(int depth) {
+	bitmap_screen->SetWaverEffectDepth(depth);
+}
+
+double Sprite::GetWaverPhase() const {
+	return bitmap_screen->GetWaverEffectPhase();
+}
+void Sprite::SetWaverPhase(double phase) {
+	bitmap_screen->SetWaverEffectPhase(phase);
 }
 
 ////////////////////////////////////////////////////////////

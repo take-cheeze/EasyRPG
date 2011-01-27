@@ -18,10 +18,14 @@
 #ifndef _SDL_BITMAP_SCREEN_H_
 #define _SDL_BITMAP_SCREEN_H_
 
+#include "system.hpp"
+#ifdef USE_SDL_BITMAP
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include "bitmap_screen.hpp"
+#include "surface.hpp"
 #include "SDL.h"
 
 ////////////////////////////////////////////////////////////
@@ -30,9 +34,10 @@
 class SdlBitmapScreen : public BitmapScreen {
 public:
 	SdlBitmapScreen(Bitmap* source);
-	SdlBitmapScreen(bool delete_bitmap);
+	SdlBitmapScreen(std::auto_ptr<Bitmap> source);
+	~SdlBitmapScreen();
 
-	void SetBitmap(std::auto_ptr<Bitmap> bitmap);
+	void SetBitmap(Bitmap* bitmap);
 
 	void BlitScreen(int x, int y);
 	void BlitScreen(int x, int y, Rect src_rect);
@@ -55,5 +60,7 @@ protected:
 	int origin_x;
 	int origin_y;
 };
+
+#endif
 
 #endif

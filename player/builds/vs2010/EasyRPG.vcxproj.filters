@@ -348,7 +348,7 @@
     <ClCompile Include="..\..\src\window_filetitle.cpp">
       <Filter>Source Files\Engine\Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\window_party.cpp">
+    <ClCompile Include="..\..\src\window_shopparty.cpp">
       <Filter>Source Files\Engine\Window</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\window_savefile.cpp">
@@ -377,6 +377,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\utils.cpp">
       <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\text.cpp">
+      <Filter>Source Files\Backend\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sdl_font.cpp">
+      <Filter>Source Files\Backend\Graphics\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\surface.cpp">
+      <Filter>Source Files\Backend\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -674,7 +683,7 @@
     <ClInclude Include="..\..\src\window_filetitle.h">
       <Filter>Source Files\Engine\Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\window_party.h">
+    <ClInclude Include="..\..\src\window_shopparty.h">
       <Filter>Source Files\Engine\Window</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\window_savefile.h">
@@ -700,6 +709,15 @@
     </ClInclude>
     <ClInclude Include="..\..\src\utils.h">
       <Filter>Source Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\text.h">
+      <Filter>Source Files\Backend\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sdl_font.h">
+      <Filter>Source Files\Backend\Graphics\sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\surface.h">
+      <Filter>Source Files\Backend\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

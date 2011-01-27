@@ -126,8 +126,8 @@
         <File Name="../../src/window_keyboard.h"/>
         <File Name="../../src/window_name.cpp"/>
         <File Name="../../src/window_name.h"/>
-        <File Name="../../src/window_party.cpp"/>
-        <File Name="../../src/window_party.h"/>
+        <File Name="../../src/window_shopparty.cpp"/>
+        <File Name="../../src/window_shopparty.h"/>
         <File Name="../../src/window_shop.cpp"/>
         <File Name="../../src/window_shop.h"/>
         <File Name="../../src/window_filetitle.h"/>
@@ -191,6 +191,8 @@
           <File Name="../../src/sdl_bitmap.h"/>
           <File Name="../../src/sdl_bitmap_screen.cpp"/>
           <File Name="../../src/sdl_bitmap_screen.h"/>
+          <File Name="../../src/sdl_font.h"/>
+          <File Name="../../src/sdl_font.cpp"/>
         </VirtualDirectory>
         <File Name="../../src/bitmap_screen.cpp"/>
         <File Name="../../src/bitmap_screen.h"/>
@@ -199,6 +201,10 @@
           <File Name="../../src/gl_bitmap_screen.h"/>
         </VirtualDirectory>
         <File Name="../../src/exfont.h"/>
+        <File Name="../../src/text.h"/>
+        <File Name="../../src/text.cpp"/>
+        <File Name="../../src/surface.cpp"/>
+        <File Name="../../src/surface.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="Input">
         <File Name="../../src/input.cpp"/>
@@ -240,7 +246,7 @@
         <File Name="../../src/registry_win.cpp"/>
         <File Name="../../src/registry_win.h"/>
         <File Name="../../src/util_win.cpp"/>
-        <File Name="../../src/util_win.h"/>		
+        <File Name="../../src/util_win.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="Cocoa">
         <File Name="../../src/msgbox_cocoa.cpp"/>
@@ -253,6 +259,8 @@
         <File Name="../../src/font_render_8x8.cpp"/>
         <File Name="../../src/font_render_8x8.h"/>
       </VirtualDirectory>
+      <File Name="../../src/utils.h"/>
+      <File Name="../../src/utils.cpp"/>
     </VirtualDirectory>
     <File Name="../../src/main.cpp"/>
     <File Name="../../src/main_data.cpp"/>

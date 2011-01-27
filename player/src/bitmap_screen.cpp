@@ -24,67 +24,68 @@
 
 #if defined(USE_SDL_BITMAP)
 	#include "sdl_bitmap_screen.hpp"
-#elif defined(USE_OPENGL)
+#endif
+#if defined(USE_OPENGL_BITMAP)
 	#include "gl_bitmap_screen.hpp"
-#elif defined(USE_SOFT_BITMAP)
+#endif
+#if defined(USE_SOFT_BITMAP)
 	#include "soft_bitmap_screen.hpp"
-#else
-	#error "No bitmap implementation selected"
+#endif
+#if defined(USE_PIXMAN_BITMAP)
+	#include "pixman_bitmap_screen.hpp"
 #endif
 
 ////////////////////////////////////////////////////////////
 std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen(Bitmap* source) {
 	#if defined(USE_SDL_BITMAP)
 		return std::auto_ptr<BitmapScreen>( new SdlBitmapScreen(source) );
-	#elif defined(USE_OPENGL)
+	#elif defined(USE_OPENGL_BITMAP)
 		return std::auto_ptr<BitmapScreen>( new GlBitmapScreen(source) );
 	#elif defined(USE_SOFT_BITMAP)
 		return std::auto_ptr<BitmapScreen>( new SoftBitmapScreen(source) );
+	#elif defined(USE_PIXMAN_BITMAP)
+		return std::auto_ptr<BitmapScreen>( new PixmanBitmapScreen(source) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
 ////////////////////////////////////////////////////////////
-	std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen(bool delete_bitmap) {
+std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen(std::auto_ptr<Bitmap> source) {
 	#if defined(USE_SDL_BITMAP)
-		return std::auto_ptr<BitmapScreen>( new SdlBitmapScreen(delete_bitmap) );
-	#elif defined(USE_OPENGL)
-		return std::auto_ptr<BitmapScreen>( new GlBitmapScreen(delete_bitmap) );
+		return std::auto_ptr<BitmapScreen>( new SdlBitmapScreen(source) );
+	#elif defined(USE_OPENGL_BITMAP)
+		return std::auto_ptr<BitmapScreen>( new GlBitmapScreen(source) );
 	#elif defined(USE_SOFT_BITMAP)
-		return std::auto_ptr<BitmapScreen>( new SoftBitmapScreen(delete_bitmap) );
+		return std::auto_ptr<BitmapScreen>( new SoftBitmapScreen(source) );
+	#elif defined(USE_PIXMAN_BITMAP)
+		return std::auto_ptr<BitmapScreen>( new PixmanBitmapScreen(source) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
 ////////////////////////////////////////////////////////////
-BitmapScreen::BitmapScreen(Bitmap* bitmap) :
-	bitmap(bitmap),
-	delete_bitmap(bitmap != NULL) {
-
-	ClearEffects();
-
-	if (bitmap != NULL) {
-		src_rect_effect = bitmap->GetRect();
-		bitmap->AttachBitmapScreen(this);
-	}
+std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen() {
+	return CreateBitmapScreen(NULL);
 }
 
 ////////////////////////////////////////////////////////////
-BitmapScreen::BitmapScreen(bool delete_bitmap) :
-	bitmap(NULL),
-	delete_bitmap(delete_bitmap) {
+BitmapScreen::BitmapScreen(Bitmap* src) :
+	bitmap(*this) {
+
+	bitmap = src;
 
 	ClearEffects();
 }
 
 ////////////////////////////////////////////////////////////
-BitmapScreen::~BitmapScreen() {
-	if (!delete_bitmap) {
-		bitmap->DetachBitmapScreen(this);
-		bitmap.release();
-	}
+BitmapScreen::BitmapScreen(std::auto_ptr<Bitmap> src) :
+	bitmap(*this) {
+
+	bitmap = src;
+
+	ClearEffects();
 }
 
 ////////////////////////////////////////////////////////////
@@ -93,40 +94,15 @@ void BitmapScreen::SetDirty() {
 }
 
 ////////////////////////////////////////////////////////////
-void BitmapScreen::SetBitmap(std::auto_ptr<Bitmap> source) {
-	if (!delete_bitmap) {
-		bitmap->DetachBitmapScreen(this);
-		bitmap.release();
-	}
-
-	bitmap.reset( source.release() );
+void BitmapScreen::SetBitmap(Bitmap* source) {
+	bitmap = source;
 	needs_refresh = true;
-
-	if (bitmap.get()) {
-		bitmap->AttachBitmapScreen(this);
-		src_rect_effect = Rect(0, 0, bitmap->width(), bitmap->height());
-	} else {
-		src_rect_effect = Rect();
-	}
 }
 
 ////////////////////////////////////////////////////////////
-void BitmapScreen::SetBitmap(Bitmap* source) {
-	if (!delete_bitmap) {
-		bitmap->DetachBitmapScreen(this);
-		bitmap.release();
-	}
-
-	bitmap.reset(source);
-	delete_bitmap = false;
+void BitmapScreen::SetBitmap(std::auto_ptr<Bitmap> source) {
+	bitmap = source;
 	needs_refresh = true;
-
-	if (bitmap.get()) {
-		bitmap->AttachBitmapScreen(this);
-		src_rect_effect = Rect(0, 0, bitmap->width(), bitmap->height());
-	} else {
-		src_rect_effect = Rect();
-	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -148,6 +124,8 @@ void BitmapScreen::ClearEffects() {
 	zoom_x_effect = 1.0;
 	zoom_y_effect = 1.0;
 	angle_effect = 0.0;
+	waver_effect_depth = 0;
+	waver_effect_phase = 0.0;
 }
 
 void BitmapScreen::SetFlashEffect(const Color &color, int duration) {
@@ -227,6 +205,20 @@ void BitmapScreen::SetAngleEffect(double angle) {
 	}
 }
 
+void BitmapScreen::SetWaverEffectDepth(int depth) {
+	if (waver_effect_depth != depth) {
+		waver_effect_depth = depth;
+		needs_refresh = true;
+	}
+}
+
+void BitmapScreen::SetWaverEffectPhase(double phase) {
+	if (waver_effect_phase != phase) {
+		waver_effect_phase = phase;
+		needs_refresh = true;
+	}
+}
+
 void BitmapScreen::SetBlendType(int blend_type) {
 	blend_type_effect = blend_type;
 }
@@ -277,4 +269,12 @@ int BitmapScreen::GetBlendType() const {
 
 Color BitmapScreen::GetBlendColor() const {
 	return blend_color_effect;
+}
+
+int BitmapScreen::GetWaverEffectDepth() const {
+	return waver_effect_depth;
+}
+
+double BitmapScreen::GetWaverEffectPhase() const {
+	return waver_effect_phase;
 }

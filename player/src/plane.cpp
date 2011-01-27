@@ -26,8 +26,7 @@
 Plane::Plane() :
 	type(TypePlane),
 	ID(Graphics::drawable_id++),
-	bitmap(NULL),
-	bitmap_screen( BitmapScreen::CreateBitmapScreen(false) ),
+	bitmap_screen( BitmapScreen::CreateBitmapScreen() ),
 	visible(true),
 	z(0),
 	ox(0),
@@ -45,7 +44,7 @@ Plane::~Plane() {
 
 ////////////////////////////////////////////////////////////
 void Plane::Draw(int z_order) {
-	if (!visible || !bitmap) return;
+	if (!visible || !GetBitmap()) return;
 
 	int screen_ox = ox % DisplayUi->GetWidth();
 	int screen_oy = oy % DisplayUi->GetHeight();
@@ -56,16 +55,18 @@ void Plane::Draw(int z_order) {
 	dst_rect.width = screen_ox + DisplayUi->GetWidth();
 	dst_rect.height = screen_oy + DisplayUi->GetHeight();
 
-	bitmap_screen->BlitScreenTiled(bitmap->GetRect(), dst_rect);
+	bitmap_screen->BlitScreenTiled(GetBitmap()->GetRect(), dst_rect);
 }
 
 ////////////////////////////////////////////////////////////
 Bitmap* Plane::GetBitmap() const {
-	return bitmap.get();
+	return bitmap_screen->GetBitmap();
 }
 void Plane::SetBitmap(std::auto_ptr<Bitmap> nbitmap) {
-	bitmap.reset( nbitmap.release() );
-	bitmap_screen->SetBitmap(bitmap.get());
+	bitmap_screen->SetBitmap(nbitmap);
+}
+void Plane::SetBitmap(Bitmap* nbitmap) {
+	bitmap_screen->SetBitmap(nbitmap);
 }
 
 bool Plane::GetVisible() const {

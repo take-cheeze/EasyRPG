@@ -178,6 +178,7 @@
     <ClCompile Include="..\..\src\sdl_audio.cpp" />
     <ClCompile Include="..\..\src\sdl_bitmap.cpp" />
     <ClCompile Include="..\..\src\sdl_bitmap_screen.cpp" />
+    <ClCompile Include="..\..\src\sdl_font.cpp" />
     <ClCompile Include="..\..\src\sdl_time.cpp" />
     <ClCompile Include="..\..\src\sdl_ui.cpp" />
     <ClCompile Include="..\..\src\soft_bitmap.cpp" />
@@ -185,6 +186,8 @@
     <ClCompile Include="..\..\src\sprite.cpp" />
     <ClCompile Include="..\..\src\spriteset_map.cpp" />
     <ClCompile Include="..\..\src\sprite_character.cpp" />
+    <ClCompile Include="..\..\src\surface.cpp" />
+    <ClCompile Include="..\..\src\text.cpp" />
     <ClCompile Include="..\..\src\tilemap.cpp" />
     <ClCompile Include="..\..\src\tilemap_layer.cpp" />
     <ClCompile Include="..\..\src\tone.cpp" />
@@ -206,7 +209,7 @@
     <ClCompile Include="..\..\src\window_numberinput.cpp" />
     <ClCompile Include="..\..\src\window_item.cpp" />
     <ClCompile Include="..\..\src\window_message.cpp" />
-    <ClCompile Include="..\..\src\window_party.cpp" />
+    <ClCompile Include="..\..\src\window_shopparty.cpp" />
     <ClCompile Include="..\..\src\window_savefile.cpp" />
     <ClCompile Include="..\..\src\window_selectable.cpp" />
     <ClCompile Include="..\..\src\window_menustatus.cpp" />
@@ -285,13 +288,16 @@
     <ClInclude Include="..\..\src\scene_title.h" />
     <ClInclude Include="..\..\src\sdl_bitmap.h" />
     <ClInclude Include="..\..\src\sdl_bitmap_screen.h" />
+    <ClInclude Include="..\..\src\sdl_font.h" />
     <ClInclude Include="..\..\src\sdl_ui.h" />
     <ClInclude Include="..\..\src\soft_bitmap.h" />
     <ClInclude Include="..\..\src\soft_bitmap_screen.h" />
     <ClInclude Include="..\..\src\sprite.h" />
     <ClInclude Include="..\..\src\spriteset_map.h" />
     <ClInclude Include="..\..\src\sprite_character.h" />
+    <ClInclude Include="..\..\src\surface.h" />
     <ClInclude Include="..\..\src\system.h" />
+    <ClInclude Include="..\..\src\text.h" />
     <ClInclude Include="..\..\src\tilemap.h" />
     <ClInclude Include="..\..\src\tilemap_layer.h" />
     <ClInclude Include="..\..\src\time.h" />
@@ -315,7 +321,7 @@
     <ClInclude Include="..\..\src\window_numberinput.h" />
     <ClInclude Include="..\..\src\window_item.h" />
     <ClInclude Include="..\..\src\window_message.h" />
-    <ClInclude Include="..\..\src\window_party.h" />
+    <ClInclude Include="..\..\src\window_shopparty.h" />
     <ClInclude Include="..\..\src\window_savefile.h" />
     <ClInclude Include="..\..\src\window_selectable.h" />
     <ClInclude Include="..\..\src\window_menustatus.h" />

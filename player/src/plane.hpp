@@ -39,6 +39,7 @@ public:
 	void Draw(int z_order);
 
 	Bitmap* GetBitmap() const;
+	void SetBitmap(Bitmap* bitmap);
 	void SetBitmap(std::auto_ptr<Bitmap> bitmap);
 	bool GetVisible() const;
 	void SetVisible(bool visible);
@@ -69,7 +70,6 @@ private:
 	unsigned long ID;
 	ZObj* zobj;
 
-	boost::scoped_ptr<Bitmap> bitmap;
 	boost::scoped_ptr<BitmapScreen> bitmap_screen;
 
 	bool visible;

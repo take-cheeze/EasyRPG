@@ -31,7 +31,37 @@ public:
 	/// Constructor
 	dlgEvtCmd(wxWindow* parent);
 private:
-	/// Closesdialog on click
+	void btnMessage_click(wxCommandEvent& WXUNUSED(event));
+	void btnMessageOptions_click(wxCommandEvent& WXUNUSED(event));
+	void btnFaceGraphic_click(wxCommandEvent& WXUNUSED(event));
+	void btnChoice_click(wxCommandEvent& WXUNUSED(event));
+	void btnNumberInput_click(wxCommandEvent& WXUNUSED(event));
+	void btnSwitch_click(wxCommandEvent& WXUNUSED(event));
+	void btnVariable_click(wxCommandEvent& WXUNUSED(event));
+	void btnTimer_click(wxCommandEvent& WXUNUSED(event));
+	void btnMoney_click(wxCommandEvent& WXUNUSED(event));
+	void btnItem_click(wxCommandEvent& WXUNUSED(event));
+	void btnParty_click(wxCommandEvent& WXUNUSED(event));
+	void btnExperience_click(wxCommandEvent& WXUNUSED(event));
+	void btnLevel_click(wxCommandEvent& WXUNUSED(event));
+	void btnParameter_click(wxCommandEvent& WXUNUSED(event));
+	void btnSkill_click(wxCommandEvent& WXUNUSED(event));
+	void btnEquipment_click(wxCommandEvent& WXUNUSED(event));
+	void btnHP_click(wxCommandEvent& WXUNUSED(event));
+	void btnMP_click(wxCommandEvent& WXUNUSED(event));
+	void btnState_click(wxCommandEvent& WXUNUSED(event));
+	void btnRecover_click(wxCommandEvent& WXUNUSED(event));
+	void btnDamage_click(wxCommandEvent& WXUNUSED(event));
+	void btnActorName_click(wxCommandEvent& WXUNUSED(event));
+	void btnActorTitle_click(wxCommandEvent& WXUNUSED(event));
+	void btnActorGraphic_click(wxCommandEvent& WXUNUSED(event));
+	void btnActorFaceGraphic_click(wxCommandEvent& WXUNUSED(event));
+	void btnVehicleGraphic_click(wxCommandEvent& WXUNUSED(event));
+	void btnSystemMusic_click(wxCommandEvent& WXUNUSED(event));
+	void btnSystemSound_click(wxCommandEvent& WXUNUSED(event));
+	void btnSystemGraphic_click(wxCommandEvent& WXUNUSED(event));
+	void btnTransition_click(wxCommandEvent& WXUNUSED(event));
+	/// Closes dialog on click
 	void Close_click(wxCommandEvent& WXUNUSED(event));
 };
 

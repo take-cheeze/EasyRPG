@@ -25,7 +25,6 @@
 #include <fstream>
 #include <windows.h>
 #include <shlobj.h>
-#include <io.h>
 #include <vector>
 #include "filefinder.hpp"
 #include "options.hpp"
@@ -48,8 +47,10 @@ static std::string fonts_path;
 // Helper Methods
 ////////////////////////////////////////////////////////////
 static bool FileExists(std::string filename) {
-	return _access(filename.c_str(), 4) == 0;
+	std::wstring file = Utils::DecodeUTF(filename);
+	return GetFileAttributes(file.c_str()) != (DWORD)-1;
 }
+
 static std::string MakePath(const std::string &dir, const std::string &name, bool ending_slash = false) {
 	std::string str;
 	if (dir.empty()) {
@@ -68,14 +69,14 @@ static std::string MakePath(const std::string &dir, const std::string &name, boo
 
 	return str;
 }
-static std::string FindFile(const std::string &dir, const std::string &_name, const std::string exts[]) {
+static std::string FindFile(const std::string &dir, const std::string &_name, const char* const exts[]) {
 	std::string name = MakePath(dir, _name);
 
 	for (std::size_t i = 0; i < search_paths.size(); i++) {
 		std::string path = search_paths[i] + name;
-		const std::string* pexts = exts;
-		while(const std::string* ext = pexts++) {
-			if (ext->empty()) break;
+		const char*const* pexts = exts;
+		while (const char*const* ext = pexts++) {
+			if (!*ext) break;
 
 			if (FileExists(path + *ext))
 				return path + *ext;
@@ -147,13 +148,17 @@ void FileFinder::Init() {
 		search_paths.push_back(MakePath(rtp_path, ""));
 }
 
+void FileFinder::Quit() {
+
+}
+
 ////////////////////////////////////////////////////////////
 std::string FileFinder::FindImage(const std::string& dir, const std::string& name) {
 	return FindFile(dir, name, IMG_TYPES);
 }
 
-inline std::string FindDefault(const std::string& dir, const std::string& name) {
-	static const std::string no_exts[] = {""};
+std::string FileFinder::FindDefault(const std::string& dir, const std::string& name) {
+	static const char* const no_exts[] = {""};
 	return FindFile(dir, name, no_exts);
 }
 

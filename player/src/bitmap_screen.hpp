@@ -34,24 +34,24 @@ class BitmapScreen {
 public:
 	////////////////////////////////////////////////////////
 	/// Creates a BitmapScreen object.
-	/// @param source : source bitmap, if different from
-	///		NULL it will be deleted together with the
-	///		BitmapScreen object.
+	/// @param source : source bitmap, or NULL.
+	/// @param delete_bitmap : if true, the bitmap will be 
+	///      deleted when it is replaced or when this object
+    ///      is deleted.
 	////////////////////////////////////////////////////////
 	static std::auto_ptr<BitmapScreen> CreateBitmapScreen(Bitmap* source);
+	static std::auto_ptr<BitmapScreen> CreateBitmapScreen(std::auto_ptr<Bitmap> source);
 
 	////////////////////////////////////////////////////////
-	/// Creates a BitmapScreen object.
-	/// @param delete_bitmap : if true the bitmaps set to
-	///     this object will be deleted together with the
-	///		BitmapScreen object.
+	/// Creates a BitmapScreen object with no attached bitmap
 	////////////////////////////////////////////////////////
-	static std::auto_ptr<BitmapScreen> CreateBitmapScreen(bool delete_bitmap);
+	static std::auto_ptr<BitmapScreen> CreateBitmapScreen();
 
 	////////////////////////////////////////////////////////
-	/// Destructor.
+	/// Constructor.
 	////////////////////////////////////////////////////////
-	virtual ~BitmapScreen();
+	BitmapScreen(Bitmap* src);
+	BitmapScreen(std::auto_ptr<Bitmap> src);
 
 	////////////////////////////////////////////////////////
 	/// Marks the BitmapScreen as dirty.
@@ -61,6 +61,9 @@ public:
 	////////////////////////////////////////////////////////
 	/// Set source bitmap.
 	/// @param source : source bitmap
+	/// @param delete_bitmap : if true, the bitmap will be 
+	///      deleted when it is replaced or when this object
+    ///      is deleted.
 	////////////////////////////////////////////////////////
 	virtual void SetBitmap(std::auto_ptr<Bitmap> source);
 	virtual void SetBitmap(Bitmap* source);
@@ -180,13 +183,60 @@ public:
 	/// @param blend_color : blend color
 	virtual void SetBlendColor(Color blend_color);
 
+	/// @return waver magnitude in pixels
+	virtual int GetWaverEffectDepth() const;
+
+	/// @return waver phase in degrees
+	virtual double GetWaverEffectPhase() const;
+
+	/// @param waver magnitude in pixels
+	virtual void SetWaverEffectDepth(int depth);
+
+	/// @param waver phase in degrees
+	virtual void SetWaverEffectPhase(double phase);
+
 protected:
-	BitmapScreen(Bitmap* source);
-	BitmapScreen(bool delete_bitmap);
+	BitmapScreen(Bitmap* source, bool delete_bitmap);
 
-	std::auto_ptr<Bitmap> bitmap;
+	class BitmapPointer {
+	public:
+		BitmapPointer(BitmapScreen& bs) : owner_(bs), rawptr_(NULL) {}
+		Bitmap* get() { return( autoptr_.get()? autoptr_.get() : rawptr_ ); }
+		Bitmap const* get() const { return( autoptr_.get()? autoptr_.get() : rawptr_ ); }
+		operator bool() const { return this->get(); }
+		Bitmap* operator ->() { return this->get(); }
+	private:
+		BitmapScreen& owner_;
+		std::auto_ptr<Bitmap> autoptr_;
+		Bitmap* rawptr_;
 
-	bool delete_bitmap;
+		void unattach() {
+			if( this->get() != NULL ) {
+				(*this)->DetachBitmapScreen(&owner_);
+			}
+			autoptr_.reset(NULL);
+			rawptr_ = NULL;
+		}
+		void attach() {
+			owner_.src_rect_effect = (*this)->GetRect();
+			(*this)->AttachBitmapScreen(&owner_);
+		}
+	public:
+		~BitmapPointer() { unattach(); }
+
+		BitmapPointer& operator =(Bitmap* src) {
+			this->unattach();
+			rawptr_ = src;
+			this->attach();
+			return *this;
+		}
+		BitmapPointer& operator =(std::auto_ptr<Bitmap> src) {
+			this->unattach();
+			autoptr_ = src;
+			this->attach();
+			return *this;
+		}
+	} bitmap;
 
 	bool needs_refresh;
 
@@ -202,6 +252,8 @@ protected:
 	double angle_effect;
 	int blend_type_effect;
 	Color blend_color_effect;
+	int waver_effect_depth;
+	double waver_effect_phase;
 };
 
 #endif

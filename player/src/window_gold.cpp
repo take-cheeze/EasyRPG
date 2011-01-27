@@ -28,7 +28,7 @@
 Window_Gold::Window_Gold(int ix, int iy, int iwidth, int iheight) :
 	Window_Base(ix, iy, iwidth, iheight) {
 
-	SetContents(Bitmap::CreateBitmap(width - 16, height - 16));
+	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
 	Refresh();
@@ -41,14 +41,5 @@ Window_Gold::~Window_Gold() {
 ////////////////////////////////////////////////////////////
 void Window_Gold::Refresh() {
 	contents->Clear();
-	std::stringstream gold;
-	gold << std::setfill(' ') << std::setw(6) << Game_Party::GetGold();
-
-	contents->GetFont()->color = 1;
-	rpg2k::SystemString const goldSuffix = Main_Data::vocabulary(95);
-	Rect gold_text_size = contents->GetTextSize(goldSuffix);
-	contents->TextDraw(contents->GetWidth() - gold_text_size.width, 2, goldSuffix);
-
-	contents->GetFont()->color = Font::ColorDefault;
-	contents->TextDraw(contents->GetWidth() - gold_text_size.width - 6 * 6, 2, gold.str(), Bitmap::TextAlignRight);
+	DrawCurrencyValue(Game_Party::GetGold(), contents->GetWidth(), 2);
 }

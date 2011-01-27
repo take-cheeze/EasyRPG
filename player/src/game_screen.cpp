@@ -15,11 +15,13 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
+#include <cstdlib>
 #include "options.hpp"
 #include "game_screen.hpp"
 
 Game_Screen::Game_Screen() :
 	weather_plane(NULL),
+	weather_surface(NULL),
 	snow_bitmap(NULL),
 	rain_bitmap(NULL)
 {
@@ -28,8 +30,6 @@ Game_Screen::Game_Screen() :
 
 Game_Screen::~Game_Screen()
 {
-	if (weather_plane)
-		delete weather_plane;
 }
 
 void Game_Screen::Reset()
@@ -173,50 +173,52 @@ static double interpolate(double d, double x0, double x1)
 	return (x0 * (d - 1) + x1) / d;
 }
 
+static const uint8 snow_image[] = {
+	0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00,
+	0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00,
+	0x00, 0x04, 0x02, 0x03, 0x00, 0x00, 0x00, 0xd4, 0x9f, 0x76, 0xed,
+	0x00, 0x00, 0x00, 0x09, 0x50, 0x4c, 0x54, 0x45, 0x00, 0x00, 0x00,
+	0xc0, 0xc0, 0xc0, 0xff, 0xff, 0xff, 0x0d, 0x6d, 0xd7, 0xbb, 0x00,
+	0x00, 0x00, 0x01, 0x74, 0x52, 0x4e, 0x53, 0x00, 0x40, 0xe6, 0xd8,
+	0x66, 0x00, 0x00, 0x00, 0x0e, 0x49, 0x44, 0x41, 0x54, 0x08, 0xd7,
+	0x63, 0x10, 0x61, 0xc8, 0x04, 0x42, 0x11, 0x00, 0x03, 0xf0, 0x00,
+	0xfb, 0xb6, 0xa8, 0xf1, 0xda, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45,
+	0x4e, 0x44, 0xae, 0x42, 0x60, 0x82
+};
+
+static const uint8 rain_image[] = {
+	0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00,
+	0x0d, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00,
+	0x00, 0x10, 0x01, 0x03, 0x00, 0x00, 0x00, 0x11, 0x44, 0xac, 0x3e,
+	0x00, 0x00, 0x00, 0x06, 0x50, 0x4c, 0x54, 0x45, 0x00, 0x00, 0x00,
+	0xc0, 0xc0, 0xc0, 0x64, 0x56, 0x3a, 0x71, 0x00, 0x00, 0x00, 0x01,
+	0x74, 0x52, 0x4e, 0x53, 0x00, 0x40, 0xe6, 0xd8, 0x66, 0x00, 0x00,
+	0x00, 0x1f, 0x49, 0x44, 0x41, 0x54, 0x08, 0xd7, 0x63, 0x60, 0x64,
+	0x60, 0x64, 0x60, 0x02, 0x42, 0x16, 0x20, 0xe4, 0x00, 0x42, 0x01,
+	0x20, 0x54, 0x00, 0x42, 0x07, 0x20, 0x6c, 0x60, 0x68, 0x00, 0x00,
+	0x0b, 0xd4, 0x01, 0xff, 0xed, 0x11, 0x33, 0x32, 0x00, 0x00, 0x00,
+	0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82
+};
+
 void Game_Screen::InitWeather() {
-	if (weather_plane == NULL) {
-		weather_plane = new Plane();
-		std::auto_ptr<Bitmap> bitmap = Bitmap::CreateBitmap(320, 240);
-		bitmap->SetTransparentColor(Color(0,0,0,0));
-		weather_plane->SetBitmap(bitmap);
+	if (!weather_plane) {
+		weather_plane.reset( new Plane() );
+		weather_surface.reset( Surface::CreateSurface(320, 240).release() );
+		weather_surface->SetTransparentColor(Color(0,0,0,0));
+		weather_plane->SetBitmap(weather_surface.get());
 		weather_plane->SetZ(9999);
 	}
-	weather_plane->GetBitmap()->Clear();
+	weather_surface->Clear();
 
-	if (rain_bitmap == NULL) {
-		Color gray(192,192,192,255);
-		rain_bitmap.reset( Bitmap::CreateBitmap(8, 16).release() );
-		rain_bitmap->Clear();
-		for (int j = 0; j < 16; j++)
-			rain_bitmap->SetPixel(7-j/2, j, gray);
-	}
+	if (!rain_bitmap)
+		rain_bitmap.reset( Bitmap::CreateBitmap(rain_image, sizeof(rain_image)).release() );
 
-	if (snow_bitmap == NULL) {
-		snow_bitmap.reset( Bitmap::CreateBitmap(4, 4).release() );
-		snow_bitmap->Clear();
-		Color gray(192,192,192,255);
-		Color white(255,255,255,255);
-		Color colors[3] = {
-			snow_bitmap->GetTransparentColor(),
-			gray,
-			white
-		};
-		static const int snow[4][4] = {
-			{0, 1, 1, 0},
-			{1, 2, 2, 1},
-			{1, 2, 2, 1},
-			{0, 1, 1, 0}
-		};
-		for (int j = 0; j < 4; j++)
-			for (int i = 0; i < 4; i++)
-				snow_bitmap->SetPixel(i, j, colors[snow[j][i]]);
-	}
+	if (!snow_bitmap)
+		snow_bitmap.reset( Bitmap::CreateBitmap(snow_image, sizeof(snow_image)).release() );
 }
 
 void Game_Screen::StopWeather() {
-	if (weather_plane != NULL)
-		delete weather_plane;
-	weather_plane = NULL;
+	weather_plane.reset();
 	snowflakes.clear();
 }
 
@@ -251,18 +253,16 @@ void Game_Screen::UpdateSnowRain(int speed) {
 }
 
 void Game_Screen::DrawRain() {
-
-	Bitmap* bitmap = weather_plane->GetBitmap();
 	weather_plane->SetOpacity(192);
 
-	Rect rect = bitmap->GetRect();
+	Rect rect = rain_bitmap->GetRect();
 
 	std::vector<Snowflake>::iterator it;
 	for (it = snowflakes.begin(); it != snowflakes.end(); it++) {
 		Snowflake& f = *it;
 		if (f.life > snowflake_visible)
 			continue;
-		bitmap->Blit(f.x - f.y/2, f.y, rain_bitmap.get(), rect, 255);
+		weather_surface->Blit(f.x - f.y/2, f.y, rain_bitmap.get(), rect, 255);
 	}
 }
 
@@ -271,10 +271,9 @@ void Game_Screen::DrawSnow() {
 		{-1,-1, 0, 1, 0, 1, 1, 0,-1,-1, 0, 1, 0, 1, 1, 0,-1, 0},
 		{-1,-1, 0, 0, 1, 1, 0,-1,-1, 0, 1, 0, 1, 1, 0,-1, 0, 0}
 	};
-	Bitmap* bitmap = weather_plane->GetBitmap();
 	weather_plane->SetOpacity(192);
 
-	Rect rect = bitmap->GetRect();
+	Rect rect = snow_bitmap->GetRect();
 
 	std::vector<Snowflake>::iterator it;
 	for (it = snowflakes.begin(); it != snowflakes.end(); it++) {
@@ -286,22 +285,20 @@ void Game_Screen::DrawSnow() {
 		int i = (y / 2) % 18;
 		x += wobble[0][i];
 		y += wobble[1][i];
-		bitmap->Blit(x, y, snow_bitmap.get(), rect, 255);
+		weather_surface->Blit(x, y, snow_bitmap.get(), rect, 255);
 	}
 }
 
 void Game_Screen::DrawFog() {
 
-	Bitmap* bitmap = weather_plane->GetBitmap();
-	bitmap->Fill(Color(128,128,128,255));
+	weather_surface->Fill(Color(128,128,128,255));
 	static const int opacities[3] = {128, 160, 192};
 	weather_plane->SetOpacity(opacities[weather_strength]);
 }
 
 void Game_Screen::DrawSandstorm() {
 
-	Bitmap* bitmap = weather_plane->GetBitmap();
-	bitmap->Fill(Color(192,160,128,255));
+	weather_surface->Fill(Color(192,160,128,255));
 	static const int opacities[3] = {128, 160, 192};
 	weather_plane->SetOpacity(opacities[weather_strength]);
 	// TODO

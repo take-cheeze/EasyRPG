@@ -15,6 +15,9 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
+#include "system.hpp"
+#ifdef USE_SDL_BITMAP
+
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
@@ -33,8 +36,8 @@
 //#include "SDL_rotozoom.h"
 #include "SDL_ttf.h"
 #include "sdl_ui.hpp"
-#include "system.hpp"
 #include "util_macro.hpp"
+#include "utils.hpp"
 
 ////////////////////////////////////////////////////////////
 #ifdef USE_ALPHA
@@ -97,12 +100,12 @@ SdlBitmap::SdlBitmap(int width, int height, bool itransparent) {
 	SDL_FreeSurface(temp);
 }
 
-SdlBitmap::SdlBitmap(const std::string filename, bool itransparent) {
+SdlBitmap::SdlBitmap(const std::string& filename, bool itransparent, uint32 flags) {
 	transparent = itransparent;
 
 	SDL_Surface* temp = IMG_Load(filename.c_str());
 
-	if (temp == NULL) {
+	if ( !temp ) {
 		Output::Error("Couldn't load %s image.\n%s\n", filename.c_str(), IMG_GetError());
 	}
 
@@ -113,15 +116,15 @@ SdlBitmap::SdlBitmap(const std::string filename, bool itransparent) {
 	}
 
 	bitmap = DisplayFormat(temp);
-
 	if (bitmap == NULL) {
 		Output::Error("Couldn't optimize %s image.\n%s\n", filename.c_str(), SDL_GetError());
 	}
-
 	SDL_FreeSurface(temp);
+
+	CheckPixels(flags);
 }
 
-SdlBitmap::SdlBitmap(const uint8* data, uint bytes, bool itransparent) {
+SdlBitmap::SdlBitmap(const uint8* data, uint bytes, bool itransparent, uint32 flags) {
 	transparent = itransparent;
 
 	SDL_RWops* rw_ops = SDL_RWFromConstMem(data, bytes);
@@ -144,6 +147,8 @@ SdlBitmap::SdlBitmap(const uint8* data, uint bytes, bool itransparent) {
 	}
 
 	SDL_FreeSurface(temp);
+
+	CheckPixels(flags);
 }
 
 SdlBitmap::SdlBitmap(Bitmap* source, Rect src_rect, bool itransparent) {
@@ -271,7 +276,7 @@ void SdlBitmap::Blit(int x, int y, Bitmap* src, Rect src_rect, int opacity) {
 
 	#ifdef USE_ALPHA
 	if (opacity < 255)
-		Bitmap::Blit(x, y, src, src_rect, opacity);
+		Surface::Blit(x, y, src, src_rect, opacity);
 	else {
 		bool has_alpha = (((SdlBitmap*)src)->bitmap->flags & SDL_SRCALPHA) != 0;
 		SDL_SetAlpha(((SdlBitmap*)src)->bitmap, 0, 255);
@@ -294,7 +299,7 @@ void SdlBitmap::StretchBlit(Rect dst_rect, Bitmap* src, Rect src_rect, int opaci
 	if (src_rect.width == dst_rect.width && src_rect.height == dst_rect.height) {
 		Blit(dst_rect.x, dst_rect.y, src, src_rect, opacity);
 	} else {
-		Bitmap::StretchBlit(dst_rect, src, src_rect, opacity);
+		Surface::StretchBlit(dst_rect, src, src_rect, opacity);
 	}
 }
 
@@ -315,252 +320,9 @@ void SdlBitmap::FillRect(Rect dst_rect, const Color &color) {
 }
 
 ////////////////////////////////////////////////////////////
-void SdlBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
-	if (text.length() == 0) return;
-	Rect dst_rect = GetTextSize(text);
-	dst_rect.x = x; dst_rect.y = y;
-	dst_rect.width += 1; dst_rect.height += 1; // Need place for shadow
-	if (dst_rect.IsOutOfBounds(GetWidth(), GetHeight())) return;
-
-	TTF_Font* ttf_font = font->GetTTF();
-	int style = 0;
-	if (font->bold) style |= TTF_STYLE_BOLD;
-	if (font->italic) style |= TTF_STYLE_ITALIC;
-	TTF_SetFontStyle(ttf_font, style);
-
-	std::auto_ptr<Bitmap> text_surface; // Complete text will be on this surface
-	std::auto_ptr<Bitmap> text_surface_aux;
-	std::auto_ptr<Bitmap> mask;
-
-	std::auto_ptr<Bitmap> char_surface; // Single char
-	std::auto_ptr<Bitmap> char_shadow; // Drop shadow of char
-
-	text_surface = CreateBitmap(dst_rect.width, TTF_FontHeight(ttf_font));
-	text_surface_aux = CreateBitmap(dst_rect.width, TTF_FontHeight(ttf_font));
-
-	Color white_color(255, 255, 255, 0);
-	Color black_color(0, 0, 0, 0);
-
-	text_surface_aux->SetTransparentColor(black_color);
-	text_surface->SetTransparentColor(black_color);
-
-	char text2[2]; text2[1] = '\0';
-
-	// Load the system file for the shadow and text color
-	Bitmap* system = Cache::System(Main_Data::project->getLDB().system()[19].toString().toSystem() );
-	// Load the exfont-file
-	Bitmap* exfont = Cache::ExFont();
-
-	// Get the Shadow color
-	Color shadow_color(system->GetPixel(16, 32));
-	// If shadow is pure black, add 1 to blue channel
-	// so it doesn't become transparent
-	if ((shadow_color.red == 0) &&
-		(shadow_color.green == 0) &&
-		(shadow_color.blue == 0) ) {
-			// FIXME: what if running in 16 bpp?
-		shadow_color.blue++;
-	}
-
-	// Where to draw the next glyph (x pos)
-	int next_glyph_pos = 0;
-
-	// The current char is a full size glyph
-	bool is_full_glyph = false;
-	// The current char is an exfont (is_full_glyph must be true too)
-	bool is_exfont = false;
-
-	#ifdef USE_ALPHA
-	SDL_SetColorKey(((SdlBitmap*) exfont)->bitmap, COLORKEY_FLAGS, SDL_MapRGB(((SdlBitmap*) exfont)->bitmap->format, 0, 0, 0));
-	#endif
-
-	// This loops always renders a single char, color blends it and then puts
-	// it onto the text_surface (including the drop shadow)
-	for (unsigned c = 0; c < text.size(); ++c) {
-		text2[0] = text[c];
-
-		Rect next_glyph_rect(next_glyph_pos, 0, 0, 0);
-
-		// ExFont-Detection: Check for A-Z or a-z behind the $
-		if (text[c] == '$' && c != text.size() - 1 &&
-			((text[c+1] >= 'a' && text[c+1] <= 'z') ||
-			(text[c+1] >= 'A' && text[c+1] <= 'Z'))) {
-			int exfont_value;
-			// Calculate which exfont shall be rendered
-			if ((text[c+1] >= 'a' && text[c+1] <= 'z')) {
-				exfont_value = 26 + text[c+1] - 'a';
-			} else {
-				exfont_value = text[c+1] - 'A';
-			}
-			is_full_glyph = true;
-			is_exfont = true;
-
-		#ifdef USE_ALPHA
-			char_surface = CreateBitmap(12, 12);
-			char_shadow = CreateBitmap(12, 12);
-			mask = CreateBitmap(12, 12);
-
-			// Get exfont from graphic
-			Rect rect_exfont((exfont_value % 13) * 12, (exfont_value / 13) * 12, 12, 12);
-
-			text_surface->Blit(next_glyph_rect.x, next_glyph_rect.y, exfont, rect_exfont, 255);
-
-			// Get color region from system graphic
-			Rect clip_system(8+16*(font->color%10), 4+48+16*(font->color/10), 6, 12);
-
-			// Blit color background (twice because its a full glyph)
-			char_surface->Blit(0, 0, system, clip_system, 255);
-			char_surface->Blit(6, 0, system, clip_system, 255);
-
-			// Blit black mask onto color background
-			SDL_Rect src_r = {(int16)clip_system.x, (int16)clip_system.y, (uint16)clip_system.width, (uint16)clip_system.height};
-			SDL_Rect dst_r = {(int16)next_glyph_rect.x, (int16)next_glyph_rect.y, 0, 0};
-			SDL_BlitSurface(((SdlBitmap*)system)->bitmap, &src_r, ((SdlBitmap*)text_surface)->bitmap, &dst_r);
-			dst_r.x += 6;
-			SDL_BlitSurface(((SdlBitmap*)system)->bitmap, &src_r, ((SdlBitmap*)text_surface)->bitmap, &dst_r);
-		#else
-			char_surface = CreateBitmap(12, 12);
-			char_shadow = CreateBitmap(12, 12);
-			mask = CreateBitmap(12, 12);
-
-			// Get exfont from graphic
-			Rect rect_exfont((exfont_value % 13) * 12, (exfont_value / 13) * 12, 12, 12);
-
-			// Create a black mask
-			mask->Blit(0, 0, exfont, rect_exfont, 255);
-			mask->SetTransparentColor(white_color);
-
-			// Get color region from system graphic
-			Rect clip_system(8+16*(font->color%10), 4+48+16*(font->color/10), 6, 12);
-
-			// Blit color background (twice because its a full glyph)
-			char_surface->Blit(0, 0, system, clip_system, 255);
-			char_surface->Blit(6, 0, system, clip_system, 255);
-
-			// Blit black mask onto color background
-			char_surface->Blit(0, 0, mask.get(), mask->GetRect(), 255);
-			char_surface->SetTransparentColor(black_color);
-
-			// Paint char shadow surface of shadow color
-			char_shadow->Fill(shadow_color);
-			// Reset the mask
-			mask->Fill(black_color);
-
-			// Paste white exfont onto mask
-			mask->Blit(0, 0, exfont, rect_exfont, 255);
-			mask->SetTransparentColor(white_color);
-
-			// Paste mask onto char_shadow
-			char_shadow->Blit(0, 0, mask.get(), mask->GetRect(), 255);
-
-			// Blit first shadow and then text
-			text_surface->Blit(next_glyph_rect.x + 1, next_glyph_rect.y + 1, char_shadow.get(), char_shadow->GetRect(), 255);
-			text_surface->Blit(next_glyph_rect.x, next_glyph_rect.y, char_surface.get(), char_surface->GetRect(), 255);
-		#endif
-		} else {
-			// No ExFont, draw normal text
-
-		#ifdef USE_ALPHA
-			// ToDo: Remove SDL-Dependency (use FreeType directly?) 
-			SDL_Color white_color2 = {255, 255, 255, 255};
-			SDL_Color black_color2 = {0, 0, 0, 255};
-			SDL_Surface* char_surface_temp = TTF_RenderUTF8_Solid(ttf_font, text2, white_color2);
-			SDL_Surface* char_shadow_temp = TTF_RenderUTF8_Solid(ttf_font, text2, black_color2);
-			SDL_Surface* char_surface_surf = DisplayFormat(char_surface_temp);
-			SDL_Surface* char_shadow_surf = DisplayFormat(char_shadow_temp);
-			SDL_FreeSurface(char_surface_temp);
-			SDL_FreeSurface(char_shadow_temp);
-
-			char_surface = new SdlBitmap(char_surface_surf);
-			char_shadow = new SdlBitmap(char_shadow_surf);
-
-			if (!((SdlBitmap*)char_surface)->bitmap || !((SdlBitmap*)char_shadow)->bitmap) {
-				Output::Debug("Couldn't render char %c (%d). Skipping...", text[c], (int)text[c]);
-				delete char_surface;
-				delete char_shadow;
-				continue;
-			}
-			// Create a black mask
-			mask = CreateBitmap(char_surface->GetWidth(), char_surface->GetHeight());
-			mask->Blit(0, 0, char_surface, char_surface->GetRect(), 255);
-
-			// Get color region from system graphic
-			Rect clip_system(8+16*(font->color%10), 4+48+16*(font->color/10), char_surface->GetWidth(), char_surface->GetHeight());
-
-			text_surface->Blit(next_glyph_rect.x, next_glyph_rect.y, char_surface, char_surface->GetRect(), 255);
-			// Blit color background
-			SDL_Rect src_r = {(int16)clip_system.x, (int16)clip_system.y, (uint16)clip_system.width, (uint16)clip_system.height};
-			SDL_Rect dst_r = {(int16)next_glyph_rect.x, (int16)next_glyph_rect.y, 0, 0};
-			SDL_BlitSurface(((SdlBitmap*)system)->bitmap, &src_r, ((SdlBitmap*)text_surface)->bitmap, &dst_r);
-			// text_surface->Blit(next_glyph_rect.x, next_glyph_rect.y, system, clip_system, 255);
-		#else
-			// ToDo: Remove SDL-Dependency (use FreeType directly?)
-			SDL_Color white_color2 = {white_color.red, white_color.green, white_color.blue, 0};
-			SDL_Color c_tmp2 = {shadow_color.red, shadow_color.green, shadow_color.blue, 0};
-			char_surface.reset( new SdlBitmap(TTF_RenderUTF8_Solid(ttf_font, text2, white_color2)) );
-			char_shadow.reset( new SdlBitmap(TTF_RenderUTF8_Solid(ttf_font, text2, c_tmp2)) );
-
-			if (!((SdlBitmap*)char_surface.get())->bitmap || !((SdlBitmap*)char_shadow.get())->bitmap) {
-				Output::Debug("Couldn't render char %c (%d). Skipping...", text[c], (int)text[c]);
-			}
-
-			// Create a black mask
-			mask = CreateBitmap(char_surface->GetWidth(), char_surface->GetHeight());
-			mask->Blit(0, 0, char_surface.get(), char_surface->GetRect(), 255);
-			mask->SetTransparentColor(white_color);
-
-			// Get color region from system graphic
-			Rect clip_system(8+16*(font->color%10), 4+48+16*(font->color/10), char_surface->GetWidth(), char_surface->GetHeight());
-
-			// Blit color background
-			text_surface_aux->Blit(next_glyph_rect.x, next_glyph_rect.y, system, clip_system, 255);
-			// Blit mask onto background
-			text_surface_aux->Blit(next_glyph_rect.x, next_glyph_rect.y, mask.get(), mask->GetRect(), 255);
-
-			// Blit first shadow and then text
-			text_surface->Blit(next_glyph_pos+1, 1, char_shadow.get(), char_shadow->GetRect(), 255);
-			text_surface->Blit(0, 0, text_surface_aux.get(), text_surface_aux->GetRect(), 255);
-		#endif
-		}
-
-		// If it's a full size glyph, add the size of a half-size glypth twice
-		if (is_full_glyph) {
-			next_glyph_pos += 6;
-			is_full_glyph = false;
-			if (is_exfont) {
-				is_exfont = false;
-				// Skip the next character
-				++c;
-			}
-		}
-		next_glyph_pos += 6;
-	}
-	
-	std::auto_ptr<Bitmap> text_bmp = CreateBitmap(text_surface.get(), text_surface->GetRect());
-	
-	Rect src_rect(0, 0, dst_rect.width, dst_rect.height);
-	int iy = dst_rect.y;
-	if (dst_rect.height > text_bmp->GetHeight()) {
-		iy += ((dst_rect.height - text_bmp->GetHeight()) / 2);
-	}
-	int ix = dst_rect.x;
-	
-	// Alignment code
-	if (dst_rect.width > text_bmp->GetWidth()) {
-		if (align == Bitmap::TextAlignCenter) {
-			ix += (dst_rect.width - text_bmp->GetWidth()) / 2;
-		} else if (align == Bitmap::TextAlignRight) {
-			ix += dst_rect.width - text_bmp->GetWidth();
-		}
-	}
-
-	Blit(ix, iy, text_bmp.get(), src_rect, SDL_ALPHA_OPAQUE);
-}
-
-////////////////////////////////////////////////////////////
 Rect SdlBitmap::GetTextSize(std::string text) const {
 	return Rect(0, 0, text.size() * 6, 12);
-	//return Rect(0, 0, text.size() * 6, min(TTF_FontHeight(font->GetTTF()), 12));
+	//return Rect(0, 0, text.size() * 6, min(font->GetHeight(), 12));
 }
 
 ////////////////////////////////////////////////////////////
@@ -605,3 +367,7 @@ void SdlBitmap::Unlock() {
 		SDL_UnlockSurface(bitmap);
 	}
 }
+
+////////////////////////////////////////////////////////////
+#endif
+

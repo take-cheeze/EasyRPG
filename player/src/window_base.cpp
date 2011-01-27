@@ -30,8 +30,7 @@ Window_Base::Window_Base(int x, int y, int width, int height) {
 	windowskin_name = Game_System::GetSystemName();
 	// Cached System graphic gets destroyed :/
 	// FixMe: BitmapScreen is marked as dont delete but still deletes
-	Bitmap* new_system = Cache::System(windowskin_name);
-	SetWindowskin(Bitmap::CreateBitmap(new_system, new_system->GetRect()));
+	SetWindowskin(Cache::System(windowskin_name));
 
 	SetX(x);
 	SetY(y);
@@ -44,11 +43,8 @@ Window_Base::Window_Base(int x, int y, int width, int height) {
 void Window_Base::Update() {
 	Window::Update();
 	if (Game_System::GetSystemName() != windowskin_name) {
-		// Cached System graphic gets destroyed here :/
-		// FixMe: BitmapScreen is marked as dont delete but still deletes
 		windowskin_name = Game_System::GetSystemName();
-		Bitmap* new_system = Cache::System(windowskin_name);
-		SetWindowskin(Bitmap::CreateBitmap(new_system, new_system->GetRect()));
+		SetWindowskin(Cache::System(windowskin_name));
 		contents->SetTransparentColor(windowskin->GetTransparentColor());
 	}
 }
@@ -65,7 +61,7 @@ void Window_Base::DrawFace(std::string face_name, int face_index, int cx, int cy
 	);
 
 	if (flip) {
-		std::auto_ptr<Bitmap> faceflip = Bitmap::CreateBitmap(faceset, src_rect, false);
+		std::auto_ptr<Surface> faceflip = Surface::CreateSurface(faceset, src_rect, false);
 		faceflip->Flip(true, false);
 		contents->Blit(cx, cy, faceflip.get(), Rect(0, 0, 48, 48), 255);
 	} else {
@@ -98,9 +94,9 @@ void Window_Base::DrawActorLevel(Game_Actor* actor, int cx, int cy) {
 
 	// Draw Level of the Actor
 	std::stringstream ss;
-	ss << std::setfill(' ') << std::setw(2) << actor->GetLevel();
+	ss << actor->GetLevel();
 	contents->GetFont()->color = Font::ColorDefault;
-	contents->TextDraw(cx + 12, cy, ss.str(), Bitmap::TextAlignRight);
+	contents->TextDraw(cx + 24, cy, ss.str(), Surface::TextAlignRight);
 }
 
 void Window_Base::DrawActorState(Game_Actor* actor, int cx, int cy) {
@@ -126,10 +122,6 @@ void Window_Base::DrawActorState(Game_Actor* actor, int cx, int cy) {
 	}
 }
 
-void Window_Base::DrawActorState(Game_Actor* actor, int cx, int cy, int width) {
-	
-}
-
 void Window_Base::DrawActorExp(Game_Actor* actor, int cx, int cy) {
 	// Draw EXP-String
 	contents->GetFont()->color = 1;
@@ -146,7 +138,7 @@ void Window_Base::DrawActorExp(Game_Actor* actor, int cx, int cy) {
 
 	// Exp for Level up
 	ss << std::setfill(' ') << std::setw(6) << actor->GetNextExpString();
-	contents->TextDraw(cx + 12, cy, ss.str(), Bitmap::TextAlignRight);
+	contents->TextDraw(cx + 12, cy, ss.str(), Surface::TextAlignLeft);
 }
 
 void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy) {
@@ -165,8 +157,8 @@ void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy) {
 	}
 	contents->GetFont()->color = color;
 	std::stringstream ss;
-	ss << std::setfill(' ') << std::setw(3) << actor->GetHp();
-	contents->TextDraw(cx, cy, ss.str(), Bitmap::TextAlignRight);
+	ss << actor->GetHp();
+	contents->TextDraw(cx + 18, cy, ss.str(), Surface::TextAlignRight);
 
 	// Draw the /
 	cx += 3 * 6;
@@ -176,12 +168,8 @@ void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy) {
 	// Draw Max Hp
 	cx += 6;
 	ss.str("");
-	ss.clear();
-	ss << std::setfill(' ') << std::setw(3) << actor->GetMaxHp();
-	contents->TextDraw(cx, cy, ss.str(), Bitmap::TextAlignRight);
-}
-void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy, int width) {
-	
+	ss << actor->GetMaxHp();
+	contents->TextDraw(cx + 18, cy, ss.str(), Surface::TextAlignRight);
 }
 
 void Window_Base::DrawActorSp(Game_Actor* actor, int cx, int cy) {
@@ -198,8 +186,8 @@ void Window_Base::DrawActorSp(Game_Actor* actor, int cx, int cy) {
 	}
 	contents->GetFont()->color = color;
 	std::stringstream ss;
-	ss << std::setfill(' ') << std::setw(3) << actor->GetSp();
-	contents->TextDraw(cx, cy, ss.str(), Bitmap::TextAlignRight);
+	ss << actor->GetSp();
+	contents->TextDraw(cx + 18, cy, ss.str(), Surface::TextAlignRight);
 
 	// Draw the /
 	cx += 3 * 6;
@@ -207,14 +195,10 @@ void Window_Base::DrawActorSp(Game_Actor* actor, int cx, int cy) {
 	contents->TextDraw(cx, cy, "/");
 
 	// Draw Max Sp
+	cx += 6;
 	ss.str("");
-	ss.clear();
-	ss << std::setfill(' ') << std::setw(3) << actor->GetMaxSp();
-	contents->TextDraw(cx + 6, cy, ss.str(), Bitmap::TextAlignRight);
-}
-
-void Window_Base::DrawActorSp(Game_Actor* actor, int cx, int cy, int width) {
-	
+	ss << actor->GetMaxSp();
+	contents->TextDraw(cx + 18, cy, ss.str(), Surface::TextAlignRight);
 }
 
 void Window_Base::DrawActorParameter(Game_Actor* actor, int cx, int cy, int type) {
@@ -251,7 +235,7 @@ void Window_Base::DrawActorParameter(Game_Actor* actor, int cx, int cy, int type
 	std::stringstream ss;
 	ss << value;
 	contents->GetFont()->color = Font::ColorDefault;
-	contents->TextDraw(cx + 78, cy, ss.str(), Bitmap::TextAlignRight);
+	contents->TextDraw(cx + 78, cy, ss.str(), Surface::TextAlignRight);
 }
 
 void Window_Base::DrawEquipmentType(Game_Actor* actor, int cx, int cy, int type) {
@@ -285,7 +269,7 @@ void Window_Base::DrawEquipmentType(Game_Actor* actor, int cx, int cy, int type)
 	contents->TextDraw(cx, cy, name);
 }
 
-void Window_Base::DrawItemName(RPG::Item* item, int cx, int cy, bool enabled) {
+void Window_Base::DrawItemName(RPG::Item const* item, int cx, int cy, bool enabled) {
 	contents->GetFont()->color = enabled ? Font::ColorDefault : Font::ColorDisabled;
 	contents->TextDraw(cx, cy, (*item)[1].toString().toSystem());
 }
@@ -293,4 +277,18 @@ void Window_Base::DrawItemName(RPG::Item* item, int cx, int cy, bool enabled) {
 void Window_Base::DrawSkillName(RPG::Skill* skill, int cx, int cy, bool enabled) {
 	contents->GetFont()->color = enabled ? Font::ColorDefault : Font::ColorDisabled;
 	contents->TextDraw(cx, cy, (*skill)[1].toString().toSystem());
+}
+
+void Window_Base::DrawCurrencyValue(int money, int cx, int cy) {
+	// This function draws right aligned because of the dynamic with of the
+	// gold output (cx and cy define the right border)
+	std::stringstream gold;
+	gold << money;
+
+	contents->GetFont()->color = 1;
+		Rect gold_text_size = contents->GetTextSize(Main_Data::vocabulary(95));
+	contents->TextDraw(cx, cy, Main_Data::vocabulary(95), Surface::TextAlignRight);
+
+	contents->GetFont()->color = Font::ColorDefault;
+	contents->TextDraw(cx - gold_text_size.width, cy, gold.str(), Surface::TextAlignRight);
 }

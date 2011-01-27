@@ -21,13 +21,14 @@
 #include "baseui.hpp"
 #include "window_menustatus.hpp"
 #include "graphics.hpp"
+#include "cache.hpp"
 #include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_MenuStatus::Window_MenuStatus(int ix, int iy, int iwidth, int iheight) :
 	Window_Selectable(ix, iy, iwidth, iheight) {
 
-	SetContents(Bitmap::CreateBitmap(width - 16, height - 16));
+	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
 	Refresh();
@@ -42,7 +43,7 @@ void Window_MenuStatus::Refresh() {
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 	contents->Clear();
 
-	DisplayUi->SetBackcolor(windowskin->GetPixel(0, 32));
+	DisplayUi->SetBackcolor(Cache::system_info.bg_color);
 
 	item_max = Game_Party::GetActors().size();
 

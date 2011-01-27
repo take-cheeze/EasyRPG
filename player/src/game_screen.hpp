@@ -20,6 +20,7 @@
 
 #include <map>
 #include "plane.hpp"
+#include "surface.hpp"
 #include "game_picture.hpp"
 
 class Game_Screen {
@@ -98,7 +99,8 @@ protected:
 
 	std::vector<Snowflake> snowflakes;
 
-	Plane* weather_plane;
+	boost::scoped_ptr<Plane> weather_plane;
+	boost::scoped_ptr<Surface> weather_surface;
 	boost::scoped_ptr<Bitmap> snow_bitmap;
 	boost::scoped_ptr<Bitmap> rain_bitmap;
 

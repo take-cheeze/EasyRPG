@@ -23,38 +23,34 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <map>
-#include "SDL_ttf.h"
-#include "color.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Font class
 ////////////////////////////////////////////////////////////
+
+class Bitmap;
+
 class Font {
 public:
 	Font();
 	Font(std::string _name);
 	Font(int _size);
 	Font(std::string _name, int _size);
-	~Font();
+	virtual ~Font();
 
-	TTF_Font* GetTTF() const;
-
+	virtual int GetHeight() = 0;
+	virtual std::auto_ptr<Bitmap> Render(int glyph) = 0;
+	
+	static std::auto_ptr<Font> CreateFont();
+	static bool Exists(std::string name);
 	static void Dispose();
-	
-	std::string name;
-	int size;
-	bool bold;
-	bool italic;
-	int color;
-	
+
 	static const std::string default_name;
 	static const int default_size;
 	static const bool default_bold;
 	static const bool default_italic;
 	static const int default_color;
-	
-	static bool Exists(std::string name);
-	
+
 	enum SystemColor {
 		ColorDefault = 0,
 		ColorDisabled = 3,
@@ -62,9 +58,12 @@ public:
 		ColorKnockout = 5
 	};
 
-private:
-	// TODO Where's the clean up for this?
-	static std::map<std::string, std::map<int, TTF_Font*> > fonts;
+	std::string name;
+	int size;
+	bool bold;
+	bool italic;
+	int color;
 };
 
 #endif
+

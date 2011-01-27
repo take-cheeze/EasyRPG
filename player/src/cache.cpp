@@ -33,40 +33,47 @@ namespace {
 	boost::ptr_unordered_map<tile_key, Bitmap> cache_tiles;
 }
 
+tSystemInfo Cache::system_info;
+
 ////////////////////////////////////////////////////////////
-Bitmap* Cache::LoadBitmap(std::string const& folder_name, std::string const& filename, bool transparent) {
+Bitmap* Cache::LoadBitmap(
+	const std::string& folder_name, 
+	const std::string& filename,
+	bool transparent, 
+	uint32 flags
+) {
 	cache_key const key = cache_key(folder_name, filename);
 
 	boost::ptr_unordered_map<cache_key, Bitmap>::iterator it = cache.find(key);
 	if (cache.find(key) == cache.end()) {
 		std::string const path = FileFinder::FindImage(folder_name, filename);
-		if (!path.empty())
-			cache.insert(key, Bitmap::CreateBitmap(path, transparent));
-		else
-			cache.insert(key, Bitmap::CreateBitmap(16, 16));
+		return cache.insert(key, !path.empty()
+			? Bitmap::CreateBitmap(path, transparent)
+			: Bitmap::CreateBitmap(16, 16, Color())
+		).first->second;
 	}
 
 	return it->second;
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Cache::Backdrop(std::string const& filename) {
+Bitmap* Cache::Backdrop(const std::string& filename) {
 	return LoadBitmap("Backdrop", filename, false);
 }
-Bitmap* Cache::Battle(std::string const& filename) {
-	return LoadBitmap("Battle", filename, true);
+Bitmap* Cache::Battle(const std::string& filename) {
+	return LoadBitmap("Battle", filename);
 }
-Bitmap* Cache::Battle2(std::string const& filename) {
-	return LoadBitmap("Battle2", filename, true);
+Bitmap* Cache::Battle2(const std::string& filename) {
+	return LoadBitmap("Battle2", filename);
 }
-Bitmap* Cache::BattleCharset(std::string const& filename) {
-	return LoadBitmap("BattleCharSet", filename, true);
+Bitmap* Cache::BattleCharset(const std::string& filename) {
+	return LoadBitmap("BattleCharSet", filename);
 }
-Bitmap* Cache::BattleWeapon(std::string const& filename) {
-	return LoadBitmap("BattleWeapon", filename, true);
+Bitmap* Cache::BattleWeapon(const std::string& filename) {
+	return LoadBitmap("BattleWeapon", filename);
 }
-Bitmap* Cache::Charset(std::string const& filename) {
-	return LoadBitmap("CharSet", filename, true);
+Bitmap* Cache::Charset(const std::string& filename) {
+	return LoadBitmap("CharSet", filename);
 }
 Bitmap* Cache::ExFont() {
 	cache_key const hash = cache_key("\x00","ExFont");
@@ -78,44 +85,42 @@ Bitmap* Cache::ExFont() {
 
 	return it->second;
 }
-Bitmap* Cache::Faceset(std::string const& filename) {
-	return LoadBitmap("FaceSet", filename, true);
+Bitmap* Cache::Faceset(const std::string& filename) {
+	return LoadBitmap("FaceSet", filename);
 }
-Bitmap* Cache::Frame(std::string const& filename) {
-	return LoadBitmap("Frame", filename, true);
+Bitmap* Cache::Frame(const std::string& filename) {
+	return LoadBitmap("Frame", filename);
 }
-Bitmap* Cache::Gameover(std::string const& filename) {
+Bitmap* Cache::Gameover(const std::string& filename) {
 	return LoadBitmap("GameOver", filename, false);
 }
-Bitmap* Cache::Monster(std::string const& filename) {
-	return LoadBitmap("Monster", filename, true);
+Bitmap* Cache::Monster(const std::string& filename) {
+	return LoadBitmap("Monster", filename);
 }
-Bitmap* Cache::Panorama(std::string const& filename) {
+Bitmap* Cache::Panorama(const std::string& filename) {
 	return LoadBitmap("Panorama", filename, false);
 }
-Bitmap* Cache::Picture(std::string const& filename) {
-	return LoadBitmap("Picture", filename, true);
+Bitmap* Cache::Picture(const std::string& filename) {
+	return LoadBitmap("Picture", filename);
 }
-Bitmap* Cache::Chipset(std::string const& filename) {
-	return LoadBitmap("ChipSet", filename, true);
+Bitmap* Cache::Chipset(const std::string& filename) {
+	return LoadBitmap("ChipSet", filename, true, Bitmap::Chipset);
 }
-Bitmap* Cache::Title(std::string const& filename) {
+Bitmap* Cache::Title(const std::string& filename) {
 	return LoadBitmap("Title", filename, false);
 }
-Bitmap* Cache::System(std::string const& filename) {
-	return LoadBitmap("System", filename, true);
+Bitmap* Cache::System(const std::string& filename) {
+	return LoadBitmap("System", filename, true, Bitmap::System);
 }
-Bitmap* Cache::System2(std::string const& filename) {
-	return LoadBitmap("System2", filename, true);
+Bitmap* Cache::System2(const std::string& filename) {
+	return LoadBitmap("System2", filename);
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Cache::Tile(std::string const& filename, int tile_id) {
+Bitmap* Cache::Tile(const std::string& filename, int tile_id) {
 	tile_key const key(filename, tile_id);
 	boost::ptr_unordered_map<tile_key, Bitmap>::iterator it = cache_tiles.find(key);
-
 	if (it == cache_tiles.end()) {
-		std::auto_ptr<Bitmap> tile = Bitmap::CreateBitmap(16, 16);
 		Bitmap* chipset = Cache::Chipset(filename);
 		Rect rect = Rect(0, 0, 16, 16);
 
@@ -141,8 +146,7 @@ Bitmap* Cache::Tile(std::string const& filename, int tile_id) {
 		rect.y += sub_tile_id / 6 * 16;
 
 
-		tile = Bitmap::CreateBitmap(chipset, rect);
-		cache_tiles.insert(key, tile);
+		return cache_tiles.insert(key, Bitmap::CreateBitmap(chipset, rect)).first->second;
 	}
 	return it->second;
 }

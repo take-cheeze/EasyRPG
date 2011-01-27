@@ -30,7 +30,7 @@
 Window_Shop::Window_Shop(int ix, int iy, int iwidth, int iheight) :
 	Window_Base(ix, iy, iwidth, iheight) {
 
-	SetContents(Bitmap::CreateBitmap(width - 16, height - 16));
+	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
 	int const baseIndex = 41 + 13 * Game_Temp::shop_type;
@@ -86,19 +86,11 @@ void Window_Shop::Refresh() {
 							   : greeting);
 			idx++;
 
-			if (Game_Temp::shop_buys) {
-				contents->TextDraw(12, 4 + idx * 16, buy_msg);
-				buy_index = idx++;
-			}
-			else
-				buy_index = 0;
+			contents->TextDraw(12, 4 + idx * 16, buy_msg);
+			buy_index = idx++;
 
-			if (Game_Temp::shop_sells) {
-				contents->TextDraw(12, 4 + idx * 16, sell_msg);
-				sell_index = idx++;
-			}
-			else
-				sell_index = 0;
+			contents->TextDraw(12, 4 + idx * 16, sell_msg);
+			sell_index = idx++;
 
 			contents->TextDraw(12, 4 + idx * 16, leave_msg);
 			leave_index = idx++;
@@ -124,15 +116,22 @@ void Window_Shop::Refresh() {
 	}
 }
 
+////////////////////////////////////////////////////////////
 void Window_Shop::SetMode(int nmode) {
 	mode = nmode;
 	Refresh();
 }
 
-int Window_Shop::GetChoice() {
+////////////////////////////////////////////////////////////
+int Window_Shop::GetChoice() const {
 	return choice;
 }
 
+void Window_Shop::SetChoice(int nchoice) {
+	choice = nchoice;
+}
+
+////////////////////////////////////////////////////////////
 void Window_Shop::Update() {
 	Window_Base::Update();
 
@@ -173,4 +172,3 @@ void Window_Shop::Update() {
 
 	UpdateCursorRect();
 }
-

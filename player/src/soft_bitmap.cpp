@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <cstdlib>
 #include <iostream>
+<<<<<<< HEAD
 #include <png.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -33,6 +34,17 @@
 // #include "data.hpp"
 #include "output.hpp"
 #include "soft_bitmap.hpp"
+=======
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+#include "data.hpp"
+#include "output.hpp"
+#include "utils.hpp"
+#include "image.hpp"
+#include "text.hpp"
+#include "soft_bitmap.hpp"
+>>>>>>> master
 
 ////////////////////////////////////////////////////////////
 void SoftBitmap::Init(int width, int height) {
@@ -46,105 +58,21 @@ void SoftBitmap::Init(int width, int height) {
 }
 
 ////////////////////////////////////////////////////////////
-static void read_data(png_structp png_ptr, png_bytep data, png_size_t length) {
-    png_bytep* bufp = (png_bytep*) png_get_io_ptr(png_ptr);
-	memcpy(data, *bufp, length);
-	*bufp += length;
-}
-
-////////////////////////////////////////////////////////////
-void SoftBitmap::ReadPNG(FILE *stream, const void *buffer) {
-	png_struct *png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-	if (png_ptr == NULL) {
-		Output::Error("Couldn't allocate PNG structure");
-		return;
+static void ConvertImage(int& width, int& height, void*& pixels) {
+	uint8* dst = (uint8*) pixels;
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			uint8 r = dst[0];
+			uint8 g = dst[1];
+			uint8 b = dst[2];
+			uint8 a = dst[3];
+			dst[0] = b;
+			dst[1] = g;
+			dst[2] = r;
+			dst[3] = a;
+			dst += 4;
+		}
 	}
-
-	png_info *info_ptr = png_create_info_struct(png_ptr);
-	if (info_ptr == NULL) {
-		Output::Error("Couldn't allocate PNG info structure");
-		return;
-	}
-
-	if (stream != NULL)
-		png_init_io(png_ptr, stream);
-	else
-		png_set_read_fn(png_ptr, (voidp) &buffer, read_data);
-
-	png_read_info(png_ptr, info_ptr);
-
-	png_uint_32 width, height;
-	int bit_depth, color_type;
-	png_get_IHDR(png_ptr, info_ptr, &width, &height,
-				 &bit_depth, &color_type, NULL, NULL, NULL);
-
-	png_color black = {0,0,0};
-	png_colorp palette;
-	int num_palette = 0;
-
-	switch (color_type) {
-		case PNG_COLOR_TYPE_PALETTE:
-			if (png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS))
-				png_set_tRNS_to_alpha(png_ptr);
-			else if (transparent && png_get_valid(png_ptr, info_ptr, PNG_INFO_PLTE))
-				png_get_PLTE(png_ptr, info_ptr, &palette, &num_palette);
-			png_set_palette_to_rgb(png_ptr);
-			png_set_swap_alpha(png_ptr);
-			png_set_filler(png_ptr, 0xFF, PNG_FILLER_BEFORE);
-			break;
-		case PNG_COLOR_TYPE_GRAY:
-			png_set_gray_to_rgb(png_ptr);
-			if (bit_depth < 8)
-				png_set_expand_gray_1_2_4_to_8(png_ptr);
-			png_set_filler(png_ptr, 0xFF, PNG_FILLER_BEFORE);
-			if (transparent) {
-				palette = &black;
-				num_palette = 1;
-			}
-			break;
-		case PNG_COLOR_TYPE_GRAY_ALPHA:
-			png_set_gray_to_rgb(png_ptr);
-			if (bit_depth < 8)
-				png_set_expand_gray_1_2_4_to_8(png_ptr);
-			break;
-		case PNG_COLOR_TYPE_RGB:
-			png_set_filler(png_ptr, 0xFF, PNG_FILLER_BEFORE);
-			break;
-		case PNG_COLOR_TYPE_RGB_ALPHA:
-			png_set_swap_alpha(png_ptr);
-			break;
-	}
-
-	if (bit_depth < 8)
-		png_set_packing(png_ptr);
-
-	if (bit_depth == 16)
-		png_set_strip_16(png_ptr);
-
-	png_read_update_info(png_ptr, info_ptr);
-
-	Init(width, height);
-
-	for (png_uint_32 y = 0; y < height; y++) {
-		png_bytep dst = (png_bytep) pixels() + y * pitch();
-		png_read_row(png_ptr, dst, NULL);
-	}
-
-	if (transparent && num_palette > 0) {
-		png_color& ck = palette[0];
-		uint8 ck1[4] = {255, ck.red, ck.green, ck.blue};
-		uint8 ck2[4] = {  0, ck.red, ck.green, ck.blue};
-		uint32 srckey = *(uint32*)ck1;
-		uint32 dstkey = *(uint32*)ck2;
-		uint32* p = (uint32*) bitmap;
-		for (int i = 0; i < w * h; i++, p++)
-			if (*p == srckey)
-				*p = dstkey;
-	}
-
-	png_read_end(png_ptr, NULL);
-
-	png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
 }
 
 ////////////////////////////////////////////////////////////
@@ -154,22 +82,49 @@ SoftBitmap::SoftBitmap(int width, int height, bool itransparent) {
 	Init(width, height);
 }
 
-SoftBitmap::SoftBitmap(const std::string filename, bool itransparent) {
+SoftBitmap::SoftBitmap(const std::string& filename, bool itransparent, uint32 flags) {
 	transparent = itransparent;
+
+	int namelen = (int) filename.size();
+	if (namelen < 5 || filename[namelen - 4] != '.') {
+		Output::Error("Invalid extension for image file %s", filename.c_str());
+		return;
+	}
+
+	std::string ext = Utils::LowerCase(filename.substr(namelen - 3, 3));
+	if (ext != "png" && ext != "xyz") {
+		Output::Error("Unsupported image file %s", filename.c_str());
+		return;
+	}
 
 	FILE* stream = FileFinder::fopenUTF8(filename, "rb");
 	if (!stream) {
-		Output::Error("Couldn't open input file %s", filename.c_str());
+		Output::Error("Couldn't open image file %s", filename.c_str());
 		return;
 	}
-	ReadPNG(stream, (void*) NULL);
+	if (ext == "png")
+		Image::ReadPNG(stream, (const void*) NULL, transparent, w, h, bitmap);
+	else if (ext == "xyz")
+		Image::ReadXYZ(stream, transparent, w, h, bitmap);
+
+	ConvertImage(w, h, bitmap);
+
 	fclose(stream);
+
+	CheckPixels(flags);
 }
 
-SoftBitmap::SoftBitmap(const uint8* data, uint bytes, bool itransparent) {
+SoftBitmap::SoftBitmap(const uint8* data, uint bytes, bool itransparent, uint32 flags) {
 	transparent = itransparent;
 
-	ReadPNG((FILE*) NULL, (const void*) data);
+	if (bytes > 4 && strncmp((char*) data, "XYZ1", 4) == 0)
+		Image::ReadXYZ(data, bytes, transparent, w, h, bitmap);
+	else
+		Image::ReadPNG((FILE*) NULL, (const void*) data, transparent, w, h, bitmap);
+
+	ConvertImage(w, h, bitmap);
+
+	CheckPixels(flags);
 }
 
 SoftBitmap::SoftBitmap(Bitmap* source, Rect src_rect, bool itransparent) {
@@ -252,11 +207,11 @@ void SoftBitmap::Blit(int x, int y, Bitmap* _src, Rect src_rect, int opacity) {
 
 	for (int i = 0; i < dst_rect.height; i++) {
 		for (int j = 0; j < dst_rect.width; j++) {
-			uint8 srca = src_pixels[0] * opacity / 255;
+			uint8 srca = src_pixels[3] * opacity / 255;
+			dst_pixels[0] = (dst_pixels[0] * (255 - srca) + src_pixels[0] * srca) / 255;
 			dst_pixels[1] = (dst_pixels[1] * (255 - srca) + src_pixels[1] * srca) / 255;
 			dst_pixels[2] = (dst_pixels[2] * (255 - srca) + src_pixels[2] * srca) / 255;
-			dst_pixels[3] = (dst_pixels[3] * (255 - srca) + src_pixels[3] * srca) / 255;
-			dst_pixels[0] = std::max(dst_pixels[0], srca);
+			dst_pixels[3] = std::max(dst_pixels[3], srca);
 
 			src_pixels += 4;
 			dst_pixels += 4;
@@ -292,7 +247,7 @@ void SoftBitmap::Mask(int x, int y, Bitmap* _src, Rect src_rect) {
 
 	for (int i = 0; i < dst_rect.height; i++) {
 		for (int j = 0; j < dst_rect.width; j++) {
-			dst_pixels[0] = std::min(dst_pixels[0], src_pixels[0]);
+			dst_pixels[3] = std::min(dst_pixels[3], src_pixels[3]);
 
 			src_pixels += 4;
 			dst_pixels += 4;
@@ -307,248 +262,6 @@ void SoftBitmap::Mask(int x, int y, Bitmap* _src, Rect src_rect) {
 	RefreshCallback();
 }
 
-FT_Library SoftBitmap::library;
-FT_Face SoftBitmap::face;
-bool SoftBitmap::ft_initialized = false;
-
-void SoftBitmap::InitFreeType() {
-	if (ft_initialized)
-		return;
-
-    FT_Error ans = FT_Init_FreeType(&library);
-    if (ans != FT_Err_Ok) {
-		Output::Error("Couldn't initialize FreeType\n");
-		return;
-	}
-
-	std::string path = FileFinder::FindFont(font->name);
-    ans = FT_New_Face(library, path.c_str(), 0, &face);
-    if (ans != FT_Err_Ok) {
-		Output::Error("Couldn't initialize FreeType face\n");
-		FT_Done_FreeType(library);
-		return;
-	}
-
-    ans = FT_Set_Char_Size(face, font->size * 64, font->size * 64, 72, 72);
-    if (ans != FT_Err_Ok) {
-		Output::Error("Couldn't set FreeType face size\n");
-		FT_Done_Face(face);
-		FT_Done_FreeType(library);
-		return;
-    }
-
-	ft_initialized = true;
-}
-
-void SoftBitmap::DoneFreeType() {
-	if (!ft_initialized)
-		return;
-
-    FT_Done_Face(face);
-
-    FT_Done_FreeType(library);
-
-	ft_initialized = false;
-}
-
-SoftBitmap* SoftBitmap::RenderFreeTypeChar(int c) {
-	FT_Error ans = FT_Load_Char(face, c, FT_LOAD_NO_BITMAP);
-    if (ans != FT_Err_Ok) {
-		Output::Error("Couldn't load FreeType character %d\n", c);
-		return NULL;
-	}
-
-	ans = FT_Render_Glyph(face->glyph, FT_RENDER_MODE_MONO);
-    if (ans != FT_Err_Ok) {
-		Output::Error("Couldn't render FreeType character %d\n", c);
-		return NULL;
-	}
-
-	FT_Bitmap ft_bitmap;
-	if (face->glyph->bitmap.pixel_mode == FT_PIXEL_MODE_GRAY)
-		ft_bitmap = face->glyph->bitmap;
-	else {
-		FT_Bitmap_New(&ft_bitmap);
-		FT_Bitmap_Convert(library, &face->glyph->bitmap, &ft_bitmap, 4);
-	}
-
-	if (ft_bitmap.pixel_mode != FT_PIXEL_MODE_GRAY) {
-		Output::Error("FreeType character has wrong format\n", c);
-		return NULL;
-	}
-
-	const uint8* src = (const uint8*) ft_bitmap.buffer;
-	if (ft_bitmap.pitch < 0)
-		src -= ft_bitmap.rows * ft_bitmap.pitch;
-
-	SoftBitmap* bitmap = new SoftBitmap(ft_bitmap.width, font->size + 2, true);
-	uint8* dst = (uint8*) bitmap->pixels();
-
-	const int base_line = bitmap->height() / 4;
-	int offset = bitmap->height() - face->glyph->bitmap_top - base_line;
-
-	for (int yd = 0; yd < bitmap->height(); yd++) {
-		int ys = yd - offset;
-		if (ys < 0 || ys >= ft_bitmap.rows)
-			continue;
-		const uint8* p = src + ys * ft_bitmap.pitch;
-		uint8* q = dst + yd * bitmap->pitch();
-		for (int x = 0; x < ft_bitmap.width; x++) {
-			*q++ = *p++ ? 0xFF : 0x00;
-			// *dst++ = *p++ * 256 / ft_bitmap.num_grays;
-			*q++ = 0;
-			*q++ = 0;
-			*q++ = 0;
-		}
-	}
-
-	return bitmap;
-}
-
-////////////////////////////////////////////////////////////
-void SoftBitmap::TextDraw(int x, int y, std::string text, TextAlignment align) {
-	if (text.length() == 0) return;
-	Rect dst_rect = GetTextSize(text);
-	dst_rect.x = x; dst_rect.y = y;
-	dst_rect.width += 1; dst_rect.height += 1; // Need place for shadow
-	if (dst_rect.IsOutOfBounds(GetWidth(), GetHeight())) return;
-
-	SoftBitmap* text_surface; // Complete text will be on this surface
-
-	text_surface = new SoftBitmap(dst_rect.width, dst_rect.height, true);
-
-	// Load the system file for the shadow and text color
-	Bitmap* system = Cache::System(Data::system.system_name);
-	// Load the exfont-file
-	Bitmap* exfont = Cache::ExFont();
-
-	// Get the Shadow color
-	Color shadow_color(system->GetPixel(16, 32));
-	// If shadow is pure black, add 1 to blue channel
-	// so it doesn't become transparent
-	if ((shadow_color.red == 0) &&
-		(shadow_color.green == 0) &&
-		(shadow_color.blue == 0) ) {
-			// FIXME: what if running in 16 bpp?
-		shadow_color.blue++;
-	}
-
-	// Where to draw the next glyph (x pos)
-	int next_glyph_pos = 0;
-
-	// The current char is a full size glyph
-	bool is_full_glyph = false;
-	// The current char is an exfont (is_full_glyph must be true too)
-	bool is_exfont = false;
-
-	InitFreeType();
-
-	// This loops always renders a single char, color blends it and then puts
-	// it onto the text_surface (including the drop shadow)
-	for (unsigned c = 0; c < text.size(); ++c) {
-		Rect next_glyph_rect(next_glyph_pos, 0, 0, 0);
-
-		SoftBitmap* mask;
-
-		// ExFont-Detection: Check for A-Z or a-z behind the $
-		if (text[c] == '$' && c != text.size() - 1 &&
-			((text[c+1] >= 'a' && text[c+1] <= 'z') ||
-			(text[c+1] >= 'A' && text[c+1] <= 'Z'))) {
-			int exfont_value;
-			// Calculate which exfont shall be rendered
-			if ((text[c+1] >= 'a' && text[c+1] <= 'z')) {
-				exfont_value = 26 + text[c+1] - 'a';
-			} else {
-				exfont_value = text[c+1] - 'A';
-			}
-			is_full_glyph = true;
-			is_exfont = true;
-
-			mask = new SoftBitmap(12, 12, true);
-
-			// Get exfont from graphic
-			Rect rect_exfont((exfont_value % 13) * 12, (exfont_value / 13) * 12, 12, 12);
-
-			// Create a mask
-			mask->Clear();
-			mask->Blit(0, 0, exfont, rect_exfont, 255);
-		} else {
-			// No ExFont, draw normal text
-
-			mask = RenderFreeTypeChar(text[c]);
-			if (mask == NULL) {
-				Output::Warning("Couldn't render char %c (%d). Skipping...", text[c], (int)text[c]);
-				continue;
-			}
-		}
-
-		// Get color region from system graphic
-		Rect clip_system(8+16*(font->color%10), 4+48+16*(font->color/10), 6, 12);
-
-		SoftBitmap* char_surface = new SoftBitmap(mask->width(), mask->height(), true);
-
-		// Blit gradient color background (twice in case of a full glyph)
-		char_surface->Blit(0, 0, system, clip_system, 255);
-		char_surface->Blit(6, 0, system, clip_system, 255);
-		// Blit mask onto background
-		char_surface->Mask(0, 0, mask, mask->GetRect());
-
-		SoftBitmap* char_shadow = new SoftBitmap(mask->width(), mask->height(), true);
-
-		// Blit solid color background
-		char_shadow->Fill(shadow_color);
-		// Blit mask onto background
-		char_shadow->Mask(0, 0, mask, mask->GetRect());
-
-		// Blit first shadow and then text
-		text_surface->Blit(next_glyph_rect.x + 1, next_glyph_rect.y + 1, char_shadow, char_shadow->GetRect(), 255);
-		text_surface->Blit(next_glyph_rect.x, next_glyph_rect.y, char_surface, char_surface->GetRect(), 255);
-
-		delete mask;
-		delete char_surface;
-		delete char_shadow;
-
-		// If it's a full size glyph, add the size of a half-size glypth twice
-		if (is_full_glyph) {
-			next_glyph_pos += 6;
-			is_full_glyph = false;
-			if (is_exfont) {
-				is_exfont = false;
-				// Skip the next character
-				++c;
-			}
-		}
-		next_glyph_pos += 6;	
-	}
-
-	DoneFreeType();
-
-	Bitmap* text_bmp = CreateBitmap(text_surface, text_surface->GetRect());
-
-	Rect src_rect(0, 0, dst_rect.width, dst_rect.height);
-	int iy = dst_rect.y;
-	if (dst_rect.height > text_bmp->GetHeight()) {
-		iy += ((dst_rect.height - text_bmp->GetHeight()) / 2);
-	}
-	int ix = dst_rect.x;
-	
-	// Alignment code
-	if (dst_rect.width > text_bmp->GetWidth()) {
-		if (align == Bitmap::TextAlignCenter) {
-			ix += (dst_rect.width - text_bmp->GetWidth()) / 2;
-		} else if (align == Bitmap::TextAlignRight) {
-			ix += dst_rect.width - text_bmp->GetWidth();
-		}
-	}
-
-	Blit(ix, iy, text_bmp, src_rect, 255);
-
-	delete text_bmp;
-	delete text_surface;
-
-	RefreshCallback();
-}
-
 ////////////////////////////////////////////////////////////
 void SoftBitmap::SetTransparentColor(Color color) {
 }
@@ -556,25 +269,25 @@ void SoftBitmap::SetTransparentColor(Color color) {
 ////////////////////////////////////////////////////////////
 Color SoftBitmap::GetColor(uint32 uint32_color) const {
 	const uint8* p = (const uint8*) &uint32_color;
-	return Color(p[1], p[2], p[3], p[0]);
+	return Color(p[2], p[1], p[0], p[3]);
 }
 
 uint32 SoftBitmap::GetUint32Color(const Color &color) const {
-	uint8 x[4] = {color.alpha, color.red, color.green, color.blue};
+	uint8 x[4] = {color.blue, color.green, color.red, color.alpha};
 	return *(const uint32*) x;
 }
 
 uint32 SoftBitmap::GetUint32Color(uint8 r, uint8  g, uint8 b, uint8 a) const {
-	uint8 x[4] = {a, r, g, b};
+	uint8 x[4] = {b, g, r, a};
 	return *(const uint32*) x;
 }
 
 void SoftBitmap::GetColorComponents(uint32 color, uint8 &r, uint8 &g, uint8 &b, uint8 &a) const {
 	const uint8* p = (const uint8*) &color;
-	a = p[0];
-	r = p[1];
-	g = p[2];
-	b = p[3];
+	b = p[0];
+	g = p[1];
+	r = p[2];
+	a = p[3];
 }
 
 ////////////////////////////////////////////////////////////

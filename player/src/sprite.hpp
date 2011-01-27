@@ -84,6 +84,10 @@ public:
 	void SetBlendColor(Color color);
 	Tone GetTone() const;
 	void SetTone(Tone tone);
+	int GetWaverDepth() const;
+	void SetWaverDepth(int depth);
+	double GetWaverPhase() const;
+	void SetWaverPhase(double phase);
 
 	unsigned long GetId() const;
 	DrawableType GetType() const;
@@ -93,7 +97,6 @@ private:
 	unsigned long ID;
 	ZObj* zobj;
 
-	Bitmap* bitmap;
 	boost::scoped_ptr<BitmapScreen> bitmap_screen;
 	
 	Rect src_rect;

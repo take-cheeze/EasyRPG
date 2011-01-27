@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include "drawable.hpp"
 #include "bitmap.hpp"
+#include "surface.hpp"
 #include "zobj.hpp"
 
 ////////////////////////////////////////////////////////////
@@ -38,8 +39,9 @@ public:
 	void Update();
 	Bitmap* GetWindowskin() const;
 	void SetWindowskin(std::auto_ptr<Bitmap> nwindowskin);
-	Bitmap* GetContents() const;
-	void SetContents(std::auto_ptr<Bitmap> ncontents);
+	void SetWindowskin(Bitmap* nwindowskin);
+	Surface* GetContents() const;
+	void SetContents(std::auto_ptr<Surface> ncontents);
 	bool GetStretch() const;
 	void SetStretch(bool nstretch);
 	Rect GetCursorRect() const;
@@ -80,8 +82,8 @@ protected:
 	DrawableType type;
 	unsigned long ID;
 	ZObj* zobj;
-	boost::scoped_ptr<Bitmap> windowskin;
-	boost::scoped_ptr<Bitmap> contents;
+	Bitmap* windowskin;
+	boost::scoped_ptr<Surface> contents;
 	bool stretch;
 	Rect cursor_rect;
 	bool active;
