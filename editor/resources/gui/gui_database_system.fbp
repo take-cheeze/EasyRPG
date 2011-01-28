@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer452</property>
+                <property name="name">szSystem</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -109,7 +109,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer453</property>
+                        <property name="name">szTop</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -120,7 +120,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Vehicle graphic</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer421</property>
+                                <property name="name">szSystemVehicleGraphic</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -132,7 +132,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Small ship</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer422</property>
+                                        <property name="name">szSystemVehicleGrahicSmallShip</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -171,7 +171,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">bmpVehicleGraphicSmallShip</property>
+                                                <property name="name">bmpSystemVehicleGraphicSmallShip</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -254,7 +254,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">btnVehicleGraphicSmallShip</property>
+                                                <property name="name">btnSystemVehicleGraphicSmallShip</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -313,7 +313,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Big ship</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer423</property>
+                                        <property name="name">szSystemVehicleGraphicBigShip</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -352,7 +352,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">bmpVehicleGraphicBigShip</property>
+                                                <property name="name">bmpSystemVehicleGraphicBigShip</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -435,7 +435,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">btnVehicleGraphicBigShip</property>
+                                                <property name="name">btnSystemVehicleGraphicBigShip</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -494,7 +494,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Airship</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer424</property>
+                                        <property name="name">szSystemVehicleGraphicAirship</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -533,7 +533,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">bmpVehicleGraphicAirship</property>
+                                                <property name="name">bmpSystemVehicleGraphicAirship</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -616,7 +616,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">btnVehicleGraphicAirship</property>
+                                                <property name="name">btnSystemVehicleGraphicAirship</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -677,7 +677,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Title graphic</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer425</property>
+                                <property name="name">szSystemTitleGraphic</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -858,7 +858,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Game over graphic</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer426</property>
+                                <property name="name">szSystemGameOverGraphic</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -1039,7 +1039,7 @@
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer454</property>
+                        <property name="name">szMiddle</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -1050,7 +1050,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Starting party</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer427</property>
+                                <property name="name">szSystemStartingParty</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -1062,7 +1062,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Actor 1</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer428</property>
+                                        <property name="name">szSystemStartingPartyActor1</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1160,7 +1160,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Actor 2</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer429</property>
+                                        <property name="name">szSystemStartingPartyActor2</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1258,7 +1258,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Actor 3</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer430</property>
+                                        <property name="name">szSystemStartingPartyActor3</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1356,7 +1356,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Actor 4</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer431</property>
+                                        <property name="name">szSystemStartingPartyActor4</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -1456,7 +1456,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">System music</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer432</property>
+                                <property name="name">szSystemMusic</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -1468,7 +1468,7 @@
                                         <property name="cols">2</property>
                                         <property name="hgap">2</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">gSizer12</property>
+                                        <property name="name">szSystemMusic2</property>
                                         <property name="permission">none</property>
                                         <property name="rows">4</property>
                                         <property name="vgap">0</property>
@@ -1480,7 +1480,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Title</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer433</property>
+                                                <property name="name">szSystemMusicTitle</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -1667,7 +1667,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Small ship</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer434</property>
+                                                <property name="name">szSystemMusicSmallShip</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -1854,7 +1854,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Battle</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer435</property>
+                                                <property name="name">szSystemMusicBattle</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2041,7 +2041,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Big ship</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer436</property>
+                                                <property name="name">szSystemMusicBigShop</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2228,7 +2228,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Victory</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer437</property>
+                                                <property name="name">szSystemMusicVictory</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2415,7 +2415,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Airship</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer438</property>
+                                                <property name="name">szSystemMusicAirshop</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2602,7 +2602,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Inn</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer439</property>
+                                                <property name="name">szSystemMusicInn</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2789,7 +2789,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Game over</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer440</property>
+                                                <property name="name">szSystemMusicGameOver</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2980,7 +2980,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">System sounds</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer441</property>
+                                <property name="name">szSystemSound</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -2992,7 +2992,7 @@
                                         <property name="cols">3</property>
                                         <property name="hgap">2</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">gSizer13</property>
+                                        <property name="name">szSystemSound2</property>
                                         <property name="permission">none</property>
                                         <property name="rows">4</property>
                                         <property name="vgap">0</property>
@@ -3004,7 +3004,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Cursor</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer442</property>
+                                                <property name="name">szSystemSoundCursor</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3191,7 +3191,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Start battle</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer443</property>
+                                                <property name="name">szSystemSoundStartBattle</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3378,7 +3378,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Actor damage</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer444</property>
+                                                <property name="name">szSystemSoundActorDamage</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3565,7 +3565,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">OK</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer445</property>
+                                                <property name="name">szSystemSoundOK</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3752,7 +3752,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Escape</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer446</property>
+                                                <property name="name">szSystemSoundEscape</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3939,7 +3939,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Dodge</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer447</property>
+                                                <property name="name">szSystemSoundDodge</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4126,7 +4126,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Cancel</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer448</property>
+                                                <property name="name">szSystemSoundCancel</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4313,7 +4313,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Enemy attack</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer449</property>
+                                                <property name="name">szSystemSoundEnemyAttack</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4500,7 +4500,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Enemy death</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer450</property>
+                                                <property name="name">szSystemSoundEnemyDeath</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4687,7 +4687,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Error</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer451</property>
+                                                <property name="name">szSystemSoundError</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4874,7 +4874,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Enemy damage</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer452</property>
+                                                <property name="name">szSystemSoundEnemyDamage</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -5061,7 +5061,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Use object</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer453</property>
+                                                <property name="name">szSystemSoundUseObject</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -5252,7 +5252,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer455</property>
+                        <property name="name">szBottom</property>
                         <property name="orient">wxHORIZONTAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -5263,7 +5263,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">System graphic</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer454</property>
+                                <property name="name">szSystemGraphic</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -5444,7 +5444,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Transition type</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer455</property>
+                                <property name="name">szSystemTransitionType</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -5456,7 +5456,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Erase screen</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer456</property>
+                                        <property name="name">szSystemTransitionTypeEraseScreen</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -5554,7 +5554,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Show screen</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer457</property>
+                                        <property name="name">szSystemTransitionTypeShowScreen</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -5654,7 +5654,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">Start battle</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer458</property>
+                                <property name="name">szSystemStartBattle</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -5666,7 +5666,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Erase screen</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer459</property>
+                                        <property name="name">szSystemStartBattleEraseScreen</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -5764,7 +5764,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Show screen</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer460</property>
+                                        <property name="name">szSystemStartBattleShowScreen</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -5864,7 +5864,7 @@
                                 <property name="id">wxID_ANY</property>
                                 <property name="label">End battle</property>
                                 <property name="minimum_size"></property>
-                                <property name="name">sbSizer461</property>
+                                <property name="name">szSystemEndBattle</property>
                                 <property name="orient">wxVERTICAL</property>
                                 <property name="permission">none</property>
                                 <event name="OnUpdateUI"></event>
@@ -5876,7 +5876,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Erase screen</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer462</property>
+                                        <property name="name">szSystemEndBattleEraseScreen</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -5974,7 +5974,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Show screen</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer463</property>
+                                        <property name="name">szSystemEndBattleShowScreen</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>

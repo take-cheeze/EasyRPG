@@ -37,12 +37,12 @@ class pnSystem_Base : public wxPanel
 	private:
 	
 	protected:
-		wxStaticBitmap* bmpVehicleGraphicSmallShip;
-		wxButton* btnVehicleGraphicSmallShip;
-		wxStaticBitmap* bmpVehicleGraphicBigShip;
-		wxButton* btnVehicleGraphicBigShip;
-		wxStaticBitmap* bmpVehicleGraphicAirship;
-		wxButton* btnVehicleGraphicAirship;
+		wxStaticBitmap* bmpSystemVehicleGraphicSmallShip;
+		wxButton* btnSystemVehicleGraphicSmallShip;
+		wxStaticBitmap* bmpSystemVehicleGraphicBigShip;
+		wxButton* btnSystemVehicleGraphicBigShip;
+		wxStaticBitmap* bmpSystemVehicleGraphicAirship;
+		wxButton* btnSystemVehicleGraphicAirship;
 		wxStaticBitmap* bmpSystemTitleGraphic;
 		wxButton* btnSystemTitleGraphic;
 		wxStaticBitmap* bmpSystemGameOverGraphic;
