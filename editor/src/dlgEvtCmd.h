@@ -61,6 +61,56 @@ private:
 	void btnSystemSound_click(wxCommandEvent& WXUNUSED(event));
 	void btnSystemGraphic_click(wxCommandEvent& WXUNUSED(event));
 	void btnTransition_click(wxCommandEvent& WXUNUSED(event));
+	
+	void btnBattle_click(wxCommandEvent& WXUNUSED(event));
+	void btnCommerce_click(wxCommandEvent& WXUNUSED(event));
+	void btnInn_click(wxCommandEvent& WXUNUSED(event));
+	void btnActorNameInput_click(wxCommandEvent& WXUNUSED(event));
+	void btnTeleport_click(wxCommandEvent& WXUNUSED(event));
+	void btnMemorizePlace_click(wxCommandEvent& WXUNUSED(event));
+	void btnGoToMemorizedPlace_click(wxCommandEvent& WXUNUSED(event));
+	void btnVehiclePosition_click(wxCommandEvent& WXUNUSED(event));
+	void btnEventPosition_click(wxCommandEvent& WXUNUSED(event));
+	void btnSwapEvents_click(wxCommandEvent& WXUNUSED(event));
+	void btnGetTerrainID_click(wxCommandEvent& WXUNUSED(event));
+	void btnGetPositionID_click(wxCommandEvent& WXUNUSED(event));
+	void btnBlankScreen_click(wxCommandEvent& WXUNUSED(event));
+	void btnShowScreen_click(wxCommandEvent& WXUNUSED(event));
+	void btnTone_click(wxCommandEvent& WXUNUSED(event));
+	void btnFlashScreen_click(wxCommandEvent& WXUNUSED(event));
+	void btnShake_click(wxCommandEvent& WXUNUSED(event));
+	void btnMoveScreen_click(wxCommandEvent& WXUNUSED(event));
+	void btnWeather_click(wxCommandEvent& WXUNUSED(event));
+	void btnPicture_click(wxCommandEvent& WXUNUSED(event));
+	void btnMovePicture_click(wxCommandEvent& WXUNUSED(event));
+	void btnDeletePicture_click(wxCommandEvent& WXUNUSED(event));
+	void btnAnimation_click(wxCommandEvent& WXUNUSED(event));
+	void btnActorTransparency_click(wxCommandEvent& WXUNUSED(event));
+	void btnFlashCharacter_click(wxCommandEvent& WXUNUSED(event));
+	void btnEventMovement_click(wxCommandEvent& WXUNUSED(event));
+	void btnWait_click(wxCommandEvent& WXUNUSED(event));
+	
+	void btnPlayMusic_click(wxCommandEvent& WXUNUSED(event));
+	void btnFadeMusic_click(wxCommandEvent& WXUNUSED(event));
+	void btnPlaySound_click(wxCommandEvent& WXUNUSED(event));
+	void btnPlayVideo_click(wxCommandEvent& WXUNUSED(event));
+	void btnKeyAssignment_click(wxCommandEvent& WXUNUSED(event));
+	void btnTileset_click(wxCommandEvent& WXUNUSED(event));
+	void btnPanorama_click(wxCommandEvent& WXUNUSED(event));
+	void btnEncounterRate_click(wxCommandEvent& WXUNUSED(event));
+	void btnTile_click(wxCommandEvent& WXUNUSED(event));
+	void btnTeleportPlace_click(wxCommandEvent& WXUNUSED(event));
+	void btnTeleportPermissions_click(wxCommandEvent& WXUNUSED(event));
+	void btnEscapePlace_click(wxCommandEvent& WXUNUSED(event));
+	void btnEscapePermissions_click(wxCommandEvent& WXUNUSED(event));
+	void btnSavePermissions_click(wxCommandEvent& WXUNUSED(event));
+	void btnSystemMenuPermissions_click(wxCommandEvent& WXUNUSED(event));
+	void btnConditions_click(wxCommandEvent& WXUNUSED(event));
+	void btnLabel_click(wxCommandEvent& WXUNUSED(event));
+	void btnGoToLabel_click(wxCommandEvent& WXUNUSED(event));
+	void btnCallEvent_click(wxCommandEvent& WXUNUSED(event));
+	void btnNote_click(wxCommandEvent& WXUNUSED(event));
+	
 	/// Closes dialog on click
 	void Close_click(wxCommandEvent& WXUNUSED(event));
 };

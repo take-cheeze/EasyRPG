@@ -635,9 +635,9 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	btnFadeMusic->SetDefault(); 
 	szEvtCmd3->Add( btnFadeMusic, 0, wxEXPAND, 0 );
 	
-	btnSaveMenuPermissions = new wxButton( pnEvtCmd3, wxID_ANY, _("Save permissions..."), wxDefaultPosition, wxDefaultSize, 0 );
-	btnSaveMenuPermissions->SetDefault(); 
-	szEvtCmd3->Add( btnSaveMenuPermissions, 0, wxEXPAND, 0 );
+	btnSavePermissions = new wxButton( pnEvtCmd3, wxID_ANY, _("Save permissions..."), wxDefaultPosition, wxDefaultSize, 0 );
+	btnSavePermissions->SetDefault(); 
+	szEvtCmd3->Add( btnSavePermissions, 0, wxEXPAND, 0 );
 	
 	btnMemorizeMusic = new wxButton( pnEvtCmd3, wxID_ANY, _("Memorize music"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnMemorizeMusic->SetDefault(); 
@@ -822,7 +822,7 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	btnPlayMusic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnPlayMusic_click ), NULL, this );
 	btnSaveMenu->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSaveMenu_click ), NULL, this );
 	btnFadeMusic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnFadeMusic_click ), NULL, this );
-	btnSaveMenuPermissions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSaveMenuPermissions_click ), NULL, this );
+	btnSavePermissions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSavePermissions_click ), NULL, this );
 	btnMemorizeMusic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnMemorizeMusic_click ), NULL, this );
 	btnSystemMenu->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSystemMenu_click ), NULL, this );
 	btnPlayMemorizedMusic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnPlayMemorizedMusic_click ), NULL, this );
@@ -918,7 +918,7 @@ dlgEvtCmd_Base::~dlgEvtCmd_Base()
 	btnPlayMusic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnPlayMusic_click ), NULL, this );
 	btnSaveMenu->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSaveMenu_click ), NULL, this );
 	btnFadeMusic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnFadeMusic_click ), NULL, this );
-	btnSaveMenuPermissions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSaveMenuPermissions_click ), NULL, this );
+	btnSavePermissions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSavePermissions_click ), NULL, this );
 	btnMemorizeMusic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnMemorizeMusic_click ), NULL, this );
 	btnSystemMenu->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnSystemMenu_click ), NULL, this );
 	btnPlayMemorizedMusic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnPlayMemorizedMusic_click ), NULL, this );

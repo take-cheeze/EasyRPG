@@ -181,7 +181,7 @@ class dlgEvtCmd_Base : public wxDialog
 		wxButton* btnPlayMusic;
 		wxButton* btnSaveMenu;
 		wxButton* btnFadeMusic;
-		wxButton* btnSaveMenuPermissions;
+		wxButton* btnSavePermissions;
 		wxButton* btnMemorizeMusic;
 		wxButton* btnSystemMenu;
 		wxButton* btnPlayMemorizedMusic;
@@ -274,7 +274,7 @@ class dlgEvtCmd_Base : public wxDialog
 		virtual void btnPlayMusic_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnSaveMenu_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnFadeMusic_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void btnSaveMenuPermissions_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnSavePermissions_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnMemorizeMusic_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnSystemMenu_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnPlayMemorizedMusic_click( wxCommandEvent& event ) { event.Skip(); }

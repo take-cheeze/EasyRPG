@@ -603,22 +603,22 @@ class dlgEvtCmdCallEvent_Base : public wxDialog
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class dlgEvtCmdNotes_Base
+/// Class dlgEvtCmdNote_Base
 ///////////////////////////////////////////////////////////////////////////////
-class dlgEvtCmdNotes_Base : public wxDialog 
+class dlgEvtCmdNote_Base : public wxDialog 
 {
 	private:
 	
 	protected:
-		wxTextCtrl* tcNotes;
+		wxTextCtrl* tcNote;
 		wxButton* btnOK;
 		wxButton* btnCancel;
 		wxButton* btnHelp;
 	
 	public:
 		
-		dlgEvtCmdNotes_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Notes"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
-		~dlgEvtCmdNotes_Base();
+		dlgEvtCmdNote_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Notes"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
+		~dlgEvtCmdNote_Base();
 	
 };
 

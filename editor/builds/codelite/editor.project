@@ -224,16 +224,16 @@
         <File Name="../../src/dlgEvtCmdShowScreen.cpp"/>
         <File Name="../../src/dlgEvtCmdWait.cpp"/>
         <File Name="../../src/dlgEvtCmdWait.h"/>
+        <File Name="../../src/dlgEvtCmdGetPositionID.cpp"/>
+        <File Name="../../src/dlgEvtCmdGetPositionID.h"/>
+        <File Name="../../src/dlgEvtCmdEventMovement.cpp"/>
+        <File Name="../../src/dlgEvtCmdEventMovement.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="Page 3">
         <File Name="../../src/dlgEvtCmdPlayMusic.h"/>
         <File Name="../../src/dlgEvtCmdPlayMusic.cpp"/>
         <File Name="../../src/dlgEvtCmdFadeMusic.cpp"/>
         <File Name="../../src/dlgEvtCmdFadeMusic.h"/>
-        <File Name="../../src/dlgEvtCmdSaveMenuPermissions.h"/>
-        <File Name="../../src/dlgEvtCmdSaveMenuPermissions.cpp"/>
-        <File Name="../../src/dlgEvtCmdPlayMemorizedMusic.cpp"/>
-        <File Name="../../src/dlgEvtCmdPlayMemorizedMusic.h"/>
         <File Name="../../src/dlgEvtCmdSystemMenuPermissions.h"/>
         <File Name="../../src/dlgEvtCmdSystemMenuPermissions.cpp"/>
         <File Name="../../src/dlgEvtCmdPlaySound.cpp"/>
@@ -268,6 +268,8 @@
         <File Name="../../src/dlgEvtCmdEscapePlace.cpp"/>
         <File Name="../../src/dlgEvtCmdEscapePermissions.cpp"/>
         <File Name="../../src/dlgEvtCmdEscapePermissions.h"/>
+        <File Name="../../src/dlgEvtCmdSavePermissions.cpp"/>
+        <File Name="../../src/dlgEvtCmdSavePermissions.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
   </VirtualDirectory>
