@@ -170,6 +170,7 @@
         <File Name="../../src/graphics.h"/>
         <File Name="../../src/hslrgb.cpp"/>
         <File Name="../../src/hslrgb.h"/>
+		<File Name="../../src/pixel_format.h"/>
         <File Name="../../src/plane.cpp"/>
         <File Name="../../src/plane.h"/>
         <File Name="../../src/rect.cpp"/>
@@ -205,6 +206,9 @@
         <File Name="../../src/text.cpp"/>
         <File Name="../../src/surface.cpp"/>
         <File Name="../../src/surface.h"/>
+        <File Name="../../src/bitmap_utils.cpp"/>
+        <File Name="../../src/bitmap_utils.h"/>
+        <File Name="../../src/pixel_format.h"/>
       </VirtualDirectory>
       <VirtualDirectory Name="Input">
         <File Name="../../src/input.cpp"/>
@@ -261,6 +265,8 @@
       </VirtualDirectory>
       <File Name="../../src/utils.h"/>
       <File Name="../../src/utils.cpp"/>
+      <File Name="../../src/wcwidth.h"/>
+      <File Name="../../src/wcwidth.cpp"/>
     </VirtualDirectory>
     <File Name="../../src/main.cpp"/>
     <File Name="../../src/main_data.cpp"/>

@@ -76,7 +76,7 @@ void Scene_Title::Start() {
 		}
 
 		// File Finder cant be initialized earlier because we need the RPG-version
-		#ifndef UNIX
+		#ifdef _WIN32
 		FileFinder::Init();
 		#endif
 	}
@@ -193,12 +193,8 @@ void Scene_Title::CreateCommandWindow() {
 	options.push_back(Main_Data::vocabulary(114)); // new game
 	options.push_back(Main_Data::vocabulary(115)); // continue
 	options.push_back(Main_Data::vocabulary(117)); // quit
-	
-	// TODO: Calculate window width from max text length from options
-	int text_size = std::max(options[0].size() * 6, options[1].size() * 6);
-	text_size = std::max(text_size, (int)options[2].size() * 6);
 
-	command_window = new Window_Command(text_size + 24, options);
+	command_window = new Window_Command(options);
 	command_window->SetX(160 - command_window->GetWidth() / 2);
 	command_window->SetY(224 - command_window->GetHeight());
 

@@ -28,6 +28,7 @@
 #include "game_variables.hpp"
 #include "graphics.hpp"
 #include "input.hpp"
+#include "player.hpp"
 #include "util_macro.hpp"
 #include "utils.hpp"
 
@@ -46,7 +47,7 @@ Window_Message::Window_Message(int ix, int iy, int iwidth, int iheight) :
 	//cursor_width = 0;
 	active = false;
 	index = -1;
-	
+
 	number_input_window = new Window_NumberInput(0, 0);
 	number_input_window->SetVisible(false);
 
@@ -60,7 +61,9 @@ Window_Message::~Window_Message() {
 	//Game_Temp::message_window_showing = false;
 	// The Windows are already deleted in Graphics during closing
 	// But this probably memleaks during scene change?
-	//delete number_input_window;
+	if (!Player::exit_flag) {
+		delete number_input_window;
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -291,7 +294,7 @@ void Window_Message::UpdateMessage() {
 				// These commands support indirect access via \v[]
 				command_result = ParseCommandCode();
 				contents->TextDraw(contents_x, contents_y, command_result);
-				contents_x += contents->GetTextSize(command_result).width;
+				contents_x += contents->Surface::GetTextSize(command_result).width;
 				break;
 			case L'\\':
 				// Show Backslash
@@ -348,7 +351,7 @@ void Window_Message::UpdateMessage() {
 			// Normal Text
 			std::wstring glyph = text.substr(text_index, 1);
 			contents->TextDraw(contents_x, contents_y, glyph);
-			contents_x += 6;
+			contents_x += contents->Surface::GetTextSize(glyph).width;
 		}
 	}
 	loop_count = 0;

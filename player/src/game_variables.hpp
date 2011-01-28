@@ -34,8 +34,7 @@ public:
 		return Main_Data::project->getLSD().var(variable_id);
 		/*
 		if (variable_id <= 0 || (size_t)variable_id >= Data::variables.size()) {
-			Output::Warning("Variable index %d is invalid.\n\
-							Check the id with isValidVar before calling this!",
+			Output::Warning("Variable index %d is invalid.\n",
 							variable_id);
 
 			if (data.size() == 0) {

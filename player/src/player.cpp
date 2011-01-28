@@ -100,7 +100,7 @@ void Player::Init(int argc, char *argv[]) {
 		}
 	}
 
-#ifdef UNIX
+#ifndef _WIN32
 	FileFinder::Init();
 #endif
 
@@ -143,6 +143,7 @@ void Player::Run() {
 
 		for (size_t i = 0; i < Scene::old_instances.size(); ++i) {
 			//Output::Debug(Scene::scene_names[Scene::old_instances[i]->type]);
+			Graphics::Pop();
 			delete Scene::old_instances[i];
 		}
 		Scene::old_instances.clear();

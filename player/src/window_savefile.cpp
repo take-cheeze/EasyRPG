@@ -72,7 +72,7 @@ void Window_SaveFile::Refresh() {
 	contents->TextDraw(8, 32+2, Main_Data::vocabulary(128)); // level short
 
 	contents->GetFont()->color = Font::ColorDefault;
-	int lx = Main_Data::vocabulary(128).size() * 6;
+	int lx = Surface::GetTextSize(Main_Data::vocabulary(128)).width;
 	out.str("");
 	out << std::setw(2) << std::setfill(' ') << actor->GetLevel();
 	contents->TextDraw(8+lx, 32+2, out.str());
@@ -81,7 +81,7 @@ void Window_SaveFile::Refresh() {
 	contents->TextDraw(42, 32+2, Main_Data::vocabulary(129));
 
 	contents->GetFont()->color = Font::ColorDefault;
-	int hx = Main_Data::vocabulary(129).size() * 6;
+	int hx = Surface::GetTextSize(Main_Data::vocabulary(129)).width;
 	out.str("");
 	out << actor->GetHp();
 	contents->TextDraw(42+hx, 32+2, out.str());

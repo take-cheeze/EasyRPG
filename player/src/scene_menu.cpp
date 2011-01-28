@@ -87,7 +87,7 @@ void Scene_Menu::CreateCommandWindow() {
 	options.push_back(Data::terms.menu_quit);
 	*/
 
-	command_window = new Window_Command(88, options);
+	command_window = new Window_Command(options, 88);
 	command_window->SetIndex(menu_index);
 
 	// If there are no actors in the party disable Skills and Equipment
@@ -160,9 +160,15 @@ void Scene_Menu::UpdateActorSelection() {
 		switch (command_window->GetIndex()) {
 		case 1: // Tech Skill
 			Scene::Push(new Scene_Skill(menustatus_window->GetIndex()));
+			command_window->SetActive(true);
+			menustatus_window->SetActive(false);
+			menustatus_window->SetIndex(-1);
 			break;
 		case 2: // Equipment
 			Scene::Push(new Scene_Equip(menustatus_window->GetIndex()));
+			command_window->SetActive(true);
+			menustatus_window->SetActive(false);
+			menustatus_window->SetIndex(-1);
 			break;
 		}
 	}

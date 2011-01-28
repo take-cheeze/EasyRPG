@@ -974,17 +974,8 @@ bool Game_Interpreter::CommandControlVariables() { // Code ControlVars
 					value = Game_Party::ItemNumber(list[index][5]);
 					break;
 				case 1:
-					// Number of heroes that have the item equipped
-					std::vector<Game_Actor*>::iterator j;
-					for (j = Game_Party::GetActors().begin(); j != Game_Party::GetActors().end(); j++) {
-						if ( ((*j)->GetWeaponId() == list[index][6]) ||
-							((*j)->GetShieldId() == list[index][6]) ||
-							((*j)->GetArmorId() == list[index][6]) ||
-							((*j)->GetHelmetId() == list[index][6]) ||
-							((*j)->GetAccessoryId() == list[index][6]) ) {
-								value++;
-						}
-					}
+					// How often the item is equipped
+					value = Game_Party::ItemNumber(list[index][5], true);
 					break;
 			}
 			break;
@@ -1122,11 +1113,11 @@ bool Game_Interpreter::CommandControlVariables() { // Code ControlVars
 					value = Game_Party::GetDefeatCount();
 					break;
 				case 7:
-					// Number of flights (aka run away)
+					// Number of escapes (aka run away)
 					value = Game_Party::GetRunCount();
 					break;
 				case 8:
-					// TODO MIDI performance position (wtf is this?)
+					// TODO: MIDI play position
 					break;
 				case 9:
 					value = Game_System::ReadTimer(Game_System::Timer2);
@@ -1211,6 +1202,7 @@ bool Game_Interpreter::CommandControlVariables() { // Code ControlVars
 				Main_Data::setVar(Game_Variables[list[index][1]], MinSize);
 			}
 	}
+
 	Game_Map::SetNeedRefresh(true);
 	return true;
 }
@@ -1853,7 +1845,7 @@ bool Game_Interpreter::CommandConditionalBranch() { // Code 12010
 					break;
 				case 1:
 					// Name
-					result = (actor->GetName() ==  list[index].string());
+					result = (actor->GetName() == list[index].string());
 					break;
 				case 2:
 					// Higher or equal level
@@ -1861,10 +1853,10 @@ bool Game_Interpreter::CommandConditionalBranch() { // Code 12010
 					break;
 				case 3:
 					// Higher or equal HP
-					//result = (actor->hp >= list[index][3]);
+					result = (actor->GetHp() >= list[index][3]);
 					break;
 				case 4:
-					// Can learn skill
+					// Is skill learned
 					result = (actor->IsSkillLearned(list[index][3]));
 					break;
 				case 5:
@@ -2712,6 +2704,7 @@ bool Game_Interpreter::CommandEnemyEncounter() { // code 10710
 
 	CloseMessageWindow();
 	Game_Temp::battle_calling = true;
+
 	SetContinuation(&Game_Interpreter::ContinuationEnemyEncounter);
 	return false;
 }
@@ -2719,7 +2712,16 @@ bool Game_Interpreter::CommandEnemyEncounter() { // code 10710
 bool Game_Interpreter::ContinuationEnemyEncounter() {
 	switch (Game_Temp::battle_result) {
 		case Game_Temp::BattleVictory:
-			return SkipTo(VictoryHandler, EndBattle);
+			// ToDo: Battle system not implemented
+			Output::Warning("Battle system not implemented\n"\
+							"Simulating a win.");
+			if (!SkipTo(VictoryHandler, EndBattle)) {
+				// Was an event battle with no handlers
+				index++;
+				return false;
+			}
+			index++;
+			return true;
 		case Game_Temp::BattleEscape:
 			switch (Game_Temp::battle_escape_mode) {
 				case 0:	// disallowed - shouldn't happen

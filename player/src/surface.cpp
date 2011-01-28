@@ -25,8 +25,10 @@
 #include "cache.hpp"
 #include "bitmap.hpp"
 #include "bitmap_screen.hpp"
+#include "output.hpp"
 #include "text.hpp"
 #include "surface.hpp"
+#include "wcwidth.hpp"
 
 #if defined(USE_SDL_BITMAP)
 	#include "sdl_bitmap.hpp"
@@ -428,7 +430,7 @@ void Surface::Mask(int x, int y, Bitmap* src, Rect src_rect) {
 				dst_pix = GetUint32Color(dst_r, dst_g, dst_b, src_a);
 
 				src_pixels++;
-				*dst_pixels++ = dst_pix;
+				*dst_pixels++ = (uint16)dst_pix;
 			}
 		}
 	} else if (bpp() == 4) {
@@ -946,13 +948,23 @@ void Surface::RefreshCallback() {
 }
 
 ////////////////////////////////////////////////////////////
-Rect Surface::GetTextSize(std::string text) const {
+Rect Surface::GetTextSize(const std::string& text) {
 	return GetTextSize(Utils::DecodeUTF(text));
 }
 
-Rect Surface::GetTextSize(std::wstring text) const {
-	return Rect(0, 0, text.size() * 6, 12);
+Rect Surface::GetTextSize(const std::wstring& text) {
+	int size = mk_wcswidth(text.c_str(), text.size());
+
+	if (size == -1) {
+		Output::Warning("Text contains invalid chars.\n"\
+			"Is the encoding correct?");
+
+		return Rect(0, 0, text.size() * 6, 12);
+	} else {
+		return Rect(0, 0, size * 6, 12);
+	}
 }
+////////////////////////////////////////////////////////////
 
 Font* Surface::GetFont() const {
 	return font.get();
@@ -963,7 +975,7 @@ void Surface::SetFont(std::auto_ptr<Font> new_font) {
 }
 
 void Surface::TextDraw(int x, int y, int width, int height, std::wstring wtext, TextAlignment align) {
-	Rect rect = GetTextSize(wtext);
+	Rect rect = Surface::GetTextSize(wtext);
 	int dx = rect.width - width;
 
 	switch (align) {

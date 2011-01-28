@@ -76,9 +76,7 @@ void Scene_End::CreateCommandWindow() {
 	options.push_back(Main_Data::vocabulary(152)); // yes
 	options.push_back(Main_Data::vocabulary(153)); // no
 
-	// TODO: Calculate window width from max text length from options
-	int text_size = max(options[0].size() * 6, options[1].size() * 6);
-	command_window = new Window_Command(text_size + 24, options);
+	command_window = new Window_Command(options);
 	command_window->SetX(160 - command_window->GetWidth() / 2);
 	command_window->SetY(72 + 48);
 }
@@ -86,7 +84,7 @@ void Scene_End::CreateCommandWindow() {
 ////////////////////////////////////////////////////////////
 void Scene_End::CreateHelpWindow() {
 	std::string const exitMessage = Main_Data::vocabulary(151);
-	int text_size = exitMessage.size() * 6;
+	int text_size = Surface::GetTextSize(exitMessage).width;
 
 	help_window = new Window_Help(160 - (text_size + 16)/ 2,
 		72, text_size + 16, 32);
