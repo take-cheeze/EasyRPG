@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer402</property>
+                <property name="name">szState</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -109,7 +109,7 @@
                     <property name="proportion">0</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer403</property>
+                        <property name="name">szLeft</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -374,7 +374,7 @@
                     <property name="proportion">1</property>
                     <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
-                        <property name="name">bSizer404</property>
+                        <property name="name">szRight</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                         <object class="sizeritem" expanded="1">
@@ -383,7 +383,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer405</property>
+                                <property name="name">szTop</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -394,7 +394,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Name</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer251</property>
+                                        <property name="name">szStateName</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -496,7 +496,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Type</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer252</property>
+                                        <property name="name">szStateType</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -594,7 +594,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Color</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer253</property>
+                                        <property name="name">szStateColor</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -692,7 +692,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Priority</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer254</property>
+                                        <property name="name">szStatePriority</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -794,7 +794,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Action range</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer255</property>
+                                        <property name="name">szStateActionRange</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -892,7 +892,7 @@
                             <property name="proportion">0</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer406</property>
+                                <property name="name">szMiddleTop</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -903,7 +903,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Effect Rate</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer256</property>
+                                        <property name="name">szStateEffectRate</property>
                                         <property name="orient">wxHORIZONTAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -918,7 +918,7 @@
                                                 <property name="growablerows"></property>
                                                 <property name="hgap">2</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">fgSizer45</property>
+                                                <property name="name">szStateEffectRate2</property>
                                                 <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
                                                 <property name="permission">none</property>
                                                 <property name="rows">5</property>
@@ -2215,7 +2215,7 @@
                                         <property name="id">wxID_ANY</property>
                                         <property name="label">Heal method</property>
                                         <property name="minimum_size"></property>
-                                        <property name="name">sbSizer257</property>
+                                        <property name="name">szMiddleTopCenter</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <event name="OnUpdateUI"></event>
@@ -2227,7 +2227,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Natural healing</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer258</property>
+                                                <property name="name">szStateNaturalHealing</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2242,7 +2242,7 @@
                                                         <property name="growablerows"></property>
                                                         <property name="hgap">2</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">fgSizer46</property>
+                                                        <property name="name">szStateNaturalHealing2</property>
                                                         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
                                                         <property name="permission">none</property>
                                                         <property name="rows">2</property>
@@ -2697,7 +2697,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">After hit healing</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer259</property>
+                                                <property name="name">szStateAfterHitHealing</property>
                                                 <property name="orient">wxVERTICAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -2791,7 +2791,7 @@
                                                     <property name="proportion">1</property>
                                                     <object class="wxBoxSizer" expanded="1">
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">bSizer407</property>
+                                                        <property name="name">szStateAfterHitHealingHealChance</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <object class="sizeritem" expanded="1">
@@ -2978,7 +2978,7 @@
                                     <property name="proportion">1</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer408</property>
+                                        <property name="name">szMiddleTopRight</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -2987,7 +2987,7 @@
                                             <property name="proportion">1</property>
                                             <object class="wxBoxSizer" expanded="1">
                                                 <property name="minimum_size"></property>
-                                                <property name="name">bSizer409</property>
+                                                <property name="name">szMiddleTopRightTop</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <object class="sizeritem" expanded="1">
@@ -2998,7 +2998,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Decrease capacities</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer260</property>
+                                                        <property name="name">szStateDecreaseCapacities</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -3010,7 +3010,7 @@
                                                                 <property name="cols">2</property>
                                                                 <property name="hgap">2</property>
                                                                 <property name="minimum_size"></property>
-                                                                <property name="name">gSizer9</property>
+                                                                <property name="name">szStateDecreaseCapacities2</property>
                                                                 <property name="permission">none</property>
                                                                 <property name="rows">2</property>
                                                                 <property name="vgap">2</property>
@@ -3366,7 +3366,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">Attack chance</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer261</property>
+                                                        <property name="name">szStateAttackChance</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -3554,7 +3554,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Skill exceptions</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer262</property>
+                                                <property name="name">szStateSkillExceptions</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -3569,7 +3569,7 @@
                                                         <property name="growablerows">0,1</property>
                                                         <property name="hgap">2</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">fgSizer47</property>
+                                                        <property name="name">szStateSkillExceptions2</property>
                                                         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
                                                         <property name="permission">none</property>
                                                         <property name="rows">2</property>
@@ -4102,7 +4102,7 @@
                             <property name="proportion">1</property>
                             <object class="wxBoxSizer" expanded="1">
                                 <property name="minimum_size"></property>
-                                <property name="name">bSizer410</property>
+                                <property name="name">szMiddleBottom</property>
                                 <property name="orient">wxHORIZONTAL</property>
                                 <property name="permission">none</property>
                                 <object class="sizeritem" expanded="1">
@@ -4111,7 +4111,7 @@
                                     <property name="proportion">1</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer411</property>
+                                        <property name="name">szMiddleBottomLeft</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -4122,7 +4122,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Actor hit</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer263</property>
+                                                <property name="name">szStateMessageActorHit</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4308,7 +4308,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Enemy hit</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer264</property>
+                                                <property name="name">szStateMessageEnemyHit</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4494,7 +4494,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Message if already in this state</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer265</property>
+                                                <property name="name">szStateMessageAlreadyInState</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4680,7 +4680,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Normal state by one</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer266</property>
+                                                <property name="name">szStateMessageNormalState</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -4866,7 +4866,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">Recover message</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer267</property>
+                                                <property name="name">szStateMessageRecover</property>
                                                 <property name="orient">wxHORIZONTAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -5052,7 +5052,7 @@
                                     <property name="proportion">0</property>
                                     <object class="wxBoxSizer" expanded="1">
                                         <property name="minimum_size"></property>
-                                        <property name="name">bSizer412</property>
+                                        <property name="name">szMiddleBottomRight</property>
                                         <property name="orient">wxVERTICAL</property>
                                         <property name="permission">none</property>
                                         <object class="sizeritem" expanded="1">
@@ -5063,7 +5063,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">HP reduction</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer268</property>
+                                                <property name="name">szStateHPReduction</property>
                                                 <property name="orient">wxVERTICAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -5075,7 +5075,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">HP reduction in every turn</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer269</property>
+                                                        <property name="name">szStateHPReduction2</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -5517,7 +5517,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">HP reduction on move</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer270</property>
+                                                        <property name="name">szStateHPReductionOnMove</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -5877,7 +5877,7 @@
                                                 <property name="id">wxID_ANY</property>
                                                 <property name="label">MP reduction</property>
                                                 <property name="minimum_size"></property>
-                                                <property name="name">sbSizer271</property>
+                                                <property name="name">szStateMPReduction</property>
                                                 <property name="orient">wxVERTICAL</property>
                                                 <property name="permission">none</property>
                                                 <event name="OnUpdateUI"></event>
@@ -5889,7 +5889,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">MP reduction in every turn</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer272</property>
+                                                        <property name="name">szStateReductionInEveryTurn</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>
@@ -6331,7 +6331,7 @@
                                                         <property name="id">wxID_ANY</property>
                                                         <property name="label">MP reduction on move</property>
                                                         <property name="minimum_size"></property>
-                                                        <property name="name">sbSizer273</property>
+                                                        <property name="name">szStateMPReductionOnMove</property>
                                                         <property name="orient">wxHORIZONTAL</property>
                                                         <property name="permission">none</property>
                                                         <event name="OnUpdateUI"></event>

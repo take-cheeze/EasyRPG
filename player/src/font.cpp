@@ -18,6 +18,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <vector>
 #include "filefinder.hpp"
 #include "output.hpp"
 #include "system.hpp"
@@ -32,44 +33,16 @@
 /// Static Variables
 ////////////////////////////////////////////////////////////
 const std::string Font::default_name = FileFinder::DefaultFont();
-const int Font::default_size = 9;
-const bool Font::default_bold = false;
-const bool Font::default_italic = false;
-const int Font::default_color = 0;
+boost::ptr_vector<Font> Font::fonts;
 
 ////////////////////////////////////////////////////////////
 /// Constructor
 ////////////////////////////////////////////////////////////
-Font::Font():
-	name(default_name),
-	size(default_size),
-	bold(default_bold),
-	italic(default_italic),
-	color(default_color) {
-}
-
-Font::Font(int _size):
-	name(default_name),
-	size(_size),
-	bold(default_bold),
-	italic(default_italic),
-	color(default_color) {
-
-}
-
-Font::Font(std::string _name):
-	name(_name),
-	size(default_size),
-	bold(default_bold),
-	italic(default_italic),
-	color(default_color) {
-}
-Font::Font(std::string _name, int _size):
-	name(_name),
-	size(_size),
-	bold(default_bold),
-	italic(default_italic),
-	color(default_color) {
+Font::Font(const std::string& name, int size, bool bold, bool italic):
+	name(name),
+	size(size),
+	bold(bold),
+	italic(italic) {
 }
 
 ////////////////////////////////////////////////////////////
@@ -81,29 +54,43 @@ Font::~Font() {
 ////////////////////////////////////////////////////////////
 /// Class Exists
 ////////////////////////////////////////////////////////////
-bool Font::Exists(std::string name) {
+bool Font::Exists(const std::string& name) {
 	return FileFinder::FindFont(name) != "";
 }
 
 ////////////////////////////////////////////////////////////
 /// Factory
 ////////////////////////////////////////////////////////////
-std::auto_ptr<Font> Font::CreateFont() {
+Font* Font::CreateFont(const std::string& _name, int size, bool bold, bool italic) {
+	const std::string& name = _name.empty() ? default_name : name;
+	if (size == 0)
+		size = default_size;
+
+	boost::ptr_vector<Font>::iterator it;
+	for (it = fonts.begin(); it != fonts.end(); it++) {
+		if (it->name == name && it->size == size &&
+			it->bold == bold && it->italic == italic)
+			return &(*it);
+	}
+
 #ifdef USE_SDL_TTF
-	return std::auto_ptr<Font>(new SdlFont());
+	std::auto_ptr<Font> font(new SdlFont(name, size, bold, italic));
 #else
-	return std::auto_ptr<Font>(new FTFont());
+	std::auto_ptr<Font> font(new FTFont(name, size, bold, italic));
 #endif
+	fonts.push_back(font);
+	return &fonts.back();
 }
 
 ////////////////////////////////////////////////////////////
 /// Cleanup
 ////////////////////////////////////////////////////////////
 void Font::Dispose() {
-#ifdef USE_SDL_TTF
-	SdlFont::Dispose();
-#else
-	FTFont::Dispose();
-#endif
+	/*
+	std::vector<Font*>::const_iterator it;
+	for (it = fonts.begin(); it != fonts.end(); it++)
+		delete *it;
+	fonts.clear();
+	*/
 }
 

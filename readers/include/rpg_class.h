@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 #include "rpg_learning.h"
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::Class class
@@ -52,7 +53,7 @@ namespace RPG {
 		std::vector<Learning> skills;
 		std::vector<unsigned char> state_ranks;
 		std::vector<unsigned char> attribute_ranks;
-		std::vector<unsigned int> battle_commands;
+		std::vector<uint32_t> battle_commands;
 	};
 }
 

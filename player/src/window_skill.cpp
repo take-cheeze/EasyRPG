@@ -82,16 +82,12 @@ void Window_Skill::DrawItem(int index) {
 	if (skill_id > 0) {
 		int const costs = Main_Data::project->getLDB().skill()[skill_id][11].to<int>();
 		bool enabled = Game_Actors::GetActor(actor_id)->IsSkillUsable(skill_id);
-		if (!enabled) {
-			contents->GetFont()->color = Font::ColorDisabled;
-		} else {
-			contents->GetFont()->color = Font::ColorDefault;
-		}
+		int color = !enabled ? Font::ColorDisabled : Font::ColorDefault;
 		
 		std::stringstream ss;
 		ss << costs;
-		contents->TextDraw(rect.x + rect.width - 28, rect.y, "-");
-		contents->TextDraw(rect.x + rect.width - 6, rect.y, ss.str(), Surface::TextAlignRight);
+		contents->TextDraw(rect.x + rect.width - 28, rect.y, color, "-");
+		contents->TextDraw(rect.x + rect.width - 6, rect.y, color, ss.str(), Surface::TextAlignRight);
 
 		DrawSkillName(&Main_Data::project->getLDB().skill()[skill_id], rect.x, rect.y, enabled);
 	}

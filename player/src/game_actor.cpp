@@ -53,6 +53,7 @@ void Game_Actor::Setup(int actor_id) {
 	exp = exp_list[level - 1];
 	hp = GetMaxHp();
 	sp = GetMaxSp();
+
 	two_swords_style = actor[21].to<bool>();
 	eastl::vector<uint32_t> buf = actor[80].toBinary().toVector<uint32_t>();
 	battle_commands.assign(buf.begin(), buf.end());
@@ -62,6 +63,14 @@ void Game_Actor::Setup(int actor_id) {
 	for (Array2D::const_iterator i = skillList.begin(); i != skillList.end(); ++i) {
 		if ((*i->second)[1].to<int>() <= level) {
 			LearnSkill((*i->second)[2].to<int>());
+	/*
+	two_swords_style = actor.two_swords_style;
+	battle_commands = std::vector<uint32_t>(actor.battle_commands);
+
+	for (size_t i = 0; i < actor.skills.size(); ++i) {
+		if (actor.skills[i].level <= level) {
+			LearnSkill(actor.skills[i].skill_id);
+	*/
 		}
 	}
 }
@@ -466,7 +475,7 @@ void Game_Actor::ChangeBattleCommands(bool add, int id) {
 		battle_commands.clear();
 	}
 	else {
-		std::vector<unsigned int>::iterator it;
+		std::vector<uint32_t>::iterator it;
 		it = std::find(battle_commands.begin(), battle_commands.end(), id);
 		if (it != battle_commands.end())
 			battle_commands.erase(it);

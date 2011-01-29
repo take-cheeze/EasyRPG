@@ -29,7 +29,7 @@
 #include "wcwidth.hpp"
 
 ////////////////////////////////////////////////////////////
-void Text::Draw(Surface* dest, int x, int y, std::wstring wtext, Surface::TextAlignment align) {
+void Text::Draw(Surface* dest, int x, int y, int color, std::wstring wtext, Surface::TextAlignment align) {
 	if (wtext.length() == 0) return;
 
 	Font* font = dest->GetFont();
@@ -62,13 +62,17 @@ void Text::Draw(Surface* dest, int x, int y, std::wstring wtext, Surface::TextAl
 
 	// Get the Shadow color
 	Color shadow_color(Cache::system_info.sh_color);
-	// If shadow is pure black, add 1 to blue channel
+	// If shadow is pure black, increase blue channel
 	// so it doesn't become transparent
 	if ((shadow_color.red == 0) &&
 		(shadow_color.green == 0) &&
 		(shadow_color.blue == 0) ) {
-		// FIXME: what if running in 16 bpp?
-		shadow_color.blue++;
+		
+		if (text_surface->bpp() >= 3) {
+			shadow_color.blue++;
+		} else {
+			shadow_color.blue += 8;
+		}
 	}
 
 	// Where to draw the next glyph (x pos)
@@ -119,7 +123,7 @@ void Text::Draw(Surface* dest, int x, int y, std::wstring wtext, Surface::TextAl
 		}
 
 		// Get color region from system graphic
-		Rect clip_system(8+16*(font->color%10), 4+48+16*(font->color/10), 6, 12);
+		Rect clip_system(8+16*(color%10), 4+48+16*(color/10), 6, 12);
 
 		std::auto_ptr<Surface> char_surface = Surface::CreateSurface(mask->GetWidth(), mask->GetHeight(), true);
 		#ifndef USE_ALPHA
@@ -177,9 +181,9 @@ void Text::Draw(Surface* dest, int x, int y, std::wstring wtext, Surface::TextAl
 	dest->Blit(ix, iy, text_bmp.get(), src_rect, 255);
 }
 
-void Text::Draw(Surface* dest, int x, int y, std::string text, Surface::TextAlignment align) {
+void Text::Draw(Surface* dest, int x, int y, int color, std::string text, Surface::TextAlignment align) {
 	if (text.length() == 0) return;
 
 	std::wstring wtext = Utils::DecodeUTF(text);
-	Draw(dest, x, y, wtext, align);
+	Draw(dest, x, y, color, wtext, align);
 }

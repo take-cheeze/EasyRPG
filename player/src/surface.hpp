@@ -179,11 +179,12 @@ public:
 	/// Draws text to bitmap.
 	/// @param x : x coordinate where text rendering starts
 	/// @param y : y coordinate where text rendering starts
+	/// @param color : text color
 	/// @param text : text to draw
 	/// @param align : text alignment
 	////////////////////////////////////////////////////////
-	virtual void TextDraw(int x, int y, std::string text, TextAlignment align = Surface::TextAlignLeft);
-	virtual void TextDraw(int x, int y, std::wstring text, TextAlignment align = Surface::TextAlignLeft);
+	virtual void TextDraw(int x, int y, int color, std::string text, TextAlignment align = Surface::TextAlignLeft);
+	virtual void TextDraw(int x, int y, int color, std::wstring text, TextAlignment align = Surface::TextAlignLeft);
 
 	////////////////////////////////////////////////////////
 	/// Draws text to bitmap.
@@ -191,20 +192,22 @@ public:
 	/// @param y : y coordinate of bounding rectangle
 	/// @param width : width of bounding rectangle
 	/// @param height : height of bounding rectangle
+	/// @param color : text color
 	/// @param text : text to draw
 	/// @param align : text alignment inside bounding rectangle
 	////////////////////////////////////////////////////////
-	virtual void TextDraw(int x, int y, int width, int height, std::string text, TextAlignment align = Surface::TextAlignLeft);
-	virtual void TextDraw(int x, int y, int width, int height, std::wstring text, TextAlignment align = Surface::TextAlignLeft);
+	virtual void TextDraw(int x, int y, int width, int height, int color, std::string text, TextAlignment align = Surface::TextAlignLeft);
+	virtual void TextDraw(int x, int y, int width, int height, int color, std::wstring text, TextAlignment align = Surface::TextAlignLeft);
 
 	////////////////////////////////////////////////////////
 	/// Draws text to bitmap.
 	/// @param rect : bounding rectangle
+	/// @param color : text color
 	/// @param text : text to draw
 	/// @param align : text alignment inside bounding rectangle
 	////////////////////////////////////////////////////////
-	virtual void TextDraw(Rect rect, std::string text, TextAlignment align = Surface::TextAlignLeft);
-	virtual void TextDraw(Rect rect, std::wstring text, TextAlignment align = Surface::TextAlignLeft);
+	virtual void TextDraw(Rect rect, int color, std::string text, TextAlignment align = Surface::TextAlignLeft);
+	virtual void TextDraw(Rect rect, int color, std::wstring text, TextAlignment align = Surface::TextAlignLeft);
 
 	////////////////////////////////////////////////////////
 	/// Get space needed to draw some text.
@@ -234,9 +237,10 @@ public:
 	virtual Font* GetFont() const;
 
 	/// @param text drawing font
-	virtual void SetFont(std::auto_ptr<Font> font);
+	virtual void SetFont(Font* font);
 
 protected:
+	friend class Text;
 	friend class FTFont;
 	template <class T> friend class BitmapUtils;
 
@@ -248,7 +252,7 @@ protected:
 	Surface();
 
 	/// Font for text drawing.
-	boost::scoped_ptr<Font> font;
+	Font* font;
 
 	virtual void RefreshCallback();
 

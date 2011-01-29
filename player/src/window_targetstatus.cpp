@@ -42,12 +42,10 @@ void Window_TargetStatus::Refresh() {
 		return;
 	}
 
-	contents->GetFont()->color = 1;
-
 	if (use_item) {
-		contents->TextDraw(0, 0, Main_Data::vocabulary(92));
+		contents->TextDraw(0, 0, 1, Main_Data::vocabulary(92));
 	} else {
-		contents->TextDraw(0, 0, Main_Data::vocabulary(131));
+		contents->TextDraw(0, 0, 1, Main_Data::vocabulary(131));
 	}
 
 	std::stringstream ss;
@@ -57,8 +55,7 @@ void Window_TargetStatus::Refresh() {
 		ss << Main_Data::project->getLDB().skill()[id][11].to<int>();
 	}
 
-	contents->GetFont()->color = Font::ColorDefault;
-	contents->TextDraw(contents->GetWidth() - contents->GetTextSize(ss.str()).width, 0, ss.str(), Surface::TextAlignRight);
+	contents->TextDraw(contents->GetWidth() - contents->GetTextSize(ss.str()).width, 0, Font::ColorDefault, ss.str(), Surface::TextAlignRight);
 }
 
 ////////////////////////////////////////////////////////////

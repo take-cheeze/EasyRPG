@@ -76,6 +76,8 @@ Window_ShopParty::~Window_ShopParty() {
 void Window_ShopParty::Refresh() {
 	contents->Clear();
 
+	Bitmap* system = Cache::System(Main_Data::system()[19].toString().toSystem());
+
 	const std::vector<Game_Actor*>& actors = Game_Party::GetActors();
 	for (size_t i = 0; i < actors.size() && i < 4; i++) {
 		Game_Actor *actor = actors[i];
@@ -86,12 +88,60 @@ void Window_ShopParty::Refresh() {
 		bool equippable = item_id == 0 || actor->IsEquippable(item_id);
 		Bitmap *bm = bitmaps[i][phase][equippable ? 1 : 0];
 		contents->Blit(i * 32, 0, bm, bm->GetRect(), 255);
-		bool is_equipped = false;
-		//check if item is equipped by any member
-		for (int j = 0; j < 5; ++j)
-			is_equipped |= (actor->GetEquipment(j) == item_id);
-		if (is_equipped) 
-			contents->TextDraw(i * 32 + 18, 22, "E");
+
+		if (equippable) {
+			//check if item is equipped by each member
+			bool is_equipped = false;
+			for (int j = 0; j < 5; ++j)
+				is_equipped |= (actor->GetEquipment(j) == item_id);
+			if (is_equipped) 
+				contents->Blit(i * 32 + 20, 24, system, Rect(128 + 8 * phase, 24, 8, 8), 255);
+			else {
+
+				RPG::Item const& new_item = Main_Data::item(item_id);
+				int item_type =  new_item[3].to<int>();
+				// int equip_type = item_type - 1;
+				RPG::Item const* current_item = NULL;
+
+				switch (item_type) {
+				
+				//get the current equipped item
+				case rpg2k::Item::WEAPON:
+					if (actor->GetWeaponId() > 0)
+						current_item = &Main_Data::item(actor->GetWeaponId());
+					break;
+				case rpg2k::Item::HELMET:
+					if (actor->GetHelmetId() > 0)
+						current_item = &Main_Data::item(actor->GetHelmetId());
+					break;
+				case rpg2k::Item::SHIELD:
+					if (actor->GetShieldId() > 0)
+						current_item = &Main_Data::item(actor->GetShieldId());
+					break;
+				case rpg2k::Item::ARMOR:
+					if (actor->GetArmorId() > 0)
+						current_item = &Main_Data::item(actor->GetArmorId());
+					break;
+				case rpg2k::Item::ACCESSORY:
+					if (actor->GetAccessoryId() > 0)
+						current_item = &Main_Data::item(actor->GetAccessoryId());
+					break;
+				}
+
+				if (current_item != NULL) {
+					int diff_atk = new_item[11].to<int>() - (*current_item)[11].to<int>();
+					int diff_def = new_item[12].to<int>() - (*current_item)[12].to<int>();
+					int diff_spi = new_item[13].to<int>() - (*current_item)[13].to<int>();
+					int diff_agi = new_item[14].to<int>() - (*current_item)[14].to<int>();
+					if (diff_atk > 0 || diff_def > 0 || diff_spi > 0 || diff_agi > 0)
+						contents->Blit(i * 32 + 20, 24, system, Rect(128 + 8 * phase, 0, 8, 8), 255);
+					else if (diff_atk < 0 || diff_def < 0 || diff_spi < 0 || diff_agi < 0)
+						contents->Blit(i * 32 + 20, 24, system, Rect(128 + 8 * phase, 16, 8, 8), 255);
+					else
+						contents->Blit(i * 32 + 20, 24, system, Rect(128 + 8 * phase, 8, 8, 8), 255);
+				}
+			}
+		}
 	}
 }
 

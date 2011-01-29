@@ -37,6 +37,7 @@
 #endif
 #if (defined(_WIN32) && !defined(_DEBUG))
 	#include <Windows.h>
+	#include <WinIoCtl.h>
 	#include <DbgHelp.h>
 	static void InitMiniDumpWriter();
 #endif
@@ -166,6 +167,10 @@ void Player::Resume() {
 
 ////////////////////////////////////////////////////////////
 void Player::Update() {
+	if (Input::IsTriggered(Input::TOGGLE_FPS)) {
+		Graphics::fps_on_screen = !Graphics::fps_on_screen;
+	}
+
 	DisplayUi->ProcessEvents();
 
 	if (exit_flag) {

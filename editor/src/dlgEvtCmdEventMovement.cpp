@@ -15,11 +15,11 @@
 // along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "dlgEvtCmdFlashCharacter.h"
+#include "dlgEvtCmdEventMovement.h"
 
-dlgEvtCmdFlashCharacter::dlgEvtCmdFlashCharacter(wxWindow* parent) : dlgEvtCmdFlashCharacter_Base(parent) {
+dlgEvtCmdEventMovement::dlgEvtCmdEventMovement(wxWindow* parent) : dlgEvtCmdEventMovement_Base(parent) {
 }
 
-void dlgEvtCmdFlashCharacter::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdEventMovement::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

@@ -52,7 +52,7 @@ public:
 
 		friend class Picture;
 	};
-	Picture();
+	Picture(int ID);
 
 	void Show(const std::string& name);
 	void Erase();
@@ -70,6 +70,7 @@ public:
 	void Update();
 
 private:
+	int ID;
 	std::string name;
 	PictureState finish_state;
 	PictureState current_state;

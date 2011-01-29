@@ -85,7 +85,7 @@ SdlBitmap::SdlBitmap(int width, int height, bool itransparent) {
 	if (transparent)
 		flags |= TRANSPARENT_FLAGS;
 
-	SDL_Surface* temp = SDL_CreateRGBSurface(flags, width, height, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, RMASK, GMASK, BMASK, AMASK);
+	SDL_Surface* temp = SDL_CreateRGBSurface(flags, width, height, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
 
 	if (temp == NULL) {
 		Output::Error("Couldn't create %dx%d image.\n%s\n", width, height, SDL_GetError());
@@ -158,7 +158,7 @@ SdlBitmap::SdlBitmap(Bitmap* source, Rect src_rect, bool itransparent) {
 	if (transparent)
 		flags |= TRANSPARENT_FLAGS;
 
-	SDL_Surface* temp = SDL_CreateRGBSurface(flags, src_rect.width, src_rect.height, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, RMASK, GMASK, BMASK, AMASK);
+	SDL_Surface* temp = SDL_CreateRGBSurface(flags, src_rect.width, src_rect.height, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
 
 	if (temp == NULL) {
 		Output::Error("Couldn't create %dx%d image.\n%s\n", src_rect.width, src_rect.height, SDL_GetError());
@@ -315,6 +315,19 @@ void SdlBitmap::FillRect(Rect dst_rect, const Color &color) {
 	SDL_Rect sdl_dst_rect = {(int16)dst_rect.x, (int16)dst_rect.y, (uint16)dst_rect.width, (uint16)dst_rect.height};
 
 	SDL_FillRect(bitmap, &sdl_dst_rect, SDL_MapRGBA(bitmap->format, color.red, color.green, color.blue, color.alpha));
+
+	RefreshCallback();
+}
+
+////////////////////////////////////////////////////////////
+void SdlBitmap::Mask(int x, int y, Bitmap* src, Rect src_rect) {
+	#ifdef USE_ALPHA
+		Surface::Mask(x, y, src, src_rect);
+	#else
+		src->SetTransparentColor(Color(255,255,255,0));
+		Blit(x, y, src, src_rect, 255);
+		SetTransparentColor(Color(0,0,0,0));
+	#endif
 
 	RefreshCallback();
 }

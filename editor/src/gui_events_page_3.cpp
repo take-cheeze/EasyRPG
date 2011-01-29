@@ -1778,15 +1778,15 @@ dlgEvtCmdCallEvent_Base::~dlgEvtCmdCallEvent_Base()
 {
 }
 
-dlgEvtCmdNotes_Base::dlgEvtCmdNotes_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+dlgEvtCmdNote_Base::dlgEvtCmdNote_Base( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* szNotes;
-	szNotes = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* szNote;
+	szNote = new wxBoxSizer( wxVERTICAL );
 	
-	tcNotes = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_LINEWRAP|wxTE_WORDWRAP );
-	szNotes->Add( tcNotes, 1, wxALL|wxEXPAND, 1 );
+	tcNote = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_LINEWRAP|wxTE_WORDWRAP );
+	szNote->Add( tcNote, 1, wxALL|wxEXPAND, 1 );
 	
 	wxBoxSizer* szBottom;
 	szBottom = new wxBoxSizer( wxHORIZONTAL );
@@ -1803,13 +1803,13 @@ dlgEvtCmdNotes_Base::dlgEvtCmdNotes_Base( wxWindow* parent, wxWindowID id, const
 	btnHelp->SetDefault(); 
 	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	szNotes->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
+	szNote->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
-	this->SetSizer( szNotes );
+	this->SetSizer( szNote );
 	this->Layout();
-	szNotes->Fit( this );
+	szNote->Fit( this );
 }
 
-dlgEvtCmdNotes_Base::~dlgEvtCmdNotes_Base()
+dlgEvtCmdNote_Base::~dlgEvtCmdNote_Base()
 {
 }

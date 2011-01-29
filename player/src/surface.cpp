@@ -90,8 +90,8 @@ std::auto_ptr<Surface> Surface::CreateSurface(int width, int height, bool transp
 
 ////////////////////////////////////////////////////////////
 Surface::Surface() :
-	font( Font::CreateFont().release() ),
 	editing(false) {
+	font = Font::CreateFont();
 }
 
 ////////////////////////////////////////////////////////////
@@ -415,6 +415,7 @@ void Surface::Mask(int x, int y, Bitmap* src, Rect src_rect) {
 	src->Lock();
 
 	if (bpp() == 2) {
+		#ifdef USE_ALPHA
 		for (int j = 0; j < src_rect.height; j++) {
 			uint16* src_pixels = (uint16*) src->pixels() + (src_rect.y + j) * src->pitch() / 2 + src_rect.x;
 			uint16* dst_pixels = (uint16*) pixels() + (y + j) * pitch() / 2 + x;
@@ -433,6 +434,21 @@ void Surface::Mask(int x, int y, Bitmap* src, Rect src_rect) {
 				*dst_pixels++ = (uint16)dst_pix;
 			}
 		}
+		#else
+		const uint16 src_trans = src->colorkey();
+		const uint16 dst_trans = colorkey();
+
+		for (int j = 0; j < src_rect.height; j++) {
+			uint16* src_pixels = (uint16*) src->pixels() + (src_rect.y + j) * src->pitch() / src->bpp() + src_rect.x;
+			uint16* dst_pixels = (uint16*) pixels() + (y + j) * pitch() / bpp() + x;
+			for (int i = 0; i < src_rect.width; i++) {
+				if (*src_pixels == src_trans)
+					*dst_pixels = dst_trans;
+				src_pixels++;
+				dst_pixels++;
+			}
+		}
+		#endif
 	} else if (bpp() == 4) {
 		#ifdef USE_ALPHA
 		const int src_abyte = GetMaskByte(src->amask());
@@ -707,7 +723,7 @@ void Surface::ToneChange(const Tone &tone) {
 			for (int i = 0; i < height(); i++) {
 				for (int j = 0; j < width(); j++) {
 					#ifndef USE_ALPHA
-						if (transparent && ((uint32*)dst_pixels)[0] == colorkey()) {
+						if (transparent && ((uint16*)dst_pixels)[0] == colorkey()) {
 							dst_pixels++;
 							continue;
 						}
@@ -731,7 +747,7 @@ void Surface::ToneChange(const Tone &tone) {
 			for (int i = 0; i < height(); i++) {
 				for (int j = 0; j < width(); j++) {
 					#ifndef USE_ALPHA
-						if (transparent && ((uint32*)dst_pixels)[0] == colorkey()) {
+						if (transparent && ((uint16*)dst_pixels)[0] == colorkey()) {
 							dst_pixels++;
 							continue;
 						}
@@ -967,48 +983,48 @@ Rect Surface::GetTextSize(const std::wstring& text) {
 ////////////////////////////////////////////////////////////
 
 Font* Surface::GetFont() const {
-	return font.get();
+	return font;
 }
 
-void Surface::SetFont(std::auto_ptr<Font> new_font) {
-	font.reset( new_font.release() );
+void Surface::SetFont(Font* new_font) {
+	font = new_font;
 }
 
-void Surface::TextDraw(int x, int y, int width, int height, std::wstring wtext, TextAlignment align) {
+void Surface::TextDraw(int x, int y, int width, int height, int color, std::wstring wtext, TextAlignment align) {
 	Rect rect = Surface::GetTextSize(wtext);
 	int dx = rect.width - width;
 
 	switch (align) {
 		case TextAlignLeft:
-			TextDraw(x, y, wtext);
+			TextDraw(x, y, color, wtext);
 			break;
 		case TextAlignCenter:
-			TextDraw(x + dx / 2, y, wtext);
+			TextDraw(x + dx / 2, y, color, wtext);
 			break;
 		case TextAlignRight:
-			TextDraw(x + dx, y, wtext);
+			TextDraw(x + dx, y, color, wtext);
 			break;
 	}
 }
 
-void Surface::TextDraw(int x, int y, int width, int height, std::string text, TextAlignment align) {
-	TextDraw(x, y, width, height, Utils::DecodeUTF(text), align);
+void Surface::TextDraw(int x, int y, int width, int height, int color, std::string text, TextAlignment align) {
+	TextDraw(x, y, width, height, color, Utils::DecodeUTF(text), align);
 }
 
-void Surface::TextDraw(Rect rect, std::wstring wtext, TextAlignment align) {
-	TextDraw(rect.x, rect.y, rect.width, rect.height, wtext, align);
+void Surface::TextDraw(Rect rect, int color, std::wstring wtext, TextAlignment align) {
+	TextDraw(rect.x, rect.y, rect.width, rect.height, color, wtext, align);
 }
 
-void Surface::TextDraw(Rect rect, std::string text, TextAlignment align) {
-	TextDraw(rect, Utils::DecodeUTF(text), align);
+void Surface::TextDraw(Rect rect, int color, std::string text, TextAlignment align) {
+	TextDraw(rect, color, Utils::DecodeUTF(text), align);
 }
 
-void Surface::TextDraw(int x, int y, std::wstring wtext, TextAlignment align) {
-	Text::Draw(this, x, y, wtext, align);
+void Surface::TextDraw(int x, int y, int color, std::wstring wtext, TextAlignment align) {
+	Text::Draw(this, x, y, color, wtext, align);
 	RefreshCallback();
 }
 
-void Surface::TextDraw(int x, int y, std::string text, TextAlignment align) {
-	TextDraw(x, y, Utils::DecodeUTF(text), align);
+void Surface::TextDraw(int x, int y, int color, std::string text, TextAlignment align) {
+	TextDraw(x, y, color, Utils::DecodeUTF(text), align);
 }
 
