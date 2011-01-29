@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_system.h"
-#include "audio.h"
-#include "graphics.h"
-#include "main_data.h"
+#include "game_system.hpp"
+#include "audio.hpp"
+#include "graphics.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 namespace Game_System {
@@ -30,10 +30,10 @@ namespace Game_System {
 	bool escape_disabled;
 	bool main_menu_disabled;
 	unsigned int save_count;
-	RPG::Music current_bgm;
-	RPG::Music memorized_bgm;
-	RPG::Music system_bgm[BGM_Count];
-	RPG::Sound system_sfx[SFX_Count];
+	RPG::Music const* current_bgm;
+	RPG::Music const* memorized_bgm;
+	RPG::Music const* system_bgm[BGM_Count];
+	RPG::Sound const* system_sfx[SFX_Count];
 	Timer timers[2];
 	int transitions[Transition_Count];
 	std::map<int, Target> teleport_targets;
@@ -50,21 +50,21 @@ void Game_System::Init() {
 	main_menu_disabled = false;
 	save_count = 0;
 	
-	SetSystemBGM(BGM_Battle, Data::system.battle_music); 
-	SetSystemBGM(BGM_Victory, Data::system.battle_end_music); 
-	SetSystemBGM(BGM_Inn, Data::system.inn_music);
-	SetSystemBGM(BGM_Skiff, Data::system.boat_music);
-	SetSystemBGM(BGM_Ship, Data::system.ship_music);
-	SetSystemBGM(BGM_Airship, Data::system.airship_music);
-	SetSystemBGM(BGM_GameOver, Data::system.gameover_music); 
+	SetSystemBGM(BGM_Battle, Main_Data::systemBGM(32)); 
+	SetSystemBGM(BGM_Victory, Main_Data::systemBGM(33)); 
+	SetSystemBGM(BGM_Inn, Main_Data::systemBGM(34));
+	SetSystemBGM(BGM_Skiff, Main_Data::systemBGM(35));
+	SetSystemBGM(BGM_Ship, Main_Data::systemBGM(36));
+	SetSystemBGM(BGM_Airship, Main_Data::systemBGM(37));
+	SetSystemBGM(BGM_GameOver, Main_Data::systemBGM(38)); 
 }
 
 ////////////////////////////////////////////////////////////
-void Game_System::BgmPlay(RPG::Music bgm) {
-	current_bgm = bgm;
+void Game_System::BgmPlay(RPG::Music const& bgm) {
+	current_bgm = &bgm;
 	// RPG Maker Hack: (OFF) means play nothing
-	if (!bgm.name.empty() && bgm.name != "(OFF)") {
-		Audio::BGM_Play(bgm.name, bgm.volume, bgm.tempo);
+	if (!bgm[1].toString().empty() && bgm[1].toString() != rpg2k::AUDIO_OFF) {
+		Audio::BGM_Play(bgm[1].toString().toSystem(), bgm[3].to<int>(), bgm[4].to<int>());
 	} else {
 		Audio::BGM_Stop();
 	}
@@ -72,34 +72,34 @@ void Game_System::BgmPlay(RPG::Music bgm) {
 }
 
 ////////////////////////////////////////////////////////////
-void Game_System::SePlay(RPG::Sound se) {
-	if (!se.name.empty() && se.name != "(OFF)") {
-		Audio::SE_Play(se.name, se.volume, se.tempo);
+void Game_System::SePlay(RPG::Sound const& se) {
+	if (!se[1].toString().empty() && se[1].toString() != rpg2k::AUDIO_OFF) {
+		Audio::SE_Play(se[1].toString().toSystem(), se[3].to<int>(), se[4].to<int>());
 	}
 }
 
 ////////////////////////////////////////////////////////////
 std::string Game_System::GetSystemName() {
 	if (system_name.empty()) {
-		return Data::system.system_name;
+		return Main_Data::project->getLDB().system()[19].toString().toSystem();
 	} else {
 		return system_name;
 	}
 }
 
 ////////////////////////////////////////////////////////////
-void Game_System::SetSystemName(std::string new_system_name) {
+void Game_System::SetSystemName(std::string const& new_system_name) {
 	system_name = new_system_name;
 }
 
 ////////////////////////////////////////////////////////////
-void Game_System::SetSystemBGM(int which, RPG::Music bgm) {
-	system_bgm[which] = bgm;
+void Game_System::SetSystemBGM(int which, RPG::Music const& bgm) {
+	system_bgm[which] = &bgm;
 }
 
 ////////////////////////////////////////////////////////////
-void Game_System::SetSystemSE(int which, RPG::Sound sfx) {
-	system_sfx[which] = sfx;
+void Game_System::SetSystemSE(int which, RPG::Sound const& sfx) {
+	system_sfx[which] = &sfx;
 }
 
 ////////////////////////////////////////////////////////////

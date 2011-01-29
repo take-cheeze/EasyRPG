@@ -19,12 +19,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <algorithm>
-#include "system.h"
-#include "game_party.h"
-#include "game_actors.h"
-#include "game_player.h"
-#include "output.h"
-#include "util_macro.h"
+#include "system.hpp"
+#include "game_party.hpp"
+#include "game_actors.hpp"
+#include "game_player.hpp"
+#include "output.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 namespace {
@@ -55,11 +55,12 @@ void Game_Party::Init() {
 ////////////////////////////////////////////////////////////
 void Game_Party::SetupStartingMembers() {
 	actors.clear();
-	for (size_t i = 0; i < Data::system.party.size(); ++i) {
-		Game_Actor* actor = Game_Actors::GetActor(Data::system.party[i]);
+	for (size_t i = 0; i < Main_Data::project->getLSD().member().size(); ++i) {
+		int const id = Main_Data::project->getLSD().member()[i];
+		Game_Actor* actor = Game_Actors::GetActor(id);
 
 		if (actor == NULL) {
-			Output::Warning("Invalid actor (Id: %d) in initial party at index %d.", Data::system.party[i], i);
+			Output::Warning("Invalid actor (Id: %d) in initial party at index %d.", id, i);
 		} else {
 			actors.push_back(actor);
 		}
@@ -125,7 +126,7 @@ void Game_Party::LoseGold(int n) {
 ////////////////////////////////////////////////////////////
 void Game_Party::GainItem(int item_id, int amount, bool include_equip) {
 	int total_items;
-	if (item_id > 0 && (uint)item_id <= Data::items.size()) {
+	if (item_id > 0 && (uint)item_id <= Main_Data::project->getLDB().item().rbegin()->first) {
 		total_items = ItemNumber(item_id);
 		items[item_id] = min(max(total_items + amount, 0), 99);
 
@@ -145,7 +146,8 @@ void Game_Party::LoseItem(int item_id, int amount, bool include_equip) {
 
 ////////////////////////////////////////////////////////////
 bool Game_Party::IsItemUsable(int item_id) {
-	if (item_id > 0 && item_id < (int)Data::items.size()) {
+	RPG::Item const& target = Main_Data::item(item_id);
+	if (item_id > 0 && item_id < (int)Main_Data::project->getLDB().item().rbegin()->first) {
 		//ToDo: if (Game_Temp::IsInBattle()) {
 		//if (Data::items[item_id - 1].type == RPG::Item::Type_medicine) {
 		//	return !Data::items[item_id - 1].ocassion_field;
@@ -153,12 +155,12 @@ bool Game_Party::IsItemUsable(int item_id) {
 		//	return Data::items[item_id - 1].ocassion_battle;
 		//} else {
 		if (actors.size() > 0 &&
-			(Data::items[item_id - 1].type == RPG::Item::Type_medicine ||
-			Data::items[item_id - 1].type == RPG::Item::Type_material ||
-			Data::items[item_id - 1].type == RPG::Item::Type_book)) {
+			(target[3].to<int>() == rpg2k::Item::MEDICINE ||
+			target[3].to<int>() == rpg2k::Item::SEED ||
+			target[3].to<int>() == rpg2k::Item::BOOK)) {
 			return true;
-		} else if (Data::items[item_id - 1].type == RPG::Item::Type_switch) {
-			return Data::items[item_id - 1].ocassion_field;
+		} else if (target[3].to<int>() == rpg2k::Item::SWITCH) {
+			return target[57].to<bool>();
 		}
 	}
 

@@ -18,18 +18,18 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_menu.h"
-#include "audio.h"
-#include "graphics.h"
-#include "game_party.h"
-#include "game_system.h"
-#include "input.h"
-#include "player.h"
-#include "scene_end.h"
-#include "scene_equip.h"
-#include "scene_item.h"
-#include "scene_map.h"
-#include "scene_skill.h"
+#include "scene_menu.hpp"
+#include "audio.hpp"
+#include "graphics.hpp"
+#include "game_party.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "player.hpp"
+#include "scene_end.hpp"
+#include "scene_equip.hpp"
+#include "scene_item.hpp"
+#include "scene_map.hpp"
+#include "scene_skill.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Menu::Scene_Menu(int menu_index) :
@@ -74,11 +74,18 @@ void Scene_Menu::Update() {
 void Scene_Menu::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
+	options.push_back(Main_Data::vocabulary(106));
+	options.push_back(Main_Data::vocabulary(107));
+	options.push_back(Main_Data::vocabulary(108));
+	options.push_back(Main_Data::vocabulary(110));
+	options.push_back(Main_Data::vocabulary(117));
+	/*
 	options.push_back(Data::terms.command_item);
 	options.push_back(Data::terms.command_skill);
 	options.push_back(Data::terms.menu_equipment);
 	options.push_back(Data::terms.menu_save);
 	options.push_back(Data::terms.menu_quit);
+	*/
 
 	command_window = new Window_Command(options, 88);
 	command_window->SetIndex(menu_index);
@@ -100,22 +107,22 @@ void Scene_Menu::CreateCommandWindow() {
 ////////////////////////////////////////////////////////////
 void Scene_Menu::UpdateCommand() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		menu_index = command_window->GetIndex();
 
 		switch (menu_index) {
 		case 0: // Item
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Main_Data::decisionSE());
 			Scene::Push(new Scene_Item());
 			break;
 		case 1: // Tech Skill
 		case 2: // Equipment
 			if (Game_Party::GetActors().empty()) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Main_Data::buzzerSE());
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Main_Data::decisionSE());
 				command_window->SetActive(false);
 				menustatus_window->SetActive(true);
 				menustatus_window->SetIndex(0);
@@ -123,9 +130,9 @@ void Scene_Menu::UpdateCommand() {
 			break;
 		case 3: // Save
 			if (Game_System::save_disabled) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Main_Data::buzzerSE());
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Main_Data::decisionSE());
 			}
 
 			// Debug Test code to add items
@@ -134,7 +141,7 @@ void Scene_Menu::UpdateCommand() {
 			}
 			break;
 		case 4: // Quit Game
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Main_Data::decisionSE());
 			Scene::Push(new Scene_End());
 			break;
 		}
@@ -144,12 +151,12 @@ void Scene_Menu::UpdateCommand() {
 ////////////////////////////////////////////////////////////
 void Scene_Menu::UpdateActorSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		command_window->SetActive(true);
 		menustatus_window->SetActive(false);
 		menustatus_window->SetIndex(-1);
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 		switch (command_window->GetIndex()) {
 		case 1: // Tech Skill
 			Scene::Push(new Scene_Skill(menustatus_window->GetIndex()));

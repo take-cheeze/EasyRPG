@@ -19,12 +19,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "input.h"
-#include "scene.h"
-#include "scene_shop.h"
-#include "game_temp.h"
-#include "game_system.h"
-#include "window_shop.h"
+#include "input.hpp"
+#include "scene.hpp"
+#include "scene_shop.hpp"
+#include "game_temp.hpp"
+#include "game_system.hpp"
+#include "window_shop.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Shop::Window_Shop(int ix, int iy, int iwidth, int iheight) :
@@ -33,47 +33,18 @@ Window_Shop::Window_Shop(int ix, int iy, int iwidth, int iheight) :
 	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
-	switch (Game_Temp::shop_type) {
-		case 0:
-			greeting = Data::terms.shop_greeting1;
-			regreeting = Data::terms.shop_regreeting1;
-			buy_msg = Data::terms.shop_buy1;
-			sell_msg = Data::terms.shop_sell1;
-			leave_msg = Data::terms.shop_leave1;
-			buy_select = Data::terms.shop_buy_select1;
-			buy_number = Data::terms.shop_buy_number1;
-			purchased = Data::terms.shop_purchased1;
-			sell_select = Data::terms.shop_sell_select1;
-			sell_number = Data::terms.shop_sell_number1;
-			sold_msg = Data::terms.shop_sold1;
-			break;
-		case 1:
-			greeting = Data::terms.shop_greeting2;
-			regreeting = Data::terms.shop_regreeting2;
-			buy_msg = Data::terms.shop_buy2;
-			sell_msg = Data::terms.shop_sell2;
-			leave_msg = Data::terms.shop_leave2;
-			buy_select = Data::terms.shop_buy_select2;
-			buy_number = Data::terms.shop_buy_number2;
-			purchased = Data::terms.shop_purchased2;
-			sell_select = Data::terms.shop_sell_select2;
-			sell_number = Data::terms.shop_sell_number2;
-			sold_msg = Data::terms.shop_sold2;
-			break;
-		case 2:
-			greeting = Data::terms.shop_greeting3;
-			regreeting = Data::terms.shop_regreeting3;
-			buy_msg = Data::terms.shop_buy3;
-			sell_msg = Data::terms.shop_sell3;
-			leave_msg = Data::terms.shop_leave3;
-			buy_select = Data::terms.shop_buy_select3;
-			buy_number = Data::terms.shop_buy_number3;
-			purchased = Data::terms.shop_purchased3;
-			sell_select = Data::terms.shop_sell_select3;
-			sell_number = Data::terms.shop_sell_number3;
-			sold_msg = Data::terms.shop_sold3;
-			break;
-	}
+	int const baseIndex = 41 + 13 * Game_Temp::shop_type;
+	greeting = Main_Data::vocabulary(baseIndex + 0);
+	regreeting = Main_Data::vocabulary(baseIndex + 1);
+	buy_msg = Main_Data::vocabulary(baseIndex + 2);
+	sell_msg = Main_Data::vocabulary(baseIndex + 3);
+	leave_msg = Main_Data::vocabulary(baseIndex + 4);
+	buy_select = Main_Data::vocabulary(baseIndex + 5);
+	buy_number = Main_Data::vocabulary(baseIndex + 6);
+	purchased = Main_Data::vocabulary(baseIndex + 7);
+	sell_select = Main_Data::vocabulary(baseIndex + 8);
+	sell_number = Main_Data::vocabulary(baseIndex + 9);
+	sold_msg = Main_Data::vocabulary(baseIndex + 10);
 
 	mode = Scene_Shop::BuySellLeave;
 	index = 1;
@@ -174,7 +145,7 @@ void Window_Shop::Update() {
 					else {
 						index = 1;
 					}
-					Game_System::SePlay(Data::system.cursor_se);
+					Game_System::SePlay(Main_Data::cursorSE());
 				}
 				if (Input::IsRepeated(Input::UP)) {
 					if (index > 1) {
@@ -183,10 +154,10 @@ void Window_Shop::Update() {
 					else {
 						index = leave_index;
 					}
-					Game_System::SePlay(Data::system.cursor_se);
+					Game_System::SePlay(Main_Data::cursorSE());
 				}
 				if (Input::IsTriggered(Input::DECISION)) {
-					Game_System::SePlay(Data::system.decision_se);
+					Game_System::SePlay(Main_Data::decisionSE());
 					if (index == buy_index)
 						choice = Scene_Shop::Buy;
 					if (index == sell_index)

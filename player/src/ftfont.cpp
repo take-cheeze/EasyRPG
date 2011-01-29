@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifndef USE_SDL_TTF
 
 ////////////////////////////////////////////////////////////
@@ -25,12 +25,12 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_BITMAP_H
-#include "output.h"
-#include "filefinder.h"
-#include "font.h"
-#include "bitmap.h"
-#include "surface.h"
-#include "ftfont.h"
+#include "output.hpp"
+#include "filefinder.hpp"
+#include "font.hpp"
+#include "bitmap.hpp"
+#include "surface.hpp"
+#include "ftfont.hpp"
 
 FT_Library FTFont::library;
 int FTFont::ft_lib_refcount = 0;

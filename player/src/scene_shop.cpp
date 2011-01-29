@@ -18,13 +18,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_temp.h"
-#include "game_system.h"
-#include "game_party.h"
-#include "input.h"
-#include "scene_shop.h"
-#include "output.h"
-#include "time.h"
+#include "game_temp.hpp"
+#include "game_system.hpp"
+#include "game_party.hpp"
+#include "input.hpp"
+#include "scene_shop.hpp"
+#include "output.hpp"
+#include "time.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Shop::Scene_Shop() :
@@ -224,7 +224,7 @@ void Scene_Shop::Update() {
 ////////////////////////////////////////////////////////////
 void Scene_Shop::UpdateCommandSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		switch (shop_window->GetChoice()) {
@@ -244,7 +244,7 @@ void Scene_Shop::UpdateBuySelection() {
 	party_window->SetItemId(buy_window->GetItemId());
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		if (Game_Temp::shop_sells) {
 			SetMode(BuySellLeave2);
 		} else {
@@ -255,29 +255,29 @@ void Scene_Shop::UpdateBuySelection() {
 
 		//checks the money and number of items possessed before buy
 		if (buy_window->CheckEnable(item_id)) {
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Main_Data::decisionSE());
 
-			RPG::Item& item = Data::items[item_id - 1];
+			RPG::Item const& item = Main_Data::item(item_id);
 
 			int max;
-			if (item.price == 0) {
+			if (item[5].to<int>() == 0) {
 				max = 99;
 			} else {
-				max = Game_Party::GetGold() / item.price;
+				max = Game_Party::GetGold() / item[5].to<int>();
 			}
-			number_window->SetData(item_id, max, item.price);
+			number_window->SetData(item_id, max, item[5].to<int>());
 
 			SetMode(BuyHowMany);
 		}
 		else {
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Main_Data::buzzerSE());
 		}
 	}
 }
 
 void Scene_Shop::UpdateSellSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		if (Game_Temp::shop_buys) {
 			SetMode(BuySellLeave2);
 		} else {
@@ -288,21 +288,21 @@ void Scene_Shop::UpdateSellSelection() {
 		status_window->SetItemId(item_id);
 		party_window->SetItemId(item_id);
 
-		if (item_id > 0 && Data::items[item_id - 1].price > 0) {
-			RPG::Item& item = Data::items[item_id - 1];
-			Game_System::SePlay(Data::system.decision_se);
-			number_window->SetData(item_id, Game_Party::ItemNumber(item_id), item.price);
+		if (item_id > 0 && Main_Data::item(item_id)[5].to<int>() > 0) {
+			RPG::Item const& item = Main_Data::item(item_id);
+			Game_System::SePlay(Main_Data::decisionSE());
+			number_window->SetData(item_id, Game_Party::ItemNumber(item_id), item[5].to<int>());
 			SetMode(SellHowMany);
 		}
 		else {
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Main_Data::buzzerSE());
 		}
 	}
 }
 
 void Scene_Shop::UpdateNumberInput() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		switch (shop_window->GetChoice()) {
 		case Buy:
 			SetMode(Buy); break;
@@ -329,7 +329,7 @@ void Scene_Shop::UpdateNumberInput() {
 			status_window->Refresh();
 			SetMode(Sold); break;
 		}
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 
 		Game_Temp::shop_transaction = true;
 	}

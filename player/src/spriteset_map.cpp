@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "spriteset_map.h"
-#include "cache.h"
-#include "game_map.h"
-#include "main_data.h"
+#include "spriteset_map.hpp"
+#include "cache.hpp"
+#include "game_map.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Constructor
@@ -45,7 +45,7 @@ Spriteset_Map::Spriteset_Map() {
 		Sprite_Character* sprite = new Sprite_Character(i->second);
 		character_sprites.push_back(sprite);
 	}
-	Sprite_Character* player = new Sprite_Character((Game_Character*)Main_Data::game_player);
+	Sprite_Character* player = new Sprite_Character((Game_Character*)Main_Data::game_player.get());
 	character_sprites.push_back(player);
 	/*weather = new Weather();
 	for (int i = 0; i < 50; i++) {

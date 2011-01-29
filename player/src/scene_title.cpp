@@ -22,34 +22,36 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "scene_title.h"
-#include "audio.h"
-#include "bitmap.h"
-#include "cache.h"
-#include "filefinder.h"
-#include "game_actors.h"
-#include "game_map.h"
-#include "game_message.h"
-#include "game_party.h"
-#include "game_player.h"
-#include "game_screen.h"
-#include "game_switches.h"
-#include "game_system.h"
-#include "game_temp.h"
-#include "game_troop.h"
-#include "game_variables.h"
-#include "graphics.h"
-#include "input.h"
-#include "ldb_reader.h"
-#include "lmt_reader.h"
-#include "main_data.h"
-#include "options.h"
-#include "output.h"
-#include "player.h"
-#include "reader.h"
-#include "scene_map.h"
-#include "util_macro.h"
-#include "window_command.h"
+#include "scene_title.hpp"
+#include "audio.hpp"
+#include "bitmap.hpp"
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "game_actors.hpp"
+#include "game_map.hpp"
+#include "game_message.hpp"
+#include "game_party.hpp"
+#include "game_player.hpp"
+#include "game_screen.hpp"
+#include "game_switches.hpp"
+#include "game_system.hpp"
+#include "game_temp.hpp"
+#include "game_troop.hpp"
+#include "game_variables.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+/*
+#include "ldb_reader.hpp"
+#include "lmt_reader.hpp"
+*/
+#include "main_data.hpp"
+#include "options.hpp"
+#include "output.hpp"
+#include "player.hpp"
+// #include "reader.hpp"
+#include "scene_map.hpp"
+#include "util_macro.hpp"
+#include "window_command.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Title::Scene_Title() :
@@ -68,7 +70,7 @@ void Scene_Title::Start() {
 	LoadDatabase();
 
 	if (!init) {
-		if (Data::system.ldb_id == 2003) {
+		if (Main_Data::project->getLDB().system()[10].to<int>() == 2003) {
 			Output::Debug("Switching to Rpg2003 Interpreter");
 			Player::engine = Player::EngineRpg2k3;
 		}
@@ -138,6 +140,8 @@ void Scene_Title::Update() {
 ////////////////////////////////////////////////////////////
 void Scene_Title::LoadDatabase() {
 	// Load Database
+	Main_Data::project.reset( new rpg2k::model::Project(".") );
+	/*
 	Data::Clear();
 
 	if (!LDB_Reader::Load(FileFinder::FindDefault(".", DATABASE_NAME))) {
@@ -146,18 +150,19 @@ void Scene_Title::LoadDatabase() {
 	if (!LMT_Reader::Load(FileFinder::FindDefault(".", TREEMAP_NAME))) {
 		Output::ErrorStr(Reader::GetError());
 	}
+	*/
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::CreateGameObjects() {
 	Game_Temp::Init();
-	Main_Data::game_screen = new Game_Screen();
+	Main_Data::game_screen.reset( new Game_Screen() );
 	Game_Actors::Init();
 	Game_Party::Init();
 	Game_Message::Init();
-	Main_Data::game_troop = new Game_Troop();
+	Main_Data::game_troop.reset( new Game_Troop() );
 	Game_Map::Init();
-	Main_Data::game_player = new Game_Player();
+	Main_Data::game_player.reset( new Game_Player() );
 }
 
 ////////////////////////////////////////////////////////////
@@ -178,16 +183,16 @@ bool Scene_Title::CheckContinue() {
 void Scene_Title::CreateTitleGraphic() {
 	// Load Title Graphic
 	title = new Sprite();
-	title->SetBitmap(Cache::Title(Data::system.title_name));
+	title->SetBitmap(Cache::Title(Main_Data::project->getLDB().system()[17].toString().toSystem()));
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Data::terms.new_game);
-	options.push_back(Data::terms.load_game);
-	options.push_back(Data::terms.exit_game);
+	options.push_back(Main_Data::vocabulary(114)); // new game
+	options.push_back(Main_Data::vocabulary(115)); // continue
+	options.push_back(Main_Data::vocabulary(117)); // quit
 
 	command_window = new Window_Command(options);
 	command_window->SetX(160 - command_window->GetWidth() / 2);
@@ -210,12 +215,12 @@ void Scene_Title::CreateCommandWindow() {
 ////////////////////////////////////////////////////////////
 void Scene_Title::PlayTitleMusic() {
 	// Play music
-	Game_System::BgmPlay(Data::system.title_music);
+	Game_System::BgmPlay(Main_Data::systemBGM(31));
 }
 
 ////////////////////////////////////////////////////////////
 bool Scene_Title::CheckValidPlayerLocation() {
-	return (Data::treemap.start_map_id > 0);
+	return true; // TODO: (Data::treemap.start_map_id > 0);
 }
 
 ////////////////////////////////////////////////////////////
@@ -223,15 +228,17 @@ void Scene_Title::CommandNewGame() {
 	if (!CheckValidPlayerLocation()) {
 		Output::Warning("The game has no start location set.");
 	} else {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 		Audio::BGM_Stop();
 		Graphics::SetFrameCount(0);
 		CreateGameObjects();
 		Game_Party::SetupStartingMembers();
-		Game_Map::Setup(Data::treemap.start_map_id);
-		Main_Data::game_player->MoveTo(
-			Data::treemap.start_x, Data::treemap.start_y);
+
+		rpg2k::structure::Array1D const& start = Main_Data::project->getLMT().startPoint();
+		Game_Map::Setup(start[11].to<int>());
+		Main_Data::game_player->MoveTo(start[12].to<int>(), start[13].to<int>());
 		Main_Data::game_player->Refresh();
+
 		Game_Map::Autoplay();
 		Scene::Push(new Scene_Map());
 	}
@@ -240,9 +247,9 @@ void Scene_Title::CommandNewGame() {
 ////////////////////////////////////////////////////////////
 void Scene_Title::CommandContinue() {
 	if (continue_enabled) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 	} else {
-		Game_System::SePlay(Data::system.buzzer_se);
+		Game_System::SePlay(Main_Data::buzzerSE());
 		return;
 	}
 
@@ -252,7 +259,7 @@ void Scene_Title::CommandContinue() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::CommandShutdown() {
-	Game_System::SePlay(Data::system.decision_se);
+	Game_System::SePlay(Main_Data::decisionSE());
 	Audio::BGS_Fade(800);
 	Pop();
 }

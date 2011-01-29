@@ -18,14 +18,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_gameover.h"
-#include "audio.h"
-#include "bitmap.h"
-#include "cache.h"
-#include "game_system.h"
-#include "graphics.h"
-#include "input.h"
-#include "scene_title.h"
+#include "scene_gameover.hpp"
+#include "audio.hpp"
+#include "bitmap.hpp"
+#include "cache.hpp"
+#include "game_system.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "scene_title.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Gameover::Scene_Gameover() {
@@ -36,12 +36,12 @@ Scene_Gameover::Scene_Gameover() {
 void Scene_Gameover::Start() {
 	// Load Background Graphic
 	background = new Sprite();
-	background->SetBitmap(Cache::Gameover(Data::system.gameover_name));
+	background->SetBitmap(Cache::Gameover( Main_Data::project->getLDB().system()[18].toString() ));
 	// Stop current music
 	Audio::BGM_Stop();
 	Audio::BGS_Stop();
 	// Play gameover music
-	Game_System::BgmPlay(Game_System::system_bgm[Game_System::BGM_GameOver]);
+	Game_System::BgmPlay(*Game_System::system_bgm[Game_System::BGM_GameOver]);
 }
 
 ////////////////////////////////////////////////////////////

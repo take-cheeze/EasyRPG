@@ -19,21 +19,21 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "filefinder.h"
-#include "output.h"
-#include "system.h"
-#include "font.h"
+#include "filefinder.hpp"
+#include "output.hpp"
+#include "system.hpp"
+#include "font.hpp"
 #ifdef USE_SDL_TTF
-#include "sdl_font.h"
+#include "sdl_font.hpp"
 #else
-#include "ftfont.h"
+#include "ftfont.hpp"
 #endif
 
 ////////////////////////////////////////////////////////////
 /// Static Variables
 ////////////////////////////////////////////////////////////
 const std::string Font::default_name = FileFinder::DefaultFont();
-std::vector<Font*> Font::fonts;
+boost::ptr_vector<Font> Font::fonts;
 
 ////////////////////////////////////////////////////////////
 /// Constructor
@@ -66,30 +66,31 @@ Font* Font::CreateFont(const std::string& _name, int size, bool bold, bool itali
 	if (size == 0)
 		size = default_size;
 
-	std::vector<Font*>::const_iterator it;
+	boost::ptr_vector<Font>::iterator it;
 	for (it = fonts.begin(); it != fonts.end(); it++) {
-		Font* font = *it;
-		if (font->name == name && font->size == size &&
-			font->bold == bold && font->italic == italic)
-			return font;
+		if (it->name == name && it->size == size &&
+			it->bold == bold && it->italic == italic)
+			return &(*it);
 	}
 
 #ifdef USE_SDL_TTF
-	Font* font = new SdlFont(name, size, bold, italic);
+	std::auto_ptr<Font> font(new SdlFont(name, size, bold, italic));
 #else
-	Font* font = new FTFont(name, size, bold, italic);
+	std::auto_ptr<Font> font(new FTFont(name, size, bold, italic));
 #endif
 	fonts.push_back(font);
-	return font;
+	return &fonts.back();
 }
 
 ////////////////////////////////////////////////////////////
 /// Cleanup
 ////////////////////////////////////////////////////////////
 void Font::Dispose() {
+	/*
 	std::vector<Font*>::const_iterator it;
 	for (it = fonts.begin(); it != fonts.end(); it++)
 		delete *it;
 	fonts.clear();
+	*/
 }
 

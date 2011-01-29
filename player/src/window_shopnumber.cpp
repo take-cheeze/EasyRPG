@@ -19,10 +19,10 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <sstream>
-#include "game_system.h"
-#include "input.h"
-#include "util_macro.h"
-#include "window_shopnumber.h"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "util_macro.hpp"
+#include "window_shopnumber.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopNumber::Window_ShopNumber(int ix, int iy, int iwidth, int iheight) : 
@@ -51,7 +51,7 @@ void Window_ShopNumber::Refresh() {
 	contents->Clear();
 
 	int y = 34;
-	DrawItemName(&Data::items[item_id - 1], 0, y);
+	DrawItemName(&Main_Data::item(item_id), 0, y);
 
 	std::stringstream ss;
 	ss << number;
@@ -85,7 +85,7 @@ void Window_ShopNumber::Update() {
 		}
 
 		if (last_number != number) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			Refresh();
 		}
 	}
@@ -93,5 +93,5 @@ void Window_ShopNumber::Update() {
 
 ////////////////////////////////////////////////////////////
 int Window_ShopNumber::GetTotal() const {
-	return Data::items[item_id - 1].price * number;
+	return Main_Data::item(item_id)[5].to<int>() * number;
 }

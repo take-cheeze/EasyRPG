@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_PIXMAN_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -24,17 +24,29 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
-#include "cache.h"
-#include "filefinder.h"
-#include "options.h"
-#include "data.h"
-#include "output.h"
-#include "utils.h"
-#include "image.h"
-#include "text.h"
-#include "pixel_format.h"
-#include "bitmap_utils.h"
-#include "pixman_bitmap.h"
+<<<<<<< HEAD
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+#include "data.hpp"
+#include "output.hpp"
+#include "utils.hpp"
+#include "image.hpp"
+#include "text.hpp"
+#include "pixman_bitmap.hpp"
+=======
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+#include "data.hpp"
+#include "output.hpp"
+#include "utils.hpp"
+#include "image.hpp"
+#include "text.hpp"
+#include "pixel_format.hpp"
+#include "bitmap_utils.hpp"
+#include "pixman_bitmap.hpp"
+>>>>>>> master
 
 ////////////////////////////////////////////////////////////
 static void destroy_func(pixman_image_t *image, void *data) {

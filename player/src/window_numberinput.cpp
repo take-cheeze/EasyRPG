@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_numberinput.h"
-#include "game_system.h"
-#include "input.h"
-#include "main_data.h"
-#include "util_macro.h"
+#include "window_numberinput.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "main_data.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_NumberInput::Window_NumberInput(int ix, int iy, int iwidth, int iheight) : 
@@ -102,7 +102,7 @@ void Window_NumberInput::Update() {
 	Window_Selectable::Update();
 	if (active) {
 		if (Input::IsRepeated(Input::DOWN) || Input::IsRepeated(Input::UP)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 
 			int place = 1;
 			for (int i = 0; i < (digits_max - 1 - (int)index); ++i) {
@@ -122,13 +122,13 @@ void Window_NumberInput::Update() {
 
 		if (Input::IsRepeated(Input::RIGHT)) {
 			if (digits_max >= 2) {
-				Game_System::SePlay(Data::system.cursor_se);
+				Game_System::SePlay(Main_Data::cursorSE());
 				index = (index + 1) % digits_max;
 			}
 		}
 
 		if (Input::IsRepeated(Input::LEFT)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Main_Data::cursorSE());
 			index = (index + digits_max - 1) % digits_max;
 		}
 	

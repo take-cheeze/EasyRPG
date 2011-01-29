@@ -19,10 +19,10 @@
 // Headers
 ////////////////////////////////////////////////////////////
 
-#include "options.h"
-#include "cache.h"
-#include "game_picture.h"
-#include "sprite.h"
+#include "options.hpp"
+#include "cache.hpp"
+#include "game_picture.hpp"
+#include "sprite.hpp"
 #include <vector>
 
 ////////////////////////////////////////////////////////////
@@ -51,13 +51,6 @@ Picture::Picture(int ID) :
 	sprite(NULL)
 {
 	Transition(0);
-}
-
-Picture::~Picture()
-{
-	if (sprite != NULL)
-		delete sprite;
-	sprite = NULL;
 }
 
 void Picture::UpdateSprite() {
@@ -94,13 +87,8 @@ void Picture::Show(const std::string& _name) {
 	shown = true;
 	duration = 0;
 
-	if (sprite != NULL) {
-		delete sprite;
-		sprite = NULL;
-	}
-
 	Bitmap* bitmap = Cache::Picture(name);
-	sprite = new Sprite();
+	sprite.reset(new Sprite());
 	sprite->SetBitmap(bitmap);
 	sprite->SetOx(bitmap->GetWidth() / 2);
 	sprite->SetOy(bitmap->GetHeight() / 2);
@@ -108,9 +96,7 @@ void Picture::Show(const std::string& _name) {
 
 void Picture::Erase() {
 	shown = false;
-	if (sprite != NULL)
-		delete sprite;
-	sprite = NULL;
+	sprite.reset();
 }
 
 void Picture::UseTransparent(bool flag) {

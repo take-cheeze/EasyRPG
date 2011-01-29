@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "data.h"
-#include "main_data.h"
-#include "game_system.h"
-#include "game_map.h"
-#include "game_player.h"
-#include "game_vehicle.h"
+// #include "data.hpp"
+#include "main_data.hpp"
+#include "game_system.hpp"
+#include "game_map.hpp"
+#include "game_player.hpp"
+#include "game_vehicle.hpp"
 
 Game_Vehicle::Game_Vehicle(Type _type) {
     type = _type;
@@ -36,7 +36,15 @@ Game_Vehicle::Game_Vehicle(Type _type) {
 }
 
 void Game_Vehicle::LoadSystemSettings() {
-    switch (type) {
+	character_name = Main_Data::system()[type * 2 + 11].toString().toSystem();
+	character_index = Main_Data::system()[type * 2 + 12];
+	bgm = &Main_Data::system()[type + 35].toMusic();
+	rpg2k::structure::Array1D const& start = Main_Data::project->getLMT().startPoint();
+	map_id = start[type * 10 + 11];
+	x = start[type * 10 + 12];
+	y = start[type * 10 + 13];
+	/*
+	switch (type) {
 		case Boat:
 			character_name = Data::system.boat_name;
 			character_index = Data::system.boat_index;
@@ -62,6 +70,7 @@ void Game_Vehicle::LoadSystemSettings() {
 			y = Data::treemap.airship_y;
 			break;
 	}
+	*/
 }
 
 void Game_Vehicle::Refresh() {
@@ -109,7 +118,7 @@ void Game_Vehicle::GetOn() {
     step_anime = true;
     if (type == Airship)
 		priority_type = 2;		// Change priority to "Above Characters"
-	Game_System::BgmPlay(bgm);
+	Game_System::BgmPlay(*bgm);
 }
 
 void Game_Vehicle::GetOff() {

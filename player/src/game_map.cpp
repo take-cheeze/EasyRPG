@@ -18,15 +18,15 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_map.h"
-#include "game_interpreter.h"
-#include "game_temp.h"
-#include "lmu_reader.h"
-#include "main_data.h"
-#include "output.h"
-#include "util_macro.h"
-#include "game_system.h"
-#include "system.h"
+#include "game_map.hpp"
+#include "game_interpreter.hpp"
+#include "game_temp.hpp"
+// #include "lmu_reader.hpp"
+#include "main_data.hpp"
+#include "output.hpp"
+#include "util_macro.hpp"
+#include "game_system.hpp"
+#include "system.hpp"
 #include <cassert>
 
 ////////////////////////////////////////////////////////////
@@ -53,7 +53,7 @@ namespace {
 	std::vector<short> terrain_tags;
 	tEventHash events;
 
-	RPG::Map* map;
+	// RPG::Map* map;
 	int map_id;
 	int scroll_direction;
 	int scroll_rest;
@@ -73,6 +73,9 @@ namespace {
 	int pan_dy;
 	int pan_x;
 	int pan_y;
+
+	std::vector<short> mapDataDown_;
+	std::vector<short> mapDataUp_;
 }
 
 ////////////////////////////////////////////////////////////
@@ -83,7 +86,7 @@ void Game_Map::Init() {
 	display_y = 0;
 	need_refresh = false;
 	
-	map = NULL;
+	// map = NULL;
 	map_id = 0;
 	scroll_direction = 0;
 	scroll_rest = 0;
@@ -114,8 +117,8 @@ void Game_Map::Dispose() {
 		Main_Data::game_screen->Reset();
 	}
 
-	delete map;
-	map = NULL;
+	// delete map;
+	// map = NULL;
 }
 
 void Game_Map::Quit() {
@@ -128,6 +131,9 @@ void Game_Map::Setup(int _id) {
 	Dispose();
 
 	map_id = _id;
+
+	Main_Data::project->move(_id, 0, 0);
+	/*
 	char file[12];
 	sprintf(file, "Map%04d.lmu", map_id);
 
@@ -137,23 +143,25 @@ void Game_Map::Setup(int _id) {
 	}
 
 	SetChipset(map->chipset_id);
-	display_x = 0;
-	display_y = 0;
-	need_refresh = false;
 
 	events.clear();
 
 	for (size_t i = 0; i < map->events.size(); i++) {
 		events.insert(std::pair<int, Game_Event*>(map->events[i].ID, new Game_Event(map_id, map->events[i])));
 	}
-	/*@common_events.clear();
-	for i in 1...$data_common_events.size
-		@common_events[i] = Game_CommonEvent.new(i)
-	end*/
+	// @common_events.clear();
+	// for i in 1...$data_common_events.size
+	// 	@common_events[i] = Game_CommonEvent.new(i)
+	// end
+	*/
+	display_x = 0;
+	display_y = 0;
+	need_refresh = false;
+
 	scroll_direction = 2;
 	scroll_rest = 0;
 	scroll_speed = 4;
-	encounter_steps = Data::treemap.maps[map_id - 1].encounter_steps;
+	encounter_steps = Main_Data::project->getLMT()[map_id][44].to<int>();
 
 	for (int i = 0; i < 3; i++)
 		vehicles[i]->Refresh();
@@ -165,33 +173,38 @@ void Game_Map::Setup(int _id) {
 	pan_dy = 0;
 	pan_x = 0;
 	pan_y = 0;
+
+	rpg2k::model::MapUnit const& lmu = Main_Data::project->getLMU();
+	mapDataUp_.assign( lmu.upper().begin(), lmu.upper().end() );
+	mapDataDown_.assign( lmu.lower().begin(), lmu.lower().end() );
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Map::Autoplay() {
 	int parent_index = 0;
 	int current_index = GetMapIndex(map_id);
+	rpg2k::structure::Array1D const& target = Main_Data::project->getLMT()[map_id];
 	
-	if ((current_index > -1) && !Data::treemap.maps[current_index].music.name.empty()) {
-		switch(Data::treemap.maps[current_index].music_type) {
+	if ((current_index > -1) && !target[12].toMusic()[1].toString().empty()) {
+		switch(target[11].to<int>()) {
 			case 0: // inherits music from parent
-				parent_index = GetMapIndex(Data::treemap.maps[current_index].parent_map);
-				if (Data::treemap.maps[parent_index].music.name != "(OFF)" && &Data::treemap.maps[parent_index].music != Game_Temp::map_bgm) {
-					Game_Temp::map_bgm = &Data::treemap.maps[parent_index].music;
+				parent_index = GetMapIndex(target[2].to<int>());
+				if (target[12].toMusic()[1].toString() != rpg2k::AUDIO_OFF && &target[12].toMusic() != Game_Temp::map_bgm) {
+					Game_Temp::map_bgm = &target[12].toMusic();
 					Game_System::BgmPlay(*Game_Temp::map_bgm);
 				}
 				break;
 			case 1:  // No Change
 				break;
 			case 2:  // specific map music
-				if (&Data::treemap.maps[current_index].music != Game_Temp::map_bgm) {
+				if (&target[12].toMusic() != Game_Temp::map_bgm) {
 					if (Game_Temp::map_bgm != NULL) {
-						if (Data::treemap.maps[current_index].music.name == Game_Temp::map_bgm->name) {
+						if (target[12].toMusic()[1].toString() == (*Game_Temp::map_bgm)[1].toString()) {
 							// ToDo: Here the volume and pitch must be updated if the song is the same
 							return;
 						}
 					}
-					Game_Temp::map_bgm = &Data::treemap.maps[current_index].music;
+					Game_Temp::map_bgm = &target[12].toMusic();
 					Game_System::BgmPlay(*Game_Temp::map_bgm);
 				}
 		}
@@ -222,7 +235,7 @@ Game_Interpreter& Game_Map::GetInterpreter() {
 
 ////////////////////////////////////////////////////////////
 void Game_Map::ScrollDown(int distance) {
-	display_y = min(display_y + distance, (map->height - 15) * 128);
+	display_y = min(display_y + distance, (Main_Data::project->getLMU().height() - 15) * 128);
 }
 
 ////////////////////////////////////////////////////////////
@@ -232,7 +245,7 @@ void Game_Map::ScrollLeft(int distance) {
 
 ////////////////////////////////////////////////////////////
 void Game_Map::ScrollRight(int distance) {
-	display_x = min(display_x + distance, (map->width - 20) * 128);
+	display_x = min(display_x + distance, (Main_Data::project->getLMU().height() - 20) * 128);
 }
 
 ////////////////////////////////////////////////////////////
@@ -260,10 +273,10 @@ bool Game_Map::IsPassable(int x, int y, int d, const Game_Character* self_event)
 		}
 	}
 
-	int16 tile_index = (int16)(x + y * map->width);
-
-	int16 tile_id = map->upper_layer[tile_index] - 10000;
+	int16 tile_id = Main_Data::project->getLMU().chipIDLw(x, y) - 10000;
 	tile_id = substitutions_up[tile_id];
+
+	int const tile_lower_id = Main_Data::project->getLMU().chipIDLw(x, y);
 
 	if ((passages_up[tile_id] & bit) == 0)
 		return false;
@@ -271,17 +284,17 @@ bool Game_Map::IsPassable(int x, int y, int d, const Game_Character* self_event)
 	if ((passages_up[tile_id] & (1 << 4)) != (1 << 4))
 		return true;
 
-	if (map->lower_layer[tile_index] >= 5000) {
-		tile_id = map->lower_layer[tile_index] - 5000;
+	if (tile_lower_id >= 5000) {
+		tile_id = tile_lower_id - 5000;
 		tile_id = substitutions_down[tile_id];
 		tile_id += 18;
 
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
 
-	} else if (map->lower_layer[tile_index] >= 4000) {
-		tile_id = (map->lower_layer[tile_index] - 4000) / 50;
-		int16 autotile_id = map->lower_layer[tile_index] - 4000 - tile_id * 50;
+	} else if (tile_lower_id >= 4000) {
+		tile_id = (tile_lower_id - 4000) / 50;
+		int16 autotile_id = tile_lower_id - 4000 - tile_id * 50;
 
 		tile_id += 6;
 
@@ -297,14 +310,14 @@ bool Game_Map::IsPassable(int x, int y, int d, const Game_Character* self_event)
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
 
-	} else if (map->lower_layer[tile_index] >= 3000) {
-		tile_id = (map->lower_layer[tile_index] - 3000) / 50 + 3;
+	} else if (tile_lower_id >= 3000) {
+	tile_id = (tile_lower_id - 3000) / 50 + 3;
 
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
 
-	} else if (map->lower_layer[tile_index] < 3000) {
-		tile_id = map->lower_layer[tile_index] / 1000;
+} else if (tile_lower_id < 3000) {
+	tile_id = tile_lower_id / 1000;
 
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
@@ -344,11 +357,11 @@ void Game_Map::GetEventsXY(std::vector<Game_Event*>& events, int x, int y) {
 }
 
 bool Game_Map::LoopHorizontal() {
-	return map->scroll_type == 2 || map->scroll_type == 3;
+	return Main_Data::project->getLMU()[11].to<int>() == 2 || Main_Data::project->getLMU()[11].to<int>() == 3;
 }
 
 bool Game_Map::LoopVertical() {
-	return map->scroll_type == 1 || map->scroll_type == 3;
+	return Main_Data::project->getLMU()[11].to<int>() == 1 || Main_Data::project->getLMU()[11].to<int>() == 3;
 }
 
 int Game_Map::RoundX(int x) {
@@ -403,6 +416,7 @@ bool Game_Map::IsScrolling() {
 	return scroll_rest > 0;
 }
 
+
 ////////////////////////////////////////////////////////////
 void Game_Map::UpdateScroll() {
 	if (scroll_rest > 0) {
@@ -449,15 +463,15 @@ int Game_Map::GetMapId() {
 }
 
 int Game_Map::GetWidth() {
-	return map->width;
+	return Main_Data::project->getLMU().width();
 }
 
 int Game_Map::GetHeight() {
-	return map->height;
+	return Main_Data::project->getLMU().height();
 }
 
-std::vector<RPG::Encounter>& Game_Map::GetEncounterList() {
-	return Data::treemap.maps[map_id - 1].encounters;
+rpg2k::structure::Array2D const& Game_Map::GetEncounterList() {
+	return Main_Data::project->getLMT()[map_id][41];
 }
 
 int Game_Map::GetEncounterStep() {
@@ -469,11 +483,11 @@ void Game_Map::SetEncounterStep(int step) {
 }
 
 std::vector<short>& Game_Map::GetMapDataDown() {
-	return map->lower_layer;
+	return mapDataDown_;
 }
 
 std::vector<short>& Game_Map::GetMapDataUp() {
-	return map->upper_layer;
+	return mapDataUp_;
 }
 
 ////////////////////////////////////////////////////////////
@@ -567,7 +581,9 @@ void Game_Map::SetParallaxScroll(bool horz, bool vert,
 }
 
 ////////////////////////////////////////////////////////////
-int Game_Map::GetMapIndex(int id) {
+int Game_Map::GetMapIndex(int const id) {
+	return id;
+	/*
 	for (unsigned int i = 0; i < Data::treemap.maps.size(); ++i) {
 		if (Data::treemap.maps[i].ID == id) {
 			return i;
@@ -575,18 +591,26 @@ int Game_Map::GetMapIndex(int id) {
 	}
 	//nothing found
 	return -1;
+	*/
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Map::SetChipset(int id) {
 	chipset_id = id;
-	RPG::Chipset &chipset = Data::chipsets[chipset_id - 1];
-	chipset_name = chipset.chipset_name;
-	passages_down = chipset.passable_data_lower;
-	passages_up = chipset.passable_data_upper;
-	terrain_tags = chipset.terrain_data;
-	panorama_speed = chipset.animation_speed;
-	panorama_type = chipset.animation_type;
+	rpg2k::structure::Array1D const& chipset = Main_Data::project->getLDB().chipSet()[chipset_id];
+	chipset_name = chipset[2].toString().toSystem();
+
+	rpg2k::Binary const* chipFlag;
+	chipFlag = &chipset[4].toBinary();
+	passages_down.assign(chipFlag->begin(), chipFlag->end());
+	chipFlag = &chipset[5].toBinary();
+	passages_up.assign(chipFlag->begin(), chipFlag->end());
+
+	eastl::vector<uint16_t> terrain = chipset[3].toBinary().toVector<uint16_t>();
+	terrain_tags.assign(terrain.begin(), terrain.end());
+
+	panorama_speed = chipset[11].to<int>();
+	panorama_type = chipset[12].to<int>();
 	if (passages_down.size() < 162)
 		passages_down.resize(162, (unsigned char) 0x0F);
 	if (passages_up.size() < 144)

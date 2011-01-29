@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <sstream>
-#include "game_party.h"
-#include "window_shopstatus.h"
+#include "game_party.hpp"
+#include "window_shopstatus.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopStatus::Window_ShopStatus(int ix, int iy, int iwidth, int iheight) :
@@ -44,8 +44,8 @@ void Window_ShopStatus::Refresh() {
 	if (item_id != 0) {
 		int number = Game_Party::ItemNumber(item_id);
 
-		contents->TextDraw(0, 2, 1, Data::terms.possessed_items);
-		contents->TextDraw(0, 18, 1, Data::terms.equipped_items);
+		contents->TextDraw(0, 2, 1, Main_Data::vocabulary(92));
+		contents->TextDraw(0, 18, 1, Main_Data::vocabulary(93));
 
 		std::stringstream ss;
 		ss << number;

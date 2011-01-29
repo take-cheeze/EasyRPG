@@ -18,9 +18,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_equipitem.h"
-#include "game_actors.h"
-#include "game_party.h"
+#include "window_equipitem.hpp"
+#include "game_actors.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_EquipItem::Window_EquipItem(int actor_id, int equip_type) :
@@ -51,21 +51,22 @@ bool Window_EquipItem::CheckInclude(int item_id) {
 
 	bool result = false;
 
+	int const type = Main_Data::project->getLDB().item()[item_id][3].to<int>();
 	switch (equip_type) {
 	case Window_EquipItem::weapon:
-		result = (Data::items[item_id - 1].type == RPG::Item::Type_weapon);
+		result = (type == 1 /* RPG::Item::Type_weapon */);
 		break;
 	case Window_EquipItem::shield:
-		result = (Data::items[item_id - 1].type == RPG::Item::Type_shield);
+		result = (type == 2 /* RPG::Item::Type_shield */);
 		break;
 	case Window_EquipItem::armor:
-		result = (Data::items[item_id - 1].type == RPG::Item::Type_armor);
+		result = (type == 3 /* RPG::Item::Type_armor */);
 		break;
 	case Window_EquipItem::helmet:
-		result = (Data::items[item_id - 1].type == RPG::Item::Type_helmet);
+		result = (type == 4 /* RPG::Item::Type_helmet */);
 		break;
 	case Window_EquipItem::other:
-		result = (Data::items[item_id - 1].type == RPG::Item::Type_accessory);
+		result = (type == 5 /* RPG::Item::Type_accessory */);
 		break;
 	default:
 		return false;

@@ -18,28 +18,22 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "cache.h"
-#include "filefinder.h"
-#include "exfont.h"
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "exfont.hpp"
+
+#include <boost/ptr_container/ptr_unordered_map.hpp>
 
 ////////////////////////////////////////////////////////////
-typedef std::pair<std::string,std::string> string_pair;
+typedef std::pair<std::string,std::string> cache_key;
+typedef std::pair<std::string, int> tile_key;
 
 namespace {
-	std::map<string_pair, Bitmap*> cache;
-	std::map<std::string, std::map<int, Bitmap*> > cache_tiles;
+	boost::ptr_unordered_map<cache_key, Bitmap> cache;
+	boost::ptr_unordered_map<tile_key, Bitmap> cache_tiles;
 }
 
 tSystemInfo Cache::system_info;
-
-bool IsCached(const string_pair& key) {
-	return cache.count(key) != 0;
-}
-
-bool IsCached(const std::string& folder_name, const std::string& filename) {
-	string_pair key = string_pair(folder_name, filename);
-	return cache.count(key) != 0;
-}
 
 ////////////////////////////////////////////////////////////
 Bitmap* Cache::LoadBitmap(
@@ -48,17 +42,18 @@ Bitmap* Cache::LoadBitmap(
 	bool transparent, 
 	uint32 flags
 ) {
-	string_pair key = string_pair(folder_name, filename);
+	cache_key const key = cache_key(folder_name, filename);
 
-	if (!IsCached(key)) {
-		std::string path = FileFinder::FindImage(folder_name, filename);
-		if (!path.empty())
-			cache[key] = Bitmap::CreateBitmap(path, transparent, flags);
-		else
-			cache[key] = Bitmap::CreateBitmap(16, 16, Color());
+	boost::ptr_unordered_map<cache_key, Bitmap>::iterator it = cache.find(key);
+	if (cache.find(key) == cache.end()) {
+		std::string const path = FileFinder::FindImage(folder_name, filename);
+		return cache.insert(key, !path.empty()
+			? Bitmap::CreateBitmap(path, transparent)
+			: Bitmap::CreateBitmap(16, 16, Color())
+		).first->second;
 	}
 
-	return cache[key];
+	return it->second;
 }
 
 ////////////////////////////////////////////////////////////
@@ -81,13 +76,14 @@ Bitmap* Cache::Charset(const std::string& filename) {
 	return LoadBitmap("CharSet", filename);
 }
 Bitmap* Cache::ExFont() {
-	string_pair hash = string_pair("\x00","ExFont");
+	cache_key const hash = cache_key("\x00","ExFont");
 
-	if (cache.count(hash) == 0) {
-		cache[hash] = Bitmap::CreateBitmap(exfont_h, sizeof(exfont_h), true);
+	boost::ptr_unordered_map<cache_key, Bitmap>::iterator it = cache.find(hash);
+	if (it == cache.end()) {
+		cache.insert( hash, Bitmap::CreateBitmap(exfont_h, sizeof(exfont_h), true) );
 	}
 
-	return cache[hash];
+	return it->second;
 }
 Bitmap* Cache::Faceset(const std::string& filename) {
 	return LoadBitmap("FaceSet", filename);
@@ -122,7 +118,9 @@ Bitmap* Cache::System2(const std::string& filename) {
 
 ////////////////////////////////////////////////////////////
 Bitmap* Cache::Tile(const std::string& filename, int tile_id) {
-	if (cache_tiles.count(filename) == 0 || cache_tiles[filename].count(tile_id) == 0) {
+	tile_key const key(filename, tile_id);
+	boost::ptr_unordered_map<tile_key, Bitmap>::iterator it = cache_tiles.find(key);
+	if (it == cache_tiles.end()) {
 		Bitmap* chipset = Cache::Chipset(filename);
 		Rect rect = Rect(0, 0, 16, 16);
 
@@ -148,28 +146,13 @@ Bitmap* Cache::Tile(const std::string& filename, int tile_id) {
 		rect.y += sub_tile_id / 6 * 16;
 
 
-		Bitmap* tile = Bitmap::CreateBitmap(chipset, rect);
-		cache_tiles[filename][tile_id] = tile;
+		return cache_tiles.insert(key, Bitmap::CreateBitmap(chipset, rect)).first->second;
 	}
-	return cache_tiles[filename][tile_id];
+	return it->second;
 }
 
 ////////////////////////////////////////////////////////////
 void Cache::Clear() {
-	std::map<string_pair, Bitmap*>::iterator it_cache;
-	for (it_cache = cache.begin(); it_cache != cache.end(); it_cache++) {
-		delete it_cache->second;
-	}
 	cache.clear();
-
-	/*
-	std::map<std::string, std::map<int, Bitmap*> >::iterator it1_cache_tiles;
-	std::map<int, Bitmap*>::iterator it2_cache_tiles;
-
-	for (it1_cache_tiles = cache_tiles.begin(); it1_cache_tiles != cache_tiles.end(); it1_cache_tiles++) {
-		for (it2_cache_tiles = cache_tiles.cache_tiles.begin(); it2_cache_tiles != it2_cache_tiles.end(); it2_cache_tiles++) {
-			delete it2_cache_tiles->second;
-		}
-	}
-	cache_tiles.clear();*/
+	cache_tiles.clear();
 }

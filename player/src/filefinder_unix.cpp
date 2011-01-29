@@ -30,9 +30,9 @@
 #include <unistd.h>
 
 #include <errno.h>
-#include "utils.h"
-#include "filefinder.h"
-#include "output.h"
+#include "utils.hpp"
+#include "filefinder.hpp"
+#include "output.hpp"
 
 typedef std::map<std::string, std::string> string_map;
 typedef std::map<std::string, string_map> directory_map;

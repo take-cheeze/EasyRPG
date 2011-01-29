@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_SDL_TTF
 
 ////////////////////////////////////////////////////////////
@@ -23,12 +23,12 @@
 ////////////////////////////////////////////////////////////
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "font.h"
-#include "filefinder.h"
-#include "output.h"
-#include "utils.h"
-#include "sdl_bitmap.h"
-#include "sdl_font.h"
+#include "font.hpp"
+#include "filefinder.hpp"
+#include "output.hpp"
+#include "utils.hpp"
+#include "sdl_bitmap.hpp"
+#include "sdl_font.hpp"
 
 ////////////////////////////////////////////////////////////
 
@@ -77,7 +77,7 @@ int SdlFont::GetHeight() {
 	return TTF_FontHeight(ttf_font);
 }
 
-Bitmap* SdlFont::Render(int c) {
+std::auto_ptr<Bitmap> SdlFont::Render(int c) {
 	GetTTF();
 	SDL_Color color = {255, 255, 255, 255};
 	uint16 text[2] = {(uint16) c, 0};
@@ -86,7 +86,7 @@ Bitmap* SdlFont::Render(int c) {
 	SDL_SetColorKey(temp, SDL_SRCCOLORKEY, SDL_MapRGB(temp->format, colorkey.r, colorkey.g, colorkey.b));
 	SDL_Surface* surf = DisplayFormat(temp);
 	SDL_FreeSurface(temp);
-	return new SdlBitmap(surf);
+	return std::auto_ptr<Bitmap>( new SdlBitmap(surf) );
 }
 
 #endif

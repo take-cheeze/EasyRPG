@@ -15,17 +15,17 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_SDL_BITMAP
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include <cmath>
-#include "sdl_bitmap_screen.h"
-#include "sdl_bitmap.h"
-#include "sdl_ui.h"
-#include "util_macro.h"
+#include "sdl_bitmap_screen.hpp"
+#include "sdl_bitmap.hpp"
+#include "sdl_ui.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 #ifdef USE_ALPHA
@@ -39,30 +39,30 @@
 #endif
 
 ////////////////////////////////////////////////////////////
-SdlBitmapScreen::SdlBitmapScreen(Bitmap* bitmap, bool delete_bitmap) :
-	BitmapScreen(bitmap, delete_bitmap),
+SdlBitmapScreen::SdlBitmapScreen(Bitmap* bitmap) :
+	BitmapScreen(bitmap),
+	bitmap_effects(NULL) {}
+
+////////////////////////////////////////////////////////////
+SdlBitmapScreen::SdlBitmapScreen(std::auto_ptr<Bitmap> bitmap) :
+	BitmapScreen(bitmap),
 	bitmap_effects(NULL) {}
 
 ////////////////////////////////////////////////////////////
 SdlBitmapScreen::~SdlBitmapScreen() {
-	if (bitmap_effects != NULL)
-		delete bitmap_effects;
 }
 
 ////////////////////////////////////////////////////////////
-void SdlBitmapScreen::SetBitmap(Bitmap* source, bool delete_bitmap) {
-	BitmapScreen::SetBitmap(source, delete_bitmap);
+void SdlBitmapScreen::SetBitmap(Bitmap* source) {
+	BitmapScreen::SetBitmap(source);
 
-	if (bitmap_effects != NULL) {
-		delete bitmap_effects;
-		bitmap_effects = NULL;
-	}
+	bitmap_effects.reset();
 }
 
 ////////////////////////////////////////////////////////////
 void SdlBitmapScreen::BlitScreen(int x, int y) {
 	// FIXME: This method needs more comments.
-	if (bitmap == NULL || opacity_top_effect <= 0) return;
+	if (bitmap.get() == NULL || opacity_top_effect <= 0) return;
 
 	Refresh();
 
@@ -72,8 +72,8 @@ void SdlBitmapScreen::BlitScreen(int x, int y) {
 	y -= origin_y;
 
 	SDL_Surface* surface = bitmap_effects != NULL
-		? ((SdlBitmap*)bitmap_effects)->bitmap
-		: ((SdlBitmap*)bitmap)->bitmap;
+		? ((SdlBitmap*)bitmap_effects.get())->bitmap
+		: ((SdlBitmap*)bitmap.get())->bitmap;
 
 	if (bush_effect < surface->h) {
 		if (!src_rect_effect_applied) {
@@ -109,7 +109,7 @@ void SdlBitmapScreen::BlitScreen(int x, int y) {
 ////////////////////////////////////////////////////////////
 void SdlBitmapScreen::BlitScreen(int x, int y, Rect src_rect) {
 	// FIXME: This method needs more comments.
-	if (bitmap == NULL || opacity_top_effect <= 0) return;
+	if (bitmap.get() == NULL || opacity_top_effect <= 0) return;
 
 	Refresh();
 
@@ -117,8 +117,8 @@ void SdlBitmapScreen::BlitScreen(int x, int y, Rect src_rect) {
 	y -= origin_y;
 
 	SDL_Surface* surface = bitmap_effects != NULL
-		? ((SdlBitmap*)bitmap_effects)->bitmap
-		: ((SdlBitmap*)bitmap)->bitmap;
+		? ((SdlBitmap*)bitmap_effects.get())->bitmap
+		: ((SdlBitmap*)bitmap.get())->bitmap;
 
 	if (bush_effect < surface->h) {
 		if (!src_rect_effect_applied) {
@@ -158,13 +158,13 @@ void SdlBitmapScreen::BlitScreen(int x, int y, Rect src_rect) {
 
 ////////////////////////////////////////////////////////////
 void SdlBitmapScreen::BlitScreenTiled(Rect src_rect, Rect dst_rect) {
-	if (bitmap == NULL || opacity_top_effect <= 0) return;
+	if (bitmap.get() == NULL || opacity_top_effect <= 0) return;
 
 	Refresh();
 
 	SDL_Surface* surface = bitmap_effects != NULL
-		? ((SdlBitmap*)bitmap_effects)->bitmap
-		: ((SdlBitmap*)bitmap)->bitmap;
+		? ((SdlBitmap*)bitmap_effects.get())->bitmap
+		: ((SdlBitmap*)bitmap.get())->bitmap;
 
 	int y_blits = 1;
 	if (src_rect.height < surface->h && src_rect.height != 0) {
@@ -273,10 +273,7 @@ void SdlBitmapScreen::Refresh() {
 	if (src_rect_effect.IsOutOfBounds(bitmap->GetWidth(), bitmap->GetHeight()))
 		return;
 
-	if (bitmap_effects != NULL) {
-		delete bitmap_effects;
-		bitmap_effects = NULL;
-	}
+	bitmap_effects.reset();
 
 	if (tone_effect == Tone() && angle_effect == 0.0 &&
 		flipx_effect == false && flipy_effect == false &&
@@ -297,32 +294,27 @@ void SdlBitmapScreen::Refresh() {
 		CalcRotatedSize(new_width, new_height);
 
 		if (new_width > 0 && new_height > 0) {
-			Surface* surf_effects = Surface::CreateSurface(bitmap, src_rect_effect, bitmap->GetTransparent());
+			std::auto_ptr<Surface> surf_effects = Surface::CreateSurface(bitmap.get(), src_rect_effect, bitmap->GetTransparent());
 
 			surf_effects->ToneChange(tone_effect);
 			surf_effects->Flip(flipx_effect, flipy_effect);
 
-			bitmap_effects = surf_effects;
+			bitmap_effects.reset( surf_effects.release() );
 
 			if (angle_effect != 0.0) {
-				Bitmap* temp = bitmap_effects->RotateScale(
+				std::auto_ptr<Bitmap> temp = bitmap_effects->RotateScale(
 					angle_effect * 3.14159 / 180, zoomed_width, zoomed_height);
 				origin_x = (temp->GetWidth() - zoomed_width) / 2;
 				origin_y = (temp->GetHeight() - zoomed_height) / 2;
-				delete bitmap_effects;
-				bitmap_effects = temp;
+					bitmap_effects.reset( temp.release() );
 			}
 			else if (zoom_x_effect != 1.0 || zoom_y_effect != 1.0) {
-				Bitmap* temp = bitmap_effects->Resample(zoomed_width, zoomed_height, bitmap_effects->GetRect());
-				delete bitmap_effects;
-				bitmap_effects = temp;
+				bitmap_effects.reset( bitmap_effects->Resample(zoomed_width, zoomed_height, bitmap_effects->GetRect()).release() );
 			}
 		}
 
 		if (waver_effect_depth != 0) {
-			Bitmap* temp = bitmap_effects->Waver(waver_effect_depth, waver_effect_phase);
-			delete bitmap_effects;
-			bitmap_effects = temp;
+			bitmap_effects.reset( bitmap_effects->Waver(waver_effect_depth, waver_effect_phase).release() );
 		}
 
 		src_rect_effect_applied = true;

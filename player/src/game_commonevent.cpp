@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_commonevent.h"
-#include "game_switches.h"
-#include "game_interpreter.h"
-#include "main_data.h"
+#include "game_commonevent.hpp"
+#include "game_switches.hpp"
+#include "game_interpreter.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 Game_CommonEvent::Game_CommonEvent(int common_event_id) :
@@ -58,17 +58,17 @@ void Game_CommonEvent::Update() {
 
 ////////////////////////////////////////////////////////////
 std::string Game_CommonEvent::GetName() const {
-	return Data::commonevents[common_event_id].name;
+	return Main_Data::commonEvent(common_event_id)[1].toString().toSystem();
 }
 
 int Game_CommonEvent::GetSwitchId() const {
-	return Data::commonevents[common_event_id].switch_id;
+	return Main_Data::commonEvent(common_event_id)[13].to<int>();
 }
 
 int Game_CommonEvent::GetTrigger() const {
-	return Data::commonevents[common_event_id].trigger;
+	return Main_Data::commonEvent(common_event_id)[11].to<int>();
 }
 
-std::vector<RPG::EventCommand>& Game_CommonEvent::GetList() {
-	return Data::commonevents[common_event_id].event_commands;
+rpg2k::structure::Event const& Game_CommonEvent::GetList() {
+	return Main_Data::commonEvent(common_event_id)[22].toEvent();
 }

@@ -18,15 +18,15 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_item.h"
-#include "game_map.h"
-#include "game_party.h"
-#include "game_switches.h"
-#include "game_system.h"
-#include "input.h"
-#include "scene_actortarget.h"
-#include "scene_map.h"
-#include "scene_menu.h"
+#include "scene_item.hpp"
+#include "game_map.hpp"
+#include "game_party.hpp"
+#include "game_switches.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "scene_actortarget.hpp"
+#include "scene_map.hpp"
+#include "scene_menu.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Item::Scene_Item(int item_index) :
@@ -56,16 +56,19 @@ void Scene_Item::Update() {
 	item_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		int item_id = item_window->GetItemId();
 
 		if (Game_Party::IsItemUsable(item_id)) {
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Main_Data::decisionSE());
 
-			if (Data::items[item_id - 1].type == RPG::Item::Type_switch) {
-				Game_Switches[Data::items[item_id - 1].switch_id] = true;
+			RPG::Item const& target = Main_Data::project->getLDB().item()[item_id];
+
+			if (target[3].to<int>() == 10 /* RPG::Item::Type_switch */) {
+				Main_Data::project->getLSD().setFlag( target[55].to<int>(), true );
+				// Game_Switches[Data::items[item_id - 1].switch_id] = true;
 				Scene::PopUntil(Scene::Map);
 				Game_Map::SetNeedRefresh(true);
 			} else {
@@ -73,7 +76,7 @@ void Scene_Item::Update() {
 				item_index = item_window->GetIndex();
 			}
 		} else {
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Main_Data::buzzerSE());
 		}
 	}
 }

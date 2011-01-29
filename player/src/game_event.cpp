@@ -18,31 +18,31 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_event.h"
-#include "game_actor.h"
-#include "game_actors.h"
-#include "game_map.h"
-#include "game_party.h"
-#include "game_player.h"
-#include "game_switches.h"
-#include "game_variables.h"
-#include "game_system.h"
-#include "main_data.h"
-#include "player.h"
+#include "game_event.hpp"
+#include "game_actor.hpp"
+#include "game_actors.hpp"
+#include "game_map.hpp"
+#include "game_party.hpp"
+#include "game_player.hpp"
+#include "game_switches.hpp"
+#include "game_variables.hpp"
+#include "game_system.hpp"
+#include "main_data.hpp"
+#include "player.hpp"
 
 ////////////////////////////////////////////////////////////
 Game_Event::Game_Event(int map_id, const RPG::Event& event) :
 	starting(false),
 	map_id(map_id),
-	event(event),
+	event(&event),
 	erased(false),
 	through(true),
 	page(NULL),
 	interpreter(NULL) {
 
-	ID = event.ID;
+	ID = event.index();
 	
-	MoveTo(event.x, event.y);
+	MoveTo(event[2].to<int>(), event[3].to<int>());
 	Refresh();
 }
 
@@ -57,8 +57,8 @@ void Game_Event::ClearStarting() {
 }
 
 ////////////////////////////////////////////////////////////
-void Game_Event::Setup(RPG::EventPage* new_page) {
-	page = new_page;
+void Game_Event::Setup(RPG::EventPage const& new_page) {
+	page = &new_page;
 
 	if (page == NULL) {
 		tile_id = 0;
@@ -68,18 +68,18 @@ void Game_Event::Setup(RPG::EventPage* new_page) {
 		//move_type = 0;
 		through = true;
 		trigger = -1;
-		list.clear();
+		// list.clear();
 		delete interpreter;
 		interpreter = NULL;
 		return;
 	}
-	character_name = page->character_name;
-	character_index = page->character_index;
+	character_name = (*page)[21].toString().toSystem();
+	character_index = (*page)[22].to<int>();
 
-	tile_id = page->character_name.empty() ? page->character_index : 0;
+	tile_id = character_name.empty() ? character_index : 0;
 
-	if (original_direction != page->character_direction) {
-		switch (page->character_direction) {
+	if (original_direction != (*page)[23].to<int>()) {
+		switch ((*page)[23].to<int>()) {
 		case 0: direction = 8; break;
 		case 1: direction = 6; break;
 		case 2: direction = 2; break;
@@ -90,43 +90,44 @@ void Game_Event::Setup(RPG::EventPage* new_page) {
 		prelock_direction = 0;
 	}
 
-	if (original_pattern != page->character_pattern) {
-		pattern = page->character_pattern;
+	if (original_pattern != (*page)[24].to<int>()) {
+		pattern = (*page)[24].to<int>();
 		original_pattern = pattern;
 	}
 	//opacity = page.opacity;
 	//opacity = page.translucent ? 192 : 255;
 	//blend_type = page.blend_type;
-	move_type = page->move_type;
-	move_speed = page->move_speed;
-	move_frequency = page->move_frequency;
-	move_route = &page->move_route;
+	move_type = (*page)[31].to<int>();
+	move_speed = (*page)[37].to<int>();
+	move_frequency = (*page)[32].to<int>();
+	move_route = &(*page)[41].toArray1D();
 	move_route_index = 0;
 	move_route_forcing = false;
 	//animation_type = page.animation_type;
 	//through = page;
 	//always_on_top = page.overlap;
-	priority_type = page->priority_type;
-	trigger = page->trigger;
-	list = page->event_commands;
+	priority_type = (*page)[34].to<int>();
+	trigger = (*page)[33].to<int>();
+	list = (*page)[52].toEvent();
 	
 	// Free resources if needed
 	delete interpreter;
 	interpreter = NULL;
-	if (trigger == TriggerParallelProcess) {
+	if (trigger == rpg2k::EventStart::PARALLEL /* TriggerParallelProcess */) {
 		interpreter = new Game_Interpreter();
 	}
 	CheckEventTriggerAuto();
 }
 
 void Game_Event::Refresh() {
-	RPG::EventPage* new_page = NULL;
+	RPG::EventPage const* new_page = NULL;
 	if (!erased) {
-		std::vector<RPG::EventPage>::reverse_iterator i;
-		for (i = event.pages.rbegin(); i != event.pages.rend(); i++) {
+		using rpg2k::structure::Array2D;
+		Array2D const& target = (*event)[5].toArray2D();
+		for(Array2D::const_reverse_iterator i = target.rbegin(); i != target.rend(); ++i) {
 			// Loop in reverse order to see whether any page meets conditions...
-			if (AreConditionsMet(*i)) {
-				new_page = &(*i);
+			if (AreConditionsMet(*i->second)) {
+				new_page = i->second;
 				// Stop looking for more...
 				break;
 			}
@@ -135,52 +136,55 @@ void Game_Event::Refresh() {
 
 	if (new_page != this->page) {
 		ClearStarting();
-		Setup(new_page);
+		Setup(*new_page);
 		CheckEventTriggerAuto();
 	}
 }
 
 bool Game_Event::AreConditionsMet(const RPG::EventPage& page) {
+	rpg2k::structure::Array1D const& term = page[2];
+	int const flag = term[1].to<int>();
+
 	// First switch (A)
-	if (page.condition.switch_a && !Game_Switches[page.condition.switch_a_id]) {
+	if ((flag & (0x1 << 0)) && !Game_Switches[term[2].to<int>()]) {
 		return false;
 	}
 
 	// Second switch (B)
-	if (page.condition.switch_b && !Game_Switches[page.condition.switch_b_id]) {
+	if ((flag & (0x1 << 1)) && !Game_Switches[term[3].to<int>()]) {
 		return false;
 	}
 
 	// Variable
 	if (Player::engine == Player::EngineRpg2k) {
-		if (page.condition.variable && !(Game_Variables[page.condition.variable_id] >= page.condition.variable_value)) {
+		if ((flag & (0x1 << 2)) && !(Game_Variables[term[4].to<int>()] >= term[5].to<int>())) {
 			return false;
 		}
 	} else {
-		if (page.condition.variable) {
-			switch (page.condition.compare_operator) {
+		if (flag & (0x1 << 2)) {
+			switch (term[10].to<int>()) {
 			case 0: // ==
-				if (!(Game_Variables[page.condition.variable_id] == page.condition.variable_value))
+				if (!(Game_Variables[term[4].to<int>()] == term[5].to<int>()))
 					return false;
 				break;
 			case 1: // >=
-				if (!(Game_Variables[page.condition.variable_id] >= page.condition.variable_value))
+				if (!(Game_Variables[term[4].to<int>()] >= term[5].to<int>()))
 					return false;
 				break;
 			case 2: // <=
-				if (!(Game_Variables[page.condition.variable_id] <= page.condition.variable_value))
+				if (!(Game_Variables[term[4].to<int>()] <= term[5].to<int>()))
 					return false;
 				break;
 			case 3: // >
-				if (!(Game_Variables[page.condition.variable_id] > page.condition.variable_value))
+				if (!(Game_Variables[term[4].to<int>()] >  term[5].to<int>()))
 					return false;
 				break;
 			case 4: // <
-				if (!(Game_Variables[page.condition.variable_id] < page.condition.variable_value))
+				if (!(Game_Variables[term[4].to<int>()] <  term[5].to<int>()))
 					return false;
 				break;
 			case 5: // !=
-				if (!(Game_Variables[page.condition.variable_id] != page.condition.variable_value))
+				if (!(Game_Variables[term[4].to<int>()] != term[5].to<int>()))
 					return false;
 				break;
 			}
@@ -188,29 +192,29 @@ bool Game_Event::AreConditionsMet(const RPG::EventPage& page) {
 	}
 
 	// Item in possession?
-	if (page.condition.item && !Game_Party::ItemNumber(page.condition.item_id)) {
+	if ((flag & (0x1 << 3)) && !Game_Party::ItemNumber(term[6].to<int>())) {
 		return false;
 	}
 
 	// Actor in party?
-	if (page.condition.actor) {
-		Game_Actor* actor = Game_Actors::GetActor(page.condition.actor_id);
+	if (flag & (0x1 << 4)) {
+		Game_Actor* actor = Game_Actors::GetActor(term[7].to<int>());
 		if (!Game_Party::IsActorInParty(actor)) {
 			return false;
 		}
 	}
 
 	// Timer
-	if (page.condition.timer) {
+	if (flag & (0x1 << 5)) {
 		int frames = Game_System::ReadTimer(Game_System::Timer1);
-		if (frames > page.condition.timer_sec * DEFAULT_FPS)
+		if (frames > term[8].to<int>() * DEFAULT_FPS)
 			return false;
 	}
 
 	// Timer2
-	if (page.condition.timer2) {
+	if (flag & (0x1 << 6)) {
 		int frames = Game_System::ReadTimer(Game_System::Timer2);
-		if (frames > page.condition.timer2_sec * DEFAULT_FPS)
+		if (frames > term[9].to<int>() * DEFAULT_FPS)
 			return false;
 	}
 
@@ -263,7 +267,7 @@ void Game_Event::CheckEventTriggerAuto() {
 	}
 }
 
-std::vector<RPG::EventCommand>& Game_Event::GetList() {
+rpg2k::structure::Event const& Game_Event::GetList() {
 	return list;
 }
 
@@ -291,14 +295,14 @@ void Game_Event::Update() {
 
 	if (interpreter != NULL) {
 		if (!interpreter->IsRunning()) {
-			interpreter->Setup(list, event.ID, event.x, event.y);
+			interpreter->Setup(list, event->index(), (*event)[2].to<int>(), (*event)[3].to<int>());
 		}
 		interpreter->Update();
 	}
 	
 }
 
-RPG::Event& Game_Event::GetEvent() {
-	return event;
+RPG::Event const& Game_Event::GetEvent() {
+	return *event;
 }
 
