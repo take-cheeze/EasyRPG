@@ -60,6 +60,13 @@ void Player::Init(int argc, char *argv[]) {
 
 	if (init) return;
 
+#ifdef GEKKO
+	// Init libfat (Mount SD/USB)
+	if (!fatInitDefault()) {
+		Output::Error("Couldn't mount any storage medium!");
+	}
+#endif
+
 #if (defined(_WIN32) && !defined(_DEBUG))
 	InitMiniDumpWriter();
 #endif
@@ -101,9 +108,7 @@ void Player::Init(int argc, char *argv[]) {
 		}
 	}
 
-#ifndef _WIN32
 	FileFinder::Init();
-#endif
 
 	DisplayUi = BaseUi::CreateBaseUi(
 		SCREEN_TARGET_WIDTH,
@@ -118,13 +123,6 @@ void Player::Init(int argc, char *argv[]) {
 
 ////////////////////////////////////////////////////////////
 void Player::Run() {
-#ifdef GEKKO
-	// Init libfat (Mount SD/USB)
-	if (!fatInitDefault()) {
-		Output::Error("Couldn't mount any storage medium!");
-	}
-#endif
-
 	if (battle_test_flag) {
 		Scene::Push(new Scene_Battle());
 	} else if (debug_flag) {
@@ -144,6 +142,9 @@ void Player::Run() {
 
 		for (size_t i = 0; i < Scene::old_instances.size(); ++i) {
 			//Output::Debug(Scene::scene_names[Scene::old_instances[i]->type]);
+			if (i > 0) {
+				Scene::old_instances[i]->Terminate();
+			}
 			Graphics::Pop();
 			delete Scene::old_instances[i];
 		}

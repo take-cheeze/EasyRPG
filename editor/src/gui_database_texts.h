@@ -83,8 +83,8 @@ class pnText_Base : public wxPanel
 		wxTextCtrl* tcTextBattleFailedSkillB;
 		wxStaticText* stTextBattleFailedSkillC;
 		wxTextCtrl* tcTextBattleFailedSkillC;
-		wxStaticText* stTextBattleEvadePsysicalAttack;
-		wxTextCtrl* tcTextBattleEvadePsysicalAttack;
+		wxStaticText* stTextBattleEvadePhysicalAttack;
+		wxTextCtrl* tcTextBattleEvadePhysicalAttack;
 		wxStaticText* stTextBattleUseItem;
 		wxTextCtrl* tcTextBattleUseItem;
 		wxStaticText* stTextBattleRecoverHP;

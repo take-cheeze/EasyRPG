@@ -25,6 +25,7 @@
 #include <cmath>
 #include <iostream>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "cache.hpp"
 #include "filefinder.hpp"
 #include "options.hpp"
@@ -46,6 +47,20 @@
 #include "pixel_format.hpp"
 #include "bitmap_utils.hpp"
 #include "pixman_bitmap.hpp"
+>>>>>>> master
+=======
+#include "cache.h"
+#include "filefinder.h"
+#include "options.h"
+#include "data.h"
+#include "output.h"
+#include "utils.h"
+#include "image_xyz.h"
+#include "image_png.h"
+#include "text.h"
+#include "pixel_format.h"
+#include "bitmap_utils.h"
+#include "pixman_bitmap.h"
 >>>>>>> master
 
 ////////////////////////////////////////////////////////////
@@ -84,7 +99,7 @@ void PixmanBitmap::ReadPNG(FILE *stream, const void *buffer) {
 
 	int w, h;
 	void* pixels;
-	Image::ReadPNG(stream, buffer, transparent, w, h, pixels);
+	ImagePNG::ReadPNG(stream, buffer, transparent, w, h, pixels);
 
 	ConvertImage(w, h, pixels);
 	Init(w, h, pixels);
@@ -95,7 +110,7 @@ void PixmanBitmap::ReadXYZ(const uint8 *data, uint len) {
 
 	int w, h;
 	void* pixels;
-	Image::ReadXYZ(data, len, transparent, w, h, pixels);
+	ImageXYZ::ReadXYZ(data, len, transparent, w, h, pixels);
 
 	ConvertImage(w, h, pixels);
 	Init(w, h, pixels);
@@ -106,7 +121,7 @@ void PixmanBitmap::ReadXYZ(FILE *stream) {
 
 	int w, h;
 	void* pixels;
-	Image::ReadXYZ(stream, transparent, w, h, pixels);
+	ImageXYZ::ReadXYZ(stream, transparent, w, h, pixels);
 
 	ConvertImage(w, h, pixels);
 	Init(w, h, pixels);

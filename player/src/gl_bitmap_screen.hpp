@@ -28,9 +28,21 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
+<<<<<<< HEAD:player/src/gl_bitmap_screen.hpp
 #include <GL/gl.h>
 #include "surface.hpp"
 #include "bitmap_screen.hpp"
+=======
+#if defined(USE_GLES)
+	#include <GLES/gl.h>
+#elif defined(USE_SDL)
+	#include <SDL_opengl.h>
+#else
+	#include <GL/gl.h>
+#endif
+#include "surface.h"
+#include "bitmap_screen.h"
+>>>>>>> master:player/src/gl_bitmap_screen.h
 
 ////////////////////////////////////////////////////////////
 /// GlBitmapScreen class.
