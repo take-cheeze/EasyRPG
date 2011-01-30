@@ -23,13 +23,8 @@
 ////////////////////////////////////////////////////////////
 
 #include <png.h>
-<<<<<<< HEAD:player/src/image.cpp
 #include "output.hpp"
-#include "image.hpp"
-=======
-#include "output.h"
-#include "image_png.h"
->>>>>>> master:player/src/image_png.cpp
+#include "image_png.hpp"
 
 ////////////////////////////////////////////////////////////
 static void read_data(png_structp png_ptr, png_bytep data, png_size_t length) {

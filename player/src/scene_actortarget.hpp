@@ -64,11 +64,11 @@ public:
 
 private:
 	/// Contains the actors of the party
-	Window_ActorTarget* target_window;
+	Window_ActorTarget target_window;
 	/// Contains the name of the item/skill that will be used
-	Window_Help* help_window;
+	Window_Help help_window;
 	/// Contains quantity/cost of item/spell
-	Window_TargetStatus* status_window;
+	Window_TargetStatus status_window;
 
 	/// id of item/skill to use
 	int id;

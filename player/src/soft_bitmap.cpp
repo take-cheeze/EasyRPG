@@ -23,55 +23,17 @@
 ////////////////////////////////////////////////////////////
 #include <cstdlib>
 #include <iostream>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-#include <png.h>
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include FT_BITMAP_H
 #include "cache.hpp"
 #include "filefinder.hpp"
 #include "options.hpp"
-// #include "data.hpp"
-#include "output.hpp"
-#include "soft_bitmap.hpp"
-=======
-#include "cache.hpp"
-#include "filefinder.hpp"
-#include "options.hpp"
-#include "data.hpp"
+#include "main_data.hpp"
 #include "output.hpp"
 #include "utils.hpp"
-#include "image.hpp"
-#include "text.hpp"
-#include "soft_bitmap.hpp"
->>>>>>> master
-=======
-#include "cache.hpp"
-#include "filefinder.hpp"
-#include "options.hpp"
-#include "data.hpp"
-#include "output.hpp"
-#include "utils.hpp"
-#include "image.hpp"
+#include "image_xyz.hpp"
+#include "image_png.hpp"
 #include "text.hpp"
 #include "bitmap_utils.hpp"
 #include "soft_bitmap.hpp"
->>>>>>> master
-=======
-#include "cache.h"
-#include "filefinder.h"
-#include "options.h"
-#include "data.h"
-#include "output.h"
-#include "utils.h"
-#include "image_xyz.h"
-#include "image_png.h"
-#include "text.h"
-#include "bitmap_utils.h"
-#include "soft_bitmap.h"
->>>>>>> master
 
 ////////////////////////////////////////////////////////////
 void SoftBitmap::Init(int width, int height) {
@@ -271,15 +233,15 @@ void SoftBitmap::OpacityChange(int opacity, const Rect &src_rect) {
 	BitmapUtils<pixel_format>::OpacityChange(this, opacity, src_rect);
 }
 
-Bitmap* SoftBitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
+std::auto_ptr<Bitmap> SoftBitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
 	return BitmapUtils<pixel_format>::Resample(this, scale_w, scale_h, src_rect);
 }
 
-Bitmap* SoftBitmap::RotateScale(double angle, int scale_w, int scale_h) {
+std::auto_ptr<Bitmap> SoftBitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	return BitmapUtils<pixel_format>::RotateScale(this, angle, scale_w, scale_h);
 }
 
-Bitmap* SoftBitmap::Waver(int depth, double phase) {
+std::auto_ptr<Bitmap> SoftBitmap::Waver(int depth, double phase) {
 	return BitmapUtils<pixel_format>::Waver(this, depth, phase);
 }
 

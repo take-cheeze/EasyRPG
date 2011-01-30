@@ -30,15 +30,14 @@
 #include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
-SoftBitmapScreen::SoftBitmapScreen(Bitmap* bitmap, bool delete_bitmap) :
-	BitmapScreen(bitmap, delete_bitmap),
+SoftBitmapScreen::SoftBitmapScreen(Bitmap* bitmap) :
+	BitmapScreen(bitmap),
 	bitmap_effects(NULL) {}
 
 ////////////////////////////////////////////////////////////
-SoftBitmapScreen::~SoftBitmapScreen() {
-	if (bitmap_effects != NULL)
-		delete bitmap_effects;
-}
+SoftBitmapScreen::SoftBitmapScreen(std::auto_ptr<Bitmap> bitmap) :
+	BitmapScreen(bitmap),
+	bitmap_effects(NULL) {}
 
 ////////////////////////////////////////////////////////////
 void SoftBitmapScreen::BlitScreen(int x, int y) {
@@ -91,7 +90,7 @@ void SoftBitmapScreen::BlitScreenTiled(Rect src_rect, Rect dst_rect) {
 
 ////////////////////////////////////////////////////////////
 void SoftBitmapScreen::BlitScreenIntern(int x, int y, Rect src_rect) {
-	DisplaySdlUi->GetDisplaySurface()->Blit(x, y, bitmap_effects, src_rect, 255);
+	DisplaySdlUi->GetDisplaySurface()->Blit(x, y, bitmap_effects.get(), src_rect, 255);
 }
 
 ////////////////////////////////////////////////////////////
@@ -104,20 +103,17 @@ void SoftBitmapScreen::Refresh() {
 
 	needs_refresh = false;
 
-	if (bitmap == NULL)
+	if (bitmap.get() == NULL)
 		return;
 
-	if (bitmap_effects != NULL)
-		delete bitmap_effects;
-
-	Surface *surface_effects = Surface::CreateSurface(src_rect_effect.width, src_rect_effect.height, true);
+	std::auto_ptr<Surface> surface_effects = Surface::CreateSurface(src_rect_effect.width, src_rect_effect.height, true);
 
 	src_rect_effect.Adjust(bitmap->GetWidth(), bitmap->GetHeight());
 
 	if (src_rect_effect.IsOutOfBounds(bitmap->GetWidth(), bitmap->GetHeight()))
 		return;
 
-	surface_effects->Blit(0, 0, bitmap, src_rect_effect, 255);
+	surface_effects->Blit(0, 0, bitmap.get(), src_rect_effect, 255);
 	surface_effects->ToneChange(tone_effect);
 	surface_effects->Flip(flipx_effect, flipy_effect);
 
@@ -131,14 +127,14 @@ void SoftBitmapScreen::Refresh() {
 		surface_effects->OpacityChange(opacity_bottom_effect / 2, src_rect);
 	}
 
-	bitmap_effects = surface_effects;
+	bitmap_effects.reset(surface_effects.release());
 
 	if (zoom_x_effect == 1.0 && zoom_y_effect == 1.0 && angle_effect == 0.0 && waver_effect_depth == 0)
 		return;
 
 	int zoomed_width  = (int)(bitmap_effects->GetWidth()  * zoom_x_effect);
 	int zoomed_height = (int)(bitmap_effects->GetHeight() * zoom_y_effect);
-	Bitmap* fx2;
+	std::auto_ptr<Bitmap> fx2;
 
 	if (angle_effect == 0.0) {
 		fx2 = bitmap_effects->Resample(zoomed_width, zoomed_height, bitmap_effects->GetRect());
@@ -150,16 +146,14 @@ void SoftBitmapScreen::Refresh() {
 		origin_y = (fx2->GetHeight() - zoomed_height) / 2;
 	}
 
-	delete bitmap_effects;
-	bitmap_effects = fx2;
+	bitmap_effects.reset(fx2.release());
 
 	if (waver_effect_depth == 0)
 		return;
 
 	fx2 = bitmap_effects->Waver(waver_effect_depth, waver_effect_phase);
 
-	delete bitmap_effects;
-	bitmap_effects = fx2;
+	bitmap_effects.reset(fx2.release());
 }
 
 #endif

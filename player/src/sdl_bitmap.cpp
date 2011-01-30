@@ -97,7 +97,7 @@ SDL_Surface* SdlBitmap::ReadXYZ(const std::string& filename, const uint8 *data, 
 #else
 	SDL_Surface* src = SDL_CreateRGBSurfaceFrom(pixels, w, h, 32, w * 4, 0xFF000000, 0x00FF0000, 0x0000FF00, 0);
 #endif
-	SDL_Surface* dst = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
+	SDL_Surface* dst = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, ((SdlUi*)DisplayUi.get())->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
 
 	SDL_Rect rect = {0, 0, (uint16) w, (uint16) h};
 	SDL_BlitSurface(src, &rect, dst, &rect);
@@ -116,7 +116,7 @@ SdlBitmap::SdlBitmap(int width, int height, bool itransparent) {
 	if (transparent)
 		flags |= TRANSPARENT_FLAGS;
 
-	SDL_Surface* temp = SDL_CreateRGBSurface(flags, width, height, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
+	SDL_Surface* temp = SDL_CreateRGBSurface(flags, width, height, ((SdlUi*)DisplayUi.get())->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
 
 	if (temp == NULL) {
 		Output::Error("Couldn't create %dx%d image.\n%s\n", width, height, SDL_GetError());
@@ -196,7 +196,7 @@ SdlBitmap::SdlBitmap(Bitmap* source, Rect src_rect, bool itransparent) {
 	if (transparent)
 		flags |= TRANSPARENT_FLAGS;
 
-	SDL_Surface* temp = SDL_CreateRGBSurface(flags, src_rect.width, src_rect.height, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
+	SDL_Surface* temp = SDL_CreateRGBSurface(flags, src_rect.width, src_rect.height, ((SdlUi*)DisplayUi.get())->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
 
 	if (temp == NULL) {
 		Output::Error("Couldn't create %dx%d image.\n%s\n", src_rect.width, src_rect.height, SDL_GetError());

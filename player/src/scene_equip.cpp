@@ -30,7 +30,8 @@
 ////////////////////////////////////////////////////////////
 Scene_Equip::Scene_Equip(int actor_index, int equip_index) :
 	actor_index(actor_index),
-	equip_index(equip_index) {
+	equip_index(equip_index),
+	help_window(0, 0, 320, 32) {
 	type = Scene::Equip;
 }
 
@@ -38,10 +39,8 @@ Scene_Equip::Scene_Equip(int actor_index, int equip_index) :
 void Scene_Equip::Start() {
 	Game_Actor* actor = Game_Party::GetActors()[actor_index];
 
-	// Create the windows
-	help_window = new Window_Help(0, 0, 320, 32);
-	equipstatus_window = new Window_EquipStatus(actor->GetId());
-	equip_window = new Window_Equip(actor->GetId());
+	equipstatus_window.reset(new Window_EquipStatus(actor->GetId()));
+	equip_window.reset(new Window_Equip(actor->GetId()));
 
 	equip_window->SetIndex(equip_index); 
 
@@ -50,27 +49,21 @@ void Scene_Equip::Start() {
 	}
 
 	// Assign the help windows
-	equip_window->SetHelpWindow(help_window);
+	equip_window->SetHelpWindow(&help_window);
 	for (size_t i = 0; i < item_windows.size(); ++i) {
-		item_windows[i]->SetHelpWindow(help_window);
-		item_windows[i]->SetActive(false);
-		item_windows[i]->Refresh();
+		item_windows[i].SetHelpWindow(&help_window);
+		item_windows[i].SetActive(false);
+		item_windows[i].Refresh();
 	}
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Equip::Terminate() {
-	delete help_window;
-	delete equip_window;
-	delete equipstatus_window;
-	for (int i = 0; i < 5; ++i) {
-		delete item_windows[i];
-	}
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Equip::Update() {
-	help_window->Update();
+	help_window.Update();
 
 	UpdateEquipWindow();
 	UpdateStatusWindow();
@@ -86,11 +79,11 @@ void Scene_Equip::Update() {
 ////////////////////////////////////////////////////////////
 void Scene_Equip::UpdateItemWindows() {
 	for (uint i = 0; i < item_windows.size(); ++i) {
-		item_windows[i]->SetVisible((uint)equip_window->GetIndex() == i);
-		item_windows[i]->Update();
+		item_windows[i].SetVisible((uint)equip_window->GetIndex() == i);
+		item_windows[i].Update();
 	}
 
-	item_window = item_windows[equip_window->GetIndex()];
+	item_window = &item_windows[equip_window->GetIndex()];
 }
 
 ////////////////////////////////////////////////////////////
@@ -128,11 +121,11 @@ void Scene_Equip::UpdateEquipSelection() {
 	} else if (Game_Party::GetActors().size() > 1 && Input::IsTriggered(Input::RIGHT)) {
 		Game_System::SePlay(Main_Data::cursorSE());
 		actor_index = (actor_index + 1) % Game_Party::GetActors().size();
-		Scene::Push(new Scene_Equip(actor_index, equip_window->GetIndex()), true);
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Equip(actor_index, equip_window->GetIndex())), true);
 	} else if (Game_Party::GetActors().size() > 1 && Input::IsTriggered(Input::LEFT)) {
 		Game_System::SePlay(Main_Data::cursorSE());
 		actor_index = (actor_index + Game_Party::GetActors().size() - 1) % Game_Party::GetActors().size();
-		Scene::Push(new Scene_Equip(actor_index, equip_window->GetIndex()), true);
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Equip(actor_index, equip_window->GetIndex())), true);
 	} 
 }
 
@@ -156,7 +149,7 @@ void Scene_Equip::UpdateItemSelection() {
 		equip_window->Refresh();
 
 		for (size_t i = 0; i < item_windows.size(); ++i) {
-			item_windows[i]->Refresh();
+			item_windows[i].Refresh();
 		}
 	}
 }

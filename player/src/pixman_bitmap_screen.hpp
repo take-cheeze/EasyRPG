@@ -31,8 +31,8 @@
 ////////////////////////////////////////////////////////////
 class PixmanBitmapScreen : public BitmapScreen {
 public:
-	PixmanBitmapScreen(Bitmap* source, bool delete_bitmap);
-	~PixmanBitmapScreen();
+	PixmanBitmapScreen(Bitmap* source);
+	PixmanBitmapScreen(std::auto_ptr<Bitmap> source);
 
 	void BlitScreen(int x, int y);
 	void BlitScreen(int x, int y, Rect src_rect);
@@ -41,7 +41,7 @@ public:
 protected:
 	void BlitScreenIntern(int x, int y, Rect src_rect);
 
-	Bitmap* bitmap_effects;
+	boost::scoped_ptr<Bitmap> bitmap_effects;
 	int origin_x;
 	int origin_y;
 

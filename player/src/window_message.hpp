@@ -176,7 +176,7 @@ protected:
 	int text_color;
 	
 	/// Used by the number input event
-	Window_NumberInput* number_input_window;
+	boost::scoped_ptr<Window_NumberInput> number_input_window;
 	//Window_Gold* gold_window; // TODO: Implement Window_Gold
 };
 

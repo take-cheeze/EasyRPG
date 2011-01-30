@@ -112,8 +112,8 @@ void Scene_Title::Suspend() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::Terminate() {
-	delete command_window;
-	delete title;
+	command_window.reset();
+	title.reset();
 }
 
 ////////////////////////////////////////////////////////////
@@ -179,7 +179,7 @@ bool Scene_Title::CheckContinue() {
 ////////////////////////////////////////////////////////////
 void Scene_Title::CreateTitleGraphic() {
 	// Load Title Graphic
-	title = new Sprite();
+	title.reset(new Sprite());
 	title->SetBitmap(Cache::Title(Main_Data::project->getLDB().system()[17].toString().toSystem()));
 }
 
@@ -191,7 +191,7 @@ void Scene_Title::CreateCommandWindow() {
 	options.push_back(Main_Data::vocabulary(115)); // continue
 	options.push_back(Main_Data::vocabulary(117)); // quit
 
-	command_window = new Window_Command(options);
+	command_window.reset(new Window_Command(options));
 	command_window->SetX(160 - command_window->GetWidth() / 2);
 	command_window->SetY(224 - command_window->GetHeight());
 
@@ -237,7 +237,7 @@ void Scene_Title::CommandNewGame() {
 		Main_Data::game_player->Refresh();
 
 		Game_Map::Autoplay();
-		Scene::Push(new Scene_Map());
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Map()));
 	}
 }
 

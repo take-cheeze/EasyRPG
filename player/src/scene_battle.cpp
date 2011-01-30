@@ -49,6 +49,6 @@ void Scene_Battle::Start() {
 ////////////////////////////////////////////////////////////
 void Scene_Battle::Update() {
 	if (Input::IsTriggered(Input::DECISION)) {
-		Scene::Push(new Scene());
+		Scene::Push(std::auto_ptr<Scene>(new Scene()));
 	}
 }

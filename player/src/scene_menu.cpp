@@ -33,7 +33,9 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Menu::Scene_Menu(int menu_index) :
-	menu_index(menu_index) {
+	menu_index(menu_index),
+	gold_window(0, 208, 88, 32),
+	menustatus_window(88, 0, 232, 240) {
 	type = Scene::Menu;
 }
 
@@ -42,30 +44,25 @@ void Scene_Menu::Start() {
 	CreateCommandWindow();
 
 	// Gold Window
-	gold_window = new Window_Gold(0, 208, 88, 32);
 
 	// Status Window
-	menustatus_window = new Window_MenuStatus(88, 0, 232, 240);
-	menustatus_window->SetActive(false);
+	menustatus_window.SetActive(false);
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Menu::Terminate() {
-	delete command_window;
-	delete gold_window;
-	delete menustatus_window;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Menu::Update() {
 	command_window->Update();
-	gold_window->Update();
-	menustatus_window->Update();
+	gold_window.Update();
+	menustatus_window.Update();
 
 	if (command_window->GetActive()) {
 		UpdateCommand();
 	}
-	else if (menustatus_window->GetActive()) {
+	else if (menustatus_window.GetActive()) {
 		UpdateActorSelection();
 	}
 }
@@ -87,7 +84,7 @@ void Scene_Menu::CreateCommandWindow() {
 	options.push_back(Data::terms.menu_quit);
 	*/
 
-	command_window = new Window_Command(options, 88);
+	command_window.reset(new Window_Command(options, 88));
 	command_window->SetIndex(menu_index);
 
 	// If there are no actors in the party disable Skills and Equipment
@@ -115,7 +112,7 @@ void Scene_Menu::UpdateCommand() {
 		switch (menu_index) {
 		case 0: // Item
 			Game_System::SePlay(Main_Data::decisionSE());
-			Scene::Push(new Scene_Item());
+			Scene::Push(std::auto_ptr<Scene>(new Scene_Item()));
 			break;
 		case 1: // Tech Skill
 		case 2: // Equipment
@@ -124,8 +121,8 @@ void Scene_Menu::UpdateCommand() {
 			} else {
 				Game_System::SePlay(Main_Data::decisionSE());
 				command_window->SetActive(false);
-				menustatus_window->SetActive(true);
-				menustatus_window->SetIndex(0);
+				menustatus_window.SetActive(true);
+				menustatus_window.SetIndex(0);
 			}
 			break;
 		case 3: // Save
@@ -142,7 +139,7 @@ void Scene_Menu::UpdateCommand() {
 			break;
 		case 4: // Quit Game
 			Game_System::SePlay(Main_Data::decisionSE());
-			Scene::Push(new Scene_End());
+			Scene::Push(std::auto_ptr<Scene>(new Scene_End()));
 			break;
 		}
 	}
@@ -153,22 +150,22 @@ void Scene_Menu::UpdateActorSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
 		Game_System::SePlay(Main_Data::cancelSE());
 		command_window->SetActive(true);
-		menustatus_window->SetActive(false);
-		menustatus_window->SetIndex(-1);
+		menustatus_window.SetActive(false);
+		menustatus_window.SetIndex(-1);
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		Game_System::SePlay(Main_Data::decisionSE());
 		switch (command_window->GetIndex()) {
 		case 1: // Tech Skill
-			Scene::Push(new Scene_Skill(menustatus_window->GetIndex()));
+			Scene::Push(std::auto_ptr<Scene>(new Scene_Skill(menustatus_window.GetIndex())));
 			command_window->SetActive(true);
-			menustatus_window->SetActive(false);
-			menustatus_window->SetIndex(-1);
+			menustatus_window.SetActive(false);
+			menustatus_window.SetIndex(-1);
 			break;
 		case 2: // Equipment
-			Scene::Push(new Scene_Equip(menustatus_window->GetIndex()));
+			Scene::Push(std::auto_ptr<Scene>(new Scene_Equip(menustatus_window.GetIndex())));
 			command_window->SetActive(true);
-			menustatus_window->SetActive(false);
-			menustatus_window->SetIndex(-1);
+			menustatus_window.SetActive(false);
+			menustatus_window.SetIndex(-1);
 			break;
 		}
 	}

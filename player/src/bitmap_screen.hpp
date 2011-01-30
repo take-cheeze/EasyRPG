@@ -48,12 +48,6 @@ public:
 	static std::auto_ptr<BitmapScreen> CreateBitmapScreen();
 
 	////////////////////////////////////////////////////////
-	/// Constructor.
-	////////////////////////////////////////////////////////
-	BitmapScreen(Bitmap* src);
-	BitmapScreen(std::auto_ptr<Bitmap> src);
-
-	////////////////////////////////////////////////////////
 	/// Marks the BitmapScreen as dirty.
 	////////////////////////////////////////////////////////
 	virtual void SetDirty();
@@ -196,7 +190,8 @@ public:
 	virtual void SetWaverEffectPhase(double phase);
 
 protected:
-	BitmapScreen(Bitmap* source, bool delete_bitmap);
+	BitmapScreen(Bitmap* src);
+	BitmapScreen(std::auto_ptr<Bitmap> src);
 
 	class BitmapPointer {
 	public:

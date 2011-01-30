@@ -154,7 +154,7 @@ void GlBitmapScreen::MakeBushTex() {
 	if (bush_tex == 0)
 		glGenTextures(1, &bush_tex);
 
-	uint8* bush_pixels = new uint8[h];
+	std::verts<uint8> bush_pixels(h);
 	for (int i = 0; i < h; i++)
 		bush_pixels[i] = i < h - bush_effect
 			? opacity_top_effect
@@ -162,9 +162,7 @@ void GlBitmapScreen::MakeBushTex() {
 
 	glBindTexture(GL_TEXTURE_2D, bush_tex);
 	int w = 1;
-	UploadBitmap(GL_ALPHA, w, h, GL_ALPHA, GL_UNSIGNED_BYTE, bush_pixels);
-
-	delete[] bush_pixels;
+	UploadBitmap(GL_ALPHA, w, h, GL_ALPHA, GL_UNSIGNED_BYTE, &bush_pixels.front());
 
 	needs_bush_refresh = false;
 }

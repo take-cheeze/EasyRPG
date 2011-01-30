@@ -24,44 +24,17 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
-<<<<<<< HEAD
-<<<<<<< HEAD
 #include "cache.hpp"
 #include "filefinder.hpp"
 #include "options.hpp"
-#include "data.hpp"
 #include "output.hpp"
 #include "utils.hpp"
-#include "image.hpp"
-#include "text.hpp"
-#include "pixman_bitmap.hpp"
-=======
-#include "cache.hpp"
-#include "filefinder.hpp"
-#include "options.hpp"
-#include "data.hpp"
-#include "output.hpp"
-#include "utils.hpp"
-#include "image.hpp"
+#include "image_xyz.hpp"
+#include "image_png.hpp"
 #include "text.hpp"
 #include "pixel_format.hpp"
 #include "bitmap_utils.hpp"
 #include "pixman_bitmap.hpp"
->>>>>>> master
-=======
-#include "cache.h"
-#include "filefinder.h"
-#include "options.h"
-#include "data.h"
-#include "output.h"
-#include "utils.h"
-#include "image_xyz.h"
-#include "image_png.h"
-#include "text.h"
-#include "pixel_format.h"
-#include "bitmap_utils.h"
-#include "pixman_bitmap.h"
->>>>>>> master
 
 ////////////////////////////////////////////////////////////
 static void destroy_func(pixman_image_t *image, void *data) {
@@ -420,7 +393,7 @@ void PixmanBitmap::ClearRect(Rect dst_rect) {
 	RefreshCallback();
 }
 
-Bitmap* PixmanBitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
+std::auto_ptr<Bitmap> PixmanBitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
 	double zoom_x = (double)src_rect.width  / scale_w;
 	double zoom_y = (double)src_rect.height / scale_h;
 
@@ -443,10 +416,10 @@ Bitmap* PixmanBitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
 	pixman_transform_init_identity(&xform);
 	pixman_image_set_transform(bitmap, &xform);
 
-	return resampled;
+		return std::auto_ptr<Bitmap>(resampled);
 }
 
-Bitmap* PixmanBitmap::RotateScale(double angle, int scale_w, int scale_h) {
+std::auto_ptr<Bitmap> PixmanBitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	pixman_transform_t fwd, rev;
 	pixman_transform_init_identity(&fwd);
 	pixman_transform_init_identity(&rev);
@@ -488,10 +461,10 @@ Bitmap* PixmanBitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	pixman_transform_init_identity(&xform);
 	pixman_image_set_transform(bitmap, &xform);
 
-	return resampled;
+	return std::auto_ptr<Bitmap>(resampled);
 }
 
-Bitmap* PixmanBitmap::Waver(int depth, double phase) {
+std::auto_ptr<Bitmap> PixmanBitmap::Waver(int depth, double phase) {
 	return BitmapUtils<pixel_format>::Waver(this, depth, phase);
 }
 

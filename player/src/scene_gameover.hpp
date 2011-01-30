@@ -42,7 +42,7 @@ public:
 
 private:
 	/// Background graphic
-	Sprite* background;
+	Sprite background;
 };
 
 #endif

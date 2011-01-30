@@ -297,7 +297,7 @@ void Graphics::DrawOverlay() {
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Graphics::SnapToBitmap() {
+std::auto_ptr<Bitmap> Graphics::SnapToBitmap() {
 	DisplayUi->BeginScreenCapture();
 
 	std::list<ZObj*>::iterator it_zlist;

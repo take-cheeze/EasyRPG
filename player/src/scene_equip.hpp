@@ -78,15 +78,15 @@ private:
 	int equip_index;
 
 	/// Displays available items in a category
-	std::vector<Window_EquipItem*> item_windows;
+	boost::ptr_vector<Window_EquipItem> item_windows;
 	/// Current active item window
 	Window_EquipItem* item_window;
 	/// Displays stats of the hero/item
-	Window_EquipStatus* equipstatus_window;
+	boost::scoped_ptr<Window_EquipStatus> equipstatus_window;
 	/// Displays currently equipped items
-	Window_Equip* equip_window;
+	boost::scoped_ptr<Window_Equip> equip_window;
 	/// Displays description about the selected item
-	Window_Help* help_window;
+	Window_Help help_window;
 };
 
 #endif

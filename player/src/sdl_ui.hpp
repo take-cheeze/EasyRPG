@@ -42,7 +42,7 @@ public:
 	/// @param title : window title
 	/// @param fullscreen : start in fullscreen flag
 	///////////////////////////////////////////////////////
-	SdlUi(long width, long height, const std::string title,	bool fullscreen);
+	SdlUi(long width, long height, const std::string title, bool fullscreen);
 
 	///////////////////////////////////////////////////////
 	/// Destructor.
@@ -62,7 +62,7 @@ public:
 	void CleanDisplay();
 	void UpdateDisplay();
 	void BeginScreenCapture();
-	Bitmap* EndScreenCapture();
+	std::auto_ptr<Bitmap> EndScreenCapture();
 	void SetTitle(const std::string &title);
 	void DrawScreenText(const std::string &text);
 	void DrawScreenText(const std::string &text, int x, int y, Color color = Color(255, 255, 255, 0));
@@ -159,7 +159,7 @@ protected:
 	SDL_Surface* main_window;
 
 	/// Surface used for zoom.
-	Surface* main_surface;
+	std::auto_ptr<Surface> main_surface;
 
 	/// Color for display background
 	uint32 back_color;

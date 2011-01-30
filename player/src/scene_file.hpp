@@ -26,6 +26,8 @@
 #include "window_savefile.hpp"
 #include "window_filetitle.hpp"
 
+#include <boost/ptr_container/ptr_vector.hpp>
+
 ////////////////////////////////////////////////////////////
 /// Scene_Item class
 ////////////////////////////////////////////////////////////
@@ -49,8 +51,8 @@ protected:
 
 	int index;
 	int top_index;
-	Window_FileTitle* title_window;
-	std::vector<Window_SaveFile*> file_windows;
+	Window_FileTitle title_window;
+	boost::ptr_vector<Window_SaveFile> file_windows;
 	std::string message;
 };
 

@@ -718,21 +718,19 @@ void BitmapUtils<PF>::Flip(Surface* dst, bool horizontal, bool vertical) {
 		uint8* dst_pixels_up = (uint8*)dst->pixels();
 		uint8* dst_pixels_down = (uint8*)dst->pixels() + (dst->height() - 1) * dst->pitch();
 		int width = dst->width();
-		uint8* tmp_buffer = new uint8[width * PF::bytes];
+		std::vector<uint8> tmp_buffer(width * PF::bytes);
 
 		for (int i = 0; i < dst->height() / 2; i++) {
 			if (dst_pixels_up == dst_pixels_down)
 				break;
 
-			PF::copy_pixels(tmp_buffer, dst_pixels_down, width);
+			PF::copy_pixels(&tmp_buffer.front(), dst_pixels_down, width);
 			PF::copy_pixels(dst_pixels_down, dst_pixels_up, width);
-			PF::copy_pixels(dst_pixels_up, tmp_buffer, width);
+			PF::copy_pixels(dst_pixels_up, &tmp_buffer.front(), width);
 
 			dst_pixels_up += dst->pitch();
 			dst_pixels_down -= dst->pitch();
 		}
-
-		delete tmp_buffer;
 	}
 
 	dst->Unlock();

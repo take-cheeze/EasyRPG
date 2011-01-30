@@ -145,7 +145,6 @@ SdlUi::SdlUi(long width, long height, const std::string title, bool fs_flag) :
 
 ///////////////////////////////////////////////////////////
 SdlUi::~SdlUi() {
-	delete main_surface;
 	SDL_Quit();
 }
 
@@ -310,15 +309,11 @@ bool SdlUi::RefreshDisplayMode() {
 
 	// Free non zoomed surface
 	#ifdef USE_SDL_BITMAP
-	if (main_surface != NULL && ((SdlBitmap*) main_surface)->bitmap != main_window) {
-		delete main_surface;
-		main_surface = NULL;
+	if (main_surface.get() != NULL && ((SdlBitmap*) main_surface.get())->bitmap != main_window) {
+		main_surface.reset();
 	}
 	#else
-	if (main_surface != NULL) {
-		delete main_surface;
-		main_surface = NULL;
-	}
+	main_surface.reset();
 	#endif
 	
 	// Create our window
@@ -336,7 +331,7 @@ bool SdlUi::RefreshDisplayMode() {
 	if (zoom_available && current_display_mode.zoom) {
 		// Create a non zoomed surface as drawing surface
 		#ifdef USE_SDL_BITMAP
-		SDL_Surface *surface = SDL_CreateRGBSurface(
+		SDL_Surface* surface = SDL_CreateRGBSurface(
 			SDL_SWSURFACE,
 			current_display_mode.width,
 			current_display_mode.height,
@@ -346,24 +341,24 @@ bool SdlUi::RefreshDisplayMode() {
 			main_window->format->Bmask,
 			main_window->format->Amask
 		);
-		main_surface = new SdlBitmap(surface, false);
+		main_surface.reset(new SdlBitmap(surface, false));
 		#else
-		main_surface = Surface::CreateSurface(current_display_mode.width,
-											  current_display_mode.height,
-											  false);
+		main_surface.reset(Surface::CreateSurface(current_display_mode.width,
+												  current_display_mode.height,
+												  false).release());
 		#endif
 
-		if (!main_surface) 
+		if (!main_surface.get()) 
 			return false;
 
 	} else {
 		#ifdef USE_SDL_BITMAP
 		// Drawing surface will be the window itself
-		main_surface = new SdlBitmap(main_window, false);
+		main_surface.reset(new SdlBitmap(main_window, false));
 		#else
-		main_surface = Surface::CreateSurface(current_display_mode.width,
-											  current_display_mode.height,
-											  false);
+		main_surface.reset(Surface::CreateSurface(current_display_mode.width,
+												  current_display_mode.height,
+												  false).release());
 		#endif
 	}
 
@@ -425,7 +420,7 @@ void SdlUi::ProcessEvents() {
 ///////////////////////////////////////////////////////////
 void SdlUi::CleanDisplay() {
 #ifdef USE_SDL_BITMAP
-	const SDL_Rect& r = ((SdlBitmap*)main_surface)->bitmap->clip_rect;
+	const SDL_Rect& r = ((SdlBitmap*)main_surface.get())->bitmap->clip_rect;
 	Rect rect(r.x, r.y, r.w, r.h);
 	main_surface->FillRect(rect, main_surface->GetColor(back_color));
 #else
@@ -437,7 +432,7 @@ void SdlUi::CleanDisplay() {
 void SdlUi::UpdateDisplay() {
 	if (zoom_available && current_display_mode.zoom)
 		// Blit drawing surface x2 scaled over window surface
-		Blit2X(main_surface, main_window);
+		Blit2X(main_surface.get(), main_window);
 
 	SDL_Flip(main_window);
 }
@@ -447,11 +442,11 @@ void SdlUi::BeginScreenCapture() {
 	CleanDisplay();
 }
 
-Bitmap* SdlUi::EndScreenCapture() {
+std::auto_ptr<Bitmap> SdlUi::EndScreenCapture() {
 #ifdef USE_SDL_BITMAP
-	return (Bitmap*)new SdlBitmap(SDL_DisplayFormat(((SdlBitmap*)main_surface)->bitmap));
+	return std::auto_ptr<Bitmap>(new SdlBitmap(SDL_DisplayFormat(((SdlBitmap*)main_surface.get())->bitmap)));
 #else
-	return Bitmap::CreateBitmap(main_surface, main_surface->GetRect());
+	return Bitmap::CreateBitmap(main_surface.get(), main_surface->GetRect());
 #endif
 }
 
@@ -968,7 +963,7 @@ int SdlUi::GetMousePosY() {
 }
 
 Surface* SdlUi::GetDisplaySurface() {
-	return main_surface;
+	return main_surface.get();
 }
 
 ///////////////////////////////////////////////////////////

@@ -26,16 +26,8 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 
-<<<<<<< HEAD:player/src/soft_bitmap.hpp
-<<<<<<< HEAD:player/src/soft_bitmap.hpp
-#include "bitmap.hpp"
-=======
-#include "surface.hpp"
->>>>>>> master:player/src/soft_bitmap.h
-=======
 #include "surface.hpp"
 #include "pixel_format.hpp"
->>>>>>> master:player/src/soft_bitmap.h
 
 ////////////////////////////////////////////////////////////
 /// SoftBitmap class.
@@ -65,9 +57,9 @@ public:
 	void ToneChange(const Tone &tone);
 	void Flip(bool horizontal, bool vertical);
 	void OpacityChange(int opacity, const Rect &src_rect);
-	Bitmap* Resample(int scale_w, int scale_h, const Rect& src_rect);
-	Bitmap* RotateScale(double angle, int scale_w, int scale_h);
-	Bitmap* Waver(int depth, double phase);
+	std::auto_ptr<Bitmap> Resample(int scale_w, int scale_h, const Rect& src_rect);
+	std::auto_ptr<Bitmap> RotateScale(double angle, int scale_w, int scale_h);
+	std::auto_ptr<Bitmap> Waver(int depth, double phase);
 
 	void SetTransparentColor(Color color);
 

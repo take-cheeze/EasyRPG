@@ -40,7 +40,8 @@
 Window_Message::Window_Message(int ix, int iy, int iwidth, int iheight) :
 	Window_Selectable(ix, iy, iwidth, iheight),
 	contents_x(0), contents_y(0), line_count(0), text_index(-1), text(L""),
-	kill_message(false), halt_output(false), number_input_window(NULL)
+	kill_message(false), halt_output(false),
+	number_input_window(new Window_NumberInput(0, 0))
 {
 	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
@@ -53,7 +54,6 @@ Window_Message::Window_Message(int ix, int iy, int iwidth, int iheight) :
 	index = -1;
 	text_color = Font::ColorDefault;
 
-	number_input_window = new Window_NumberInput(0, 0);
 	number_input_window->SetVisible(false);
 
 	Game_Message::Init();
@@ -67,7 +67,7 @@ Window_Message::~Window_Message() {
 	// The Windows are already deleted in Graphics during closing
 	// But this probably memleaks during scene change?
 	if (!Player::exit_flag) {
-		delete number_input_window;
+		number_input_window.reset();
 	}
 }
 

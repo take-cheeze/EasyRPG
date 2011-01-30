@@ -61,13 +61,13 @@ private:
 	int menu_index;
 
 	/// window displaying the commands
-	Window_Command* command_window;
+	boost::scoped_ptr<Window_Command> command_window;
 
 	/// window displaying the gold amount
-	Window_Gold* gold_window;
+	Window_Gold gold_window;
 
 	/// window displaying the heros and their status
-	Window_MenuStatus* menustatus_window;
+	Window_MenuStatus menustatus_window;
 };
 
 #endif

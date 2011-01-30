@@ -24,6 +24,7 @@
 #include "tilemap.hpp"
 #include "plane.hpp"
 #include "sprite_character.hpp"
+#include <boost/ptr_container/ptr_vector.hpp>
 
 ////////////////////////////////////////////////////////////
 /// Spriteset_Map class
@@ -31,14 +32,13 @@
 class Spriteset_Map {
 public:
 	Spriteset_Map();
-	~Spriteset_Map();
 
 	void Update();
 
 	////////////////////////////////////////////////////////////
 	/// Find the sprite for a specific character
 	////////////////////////////////////////////////////////////
-	Sprite_Character* FindCharacter(Game_Character* character) const;
+	Sprite_Character* FindCharacter(Game_Character* character);
 
 	////////////////////////////////////////////////////////////
 	/// Notify that the map's chipset has changed
@@ -51,13 +51,13 @@ public:
 	void SubstituteUp(int old_id, int new_id);
 	
 protected:
-	Tilemap* tilemap;
-	Plane* panorama;
-	Plane* fog;
-	std::vector<Sprite_Character*> character_sprites;
+	boost::scoped_ptr<Tilemap> tilemap;
+	boost::scoped_ptr<Plane> panorama;
+	boost::scoped_ptr<Plane> fog;
+	boost::ptr_vector<Sprite_Character> character_sprites;
 	/*std::vector<Sprite_Picture*> picture_sprites;
-	Weather* weather;
-	Sprite_Timer* timer_sprite;*/
+	boost::scoped_ptr<Weather> weather;
+	boost::scoped_ptr<Sprite_Timer> timer_sprite;*/
 };
 
 #endif

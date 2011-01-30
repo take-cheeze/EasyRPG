@@ -69,16 +69,16 @@ public:
 
 private:
 	/// Displays available items
-	Window_Help* help_window;
-	Window_ShopBuy* buy_window;
-	Window_ShopParty* party_window;
-	Window_ShopStatus* status_window;
-	Window_Gold* gold_window;
-	Window_ShopSell* sell_window;
-	Window_ShopNumber* number_window;
-	Window_Base* empty_window;
-	Window_Base* empty_window2;
-	Window_Shop* shop_window;
+	Window_Help help_window;
+	Window_ShopBuy buy_window;
+	Window_ShopParty party_window;
+	Window_ShopStatus status_window;
+	Window_Gold gold_window;
+	Window_ShopSell sell_window;
+	Window_ShopNumber number_window;
+	Window_Base empty_window;
+	Window_Base empty_window2;
+	Window_Shop shop_window;
 	int mode;
 	int timer;
 };

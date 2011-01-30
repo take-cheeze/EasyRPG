@@ -22,7 +22,7 @@
 #include "system.hpp"
 
 namespace ImageXYZ {
-	void ReadXYZ(const uint8* data, uint len, bool transparent, int& width, int& height, void*& pixels);
+	void ReadXYZ(uint8 const* data, uint len, bool transparent, int& width, int& height, void*& pixels);
 	void ReadXYZ(FILE* stream, bool transparent, int& width, int& height, void*& pixels);
 }
 
