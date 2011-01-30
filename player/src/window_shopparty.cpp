@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "bitmap.h"
-#include "surface.h"
-#include "cache.h"
-#include "game_party.h"
-#include "game_actor.h"
-#include "window_shopparty.h"
+#include "bitmap.hpp"
+#include "surface.hpp"
+#include "cache.hpp"
+#include "game_party.hpp"
+#include "game_actor.hpp"
+#include "window_shopparty.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopParty::Window_ShopParty(int ix, int iy, int iwidth, int iheight) :
@@ -48,7 +48,7 @@ Window_ShopParty::Window_ShopParty(int ix, int iy, int iwidth, int iheight) :
 			int sy = ((sprite_id / 4) * 4 + 2) * height;
 			Rect src(sx, sy, width, height);
 			for (int k = 0; k < 2; k++) {
-				Surface *bm2 = Surface::CreateSurface(width, height, true);
+				std::auto_ptr<Surface> bm2 = Surface::CreateSurface(width, height, true);
 				#ifndef USE_ALPHA
 				bm2->SetTransparentColor(bm->GetTransparentColor());
 				bm2->Clear();
@@ -56,7 +56,7 @@ Window_ShopParty::Window_ShopParty(int ix, int iy, int iwidth, int iheight) :
 				bm2->Blit(0, 0, bm, src, 255);
 				if (k == 0)
 					bm2->ToneChange(Tone(0, 0, 0, 255));
-				bitmaps[i][j][k] = bm2;
+				bitmaps[i][j][k] = bm2.release();
 			}
 		}
 	}
@@ -76,7 +76,7 @@ Window_ShopParty::~Window_ShopParty() {
 void Window_ShopParty::Refresh() {
 	contents->Clear();
 
-	Bitmap* system = Cache::System(Data::system.system_name);
+	Bitmap* system = Cache::System(Main_Data::system()[19].toString().toSystem());
 
 	const std::vector<Game_Actor*>& actors = Game_Party::GetActors();
 	for (size_t i = 0; i < actors.size() && i < 4; i++) {
@@ -98,50 +98,40 @@ void Window_ShopParty::Refresh() {
 				contents->Blit(i * 32 + 20, 24, system, Rect(128 + 8 * phase, 24, 8, 8), 255);
 			else {
 
-				RPG::Item* new_item = &Data::items[item_id - 1];
-				int item_type =  new_item->type;
-				RPG::Item* current_item = NULL;
+				RPG::Item const& new_item = Main_Data::item(item_id);
+				int item_type =  new_item[3].to<int>();
+				RPG::Item const* current_item = NULL;
 
 				switch (item_type) {
 				
 				//get the current equipped item
-				case RPG::Item::Type_weapon:
+				case rpg2k::Item::WEAPON:
 					if (actor->GetWeaponId() > 0)
-						current_item = &Data::items[actor->GetWeaponId() - 1];
-					else
-						current_item = &Data::items[0];
+						current_item = &Main_Data::item(actor->GetWeaponId());
 					break;
-				case RPG::Item::Type_helmet:
+				case rpg2k::Item::HELMET:
 					if (actor->GetHelmetId() > 0)
-						current_item = &Data::items[actor->GetHelmetId() - 1];
-					else
-						current_item = &Data::items[0];
+						current_item = &Main_Data::item(actor->GetHelmetId());
 					break;
-				case RPG::Item::Type_shield:
+				case rpg2k::Item::SHIELD:
 					if (actor->GetShieldId() > 0)
-						current_item = &Data::items[actor->GetShieldId() - 1];
-					else
-						current_item = &Data::items[0];
+						current_item = &Main_Data::item(actor->GetShieldId());
 					break;
-				case RPG::Item::Type_armor:
+				case rpg2k::Item::ARMOR:
 					if (actor->GetArmorId() > 0)
-						current_item = &Data::items[actor->GetArmorId() - 1];
-					else
-						current_item = &Data::items[0];
+						current_item = &Main_Data::item(actor->GetArmorId());
 					break;
-				case RPG::Item::Type_accessory:
+				case rpg2k::Item::ACCESSORY:
 					if (actor->GetAccessoryId() > 0)
-						current_item = &Data::items[actor->GetAccessoryId() -1];
-					else
-						current_item = &Data::items[0];
+						current_item = &Main_Data::item(actor->GetAccessoryId());
 					break;
 				}
 
 				if (current_item != NULL) {
-					int diff_atk = new_item->atk_points - current_item->atk_points;
-					int diff_def = new_item->def_points - current_item->def_points;
-					int diff_spi = new_item->spi_points - current_item->spi_points;
-					int diff_agi = new_item->agi_points - current_item->agi_points;
+					int diff_atk = new_item[11].to<int>() - (*current_item)[11].to<int>();
+					int diff_def = new_item[12].to<int>() - (*current_item)[12].to<int>();
+					int diff_spi = new_item[13].to<int>() - (*current_item)[13].to<int>();
+					int diff_agi = new_item[14].to<int>() - (*current_item)[14].to<int>();
 					if (diff_atk > 0 || diff_def > 0 || diff_spi > 0 || diff_agi > 0)
 						contents->Blit(i * 32 + 20, 24, system, Rect(128 + 8 * phase, 0, 8, 8), 255);
 					else if (diff_atk < 0 || diff_def < 0 || diff_spi < 0 || diff_agi < 0)

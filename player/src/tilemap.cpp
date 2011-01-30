@@ -18,22 +18,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "tilemap.h"
+#include "tilemap.hpp"
 
 ////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////
-Tilemap::Tilemap() {
-	layer_down = new TilemapLayer(0);
-	layer_up = new TilemapLayer(1);
-}
-
-////////////////////////////////////////////////////////////
-// Destructor
-////////////////////////////////////////////////////////////
-Tilemap::~Tilemap() {
-	delete layer_down;
-	delete layer_up;
+Tilemap::Tilemap() :
+	layer_down( new TilemapLayer(0) ),
+	layer_up( new TilemapLayer(1) ) {
 }
 
 ////////////////////////////////////////////////////////////
@@ -53,28 +45,28 @@ void Tilemap::SetChipset(Bitmap* chipset) {
 	layer_down->SetChipset(chipset);
 	layer_up->SetChipset(chipset);
 }
-std::vector<short> Tilemap::GetMapDataDown() const {
+std::vector<short> const& Tilemap::GetMapDataDown() const {
 	return layer_down->GetMapData();
 }
-void Tilemap::SetMapDataDown(std::vector<short> down) {
+void Tilemap::SetMapDataDown(std::vector<short> const& down) {
 	layer_down->SetMapData(down);
 }
-std::vector<short> Tilemap::GetMapDataUp() const {
+std::vector<short> const& Tilemap::GetMapDataUp() const {
 	return layer_up->GetMapData();
 }
-void Tilemap::SetMapDataUp(std::vector<short> up) {
+void Tilemap::SetMapDataUp(std::vector<short> const& up) {
 	layer_up->SetMapData(up);
 }
-std::vector<unsigned char> Tilemap::GetPassableDown() const {
+std::vector<unsigned char> const& Tilemap::GetPassableDown() const {
 	return layer_down->GetPassable();
 }
-void Tilemap::SetPassableDown(std::vector<unsigned char> down) {
+void Tilemap::SetPassableDown(std::vector<unsigned char> const& down) {
 	layer_down->SetPassable(down);
 }
-std::vector<unsigned char> Tilemap::GetPassableUp() const {
+std::vector<unsigned char> const& Tilemap::GetPassableUp() const {
 	return layer_up->GetPassable();
 }
-void Tilemap::SetPassableUp(std::vector<unsigned char> up) {
+void Tilemap::SetPassableUp(std::vector<unsigned char> const& up) {
 	layer_up->SetPassable(up);
 }
 bool Tilemap::GetVisible() const {

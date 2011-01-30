@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_SOFT_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -23,16 +23,41 @@
 ////////////////////////////////////////////////////////////
 #include <cstdlib>
 #include <iostream>
-#include "cache.h"
-#include "filefinder.h"
-#include "options.h"
-#include "data.h"
-#include "output.h"
-#include "utils.h"
-#include "image.h"
-#include "text.h"
-#include "bitmap_utils.h"
-#include "soft_bitmap.h"
+<<<<<<< HEAD
+<<<<<<< HEAD
+#include <png.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include FT_BITMAP_H
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+// #include "data.hpp"
+#include "output.hpp"
+#include "soft_bitmap.hpp"
+=======
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+#include "data.hpp"
+#include "output.hpp"
+#include "utils.hpp"
+#include "image.hpp"
+#include "text.hpp"
+#include "soft_bitmap.hpp"
+>>>>>>> master
+=======
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "options.hpp"
+#include "data.hpp"
+#include "output.hpp"
+#include "utils.hpp"
+#include "image.hpp"
+#include "text.hpp"
+#include "bitmap_utils.hpp"
+#include "soft_bitmap.hpp"
+>>>>>>> master
 
 ////////////////////////////////////////////////////////////
 void SoftBitmap::Init(int width, int height) {

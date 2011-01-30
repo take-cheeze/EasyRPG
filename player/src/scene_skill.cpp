@@ -18,15 +18,15 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_skill.h"
-#include "game_map.h"
-#include "game_party.h"
-#include "game_switches.h"
-#include "game_system.h"
-#include "input.h"
-#include "scene_actortarget.h"
-#include "scene_map.h"
-#include "scene_menu.h"
+#include "scene_skill.hpp"
+#include "game_map.hpp"
+#include "game_party.hpp"
+#include "game_switches.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "scene_actortarget.hpp"
+#include "scene_map.hpp"
+#include "scene_menu.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Skill::Scene_Skill(int actor_index, int skill_index) :
@@ -62,7 +62,7 @@ void Scene_Skill::Update() {
 	skill_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		int skill_id = skill_window->GetSkillId();
@@ -70,8 +70,29 @@ void Scene_Skill::Update() {
 		Game_Actor* actor = Game_Party::GetActors()[actor_index];
 
 		if (actor->IsSkillUsable(skill_id)) {
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Main_Data::decisionSE());
 
+			RPG::Skill const& target = Main_Data::project->getLDB().skill()[skill_id];
+			switch( target[8].to<int>() ) {
+			case 0: // normal
+				Scene::Push(new Scene_ActorTarget(skill_id, actor_index, skill_window->GetIndex()));
+				skill_index = skill_window->GetIndex();
+				break;
+			case 1: // teleport
+				// ToDo: Displays the teleport target scene/window
+				break;
+			case 2: // escape
+				// ToDo: Displays the escape target scene/window
+				break;
+			case 3: // flag
+				actor->SetSp(actor->GetSp() - actor->CalculateSkillCost(skill_id));
+				Main_Data::project->getLSD().setFlag( target[13].to<int>(), true );
+				// Game_Switches[Data::skills[skill_id - 1].switch_id] = true;
+				Scene::PopUntil(Scene::Map);
+				Game_Map::SetNeedRefresh(true);
+				break;
+			}
+			/*
 			if (Data::skills[skill_id - 1].type == RPG::Skill::Type_switch) {
 				actor->SetSp(actor->GetSp() - actor->CalculateSkillCost(skill_id));
 				Game_Switches[Data::skills[skill_id - 1].switch_id] = true;
@@ -85,8 +106,9 @@ void Scene_Skill::Update() {
 			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_escape) {
 				// ToDo: Displays the escape target scene/window
 			} 
+			*/
 		} else {
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Main_Data::buzzerSE());
 		}
 	}
 }

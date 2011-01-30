@@ -19,13 +19,13 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "audio.h"
-#include "game_system.h"
-#include "input.h"
-#include "scene_end.h"
-#include "scene_menu.h"
-#include "scene_title.h"
-#include "util_macro.h"
+#include "audio.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "scene_end.hpp"
+#include "scene_menu.hpp"
+#include "scene_title.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_End::Scene_End() :
@@ -51,10 +51,10 @@ void Scene_End::Update() {
 	command_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop(); // Select End Game
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 		switch (command_window->GetIndex()) {
 		case 0: // Yes
 			Audio::BGM_Fade(800);
@@ -73,8 +73,8 @@ void Scene_End::Update() {
 void Scene_End::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Data::terms.yes);
-	options.push_back(Data::terms.no);
+	options.push_back(Main_Data::vocabulary(152)); // yes
+	options.push_back(Main_Data::vocabulary(153)); // no
 
 	command_window = new Window_Command(options);
 	command_window->SetX(160 - command_window->GetWidth() / 2);
@@ -83,11 +83,12 @@ void Scene_End::CreateCommandWindow() {
 
 ////////////////////////////////////////////////////////////
 void Scene_End::CreateHelpWindow() {
-	int text_size = Surface::GetTextSize(Data::terms.exit_game_message).width;
+	std::string const exitMessage = Main_Data::vocabulary(151);
+	int text_size = Surface::GetTextSize(exitMessage).width;
 
 	help_window = new Window_Help(160 - (text_size + 16)/ 2,
 		72, text_size + 16, 32);
-	help_window->SetText(Data::terms.exit_game_message);
+	help_window->SetText(exitMessage);
 
 	command_window->SetHelpWindow(help_window);
 }

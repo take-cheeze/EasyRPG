@@ -18,13 +18,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "data.h"
-#include "scene_load.h"
-#include "scene_file.h"
+// #include "data.hpp"
+#include "scene_load.hpp"
+#include "scene_file.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Load::Scene_Load() :
-	Scene_File(Data::terms.load_game_message) {
+	Scene_File(Main_Data::vocabulary(147)) {
 	Scene::type = Scene::Load;
 }
 

@@ -19,9 +19,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "game_actors.h"
-#include "main_data.h"
-#include "output.h"
+#include "game_actors.hpp"
+#include "main_data.hpp"
+#include "output.hpp"
 
 ////////////////////////////////////////////////////////////
 namespace {
@@ -30,7 +30,7 @@ namespace {
 
 ////////////////////////////////////////////////////////////
 void Game_Actors::Init() {
-	data.resize(Data::actors.size() + 1);
+	data.resize(Main_Data::project->getLDB().character().rbegin()->first + 1);
 }
 
 ////////////////////////////////////////////////////////////

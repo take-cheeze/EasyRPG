@@ -16,8 +16,8 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <cstdlib>
-#include "options.h"
-#include "game_screen.h"
+#include "options.hpp"
+#include "game_screen.hpp"
 
 Game_Screen::Game_Screen() :
 	weather_plane(NULL),
@@ -30,10 +30,6 @@ Game_Screen::Game_Screen() :
 
 Game_Screen::~Game_Screen()
 {
-	if (weather_plane)
-		delete weather_plane;
-	if (weather_surface)
-		delete weather_surface;
 }
 
 void Game_Screen::Reset()
@@ -205,26 +201,24 @@ static const uint8 rain_image[] = {
 };
 
 void Game_Screen::InitWeather() {
-	if (weather_plane == NULL) {
-		weather_plane = new Plane();
-		weather_surface = Surface::CreateSurface(320, 240);
+	if (!weather_plane) {
+		weather_plane.reset( new Plane() );
+		weather_surface.reset( Surface::CreateSurface(320, 240).release() );
 		weather_surface->SetTransparentColor(Color(0,0,0,0));
-		weather_plane->SetBitmap(weather_surface);
+		weather_plane->SetBitmap(weather_surface.get());
 		weather_plane->SetZ(9999);
 	}
 	weather_surface->Clear();
 
-	if (rain_bitmap == NULL)
-		rain_bitmap = Bitmap::CreateBitmap(rain_image, sizeof(rain_image));
+	if (!rain_bitmap)
+		rain_bitmap.reset( Bitmap::CreateBitmap(rain_image, sizeof(rain_image)).release() );
 
-	if (snow_bitmap == NULL)
-		snow_bitmap = Bitmap::CreateBitmap(snow_image, sizeof(snow_image));
+	if (!snow_bitmap)
+		snow_bitmap.reset( Bitmap::CreateBitmap(snow_image, sizeof(snow_image)).release() );
 }
 
 void Game_Screen::StopWeather() {
-	if (weather_plane != NULL)
-		delete weather_plane;
-	weather_plane = NULL;
+	weather_plane.reset();
 	snowflakes.clear();
 }
 
@@ -268,7 +262,7 @@ void Game_Screen::DrawRain() {
 		Snowflake& f = *it;
 		if (f.life > snowflake_visible)
 			continue;
-		weather_surface->Blit(f.x - f.y/2, f.y, rain_bitmap, rect, 255);
+		weather_surface->Blit(f.x - f.y/2, f.y, rain_bitmap.get(), rect, 255);
 	}
 }
 
@@ -291,7 +285,7 @@ void Game_Screen::DrawSnow() {
 		int i = (y / 2) % 18;
 		x += wobble[0][i];
 		y += wobble[1][i];
-		weather_surface->Blit(x, y, snow_bitmap, rect, 255);
+		weather_surface->Blit(x, y, snow_bitmap.get(), rect, 255);
 	}
 }
 

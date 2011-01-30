@@ -20,11 +20,11 @@
 ////////////////////////////////////////////////////////////
 #include <cstring>
 #include <math.h>
-#include "tilemap_layer.h"
-#include "graphics.h"
-#include "output.h"
-#include "player.h"
-#include "surface.h"
+#include "tilemap_layer.hpp"
+#include "graphics.hpp"
+#include "output.hpp"
+#include "player.hpp"
+#include "surface.hpp"
 
 ////////////////////////////////////////////////////////////
 // BlockD subtiles IDs
@@ -170,9 +170,7 @@ TilemapLayer::TilemapLayer(int ilayer) :
 	layer(ilayer),
 	have_invisible_tile(false) {
 
-	chipset_screen = BitmapScreen::CreateBitmapScreen();
-	autotiles_ab_screen = NULL;
-	autotiles_d_screen = NULL;
+	chipset_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
 
 	memset(autotiles_ab, NULL, sizeof(autotiles_ab));
 	memset(autotiles_d, NULL, sizeof(autotiles_d));
@@ -192,10 +190,6 @@ TilemapLayer::TilemapLayer(int ilayer) :
 TilemapLayer::~TilemapLayer() {
 	Graphics::RemoveZObj(ID, true);
 	Graphics::RemoveDrawable(ID);
-
-	delete chipset_screen;
-	delete autotiles_ab_screen;
-	delete autotiles_d_screen;
 }
 
 ////////////////////////////////////////////////////////////
@@ -507,9 +501,9 @@ void TilemapLayer::GenerateAutotileD(short ID) {
 
 
 ////////////////////////////////////////////////////////////
-BitmapScreen* TilemapLayer::GenerateAutotiles(int count, const std::map<uint32, TileXY>& map) {
+std::auto_ptr<BitmapScreen> TilemapLayer::GenerateAutotiles(int count, const std::map<uint32, TileXY>& map) {
 	int rows = (count + TILES_PER_ROW - 1) / TILES_PER_ROW;
-	Surface *tiles = Surface::CreateSurface(TILES_PER_ROW * 16, rows * 16);
+	std::auto_ptr<Surface> tiles = Surface::CreateSurface(TILES_PER_ROW * 16, rows * 16);
 	tiles->Fill(Color(255,255,0,255));
 	Rect rect(0, 0, 8, 8);
 
@@ -533,7 +527,7 @@ BitmapScreen* TilemapLayer::GenerateAutotiles(int count, const std::map<uint32, 
 		}
 	}
 
-	return BitmapScreen::CreateBitmapScreen(tiles, true);
+	return BitmapScreen::CreateBitmapScreen(std::auto_ptr<Bitmap>(tiles.release()));
 }
 
 ////////////////////////////////////////////////////////////
@@ -570,7 +564,7 @@ Bitmap* TilemapLayer::GetChipset() const {
 }
 void TilemapLayer::SetChipset(Bitmap* nchipset) {
 	chipset = nchipset;
-	chipset_screen->SetBitmap(chipset, false);
+	chipset_screen->SetBitmap(chipset);
 	chipset_screen->SetSrcRect(chipset->GetRect());
 }
 std::vector<short> TilemapLayer::GetMapData() const {

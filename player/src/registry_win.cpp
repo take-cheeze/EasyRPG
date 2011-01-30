@@ -21,8 +21,28 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
+<<<<<<< HEAD
+#include "registry_win.hpp"
+
+////////////////////////////////////////////////////////////
+/// MSVC Unicode std::string to LPCWSTR
+////////////////////////////////////////////////////////////
+#ifdef UNICODE
+static std::wstring s2ws2(const std::string& s) {
+	int len;
+	int slength = (int)s.length() + 1;
+	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
+	wchar_t* buf = new wchar_t[len];
+	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
+	std::wstring r(buf);
+	delete[] buf;
+	return r;
+}
+#endif
+=======
 #include "registry_win.h"
 #include "utils.h"
+>>>>>>> master
 
 ////////////////////////////////////////////////////////////
 /// Read String value

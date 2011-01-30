@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "game_actors.h"
-#include "window_equipstatus.h"
+#include "game_actors.hpp"
+#include "window_equipstatus.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_EquipStatus::Window_EquipStatus(int actor_id) :
@@ -92,22 +92,22 @@ void Window_EquipStatus::DrawParameter(int cx, int cy, int type) {
 	
 	switch (type) {
 	case 0:
-		name = Data::terms.attack;
+		name = Main_Data::vocabulary(132); // attack
 		value = Game_Actors::GetActor(actor_id)->GetAtk();
 		new_value = atk;
 		break;
 	case 1:
-		name = Data::terms.defense;
+		name = Main_Data::vocabulary(133); // defence
 		value = Game_Actors::GetActor(actor_id)->GetDef();
 		new_value = def;
 		break;
 	case 2:
-		name = Data::terms.spirit;
+		name = Main_Data::vocabulary(134); // mental
 		value = Game_Actors::GetActor(actor_id)->GetSpi();
 		new_value = spi;
 		break;
 	case 3:
-		name = Data::terms.agility;
+		name = Main_Data::vocabulary(135); // speed
 		value = Game_Actors::GetActor(actor_id)->GetAgi();
 		new_value = agi;
 		break;

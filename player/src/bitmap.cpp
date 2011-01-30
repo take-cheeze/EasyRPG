@@ -21,64 +21,64 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-#include "utils.h"
-#include "cache.h"
-#include "bitmap.h"
-#include "surface.h"
-#include "bitmap_screen.h"
-#include "text.h"
+#include "utils.hpp"
+#include "cache.hpp"
+#include "bitmap.hpp"
+#include "surface.hpp"
+#include "bitmap_screen.hpp"
+#include "text.hpp"
 
 #if defined(USE_SDL_BITMAP)
-	#include "sdl_bitmap.h"
+	#include "sdl_bitmap.hpp"
 #endif
 #if defined(USE_SOFT_BITMAP)
-	#include "soft_bitmap.h"
+	#include "soft_bitmap.hpp"
 #endif
 #if defined(USE_PIXMAN_BITMAP)
-	#include "pixman_bitmap.h"
+	#include "pixman_bitmap.hpp"
 #endif
 #if defined(USE_OPENGL)
-	#include "gl_bitmap.h"
+	#include "gl_bitmap.hpp"
 #endif
 
-#include "util_macro.h"
+#include "util_macro.hpp"
 
-Bitmap* Bitmap::CreateBitmap(int width, int height, const Color& color) {
-	Surface *surface = Surface::CreateSurface(width, height, false);
+std::auto_ptr<Bitmap> Bitmap::CreateBitmap(int width, int height, const Color& color) {
+	std::auto_ptr<Surface> surface = Surface::CreateSurface(width, height, false);
 	surface->Fill(color);
-	return surface;
+	return std::auto_ptr<Bitmap>(surface.release());
 }
 
-Bitmap* Bitmap::CreateBitmap(const std::string& filename, bool transparent, uint32 flags) {
+std::auto_ptr<Bitmap> Bitmap::CreateBitmap(const std::string& filename, bool transparent, uint32 flags) {
 	#if defined(USE_SDL_BITMAP)
-		return (Bitmap*)new SdlBitmap(filename, transparent, flags);
+		return std::auto_ptr<Bitmap>( new SdlBitmap(filename, transparent, flags) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (Bitmap*)new SoftBitmap(filename, transparent, flags);
+		return std::auto_ptr<Bitmap>( new SoftBitmap(filename, transparent, flags) );
 	#elif defined(USE_PIXMAN_BITMAP)
-		return (Bitmap*)new PixmanBitmap(filename, transparent, flags);
+		return std::auto_ptr<Bitmap>( new PixmanBitmap(filename, transparent, flags) );
 	#elif defined(USE_OPENGL_BITMAP)
-		return (Bitmap*)new GlBitmap(filename, transparent, flags);
+		return std::auto_ptr<Bitmap>( new GlBitmap(filename, transparent, flags) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
-Bitmap* Bitmap::CreateBitmap(const uint8* data, uint bytes, bool transparent, uint32 flags) {
+std::auto_ptr<Bitmap> Bitmap::CreateBitmap(const uint8* data, uint bytes, bool transparent, uint32 flags) {
 	#if defined(USE_SDL_BITMAP)
-		return (Bitmap*)new SdlBitmap(data, bytes, transparent, flags);
+		return std::auto_ptr<Bitmap>( new SdlBitmap(data, bytes, transparent, flags) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (Bitmap*)new SoftBitmap(data, bytes, transparent, flags);
+		return std::auto_ptr<Bitmap>( new SoftBitmap(data, bytes, transparent, flags) );
 	#elif defined(USE_PIXMAN_BITMAP)
-		return (Bitmap*)new PixmanBitmap(data, bytes, transparent, flags);
+		return std::auto_ptr<Bitmap>( new PixmanBitmap(data, bytes, transparent, flags) );
 	#elif defined(USE_OPENGL_BITMAP)
-		return (Bitmap*)new GlBitmap(data, bytes, transparent, flags);
+		return std::auto_ptr<Bitmap>( new GlBitmap(data, bytes, transparent, flags) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
-Bitmap* Bitmap::CreateBitmap(Bitmap* source, Rect src_rect, bool transparent) {
-	return Surface::CreateSurface(source, src_rect, transparent);
+std::auto_ptr<Bitmap> Bitmap::CreateBitmap(Bitmap* source, Rect src_rect, bool transparent) {
+	return std::auto_ptr<Bitmap>( Surface::CreateSurface(source, src_rect, transparent).release() );
 }
 
 ////////////////////////////////////////////////////////////
@@ -121,11 +121,11 @@ Color Bitmap::GetPixel(int x, int y) {
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Bitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
+std::auto_ptr<Bitmap> Bitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
 	double zoom_x = (double)(scale_w) / src_rect.width;
 	double zoom_y = (double)(scale_h) / src_rect.height;
 
-	Surface* resampled = Surface::CreateSurface(scale_w, scale_h, transparent);
+	std::auto_ptr<Surface> resampled = Surface::CreateSurface(scale_w, scale_h, transparent);
 	if (transparent)
 		resampled->SetTransparentColor(GetTransparentColor());
 
@@ -174,11 +174,11 @@ Bitmap* Bitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
 	Unlock();
 	resampled->Unlock();
 
-	return resampled;
+	return std::auto_ptr<Bitmap>(resampled.release());
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
+std::auto_ptr<Bitmap> Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	double c = cos(-angle);
 	double s = sin(-angle);
 	int w = width();
@@ -217,7 +217,7 @@ Bitmap* Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	double ix0 = -(c * fx0 - s * fy0) / sx;
 	double iy0 = -(s * fx0 + c * fy0) / sy;
 
-	Surface* result = Surface::CreateSurface(dst_w, dst_h, true);
+	std::auto_ptr<Surface> result = Surface::CreateSurface(dst_w, dst_h, true);
 	const Color& trans = transparent ? GetTransparentColor() : Color(255,0,255,0);
 	result->SetTransparentColor(trans);
 	result->Fill(trans);
@@ -268,12 +268,12 @@ Bitmap* Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
 	Unlock();
 	result->Unlock();
 
-	return result;
+	return std::auto_ptr<Bitmap>(result.release());
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Bitmap::Waver(int depth, double phase) {
-	Surface* resampled = Surface::CreateSurface(width() + 2 * depth, height(), true);
+std::auto_ptr<Bitmap> Bitmap::Waver(int depth, double phase) {
+	std::auto_ptr<Surface> resampled = Surface::CreateSurface(width() + 2 * depth, height(), true);
 
 	if (transparent)
 		resampled->SetTransparentColor(GetTransparentColor());
@@ -298,7 +298,7 @@ Bitmap* Bitmap::Waver(int depth, double phase) {
 	Unlock();
 	resampled->Unlock();
 
-	return resampled;
+	return std::auto_ptr<Bitmap>(resampled.release());
 }
 
 ////////////////////////////////////////////////////////////

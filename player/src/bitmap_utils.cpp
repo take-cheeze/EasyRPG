@@ -18,11 +18,11 @@
 #include <algorithm>
 #include <cmath>
 #include <cstring>
-#include "system.h"
-#include "bitmap.h"
-#include "surface.h"
-#include "pixel_format.h"
-#include "bitmap_utils.h"
+#include "system.hpp"
+#include "bitmap.hpp"
+#include "surface.hpp"
+#include "pixel_format.hpp"
+#include "bitmap_utils.hpp"
 
 ////////////////////////////////////////////////////////////
 template <class PF>
@@ -43,11 +43,11 @@ Color BitmapUtils<PF>::GetPixel(Bitmap* src, int x, int y) {
 
 ////////////////////////////////////////////////////////////
 template <class PF>
-Bitmap* BitmapUtils<PF>::Resample(Bitmap* src, int scale_w, int scale_h, const Rect& src_rect) {
+std::auto_ptr<Bitmap> BitmapUtils<PF>::Resample(Bitmap* src, int scale_w, int scale_h, const Rect& src_rect) {
 	double zoom_x = (double)(scale_w) / src_rect.width;
 	double zoom_y = (double)(scale_h) / src_rect.height;
 
-	Surface* dst = Surface::CreateSurface(scale_w, scale_h, src->transparent);
+	std::auto_ptr<Surface> dst = Surface::CreateSurface(scale_w, scale_h, src->transparent);
 	if (src->transparent)
 		dst->SetTransparentColor(src->GetTransparentColor());
 
@@ -73,12 +73,12 @@ Bitmap* BitmapUtils<PF>::Resample(Bitmap* src, int scale_w, int scale_h, const R
 	src->Unlock();
 	dst->Unlock();
 
-	return dst;
+	return std::auto_ptr<Bitmap>(dst.release());
 }
 
 ////////////////////////////////////////////////////////////
 template <class PF>
-Bitmap* BitmapUtils<PF>::RotateScale(Bitmap* src, double angle, int scale_w, int scale_h) {
+std::auto_ptr<Bitmap> BitmapUtils<PF>::RotateScale(Bitmap* src, double angle, int scale_w, int scale_h) {
 	double c = cos(-angle);
 	double s = sin(-angle);
 	int w = src->width();
@@ -117,7 +117,7 @@ Bitmap* BitmapUtils<PF>::RotateScale(Bitmap* src, double angle, int scale_w, int
 	double ix0 = -(c * fx0 - s * fy0) / sx;
 	double iy0 = -(s * fx0 + c * fy0) / sy;
 
-	Surface* result = Surface::CreateSurface(dst_w, dst_h, true);
+	std::auto_ptr<Surface> result = Surface::CreateSurface(dst_w, dst_h, true);
 	const Color& trans = src->transparent ? src->GetTransparentColor() : Color(255,0,255,0);
 	result->SetTransparentColor(trans);
 	result->Fill(trans);
@@ -148,13 +148,13 @@ Bitmap* BitmapUtils<PF>::RotateScale(Bitmap* src, double angle, int scale_w, int
 	src->Unlock();
 	result->Unlock();
 
-	return result;
+	return std::auto_ptr<Bitmap>(result.release());
 }
 
 ////////////////////////////////////////////////////////////
 template <class PF>
-Bitmap* BitmapUtils<PF>::Waver(Bitmap* src, int depth, double phase) {
-	Surface* dst = Surface::CreateSurface(src->width() + 2 * depth, src->height(), true);
+std::auto_ptr<Bitmap> BitmapUtils<PF>::Waver(Bitmap* src, int depth, double phase) {
+	std::auto_ptr<Surface> dst = Surface::CreateSurface(src->width() + 2 * depth, src->height(), true);
 
 	if (src->transparent)
 		dst->SetTransparentColor(src->GetTransparentColor());
@@ -179,7 +179,7 @@ Bitmap* BitmapUtils<PF>::Waver(Bitmap* src, int depth, double phase) {
 	src->Unlock();
 	dst->Unlock();
 
-	return dst;
+	return std::auto_ptr<Bitmap>(dst.release());
 }
 
 ////////////////////////////////////////////////////////////
@@ -379,11 +379,9 @@ void BitmapUtils<PF>::StretchBlit(Surface* dst, Rect dst_rect, Bitmap* src, Rect
 
 		if (dst_rect.IsOutOfBounds(dst->width(), dst->height())) return;
 
-		Bitmap* resampled = src->Resample(dst_rect.width, dst_rect.height, src_rect);
+		std::auto_ptr<Bitmap> resampled = src->Resample(dst_rect.width, dst_rect.height, src_rect);
 
-		dst->Blit(dst_rect.x, dst_rect.y, resampled, resampled->GetRect(), opacity);
-
-		delete resampled;
+		dst->Blit(dst_rect.x, dst_rect.y, resampled.get(), resampled->GetRect(), opacity);
 	}
 }
 

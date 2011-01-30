@@ -20,10 +20,10 @@
 ////////////////////////////////////////////////////////////
 #include <algorithm>
 #include <sstream>
-#include "game_actor.h"
-#include "game_party.h"
-#include "main_data.h"
-#include "util_macro.h"
+#include "game_actor.hpp"
+#include "game_party.hpp"
+#include "main_data.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 Game_Actor::Game_Actor(int actor_id) {
@@ -32,32 +32,45 @@ Game_Actor::Game_Actor(int actor_id) {
 
 ////////////////////////////////////////////////////////////
 void Game_Actor::Setup(int actor_id) {
-	const RPG::Actor& actor = Data::actors[actor_id - 1];
+	const RPG::Actor& actor = Main_Data::actor(actor_id);
 	this->actor_id = actor_id;
-	name = actor.name;
-	character_name = actor.character_name;
-	character_index = actor.character_index;
+	name = actor[1].toString().toSystem();
+	character_name = actor[3].toString().toSystem();
+	character_index = actor[4].to<int>();
 	character_transparent = false;
-	face_name = actor.face_name;
-	face_index = actor.face_index;
-	title = actor.title;
-	weapon_id = actor.weapon_id;
-	shield_id = actor.shield_id;
-	armor_id = actor.armor_id;
-	helmet_id = actor.helmet_id;
-	accessory_id = actor.accessory_id;
-	level = actor.initial_level;
-	exp_list.resize(actor.final_level, 0);
+	face_name = actor[15].toString().toSystem();
+	face_index = actor[16].to<int>();
+	title = actor[2].toString().toSystem();
+	boost::array<uint16_t, rpg2k::Equip::END> eq = actor[51].toBinary().toArray<uint16_t, rpg2k::Equip::END>();
+	weapon_id = eq[rpg2k::Equip::WEAPON];
+	shield_id = eq[rpg2k::Equip::SHIELD];
+	armor_id = eq[rpg2k::Equip::ARMOR];
+	helmet_id = eq[rpg2k::Equip::HELMET];
+	accessory_id = eq[rpg2k::Equip::OTHER];
+	level = actor[7].to<int>();
+	exp_list.resize(actor[8].to<int>(), 0);
 	MakeExpList();
 	exp = exp_list[level - 1];
 	hp = GetMaxHp();
 	sp = GetMaxSp();
+
+	two_swords_style = actor[21].to<bool>();
+	eastl::vector<uint32_t> buf = actor[80].toBinary().toVector<uint32_t>();
+	battle_commands.assign(buf.begin(), buf.end());
+
+	using rpg2k::structure::Array2D;
+	Array2D const& skillList = actor[63].toArray2D();
+	for (Array2D::const_iterator i = skillList.begin(); i != skillList.end(); ++i) {
+		if ((*i->second)[1].to<int>() <= level) {
+			LearnSkill((*i->second)[2].to<int>());
+	/*
 	two_swords_style = actor.two_swords_style;
 	battle_commands = std::vector<uint32_t>(actor.battle_commands);
 
 	for (size_t i = 0; i < actor.skills.size(); ++i) {
 		if (actor.skills[i].level <= level) {
 			LearnSkill(actor.skills[i].skill_id);
+	*/
 		}
 	}
 }
@@ -165,32 +178,32 @@ void Game_Actor::ChangeEquipment(int equip_type, int item_id, bool test) {
 
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseMaxHp() const {
-	return Data::actors[actor_id - 1].parameter_maxhp[level - 1];
+	return Main_Data::project->character(actor_id).basicParam(level, rpg2k::Param::HP);
 }
 
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseMaxSp() const {
-	return Data::actors[actor_id - 1].parameter_maxsp[level - 1];
+	return Main_Data::project->character(actor_id).basicParam(level, rpg2k::Param::MP);
 }
 
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseAtk() const {
-	int n = Data::actors[actor_id - 1].parameter_attack[level - 1];
+	int n = Main_Data::project->character(actor_id).basicParam(level, rpg2k::Param::ATTACK);
 
 	if (weapon_id > 0) {
-		n += Data::items[weapon_id - 1].atk_points;
+		n += Main_Data::item(weapon_id)[11].to<int>();
 	}
 	if (shield_id > 0) {
-		n += Data::items[shield_id - 1].atk_points;
+		n += Main_Data::item(shield_id)[11].to<int>();
 	}
 	if (armor_id > 0) {
-		n += Data::items[armor_id - 1].atk_points;
+		n += Main_Data::item(armor_id)[11].to<int>();
 	}
 	if (helmet_id > 0) {
-		n += Data::items[helmet_id - 1].atk_points;
+		n += Main_Data::item(helmet_id)[11].to<int>();
 	}
 	if (accessory_id > 0) {
-		n += Data::items[accessory_id - 1].atk_points;
+		n += Main_Data::item(accessory_id)[11].to<int>();
 	}
 
 	return min(max(n, 1), 999);
@@ -198,22 +211,22 @@ int Game_Actor::GetBaseAtk() const {
 
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseDef() const {
-	int n = Data::actors[actor_id - 1].parameter_defense[level - 1];
+	int n = Main_Data::project->character(actor_id).basicParam(level, rpg2k::Param::GAURD);
 
 	if (weapon_id > 0) {
-		n += Data::items[weapon_id - 1].def_points;
+		n += Main_Data::item(weapon_id)[12].to<int>();
 	}
 	if (shield_id > 0) {
-		n += Data::items[shield_id - 1].def_points;
+		n += Main_Data::item(shield_id)[12].to<int>();
 	}
 	if (armor_id > 0) {
-		n += Data::items[armor_id - 1].def_points;
+		n += Main_Data::item(armor_id)[12].to<int>();
 	}
 	if (helmet_id > 0) {
-		n += Data::items[helmet_id - 1].def_points;
+		n += Main_Data::item(helmet_id)[12].to<int>();
 	}
 	if (accessory_id > 0) {
-		n += Data::items[accessory_id - 1].def_points;
+		n += Main_Data::item(accessory_id)[12].to<int>();
 	}
 
 	return min(max(n, 1), 999);
@@ -221,22 +234,22 @@ int Game_Actor::GetBaseDef() const {
 
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseSpi() const {
-	int n = Data::actors[actor_id - 1].parameter_spirit[level - 1];
+	int n = Main_Data::project->character(actor_id).basicParam(level, rpg2k::Param::MIND);
 
 	if (weapon_id > 0) {
-		n += Data::items[weapon_id - 1].spi_points;
+		n += Main_Data::item(weapon_id)[13].to<int>();
 	}
 	if (shield_id > 0) {
-		n += Data::items[shield_id - 1].spi_points;
+		n += Main_Data::item(shield_id)[13].to<int>();
 	}
 	if (armor_id > 0) {
-		n += Data::items[armor_id - 1].spi_points;
+		n += Main_Data::item(armor_id)[13].to<int>();
 	}
 	if (helmet_id > 0) {
-		n += Data::items[helmet_id - 1].spi_points;
+		n += Main_Data::item(helmet_id)[13].to<int>();
 	}
 	if (accessory_id > 0) {
-		n += Data::items[accessory_id - 1].spi_points;
+		n += Main_Data::item(accessory_id)[13].to<int>();
 	}
 
 	return min(max(n, 1), 999);
@@ -244,22 +257,22 @@ int Game_Actor::GetBaseSpi() const {
 
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseAgi() const {
-	int n = Data::actors[actor_id - 1].parameter_agility[level - 1];
+	int n = Main_Data::project->character(actor_id).basicParam(level, rpg2k::Param::SPEED);
 
 	if (weapon_id > 0) {
-		n += Data::items[weapon_id - 1].agi_points;
+		n += Main_Data::item(weapon_id)[14].to<int>();
 	}
 	if (shield_id > 0) {
-		n += Data::items[shield_id - 1].agi_points;
+		n += Main_Data::item(shield_id)[14].to<int>();
 	}
 	if (armor_id > 0) {
-		n += Data::items[armor_id - 1].agi_points;
+		n += Main_Data::item(armor_id)[14].to<int>();
 	}
 	if (helmet_id > 0) {
-		n += Data::items[helmet_id - 1].agi_points;
+		n += Main_Data::item(helmet_id)[14].to<int>();
 	}
 	if (accessory_id > 0) {
-		n += Data::items[accessory_id - 1].agi_points;
+		n += Main_Data::item(accessory_id)[14].to<int>();
 	}
 
 	return min(max(n, 1), 999);
@@ -268,26 +281,26 @@ int Game_Actor::GetBaseAgi() const {
 ////////////////////////////////////////////////////////////
 int Game_Actor::CalculateExp(int level)
 {
-        double base = Data::actors[actor_id - 1].exp_base;
-        double inflation = Data::actors[actor_id - 1].exp_inflation;
-		double correction = Data::actors[actor_id - 1].exp_correction;
+	double base = Main_Data::actor(actor_id)[41].to<int>();
+	double inflation = Main_Data::actor(actor_id)[42].to<int>();
+	double correction = Main_Data::actor(actor_id)[43].to<int>();
 
-        int result = 0;
+	int result = 0;
 
-        inflation = 1.5 + (inflation * 0.01);
+	inflation = 1.5 + (inflation * 0.01);
 
-        for (int i = level; i >= 1; i--)
-        {
-                result = result + (int)(correction + base);
-                base = base * inflation;
-                inflation = ((level+1) * 0.002 + 0.8) * (inflation - 1) + 1;
-        }
-        return min(result, 1000000);
+	for (int i = level; i >= 1; i--)
+	{
+		result = result + (int)(correction + base);
+		base = base * inflation;
+		inflation = ((level+1) * 0.002 + 0.8) * (inflation - 1) + 1;
+	}
+	return std::min(result, 1000000);
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Actor::MakeExpList() {
-	for (int i = 1; i < Data::actors[actor_id - 1].final_level; ++i) {
+	for (int i = 1; i < Main_Data::actor(actor_id)[8].to<int>(); ++i) {
 		exp_list[i] = CalculateExp(i);
 	}
 }
@@ -406,17 +419,19 @@ void Game_Actor::ChangeLevel(int level) {
 
 ////////////////////////////////////////////////////////////
 bool Game_Actor::IsEquippable(int item_id) {
+	RPG::Item const& target = Main_Data::item(item_id);
+
 	if (two_swords_style &&
-		Data::items[item_id - 1].type == RPG::Item::Type_shield) {
+		target[3].to<int>() == rpg2k::Item::SHIELD) {
 			return false;
 	}
 
 	// If the actor id is out of range this is an optimization in the ldb file
 	// (all actors missing can equip the item)
-	if (Data::items[item_id - 1].actor_set.size() <= (unsigned)(actor_id - 1)) {
+	if (target[61].to<int>() <= (actor_id - 1)) {
 		return true;
 	} else {
-		return Data::items[item_id - 1].actor_set.at(actor_id - 1);
+		return target[61].toBinary()[actor_id - 1];
 	}
 }
 

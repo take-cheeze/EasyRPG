@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_PIXMAN_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -23,9 +23,9 @@
 ////////////////////////////////////////////////////////////
 #include <cmath>
 #include <iostream>
-#include "pixman_bitmap_screen.h"
-#include "pixman_bitmap.h"
-#include "sdl_ui.h"
+#include "pixman_bitmap_screen.hpp"
+#include "pixman_bitmap.hpp"
+#include "sdl_ui.hpp"
 
 ////////////////////////////////////////////////////////////
 PixmanBitmapScreen::PixmanBitmapScreen(Bitmap* bitmap, bool delete_bitmap) :

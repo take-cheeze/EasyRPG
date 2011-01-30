@@ -18,7 +18,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_temp.h"
+#include "game_temp.hpp"
 
 ////////////////////////////////////////////////////////////
 bool Game_Temp::menu_calling;
@@ -55,7 +55,7 @@ int Game_Temp::battle_defeat_mode;
 bool Game_Temp::battle_first_strike;
 int Game_Temp::battle_mode;
 int Game_Temp::battle_result;
-RPG::Music* Game_Temp::map_bgm;
+RPG::Music const* Game_Temp::map_bgm;
 
 ////////////////////////////////////////////////////////////
 void Game_Temp::Init() {

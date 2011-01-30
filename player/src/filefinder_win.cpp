@@ -26,11 +26,11 @@
 #include <windows.h>
 #include <shlobj.h>
 #include <vector>
-#include "filefinder.h"
-#include "options.h"
-#include "player.h"
-#include "registry_win.h"
-#include "utils.h"
+#include "filefinder.hpp"
+#include "options.hpp"
+#include "player.hpp"
+#include "registry_win.hpp"
+#include "utils.hpp"
 
 // MinGW shlobj.h does not define this
 #ifndef SHGFP_TYPE_CURRENT

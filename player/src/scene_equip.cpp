@@ -18,14 +18,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_equip.h"
-#include "game_actors.h"
-#include "game_party.h"
-#include "game_system.h"
-#include "graphics.h"
-#include "input.h"
-#include "player.h"
-#include "scene_menu.h"
+#include "scene_equip.hpp"
+#include "game_actors.hpp"
+#include "game_party.hpp"
+#include "game_system.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "player.hpp"
+#include "scene_menu.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Equip::Scene_Equip(int actor_index, int equip_index) :
@@ -118,19 +118,19 @@ void Scene_Equip::UpdateStatusWindow() {
 ////////////////////////////////////////////////////////////
 void Scene_Equip::UpdateEquipSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 		equip_window->SetActive(false);
 		item_window->SetActive(true);
 		item_window->SetIndex(0);
 	} else if (Game_Party::GetActors().size() > 1 && Input::IsTriggered(Input::RIGHT)) {
-		Game_System::SePlay(Data::system.cursor_se);
+		Game_System::SePlay(Main_Data::cursorSE());
 		actor_index = (actor_index + 1) % Game_Party::GetActors().size();
 		Scene::Push(new Scene_Equip(actor_index, equip_window->GetIndex()), true);
 	} else if (Game_Party::GetActors().size() > 1 && Input::IsTriggered(Input::LEFT)) {
-		Game_System::SePlay(Data::system.cursor_se);
+		Game_System::SePlay(Main_Data::cursorSE());
 		actor_index = (actor_index + Game_Party::GetActors().size() - 1) % Game_Party::GetActors().size();
 		Scene::Push(new Scene_Equip(actor_index, equip_window->GetIndex()), true);
 	} 
@@ -139,12 +139,12 @@ void Scene_Equip::UpdateEquipSelection() {
 ////////////////////////////////////////////////////////////
 void Scene_Equip::UpdateItemSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Main_Data::cancelSE());
 		equip_window->SetActive(true);
 		item_window->SetActive(false);
 		item_window->SetIndex(-1);
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Main_Data::decisionSE());
 
 		Game_Party::GetActors()[actor_index]->ChangeEquipment(
 			equip_window->GetIndex(), item_window->GetItemId());

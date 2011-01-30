@@ -18,15 +18,16 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "audio.h"
-#include "game_character.h"
-#include "game_map.h"
-#include "game_player.h"
-#include "game_switches.h"
-#include "game_system.h"
-#include "lmu_chunks.h"
-#include "main_data.h"
-#include "util_macro.h"
+#include "audio.hpp"
+#include "game_character.hpp"
+#include "game_map.hpp"
+#include "game_player.hpp"
+#include "game_switches.hpp"
+#include "game_system.hpp"
+// #include "lmu_chunks.hpp"
+#include "main_data.hpp"
+#include "util_macro.hpp"
+#include <rpg2k/Stream.hxx>
 #include <cassert>
 #include <cstdlib>
 
@@ -98,7 +99,7 @@ bool Game_Character::IsPassable(int x, int y, int d) const {
 		Game_Event* evnt = i->second;
 		if (evnt->GetX() == new_x && evnt->GetY() == new_y) {
 			if (!evnt->GetThrough() && evnt->GetPriorityType() == 1) {
-				if (this != (const Game_Character*)Main_Data::game_player)
+				if (this != (const Game_Character*)Main_Data::game_player.get())
 					return false;
 
 				if (!evnt->GetCharacterName().empty())
@@ -262,96 +263,118 @@ void Game_Character::UpdateStop() {
 }
 
 ////////////////////////////////////////////////////////////
+static rpg2k::SystemString readString(std::istream& is)
+{
+	using rpg2k::structure::readBER;
+
+	rpg2k::size_t const size = readBER(is);
+	rpg2k::String ret;
+	for(rpg2k::size_t i = 0; i < size; ++i) {
+		ret.push_back( readBER(is) );
+	}
+	return ret.toSystem();
+}
+
 void Game_Character::MoveTypeCustom() {
+	using rpg2k::structure::readBER;
+
 	if (IsStopping()) {
 		move_failed = false;
-		if ((size_t)move_route_index >= move_route->move_commands.size()) {
+		if( rpg2k::structure::isEOF(move_commands) ) {
+		// if ((size_t)move_route_index >= move_route->move_commands.size()) {
 			// End of Move list
-			if (move_route->repeat) {
-				move_route_index = 0;
+			if ((*move_route)[21].to<bool>()) {
+				move_commands.seekg(0);
+				// move_route_index = 0;
 			} else if (move_route_forcing) {
 				move_route_forcing = false;
 				if (move_route_owner != NULL) {
-					move_route_owner->EndMoveRoute(move_route);
+					move_route_owner->EndMoveRoute(*move_route);
 				}
 				move_route = original_move_route;
 				move_route_index = original_move_route_index;
 				original_move_route = NULL;
 			}
 		} else {
-			RPG::MoveCommand& move_command = move_route->move_commands[move_route_index];
-			switch (move_command.command_id) {
-			case LMU_Reader::ChunkMoveCommands::move_up:
+			// RPG::MoveCommand& move_command = move_route->move_commands[move_route_index];
+			switch ( readBER(move_commands) /* move_command.command_id */) {
+			case rpg2k::Action::Move::UP:
 				MoveUp();	break;
-			case LMU_Reader::ChunkMoveCommands::move_right:
+			case rpg2k::Action::Move::RIGHT:
 				MoveRight(); break;
-			case LMU_Reader::ChunkMoveCommands::move_down:
+			case rpg2k::Action::Move::DOWN:
 				MoveDown(); break;
-			case LMU_Reader::ChunkMoveCommands::move_left:
+			case rpg2k::Action::Move::LEFT:
 				MoveLeft(); break;
-			case LMU_Reader::ChunkMoveCommands::move_upright: break;
-			case LMU_Reader::ChunkMoveCommands::move_downright: break;
-			case LMU_Reader::ChunkMoveCommands::move_downleft: break;
-			case LMU_Reader::ChunkMoveCommands::move_upleft: break;
-			case LMU_Reader::ChunkMoveCommands::move_random: break;
-			case LMU_Reader::ChunkMoveCommands::move_towards_hero: break;
-			case LMU_Reader::ChunkMoveCommands::move_away_from_hero: break;
-			case LMU_Reader::ChunkMoveCommands::move_forward: break;
-			case LMU_Reader::ChunkMoveCommands::face_up:
+			case rpg2k::Action::Move::RIGHT_UP: break;
+			case rpg2k::Action::Move::RIGHT_DOWN: break;
+			case rpg2k::Action::Move::LEFT_DOWN: break;
+			case rpg2k::Action::Move::LEFT_UP: break;
+			case rpg2k::Action::Move::RANDOM: break;
+			case rpg2k::Action::Move::TO_PARTY: break;
+			case rpg2k::Action::Move::FROM_PARTY: break;
+			case rpg2k::Action::Move::A_STEP: break;
+			case rpg2k::Action::Face::UP:
 				TurnUp(); break;
-			case LMU_Reader::ChunkMoveCommands::face_right:
+			case rpg2k::Action::Face::RIGHT:
 				TurnRight(); break;
-			case LMU_Reader::ChunkMoveCommands::face_down:
+			case rpg2k::Action::Face::DOWN:
 				TurnDown(); break;
-			case LMU_Reader::ChunkMoveCommands::face_left:
+			case rpg2k::Action::Face::LEFT:
 				TurnLeft(); break;
-			case LMU_Reader::ChunkMoveCommands::turn_90_degree_right: break;
-			case LMU_Reader::ChunkMoveCommands::turn_90_degree_left: break;
-			case LMU_Reader::ChunkMoveCommands::turn_180_degree: break;
-			case LMU_Reader::ChunkMoveCommands::turn_90_degree_random: break;
-			case LMU_Reader::ChunkMoveCommands::face_random_direction: break;
-			case LMU_Reader::ChunkMoveCommands::face_hero: break;
-			case LMU_Reader::ChunkMoveCommands::face_away_from_hero: break;
-			case LMU_Reader::ChunkMoveCommands::wait: break;
-			case LMU_Reader::ChunkMoveCommands::begin_jump: break;
-			case LMU_Reader::ChunkMoveCommands::end_jump: break;
-			case LMU_Reader::ChunkMoveCommands::lock_facing: break;
-			case LMU_Reader::ChunkMoveCommands::unlock_facing: break;
-			case LMU_Reader::ChunkMoveCommands::increase_movement_speed:
-				move_speed = min(move_speed + 1, 8); break;
-			case LMU_Reader::ChunkMoveCommands::decrease_movement_speed: 
-				move_speed = max(move_speed - 1, 1); break;
-			case LMU_Reader::ChunkMoveCommands::increase_movement_frequence: break;
-			case LMU_Reader::ChunkMoveCommands::decrease_movement_frequence: break;
-			case LMU_Reader::ChunkMoveCommands::switch_on: // Parameter A: Switch to turn on
-				Game_Switches[move_command.parameter_a] = true;
+			case rpg2k::Action::Turn::RIGHT_90: break;
+			case rpg2k::Action::Turn::LEFT_90: break;
+			case rpg2k::Action::Turn::OPPOSITE: break;
+			case rpg2k::Action::Turn::RIGHT_OR_LEFT_90: break;
+			case rpg2k::Action::Turn::RANDOM: break;
+			case rpg2k::Action::Turn::TO_PARTY: break;
+			case rpg2k::Action::Turn::OPPOSITE_OF_PARTY: break;
+			case rpg2k::Action::HALT: break;
+			case rpg2k::Action::BEGIN_JUMP: break;
+			case rpg2k::Action::END_JUMP: break;
+			case rpg2k::Action::FIX_DIR: break;
+			case rpg2k::Action::UNFIX_DIR: break;
+			case rpg2k::Action::SPEED_UP:
+				move_speed = std::min(move_speed + 1, 8); break;
+			case rpg2k::Action::SPEED_DOWN: 
+				move_speed = std::max(move_speed - 1, 1); break;
+			case rpg2k::Action::FREQ_UP: break;
+			case rpg2k::Action::FREQ_DOWN: break;
+			case rpg2k::Action::SWITCH_ON: // Parameter A: Switch to turn on
+				Main_Data::project->getLSD().setFlag(readBER(move_commands), true);
 				Game_Map::SetNeedRefresh(true);
 				break;
-			case LMU_Reader::ChunkMoveCommands::switch_off: // Parameter A: Switch to turn off
-				Game_Switches[move_command.parameter_a] = false;
+			case rpg2k::Action::SWITCH_OFF: // Parameter A: Switch to turn off
+				Main_Data::project->getLSD().setFlag(readBER(move_commands), false);
 				Game_Map::SetNeedRefresh(true);
 				break;
-			case LMU_Reader::ChunkMoveCommands::change_graphic: // String: File, Parameter A: index
-				character_name = move_command.parameter_string;
-				character_index = move_command.parameter_a;
+			case rpg2k::Action::CHANGE_CHAR_SET: // String: File, Parameter A: index
+				character_name = readString(move_commands);
+				character_index = readBER(move_commands);
 				break;
-			case LMU_Reader::ChunkMoveCommands::play_sound_effect: // String: File, Parameters: Volume, Tempo, Balance
-				if (move_command.parameter_string != "(OFF)") {
-					Audio::SE_Play(move_command.parameter_string,
-						move_command.parameter_a, move_command.parameter_b);
+			case rpg2k::Action::PLAY_SOUND: // String: File, Parameters: Volume, Tempo, Balance
+				{
+					rpg2k::SystemString const name = readString(move_commands);
+					int volume = readBER(move_commands)
+					, tempo = readBER(move_commands)
+					, balance = readBER(move_commands);
+					tempo = tempo;
+					if (name != rpg2k::AUDIO_OFF) {
+						Audio::SE_Play(name, volume, balance);
+					}
 				}
 				break;
-			case LMU_Reader::ChunkMoveCommands::walk_everywhere_on:
+			case rpg2k::Action::BEGIN_SLIP:
 				through = true; break;
-			case LMU_Reader::ChunkMoveCommands::walk_everywhere_off:
+			case rpg2k::Action::END_SLIP:
 				through = false; break;
-			case LMU_Reader::ChunkMoveCommands::stop_animation: break;
-			case LMU_Reader::ChunkMoveCommands::start_animation: break;
-			case LMU_Reader::ChunkMoveCommands::increase_transp: break; // ???
-			case LMU_Reader::ChunkMoveCommands::decrease_transp: break; // ???
+			case rpg2k::Action::STOP_ANIME: break;
+			case rpg2k::Action::START_ANIME: break;
+			case rpg2k::Action::TRANS_UP: break; // ???
+			case rpg2k::Action::TRANS_DOWN: break; // ???
 			}
 
-			if (move_route->skippable || !move_failed) {
+			if ((*move_route)[22].to<bool>() || !move_failed) {
 				++move_route_index;
 			}
 		}
@@ -522,6 +545,8 @@ void Game_Character::ForceMoveRoute(RPG::MoveRoute* new_route,
 	prelock_direction = 0;
 	wait_count = 0;
 	MoveTypeCustom();
+
+	move_commands.str( (*new_route)[12].toBinary() );
 }
 
 void Game_Character::DetachMoveRouteOwner(Game_Interpreter* owner) {

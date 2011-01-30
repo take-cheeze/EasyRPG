@@ -19,11 +19,11 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <cassert>
-#include "scene.h"
-#include "graphics.h"
-#include "input.h"
-#include "player.h"
-#include "output.h"
+#include "scene.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "player.hpp"
+#include "output.hpp"
 
 #ifndef NULL
 #define NULL 0

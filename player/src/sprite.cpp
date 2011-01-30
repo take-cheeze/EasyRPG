@@ -19,10 +19,10 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "sprite.h"
-#include "player.h"
-#include "graphics.h"
-#include "util_macro.h"
+#include "sprite.hpp"
+#include "player.hpp"
+#include "graphics.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Constructor
@@ -30,7 +30,6 @@
 Sprite::Sprite() :
 	type(TypeSprite),
 	ID(Graphics::drawable_id++),
-	bitmap(NULL),
 	visible(true),
 	x(0),
 	y(0),
@@ -40,7 +39,7 @@ Sprite::Sprite() :
 	flash_duration(0),
 	flash_frame(0) {
 
-	bitmap_screen = BitmapScreen::CreateBitmapScreen();
+	bitmap_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
 
 	zobj = Graphics::RegisterZObj(0, ID);
 	Graphics::RegisterDrawable(ID, this);
@@ -52,7 +51,6 @@ Sprite::Sprite() :
 Sprite::~Sprite() {
 	Graphics::RemoveZObj(ID);
 	Graphics::RemoveDrawable(ID);
-	delete bitmap_screen;
 }
 
 ////////////////////////////////////////////////////////////
@@ -103,18 +101,14 @@ void Sprite::Flash(Color color, int duration){
 
 ////////////////////////////////////////////////////////////
 Bitmap* Sprite::GetBitmap() const {
-	return bitmap;
+	return bitmap_screen->GetBitmap();
 }
 
-void Sprite::SetBitmap(Bitmap* nbitmap, bool delete_bitmap) {
-	bitmap = nbitmap;
-	if (!bitmap) {
-		src_rect = Rect();
-	} else {
-		src_rect = bitmap->GetRect();
-	}
-	bitmap_screen->SetBitmap(bitmap, delete_bitmap);
-	bitmap_screen->SetSrcRect(src_rect);
+void Sprite::SetBitmap(Bitmap* nbitmap) {
+	bitmap_screen->SetBitmap(nbitmap);
+}
+void Sprite::SetBitmap(std::auto_ptr<Bitmap> nbitmap) {
+	bitmap_screen->SetBitmap(nbitmap);
 }
 Rect Sprite::GetSrcRect() const {
 	return src_rect;

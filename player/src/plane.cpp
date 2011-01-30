@@ -18,21 +18,19 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "plane.h"
-#include "graphics.h"
-#include "player.h"
+#include "plane.hpp"
+#include "graphics.hpp"
+#include "player.hpp"
 
 ////////////////////////////////////////////////////////////
 Plane::Plane() :
 	type(TypePlane),
 	ID(Graphics::drawable_id++),
-	bitmap(NULL),
+	bitmap_screen( BitmapScreen::CreateBitmapScreen() ),
 	visible(true),
 	z(0),
 	ox(0),
 	oy(0) {
-	
-	bitmap_screen = BitmapScreen::CreateBitmapScreen();
 	
 	zobj = Graphics::RegisterZObj(0, ID);
 	Graphics::RegisterDrawable(ID, this);
@@ -42,12 +40,11 @@ Plane::Plane() :
 Plane::~Plane() {
 	Graphics::RemoveZObj(ID);
 	Graphics::RemoveDrawable(ID);
-	delete bitmap_screen;
 }
 
 ////////////////////////////////////////////////////////////
 void Plane::Draw(int z_order) {
-	if (!visible || !bitmap) return;
+	if (!visible || !GetBitmap()) return;
 
 	int screen_ox = ox % DisplayUi->GetWidth();
 	int screen_oy = oy % DisplayUi->GetHeight();
@@ -58,16 +55,18 @@ void Plane::Draw(int z_order) {
 	dst_rect.width = screen_ox + DisplayUi->GetWidth();
 	dst_rect.height = screen_oy + DisplayUi->GetHeight();
 
-	bitmap_screen->BlitScreenTiled(bitmap->GetRect(), dst_rect);
+	bitmap_screen->BlitScreenTiled(GetBitmap()->GetRect(), dst_rect);
 }
 
 ////////////////////////////////////////////////////////////
 Bitmap* Plane::GetBitmap() const {
-	return bitmap;
+	return bitmap_screen->GetBitmap();
 }
-void Plane::SetBitmap(Bitmap* nbitmap, bool delete_bitmap) {
-	bitmap = nbitmap;
-	bitmap_screen->SetBitmap(nbitmap, delete_bitmap);
+void Plane::SetBitmap(std::auto_ptr<Bitmap> nbitmap) {
+	bitmap_screen->SetBitmap(nbitmap);
+}
+void Plane::SetBitmap(Bitmap* nbitmap) {
+	bitmap_screen->SetBitmap(nbitmap);
 }
 
 bool Plane::GetVisible() const {

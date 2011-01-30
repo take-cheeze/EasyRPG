@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_item.h"
-#include "game_party.h"
+#include "window_item.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Item::Window_Item(int ix, int iy, int iwidth, int iheight) :
@@ -102,8 +102,8 @@ void Window_Item::DrawItem(int index) {
 	if (item_id > 0) {
 		int number = Game_Party::ItemNumber(item_id);
 		bool enabled = CheckEnable(item_id);
-		DrawItemName(&Data::items[item_id - 1], rect.x, rect.y, enabled);
-		
+		DrawItemName(&Main_Data::project->getLDB().item()[item_id], rect.x, rect.y, enabled);
+
 		std::stringstream ss;
 		ss << number;
 		contents->TextDraw(rect.x + rect.width - 28, rect.y, Font::ColorDefault, "x");
@@ -113,6 +113,6 @@ void Window_Item::DrawItem(int index) {
 
 ////////////////////////////////////////////////////////////
 void Window_Item::UpdateHelp() {
-	help_window->SetText(GetItemId() == 0 ? "" : 
-		Data::items[GetItemId() - 1].description);
+	help_window->SetText(GetItemId() == 0 ? ""
+	: Main_Data::project->getLDB().item()[GetItemId()][2].toString().toSystem());
 }

@@ -19,62 +19,73 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <cmath>
-#include "bitmap_screen.h"
-#include "util_macro.h"
+#include "bitmap_screen.hpp"
+#include "util_macro.hpp"
 
 #if defined(USE_SDL_BITMAP)
-	#include "sdl_bitmap_screen.h"
+	#include "sdl_bitmap_screen.hpp"
 #endif
 #if defined(USE_OPENGL_BITMAP)
-	#include "gl_bitmap_screen.h"
+	#include "gl_bitmap_screen.hpp"
 #endif
 #if defined(USE_SOFT_BITMAP)
-	#include "soft_bitmap_screen.h"
+	#include "soft_bitmap_screen.hpp"
 #endif
 #if defined(USE_PIXMAN_BITMAP)
-	#include "pixman_bitmap_screen.h"
+	#include "pixman_bitmap_screen.hpp"
 #endif
 
 ////////////////////////////////////////////////////////////
-BitmapScreen* BitmapScreen::CreateBitmapScreen(Bitmap* source, bool delete_bitmap) {
+std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen(Bitmap* source) {
 	#if defined(USE_SDL_BITMAP)
-		return (BitmapScreen*)new SdlBitmapScreen(source, delete_bitmap);
+		return std::auto_ptr<BitmapScreen>( new SdlBitmapScreen(source) );
 	#elif defined(USE_OPENGL_BITMAP)
-		return (BitmapScreen*)new GlBitmapScreen(source, delete_bitmap);
+		return std::auto_ptr<BitmapScreen>( new GlBitmapScreen(source) );
 	#elif defined(USE_SOFT_BITMAP)
-		return (BitmapScreen*)new SoftBitmapScreen(source, delete_bitmap);
+		return std::auto_ptr<BitmapScreen>( new SoftBitmapScreen(source) );
 	#elif defined(USE_PIXMAN_BITMAP)
-		return (BitmapScreen*)new PixmanBitmapScreen(source, delete_bitmap);
+		return std::auto_ptr<BitmapScreen>( new PixmanBitmapScreen(source) );
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
 ////////////////////////////////////////////////////////////
-BitmapScreen* BitmapScreen::CreateBitmapScreen() {
+std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen(std::auto_ptr<Bitmap> source) {
+	#if defined(USE_SDL_BITMAP)
+		return std::auto_ptr<BitmapScreen>( new SdlBitmapScreen(source) );
+	#elif defined(USE_OPENGL_BITMAP)
+		return std::auto_ptr<BitmapScreen>( new GlBitmapScreen(source) );
+	#elif defined(USE_SOFT_BITMAP)
+		return std::auto_ptr<BitmapScreen>( new SoftBitmapScreen(source) );
+	#elif defined(USE_PIXMAN_BITMAP)
+		return std::auto_ptr<BitmapScreen>( new PixmanBitmapScreen(source) );
+	#else
+		#error "No bitmap implementation selected"
+	#endif
+}
+
+////////////////////////////////////////////////////////////
+std::auto_ptr<BitmapScreen> BitmapScreen::CreateBitmapScreen() {
 	return CreateBitmapScreen(NULL);
 }
 
 ////////////////////////////////////////////////////////////
-BitmapScreen::BitmapScreen(Bitmap* bitmap, bool delete_bitmap) :
-	bitmap(bitmap),
-	delete_bitmap(delete_bitmap) {
+BitmapScreen::BitmapScreen(Bitmap* src) :
+	bitmap(*this) {
+
+	bitmap = src;
 
 	ClearEffects();
-
-	if (bitmap != NULL) {
-		src_rect_effect = bitmap->GetRect();
-		bitmap->AttachBitmapScreen(this);
-	}
 }
 
 ////////////////////////////////////////////////////////////
-BitmapScreen::~BitmapScreen() {
-	if (delete_bitmap && bitmap != NULL) {
-		delete bitmap;
-	} else if (bitmap != NULL) {
-		bitmap->DetachBitmapScreen(this);
-	}
+BitmapScreen::BitmapScreen(std::auto_ptr<Bitmap> src) :
+	bitmap(*this) {
+
+	bitmap = src;
+
+	ClearEffects();
 }
 
 ////////////////////////////////////////////////////////////
@@ -83,28 +94,20 @@ void BitmapScreen::SetDirty() {
 }
 
 ////////////////////////////////////////////////////////////
-void BitmapScreen::SetBitmap(Bitmap* source, bool _delete_bitmap) {
-	if (delete_bitmap && bitmap != NULL) {
-		delete bitmap;
-	} else if (bitmap != NULL)
-		bitmap->DetachBitmapScreen(this);
-
-	delete_bitmap = _delete_bitmap;
-
+void BitmapScreen::SetBitmap(Bitmap* source) {
 	bitmap = source;
 	needs_refresh = true;
+}
 
-	if (bitmap) {
-		bitmap->AttachBitmapScreen(this);
-		src_rect_effect = bitmap->GetRect();
-	} else {
-		src_rect_effect = Rect();
-	}
+////////////////////////////////////////////////////////////
+void BitmapScreen::SetBitmap(std::auto_ptr<Bitmap> source) {
+	bitmap = source;
+	needs_refresh = true;
 }
 
 ////////////////////////////////////////////////////////////
 Bitmap* BitmapScreen::GetBitmap() {
-	return bitmap;
+	return bitmap.get();
 }
 
 ////////////////////////////////////////////////////////////

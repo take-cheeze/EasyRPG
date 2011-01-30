@@ -20,11 +20,11 @@
 ////////////////////////////////////////////////////////////
 #include <sstream>
 #include <string>
-#include "window_base.h"
-#include "window_shopbuy.h"
-#include "game_system.h"
-#include "game_temp.h"
-#include "game_party.h"
+#include "window_base.hpp"
+#include "window_shopbuy.hpp"
+#include "game_system.hpp"
+#include "game_temp.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopBuy::Window_ShopBuy(int ix, int iy, int iwidth, int iheight) : 
@@ -64,27 +64,28 @@ void Window_ShopBuy::Refresh() {
 ////////////////////////////////////////////////////////////
 void Window_ShopBuy::DrawItem(int index) {
 	int item_id = data[index];
-	bool enabled = Data::items[item_id - 1].price <= Game_Party::GetGold();
+	RPG::Item const& item = Main_Data::project->getLDB().item()[item_id];
+	bool enabled = item[5].to<int>() <= Game_Party::GetGold();
 	Rect rect = GetItemRect(index);
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 	contents->ClearRect(rect);
-	DrawItemName(&Data::items[item_id - 1], rect.x, rect.y, enabled);
+	DrawItemName(&item, rect.x, rect.y, enabled);
 
 	std::stringstream ss;
-	ss << Data::items[item_id - 1].price;
+	ss << item[5].to<int>();
 	contents->TextDraw(rect.width + 4, rect.y, Font::ColorDefault, ss.str(), Surface::TextAlignRight);
 }
 
 ////////////////////////////////////////////////////////////
 void Window_ShopBuy::UpdateHelp() {
 	help_window->SetText(GetItemId() == 0 ? "" : 
-		Data::items[GetItemId() - 1].description);
+		Main_Data::item(GetItemId())[2].toString().toSystem());
 }
 
 ////////////////////////////////////////////////////////////
 bool Window_ShopBuy::CheckEnable(int item_id) {
 	return (
 		item_id > 0 &&
-		Data::items[item_id - 1].price <= Game_Party::GetGold() &&
+		Main_Data::project->getLDB().item()[item_id][5].to<int>() <= Game_Party::GetGold() &&
 		Game_Party::ItemNumber(item_id) < 99);
 }

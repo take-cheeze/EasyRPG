@@ -21,9 +21,9 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
-#include "window_savefile.h"
-#include "game_system.h"
-#include "input.h"
+#include "window_savefile.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_SaveFile::Window_SaveFile(int ix, int iy, int iwidth, int iheight) : 
@@ -66,16 +66,16 @@ void Window_SaveFile::Refresh() {
 	Game_Actor* actor = party[0];
 	contents->TextDraw(8, 16+2, Font::ColorDefault, actor->GetName());
 
-	contents->TextDraw(8, 32+2, 1, Data::terms.lvl_short);
+	contents->TextDraw(8, 32+2, 1, Main_Data::vocabulary(128));
 
-	int lx = Surface::GetTextSize(Data::terms.lvl_short).width;
+	int lx = Surface::GetTextSize(Main_Data::vocabulary(128)).width;
 	out.str("");
 	out << std::setw(2) << std::setfill(' ') << actor->GetLevel();
 	contents->TextDraw(8+lx, 32+2, Font::ColorDefault, out.str());
 
-	contents->TextDraw(42, 32+2, 1, Data::terms.hp_short);
+	contents->TextDraw(42, 32+2, 1, Main_Data::vocabulary(129));
 
-	int hx = Surface::GetTextSize(Data::terms.hp_short).width;
+	int hx = Surface::GetTextSize(Main_Data::vocabulary(129)).width;
 	out.str("");
 	out << actor->GetHp();
 	contents->TextDraw(42+hx, 32+2, Font::ColorDefault, out.str());

@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_shopsell.h"
-#include "game_party.h"
+#include "window_shopsell.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopSell::Window_ShopSell(int ix, int iy, int iwidth, int iheight) :
@@ -33,5 +33,5 @@ Window_ShopSell::~Window_ShopSell() {
 
 ////////////////////////////////////////////////////////////
 bool Window_ShopSell::CheckEnable(int item_id) {
-	return Data::items[item_id - 1].price > 0;
+	return Main_Data::item(item_id)[5].to<int>() > 0;
 }

@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_battler.h"
+#include "game_battler.hpp"
 #include <algorithm>
-#include "game_actor.h"
-#include "util_macro.h"
-#include "main_data.h"
+#include "game_actor.hpp"
+#include "util_macro.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 Game_Battler::Game_Battler() :
@@ -82,7 +82,7 @@ int Game_Battler::GetMaxHp() {
 		i != states.end();
 		i++) {
 			// TODO test needed
-			n *= Data::states[(*i)].hp_change_max / 100;
+			n *= Main_Data::condition(*i)[61].to<int>() / 100;
 	}
 
 	n = min(max(n, 1), 999);
@@ -99,7 +99,7 @@ int Game_Battler::GetMaxSp() {
 		i != states.end();
 		i++) {
 			// TODO test needed
-			n *= Data::states[(*i)].sp_change_max / 100;
+			n *= Main_Data::condition(*i)[65].to<int>() / 100;
 	}
 
 	n = min(max(n, 0), 999);
@@ -237,22 +237,24 @@ bool Game_Battler::IsSkillUsable(int skill_id) {
 	//} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_escape) {
 	//	return is_there_an_escape_set;
 	//} else
-	if (Data::skills[skill_id - 1].type == RPG::Skill::Type_normal) {
-		int scope = Data::skills[skill_id - 1].scope;
 
-		if (scope == RPG::Skill::Scope_self ||
-			scope == RPG::Skill::Scope_ally ||
-			scope == RPG::Skill::Scope_party) {
+	RPG::Skill const& target = Main_Data::skill(skill_id);
+	if (target[8].to<int>() == 0) {
+	// if (Data::skills[skill_id - 1].type == RPG::Skill::Type_normal) {
+		int const scope = target[12].to<int>();
+
+		if (scope == 2 /* RPG::Skill::Scope_self */ ||
+			scope == 3 /* RPG::Skill::Scope_ally */ ||
+			scope == 4 /* RPG::Skill::Scope_party */) {
 			// ToDo: A skill is also acceptable when it cures a status
-			return (Data::skills[skill_id - 1].affect_hp ||
-					Data::skills[skill_id - 1].affect_sp);
+			return (target[31].to<bool>() || target[32].to<bool>());
 		}
-	} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_switch) {
+	} else if (Main_Data::skill(skill_id)[8].to<int>() == 3 /* RPG::Skill::Type_switch */) {
 		// Todo:
 		// if (Game_Temp::IsInBattle()) {
 		// return Data::skills[skill_id - 1].occasion_battle;
 		// else {
-		return Data::skills[skill_id - 1].occasion_field;
+		return target[18].to<bool>();
 		// }
 	}
 
@@ -261,7 +263,8 @@ bool Game_Battler::IsSkillUsable(int skill_id) {
 
 ////////////////////////////////////////////////////////////
 int Game_Battler::CalculateSkillCost(int skill_id) {
-	return Data::skills[skill_id - 1].sp_cost;
+	return Main_Data::skill(skill_id)[11].to<int>();
+	// return Data::skills[skill_id - 1].sp_cost;
 }
 
 ////////////////////////////////////////////////////////////

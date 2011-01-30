@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_logo.h"
-#include "graphics.h"
-#include "input.h"
-#include "scene_title.h"
+#include "scene_logo.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "scene_title.hpp"
 
 static unsigned char easyrpg_logo[] = {
 	0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D,
@@ -913,15 +913,15 @@ Scene_Logo::Scene_Logo() :
 
 ////////////////////////////////////////////////////////////
 void Scene_Logo::Start() {
-	logo = new Sprite();
-	logo_img = Bitmap::CreateBitmap((const uint8*)easyrpg_logo, sizeof(easyrpg_logo), false);
-	logo->SetBitmap(logo_img);
+	logo.reset( new Sprite() );
+	logo_img.reset( Bitmap::CreateBitmap((const uint8*)easyrpg_logo, sizeof(easyrpg_logo), false).release() );
+	logo->SetBitmap(logo_img.get());
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Logo::Terminate() {
-	delete logo;
-	delete logo_img;
+	logo.reset();
+	logo_img.reset();
 }
 
 ////////////////////////////////////////////////////////////

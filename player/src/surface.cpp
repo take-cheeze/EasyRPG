@@ -21,29 +21,29 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-#include "utils.h"
-#include "cache.h"
-#include "bitmap.h"
-#include "bitmap_screen.h"
-#include "output.h"
-#include "text.h"
-#include "surface.h"
-#include "wcwidth.h"
+#include "utils.hpp"
+#include "cache.hpp"
+#include "bitmap.hpp"
+#include "bitmap_screen.hpp"
+#include "output.hpp"
+#include "text.hpp"
+#include "surface.hpp"
+#include "wcwidth.hpp"
 
 #if defined(USE_SDL_BITMAP)
-	#include "sdl_bitmap.h"
+	#include "sdl_bitmap.hpp"
 #endif
 #if defined(USE_SOFT_BITMAP)
-	#include "soft_bitmap.h"
+	#include "soft_bitmap.hpp"
 #endif
 #if defined(USE_PIXMAN_BITMAP)
-	#include "pixman_bitmap.h"
+	#include "pixman_bitmap.hpp"
 #endif
 #if defined(USE_OPENGL)
-	#include "gl_bitmap.h"
+	#include "gl_bitmap.hpp"
 #endif
 
-#include "util_macro.h"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 static int GetMaskByte(uint32 mask) {
@@ -60,29 +60,29 @@ static int GetMaskByte(uint32 mask) {
 }
 
 ////////////////////////////////////////////////////////////
-Surface* Surface::CreateSurface(int width, int height, bool transparent) {
+std::auto_ptr<Surface> Surface::CreateSurface(int width, int height, bool transparent) {
 	#if defined(USE_SDL_BITMAP)
-		return (Surface*)new SdlBitmap(width, height, transparent);
+		return std::auto_ptr<Surface>(new SdlBitmap(width, height, transparent));
 	#elif defined(USE_SOFT_BITMAP)
-		return (Surface*)new SoftBitmap(width, height, transparent);
+		return std::auto_ptr<Surface>(new SoftBitmap(width, height, transparent));
 	#elif defined(USE_PIXMAN_BITMAP)
-		return (Surface*)new PixmanBitmap(width, height, transparent);
+		return std::auto_ptr<Surface>(new PixmanBitmap(width, height, transparent));
 	#elif defined(USE_OPENGL_BITMAP)
-		return (Surface*)new GlBitmap(width, height, transparent);
+		return std::auto_ptr<Surface>(new GlBitmap(width, height, transparent));
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
-Surface* Surface::CreateSurface(Bitmap* source, Rect src_rect, bool transparent) {
+	std::auto_ptr<Surface> Surface::CreateSurface(Bitmap* source, Rect src_rect, bool transparent) {
 	#if defined(USE_SDL_BITMAP)
-		return (Surface*)new SdlBitmap(source, src_rect, transparent);
+		return std::auto_ptr<Surface>(new SdlBitmap(source, src_rect, transparent));
 	#elif defined(USE_SOFT_BITMAP)
-		return (Surface*)new SoftBitmap(source, src_rect, transparent);
+		return std::auto_ptr<Surface>(new SoftBitmap(source, src_rect, transparent));
 	#elif defined(USE_PIXMAN_BITMAP)
-		return (Surface*)new PixmanBitmap(source, src_rect, transparent);
+		return std::auto_ptr<Surface>(new PixmanBitmap(source, src_rect, transparent));
 	#elif defined(USE_OPENGL_BITMAP)
-		return (Surface*)new GlBitmap(source, src_rect, transparent);
+		return std::auto_ptr<Surface>(new GlBitmap(source, src_rect, transparent));
 	#else
 		#error "No bitmap implementation selected"
 	#endif
@@ -92,10 +92,6 @@ Surface* Surface::CreateSurface(Bitmap* source, Rect src_rect, bool transparent)
 Surface::Surface() :
 	editing(false) {
 	font = Font::CreateFont();
-}
-
-////////////////////////////////////////////////////////////
-Surface::~Surface() {
 }
 
 ////////////////////////////////////////////////////////////
@@ -407,11 +403,9 @@ void Surface::StretchBlit(Rect dst_rect, Bitmap* src, Rect src_rect, int opacity
 
 		if (dst_rect.IsOutOfBounds(width(), height())) return;
 
-		Bitmap* resampled = src->Resample(dst_rect.width, dst_rect.height, src_rect);
+		std::auto_ptr<Bitmap> resampled = src->Resample(dst_rect.width, dst_rect.height, src_rect);
 
-		Blit(dst_rect.x, dst_rect.y, resampled, resampled->GetRect(), opacity);
-
-		delete resampled;
+		Blit(dst_rect.x, dst_rect.y, resampled.get(), resampled->GetRect(), opacity);
 	}
 }
 
