@@ -35,9 +35,6 @@ public:
 	////////////////////////////////////////////////////////
 	/// Creates a BitmapScreen object.
 	/// @param source : source bitmap, or NULL.
-	/// @param delete_bitmap : if true, the bitmap will be 
-	///      deleted when it is replaced or when this object
-    ///      is deleted.
 	////////////////////////////////////////////////////////
 	static std::auto_ptr<BitmapScreen> CreateBitmapScreen(Bitmap* source);
 	static std::auto_ptr<BitmapScreen> CreateBitmapScreen(std::auto_ptr<Bitmap> source);
@@ -48,12 +45,6 @@ public:
 	static std::auto_ptr<BitmapScreen> CreateBitmapScreen();
 
 	////////////////////////////////////////////////////////
-	/// Constructor.
-	////////////////////////////////////////////////////////
-	BitmapScreen(Bitmap* src);
-	BitmapScreen(std::auto_ptr<Bitmap> src);
-
-	////////////////////////////////////////////////////////
 	/// Marks the BitmapScreen as dirty.
 	////////////////////////////////////////////////////////
 	virtual void SetDirty();
@@ -61,9 +52,6 @@ public:
 	////////////////////////////////////////////////////////
 	/// Set source bitmap.
 	/// @param source : source bitmap
-	/// @param delete_bitmap : if true, the bitmap will be 
-	///      deleted when it is replaced or when this object
-    ///      is deleted.
 	////////////////////////////////////////////////////////
 	virtual void SetBitmap(std::auto_ptr<Bitmap> source);
 	virtual void SetBitmap(Bitmap* source);
@@ -196,7 +184,8 @@ public:
 	virtual void SetWaverEffectPhase(double phase);
 
 protected:
-	BitmapScreen(Bitmap* source, bool delete_bitmap);
+	BitmapScreen(Bitmap* src);
+	BitmapScreen(std::auto_ptr<Bitmap> src);
 
 	class BitmapPointer {
 	public:

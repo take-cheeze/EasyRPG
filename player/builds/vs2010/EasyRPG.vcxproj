@@ -1,8 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug Pixman|Win32">
+      <Configuration>Debug Pixman</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug SoftBitmap|Win32">
+      <Configuration>Debug SoftBitmap</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Pixman|Win32">
+      <Configuration>Release Pixman</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release SoftBitmap|Win32">
+      <Configuration>Release SoftBitmap</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
@@ -22,7 +38,33 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Pixman|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SoftBitmap|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Pixman|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SoftBitmap|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -35,19 +77,53 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Pixman|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug SoftBitmap|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Pixman|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release SoftBitmap|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>.</OutDir>
+    <OutDir>..\..\bin\</OutDir>
+    <TargetName>PlayerD</TargetName>
+    <SourcePath>$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Pixman|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\bin\</OutDir>
+    <TargetName>PlayerD</TargetName>
+    <SourcePath>$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SoftBitmap|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\bin\</OutDir>
     <TargetName>PlayerD</TargetName>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>./</OutDir>
+    <OutDir>..\..\bin\</OutDir>
+    <TargetName>Player</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Pixman|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\bin\</OutDir>
+    <TargetName>Player</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SoftBitmap|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\bin\</OutDir>
     <TargetName>Player</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -57,6 +133,62 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>MSVC;USE_SDL;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\readers\include;$(EASYDEV_MSVC)\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
+      <DisableSpecificWarnings>4996;4100;4512</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MinimalRebuild>true</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(EASYDEV_MSVC)\lib\debug;..\..\..\readers\lib\debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>readers.lib;dxguid.lib;winmm.lib;SDL.lib;SDLmain.lib;zlib.lib;SDL_image.lib;libpng.lib;jpeg.lib;freetype.lib;SDL_ttf.lib;SDL_gfx.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;native_midi.lib;smpeg.lib;SDL_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <Profile>false</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Pixman|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>MSVC;USE_SDL;DEBUG;USE_PIXMAN;USE_ALPHA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\readers\include;$(EASYDEV_MSVC)\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
+      <DisableSpecificWarnings>4996;4100;4512</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MinimalRebuild>true</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(EASYDEV_MSVC)\lib\debug;..\..\..\readers\lib\debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>readers.lib;dxguid.lib;winmm.lib;SDL.lib;SDLmain.lib;zlib.lib;SDL_image.lib;libpng.lib;jpeg.lib;freetype.lib;SDL_ttf.lib;SDL_gfx.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;native_midi.lib;smpeg.lib;SDL_mixer.lib;pixman.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <Profile>false</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug SoftBitmap|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>MSVC;USE_SDL;DEBUG;USE_SOFT_BITMAP;USE_ALPHA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\readers\include;$(EASYDEV_MSVC)\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>
       </MultiProcessorCompilation>
@@ -110,6 +242,70 @@
       </IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Pixman|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>MSVC;USE_SDL;_HAS_EXCEPTIONS=0;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\readers\include;$(EASYDEV_MSVC)\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
+      <DisableSpecificWarnings>4996;4512</DisableSpecificWarnings>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(EASYDEV_MSVC)\lib\release;..\..\..\readers\lib\release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>readers.lib;dxguid.lib;winmm.lib;SDL.lib;SDLmain.lib;zlib.lib;SDL_image.lib;libpng.lib;freetype.lib;SDL_ttf.lib;SDL_gfx.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;native_midi.lib;jpeg.lib;smpeg.lib;SDL_mixer.lib;pixman.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release SoftBitmap|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>MSVC;USE_SDL;_HAS_EXCEPTIONS=0;NDEBUG;USE_SOFT_BITMAP;USE_ALPHA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\readers\include;$(EASYDEV_MSVC)\include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>
+      </MultiProcessorCompilation>
+      <DisableSpecificWarnings>4996;4512</DisableSpecificWarnings>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(EASYDEV_MSVC)\lib\release;..\..\..\readers\lib\release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>readers.lib;dxguid.lib;winmm.lib;SDL.lib;SDLmain.lib;zlib.lib;SDL_image.lib;libpng.lib;freetype.lib;SDL_ttf.lib;SDL_gfx.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;native_midi.lib;jpeg.lib;smpeg.lib;SDL_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\resources\player.rc" />
   </ItemGroup>
@@ -118,12 +314,15 @@
     <ClCompile Include="..\..\src\baseui.cpp" />
     <ClCompile Include="..\..\src\bitmap.cpp" />
     <ClCompile Include="..\..\src\bitmap_screen.cpp" />
+    <ClCompile Include="..\..\src\bitmap_utils.cpp" />
+    <ClCompile Include="..\..\src\blit.cpp" />
     <ClCompile Include="..\..\src\cache.cpp" />
     <ClCompile Include="..\..\src\color.cpp" />
     <ClCompile Include="..\..\src\filefinder_win.cpp" />
     <ClCompile Include="..\..\src\font.cpp" />
     <ClCompile Include="..\..\src\font_pearl_8x8.cpp" />
     <ClCompile Include="..\..\src\font_render_8x8.cpp" />
+    <ClCompile Include="..\..\src\ftfont.cpp" />
     <ClCompile Include="..\..\src\game_actor.cpp" />
     <ClCompile Include="..\..\src\game_actors.cpp" />
     <ClCompile Include="..\..\src\game_battler.cpp" />
@@ -145,6 +344,8 @@
     <ClCompile Include="..\..\src\gl_bitmap_screen.cpp" />
     <ClCompile Include="..\..\src\graphics.cpp" />
     <ClCompile Include="..\..\src\hslrgb.cpp" />
+    <ClCompile Include="..\..\src\image_png.cpp" />
+    <ClCompile Include="..\..\src\image_xyz.cpp" />
     <ClCompile Include="..\..\src\input.cpp" />
     <ClCompile Include="..\..\src\input_buttons_desktop.cpp" />
     <ClCompile Include="..\..\src\input_buttons_dingoo.cpp" />
@@ -155,6 +356,8 @@
     <ClCompile Include="..\..\src\main_data.cpp" />
     <ClCompile Include="..\..\src\msgbox_win.cpp" />
     <ClCompile Include="..\..\src\output.cpp" />
+    <ClCompile Include="..\..\src\pixman_bitmap.cpp" />
+    <ClCompile Include="..\..\src\pixman_bitmap_screen.cpp" />
     <ClCompile Include="..\..\src\plane.cpp" />
     <ClCompile Include="..\..\src\player.cpp" />
     <ClCompile Include="..\..\src\rect.cpp" />
@@ -228,6 +431,8 @@
     <ClInclude Include="..\..\src\audio.h" />
     <ClInclude Include="..\..\src\bitmap.h" />
     <ClInclude Include="..\..\src\bitmap_screen.h" />
+    <ClInclude Include="..\..\src\bitmap_utils.h" />
+    <ClInclude Include="..\..\src\blit.h" />
     <ClInclude Include="..\..\src\cache.h" />
     <ClInclude Include="..\..\src\color.h" />
     <ClInclude Include="..\..\src\baseui.h" />
@@ -236,6 +441,7 @@
     <ClInclude Include="..\..\src\filefinder.h" />
     <ClInclude Include="..\..\src\font.h" />
     <ClInclude Include="..\..\src\font_render_8x8.h" />
+    <ClInclude Include="..\..\src\ftfont.h" />
     <ClInclude Include="..\..\src\game_actor.h" />
     <ClInclude Include="..\..\src\game_actors.h" />
     <ClInclude Include="..\..\src\game_battler.h" />
@@ -259,15 +465,20 @@
     <ClInclude Include="..\..\src\gl_bitmap_screen.h" />
     <ClInclude Include="..\..\src\graphics.h" />
     <ClInclude Include="..\..\src\hslrgb.h" />
+    <ClInclude Include="..\..\src\image_png.h" />
+    <ClInclude Include="..\..\src\image_xyz.h" />
     <ClInclude Include="..\..\src\input.h" />
     <ClInclude Include="..\..\src\game_interpreter.h" />
     <ClInclude Include="..\..\src\input_buttons.h" />
     <ClInclude Include="..\..\src\keys.h" />
     <ClInclude Include="..\..\src\main_data.h" />
+    <ClInclude Include="..\..\src\map_data.h" />
     <ClInclude Include="..\..\src\msgbox.h" />
     <ClInclude Include="..\..\src\options.h" />
     <ClInclude Include="..\..\src\output.h" />
     <ClInclude Include="..\..\src\pixel_format.h" />
+    <ClInclude Include="..\..\src\pixman_bitmap.h" />
+    <ClInclude Include="..\..\src\pixman_bitmap_screen.h" />
     <ClInclude Include="..\..\src\plane.h" />
     <ClInclude Include="..\..\src\player.h" />
     <ClInclude Include="..\..\src\rect.h" />

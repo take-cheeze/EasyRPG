@@ -31,8 +31,8 @@
 ////////////////////////////////////////////////////////////
 class SoftBitmapScreen : public BitmapScreen {
 public:
-	SoftBitmapScreen(Bitmap* source, bool delete_bitmap);
-	~SoftBitmapScreen();
+	SoftBitmapScreen(Bitmap* source);
+	SoftBitmapScreen(std::auto_ptr<Bitmap> source);
 
 	void BlitScreen(int x, int y);
 	void BlitScreen(int x, int y, Rect src_rect);
@@ -41,11 +41,12 @@ public:
 protected:
 	void BlitScreenIntern(int x, int y, Rect src_rect);
 
-	Bitmap* bitmap_effects;
+	boost::scoped_ptr<Bitmap> bitmap_effects;
+	Rect bitmap_effects_src_rect;
 	int origin_x;
 	int origin_y;
 
-	void Refresh();
+	void Refresh(Rect& rect);
 };
 
 #endif

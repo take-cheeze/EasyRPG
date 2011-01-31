@@ -60,6 +60,13 @@ void Player::Init(int argc, char *argv[]) {
 
 	if (init) return;
 
+#ifdef GEKKO
+	// Init libfat (Mount SD/USB)
+	if (!fatInitDefault()) {
+		Output::Error("Couldn't mount any storage medium!");
+	}
+#endif
+
 #if (defined(_WIN32) && !defined(_DEBUG))
 	InitMiniDumpWriter();
 #endif
@@ -101,36 +108,27 @@ void Player::Init(int argc, char *argv[]) {
 		}
 	}
 
-#ifndef _WIN32
 	FileFinder::Init();
-#endif
 
-	DisplayUi = BaseUi::CreateBaseUi(
+	DisplayUi.reset(BaseUi::CreateBaseUi(
 		SCREEN_TARGET_WIDTH,
 		SCREEN_TARGET_HEIGHT,
 		GAME_TITLE,
 		!window_flag,
 		RUN_ZOOM
-	);
+	).release());
 
 	init = true;
 }
 
 ////////////////////////////////////////////////////////////
 void Player::Run() {
-#ifdef GEKKO
-	// Init libfat (Mount SD/USB)
-	if (!fatInitDefault()) {
-		Output::Error("Couldn't mount any storage medium!");
-	}
-#endif
-
 	if (battle_test_flag) {
-		Scene::Push(new Scene_Battle());
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Battle()));
 	} else if (debug_flag) {
-		Scene::Push(new Scene_Title());
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Title()));
 	} else {
-		Scene::Push(new Scene_Logo());
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Logo()));
 	}
 
 	reset_flag = false;
@@ -142,10 +140,11 @@ void Player::Run() {
 	while (Scene::instance->type != Scene::Null) {
 		Scene::instance->MainFunction();
 
-		for (size_t i = 0; i < Scene::old_instances.size(); ++i) {
-			//Output::Debug(Scene::scene_names[Scene::old_instances[i]->type]);
+		while(!Scene::old_instances.empty()) {
+			//Output::Debug(Scene::scene_names[Scene::old_instances.back().type]);
+			Scene::old_instances.back().Terminate();
 			Graphics::Pop();
-			delete Scene::old_instances[i];
+			Scene::old_instances.pop_back();
 		}
 		Scene::old_instances.clear();
 	}
@@ -188,7 +187,7 @@ void Player::Exit() {
 	Graphics::Quit();
 	Audio::Quit();
 	FileFinder::Quit();
-	delete DisplayUi;
+	DisplayUi.reset();
 }
 
 #if (defined(_WIN32) && !defined(_DEBUG))

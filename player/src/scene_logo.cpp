@@ -941,6 +941,6 @@ void Scene_Logo::Update() {
 	if (frame_counter == 90 ||
 		Input::IsTriggered(Input::DECISION) ||
 		Input::IsTriggered(Input::CANCEL)) {
-			Scene::Push(new Scene_Title(), true);
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Title()), true);
 	}
 }

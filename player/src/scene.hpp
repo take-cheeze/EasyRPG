@@ -22,6 +22,8 @@
 /// Includes
 ////////////////////////////////////////////////////////////
 #include <vector>
+#include <boost/array.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
 
 ////////////////////////////////////////////////////////////
 /// Scene virtual class
@@ -126,7 +128,7 @@ public:
 	/// @param pop_stack_top : If the scene that is currently
 	/// on the top should be popped
 	////////////////////////////////////////////////////////
-	static void Push(Scene* new_scene, bool pop_stack_top = false);
+	static void Push(std::auto_ptr<Scene> new_scene, bool pop_stack_top = false);
 
 	////////////////////////////////////////////////////////
 	/// Removes the scene that is on the top of the stack
@@ -157,14 +159,14 @@ public:
 	static Scene* instance;
 
 	/// Old scenes, temporary save for deleting.
-	static std::vector<Scene*> old_instances;
+	static boost::ptr_vector<Scene> old_instances;
 
 	/// Contains name of the Scenes. For Debug purposes.
-	static const char scene_names[SceneMax][12];
+	static boost::array<const char*, SceneMax> scene_names;
 
 private:
 	/// Scene stack
-	static std::vector<Scene*> instances;
+	static boost::ptr_vector<Scene> instances;
 
 	static int push_pop_operation;
 };

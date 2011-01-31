@@ -757,9 +757,9 @@ void Surface::ToneChange(const Tone &tone) {
 
 					gray = dst_r * 0.299 + dst_g * 0.587 + dst_b * 0.114;
 
-					dst_r = (uint8)max(min((dst_r - gray) * factor + gray + tone.red + 0.5, 255), 0);
-					dst_g = (uint8)max(min((dst_g - gray) * factor + gray + tone.green + 0.5, 255), 0);
-					dst_b = (uint8)max(min((dst_b - gray) * factor + gray + tone.blue + 0.5, 255), 0);
+					dst_r = (uint8)max(min((dst_r - gray) * factor + gray + tone.red + 0.5, 255.0), 0.0);
+					dst_g = (uint8)max(min((dst_g - gray) * factor + gray + tone.green + 0.5, 255.0), 0.0);
+					dst_b = (uint8)max(min((dst_b - gray) * factor + gray + tone.blue + 0.5, 255.0), 0.0);
 
 					dst_pixels++;
 				}
@@ -807,9 +807,9 @@ void Surface::ToneChange(const Tone &tone) {
 
 					gray = dst_pixels[rbyte] * 0.299 + dst_pixels[gbyte] * 0.587 + dst_pixels[bbyte] * 0.114;
 
-					dst_pixels[rbyte] = (uint8)max(min((dst_pixels[rbyte] - gray) * factor + gray + tone.red + 0.5, 255), 0);
-					dst_pixels[gbyte] = (uint8)max(min((dst_pixels[gbyte] - gray) * factor + gray + tone.green + 0.5, 255), 0);
-					dst_pixels[bbyte] = (uint8)max(min((dst_pixels[bbyte] - gray) * factor + gray + tone.blue + 0.5, 255), 0);
+					dst_pixels[rbyte] = (uint8)max(min((dst_pixels[rbyte] - gray) * factor + gray + tone.red + 0.5, 255.0), 0.0);
+					dst_pixels[gbyte] = (uint8)max(min((dst_pixels[gbyte] - gray) * factor + gray + tone.green + 0.5, 255.0), 0.0);
+					dst_pixels[bbyte] = (uint8)max(min((dst_pixels[bbyte] - gray) * factor + gray + tone.blue + 0.5, 255.0), 0.0);
 
 					dst_pixels += bpp();
 				}
@@ -835,15 +835,15 @@ void Surface::Flip(bool horizontal, bool vertical) {
 		uint8* dst_pixels_first = (uint8*)pixels();
 		uint8* dst_pixels_last = (uint8*)pixels() + (width() - 1) * bpp() + (height() - 1) * pitch();
 
-		uint8* tmp_buffer = new uint8[bpp()];
+		std::vector<uint8> tmp_buffer(bpp());
 
 		for (int i = 0; i < height() / 2; i++) {
 			for (int j = 0; j < width(); j++) {
 				if (dst_pixels_first == dst_pixels_last) break;
 
-				memcpy(tmp_buffer, dst_pixels_first, bpp());
+				memcpy(&tmp_buffer.front(), dst_pixels_first, bpp());
 				memcpy(dst_pixels_first, dst_pixels_last, bpp());
-				memcpy(dst_pixels_last, tmp_buffer, bpp());
+				memcpy(dst_pixels_last, &tmp_buffer.front(), bpp());
 
 				dst_pixels_first += bpp();
 				dst_pixels_last -= bpp();
@@ -851,8 +851,6 @@ void Surface::Flip(bool horizontal, bool vertical) {
 			dst_pixels_first += stride;
 			dst_pixels_last += stride;
 		}
-
-		delete tmp_buffer;
 	} else if (horizontal) {
 		int stride_left = (width() - width() / 2) * bpp();
 		int stride_right = (width() + width() / 2) * bpp();
@@ -860,15 +858,15 @@ void Surface::Flip(bool horizontal, bool vertical) {
 		uint8* dst_pixels_left = (uint8*)pixels();
 		uint8* dst_pixels_right = (uint8*)pixels() + (width() - 1) * bpp();
 
-		uint8* tmp_buffer = new uint8[bpp()];
+		std::vector<uint8> tmp_buffer(bpp());
 
 		for (int i = 0; i < height(); i++) {
 			for (int j = 0; j < width() / 2; j++) {
 				if (dst_pixels_left == dst_pixels_right) continue;
 
-				memcpy(tmp_buffer, dst_pixels_left, bpp());
+				memcpy(&tmp_buffer.front(), dst_pixels_left, bpp());
 				memcpy(dst_pixels_left, dst_pixels_right, bpp());
-				memcpy(dst_pixels_right, tmp_buffer, bpp());
+				memcpy(dst_pixels_right, &tmp_buffer.front(), bpp());
 
 				dst_pixels_left += bpp();
 				dst_pixels_right -= bpp();
@@ -876,28 +874,24 @@ void Surface::Flip(bool horizontal, bool vertical) {
 			dst_pixels_left += stride_left;
 			dst_pixels_right += stride_right;
 		}
-
-		delete tmp_buffer;
 	} else {
 		uint8* dst_pixels_up = (uint8*)pixels();
 		uint8* dst_pixels_down = (uint8*)pixels() + (height() - 1) * pitch();
 
 		int stride = width() * bpp();
 
-		uint8* tmp_buffer = new uint8[stride];
+		std::vector<uint8> tmp_buffer(stride);
 
 		for (int i = 0; i < height() / 2; i++) {
 			if (dst_pixels_up == dst_pixels_down) break;
 
-			memcpy(tmp_buffer, dst_pixels_down, stride);
+			memcpy(&tmp_buffer.front(), dst_pixels_down, stride);
 			memcpy(dst_pixels_down, dst_pixels_up, stride);
-			memcpy(dst_pixels_up, tmp_buffer, stride);
+			memcpy(dst_pixels_up, &tmp_buffer.front(), stride);
 
 			dst_pixels_up += pitch();
 			dst_pixels_down -= pitch();
 		}
-
-		delete tmp_buffer;
 	}
 
 	Unlock();

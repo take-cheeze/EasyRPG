@@ -26,6 +26,8 @@
 #include "color.hpp"
 #include "rect.hpp"
 
+#include <boost/scoped_ptr.hpp>
+
 ///////////////////////////////////////////////////////////
 // Forward declarations
 ///////////////////////////////////////////////////////////
@@ -49,7 +51,7 @@ public:
 	/// @param title : display title
 	/// @param fullscreen : start in fullscreen flag
 	///////////////////////////////////////////////////////
-	static BaseUi* CreateBaseUi(long width, long height, const std::string title, bool fullscreen, bool zoom);
+	static std::auto_ptr<BaseUi> CreateBaseUi(long width, long height, const std::string title, bool fullscreen, bool zoom);
 
 	///////////////////////////////////////////////////////
 	/// Begins a display mode change.
@@ -105,7 +107,7 @@ public:
 	/// Ends screen capture and get the drawn contents.
 	/// @return bitmap with drawn contents
 	///////////////////////////////////////////////////////
-	virtual Bitmap* EndScreenCapture() = 0;
+	virtual std::auto_ptr<Bitmap> EndScreenCapture() = 0;
 
 	///////////////////////////////////////////////////////
 	/// Set display title.
@@ -182,6 +184,6 @@ protected:
 };
 
 /// Global DisplayUi variable.
-extern BaseUi* DisplayUi;
+extern boost::scoped_ptr<BaseUi> DisplayUi;
 
 #endif

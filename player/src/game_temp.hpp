@@ -25,7 +25,6 @@
 #include "game_battler.hpp"
 #include "graphics.hpp"
 #include "main_data.hpp"
-// #include "rpg_music.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Game Temp static class

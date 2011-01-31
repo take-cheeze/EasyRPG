@@ -27,7 +27,7 @@
 /// Constructor
 ////////////////////////////////////////////////////////////
 Spriteset_Map::Spriteset_Map() {
-	tilemap = new Tilemap();
+	tilemap.reset(new Tilemap());
 	tilemap->SetWidth(Game_Map::GetWidth());
 	tilemap->SetHeight(Game_Map::GetHeight());
 	tilemap->SetChipset(Cache::Chipset(Game_Map::GetChipsetName()));
@@ -35,17 +35,17 @@ Spriteset_Map::Spriteset_Map() {
 	tilemap->SetPassableUp(Game_Map::GetPassagesUp());
 	tilemap->SetMapDataDown(Game_Map::GetMapDataDown());
 	tilemap->SetMapDataUp(Game_Map::GetMapDataUp());
-	panorama = new Plane();
+	panorama.reset(new Plane());
 	panorama->SetZ(-1000);
-	fog = new Plane();
+	fog.reset(new Plane());
 	fog->SetZ(3000);
 
-	tEventHash events = Game_Map::GetEvents();
+	tEventHash& events = Game_Map::GetEvents();
 	for (tEventHash::iterator i = events.begin(); i != events.end(); i++) {
-		Sprite_Character* sprite = new Sprite_Character(i->second);
+		std::auto_ptr<Sprite_Character> sprite(new Sprite_Character(i->second));
 		character_sprites.push_back(sprite);
 	}
-	Sprite_Character* player = new Sprite_Character((Game_Character*)Main_Data::game_player.get());
+	std::auto_ptr<Sprite_Character> player(new Sprite_Character((Game_Character*)Main_Data::game_player.get()));
 	character_sprites.push_back(player);
 	/*weather = new Weather();
 	for (int i = 0; i < 50; i++) {
@@ -57,23 +57,6 @@ Spriteset_Map::Spriteset_Map() {
 }
 
 ////////////////////////////////////////////////////////////
-/// Destructor
-////////////////////////////////////////////////////////////
-Spriteset_Map::~Spriteset_Map() {
-	delete tilemap;
-	delete panorama;
-	delete fog;
-	for (size_t i = 0; i < character_sprites.size(); i++) {
-		delete character_sprites[i];
-	}
-	/*for (int i = 0; i < picture_sprites.size(); i++) {
-		delete picture_sprites[i];
-	}
-	delete weather;
-	delete timer_sprite;*/
-}
-
-////////////////////////////////////////////////////////////
 /// Update
 ////////////////////////////////////////////////////////////
 void Spriteset_Map::Update() {
@@ -81,20 +64,19 @@ void Spriteset_Map::Update() {
 	tilemap->SetOy(Game_Map::GetDisplayY() / 8);
 	tilemap->Update();
 	for (size_t i = 0; i < character_sprites.size(); i++) {
-		character_sprites[i]->Update();
+		character_sprites[i].Update();
 	}
 }
 
 ////////////////////////////////////////////////////////////
 /// Find the sprite for a specific character
 ////////////////////////////////////////////////////////////
-Sprite_Character* Spriteset_Map::FindCharacter(Game_Character* character) const
+Sprite_Character* Spriteset_Map::FindCharacter(Game_Character* character)
 {
-	std::vector<Sprite_Character*>::const_iterator it;
+	boost::ptr_vector<Sprite_Character>::iterator it;
 	for (it = character_sprites.begin(); it != character_sprites.end(); it++) {
-		Sprite_Character* sprite = *it;
-		if (sprite->GetCharacter() == character)
-			return sprite;
+		if (it->GetCharacter() == character)
+			return &(*it);
 	}
 	return NULL;
 }

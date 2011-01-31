@@ -27,7 +27,9 @@
 
 ////////////////////////////////////////////////////////////
 Scene_ActorTarget::Scene_ActorTarget(int item_id, int item_index) :
-	target_window(NULL), help_window(NULL), status_window(NULL),
+	target_window(136, 0, 184, 240),
+	help_window(0, 0, 136, 32),
+	status_window(0, 32, 136, 32),
 	id(item_id), index(item_index), use_item(true) {
 	Scene::type = Scene::ActorTarget;
 }
@@ -35,6 +37,9 @@ Scene_ActorTarget::Scene_ActorTarget(int item_id, int item_index) :
 ////////////////////////////////////////////////////////////
 Scene_ActorTarget::Scene_ActorTarget(
 	int skill_id, int actor_index, int skill_index) :
+	target_window(136, 0, 184, 240),
+	help_window(0, 0, 136, 32),
+	status_window(0, 32, 136, 32),
 	id(skill_id), index(skill_index),
 	actor_index(actor_index), use_item(false) {
 	Scene::type = Scene::ActorTarget;
@@ -42,67 +47,59 @@ Scene_ActorTarget::Scene_ActorTarget(
 
 ////////////////////////////////////////////////////////////
 void Scene_ActorTarget::Start() {
-	// Create the windows
-	help_window = new Window_Help(0, 0, 136, 32);
-	target_window = new Window_ActorTarget(136, 0, 184, 240);
-	status_window = new Window_TargetStatus(0, 32, 136, 32);
-	
-	target_window->SetActive(true);
-	target_window->SetIndex(0);
+	target_window.SetActive(true);
+	target_window.SetIndex(0);
 
 	if (use_item) {
 		RPG::Item const& item = Main_Data::project->getLDB().item()[id];
 		if (item[31].to<int>() == 1) {
-			target_window->SetIndex(-100);
+			target_window.SetIndex(-100);
 		}
-		status_window->SetData(id, true);
-		help_window->SetText(item[1].toString());
+		status_window.SetData(id, true);
+		help_window.SetText(item[1].toString());
 	} else {
 		RPG::Skill const& skill = Main_Data::project->getLDB().skill()[id];
 		switch( skill[12].to<int>() ) {
 		case 3:
-			target_window->SetIndex(-actor_index);
+			target_window.SetIndex(-actor_index);
 			break;
 		case 4:
-			target_window->SetIndex(-100);
+			target_window.SetIndex(-100);
 			break;
 		}
 
-		status_window->SetData(id, false);
-		help_window->SetText(skill[1].toString());
+		status_window.SetData(id, false);
+		help_window.SetText(skill[1].toString());
 	}
 	/*
 	if (use_item) {
 		if (Data::items[id - 1].entire_party) {
-			target_window->SetIndex(-100);
+			target_window.SetIndex(-100);
 		}
-		status_window->SetData(id, true);
-		help_window->SetText(Data::items[id - 1].name);
+		status_window.SetData(id, true);
+		help_window.SetText(Data::items[id - 1].name);
 	} else {
 		if (Data::skills[id - 1].scope == RPG::Skill::Scope_self) {
-			target_window->SetIndex(-actor_index);
+			target_window.SetIndex(-actor_index);
 		} else if (Data::skills[id - 1].scope == RPG::Skill::Scope_party) {
-			target_window->SetIndex(-100);
+			target_window.SetIndex(-100);
 		}
 
-		status_window->SetData(id, false);
-		help_window->SetText(Data::skills[id - 1].name);
+		status_window.SetData(id, false);
+		help_window.SetText(Data::skills[id - 1].name);
 	}
 	*/
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_ActorTarget::Terminate() {
-	delete target_window;
-	delete help_window;
-	delete status_window;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_ActorTarget::Update() {
-	help_window->Update();
-	target_window->Update();
-	status_window->Update();
+	help_window.Update();
+	target_window.Update();
+	status_window.Update();
 
 	if (use_item) {
 		UpdateItem();

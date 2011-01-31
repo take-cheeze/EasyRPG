@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <boost/scoped_ptr.hpp>
-#include <rpg2k/Project.hxx> // "data.hpp"
+#include <rpg2k/Project.hxx>
 #include <rpg2k/Event.hxx>
 #include "game_screen.hpp"
 

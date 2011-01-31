@@ -30,36 +30,34 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Item::Scene_Item(int item_index) :
-	help_window(NULL), item_window(NULL), item_index(item_index) {
+	help_window(0, 0, 320, 32),
+	item_window(0, 32, 320, 240 - 32),
+	item_index(item_index) {
 	Scene::type = Scene::Item;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Item::Start() {
 	// Create the windows
-	help_window = new Window_Help(0, 0, 320, 32);
-	item_window = new Window_Item(0, 32, 320, 240 - 32);
-	item_window->SetHelpWindow(help_window);
-	item_window->Refresh();
-	item_window->SetIndex(item_index);
+	item_window.SetHelpWindow(&help_window);
+	item_window.Refresh();
+	item_window.SetIndex(item_index);
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Item::Terminate() {
-	delete help_window;
-	delete item_window;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Item::Update() {
-	help_window->Update();
-	item_window->Update();
+	help_window.Update();
+	item_window.Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
 		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		int item_id = item_window->GetItemId();
+		int item_id = item_window.GetItemId();
 
 		if (Game_Party::IsItemUsable(item_id)) {
 			Game_System::SePlay(Main_Data::decisionSE());
@@ -72,8 +70,8 @@ void Scene_Item::Update() {
 				Scene::PopUntil(Scene::Map);
 				Game_Map::SetNeedRefresh(true);
 			} else {
-				Scene::Push(new Scene_ActorTarget(item_id, item_window->GetIndex()));
-				item_index = item_window->GetIndex();
+				Scene::Push(std::auto_ptr<Scene>(new Scene_ActorTarget(item_id, item_window.GetIndex())));
+				item_index = item_window.GetIndex();
 			}
 		} else {
 			Game_System::SePlay(Main_Data::buzzerSE());

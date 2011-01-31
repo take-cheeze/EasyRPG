@@ -30,42 +30,38 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Skill::Scene_Skill(int actor_index, int skill_index) :
-	actor_index(actor_index), skill_index(skill_index) {
+	actor_index(actor_index), skill_index(skill_index),
+	// Create the windows
+	skill_window(0, 64, 320, 240 - 64),
+	skillstatus_window(0, 32, 320, 32),
+	help_window(0, 0, 320, 32) {
 	Scene::type = Scene::Skill;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Skill::Start() {
-	// Create the windows
-	help_window = new Window_Help(0, 0, 320, 32);
-	skillstatus_window = new Window_SkillStatus(0, 32, 320, 32);
-	skill_window = new Window_Skill(0, 64, 320, 240 - 64);
-
 	// Assign actors and help to windows
-	skill_window->SetActor(Game_Party::GetActors()[actor_index]->GetId());
-	skillstatus_window->SetActor(Game_Party::GetActors()[actor_index]->GetId());
-	skill_window->SetIndex(skill_index);
-	skill_window->SetHelpWindow(help_window);
+	skill_window.SetActor(Game_Party::GetActors()[actor_index]->GetId());
+	skillstatus_window.SetActor(Game_Party::GetActors()[actor_index]->GetId());
+	skill_window.SetIndex(skill_index);
+	skill_window.SetHelpWindow(&help_window);
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Skill::Terminate() {
-	delete help_window;
-	delete skillstatus_window;
-	delete skill_window;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Skill::Update() {
-	help_window->Update();
-	skillstatus_window->Update();
-	skill_window->Update();
+	help_window.Update();
+	skillstatus_window.Update();
+	skill_window.Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
 		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		int skill_id = skill_window->GetSkillId();
+		int skill_id = skill_window.GetSkillId();
 
 		Game_Actor* actor = Game_Party::GetActors()[actor_index];
 
@@ -75,8 +71,8 @@ void Scene_Skill::Update() {
 			RPG::Skill const& target = Main_Data::project->getLDB().skill()[skill_id];
 			switch( target[8].to<int>() ) {
 			case 0: // normal
-				Scene::Push(new Scene_ActorTarget(skill_id, actor_index, skill_window->GetIndex()));
-				skill_index = skill_window->GetIndex();
+				Scene::Push(std::auto_ptr<Scene>(new Scene_ActorTarget(skill_id, actor_index, skill_window.GetIndex())));
+				skill_index = skill_window.GetIndex();
 				break;
 			case 1: // teleport
 				// ToDo: Displays the teleport target scene/window
@@ -99,8 +95,8 @@ void Scene_Skill::Update() {
 				Scene::PopUntil(Scene::Map);
 				Game_Map::SetNeedRefresh(true);
 			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_normal) {
-				Scene::Push(new Scene_ActorTarget(skill_id, actor_index, skill_window->GetIndex()));
-				skill_index = skill_window->GetIndex();
+				Scene::Push(new Scene_ActorTarget(skill_id, actor_index, skill_window.GetIndex()));
+				skill_index = skill_window.GetIndex();
 			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_teleport) {
 				// ToDo: Displays the teleport target scene/window
 			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_escape) {

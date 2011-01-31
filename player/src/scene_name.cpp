@@ -26,7 +26,9 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Name::Scene_Name() :
-	kbd_window(NULL), name_window(NULL), face_window(NULL) {
+	kbd_window(0, 80, 320, 160),
+	name_window(80, 40, 240, 40),
+	face_window(0, 0, 80, 80) {
 	Scene::type = Scene::Name;
 }
 
@@ -34,54 +36,48 @@ Scene_Name::Scene_Name() :
 void Scene_Name::Start() {
 	// Create the windows
 
-	name_window = new Window_Name(80, 40, 240, 40);
-	name_window->Set(Game_Temp::hero_name);
-	name_window->Refresh();
+	name_window.Set(Game_Temp::hero_name);
+	name_window.Refresh();
 
-	face_window = new Window_Face(0, 0, 80, 80);
-	face_window->Set(Game_Temp::hero_name_id);
-	face_window->Refresh();
+	face_window.Set(Game_Temp::hero_name_id);
+	face_window.Refresh();
 
-	kbd_window = new Window_Keyboard(0, 80, 320, 160);
-	kbd_window->SetMode(Game_Temp::hero_name_charset);
-	kbd_window->Refresh();
-	kbd_window->UpdateCursorRect();
+	kbd_window.SetMode(Game_Temp::hero_name_charset);
+	kbd_window.Refresh();
+	kbd_window.UpdateCursorRect();
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Name::Terminate() {
-	delete kbd_window;
-	delete name_window;
-	delete face_window;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Name::Update() {
-	kbd_window->Update();
+	kbd_window.Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		if (name_window->Get().size() > 0) {
+		if (name_window.Get().size() > 0) {
 			Game_System::SePlay(Main_Data::cancelSE());
-			name_window->Erase();
+			name_window.Erase();
 		}
 		else
 			Game_System::SePlay(Main_Data::buzzerSE());
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		Game_System::SePlay(Main_Data::decisionSE());
-		std::string s(kbd_window->GetSelected());
+		std::string s(kbd_window.GetSelected());
 		if (s == "Done") {
-			Game_Temp::hero_name = name_window->Get();
+			Game_Temp::hero_name = name_window.Get();
 			Game_Actor* actor = Game_Actors::GetActor(Game_Temp::hero_name_id);
 			if (actor != NULL) {
-				actor->SetName(name_window->Get());
+				actor->SetName(name_window.Get());
 			}
 			Scene::Pop();
 		}
 		else if (s == "Symbol")
-			kbd_window->SetMode(1);
+			kbd_window.SetMode(1);
 		else if (s == "Letter")
-			kbd_window->SetMode(0);
+			kbd_window.SetMode(0);
 		else
-			name_window->Append(s);
+			name_window.Append(s);
 	}
 }

@@ -100,10 +100,10 @@ public:
 	
 private:
 	/// Displays the options of the title scene
-	Window_Command* command_window;
+	boost::scoped_ptr<Window_Command> command_window;
 
 	/// Background graphic
-	Sprite* title;
+	boost::scoped_ptr<Sprite> title;
 
 	/// contains state of continue button
 	bool continue_enabled;

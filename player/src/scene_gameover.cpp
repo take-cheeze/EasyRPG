@@ -35,8 +35,7 @@ Scene_Gameover::Scene_Gameover() {
 ////////////////////////////////////////////////////////////
 void Scene_Gameover::Start() {
 	// Load Background Graphic
-	background = new Sprite();
-	background->SetBitmap(Cache::Gameover( Main_Data::project->getLDB().system()[18].toString() ));
+	background.SetBitmap(Cache::Gameover( Main_Data::project->getLDB().system()[18].toString() ));
 	// Stop current music
 	Audio::BGM_Stop();
 	Audio::BGS_Stop();
@@ -46,7 +45,6 @@ void Scene_Gameover::Start() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Gameover::Terminate() {
-	delete background;
 }
 
 ////////////////////////////////////////////////////////////

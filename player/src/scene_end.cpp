@@ -42,8 +42,6 @@ void Scene_End::Start() {
 
 ////////////////////////////////////////////////////////////
 void Scene_End::Terminate() {
-	delete command_window;
-	delete help_window;
 }
 
 ////////////////////////////////////////////////////////////
@@ -76,7 +74,7 @@ void Scene_End::CreateCommandWindow() {
 	options.push_back(Main_Data::vocabulary(152)); // yes
 	options.push_back(Main_Data::vocabulary(153)); // no
 
-	command_window = new Window_Command(options);
+	command_window.reset(new Window_Command(options));
 	command_window->SetX(160 - command_window->GetWidth() / 2);
 	command_window->SetY(72 + 48);
 }
@@ -86,9 +84,9 @@ void Scene_End::CreateHelpWindow() {
 	std::string const exitMessage = Main_Data::vocabulary(151);
 	int text_size = Surface::GetTextSize(exitMessage).width;
 
-	help_window = new Window_Help(160 - (text_size + 16)/ 2,
-		72, text_size + 16, 32);
+	help_window.reset(new Window_Help(60 - (text_size + 16)/ 2,
+		72, text_size + 16, 32));
 	help_window->SetText(exitMessage);
 
-	command_window->SetHelpWindow(help_window);
+	command_window->SetHelpWindow(help_window.get());
 }

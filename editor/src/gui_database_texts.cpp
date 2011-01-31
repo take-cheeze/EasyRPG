@@ -11,557 +11,557 @@
 
 pnText_Base::pnText_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxPanel( parent, id, pos, size, style )
 {
-	wxBoxSizer* bSizer434;
-	bSizer434 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szText;
+	szText = new wxBoxSizer( wxHORIZONTAL );
 	
 	nbText = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	pnTextBattleMessages1And2 = new wxPanel( nbText, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* bSizer435;
-	bSizer435 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTextBattleMessages1and2;
+	szTextBattleMessages1and2 = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer293;
-	sbSizer293 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Battle messages 1") ), wxVERTICAL );
+	wxStaticBoxSizer* szszTextBattleMessages1;
+	szszTextBattleMessages1 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Battle messages 1") ), wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer294;
-	sbSizer294 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Start battle") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleStartBattle;
+	szTextBattleStartBattle = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Start battle") ), wxHORIZONTAL );
 	
 	stTextBattleStartBattle = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(Enemy name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleStartBattle->Wrap( -1 );
-	sbSizer294->Add( stTextBattleStartBattle, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleStartBattle->Add( stTextBattleStartBattle, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleStartBattle = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer294->Add( tcTextBattleStartBattle, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleStartBattle->Add( tcTextBattleStartBattle, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer293->Add( sbSizer294, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleStartBattle, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer295;
-	sbSizer295 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Priority attack") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattlePriorityAttack;
+	szTextBattlePriorityAttack = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Priority attack") ), wxHORIZONTAL );
 	
 	tcTextBattlePriorityAttack = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer295->Add( tcTextBattlePriorityAttack, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattlePriorityAttack->Add( tcTextBattlePriorityAttack, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer293->Add( sbSizer295, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattlePriorityAttack, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer296;
-	sbSizer296 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Successful escape") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleSuccessfulEscape;
+	szTextBattleSuccessfulEscape = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Successful escape") ), wxHORIZONTAL );
 	
 	tcTextBattleSuccessfulEscape = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer296->Add( tcTextBattleSuccessfulEscape, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattleSuccessfulEscape->Add( tcTextBattleSuccessfulEscape, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer293->Add( sbSizer296, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleSuccessfulEscape, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer297;
-	sbSizer297 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Failed escape") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleFailedEscape;
+	szTextBattleFailedEscape = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Failed escape") ), wxHORIZONTAL );
 	
 	tcTextBattleFailedEscape = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer297->Add( tcTextBattleFailedEscape, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattleFailedEscape->Add( tcTextBattleFailedEscape, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer293->Add( sbSizer297, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleFailedEscape, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer298;
-	sbSizer298 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Victory") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleVictory;
+	szTextBattleVictory = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Victory") ), wxHORIZONTAL );
 	
 	tcTextBattleVictory = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer298->Add( tcTextBattleVictory, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattleVictory->Add( tcTextBattleVictory, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer293->Add( sbSizer298, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleVictory, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer299;
-	sbSizer299 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Dead group") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleDeadGroup;
+	szTextBattleDeadGroup = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Dead group") ), wxHORIZONTAL );
 	
 	tcTextBattleDeadGroup = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer299->Add( tcTextBattleDeadGroup, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattleDeadGroup->Add( tcTextBattleDeadGroup, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer293->Add( sbSizer299, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleDeadGroup, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer300;
-	sbSizer300 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Experience") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleExperience;
+	szTextBattleExperience = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Experience") ), wxHORIZONTAL );
 	
 	stTextBattleExperience = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleExperience->Wrap( -1 );
-	sbSizer300->Add( stTextBattleExperience, 0, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattleExperience->Add( stTextBattleExperience, 0, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	tcTextBattleExperience = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer300->Add( tcTextBattleExperience, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleExperience->Add( tcTextBattleExperience, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer293->Add( sbSizer300, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleExperience, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer301;
-	sbSizer301 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Obtained money") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleObtainedMoney;
+	szTextBattleObtainedMoney = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Obtained money") ), wxHORIZONTAL );
 	
 	tcTextBattleObtainedMoney1 = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer301->Add( tcTextBattleObtainedMoney1, 1, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleObtainedMoney->Add( tcTextBattleObtainedMoney1, 1, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	stTextBattleObtainedMoney = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(X) (Currency)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleObtainedMoney->Wrap( -1 );
-	sbSizer301->Add( stTextBattleObtainedMoney, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleObtainedMoney->Add( stTextBattleObtainedMoney, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	TextBattleObtainedMoney2 = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer301->Add( TextBattleObtainedMoney2, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleObtainedMoney->Add( TextBattleObtainedMoney2, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer293->Add( sbSizer301, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleObtainedMoney, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer302;
-	sbSizer302 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Obtained object") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleObtainedObject;
+	szTextBattleObtainedObject = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Obtained object") ), wxHORIZONTAL );
 	
 	stTextBattleObtainedObject = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(Item name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleObtainedObject->Wrap( -1 );
-	sbSizer302->Add( stTextBattleObtainedObject, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleObtainedObject->Add( stTextBattleObtainedObject, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleObtainedObject = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer302->Add( tcTextBattleObtainedObject, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleObtainedObject->Add( tcTextBattleObtainedObject, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer293->Add( sbSizer302, 1, wxEXPAND, 0 );
+	szszTextBattleMessages1->Add( szTextBattleObtainedObject, 1, wxEXPAND, 0 );
 	
-	bSizer435->Add( sbSizer293, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTextBattleMessages1and2->Add( szszTextBattleMessages1, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer303;
-	sbSizer303 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Battle messages 2") ), wxVERTICAL );
+	wxStaticBoxSizer* szTextBattleMessages2;
+	szTextBattleMessages2 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Battle messages 2") ), wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer304;
-	sbSizer304 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Normal attack") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleNormalAttack;
+	szTextBattleNormalAttack = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Normal attack") ), wxHORIZONTAL );
 	
 	stTextBattleNormalAttack = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(User name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleNormalAttack->Wrap( -1 );
-	sbSizer304->Add( stTextBattleNormalAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleNormalAttack->Add( stTextBattleNormalAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleNormalAttack = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer304->Add( tcTextBattleNormalAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleNormalAttack->Add( tcTextBattleNormalAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer303->Add( sbSizer304, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleNormalAttack, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer305;
-	sbSizer305 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Actor death") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleActorDeath;
+	szTextBattleActorDeath = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Actor death") ), wxHORIZONTAL );
 	
 	tcTextBattleActorDeath = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer305->Add( tcTextBattleActorDeath, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattleActorDeath->Add( tcTextBattleActorDeath, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer303->Add( sbSizer305, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleActorDeath, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer306;
-	sbSizer306 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Enemy death") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleEnemyDeath;
+	szTextBattleEnemyDeath = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Enemy death") ), wxHORIZONTAL );
 	
 	tcTextBattleEnemyDeath = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer306->Add( tcTextBattleEnemyDeath, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextBattleEnemyDeath->Add( tcTextBattleEnemyDeath, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer303->Add( sbSizer306, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleEnemyDeath, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer307;
-	sbSizer307 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Defense") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleDefense;
+	szTextBattleDefense = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Defense") ), wxHORIZONTAL );
 	
 	stTextBattleDefense = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(User name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleDefense->Wrap( -1 );
-	sbSizer307->Add( stTextBattleDefense, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleDefense->Add( stTextBattleDefense, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleDefense = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer307->Add( tcTextBattleDefense, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleDefense->Add( tcTextBattleDefense, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer303->Add( sbSizer307, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleDefense, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer308;
-	sbSizer308 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("State control") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleStateControl;
+	szTextBattleStateControl = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("State control") ), wxHORIZONTAL );
 	
 	stTextBattleStateControl = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(Enemy name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleStateControl->Wrap( -1 );
-	sbSizer308->Add( stTextBattleStateControl, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleStateControl->Add( stTextBattleStateControl, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleStateControl = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer308->Add( tcTextBattleStateControl, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleStateControl->Add( tcTextBattleStateControl, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer303->Add( sbSizer308, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleStateControl, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer309;
-	sbSizer309 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Strength gain") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleStrengthGain;
+	szTextBattleStrengthGain = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Strength gain") ), wxHORIZONTAL );
 	
 	stTextBattleStrengthGain = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(Enemy name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleStrengthGain->Wrap( -1 );
-	sbSizer309->Add( stTextBattleStrengthGain, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleStrengthGain->Add( stTextBattleStrengthGain, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleStrengthGain = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer309->Add( tcTextBattleStrengthGain, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleStrengthGain->Add( tcTextBattleStrengthGain, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer303->Add( sbSizer309, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleStrengthGain, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer310;
-	sbSizer310 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Autodestruction") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleAutodestruction;
+	szTextBattleAutodestruction = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Autodestruction") ), wxHORIZONTAL );
 	
 	stTextBattleAutodestruction = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(Enemy name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleAutodestruction->Wrap( -1 );
-	sbSizer310->Add( stTextBattleAutodestruction, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleAutodestruction->Add( stTextBattleAutodestruction, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleAutodestruction = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer310->Add( tcTextBattleAutodestruction, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleAutodestruction->Add( tcTextBattleAutodestruction, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer303->Add( sbSizer310, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleAutodestruction, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer311;
-	sbSizer311 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Enemy escape") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleEnemyEscape;
+	szTextBattleEnemyEscape = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Enemy escape") ), wxHORIZONTAL );
 	
 	stTextBattleEnemyEscape = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(Enemy name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleEnemyEscape->Wrap( -1 );
-	sbSizer311->Add( stTextBattleEnemyEscape, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleEnemyEscape->Add( stTextBattleEnemyEscape, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleEnemyEscape = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer311->Add( tcTextBattleEnemyEscape, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleEnemyEscape->Add( tcTextBattleEnemyEscape, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer303->Add( sbSizer311, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleEnemyEscape, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer312;
-	sbSizer312 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Transformation") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleTransformation;
+	szTextBattleTransformation = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages1And2, wxID_ANY, _("Transformation") ), wxHORIZONTAL );
 	
 	stTextBattleTransformation = new wxStaticText( pnTextBattleMessages1And2, wxID_ANY, _("(Enemy name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleTransformation->Wrap( -1 );
-	sbSizer312->Add( stTextBattleTransformation, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleTransformation->Add( stTextBattleTransformation, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleTransformation = new wxTextCtrl( pnTextBattleMessages1And2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer312->Add( tcTextBattleTransformation, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleTransformation->Add( tcTextBattleTransformation, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer303->Add( sbSizer312, 1, wxEXPAND, 0 );
+	szTextBattleMessages2->Add( szTextBattleTransformation, 1, wxEXPAND, 0 );
 	
-	bSizer435->Add( sbSizer303, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTextBattleMessages1and2->Add( szTextBattleMessages2, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	pnTextBattleMessages1And2->SetSizer( bSizer435 );
+	pnTextBattleMessages1And2->SetSizer( szTextBattleMessages1and2 );
 	pnTextBattleMessages1And2->Layout();
-	bSizer435->Fit( pnTextBattleMessages1And2 );
-	nbText->AddPage( pnTextBattleMessages1And2, _("Battle messages 1 && 2"), true );
+	szTextBattleMessages1and2->Fit( pnTextBattleMessages1And2 );
+	nbText->AddPage( pnTextBattleMessages1And2, _("Battle messages 1 && 2"), false );
 	pnTextBattleMessages3And4 = new wxPanel( nbText, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* bSizer436;
-	bSizer436 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTextBattleMessages3and4;
+	szTextBattleMessages3and4 = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer313;
-	sbSizer313 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Battle messages 3") ), wxVERTICAL );
+	wxStaticBoxSizer* szTextBattleMessages3;
+	szTextBattleMessages3 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Battle messages 3") ), wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer314;
-	sbSizer314 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Actor attack") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleActorAttack;
+	szTextBattleActorAttack = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Actor attack") ), wxHORIZONTAL );
 	
 	stTextBattleActorAttack = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Enemy name) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleActorAttack->Wrap( -1 );
-	sbSizer314->Add( stTextBattleActorAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleActorAttack->Add( stTextBattleActorAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleActorAttack = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer314->Add( tcTextBattleActorAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleActorAttack->Add( tcTextBattleActorAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer314, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleActorAttack, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer315;
-	sbSizer315 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed actor attack") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTestBattleFailedActorAttack;
+	szTestBattleFailedActorAttack = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed actor attack") ), wxHORIZONTAL );
 	
 	stTextBattleFailedActorAttack = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Enemy name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleFailedActorAttack->Wrap( -1 );
-	sbSizer315->Add( stTextBattleFailedActorAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTestBattleFailedActorAttack->Add( stTextBattleFailedActorAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleFailedActorAttack = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer315->Add( tcTextBattleFailedActorAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTestBattleFailedActorAttack->Add( tcTextBattleFailedActorAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer315, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTestBattleFailedActorAttack, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer316;
-	sbSizer316 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Enemy attack") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleEnemyAttack;
+	szTextBattleEnemyAttack = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Enemy attack") ), wxHORIZONTAL );
 	
 	stTextBattleEnemyAttack = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Actor name) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleEnemyAttack->Wrap( -1 );
-	sbSizer316->Add( stTextBattleEnemyAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleEnemyAttack->Add( stTextBattleEnemyAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleEnemyAttack = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer316->Add( tcTextBattleEnemyAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleEnemyAttack->Add( tcTextBattleEnemyAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer316, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleEnemyAttack, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer317;
-	sbSizer317 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed enemy attack") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleFailedEnemyAttack;
+	szTextBattleFailedEnemyAttack = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed enemy attack") ), wxHORIZONTAL );
 	
 	stTextBattleFailedEnemyAttack = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Actor name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleFailedEnemyAttack->Wrap( -1 );
-	sbSizer317->Add( stTextBattleFailedEnemyAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedEnemyAttack->Add( stTextBattleFailedEnemyAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleFailedEnemyAttack = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer317->Add( tcTextBattleFailedEnemyAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedEnemyAttack->Add( tcTextBattleFailedEnemyAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer317, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleFailedEnemyAttack, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer318;
-	sbSizer318 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed skill A") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleFailedSkillA;
+	szTextBattleFailedSkillA = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed skill A") ), wxHORIZONTAL );
 	
 	stTextBattleFailedSkillA = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleFailedSkillA->Wrap( -1 );
-	sbSizer318->Add( stTextBattleFailedSkillA, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedSkillA->Add( stTextBattleFailedSkillA, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleFailedSkillA = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer318->Add( tcTextBattleFailedSkillA, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedSkillA->Add( tcTextBattleFailedSkillA, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer318, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleFailedSkillA, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer319;
-	sbSizer319 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed skill B") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleFailedSkillB;
+	szTextBattleFailedSkillB = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed skill B") ), wxHORIZONTAL );
 	
 	stTextBattleFailedSkillB = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleFailedSkillB->Wrap( -1 );
-	sbSizer319->Add( stTextBattleFailedSkillB, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedSkillB->Add( stTextBattleFailedSkillB, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleFailedSkillB = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer319->Add( tcTextBattleFailedSkillB, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedSkillB->Add( tcTextBattleFailedSkillB, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer319, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleFailedSkillB, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer320;
-	sbSizer320 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed skill C") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleFailedSkillC;
+	szTextBattleFailedSkillC = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Failed skill C") ), wxHORIZONTAL );
 	
 	stTextBattleFailedSkillC = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleFailedSkillC->Wrap( -1 );
-	sbSizer320->Add( stTextBattleFailedSkillC, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedSkillC->Add( stTextBattleFailedSkillC, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleFailedSkillC = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer320->Add( tcTextBattleFailedSkillC, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleFailedSkillC->Add( tcTextBattleFailedSkillC, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer320, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleFailedSkillC, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer321;
-	sbSizer321 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Evade physical attack") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleEvadePhysicalAttack;
+	szTextBattleEvadePhysicalAttack = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Evade physical attack") ), wxHORIZONTAL );
 	
-	stTextBattleEvadePsysicalAttack = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Affected name)"), wxDefaultPosition, wxDefaultSize, 0 );
-	stTextBattleEvadePsysicalAttack->Wrap( -1 );
-	sbSizer321->Add( stTextBattleEvadePsysicalAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	stTextBattleEvadePhysicalAttack = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Affected name)"), wxDefaultPosition, wxDefaultSize, 0 );
+	stTextBattleEvadePhysicalAttack->Wrap( -1 );
+	szTextBattleEvadePhysicalAttack->Add( stTextBattleEvadePhysicalAttack, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	tcTextBattleEvadePsysicalAttack = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer321->Add( tcTextBattleEvadePsysicalAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	tcTextBattleEvadePhysicalAttack = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
+	szTextBattleEvadePhysicalAttack->Add( tcTextBattleEvadePhysicalAttack, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer321, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleEvadePhysicalAttack, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer322;
-	sbSizer322 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Use item") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleUseItem;
+	szTextBattleUseItem = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Use item") ), wxHORIZONTAL );
 	
 	stTextBattleUseItem = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (Object name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleUseItem->Wrap( -1 );
-	sbSizer322->Add( stTextBattleUseItem, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleUseItem->Add( stTextBattleUseItem, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleUseItem = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer322->Add( tcTextBattleUseItem, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleUseItem->Add( tcTextBattleUseItem, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer313->Add( sbSizer322, 1, wxEXPAND, 0 );
+	szTextBattleMessages3->Add( szTextBattleUseItem, 1, wxEXPAND, 0 );
 	
-	bSizer436->Add( sbSizer313, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTextBattleMessages3and4->Add( szTextBattleMessages3, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer323;
-	sbSizer323 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Battle messages 4") ), wxVERTICAL );
+	wxStaticBoxSizer* szTextBattleMessages4;
+	szTextBattleMessages4 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Battle messages 4") ), wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer324;
-	sbSizer324 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Recover HP") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleRecoverHP;
+	szTextBattleRecoverHP = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Recover HP") ), wxHORIZONTAL );
 	
 	stTextBattleRecoverHP = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (HP cost) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleRecoverHP->Wrap( -1 );
-	sbSizer324->Add( stTextBattleRecoverHP, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleRecoverHP->Add( stTextBattleRecoverHP, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleRecoverHP = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer324->Add( tcTextBattleRecoverHP, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleRecoverHP->Add( tcTextBattleRecoverHP, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer324, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleRecoverHP, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer325;
-	sbSizer325 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter up") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleParameterUp;
+	szTextBattleParameterUp = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter up") ), wxHORIZONTAL );
 	
 	stTextBattleParameterUp = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (Parameter cost) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleParameterUp->Wrap( -1 );
-	sbSizer325->Add( stTextBattleParameterUp, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterUp->Add( stTextBattleParameterUp, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleParameterUp = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer325->Add( tcTextBattleParameterUp, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterUp->Add( tcTextBattleParameterUp, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer325, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleParameterUp, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer326;
-	sbSizer326 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter down") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleParameterDown;
+	szTextBattleParameterDown = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter down") ), wxHORIZONTAL );
 	
 	stTextBattleParameterDown = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (Parameter cost) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleParameterDown->Wrap( -1 );
-	sbSizer326->Add( stTextBattleParameterDown, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterDown->Add( stTextBattleParameterDown, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleParameterDown = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer326->Add( tcTextBattleParameterDown, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterDown->Add( tcTextBattleParameterDown, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer326, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleParameterDown, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer327;
-	sbSizer327 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter absorption (allied)") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleParameterAbsorptionAllied;
+	szTextBattleParameterAbsorptionAllied = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter absorption (allied)") ), wxHORIZONTAL );
 	
 	stTextBattleParameterAbsorptionAllied = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (Parameter cost) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleParameterAbsorptionAllied->Wrap( -1 );
-	sbSizer327->Add( stTextBattleParameterAbsorptionAllied, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterAbsorptionAllied->Add( stTextBattleParameterAbsorptionAllied, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleParameterAbsorptionAllied = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer327->Add( tcTextBattleParameterAbsorptionAllied, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterAbsorptionAllied->Add( tcTextBattleParameterAbsorptionAllied, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer327, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleParameterAbsorptionAllied, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer328;
-	sbSizer328 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter absorption (enemy)") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleParameterAbsorptionEnemy;
+	szTextBattleParameterAbsorptionEnemy = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Parameter absorption (enemy)") ), wxHORIZONTAL );
 	
 	stTextBattleParameterAbsorptionEnemy = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (Parameter cost) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleParameterAbsorptionEnemy->Wrap( -1 );
-	sbSizer328->Add( stTextBattleParameterAbsorptionEnemy, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterAbsorptionEnemy->Add( stTextBattleParameterAbsorptionEnemy, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleParameterAbsorptionEnemy = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer328->Add( tcTextBattleParameterAbsorptionEnemy, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleParameterAbsorptionEnemy->Add( tcTextBattleParameterAbsorptionEnemy, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer328, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleParameterAbsorptionEnemy, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer329;
-	sbSizer329 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Defense up") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleDefenseUp;
+	szTextBattleDefenseUp = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Defense up") ), wxHORIZONTAL );
 	
 	stTextBattleDefenseUp = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (Defense)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleDefenseUp->Wrap( -1 );
-	sbSizer329->Add( stTextBattleDefenseUp, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleDefenseUp->Add( stTextBattleDefenseUp, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleDefenseUp = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer329->Add( tcTextBattleDefenseUp, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleDefenseUp->Add( tcTextBattleDefenseUp, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer329, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleDefenseUp, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer330;
-	sbSizer330 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Defense down") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleDefenseDown;
+	szTextBattleDefenseDown = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Defense down") ), wxHORIZONTAL );
 	
 	stTextBattleDefenseDown = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(User name) (Defense)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleDefenseDown->Wrap( -1 );
-	sbSizer330->Add( stTextBattleDefenseDown, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleDefenseDown->Add( stTextBattleDefenseDown, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleDefenseDown = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer330->Add( tcTextBattleDefenseDown, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleDefenseDown->Add( tcTextBattleDefenseDown, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer330, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleDefenseDown, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer331;
-	sbSizer331 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Level up") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleLevelUp;
+	szTextBattleLevelUp = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Level up") ), wxHORIZONTAL );
 	
 	stTextBattleLevelUp = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Actor name) (Level) (X)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleLevelUp->Wrap( -1 );
-	sbSizer331->Add( stTextBattleLevelUp, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleLevelUp->Add( stTextBattleLevelUp, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleLevelUp = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer331->Add( tcTextBattleLevelUp, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleLevelUp->Add( tcTextBattleLevelUp, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer331, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleLevelUp, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer332;
-	sbSizer332 = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Learn skill") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextBattleLearnSkill;
+	szTextBattleLearnSkill = new wxStaticBoxSizer( new wxStaticBox( pnTextBattleMessages3And4, wxID_ANY, _("Learn skill") ), wxHORIZONTAL );
 	
 	stTextBattleLearnSkill = new wxStaticText( pnTextBattleMessages3And4, wxID_ANY, _("(Skill name)"), wxDefaultPosition, wxDefaultSize, 0 );
 	stTextBattleLearnSkill->Wrap( -1 );
-	sbSizer332->Add( stTextBattleLearnSkill, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleLearnSkill->Add( stTextBattleLearnSkill, 0, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	tcTextBattleLearnSkill = new wxTextCtrl( pnTextBattleMessages3And4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer332->Add( tcTextBattleLearnSkill, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szTextBattleLearnSkill->Add( tcTextBattleLearnSkill, 1, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
 	
-	sbSizer323->Add( sbSizer332, 1, wxEXPAND, 0 );
+	szTextBattleMessages4->Add( szTextBattleLearnSkill, 1, wxEXPAND, 0 );
 	
-	bSizer436->Add( sbSizer323, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTextBattleMessages3and4->Add( szTextBattleMessages4, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	pnTextBattleMessages3And4->SetSizer( bSizer436 );
+	pnTextBattleMessages3And4->SetSizer( szTextBattleMessages3and4 );
 	pnTextBattleMessages3And4->Layout();
-	bSizer436->Fit( pnTextBattleMessages3And4 );
-	nbText->AddPage( pnTextBattleMessages3And4, _("Battle messages 3 && 4"), true );
+	szTextBattleMessages3and4->Fit( pnTextBattleMessages3And4 );
+	nbText->AddPage( pnTextBattleMessages3And4, _("Battle messages 3 && 4"), false );
 	pnTextCommerceMessages = new wxPanel( nbText, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* bSizer437;
-	bSizer437 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTextCommerceMessages;
+	szTextCommerceMessages = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer333;
-	sbSizer333 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Commerce messages type A") ), wxVERTICAL );
+	wxStaticBoxSizer* szTextCommerceMessagesA;
+	szTextCommerceMessagesA = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Commerce messages A") ), wxVERTICAL );
 	
-	wxStaticBoxSizer* sbSizer334;
-	sbSizer334 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy selection") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesBuySelection;
+	szTextCommerceMessagesBuySelection = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy selection") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesABuySelection = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer334->Add( tcTextCommerceMessagesABuySelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesBuySelection->Add( tcTextCommerceMessagesABuySelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer334, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesBuySelection, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer335;
-	sbSizer335 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy selection (second time and later)") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesABuySelectionSecondTimeAndLater;
+	szTextCommerceMessagesABuySelectionSecondTimeAndLater = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy selection (second time and later)") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesABuySelectionSecondTimeAndLater = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer335->Add( tcTextCommerceMessagesABuySelectionSecondTimeAndLater, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesABuySelectionSecondTimeAndLater->Add( tcTextCommerceMessagesABuySelectionSecondTimeAndLater, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer335, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesABuySelectionSecondTimeAndLater, 1, wxEXPAND, 0 );
 	
-	wxBoxSizer* bSizer438;
-	bSizer438 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* szTextCommerceMessagesABuySellExit;
+	szTextCommerceMessagesABuySellExit = new wxBoxSizer( wxHORIZONTAL );
 	
-	wxStaticBoxSizer* sbSizer336;
-	sbSizer336 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesABuy;
+	szTextCommerceMessagesABuy = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesABuy = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer336->Add( tcTextCommerceMessagesABuy, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesABuy->Add( tcTextCommerceMessagesABuy, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer438->Add( sbSizer336, 1, wxRIGHT|wxEXPAND, 1 );
+	szTextCommerceMessagesABuySellExit->Add( szTextCommerceMessagesABuy, 1, wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer337;
-	sbSizer337 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Sell") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesASell;
+	szTextCommerceMessagesASell = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Sell") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesASell = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer337->Add( tcTextCommerceMessagesASell, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesASell->Add( tcTextCommerceMessagesASell, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer438->Add( sbSizer337, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
+	szTextCommerceMessagesABuySellExit->Add( szTextCommerceMessagesASell, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
 	
-	wxStaticBoxSizer* sbSizer338;
-	sbSizer338 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Exit") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesAExit;
+	szTextCommerceMessagesAExit = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Exit") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesAExit = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer338->Add( tcTextCommerceMessagesAExit, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesAExit->Add( tcTextCommerceMessagesAExit, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	bSizer438->Add( sbSizer338, 1, wxLEFT|wxEXPAND, 1 );
+	szTextCommerceMessagesABuySellExit->Add( szTextCommerceMessagesAExit, 1, wxLEFT|wxEXPAND, 1 );
 	
-	sbSizer333->Add( bSizer438, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesABuySellExit, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer339;
-	sbSizer339 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to buy selection") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesAItemToBuySelection;
+	szTextCommerceMessagesAItemToBuySelection = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to buy selection") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesAItemToBuySelection = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer339->Add( tcTextCommerceMessagesAItemToBuySelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesAItemToBuySelection->Add( tcTextCommerceMessagesAItemToBuySelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer339, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesAItemToBuySelection, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer340;
-	sbSizer340 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to buy number selection") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesAItemToBuyNumberSelection;
+	szTextCommerceMessagesAItemToBuyNumberSelection = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to buy number selection") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesAItemToBuyNumberSelection = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer340->Add( tcTextCommerceMessagesAItemToBuyNumberSelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesAItemToBuyNumberSelection->Add( tcTextCommerceMessagesAItemToBuyNumberSelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer340, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesAItemToBuyNumberSelection, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer341;
-	sbSizer341 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy completed") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesABuyCompleted;
+	szTextCommerceMessagesABuyCompleted = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy completed") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesABuyCompleted = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer341->Add( tcTextCommerceMessagesABuyCompleted, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesABuyCompleted->Add( tcTextCommerceMessagesABuyCompleted, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer341, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesABuyCompleted, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer342;
-	sbSizer342 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to sell selection") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesAItemToSellSelection;
+	szTextCommerceMessagesAItemToSellSelection = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to sell selection") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesAItemToSellSelection = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer342->Add( tcTextCommerceMessagesAItemToSellSelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesAItemToSellSelection->Add( tcTextCommerceMessagesAItemToSellSelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer342, 1, wxALL|wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesAItemToSellSelection, 1, wxALL|wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer343;
-	sbSizer343 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to sell number selection") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesAItemToSellNumberSelection;
+	szTextCommerceMessagesAItemToSellNumberSelection = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Item to sell number selection") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesAItemToSellNumberSelection = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer343->Add( tcTextCommerceMessagesAItemToSellNumberSelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesAItemToSellNumberSelection->Add( tcTextCommerceMessagesAItemToSellNumberSelection, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer343, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesAItemToSellNumberSelection, 1, wxEXPAND, 0 );
 	
-	wxStaticBoxSizer* sbSizer344;
-	sbSizer344 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Sell completed") ), wxHORIZONTAL );
+	wxStaticBoxSizer* szTextCommerceMessagesASellCompleted;
+	szTextCommerceMessagesASellCompleted = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Sell completed") ), wxHORIZONTAL );
 	
 	tcTextCommerceMessagesASellCompleted = new wxTextCtrl( pnTextCommerceMessages, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	sbSizer344->Add( tcTextCommerceMessagesASellCompleted, 1, wxALIGN_CENTER_VERTICAL, 0 );
+	szTextCommerceMessagesASellCompleted->Add( tcTextCommerceMessagesASellCompleted, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
-	sbSizer333->Add( sbSizer344, 1, wxEXPAND, 0 );
+	szTextCommerceMessagesA->Add( szTextCommerceMessagesASellCompleted, 1, wxEXPAND, 0 );
 	
-	bSizer437->Add( sbSizer333, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTextCommerceMessages->Add( szTextCommerceMessagesA, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
 	wxStaticBoxSizer* sbSizer345;
-	sbSizer345 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Commerce messages type B") ), wxVERTICAL );
+	sbSizer345 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Commerce messages B") ), wxVERTICAL );
 	
 	wxStaticBoxSizer* sbSizer346;
 	sbSizer346 = new wxStaticBoxSizer( new wxStaticBox( pnTextCommerceMessages, wxID_ANY, _("Buy selection") ), wxHORIZONTAL );
@@ -656,11 +656,11 @@ pnText_Base::pnText_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	
 	sbSizer345->Add( sbSizer356, 1, wxEXPAND, 0 );
 	
-	bSizer437->Add( sbSizer345, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szTextCommerceMessages->Add( sbSizer345, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	pnTextCommerceMessages->SetSizer( bSizer437 );
+	pnTextCommerceMessages->SetSizer( szTextCommerceMessages );
 	pnTextCommerceMessages->Layout();
-	bSizer437->Fit( pnTextCommerceMessages );
+	szTextCommerceMessages->Fit( pnTextCommerceMessages );
 	nbText->AddPage( pnTextCommerceMessages, _("Commerce messages"), true );
 	pnTextCommerceAndInn = new wxPanel( nbText, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer440;
@@ -913,7 +913,7 @@ pnText_Base::pnText_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	pnTextCommerceAndInn->SetSizer( bSizer440 );
 	pnTextCommerceAndInn->Layout();
 	bSizer440->Fit( pnTextCommerceAndInn );
-	nbText->AddPage( pnTextCommerceAndInn, _("Commerce && inn"), true );
+	nbText->AddPage( pnTextCommerceAndInn, _("Commerce && inn"), false );
 	pnTextParametersAndOther = new wxPanel( nbText, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer448;
 	bSizer448 = new wxBoxSizer( wxHORIZONTAL );
@@ -1271,11 +1271,11 @@ pnText_Base::pnText_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos, c
 	bSizer448->Fit( pnTextParametersAndOther );
 	nbText->AddPage( pnTextParametersAndOther, _("Parameters && other"), true );
 	
-	bSizer434->Add( nbText, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
+	szText->Add( nbText, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	
-	this->SetSizer( bSizer434 );
+	this->SetSizer( szText );
 	this->Layout();
-	bSizer434->Fit( this );
+	szText->Fit( this );
 }
 
 pnText_Base::~pnText_Base()

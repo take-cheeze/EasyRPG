@@ -204,7 +204,7 @@ void Game_Interpreter::Clear() {
 	move_route_waiting = false;		// waiting for move completion
 	button_input_variable_id = 0;	// button input variable ID
 	wait_count = 0;					// wait count
-	child_interpreter = NULL;		// child interpreter for common events, etc
+	child_interpreter.reset();		// child interpreter for common events, etc
 	continuation = NULL;			// function to execute to resume command
 	button_timer = 0;
 }
@@ -270,8 +270,7 @@ void Game_Interpreter::Update() {
 			child_interpreter->Update();
 
 			if (!child_interpreter->IsRunning()) {
-				delete child_interpreter;
-				child_interpreter = NULL;
+				child_interpreter.reset();
 			}
 
 			// If child interpreter still exists
@@ -2914,7 +2913,7 @@ bool Game_Interpreter::CommandEraseEvent() { // code 12320
 		return true;
 
 	tEventHash& events = Game_Map::GetEvents();
-	events[event_id]->SetDisabled(true);
+		events.find(event_id)->second->SetDisabled(true);
 
 	return true;
 }
@@ -2940,7 +2939,7 @@ bool Game_Interpreter::CommandCallEvent() { // code 12330
 	if (child_interpreter != NULL)
 		return false;
 
-	child_interpreter = new Game_Interpreter(depth + 1);
+	child_interpreter.reset(new Game_Interpreter(depth + 1));
 
 	switch (list[index][0]) {
 		case 0: // Common Event
@@ -2959,7 +2958,7 @@ bool Game_Interpreter::CommandCallEvent() { // code 12330
 			return false;
 	}
 
-	Game_Event* event = Game_Map::GetEvents()[event_id];
+	Game_Event* event = Game_Map::GetEvents().find(event_id)->second;
 	RPG::EventPage const& page = event->GetEvent()[5].toArray2D()[event_page];
 	child_interpreter->Setup(page[52].toEvent(), event_id, event->GetX(), event->GetY());
 

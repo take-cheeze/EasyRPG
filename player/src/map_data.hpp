@@ -15,49 +15,36 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _GAME_VEHICLE_H_
-#define _GAME_VEHICLE_H_
+#ifndef _MAP_DATA_H_
+#define _MAP_DATA_H_
 
 ////////////////////////////////////////////////////////////
-// Headers
+// Tile IDs
 ////////////////////////////////////////////////////////////
-#include <string>
-#include "game_character.hpp"
+static const int BLOCK_C = 3000;
+
+static const int BLOCK_D = 4000;
+static const int BLOCK_D_BLOCKS = 12;
+
+static const int BLOCK_E = 5000;
+static const int BLOCK_E_TILES = 144;
+
+static const int BLOCK_F = 10000;
+static const int BLOCK_F_TILES = 144;
 
 ////////////////////////////////////////////////////////////
-/// Game_Vehicle class.
+// Passability flags
 ////////////////////////////////////////////////////////////
-class Game_Vehicle : public Game_Character {
-public:
-	static const int MAX_ALTITUDE = 32;	// the airship flies at
-
-	enum Type {
-		Boat,
-		Ship,
-		Airship
+namespace Passable {
+	enum Passable {
+		Down		= 0x01,
+		Left		= 0x02,
+		Right		= 0x04,
+		Up			= 0x08,
+		Above		= 0x10,
+		Wall		= 0x20,
+		Counter		= 0x40
 	};
-
-	Game_Vehicle(Type _type);
-	void LoadSystemSettings();
-	void Refresh();
-	void SetPosition(int _map_id, int _x, int _y);
-	virtual bool IsInPosition(int x, int y) const;
-	virtual bool IsTransparent() const;
-	void GetOn();
-	void GetOff();
-	void SyncWithPlayer();
-	int GetSpeed() const;
-	virtual int GetScreenY() const;
-	bool IsMovable();
-	virtual void Update();
-	virtual bool CheckEventTriggerTouch(int x, int y);
-
-protected:
-	int map_id;
-	Type type;
-	int altitude;
-	bool driving;
-	RPG::Music const* bgm;
-};
+}
 
 #endif

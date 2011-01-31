@@ -100,7 +100,7 @@
             <event name="OnUpdateUI"></event>
             <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
-                <property name="name">bSizer434</property>
+                <property name="name">szText</property>
                 <property name="orient">wxHORIZONTAL</property>
                 <property name="permission">none</property>
                 <object class="sizeritem" expanded="1">
@@ -189,7 +189,7 @@
                         <object class="notebookpage" expanded="1">
                             <property name="bitmap"></property>
                             <property name="label">Battle messages 1 &amp;&amp; 2</property>
-                            <property name="select"></property>
+                            <property name="select">0</property>
                             <object class="wxPanel" expanded="1">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
@@ -267,7 +267,7 @@
                                 <event name="OnUpdateUI"></event>
                                 <object class="wxBoxSizer" expanded="1">
                                     <property name="minimum_size"></property>
-                                    <property name="name">bSizer435</property>
+                                    <property name="name">szTextBattleMessages1and2</property>
                                     <property name="orient">wxHORIZONTAL</property>
                                     <property name="permission">none</property>
                                     <object class="sizeritem" expanded="1">
@@ -278,7 +278,7 @@
                                             <property name="id">wxID_ANY</property>
                                             <property name="label">Battle messages 1</property>
                                             <property name="minimum_size"></property>
-                                            <property name="name">sbSizer293</property>
+                                            <property name="name">szszTextBattleMessages1</property>
                                             <property name="orient">wxVERTICAL</property>
                                             <property name="permission">none</property>
                                             <event name="OnUpdateUI"></event>
@@ -290,7 +290,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Start battle</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer294</property>
+                                                    <property name="name">szTextBattleStartBattle</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -476,7 +476,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Priority attack</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer295</property>
+                                                    <property name="name">szTextBattlePriorityAttack</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -578,7 +578,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Successful escape</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer296</property>
+                                                    <property name="name">szTextBattleSuccessfulEscape</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -680,7 +680,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Failed escape</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer297</property>
+                                                    <property name="name">szTextBattleFailedEscape</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -782,7 +782,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Victory</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer298</property>
+                                                    <property name="name">szTextBattleVictory</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -884,7 +884,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Dead group</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer299</property>
+                                                    <property name="name">szTextBattleDeadGroup</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -986,7 +986,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Experience</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer300</property>
+                                                    <property name="name">szTextBattleExperience</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -1172,7 +1172,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Obtained money</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer301</property>
+                                                    <property name="name">szTextBattleObtainedMoney</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -1446,7 +1446,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Obtained object</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer302</property>
+                                                    <property name="name">szTextBattleObtainedObject</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -1634,7 +1634,7 @@
                                             <property name="id">wxID_ANY</property>
                                             <property name="label">Battle messages 2</property>
                                             <property name="minimum_size"></property>
-                                            <property name="name">sbSizer303</property>
+                                            <property name="name">szTextBattleMessages2</property>
                                             <property name="orient">wxVERTICAL</property>
                                             <property name="permission">none</property>
                                             <event name="OnUpdateUI"></event>
@@ -1646,7 +1646,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Normal attack</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer304</property>
+                                                    <property name="name">szTextBattleNormalAttack</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -1832,7 +1832,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Actor death</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer305</property>
+                                                    <property name="name">szTextBattleActorDeath</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -1934,7 +1934,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Enemy death</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer306</property>
+                                                    <property name="name">szTextBattleEnemyDeath</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -2036,7 +2036,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Defense</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer307</property>
+                                                    <property name="name">szTextBattleDefense</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -2222,7 +2222,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">State control</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer308</property>
+                                                    <property name="name">szTextBattleStateControl</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -2408,7 +2408,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Strength gain</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer309</property>
+                                                    <property name="name">szTextBattleStrengthGain</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -2594,7 +2594,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Autodestruction</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer310</property>
+                                                    <property name="name">szTextBattleAutodestruction</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -2780,7 +2780,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Enemy escape</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer311</property>
+                                                    <property name="name">szTextBattleEnemyEscape</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -2966,7 +2966,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Transformation</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer312</property>
+                                                    <property name="name">szTextBattleTransformation</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -3152,7 +3152,7 @@
                         <object class="notebookpage" expanded="1">
                             <property name="bitmap"></property>
                             <property name="label">Battle messages 3 &amp;&amp; 4</property>
-                            <property name="select"></property>
+                            <property name="select">0</property>
                             <object class="wxPanel" expanded="1">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
@@ -3230,7 +3230,7 @@
                                 <event name="OnUpdateUI"></event>
                                 <object class="wxBoxSizer" expanded="1">
                                     <property name="minimum_size"></property>
-                                    <property name="name">bSizer436</property>
+                                    <property name="name">szTextBattleMessages3and4</property>
                                     <property name="orient">wxHORIZONTAL</property>
                                     <property name="permission">none</property>
                                     <object class="sizeritem" expanded="1">
@@ -3241,7 +3241,7 @@
                                             <property name="id">wxID_ANY</property>
                                             <property name="label">Battle messages 3</property>
                                             <property name="minimum_size"></property>
-                                            <property name="name">sbSizer313</property>
+                                            <property name="name">szTextBattleMessages3</property>
                                             <property name="orient">wxVERTICAL</property>
                                             <property name="permission">none</property>
                                             <event name="OnUpdateUI"></event>
@@ -3253,7 +3253,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Actor attack</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer314</property>
+                                                    <property name="name">szTextBattleActorAttack</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -3439,7 +3439,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Failed actor attack</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer315</property>
+                                                    <property name="name">szTestBattleFailedActorAttack</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -3625,7 +3625,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Enemy attack</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer316</property>
+                                                    <property name="name">szTextBattleEnemyAttack</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -3811,7 +3811,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Failed enemy attack</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer317</property>
+                                                    <property name="name">szTextBattleFailedEnemyAttack</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -3997,7 +3997,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Failed skill A</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer318</property>
+                                                    <property name="name">szTextBattleFailedSkillA</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -4183,7 +4183,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Failed skill B</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer319</property>
+                                                    <property name="name">szTextBattleFailedSkillB</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -4369,7 +4369,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Failed skill C</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer320</property>
+                                                    <property name="name">szTextBattleFailedSkillC</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -4555,7 +4555,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Evade physical attack</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer321</property>
+                                                    <property name="name">szTextBattleEvadePhysicalAttack</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -4594,7 +4594,7 @@
                                                             <property name="minimize_button">0</property>
                                                             <property name="minimum_size"></property>
                                                             <property name="moveable">1</property>
-                                                            <property name="name">stTextBattleEvadePsysicalAttack</property>
+                                                            <property name="name">stTextBattleEvadePhysicalAttack</property>
                                                             <property name="pane_border">1</property>
                                                             <property name="pane_position"></property>
                                                             <property name="pane_size"></property>
@@ -4678,7 +4678,7 @@
                                                             <property name="minimize_button">0</property>
                                                             <property name="minimum_size"></property>
                                                             <property name="moveable">1</property>
-                                                            <property name="name">tcTextBattleEvadePsysicalAttack</property>
+                                                            <property name="name">tcTextBattleEvadePhysicalAttack</property>
                                                             <property name="pane_border">1</property>
                                                             <property name="pane_position"></property>
                                                             <property name="pane_size"></property>
@@ -4741,7 +4741,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Use item</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer322</property>
+                                                    <property name="name">szTextBattleUseItem</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -4929,7 +4929,7 @@
                                             <property name="id">wxID_ANY</property>
                                             <property name="label">Battle messages 4</property>
                                             <property name="minimum_size"></property>
-                                            <property name="name">sbSizer323</property>
+                                            <property name="name">szTextBattleMessages4</property>
                                             <property name="orient">wxVERTICAL</property>
                                             <property name="permission">none</property>
                                             <event name="OnUpdateUI"></event>
@@ -4941,7 +4941,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Recover HP</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer324</property>
+                                                    <property name="name">szTextBattleRecoverHP</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -5127,7 +5127,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Parameter up</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer325</property>
+                                                    <property name="name">szTextBattleParameterUp</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -5313,7 +5313,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Parameter down</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer326</property>
+                                                    <property name="name">szTextBattleParameterDown</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -5499,7 +5499,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Parameter absorption (allied)</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer327</property>
+                                                    <property name="name">szTextBattleParameterAbsorptionAllied</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -5685,7 +5685,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Parameter absorption (enemy)</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer328</property>
+                                                    <property name="name">szTextBattleParameterAbsorptionEnemy</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -5871,7 +5871,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Defense up</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer329</property>
+                                                    <property name="name">szTextBattleDefenseUp</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -6057,7 +6057,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Defense down</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer330</property>
+                                                    <property name="name">szTextBattleDefenseDown</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -6243,7 +6243,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Level up</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer331</property>
+                                                    <property name="name">szTextBattleLevelUp</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -6429,7 +6429,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Learn skill</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer332</property>
+                                                    <property name="name">szTextBattleLearnSkill</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -6615,7 +6615,7 @@
                         <object class="notebookpage" expanded="1">
                             <property name="bitmap"></property>
                             <property name="label">Commerce messages</property>
-                            <property name="select"></property>
+                            <property name="select">1</property>
                             <object class="wxPanel" expanded="1">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
@@ -6693,7 +6693,7 @@
                                 <event name="OnUpdateUI"></event>
                                 <object class="wxBoxSizer" expanded="1">
                                     <property name="minimum_size"></property>
-                                    <property name="name">bSizer437</property>
+                                    <property name="name">szTextCommerceMessages</property>
                                     <property name="orient">wxHORIZONTAL</property>
                                     <property name="permission">none</property>
                                     <object class="sizeritem" expanded="1">
@@ -6702,9 +6702,9 @@
                                         <property name="proportion">1</property>
                                         <object class="wxStaticBoxSizer" expanded="1">
                                             <property name="id">wxID_ANY</property>
-                                            <property name="label">Commerce messages type A</property>
+                                            <property name="label">Commerce messages A</property>
                                             <property name="minimum_size"></property>
-                                            <property name="name">sbSizer333</property>
+                                            <property name="name">szTextCommerceMessagesA</property>
                                             <property name="orient">wxVERTICAL</property>
                                             <property name="permission">none</property>
                                             <event name="OnUpdateUI"></event>
@@ -6716,7 +6716,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Buy selection</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer334</property>
+                                                    <property name="name">szTextCommerceMessagesBuySelection</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -6818,7 +6818,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Buy selection (second time and later)</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer335</property>
+                                                    <property name="name">szTextCommerceMessagesABuySelectionSecondTimeAndLater</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -6918,7 +6918,7 @@
                                                 <property name="proportion">1</property>
                                                 <object class="wxBoxSizer" expanded="1">
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">bSizer438</property>
+                                                    <property name="name">szTextCommerceMessagesABuySellExit</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <object class="sizeritem" expanded="1">
@@ -6929,7 +6929,7 @@
                                                             <property name="id">wxID_ANY</property>
                                                             <property name="label">Buy</property>
                                                             <property name="minimum_size"></property>
-                                                            <property name="name">sbSizer336</property>
+                                                            <property name="name">szTextCommerceMessagesABuy</property>
                                                             <property name="orient">wxHORIZONTAL</property>
                                                             <property name="permission">none</property>
                                                             <event name="OnUpdateUI"></event>
@@ -7031,7 +7031,7 @@
                                                             <property name="id">wxID_ANY</property>
                                                             <property name="label">Sell</property>
                                                             <property name="minimum_size"></property>
-                                                            <property name="name">sbSizer337</property>
+                                                            <property name="name">szTextCommerceMessagesASell</property>
                                                             <property name="orient">wxHORIZONTAL</property>
                                                             <property name="permission">none</property>
                                                             <event name="OnUpdateUI"></event>
@@ -7133,7 +7133,7 @@
                                                             <property name="id">wxID_ANY</property>
                                                             <property name="label">Exit</property>
                                                             <property name="minimum_size"></property>
-                                                            <property name="name">sbSizer338</property>
+                                                            <property name="name">szTextCommerceMessagesAExit</property>
                                                             <property name="orient">wxHORIZONTAL</property>
                                                             <property name="permission">none</property>
                                                             <event name="OnUpdateUI"></event>
@@ -7237,7 +7237,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Item to buy selection</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer339</property>
+                                                    <property name="name">szTextCommerceMessagesAItemToBuySelection</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -7339,7 +7339,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Item to buy number selection</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer340</property>
+                                                    <property name="name">szTextCommerceMessagesAItemToBuyNumberSelection</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -7441,7 +7441,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Buy completed</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer341</property>
+                                                    <property name="name">szTextCommerceMessagesABuyCompleted</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -7543,7 +7543,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Item to sell selection</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer342</property>
+                                                    <property name="name">szTextCommerceMessagesAItemToSellSelection</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -7645,7 +7645,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Item to sell number selection</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer343</property>
+                                                    <property name="name">szTextCommerceMessagesAItemToSellNumberSelection</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -7747,7 +7747,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Sell completed</property>
                                                     <property name="minimum_size"></property>
-                                                    <property name="name">sbSizer344</property>
+                                                    <property name="name">szTextCommerceMessagesASellCompleted</property>
                                                     <property name="orient">wxHORIZONTAL</property>
                                                     <property name="permission">none</property>
                                                     <event name="OnUpdateUI"></event>
@@ -7849,7 +7849,7 @@
                                         <property name="proportion">1</property>
                                         <object class="wxStaticBoxSizer" expanded="1">
                                             <property name="id">wxID_ANY</property>
-                                            <property name="label">Commerce messages type B</property>
+                                            <property name="label">Commerce messages B</property>
                                             <property name="minimum_size"></property>
                                             <property name="name">sbSizer345</property>
                                             <property name="orient">wxVERTICAL</property>
@@ -8996,7 +8996,7 @@
                         <object class="notebookpage" expanded="1">
                             <property name="bitmap"></property>
                             <property name="label">Commerce &amp;&amp; inn</property>
-                            <property name="select"></property>
+                            <property name="select">0</property>
                             <object class="wxPanel" expanded="1">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>

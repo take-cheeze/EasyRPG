@@ -98,19 +98,19 @@ int FTFont::GetHeight() {
 	return size + 2;
 }
 
-Bitmap* FTFont::Render(int c) {
+std::auto_ptr<Bitmap> FTFont::Render(int c) {
 	Init();
 
 	FT_Error ans = FT_Load_Char(face, c, FT_LOAD_NO_BITMAP);
     if (ans != FT_Err_Ok) {
 		Output::Error("Couldn't load FreeType character %d\n", c);
-		return NULL;
+		return std::auto_ptr<Bitmap>(NULL);
 	}
 
 	ans = FT_Render_Glyph(face->glyph, FT_RENDER_MODE_MONO);
     if (ans != FT_Err_Ok) {
 		Output::Error("Couldn't render FreeType character %d\n", c);
-		return NULL;
+		return std::auto_ptr<Bitmap>(NULL);
 	}
 
 	FT_Bitmap ft_bitmap;
@@ -123,14 +123,14 @@ Bitmap* FTFont::Render(int c) {
 
 	if (ft_bitmap.pixel_mode != FT_PIXEL_MODE_GRAY) {
 		Output::Error("FreeType character has wrong format\n", c);
-		return NULL;
+		return std::auto_ptr<Bitmap>(NULL);
 	}
 
 	const uint8* src = (const uint8*) ft_bitmap.buffer;
 	if (ft_bitmap.pitch < 0)
 		src -= ft_bitmap.rows * ft_bitmap.pitch;
 
-	Surface* bitmap = Surface::CreateSurface(ft_bitmap.width, size + 2, true);
+	std::auto_ptr<Surface> bitmap = Surface::CreateSurface(ft_bitmap.width, size + 2, true);
 	uint8* dst = (uint8*) bitmap->pixels();
 
 	const int base_line = bitmap->height() / 4;
@@ -148,7 +148,7 @@ Bitmap* FTFont::Render(int c) {
 			*q++ = (*p++ != 0) ? fg : bg;
 	}
 
-	return bitmap;
+	return std::auto_ptr<Bitmap>(bitmap.release());
 }
 
 #endif

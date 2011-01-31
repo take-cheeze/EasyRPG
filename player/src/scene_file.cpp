@@ -23,13 +23,12 @@
 #include "game_system.hpp"
 #include "game_party.hpp"
 #include "input.hpp"
-// // #include "data.hpp"
 #include "scene_file.hpp"
 #include "window_filetitle.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_File::Scene_File(const std::string& message) :
-	title_window(NULL), message(message) {
+	title_window(0, 0, 320, 32), message(message) {
 	top_index = 0;
 	index = 0;
 }
@@ -37,11 +36,10 @@ Scene_File::Scene_File(const std::string& message) :
 ////////////////////////////////////////////////////////////
 void Scene_File::Start() {
 	// Create the windows
-	title_window = new Window_FileTitle(0, 0, 320, 32);
-	title_window->Set(message);
+	title_window.Set(message);
 
 	for (int i = 0; i < 15; i++) {
-		Window_SaveFile *w = new Window_SaveFile(0, 40 + i * 64, 320, 64);
+		std::auto_ptr<Window_SaveFile> w(new Window_SaveFile(0, 40 + i * 64, 320, 64));
 		w->SetIndex(i);
 		// TODO: read party from save file
 		std::vector<Game_Actor*> party = Game_Party::GetActors();
@@ -56,15 +54,12 @@ void Scene_File::Start() {
 
 ////////////////////////////////////////////////////////////
 void Scene_File::Terminate() {
-	delete title_window;
-	for (int i = 0; (size_t) i < file_windows.size(); i++)
-		delete file_windows[i];
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_File::Refresh() {
 	for (int i = 0; (size_t) i < file_windows.size(); i++) {
-		Window_SaveFile *w = file_windows[i];
+		Window_SaveFile *w = &file_windows[i];
 		w->SetY(40 + (i - top_index) * 64);
 		w->SetActive(i == index);
 		w->SetVisible(i >= top_index && i < top_index + 3);
@@ -74,7 +69,7 @@ void Scene_File::Refresh() {
 ////////////////////////////////////////////////////////////
 void Scene_File::Update() {
 	for (int i = 0; (size_t) i < file_windows.size(); i++)
-		file_windows[i]->Update();
+		file_windows[i].Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
 		Game_System::SePlay(Main_Data::cancelSE());

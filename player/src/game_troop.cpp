@@ -17,7 +17,6 @@
 
 #include "game_interpreter.hpp"
 #include "game_troop.hpp"
-// #include "rpg_enemy.hpp"
 
 Game_Troop::Game_Troop():
 	interpreter(NULL) {

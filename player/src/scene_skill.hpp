@@ -47,11 +47,11 @@ private:
 	/// Skill to select at startup
 	int skill_index;
 	/// Displays available skills
-	Window_Skill* skill_window;
+	Window_Skill skill_window;
 	/// Displays information about the actor
-	Window_SkillStatus* skillstatus_window;
+	Window_SkillStatus skillstatus_window;
 	/// Displays description about the selected skill
-	Window_Help* help_window;
+	Window_Help help_window;
 };
 
 #endif

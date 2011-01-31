@@ -40,15 +40,10 @@
 #include "game_variables.hpp"
 #include "graphics.hpp"
 #include "input.hpp"
-/*
-#include "ldb_reader.hpp"
-#include "lmt_reader.hpp"
-*/
 #include "main_data.hpp"
 #include "options.hpp"
 #include "output.hpp"
 #include "player.hpp"
-// #include "reader.hpp"
 #include "scene_map.hpp"
 #include "util_macro.hpp"
 #include "window_command.hpp"
@@ -75,10 +70,7 @@ void Scene_Title::Start() {
 			Player::engine = Player::EngineRpg2k3;
 		}
 
-		// File Finder cant be initialized earlier because we need the RPG-version
-		#ifdef _WIN32
-		FileFinder::Init();
-		#endif
+		FileFinder::InitRtpPaths();
 	}
 
 	init = true;
@@ -115,8 +107,8 @@ void Scene_Title::Suspend() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::Terminate() {
-	delete command_window;
-	delete title;
+	command_window.reset();
+	title.reset();
 }
 
 ////////////////////////////////////////////////////////////
@@ -182,7 +174,7 @@ bool Scene_Title::CheckContinue() {
 ////////////////////////////////////////////////////////////
 void Scene_Title::CreateTitleGraphic() {
 	// Load Title Graphic
-	title = new Sprite();
+	title.reset(new Sprite());
 	title->SetBitmap(Cache::Title(Main_Data::project->getLDB().system()[17].toString().toSystem()));
 }
 
@@ -194,7 +186,7 @@ void Scene_Title::CreateCommandWindow() {
 	options.push_back(Main_Data::vocabulary(115)); // continue
 	options.push_back(Main_Data::vocabulary(117)); // quit
 
-	command_window = new Window_Command(options);
+	command_window.reset(new Window_Command(options));
 	command_window->SetX(160 - command_window->GetWidth() / 2);
 	command_window->SetY(224 - command_window->GetHeight());
 
@@ -240,7 +232,7 @@ void Scene_Title::CommandNewGame() {
 		Main_Data::game_player->Refresh();
 
 		Game_Map::Autoplay();
-		Scene::Push(new Scene_Map());
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Map()));
 	}
 }
 

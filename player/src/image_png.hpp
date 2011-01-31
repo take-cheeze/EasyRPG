@@ -15,37 +15,18 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _EASYRPG_FTFONT_H_
-#define _EASYRPG_FTFONT_H_
+#ifndef _EASYRPG_IMAGE_PNG_H_
+#define _EASYRPG_IMAGE_PNG_H_
 
 #include "system.hpp"
-#ifndef USE_SDL_TTF
+#if defined(USE_SOFT_BITMAP) || defined(USE_PIXMAN_BITMAP)
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include FT_BITMAP_H
-#include "font.hpp"
-#include "bitmap.hpp"
+#include <cstdio>
+#include "system.hpp"
 
-////////////////////////////////////////////////////////////
-/// FTFont class
-////////////////////////////////////////////////////////////
-class FTFont : public Font {
-public:
-	FTFont(std::string name, int size, bool bold, bool italic);
-	~FTFont();
-
-	int GetHeight();
-	std::auto_ptr<Bitmap> Render(int glyph);
-
-private:
-	static FT_Library library;
-	static int ft_lib_refcount;
-	FT_Face face;
-	bool ft_face_initialized;
-
-	void Init();
-};
+namespace ImagePNG {
+	void ReadPNG(FILE* stream, const void* buffer, bool transparent, int& width, int& height, void*& pixels);
+}
 
 #endif
 

@@ -30,14 +30,9 @@
 #include FT_FREETYPE_H
 #include <pixman.h>
 
-<<<<<<< HEAD:player/src/pixman_bitmap.hpp
-#include "bitmap.hpp"
-#include "surface.hpp"
-=======
 #include "bitmap.hpp"
 #include "surface.hpp"
 #include "pixel_format.hpp"
->>>>>>> master:player/src/pixman_bitmap.h
 
 ////////////////////////////////////////////////////////////
 /// PixmanBitmap class.
@@ -63,9 +58,9 @@ public:
 
 	void ToneChange(const Tone &tone);
 	void Flip(bool horizontal, bool vertical);
-	Bitmap* Resample(int scale_w, int scale_h, const Rect& src_rect);
-	Bitmap* RotateScale(double angle, int scale_w, int scale_h);
-	Bitmap* Waver(int depth, double phase);
+	std::auto_ptr<Bitmap> Resample(int scale_w, int scale_h, const Rect& src_rect);
+	std::auto_ptr<Bitmap> RotateScale(double angle, int scale_w, int scale_h);
+	std::auto_ptr<Bitmap> Waver(int depth, double phase);
 	void OpacityChange(int opacity, const Rect& dst_rect);
 	void SetTransparentColor(Color color);
 

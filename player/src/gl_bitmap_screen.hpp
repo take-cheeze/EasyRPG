@@ -13,9 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
-<<<<<<< HEAD:player/src/gl_bitmap_screen.hpp
-/////////////////////////////////////////////////////////////////////////////
-=======
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef _GL_BITMAP_SCREEN_H_
@@ -28,7 +25,13 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include <GL/gl.h>
+#if defined(USE_GLES)
+	#include <GLES/gl.h>
+#elif defined(USE_SDL)
+	#include <SDL_opengl.h>
+#else
+	#include <GL/gl.h>
+#endif
 #include "surface.hpp"
 #include "bitmap_screen.hpp"
 
@@ -37,8 +40,8 @@
 ////////////////////////////////////////////////////////////
 class GlBitmapScreen : public BitmapScreen {
 public:
-	GlBitmapScreen(Bitmap* source, bool delete_bitmap);
-	~GlBitmapScreen();
+	GlBitmapScreen(Bitmap* source);
+	GlBitmapScreen(std::auto_ptr<Bitmap> source);
 
 	void BlitScreen(int x, int y);
 	void BlitScreen(int x, int y, Rect src_rect);
@@ -66,7 +69,7 @@ protected:
 	GLuint tex;
 	GLuint bush_tex;
 	GLuint gray_tex;
-	Surface* gray_bitmap;
+	boost::scoped_ptr<Surface> gray_bitmap;
 	bool needs_bush_refresh;
 	bool needs_gray_refresh;
 };
@@ -74,4 +77,3 @@ protected:
 #endif
 
 #endif
->>>>>>> master:player/src/gl_bitmap_screen.h

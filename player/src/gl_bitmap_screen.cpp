@@ -24,8 +24,49 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <sstream>
+#include <iosfwd>
 #include "gl_bitmap_screen.hpp"
 #include "bitmap.hpp"
+
+////////////////////////////////////////////////////////////
+namespace GL {
+	// Supported GL extensions
+	bool npot_supported = false; // Non power of 2 textures supported
+
+	// Get available GL extensions
+	void InitGLExtensions();
+}
+
+#ifndef CHECK_GL_ERROR
+#define CHECK_GL_ERROR()
+#endif
+
+////////////////////////////////////////////////////////////
+void GL::InitGLExtensions() {
+	static bool glext_inited = false;
+
+	// Return if extensions were already checked
+	if (glext_inited)
+		return;
+
+	// Get a string with all extensions
+	const std::string ext_string = std::string(reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS)));
+	CHECK_GL_ERROR();
+
+	std::istringstream iss((ext_string));
+
+	std::string token;
+
+	// Iterate through all string tokens
+	while (getline(iss, token, ' ')) {
+		if (token == "GL_ARB_texture_non_power_of_two")
+			npot_supported = true;
+	}
+
+	glext_inited = true;
+}
 
 ////////////////////////////////////////////////////////////
 GlBitmapScreen::GlBitmapScreen(Bitmap* bitmap, bool delete_bitmap) :
@@ -54,7 +95,10 @@ void GlBitmapScreen::UploadBitmap(
 	GLint internal_format, int &width, int &height,
 	GLenum format, GLenum type, const GLvoid *data) {
 
-	#ifdef NON_POWER_OF_TWO
+	// TODO: Maybe a better place for putting this? Some GlUi class? GlSdlUi? GlutUi?
+	GL::InitGLExtensions();
+
+	if (GL::npot_supported) {
 		glTexImage2D(
 			GL_TEXTURE_2D,
 			0,
@@ -62,7 +106,7 @@ void GlBitmapScreen::UploadBitmap(
 			width, height, 0,
 			format, type,
 			data);
-	#else
+	} else {
 		width = PowerOfTwo(width);
 		height = PowerOfTwo(height);
 		glTexImage2D(
@@ -79,7 +123,7 @@ void GlBitmapScreen::UploadBitmap(
 			bitmap->GetWidth(), bitmap->GetHeight(),
 			format, type,
 			data);
-	#endif
+	}
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -105,7 +149,7 @@ void GlBitmapScreen::MakeBushTex() {
 	if (bush_tex == 0)
 		glGenTextures(1, &bush_tex);
 
-	uint8* bush_pixels = new uint8[h];
+	std::verts<uint8> bush_pixels(h);
 	for (int i = 0; i < h; i++)
 		bush_pixels[i] = i < h - bush_effect
 			? opacity_top_effect
@@ -113,9 +157,7 @@ void GlBitmapScreen::MakeBushTex() {
 
 	glBindTexture(GL_TEXTURE_2D, bush_tex);
 	int w = 1;
-	UploadBitmap(GL_ALPHA, w, h, GL_ALPHA, GL_UNSIGNED_BYTE, bush_pixels);
-
-	delete[] bush_pixels;
+	UploadBitmap(GL_ALPHA, w, h, GL_ALPHA, GL_UNSIGNED_BYTE, &bush_pixels.front());
 
 	needs_bush_refresh = false;
 }
@@ -187,7 +229,6 @@ void GlBitmapScreen::BlitScreen(int x, int y) {
 }
 
 ////////////////////////////////////////////////////////////
-
 void GlBitmapScreen::BlitScreen(int x, int y, Rect src_rect) {
 	if (bitmap == NULL || (opacity_top_effect <= 0 &&
 						   opacity_bottom_effect <= 0))

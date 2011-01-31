@@ -24,8 +24,6 @@
 #include <string>
 #include <map>
 #include "main_data.hpp"
-// // #include "rpg_music.hpp"
-// // #include "rpg_sound.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Game System namespace

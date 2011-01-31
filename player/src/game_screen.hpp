@@ -18,7 +18,7 @@
 #ifndef __game_screen__
 #define __game_screen__
 
-#include <map>
+#include <boost/ptr_container/ptr_map.hpp>
 #include "plane.hpp"
 #include "surface.hpp"
 #include "game_picture.hpp"
@@ -45,7 +45,7 @@ public:
 	void Update();
 
 private:
-	std::map<int,Picture*> pictures;
+	boost::ptr_map<int,Picture> pictures;
 
 	double tint_red;
 	double tint_green;

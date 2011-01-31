@@ -21,12 +21,13 @@
 #include "game_map.hpp"
 #include "game_interpreter.hpp"
 #include "game_temp.hpp"
-// #include "lmu_reader.hpp"
+#include "map_data.hpp"
 #include "main_data.hpp"
 #include "output.hpp"
 #include "util_macro.hpp"
 #include "game_system.hpp"
 #include "system.hpp"
+#include <algorithm>
 #include <cassert>
 
 ////////////////////////////////////////////////////////////
@@ -60,7 +61,7 @@ namespace {
 	int scroll_speed;
 	int encounter_steps;
 
-	Game_Interpreter* interpreter;
+	boost::scoped_ptr<Game_Interpreter> interpreter;
 	Game_Vehicle* vehicles[3];
 
 	uint8 substitutions_down[144];
@@ -91,7 +92,7 @@ void Game_Map::Init() {
 	scroll_direction = 0;
 	scroll_rest = 0;
 	scroll_speed = 0;
-	interpreter = new Game_Interpreter(0, true);
+	interpreter.reset(new Game_Interpreter(0, true));
 	encounter_steps = 0;
 
 	for (int i = 0; i < 3; i++)
@@ -108,22 +109,16 @@ void Game_Map::Init() {
 
 ////////////////////////////////////////////////////////////
 void Game_Map::Dispose() {
-	for (tEventHash::iterator i = events.begin(); i != events.end(); ++i) {
-		delete i->second;
-	}
 	events.clear();
 
 	if (Main_Data::game_screen != NULL) {
 		Main_Data::game_screen->Reset();
 	}
-
-	// delete map;
-	// map = NULL;
 }
 
 void Game_Map::Quit() {
 	Dispose();
-	delete interpreter;
+	interpreter.reset();
 }
 
 ////////////////////////////////////////////////////////////
@@ -235,17 +230,17 @@ Game_Interpreter& Game_Map::GetInterpreter() {
 
 ////////////////////////////////////////////////////////////
 void Game_Map::ScrollDown(int distance) {
-	display_y = min(display_y + distance, (Main_Data::project->getLMU().height() - 15) * 128);
+	display_y = std::min<int>(display_y + distance, (Main_Data::project->getLMU().height() - 15) * 128);
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Map::ScrollLeft(int distance) {
-	display_x = max(display_x - distance, 0);
+	display_x = std::max<int>(display_x - distance, 0);
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Map::ScrollRight(int distance) {
-	display_x = min(display_x + distance, (Main_Data::project->getLMU().height() - 20) * 128);
+	display_x = std::min<int>(display_x + distance, (Main_Data::project->getLMU().height() - 20) * 128);
 }
 
 ////////////////////////////////////////////////////////////
@@ -273,7 +268,7 @@ bool Game_Map::IsPassable(int x, int y, int d, const Game_Character* self_event)
 		}
 	}
 
-	int16 tile_id = Main_Data::project->getLMU().chipIDLw(x, y) - 10000;
+	int16 tile_id = Main_Data::project->getLMU().chipIDLw(x, y) - BLOCK_F;
 	tile_id = substitutions_up[tile_id];
 
 	int const tile_lower_id = Main_Data::project->getLMU().chipIDLw(x, y);
@@ -281,24 +276,24 @@ bool Game_Map::IsPassable(int x, int y, int d, const Game_Character* self_event)
 	if ((passages_up[tile_id] & bit) == 0)
 		return false;
 
-	if ((passages_up[tile_id] & (1 << 4)) != (1 << 4))
+	if ((passages_up[tile_id] & Passable::Above) == 0)
 		return true;
 
-	if (tile_lower_id >= 5000) {
-		tile_id = tile_lower_id - 5000;
+	if (tile_lower_id >= BLOCK_E) {
+		tile_id = tile_lower_id - BLOCK_E;
 		tile_id = substitutions_down[tile_id];
 		tile_id += 18;
 
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
 
-	} else if (tile_lower_id >= 4000) {
-		tile_id = (tile_lower_id - 4000) / 50;
-		int16 autotile_id = tile_lower_id - 4000 - tile_id * 50;
+	} else if (tile_lower_id >= BLOCK_D) {
+		tile_id = (tile_lower_id - BLOCK_D) / 50;
+		int16 autotile_id = tile_lower_id - BLOCK_D - tile_id * 50;
 
 		tile_id += 6;
 
-		if (((passages_down[tile_id] & (1 << 5)) == (1 << 5)) && (
+		if (((passages_down[tile_id] & Passable::Wall) != 0) && (
 				(autotile_id >= 20 && autotile_id <= 23) ||
 				(autotile_id >= 33 && autotile_id <= 37) ||
 				autotile_id == 42 ||
@@ -310,14 +305,14 @@ bool Game_Map::IsPassable(int x, int y, int d, const Game_Character* self_event)
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
 
-	} else if (tile_lower_id >= 3000) {
-	tile_id = (tile_lower_id - 3000) / 50 + 3;
+	} else if (tile_lower_id >= BLOCK_C) {
+		tile_id = (tile_lower_id - BLOCK_C) / 50 + 3;
 
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
 
-} else if (tile_lower_id < 3000) {
-	tile_id = tile_lower_id / 1000;
+	} else if (tile_lower_id < BLOCK_C) {
+		tile_id = tile_lower_id / 1000;
 
 		if ((passages_down[tile_id] & bit) == 0)
 			return false;
@@ -346,7 +341,7 @@ int Game_Map::GetTerrainTag(int x, int y) {
 void Game_Map::GetEventsXY(std::vector<Game_Event*>& events, int x, int y) {
 	std::vector<Game_Event*> result;
 
-	tEventHash::const_iterator i;
+	tEventHash::iterator i;
 	for (i = Game_Map::GetEvents().begin(); i != Game_Map::GetEvents().end(); i++) {
 		if (i->second->GetX() == x && i->second->GetY() == y) {
 			result.push_back(i->second);

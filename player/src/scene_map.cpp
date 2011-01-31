@@ -31,7 +31,6 @@
 #include "game_player.hpp"
 #include "game_system.hpp"
 #include "game_temp.hpp"
-// #include "rpg_system.hpp"
 #include "player.hpp"
 #include "graphics.hpp"
 #include "audio.hpp"
@@ -39,16 +38,13 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Map::Scene_Map() : 
-	spriteset(NULL),
-	message_window(NULL) {
+	spriteset(new Spriteset_Map()),
+	message_window(0, 240 - 80, 320, 80) {
 	type = Scene::Map;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Map::Start() {
-	spriteset = new Spriteset_Map();
-	message_window = new Window_Message(0, 240 - 80, 320, 80);
-
 	Main_Data::game_screen->Reset();
 	Graphics::FrameReset();
 }
@@ -56,9 +52,16 @@ void Scene_Map::Start() {
 ////////////////////////////////////////////////////////////
 void Scene_Map::Terminate() {
 	Main_Data::game_screen->Reset();
-	delete spriteset;
-	delete message_window;
 }
+
+////////////////////////////////////////////////////////////
+/*void Scene_Map::TransitionIn() {
+	Graphics::Transition((Graphics::TransitionType)Data::system.transition_in, 12);
+}
+
+void Scene_Map::TransitionOut() {
+	Graphics::Transition((Graphics::TransitionType)Data::system.transition_in, 12, true);
+}*/
 
 ////////////////////////////////////////////////////////////
 void Scene_Map::Update() {
@@ -70,11 +73,11 @@ void Scene_Map::Update() {
 	Main_Data::game_player->Update();
 	Main_Data::game_screen->Update();
 	spriteset->Update();
-	message_window->Update();
+	message_window.Update();
 	
 	if (Game_Temp::gameover) {
 		Game_Temp::gameover = false;
-		Scene::Push(new Scene_Gameover());
+		Scene::Push(std::auto_ptr<Scene>(new Scene_Gameover()));
 	}
 	
 	if (Game_Temp::to_title) {
@@ -132,11 +135,10 @@ void Scene_Map::UpdateTeleportPlayer() {
 
 	Scene::TransitionOut();
 
-	delete spriteset;
 	Main_Data::game_player->PerformTeleport();
 	Game_Map::Autoplay();
 
-	spriteset = new Spriteset_Map();
+	spriteset.reset(new Spriteset_Map());
 
 	Game_Map::Update();
 
@@ -155,13 +157,13 @@ void Scene_Map::CallBattle() {
 void Scene_Map::CallShop() {
 	Game_Temp::shop_calling = false;
 
-	Scene::Push(new Scene_Shop());
+	Scene::Push(std::auto_ptr<Scene>(new Scene_Shop()));
 }
 
 void Scene_Map::CallName() {
 	Game_Temp::name_calling = false;
 
-	Scene::Push(new Scene_Name());
+	Scene::Push(std::auto_ptr<Scene>(new Scene_Name()));
 }
 
 ////////////////////////////////////////////////////////////
@@ -177,13 +179,13 @@ void Scene_Map::CallMenu() {
 
 	// TODO: Main_Data::game_player->Straighten();
 
-	Scene::Push(new Scene_Menu());
+	Scene::Push(std::auto_ptr<Scene>(new Scene_Menu()));
 }
 
 void Scene_Map::CallSave() {
 	Game_Temp::save_calling = false;
 
-	Scene::Push(new Scene_Save());
+	Scene::Push(std::auto_ptr<Scene>(new Scene_Save()));
 }
 
 void Scene_Map::CallDebug() {

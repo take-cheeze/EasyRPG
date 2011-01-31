@@ -24,7 +24,6 @@
 #include <string>
 #include <vector>
 #include "game_interpreter.hpp"
-// #include "rpg_commonevent.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Game_CommonEvent class
@@ -36,11 +35,6 @@ public:
 	/// @param common_event_id : database common event id
 	////////////////////////////////////////////////////////
 	Game_CommonEvent(int common_event_id);
-
-	////////////////////////////////////////////////////////
-	/// Destructor.
-	////////////////////////////////////////////////////////
-	~Game_CommonEvent();
 
 	////////////////////////////////////////////////////////
 	/// Refreshes the common event.
@@ -68,7 +62,7 @@ private:
 	int common_event_id;
 
 	// Interpreter for parallel common events
-	Game_Interpreter* interpreter;
+	boost::scoped_ptr<Game_Interpreter> interpreter;
 };
 
 #endif

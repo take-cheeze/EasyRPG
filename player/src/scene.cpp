@@ -31,10 +31,10 @@
 
 ////////////////////////////////////////////////////////////
 Scene* Scene::instance;
-std::vector<Scene*> Scene::old_instances;
-std::vector<Scene*> Scene::instances;
-const char Scene::scene_names[SceneMax][12] =
-{
+boost::ptr_vector<Scene> Scene::old_instances;
+boost::ptr_vector<Scene> Scene::instances;
+boost::array<const char*, Scene::SceneMax> Scene::scene_names =
+{ {
 	"Null",
 	"Title",
 	"Map",
@@ -54,7 +54,7 @@ const char Scene::scene_names[SceneMax][12] =
 	"Gameover",
 	"Debug",
 	"Logo"
-};
+} };
 int Scene::push_pop_operation = 0;
 
 ////////////////////////////////////////////////////////////
@@ -129,14 +129,13 @@ void Scene::Update() {
 }
 
 ////////////////////////////////////////////////////////////
-void Scene::Push(Scene* new_scene, bool pop_stack_top) {
+void Scene::Push(std::auto_ptr<Scene> new_scene, bool pop_stack_top) {
 	if (pop_stack_top) {
-		old_instances.push_back(instances.back());
-		instances.pop_back();
+		old_instances.push_back(instances.pop_back().release());
 	}
 
 	instances.push_back(new_scene);
-	instance = new_scene;
+	instance = &instances.back();
 
 	push_pop_operation = 1;
 
@@ -148,13 +147,12 @@ void Scene::Push(Scene* new_scene, bool pop_stack_top) {
 
 ////////////////////////////////////////////////////////////
 void Scene::Pop() {
-	old_instances.push_back(instances.back());
-	instances.pop_back();
+	old_instances.push_back(instances.pop_back().release());
 
-	if (instances.size() == 0) {
-		Push(new Scene()); // Null-scene
+	if (instances.empty()) {
+		Push(std::auto_ptr<Scene>(new Scene())); // Null-scene
 	} else {
-		instance = instances.back();
+		instance = &instances.back();
 	}
 
 	push_pop_operation = 2;
@@ -170,12 +168,11 @@ void Scene::PopUntil(SceneType type) {
 	int count = 0;
 
 	for (int i = (int)instances.size() - 1 ; i >= 0; --i) {
-		if (instances[i]->type == type) {
+		if (instances[i].type == type) {
 			for (i = 0; i < count; ++i) {
-				old_instances.push_back(instances.back());
-				instances.pop_back();
+				old_instances.push_back(instances.pop_back().release());
 			}
-			instance = instances.back();
+			instance = &instances.back();
 			push_pop_operation = 2;
 			return;
 		}
@@ -187,7 +184,7 @@ void Scene::PopUntil(SceneType type) {
 
 ////////////////////////////////////////////////////////////
 Scene* Scene::Find(SceneType type) {
-	std::vector<Scene*>::const_reverse_iterator it;
+	boost::ptr_vector<Scene*>::reverse_iterator it;
 	for (it = instances.rbegin() ; it != instances.rend(); it++) {
 		if ((*it)->type == type) {
 			return *it;

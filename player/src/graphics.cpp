@@ -30,6 +30,9 @@
 #include "util_macro.hpp"
 #include "player.hpp"
 
+#include <boost/ptr_container/ptr_list.hpp>
+#include <boost/ptr_container/ptr_map.hpp>
+
 ////////////////////////////////////////////////////////////
 namespace Graphics {
 	bool fps_on_screen;
@@ -64,16 +67,16 @@ namespace Graphics {
 
 	struct State {
 		State() : zlist_dirty(false) {}
-		std::map<uint32, Drawable*> drawable_map;
-		std::list<ZObj*> zlist;
+		boost::ptr_map<uint32, Drawable> drawable_map;
+		boost::ptr_list<ZObj> zlist;
 		bool zlist_dirty;
 	};
-	State* state;
-	std::vector<State*> stack;
+	std::auto_ptr<State> state;
+	boost::ptr_vector<State> stack;
 	void Push();
 	void Pop();
 
-	bool SortZObj(const ZObj* first, const ZObj* second);
+	bool SortZObj(const ZObj& first, const ZObj& second);
 }
 
 ////////////////////////////////////////////////////////////
@@ -94,26 +97,13 @@ void Graphics::Init() {
 	frozen = false;
 	drawable_creation = 0;
 	drawable_id = 0;
-	state = new State();
+	state.reset(new State());
 	screen_erased = false;
 }
 
 ////////////////////////////////////////////////////////////
 void Graphics::Quit() {
-	std::map<uint32, Drawable*>::iterator it;
-	std::map<uint32, Drawable*> drawable_map_temp = state->drawable_map;
-
-	for (it = drawable_map_temp.begin(); it != drawable_map_temp.end(); it++) {
-		delete it->second;
-	}
-
 	state->drawable_map.clear();
-
-	std::list<ZObj*>::iterator it_zlist;
-	for (it_zlist = state->zlist.begin(); it_zlist != state->zlist.end(); it_zlist++) {
-		delete *it_zlist;
-	}
-
 	state->zlist.clear();
 
 	frozen_screen.reset();
@@ -275,9 +265,9 @@ void Graphics::DrawFrame() {
 
 	DisplayUi->CleanDisplay();
 
-	std::list<ZObj*>::iterator it_zlist;
+	boost::ptr_list<ZObj>::iterator it_zlist;
 	for (it_zlist = state->zlist.begin(); it_zlist != state->zlist.end(); it_zlist++) {
-		state->drawable_map[(*it_zlist)->GetId()]->Draw((*it_zlist)->GetZ());
+		state->drawable_map.find(it_zlist->GetId())->second->Draw(it_zlist->GetZ());
 	}
 
 	if (overlay_visible) {
@@ -297,12 +287,12 @@ void Graphics::DrawOverlay() {
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap* Graphics::SnapToBitmap() {
+std::auto_ptr<Bitmap> Graphics::SnapToBitmap() {
 	DisplayUi->BeginScreenCapture();
 
-	std::list<ZObj*>::iterator it_zlist;
+	boost::ptr_list<ZObj>::iterator it_zlist;
 	for (it_zlist = state->zlist.begin(); it_zlist != state->zlist.end(); it_zlist++) {
-		state->drawable_map[(*it_zlist)->GetId()]->Draw((*it_zlist)->GetZ());
+		state->drawable_map.find(it_zlist->GetId())->second->Draw(it_zlist->GetZ());
 	}
 
 	return DisplayUi->EndScreenCapture();
@@ -535,11 +525,11 @@ void Graphics::SetFrameCount(int nframecount) {
 
 ///////////////////////////////////////////////////////////
 void Graphics::RegisterDrawable(uint32 ID, Drawable* drawable) {
-	state->drawable_map[ID] = drawable;
+	state->drawable_map.insert(ID, drawable);
 }
 
 void Graphics::RemoveDrawable(uint32 ID) {
-	std::map<uint32, Drawable*>::iterator it = state->drawable_map.find(ID);
+	boost::ptr_map<uint32, Drawable>::iterator it = state->drawable_map.find(ID);
 	state->drawable_map.erase(it);
 }
 
@@ -566,12 +556,11 @@ void Graphics::RemoveZObj(uint32 ID) {
 }
 
 void Graphics::RemoveZObj(uint32 ID, bool multiz) {
-	std::vector<std::list<ZObj*>::iterator> to_erase;
+	std::vector<boost::ptr_list<ZObj>::iterator> to_erase;
 
-	std::list<ZObj*>::iterator it_zlist;
+	boost::ptr_list<ZObj>::iterator it_zlist;
 	for (it_zlist = state->zlist.begin(); it_zlist != state->zlist.end(); it_zlist++) {
-		if ((*it_zlist)->GetId() == ID) {
-			delete *it_zlist;
+		if (it_zlist->GetId() == ID) {
 			to_erase.push_back(it_zlist);
 			if (!multiz) break;
 		}
@@ -589,23 +578,21 @@ void Graphics::UpdateZObj(ZObj* zobj, int z) {
 }
 
 ///////////////////////////////////////////////////////////
-inline bool Graphics::SortZObj(const ZObj* first, const ZObj* second) {
-	if (first->GetZ() < second->GetZ()) return true;
-	else if (first->GetZ() > second->GetZ()) return false;
-	else return first->GetCreation() < second->GetCreation();
+inline bool Graphics::SortZObj(const ZObj& first, const ZObj& second) {
+	if (first.GetZ() < second.GetZ()) return true;
+	else if (first.GetZ() > second.GetZ()) return false;
+	else return first.GetCreation() < second.GetCreation();
 }
 
 ///////////////////////////////////////////////////////////
 void Graphics::Push() {
 	stack.push_back(state);
-	state = new State();
+	state.reset(new State());
 }
 
 ///////////////////////////////////////////////////////////
 void Graphics::Pop() {
 	if (stack.size() > 0) {
-		delete state;
-		state = stack.back();
-		stack.pop_back();
+		state.reset(stack.pop_back().release());
 	}
 }

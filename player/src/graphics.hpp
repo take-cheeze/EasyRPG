@@ -65,7 +65,7 @@ namespace Graphics {
 	/// Get a bitmap with the actual contents of the screen.
 	/// @return screen contents
 	////////////////////////////////////////////////////////
-	Bitmap* SnapToBitmap();
+	std::auto_ptr<Bitmap> SnapToBitmap();
 
 	/// Transition types.
 	enum TransitionType {

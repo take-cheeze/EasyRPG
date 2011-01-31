@@ -30,19 +30,13 @@ Game_CommonEvent::Game_CommonEvent(int common_event_id) :
 }
 
 ////////////////////////////////////////////////////////////
-Game_CommonEvent::~Game_CommonEvent() {
-	delete interpreter;
-}
-
-////////////////////////////////////////////////////////////
 void Game_CommonEvent::Refresh() {
 	if ( (GetTrigger() == 2) && ( Game_Switches[GetSwitchId()] ) ) {
 		if (interpreter == NULL) {
-			interpreter = new Game_Interpreter();
+			interpreter.reset(new Game_Interpreter());
 		}
 	} else {
-		delete interpreter;
-		interpreter = NULL;
+		interpreter.reset();
 	}
 }
 

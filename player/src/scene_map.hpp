@@ -38,6 +38,8 @@ public:
 	void Start();
 	void Update();
 	void Terminate();
+//	void TransitionIn();
+//	void TransitionOut();
 
 	void CallBattle();
 	void CallShop();
@@ -46,8 +48,8 @@ public:
 	void CallSave();
 	void CallDebug();
 	
-	Spriteset_Map* spriteset;
-	Window_Message* message_window;
+	boost::scoped_ptr<Spriteset_Map> spriteset;
+	Window_Message message_window;
 
 private:
 	void UpdateTeleportPlayer();

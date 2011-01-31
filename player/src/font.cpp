@@ -62,7 +62,7 @@ bool Font::Exists(const std::string& name) {
 /// Factory
 ////////////////////////////////////////////////////////////
 Font* Font::CreateFont(const std::string& _name, int size, bool bold, bool italic) {
-	const std::string& name = _name.empty() ? default_name : name;
+	const std::string& name = _name.empty() ? default_name : _name;
 	if (size == 0)
 		size = default_size;
 
@@ -86,11 +86,6 @@ Font* Font::CreateFont(const std::string& _name, int size, bool bold, bool itali
 /// Cleanup
 ////////////////////////////////////////////////////////////
 void Font::Dispose() {
-	/*
-	std::vector<Font*>::const_iterator it;
-	for (it = fonts.begin(); it != fonts.end(); it++)
-		delete *it;
 	fonts.clear();
-	*/
 }
 

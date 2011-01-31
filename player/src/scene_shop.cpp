@@ -28,47 +28,36 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Shop::Scene_Shop() :
-	help_window(NULL),
-	buy_window(NULL),
-	party_window(NULL),
-	status_window(NULL),
-	gold_window(NULL),
-	sell_window(NULL),
-	number_window(NULL),
-	empty_window(NULL),
-	empty_window2(NULL),
-	shop_window(NULL) {
+	help_window(0, 0, 320, 32),
+	buy_window(0, 32, 184, 128),
+	party_window(184, 32, 136, 48),
+	status_window(184, 80, 136, 48),
+	gold_window(184, 128, 136, 32),
+	sell_window(0, 32, 320, 128),
+	number_window(0, 32, 184, 128),
+	empty_window(0, 32, 320, 128),
+	empty_window2(0, 32, 184, 128),
+	shop_window(0, 160, 320, 80) {
 	Scene::type = Scene::Shop;
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Shop::Start() {
-	shop_window = new Window_Shop(0, 160, 320, 80);
-	help_window = new Window_Help(0, 0, 320, 32);
-	gold_window = new Window_Gold(184, 128, 136, 32);
-	empty_window = new Window_Base(0, 32, 320, 128);
-	empty_window2 = new Window_Base(0, 32, 184, 128);
-	buy_window = new Window_ShopBuy(0, 32, 184, 128);
-	party_window = new Window_ShopParty(184, 32, 136, 48);
-	sell_window = new Window_ShopSell(0, 32, 320, 128);
-	status_window = new Window_ShopStatus(184, 80, 136, 48);
-	number_window = new Window_ShopNumber(0, 32, 184, 128);
+	buy_window.SetActive(false);
+	buy_window.SetVisible(false);
+	buy_window.SetHelpWindow(&help_window);
 
-	buy_window->SetActive(false);
-	buy_window->SetVisible(false);
-	buy_window->SetHelpWindow(help_window);
-
-	sell_window->SetActive(false);
-	sell_window->SetVisible(false);
-	sell_window->SetHelpWindow(help_window);
+	sell_window.SetActive(false);
+	sell_window.SetVisible(false);
+	sell_window.SetHelpWindow(&help_window);
 	
-	number_window->SetActive(false);
-	number_window->SetVisible(false);
+	number_window.SetActive(false);
+	number_window.SetVisible(false);
 
-	status_window->SetVisible(false);
-	sell_window->Refresh();
-	sell_window->SetIndex(0);
-	sell_window->SetActive(true);
+	status_window.SetVisible(false);
+	sell_window.Refresh();
+	sell_window.SetIndex(0);
+	sell_window.SetActive(true);
 
 	Game_Temp::shop_transaction = false;
 	timer = 0;
@@ -76,47 +65,37 @@ void Scene_Shop::Start() {
 	if (Game_Temp::shop_buys && Game_Temp::shop_sells) {
 		SetMode(BuySellLeave);
 	} else if (Game_Temp::shop_buys) {
-		shop_window->SetChoice(Buy);
+		shop_window.SetChoice(Buy);
 		SetMode(Buy);
 	} else {
-		shop_window->SetChoice(Sell);
+		shop_window.SetChoice(Sell);
 		SetMode(Sell);
 	}
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Shop::Terminate() {
-	delete shop_window;
-	delete help_window;
-	delete gold_window;
-	delete empty_window;
-	delete empty_window2;
-	delete buy_window;
-	delete party_window;	
-	delete sell_window;
-	delete status_window;
-	delete number_window;
 }
 
 ////////////////////////////////////////////////////////////
-static void Enable(Window* window, bool state) {
-	window->SetVisible(state);
-	window->SetActive(state);
+static void Enable(Window& window, bool state) {
+	window.SetVisible(state);
+	window.SetActive(state);
 }
 
 void Scene_Shop::SetMode(int nmode) {
 	mode = nmode;
-	help_window->SetText("");
+	help_window.SetText("");
 
 	// Central panel
 	switch (mode) {
 		case BuySellLeave:
 		case BuySellLeave2:
-			empty_window->SetVisible(true);
+			empty_window.SetVisible(true);
 			Enable(sell_window, false);
 			break;
 		case Sell:
-			empty_window->SetVisible(false);
+			empty_window.SetVisible(false);
 			Enable(sell_window, true);
 			break;
 		case Buy:
@@ -124,7 +103,7 @@ void Scene_Shop::SetMode(int nmode) {
 		case SellHowMany:
 		case Bought:
 		case Sold:
-			empty_window->SetVisible(false);
+			empty_window.SetVisible(false);
 			Enable(sell_window, false);
 			break;
 	}
@@ -134,18 +113,18 @@ void Scene_Shop::SetMode(int nmode) {
 		case BuySellLeave:
 		case BuySellLeave2:
 		case Sell:
-			party_window->SetVisible(false);
-			status_window->SetVisible(false);
-			gold_window->SetVisible(false);
+			party_window.SetVisible(false);
+			status_window.SetVisible(false);
+			gold_window.SetVisible(false);
 			break;
 		case Buy:
 		case BuyHowMany:
 		case SellHowMany:
 		case Bought:
 		case Sold:
-			party_window->SetVisible(true);
-			status_window->SetVisible(true);
-			gold_window->SetVisible(true);
+			party_window.SetVisible(true);
+			status_window.SetVisible(true);
+			gold_window.SetVisible(true);
 			break;
 	}
 
@@ -156,17 +135,17 @@ void Scene_Shop::SetMode(int nmode) {
 		case Sell:
 			Enable(buy_window, false);
 			Enable(number_window, false);
-			empty_window2->SetVisible(false);
+			empty_window2.SetVisible(false);
 			break;
 		case Buy:
-			buy_window->Refresh();
+			buy_window.Refresh();
 			Enable(buy_window, true);
 			Enable(number_window, false);
-			empty_window2->SetVisible(false);
+			empty_window2.SetVisible(false);
 			break;
 		case BuyHowMany:
 		case SellHowMany:
-			number_window->Refresh();
+			number_window.Refresh();
 			Enable(buy_window, false);
 			Enable(number_window, true);
 			break;
@@ -174,22 +153,22 @@ void Scene_Shop::SetMode(int nmode) {
 		case Sold:
 			Enable(buy_window, false);
 			Enable(number_window, false);
-			empty_window2->SetVisible(true);
+			empty_window2.SetVisible(true);
 
 			timer = DEFAULT_FPS;
 			break;
 	}
 
-	shop_window->SetMode(mode);
+	shop_window.SetMode(mode);
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Shop::Update() {
-	buy_window->Update();
-	sell_window->Update();
-	shop_window->Update();
-	number_window->Update();
-	party_window->Update();
+	buy_window.Update();
+	sell_window.Update();
+	shop_window.Update();
+	number_window.Update();
+	party_window.Update();
 
 	switch (mode) {
 		case BuySellLeave:
@@ -227,10 +206,10 @@ void Scene_Shop::UpdateCommandSelection() {
 		Game_System::SePlay(Main_Data::cancelSE());
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		switch (shop_window->GetChoice()) {
+		switch (shop_window.GetChoice()) {
 			case Buy:
 			case Sell:
-				SetMode(shop_window->GetChoice());
+				SetMode(shop_window.GetChoice());
 				break;
 			case Leave:
 				Scene::Pop();
@@ -240,8 +219,8 @@ void Scene_Shop::UpdateCommandSelection() {
 }
 
 void Scene_Shop::UpdateBuySelection() {
-	status_window->SetItemId(buy_window->GetItemId());
-	party_window->SetItemId(buy_window->GetItemId());
+	status_window.SetItemId(buy_window.GetItemId());
+	party_window.SetItemId(buy_window.GetItemId());
 
 	if (Input::IsTriggered(Input::CANCEL)) {
 		Game_System::SePlay(Main_Data::cancelSE());
@@ -251,10 +230,10 @@ void Scene_Shop::UpdateBuySelection() {
 			Scene::Pop();
 		}
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		int item_id = buy_window->GetItemId();
+		int item_id = buy_window.GetItemId();
 
 		//checks the money and number of items possessed before buy
-		if (buy_window->CheckEnable(item_id)) {
+		if (buy_window.CheckEnable(item_id)) {
 			Game_System::SePlay(Main_Data::decisionSE());
 
 			RPG::Item const& item = Main_Data::item(item_id);
@@ -265,7 +244,7 @@ void Scene_Shop::UpdateBuySelection() {
 			} else {
 				max = Game_Party::GetGold() / item[5].to<int>();
 			}
-			number_window->SetData(item_id, max, item[5].to<int>());
+			number_window.SetData(item_id, max, item[5].to<int>());
 
 			SetMode(BuyHowMany);
 		}
@@ -284,14 +263,14 @@ void Scene_Shop::UpdateSellSelection() {
 			Scene::Pop();
 		}
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		int item_id = sell_window->GetItemId();
-		status_window->SetItemId(item_id);
-		party_window->SetItemId(item_id);
+		int item_id = sell_window.GetItemId();
+		status_window.SetItemId(item_id);
+		party_window.SetItemId(item_id);
 
 		if (item_id > 0 && Main_Data::item(item_id)[5].to<int>() > 0) {
 			RPG::Item const& item = Main_Data::item(item_id);
 			Game_System::SePlay(Main_Data::decisionSE());
-			number_window->SetData(item_id, Game_Party::ItemNumber(item_id), item[5].to<int>());
+			number_window.SetData(item_id, Game_Party::ItemNumber(item_id), item[5].to<int>());
 			SetMode(SellHowMany);
 		}
 		else {
@@ -303,7 +282,7 @@ void Scene_Shop::UpdateSellSelection() {
 void Scene_Shop::UpdateNumberInput() {
 	if (Input::IsTriggered(Input::CANCEL)) {
 		Game_System::SePlay(Main_Data::cancelSE());
-		switch (shop_window->GetChoice()) {
+		switch (shop_window.GetChoice()) {
 		case Buy:
 			SetMode(Buy); break;
 		case Sell:
@@ -311,22 +290,22 @@ void Scene_Shop::UpdateNumberInput() {
 		}
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		int item_id;
-		switch (shop_window->GetChoice()) {
+		switch (shop_window.GetChoice()) {
 		case Buy:
-			item_id = buy_window->GetItemId();
-			Game_Party::LoseGold(number_window->GetTotal());
-			Game_Party::GainItem(item_id, number_window->GetNumber());
-			gold_window->Refresh();
-			buy_window->Refresh();
-			status_window->Refresh();
+			item_id = buy_window.GetItemId();
+			Game_Party::LoseGold(number_window.GetTotal());
+			Game_Party::GainItem(item_id, number_window.GetNumber());
+			gold_window.Refresh();
+			buy_window.Refresh();
+			status_window.Refresh();
 			SetMode(Bought); break;
 		case Sell:
-			item_id = sell_window->GetItemId();
-			Game_Party::GainGold(number_window->GetTotal());
-			Game_Party::LoseItem(item_id, number_window->GetNumber());
-			gold_window->Refresh();
-			sell_window->Refresh();
-			status_window->Refresh();
+			item_id = sell_window.GetItemId();
+			Game_Party::GainGold(number_window.GetTotal());
+			Game_Party::LoseItem(item_id, number_window.GetNumber());
+			gold_window.Refresh();
+			sell_window.Refresh();
+			status_window.Refresh();
 			SetMode(Sold); break;
 		}
 		Game_System::SePlay(Main_Data::decisionSE());

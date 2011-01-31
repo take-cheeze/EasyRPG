@@ -23,8 +23,9 @@
 ////////////////////////////////////////////////////////////
 #include <vector>
 #include "game_character.hpp"
-// #include "rpg_event.hpp"
 #include "game_interpreter.hpp"
+
+#include <boost/scoped_ptr.hpp>
 
 ////////////////////////////////////////////////////////////
 /// Game_Event class
@@ -89,7 +90,7 @@ private:
 	bool through;
 	RPG::EventPage const* page;
 	rpg2k::structure::Event list;
-	Game_Interpreter* interpreter;
+	boost::scoped_ptr<Game_Interpreter> interpreter;
 };
 
 #endif

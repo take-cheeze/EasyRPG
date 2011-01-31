@@ -44,9 +44,9 @@ public:
 
 private:
 	/// Displays available items
-	Window_Keyboard* kbd_window;
-	Window_Name* name_window;
-	Window_Face* face_window;
+	Window_Keyboard kbd_window;
+	Window_Name name_window;
+	Window_Face face_window;
 	/// index of item selected on startup
 };
 

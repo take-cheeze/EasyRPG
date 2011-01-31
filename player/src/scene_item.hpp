@@ -43,9 +43,9 @@ public:
 
 private:
 	/// Displays description about the selected item
-	Window_Help* help_window;
+	Window_Help help_window;
 	/// Displays available items
-	Window_Item* item_window;
+	Window_Item item_window;
 	/// index of item selected on startup
 	int item_index;
 };
