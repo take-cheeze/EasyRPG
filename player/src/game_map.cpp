@@ -21,7 +21,6 @@
 #include "game_map.hpp"
 #include "game_interpreter.hpp"
 #include "game_temp.hpp"
-// #include "lmu_reader.h"
 #include "map_data.hpp"
 #include "main_data.hpp"
 #include "output.hpp"
@@ -62,7 +61,7 @@ namespace {
 	int scroll_speed;
 	int encounter_steps;
 
-	Game_Interpreter* interpreter;
+	boost::scoped_ptr<Game_Interpreter> interpreter;
 	Game_Vehicle* vehicles[3];
 
 	uint8 substitutions_down[144];
@@ -93,7 +92,7 @@ void Game_Map::Init() {
 	scroll_direction = 0;
 	scroll_rest = 0;
 	scroll_speed = 0;
-	interpreter = new Game_Interpreter(0, true);
+	interpreter.reset(new Game_Interpreter(0, true));
 	encounter_steps = 0;
 
 	for (int i = 0; i < 3; i++)
@@ -110,22 +109,16 @@ void Game_Map::Init() {
 
 ////////////////////////////////////////////////////////////
 void Game_Map::Dispose() {
-	for (tEventHash::iterator i = events.begin(); i != events.end(); ++i) {
-		delete i->second;
-	}
 	events.clear();
 
 	if (Main_Data::game_screen != NULL) {
 		Main_Data::game_screen->Reset();
 	}
-
-	// delete map;
-	// map = NULL;
 }
 
 void Game_Map::Quit() {
 	Dispose();
-	delete interpreter;
+	interpreter.reset();
 }
 
 ////////////////////////////////////////////////////////////
@@ -348,7 +341,7 @@ int Game_Map::GetTerrainTag(int x, int y) {
 void Game_Map::GetEventsXY(std::vector<Game_Event*>& events, int x, int y) {
 	std::vector<Game_Event*> result;
 
-	tEventHash::const_iterator i;
+	tEventHash::iterator i;
 	for (i = Game_Map::GetEvents().begin(); i != Game_Map::GetEvents().end(); i++) {
 		if (i->second->GetX() == x && i->second->GetY() == y) {
 			result.push_back(i->second);

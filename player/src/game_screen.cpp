@@ -34,12 +34,6 @@ Game_Screen::~Game_Screen()
 
 void Game_Screen::Reset()
 {
-	std::map<int, Picture*>::iterator it;
-
-	for (it = pictures.begin(); it != pictures.end(); ++it) {
-		delete it->second;
-	}
-
 	pictures.clear();
 
 	tint_red = 0;
@@ -81,10 +75,10 @@ void Game_Screen::Reset()
 }
 
 Picture* Game_Screen::GetPicture(int id) {
-	Picture*& p = pictures[id];
-	if (p == NULL)
-		p = new Picture(id);
-	return p;
+	boost::ptr_map<int,Picture>::iterator p = pictures.find(id);
+	if (p == pictures.end())
+		return pictures.insert(id, new Picture(id)).first->second;
+	return p->second;
 }
 
 void Game_Screen::TintScreen(int r, int g, int b, int s, int tenths) {
@@ -335,7 +329,7 @@ void Game_Screen::Update() {
 			shake_duration--;
 	}
 
-	std::map<int,Picture*>::const_iterator it;
+	boost::ptr_map<int,Picture>::iterator it;
 	for (it = pictures.begin(); it != pictures.end(); it++)
 		it->second->Update();
 

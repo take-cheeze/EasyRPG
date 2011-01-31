@@ -39,23 +39,16 @@ PixmanBitmapScreen::PixmanBitmapScreen(std::auto_ptr<Bitmap> bitmap) :
 
 ////////////////////////////////////////////////////////////
 void PixmanBitmapScreen::BlitScreen(int x, int y) {
-	if (bitmap == NULL || opacity_top_effect <= 0)
-		return;
-
-	Refresh();
-
-	x -= origin_x;
-	y -= origin_y;
-
-	BlitScreenIntern(x, y, bitmap_effects->GetRect());
+	BlitScreen(x, y, Rect(0, 0, src_rect_effect.width, src_rect_effect.height));
 }
 
 ////////////////////////////////////////////////////////////
 void PixmanBitmapScreen::BlitScreen(int x, int y, Rect src_rect) {
-	if (bitmap == NULL || opacity_top_effect <= 0)
+	if (bitmap == NULL || (opacity_top_effect <= 0 && opacity_bottom_effect <= 0))
 		return;
 
-	Refresh();
+	src_rect = src_rect_effect.GetSubRect(src_rect);
+	Refresh(src_rect);
 
 	if (bitmap_effects == NULL) return;
 
@@ -67,10 +60,11 @@ void PixmanBitmapScreen::BlitScreen(int x, int y, Rect src_rect) {
 
 ////////////////////////////////////////////////////////////
 void PixmanBitmapScreen::BlitScreenTiled(Rect src_rect, Rect dst_rect) {
-	if (bitmap == NULL || opacity_top_effect <= 0)
+	if (bitmap == NULL || (opacity_top_effect <= 0 && opacity_bottom_effect <= 0))
 		return;
 
-	Refresh();
+	src_rect = src_rect_effect.GetSubRect(src_rect);
+	Refresh(src_rect);
 
 	int x1 = dst_rect.x + dst_rect.width;
 	int y1 = dst_rect.y + dst_rect.height;
@@ -92,40 +86,58 @@ void PixmanBitmapScreen::BlitScreenIntern(int x, int y, Rect src_rect) {
 }
 
 ////////////////////////////////////////////////////////////
-void PixmanBitmapScreen::Refresh() {
+void PixmanBitmapScreen::Refresh(Rect& rect) {
 	origin_x = 0;
 	origin_y = 0;
 
-	if (!needs_refresh)
+	if (!needs_refresh && bitmap_effects != NULL && rect == bitmap_effects_src_rect) {
+		rect = bitmap_effects->GetRect();
 		return;
+	}
 
+	bitmap_effects_src_rect = rect;
 	needs_refresh = false;
 
 	if (bitmap.get() == NULL)
 		return;
 
-	std::auto_ptr<Surface> surface_effects = Surface::CreateSurface(src_rect_effect.width, src_rect_effect.height, true);
+	rect.Adjust(bitmap->GetWidth(), bitmap->GetHeight());
 
-	src_rect_effect.Adjust(bitmap->GetWidth(), bitmap->GetHeight());
-
-	if (src_rect_effect.IsOutOfBounds(bitmap->GetWidth(), bitmap->GetHeight()))
+	if (rect.IsOutOfBounds(bitmap->GetWidth(), bitmap->GetHeight()))
 		return;
 
-	surface_effects->Blit(0, 0, bitmap.get(), src_rect_effect, 255);
+	if (bitmap_effects != NULL) {
+		delete bitmap_effects;
+		bitmap_effects = NULL;
+	}
+
+	std::auto_ptr<Surface> surface_effects = Surface::CreateSurface(src_rect_effect.width, src_rect_effect.height, true);
+
+	surface_effects->Blit(0, 0, bitmap, rect, 255);
 	surface_effects->ToneChange(tone_effect);
 	surface_effects->Flip(flipx_effect, flipy_effect);
 
 	if (opacity_top_effect < 255 && bush_effect < surface_effects->GetHeight()) {
-		Rect src_rect(0, 0, surface_effects->GetWidth(), surface_effects->GetHeight() - bush_effect);
+		Rect src_rect = src_rect_effect;
+		src_rect.height -= bush_effect;
+		src_rect.x -= rect.x - src_rect_effect.x;
+		src_rect.y -= rect.y - src_rect_effect.y;
+		src_rect.Adjust(rect.width, rect.height);
 		surface_effects->OpacityChange(opacity_top_effect, src_rect);
 	}
 
 	if (opacity_bottom_effect < 255 && bush_effect > 0) {
-		Rect src_rect(0, surface_effects->GetHeight() - bush_effect, surface_effects->GetWidth(), bush_effect);
-		surface_effects->OpacityChange(opacity_bottom_effect / 2, src_rect);
+		Rect src_rect = src_rect_effect;
+		src_rect.y += src_rect_effect.height - bush_effect;
+		src_rect.height = bush_effect;
+		src_rect.x -= rect.x - src_rect_effect.x;
+		src_rect.y -= rect.y - src_rect_effect.y;
+		src_rect.Adjust(rect.width, rect.height);
+		surface_effects->OpacityChange(opacity_bottom_effect, src_rect);
 	}
 
 	bitmap_effects.reset(surface_effects.release());
+	rect = bitmap_effects->GetRect();
 
 	if (zoom_x_effect == 1.0 && zoom_y_effect == 1.0 && angle_effect == 0.0 && waver_effect_depth == 0)
 		return;
@@ -145,6 +157,7 @@ void PixmanBitmapScreen::Refresh() {
 	}
 
 	bitmap_effects.reset(fx2.release());
+	rect = bitmap_effects->GetRect();
 
 	if (waver_effect_depth == 0)
 		return;
@@ -152,6 +165,7 @@ void PixmanBitmapScreen::Refresh() {
 	fx2 = bitmap_effects->Waver(waver_effect_depth, waver_effect_phase);
 
 	bitmap_effects.reset(fx2.release());
+	rect = bitmap_effects->GetRect();
 }
 
 #endif

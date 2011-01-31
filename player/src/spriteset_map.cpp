@@ -40,7 +40,7 @@ Spriteset_Map::Spriteset_Map() {
 	fog.reset(new Plane());
 	fog->SetZ(3000);
 
-	tEventHash events = Game_Map::GetEvents();
+	tEventHash& events = Game_Map::GetEvents();
 	for (tEventHash::iterator i = events.begin(); i != events.end(); i++) {
 		std::auto_ptr<Sprite_Character> sprite(new Sprite_Character(i->second));
 		character_sprites.push_back(sprite);

@@ -40,15 +40,10 @@
 #include "game_variables.hpp"
 #include "graphics.hpp"
 #include "input.hpp"
-/*
-#include "ldb_reader.hpp"
-#include "lmt_reader.hpp"
-*/
 #include "main_data.hpp"
 #include "options.hpp"
 #include "output.hpp"
 #include "player.hpp"
-// #include "reader.hpp"
 #include "scene_map.hpp"
 #include "util_macro.hpp"
 #include "window_command.hpp"

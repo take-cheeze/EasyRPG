@@ -22,7 +22,6 @@
 #include <string>
 #include <vector>
 #include "game_character.hpp"
-// #include "rpg_eventcommand.hpp"
 #include "system.hpp"
 
 ////////////////////////////////////////////////////////////
@@ -59,7 +58,7 @@ private:
 	unsigned int event_id;
 	int wait_count;
 
-	Game_Interpreter* child_interpreter;
+	boost::scoped_ptr<Game_Interpreter> child_interpreter;
 	bool (Game_Interpreter::*continuation)();
 
 	rpg2k::structure::Event list;

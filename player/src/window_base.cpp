@@ -22,7 +22,6 @@
 #include <sstream>
 #include "window_base.hpp"
 #include "cache.hpp"
-// #include "data.hpp"
 #include "game_system.hpp"
 
 ////////////////////////////////////////////////////////////

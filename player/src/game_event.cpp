@@ -48,7 +48,6 @@ Game_Event::Game_Event(int map_id, const RPG::Event& event) :
 
 ////////////////////////////////////////////////////////////
 Game_Event::~Game_Event() {
-	delete interpreter;
 }
 
 ////////////////////////////////////////////////////////////
@@ -69,8 +68,7 @@ void Game_Event::Setup(RPG::EventPage const& new_page) {
 		through = true;
 		trigger = -1;
 		// list.clear();
-		delete interpreter;
-		interpreter = NULL;
+		interpreter.reset();
 		return;
 	}
 	character_name = (*page)[21].toString().toSystem();
@@ -110,11 +108,8 @@ void Game_Event::Setup(RPG::EventPage const& new_page) {
 	trigger = (*page)[33].to<int>();
 	list = (*page)[52].toEvent();
 	
-	// Free resources if needed
-	delete interpreter;
-	interpreter = NULL;
 	if (trigger == rpg2k::EventStart::PARALLEL /* TriggerParallelProcess */) {
-		interpreter = new Game_Interpreter();
+		interpreter.reset(new Game_Interpreter());
 	}
 	CheckEventTriggerAuto();
 }

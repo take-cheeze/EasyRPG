@@ -24,7 +24,6 @@
 #include <sstream>
 #include <string>
 #include "main_data.hpp"
-// // #include "rpg_moveroute.hpp"
 
 class Game_Event;
 class Game_Player;
@@ -263,7 +262,7 @@ protected:
 	bool move_route_forcing;
 	bool through;
 	int animation_id;
-	
+
 	RPG::MoveRoute const* move_route;
 	RPG::MoveRoute const* original_move_route;
 	int move_route_index;

@@ -24,7 +24,6 @@
 #include "game_player.hpp"
 #include "game_switches.hpp"
 #include "game_system.hpp"
-// #include "lmu_chunks.hpp"
 #include "main_data.hpp"
 #include "util_macro.hpp"
 #include <rpg2k/Stream.hxx>

@@ -25,9 +25,10 @@
 #include <string>
 #include "game_event.hpp"
 #include "game_vehicle.hpp"
-// #include "rpg_encounter.hpp"
 
-typedef std::map<int, Game_Event*> tEventHash;
+#include <boost/ptr_container/ptr_map.hpp>
+
+typedef boost::ptr_map<int, Game_Event> tEventHash;
 ////////////////////////////////////////////////////////////
 /// Game_Map namespace
 ////////////////////////////////////////////////////////////

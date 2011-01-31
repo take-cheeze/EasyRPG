@@ -86,11 +86,6 @@ Font* Font::CreateFont(const std::string& _name, int size, bool bold, bool itali
 /// Cleanup
 ////////////////////////////////////////////////////////////
 void Font::Dispose() {
-	/*
-	std::vector<Font*>::const_iterator it;
-	for (it = fonts.begin(); it != fonts.end(); it++)
-		delete *it;
 	fonts.clear();
-	*/
 }
 

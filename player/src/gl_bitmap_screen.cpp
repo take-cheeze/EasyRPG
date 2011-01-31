@@ -24,16 +24,11 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-<<<<<<< HEAD
-#include "gl_bitmap_screen.hpp"
-#include "bitmap.hpp"
-=======
 #include <string>
 #include <sstream>
 #include <iosfwd>
-#include "gl_bitmap_screen.h"
-#include "bitmap.h"
->>>>>>> master
+#include "gl_bitmap_screen.hpp"
+#include "bitmap.hpp"
 
 ////////////////////////////////////////////////////////////
 namespace GL {

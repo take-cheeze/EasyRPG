@@ -25,32 +25,29 @@
 
 ////////////////////////////////////////////////////////////
 namespace {
-	std::vector<Game_Actor*> data;
+	boost::ptr_map<int,Game_Actor> data;
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Actors::Init() {
-	data.resize(Main_Data::project->getLDB().character().rbegin()->first + 1);
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Actors::Dispose() {
-	for (size_t i = 0; i < data.size(); i++) {
-		delete data[i];
-	}
 	data.clear();
 }
 
 ////////////////////////////////////////////////////////////
 Game_Actor* Game_Actors::GetActor(int actor_id) {
+	boost::ptr_map<int,Game_Actor>::iterator it = data.find(actor_id);
 	if (!ActorExists(actor_id)) {
 		Output::Warning("Actor id %d is invalid.", actor_id);
 		return NULL;
 	}
-	else if (!data[actor_id])
-		data[actor_id] = new Game_Actor(actor_id);
+	else if (it == data.end())
+		return data.insert(actor_id, new Game_Actor(actor_id)).first->second;
 
-	return data[actor_id];
+	return it->second;
 }
 
 ////////////////////////////////////////////////////////////
