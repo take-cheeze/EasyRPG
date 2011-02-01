@@ -64,8 +64,8 @@ public:
 	void SubstituteUp(int old_id, int new_id);
 
 private:
-	boost::scoped_ptr<TilemapLayer> layer_down;
-	boost::scoped_ptr<TilemapLayer> layer_up;
+	TilemapLayer layer_down;
+	TilemapLayer layer_up;
 };
 
 #endif

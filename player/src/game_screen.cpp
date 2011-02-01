@@ -197,7 +197,7 @@ static const uint8 rain_image[] = {
 void Game_Screen::InitWeather() {
 	if (!weather_plane) {
 		weather_plane.reset( new Plane() );
-		weather_surface.reset( Surface::CreateSurface(320, 240).release() );
+		weather_surface << Surface::CreateSurface(320, 240);
 		weather_surface->SetTransparentColor(Color(0,0,0,0));
 		weather_plane->SetBitmap(weather_surface.get());
 		weather_plane->SetZ(9999);
@@ -205,10 +205,10 @@ void Game_Screen::InitWeather() {
 	weather_surface->Clear();
 
 	if (!rain_bitmap)
-		rain_bitmap.reset( Bitmap::CreateBitmap(rain_image, sizeof(rain_image)).release() );
+		rain_bitmap << Bitmap::CreateBitmap(rain_image, sizeof(rain_image));
 
 	if (!snow_bitmap)
-		snow_bitmap.reset( Bitmap::CreateBitmap(snow_image, sizeof(snow_image)).release() );
+		snow_bitmap << Bitmap::CreateBitmap(snow_image, sizeof(snow_image));
 }
 
 void Game_Screen::StopWeather() {

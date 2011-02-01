@@ -243,22 +243,22 @@ void SdlBitmapScreen::Refresh(Rect& rect) {
 			surf_effects->ToneChange(tone_effect);
 			surf_effects->Flip(flipx_effect, flipy_effect);
 
-			bitmap_effects.reset( surf_effects.release() );
+				bitmap_effects << surf_effects;
 
 			if (angle_effect != 0.0) {
 				std::auto_ptr<Bitmap> temp = bitmap_effects->RotateScale(
 					angle_effect * 3.14159 / 180, zoomed_width, zoomed_height);
 				origin_x = (temp->GetWidth() - zoomed_width) / 2;
 				origin_y = (temp->GetHeight() - zoomed_height) / 2;
-					bitmap_effects.reset( temp.release() );
+					bitmap_effects << temp;
 			}
 			else if (zoom_x_effect != 1.0 || zoom_y_effect != 1.0) {
-				bitmap_effects.reset( bitmap_effects->Resample(zoomed_width, zoomed_height, bitmap_effects->GetRect()).release() );
+				bitmap_effects << bitmap_effects->Resample(zoomed_width, zoomed_height, bitmap_effects->GetRect());
 			}
 		}
 
 		if (waver_effect_depth != 0) {
-			bitmap_effects.reset( bitmap_effects->Waver(waver_effect_depth, waver_effect_phase).release() );
+			bitmap_effects << bitmap_effects->Waver(waver_effect_depth, waver_effect_phase);
 		}
 
 		bitmap_effects_rect = bitmap_effects->GetRect();

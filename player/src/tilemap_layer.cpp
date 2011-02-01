@@ -141,7 +141,7 @@ static signed char BlockD_Subtiles_IDS[50][2][2][2] = {
 
 ////////////////////////////////////////////////////////////
 TilemapLayer::TilemapLayer(int ilayer) :
-	chipset(NULL),
+	chipset_screen( BitmapScreen::CreateBitmapScreen().release() ),
 	visible(true),
 	ox(0),
 	oy(0),
@@ -156,8 +156,6 @@ TilemapLayer::TilemapLayer(int ilayer) :
 	type(TypeTilemap),
 	layer(ilayer),
 	have_invisible_tile(false) {
-
-	chipset_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
 
 	memset(autotiles_ab, NULL, sizeof(autotiles_ab));
 	memset(autotiles_d, NULL, sizeof(autotiles_d));

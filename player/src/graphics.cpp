@@ -88,9 +88,9 @@ void Graphics::Init() {
 	framecount = 0;
 	fps_mode = 0;
 	timer_wait = 0;
-	frozen_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
+	frozen_screen = BitmapScreen::CreateBitmapScreen();
 
-	black_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
+	black_screen = BitmapScreen::CreateBitmapScreen();
 	std::auto_ptr<Bitmap> black_bitmap = Bitmap::CreateBitmap(DisplayUi->GetWidth(), DisplayUi->GetHeight(), Color());
 	black_screen->SetBitmap(black_bitmap);
 

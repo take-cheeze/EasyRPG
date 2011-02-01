@@ -138,7 +138,7 @@ void SoftBitmapScreen::Refresh(Rect& rect) {
 		surface_effects->OpacityChange(opacity_bottom_effect, src_rect);
 	}
 
-	bitmap_effects.reset(surface_effects.release());
+	bitmap_effects << surface_effects;
 	rect = bitmap_effects->GetRect();
 
 	if (zoom_x_effect == 1.0 && zoom_y_effect == 1.0 && angle_effect == 0.0 && waver_effect_depth == 0)
@@ -158,7 +158,7 @@ void SoftBitmapScreen::Refresh(Rect& rect) {
 		origin_y = (fx2->GetHeight() - zoomed_height) / 2;
 	}
 
-	bitmap_effects.reset(fx2.release());
+	bitmap_effects << fx2.release();
 	rect = bitmap_effects->GetRect();
 
 	if (waver_effect_depth == 0)
@@ -166,7 +166,7 @@ void SoftBitmapScreen::Refresh(Rect& rect) {
 
 	fx2 = bitmap_effects->Waver(waver_effect_depth, waver_effect_phase);
 
-	bitmap_effects.reset(fx2.release());
+	bitmap_effects << fx2.release();
 	rect = bitmap_effects->GetRect();
 }
 

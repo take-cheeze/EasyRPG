@@ -37,6 +37,13 @@ class BitmapScreen;
 template <class T>
 class BitmapUtils;
 
+template<class LHS, class RHS>
+boost::scoped_ptr<LHS>& operator <<(boost::scoped_ptr<LHS>& lhs, std::auto_ptr<RHS> rhs)
+{
+	lhs.reset(static_cast<LHS*>(rhs.release()));
+	return lhs;
+}
+
 ////////////////////////////////////////////////////////////
 /// Base Bitmap class.
 ////////////////////////////////////////////////////////////
