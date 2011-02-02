@@ -34,7 +34,6 @@
 #endif
 
 
-template <class T>
 class BitmapUtils;
 
 ////////////////////////////////////////////////////////////
@@ -247,7 +246,8 @@ public:
 protected:
 	friend class Text;
 	friend class FTFont;
-	template <class T> friend class BitmapUtils;
+	friend class BitmapUtils;
+	template <class T> friend class BitmapUtilsT;
 
 #ifdef USE_SDL
 	friend class SdlBitmap;

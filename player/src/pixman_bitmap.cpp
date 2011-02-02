@@ -37,6 +37,10 @@
 #include "pixman_bitmap.hpp"
 
 ////////////////////////////////////////////////////////////
+
+static const DynamicFormat dynamic_format;
+
+////////////////////////////////////////////////////////////
 static void destroy_func(pixman_image_t *image, void *data) {
 	free(data);
 }
@@ -59,9 +63,9 @@ void PixmanBitmap::ConvertImage(int& width, int& height, void*& pixels) {
 		uint8* dst = (uint8*) pixels + y * width * 4;
 		for (int x = 0; x < width; x++) {
 			uint8 r, g, b, a;
-			image_format::get_rgba(format, dst, r, g, b, a);
+			image_format::get_rgba(dynamic_format, dst, r, g, b, a);
 			MultiplyAlpha(r, g, b, a);
-			pixel_format::set_rgba(format, dst, r, g, b, a);
+			pixel_format::set_rgba(dynamic_format, dst, r, g, b, a);
 			dst += 4;
 		}
 	}
@@ -103,12 +107,14 @@ void PixmanBitmap::ReadXYZ(FILE *stream) {
 ////////////////////////////////////////////////////////////
 PixmanBitmap::PixmanBitmap(int width, int height, bool itransparent) {
 	transparent = itransparent;
+	bm_utils = new BitmapUtilsT<pixel_format>(dynamic_format);
 
 	Init(width, height, (void *) NULL);
 }
 
 PixmanBitmap::PixmanBitmap(const std::string filename, bool itransparent, uint32 flags) {
 	transparent = itransparent;
+	bm_utils = new BitmapUtilsT<pixel_format>(dynamic_format);
 
 	int namelen = (int) filename.size();
 	if (namelen < 5 || filename[namelen - 4] != '.') {
@@ -139,6 +145,7 @@ PixmanBitmap::PixmanBitmap(const std::string filename, bool itransparent, uint32
 
 PixmanBitmap::PixmanBitmap(const uint8* data, uint bytes, bool itransparent, uint32 flags) {
 	transparent = itransparent;
+	bm_utils = new BitmapUtilsT<pixel_format>(dynamic_format);
 
 	if (bytes > 4 && strncmp((char*) data, "XYZ1", 4) == 0)
 		ReadXYZ(data, bytes);
@@ -150,6 +157,7 @@ PixmanBitmap::PixmanBitmap(const uint8* data, uint bytes, bool itransparent, uin
 
 PixmanBitmap::PixmanBitmap(Bitmap* source, Rect src_rect, bool itransparent) {
 	transparent = itransparent;
+	bm_utils = new BitmapUtilsT<pixel_format>(dynamic_format);
 
 	Init(src_rect.width, src_rect.height, (void *) NULL);
 
@@ -159,6 +167,7 @@ PixmanBitmap::PixmanBitmap(Bitmap* source, Rect src_rect, bool itransparent) {
 ////////////////////////////////////////////////////////////
 PixmanBitmap::~PixmanBitmap() {
 	pixman_image_unref(bitmap);
+	delete bm_utils;
 }
 
 ////////////////////////////////////////////////////////////
@@ -183,19 +192,19 @@ uint16 PixmanBitmap::pitch() const {
 }
 
 uint32 PixmanBitmap::rmask() const {
-	return pixel_format::r_mask(format);
+	return pixel_format::r_mask(dynamic_format);
 }
 
 uint32 PixmanBitmap::gmask() const {
-	return pixel_format::g_mask(format);
+	return pixel_format::g_mask(dynamic_format);
 }
 
 uint32 PixmanBitmap::bmask() const {
-	return pixel_format::b_mask(format);
+	return pixel_format::b_mask(dynamic_format);
 }
 
 uint32 PixmanBitmap::amask() const {
-	return pixel_format::a_mask(format);
+	return pixel_format::a_mask(dynamic_format);
 }
 
 uint32 PixmanBitmap::colorkey() const {
@@ -465,7 +474,7 @@ std::auto_ptr<Bitmap> PixmanBitmap::RotateScale(double angle, int scale_w, int s
 }
 
 std::auto_ptr<Bitmap> PixmanBitmap::Waver(int depth, double phase) {
-	return BitmapUtils<pixel_format>::Waver(this, depth, phase);
+	return bm_utils->Waver(this, depth, phase);
 }
 
 void PixmanBitmap::OpacityChange(int opacity, const Rect& dst_rect) {
@@ -589,11 +598,11 @@ uint32 PixmanBitmap::GetUint32Color(const Color &color) const {
 
 uint32 PixmanBitmap::GetUint32Color(uint8 r, uint8 g, uint8 b, uint8 a) const {
 	MultiplyAlpha(r, g, b, a);
-	return pixel_format::rgba_to_uint32(format, r, g, b, a);
+	return pixel_format::rgba_to_uint32(dynamic_format, r, g, b, a);
 }
 
 void PixmanBitmap::GetColorComponents(uint32 color, uint8 &r, uint8 &g, uint8 &b, uint8 &a) const {
-	pixel_format::uint32_to_rgba(format, color, r, g, b, a);
+	pixel_format::uint32_to_rgba(dynamic_format, color, r, g, b, a);
 	DivideAlpha(r, g, b, a);
 }
 

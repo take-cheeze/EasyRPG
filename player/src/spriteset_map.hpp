@@ -53,7 +53,7 @@ public:
 protected:
 	boost::scoped_ptr<Tilemap> tilemap;
 	boost::scoped_ptr<Plane> panorama;
-	boost::scoped_ptr<Plane> fog;
+	std::string panorama_name;
 	boost::ptr_vector<Sprite_Character> character_sprites;
 	/*std::vector<Sprite_Picture*> picture_sprites;
 	boost::scoped_ptr<Weather> weather;

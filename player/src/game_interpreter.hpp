@@ -24,6 +24,9 @@
 #include "game_character.hpp"
 #include "system.hpp"
 
+class Game_Event;
+class Game_CommonEvent;
+
 ////////////////////////////////////////////////////////////
 /// Game_Interpreter class
 ////////////////////////////////////////////////////////////
@@ -38,7 +41,8 @@ public:
 	bool IsRunning() const;
 	void Update();
 
-	void SetupStartingEvent();
+	void SetupStartingEvent(Game_Event* ev);
+	void SetupStartingEvent(Game_CommonEvent* ev);
 	bool ExecuteCommand();
 	void InputButton();
 	void SetupChoices(const std::vector<std::string>& choices);

@@ -97,30 +97,39 @@ void SdlBitmapScreen::BlitScreen(int x, int y, Rect src_rect) {
 }
 
 ////////////////////////////////////////////////////////////
-void SdlBitmapScreen::BlitScreenTiled(Rect src_rect, Rect dst_rect) {
+void SdlBitmapScreen::BlitScreenTiled(Rect src_rect, Rect dst_rect, int ox, int oy) {
 	if (bitmap.get() == NULL || (opacity_top_effect <= 0 && opacity_bottom_effect <= 0))
 		return;
 
 	src_rect = src_rect_effect.GetSubRect(src_rect);
 	Refresh(src_rect);
 
+	if (ox > 0)
+		ox -= src_rect.width * ((ox + src_rect.width - 1) / src_rect.width);
+	else if (ox < 0)
+		ox += src_rect.width * (ox / src_rect.width);
+
+	if (oy > 0)
+		oy -= src_rect.height * ((oy + src_rect.height - 1) / src_rect.height);
+	else if (oy < 0)
+		oy += src_rect.height * (oy / src_rect.height);
+
 	SDL_Surface* surface = bitmap_effects != NULL
 		? ((SdlBitmap*)bitmap_effects.get())->bitmap
 		: ((SdlBitmap*)bitmap.get())->bitmap;
 
-	int y_blits = 1;
-	if (src_rect.height < surface->h && src_rect.height != 0) {
-		y_blits = (int)ceil((float)surface->h / (float)src_rect.height);
-	}
-
-	int x_blits = 1;
-	if (src_rect.width < surface->w && src_rect.width != 0) {
-		x_blits = (int)ceil((float)surface->w / (float)src_rect.width);
-	}
-
-	for (int j = 0; j < y_blits; j++) {
-		for (int i = 0; i < x_blits; i++) {
-			BlitScreenIntern(surface, i * src_rect.width, j * src_rect.height, src_rect, opacity_top_effect);
+	int x0 = dst_rect.x + ox;
+	int y0 = dst_rect.y + oy;
+	int x1 = dst_rect.x + dst_rect.width;
+	int y1 = dst_rect.y + dst_rect.height;
+	for (int y = y0; y < y1; y += src_rect.height) {
+		for (int x = x0; x < x1; x += src_rect.width) {
+			Rect rect = src_rect;
+			if (y + rect.height > y1)
+				rect.height = y1 - y;
+			if (x + rect.width > x1)
+				rect.width = x1 - x;
+			BlitScreenIntern(surface, x, y, src_rect, opacity_top_effect);
 		}
 	}
 }
@@ -136,10 +145,14 @@ void SdlBitmapScreen::BlitScreenIntern(SDL_Surface* surface, int x, int y, Rect 
 			SDL_Surface* display = ((SdlBitmap*) DisplaySdlUi->GetDisplaySurface())->bitmap;
 			SDL_BlitSurface(surface, &src_r, display, &dst_r);
 		} else {
-			src_rect.Adjust(surface->w, surface->h);
-			if (src_rect.IsOutOfBounds(surface->w, surface->h) )return;
-
 			SDL_Surface* display = ((SdlBitmap*) DisplaySdlUi->GetDisplaySurface())->bitmap;
+
+			Rect dst_rect(x, y, 0, 0);
+
+			if (!Rect::AdjustRectangles(src_rect, dst_rect, Rect(0, 0, surface->w, surface->h)))
+				return;
+			if (!Rect::AdjustRectangles(dst_rect, src_rect, Rect(0, 0, display->w, display->h)))
+				return;
 
 			int bpp = display->format->BytesPerPixel;
 
@@ -148,7 +161,7 @@ void SdlBitmapScreen::BlitScreenIntern(SDL_Surface* surface, int x, int y, Rect 
 
 			if (bpp == 2) {
 				const uint16* src_pixel = ((uint16*)surface->pixels) + src_rect.x + src_rect.y * surface->pitch / bpp;
-				uint16* dst_pixel = ((uint16*)display->pixels) + x + y * display->pitch / bpp;
+				uint16* dst_pixel = ((uint16*)display->pixels) + dst_rect.x + dst_rect.y * display->pitch / bpp;
 
 				/*for (int i = 0; i < src_rect.height; i++) {
 					for (int j = 0; j < src_rect.width; j++) {
@@ -165,7 +178,7 @@ void SdlBitmapScreen::BlitScreenIntern(SDL_Surface* surface, int x, int y, Rect 
 				}*/
 			} else if (bpp == 4) {
 				const uint8* src_pixel = (uint8*)surface->pixels + src_rect.x * bpp + src_rect.y * surface->pitch;
-				uint8* dst_pixel = (uint8*)display->pixels + x * bpp + y * display->pitch;
+				uint8* dst_pixel = (uint8*)display->pixels + dst_rect.x * bpp + dst_rect.y * display->pitch;
 
 				for (int i = 0; i < src_rect.height; i++) {
 					for (int j = 0; j < src_rect.width; j++) {

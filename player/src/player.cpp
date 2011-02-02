@@ -142,7 +142,9 @@ void Player::Run() {
 
 		while(!Scene::old_instances.empty()) {
 			//Output::Debug(Scene::scene_names[Scene::old_instances.back().type]);
-			Scene::old_instances.back().Terminate();
+			if (Scene::old_instances.size() >= 1) {
+				Scene::old_instances.back().Terminate();
+			}
 			Graphics::Pop();
 			Scene::old_instances.pop_back();
 		}

@@ -28,13 +28,11 @@
 #include "font.hpp"
 #include "rect.hpp"
 #include "tone.hpp"
-#include "pixel_format.hpp"
 
 #include <boost/scoped_ptr.hpp>
 
 class BitmapScreen;
 
-template <class T>
 class BitmapUtils;
 
 template<class LHS, class RHS>
@@ -136,12 +134,12 @@ protected:
 	friend class Surface;
 	friend class BitmapScreen;
 	friend class GlBitmapScreen;
-	template <class T> friend class BitmapUtils;
-	template <class T1, class T2> friend class Blit;
+	friend class BitmapUtils;
+	template <class T> friend class BitmapUtilsT;
+	friend class Blit;
+	template <class T1, class T2> friend class BlitT;
 
 	Bitmap();
-
-	DynamicFormat format;
 
 	virtual void* pixels() = 0;
 	virtual int width() const = 0;

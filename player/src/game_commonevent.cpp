@@ -19,6 +19,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "game_commonevent.hpp"
+#include "game_map.hpp"
 #include "game_switches.hpp"
 #include "game_interpreter.hpp"
 #include "main_data.hpp"
@@ -31,9 +32,10 @@ Game_CommonEvent::Game_CommonEvent(int common_event_id) :
 
 ////////////////////////////////////////////////////////////
 void Game_CommonEvent::Refresh() {
-	if ( (GetTrigger() == 2) && ( Game_Switches[GetSwitchId()] ) ) {
+	if ( (GetTrigger() == Game_Character::TriggerParallelProcess) && ( Game_Switches[GetSwitchId()] ) ) {
 		if (interpreter == NULL) {
 			interpreter.reset(new Game_Interpreter());
+			Update();
 		}
 	} else {
 		interpreter.reset();
@@ -43,14 +45,19 @@ void Game_CommonEvent::Refresh() {
 ////////////////////////////////////////////////////////////
 void Game_CommonEvent::Update() {
 	if (interpreter) {
-		if (!interpreter->IsRunning()) {
+		if (!Game_Map::GetInterpreter().IsRunning()) {
 			interpreter->Setup(GetList(), 0);
+			Game_Map::GetInterpreter().SetupStartingEvent(this);
 		}
 		interpreter->Update();
 	}
 }
 
 ////////////////////////////////////////////////////////////
+int Game_CommonEvent::GetIndex() const {
+	return common_event_id;
+}
+
 std::string Game_CommonEvent::GetName() const {
 	return Main_Data::commonEvent(common_event_id)[1].toString().toSystem();
 }

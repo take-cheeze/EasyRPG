@@ -337,7 +337,9 @@ void Game_Interpreter::Update() {
 
 		if (list.empty()) {
 			if (!Main_Data::game_player->IsTeleporting() && main_flag) {
-				SetupStartingEvent();
+				if (Game_Map::GetNeedRefresh()) {
+					Game_Map::Refresh();
+				}
 			}
 
 			if (list.empty()) {
@@ -358,11 +360,7 @@ void Game_Interpreter::Update() {
 ////////////////////////////////////////////////////////////
 /// Setup Starting Event
 ////////////////////////////////////////////////////////////
-void Game_Interpreter::SetupStartingEvent() {
-
-	if (Game_Map::GetNeedRefresh()) {
-		Game_Map::Refresh();
-	}
+void Game_Interpreter::SetupStartingEvent(Game_Event* ev) {
 
 	if (Game_Temp::common_event_id > 0) {
 		Setup(Main_Data::commonEvent(Game_Temp::common_event_id)[22].toEvent(), 0);
@@ -370,27 +368,23 @@ void Game_Interpreter::SetupStartingEvent() {
 		return;
 	}
 
-	Game_Event* _event;
-	for (tEventHash::iterator i = Game_Map::GetEvents().begin(); i != Game_Map::GetEvents().end(); i++) {
-		_event = i->second;
-		
-		if (_event->GetStarting()) {
-			_event->ClearStarting();
-			Setup(_event->GetList(), _event->GetId(), _event->GetX(), _event->GetY());
-			return;
-		}
-	}
+	ev->ClearStarting();
+	Setup(ev->GetList(), ev->GetId(), ev->GetX(), ev->GetY());
 
 	using rpg2k::structure::Array2D;
 	Array2D const& commonEvent = Main_Data::project->getLDB().commonEvent();
 	for (Array2D::const_iterator i = commonEvent.begin(); i != commonEvent.end(); ++i) {
 		// If trigger is auto run, and condition switch is ON
-		if ( ((*i->second)[11].to<int>() == 1) &&
-			 Game_Switches[(*i->second)[13].to<int>()]) {
+		if ( ((*i->second)[11].to<int>() == Game_Character::TriggerAutoStart) &&
+			Game_Switches[(*i->second)[13].to<int>()]) {
 			Setup((*i->second)[22].toEvent(), 0);
 			return;
 		}
 	}
+}
+
+void Game_Interpreter::SetupStartingEvent(Game_CommonEvent* ev) {
+	Setup(ev->GetList(), 0, ev->GetIndex(), -2);
 }
 
 ////////////////////////////////////////////////////////////
@@ -2428,9 +2422,9 @@ bool Game_Interpreter::CommandChangePBG() { // code 11720
 	Game_Map::SetParallaxName(name);
 
 	bool horz = list[index][0] != 0;
-	bool horz_auto = list[index][1] != 0;
-	int horz_speed = list[index][2];
-	bool vert = list[index][3] != 0;
+	bool vert = list[index][1] != 0;
+	bool horz_auto = list[index][2] != 0;
+	int horz_speed = list[index][3];
 	bool vert_auto = list[index][4] != 0;
 	int vert_speed = list[index][5];
 	Game_Map::SetParallaxScroll(horz, vert,

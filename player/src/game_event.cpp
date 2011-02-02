@@ -251,7 +251,7 @@ void Game_Event::Start() {
 		Lock();
 
 	if (!Game_Map::GetInterpreter().IsRunning()) {
-		Game_Map::GetInterpreter().SetupStartingEvent();
+		Game_Map::GetInterpreter().SetupStartingEvent(this);
 	}
 }
 
