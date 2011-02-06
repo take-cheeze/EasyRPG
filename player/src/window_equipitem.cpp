@@ -18,9 +18,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_equipitem.hpp"
-#include "game_actors.hpp"
-#include "game_party.hpp"
+#include "window_equipitem.h"
+#include "game_actors.h"
+#include "game_party.h"
 
 ////////////////////////////////////////////////////////////
 Window_EquipItem::Window_EquipItem(int actor_id, int equip_type) :

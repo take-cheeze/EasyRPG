@@ -21,10 +21,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene.hpp"
-#include "window_help.hpp"
-#include "window_skill.hpp"
-#include "window_skillstatus.hpp"
+#include "scene.h"
+#include "window_help.h"
+#include "window_skill.h"
+#include "window_skillstatus.h"
 
 ////////////////////////////////////////////////////////////
 /// Scene_Skill class

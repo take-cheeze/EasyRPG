@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_PIXMAN_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -24,17 +24,17 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
-#include "cache.hpp"
-#include "filefinder.hpp"
-#include "options.hpp"
-#include "output.hpp"
-#include "utils.hpp"
-#include "image_xyz.hpp"
-#include "image_png.hpp"
-#include "text.hpp"
-#include "pixel_format.hpp"
-#include "bitmap_utils.hpp"
-#include "pixman_bitmap.hpp"
+#include "cache.h"
+#include "filefinder.h"
+#include "options.h"
+#include "output.h"
+#include "utils.h"
+#include "image_xyz.h"
+#include "image_png.h"
+#include "text.h"
+#include "pixel_format.h"
+#include "bitmap_utils.h"
+#include "pixman_bitmap.h"
 
 ////////////////////////////////////////////////////////////
 

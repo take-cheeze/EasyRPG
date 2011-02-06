@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_name.hpp"
-#include "game_actors.hpp"
-#include "game_system.hpp"
-#include "game_temp.hpp"
-#include "input.hpp"
+#include "scene_name.h"
+#include "game_actors.h"
+#include "game_system.h"
+#include "game_temp.h"
+#include "input.h"
 
 ////////////////////////////////////////////////////////////
 Scene_Name::Scene_Name() :

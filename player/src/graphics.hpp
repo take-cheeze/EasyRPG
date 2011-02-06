@@ -24,10 +24,10 @@
 #include <string>
 #include <list>
 #include "SDL.h"
-#include "system.hpp"
-#include "bitmap.hpp"
-#include "drawable.hpp"
-#include "zobj.hpp"
+#include "system.h"
+#include "bitmap.h"
+#include "drawable.h"
+#include "zobj.h"
 
 ////////////////////////////////////////////////////////////
 /// Graphics namespace.

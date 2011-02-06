@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_commonevent.hpp"
-#include "game_map.hpp"
-#include "game_switches.hpp"
-#include "game_interpreter.hpp"
-#include "main_data.hpp"
+#include "game_commonevent.h"
+#include "game_map.h"
+#include "game_switches.h"
+#include "game_interpreter.h"
+#include "main_data.h"
 
 ////////////////////////////////////////////////////////////
 Game_CommonEvent::Game_CommonEvent(int common_event_id) :

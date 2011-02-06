@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_battler.hpp"
+#include "game_battler.h"
 #include <algorithm>
-#include "game_actor.hpp"
-#include "util_macro.hpp"
-#include "main_data.hpp"
+#include "game_actor.h"
+#include "util_macro.h"
+#include "main_data.h"
 
 ////////////////////////////////////////////////////////////
 Game_Battler::Game_Battler() :

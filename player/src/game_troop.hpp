@@ -19,7 +19,7 @@
 #define __game_troop__
 
 #include <vector>
-#include "game_unit.hpp"
+#include "game_unit.h"
 
 class Game_Enemy;
 class Game_Interpreter;

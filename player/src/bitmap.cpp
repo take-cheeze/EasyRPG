@@ -21,12 +21,12 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-#include "utils.hpp"
-#include "cache.hpp"
-#include "bitmap.hpp"
-#include "surface.hpp"
-#include "bitmap_screen.hpp"
-#include "text.hpp"
+#include "utils.h"
+#include "cache.h"
+#include "bitmap.h"
+#include "surface.h"
+#include "bitmap_screen.h"
+#include "text.h"
 
 #if defined(USE_SDL_BITMAP)
 	#include "sdl_bitmap.hpp"
@@ -41,7 +41,7 @@
 	#include "gl_bitmap.hpp"
 #endif
 
-#include "util_macro.hpp"
+#include "util_macro.h"
 
 std::auto_ptr<Bitmap> Bitmap::CreateBitmap(int width, int height, const Color& color) {
 	std::auto_ptr<Surface> surface = Surface::CreateSurface(width, height, false);

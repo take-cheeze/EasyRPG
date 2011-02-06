@@ -19,10 +19,10 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <sstream>
-#include "game_system.hpp"
-#include "input.hpp"
-#include "util_macro.hpp"
-#include "window_shopnumber.hpp"
+#include "game_system.h"
+#include "input.h"
+#include "util_macro.h"
+#include "window_shopnumber.h"
 
 ////////////////////////////////////////////////////////////
 Window_ShopNumber::Window_ShopNumber(int ix, int iy, int iwidth, int iheight) : 

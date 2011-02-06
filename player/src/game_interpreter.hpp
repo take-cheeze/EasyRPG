@@ -21,8 +21,8 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "game_character.hpp"
-#include "system.hpp"
+#include "game_character.h"
+#include "system.h"
 
 class Game_Event;
 class Game_CommonEvent;

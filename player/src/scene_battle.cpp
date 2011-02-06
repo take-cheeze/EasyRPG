@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_battle.hpp"
-#include "input.hpp"
-#include "output.hpp"
-#include "player.hpp"
-#include "sprite.hpp"
+#include "scene_battle.h"
+#include "input.h"
+#include "output.h"
+#include "player.h"
+#include "sprite.h"
 
 ////////////////////////////////////////////////////////////
 Scene_Battle::Scene_Battle() {

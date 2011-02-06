@@ -19,18 +19,18 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <sstream>
-#include "window_message.hpp"
-#include "game_actors.hpp"
-#include "game_map.hpp"
-#include "game_message.hpp"
-#include "game_party.hpp"
-#include "game_system.hpp"
-#include "game_variables.hpp"
-#include "graphics.hpp"
-#include "input.hpp"
-#include "player.hpp"
-#include "util_macro.hpp"
-#include "utils.hpp"
+#include "window_message.h"
+#include "game_actors.h"
+#include "game_map.h"
+#include "game_message.h"
+#include "game_party.h"
+#include "game_system.h"
+#include "game_variables.h"
+#include "graphics.h"
+#include "input.h"
+#include "player.h"
+#include "util_macro.h"
+#include "utils.h"
 
 #if defined(DINGOO)
 //#define wstringstream basic_stringstream<wchar_t>

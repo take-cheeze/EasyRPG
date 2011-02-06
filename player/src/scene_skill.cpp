@@ -18,15 +18,15 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_skill.hpp"
-#include "game_map.hpp"
-#include "game_party.hpp"
-#include "game_switches.hpp"
-#include "game_system.hpp"
-#include "input.hpp"
-#include "scene_actortarget.hpp"
-#include "scene_map.hpp"
-#include "scene_menu.hpp"
+#include "scene_skill.h"
+#include "game_map.h"
+#include "game_party.h"
+#include "game_switches.h"
+#include "game_system.h"
+#include "input.h"
+#include "scene_actortarget.h"
+#include "scene_map.h"
+#include "scene_menu.h"
 
 ////////////////////////////////////////////////////////////
 Scene_Skill::Scene_Skill(int actor_index, int skill_index) :

@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_command.hpp"
-#include "color.hpp"
-#include "surface.hpp"
-#include "util_macro.hpp"
+#include "window_command.h"
+#include "color.h"
+#include "surface.h"
+#include "util_macro.h"
 
 ////////////////////////////////////////////////////////////
 Window_Command::Window_Command(std::vector<std::string> commands, int width) :

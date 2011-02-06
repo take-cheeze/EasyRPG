@@ -20,10 +20,10 @@
 ////////////////////////////////////////////////////////////
 #include <algorithm>
 #include <sstream>
-#include "game_actor.hpp"
-#include "game_party.hpp"
-#include "main_data.hpp"
-#include "util_macro.hpp"
+#include "game_actor.h"
+#include "game_party.h"
+#include "main_data.h"
+#include "util_macro.h"
 
 ////////////////////////////////////////////////////////////
 Game_Actor::Game_Actor(int actor_id) {

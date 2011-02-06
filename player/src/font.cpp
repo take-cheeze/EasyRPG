@@ -19,14 +19,14 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "filefinder.hpp"
-#include "output.hpp"
-#include "system.hpp"
-#include "font.hpp"
+#include "filefinder.h"
+#include "output.h"
+#include "system.h"
+#include "font.h"
 #ifdef USE_SDL_TTF
-#include "sdl_font.hpp"
+#include "sdl_font.h"
 #else
-#include "ftfont.hpp"
+#include "ftfont.h"
 #endif
 
 ////////////////////////////////////////////////////////////

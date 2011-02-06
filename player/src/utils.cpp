@@ -18,7 +18,7 @@
 #include <string>
 #include <cctype>
 
-#include "utils.hpp"
+#include "utils.h"
 
 ////////////////////////////////////////////////////////////
 std::wstring Utils::DecodeUTF(const std::string& str) {

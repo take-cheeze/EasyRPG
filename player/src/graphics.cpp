@@ -21,14 +21,14 @@
 #include <algorithm>
 #include <sstream>
 #include <vector>
-#include "graphics.hpp"
-#include "bitmap_screen.hpp"
-#include "cache.hpp"
-#include "baseui.hpp"
-#include "drawable.hpp"
-#include "time.hpp"
-#include "util_macro.hpp"
-#include "player.hpp"
+#include "graphics.h"
+#include "bitmap_screen.h"
+#include "cache.h"
+#include "baseui.h"
+#include "drawable.h"
+#include "time.h"
+#include "util_macro.h"
+#include "player.h"
 
 #include <boost/ptr_container/ptr_list.hpp>
 #include <boost/ptr_container/ptr_map.hpp>

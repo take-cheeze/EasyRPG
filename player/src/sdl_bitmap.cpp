@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_SDL_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -23,22 +23,22 @@
 ////////////////////////////////////////////////////////////
 #include <cassert>
 #include <cmath>
-#include "sdl_bitmap.hpp"
-#include "cache.hpp"
-#include "filefinder.hpp"
-#include "graphics.hpp"
-#include "hslrgb.hpp"
-#include "main_data.hpp"
-#include "options.hpp"
-#include "output.hpp"
-#include "player.hpp"
+#include "sdl_bitmap.h"
+#include "cache.h"
+#include "filefinder.h"
+#include "graphics.h"
+#include "hslrgb.h"
+#include "main_data.h"
+#include "options.h"
+#include "output.h"
+#include "player.h"
 #include <SDL_image.h>
-#include "image_xyz.hpp"
+#include "image_xyz.h"
 //#include "SDL_rotozoom.h"
 #include <SDL_ttf.h>
-#include "sdl_ui.hpp"
-#include "util_macro.hpp"
-#include "utils.hpp"
+#include "sdl_ui.h"
+#include "util_macro.h"
+#include "utils.h"
 
 ////////////////////////////////////////////////////////////
 #ifdef USE_ALPHA

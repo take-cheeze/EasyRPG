@@ -19,8 +19,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <cmath>
-#include "bitmap_screen.hpp"
-#include "util_macro.hpp"
+#include "bitmap_screen.h"
+#include "util_macro.h"
 
 #if defined(USE_SDL_BITMAP)
 	#include "sdl_bitmap_screen.hpp"

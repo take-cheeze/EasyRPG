@@ -19,11 +19,11 @@
 // Headers
 ////////////////////////////////////////////////////////////
 // #include "data.hpp"
-#include "main_data.hpp"
-#include "game_system.hpp"
-#include "game_map.hpp"
-#include "game_player.hpp"
-#include "game_vehicle.hpp"
+#include "main_data.h"
+#include "game_system.h"
+#include "game_map.h"
+#include "game_player.h"
+#include "game_vehicle.h"
 
 Game_Vehicle::Game_Vehicle(Type _type) {
     type = _type;

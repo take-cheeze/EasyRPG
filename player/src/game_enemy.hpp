@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "game_battler.hpp"
+#include "game_battler.h"
 class Game_Enemy :
 	public Game_Battler
 {

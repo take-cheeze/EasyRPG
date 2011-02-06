@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "baseui.hpp"
-#include "window_menustatus.hpp"
-#include "graphics.hpp"
-#include "cache.hpp"
-#include "game_party.hpp"
+#include "baseui.h"
+#include "window_menustatus.h"
+#include "graphics.h"
+#include "cache.h"
+#include "game_party.h"
 
 ////////////////////////////////////////////////////////////
 Window_MenuStatus::Window_MenuStatus(int ix, int iy, int iwidth, int iheight) :

@@ -19,7 +19,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "window_filetitle.hpp"
+#include "window_filetitle.h"
 
 ////////////////////////////////////////////////////////////
 Window_FileTitle::Window_FileTitle(int ix, int iy, int iwidth, int iheight) :

@@ -21,16 +21,16 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene.hpp"
-#include "window_base.hpp"
-#include "window_help.hpp"
-#include "window_gold.hpp"
-#include "window_shopparty.hpp"
-#include "window_shopbuy.hpp"
-#include "window_shopnumber.hpp"
-#include "window_shopstatus.hpp"
-#include "window_shopsell.hpp"
-#include "window_shop.hpp"
+#include "scene.h"
+#include "window_base.h"
+#include "window_help.h"
+#include "window_gold.h"
+#include "window_shopparty.h"
+#include "window_shopbuy.h"
+#include "window_shopnumber.h"
+#include "window_shopstatus.h"
+#include "window_shopsell.h"
+#include "window_shop.h"
 
 ////////////////////////////////////////////////////////////
 /// Scene Shop class.

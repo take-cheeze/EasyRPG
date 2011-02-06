@@ -22,9 +22,9 @@
 ////////////////////////////////////////////////////////////
 #include <cstdio>
 #include <vector>
-#include "filefinder.hpp"
-#include "options.hpp"
-#include "player.hpp"
+#include "filefinder.h"
+#include "options.h"
+#include "player.h"
 
 ////////////////////////////////////////////////////////////
 // Helper Variables

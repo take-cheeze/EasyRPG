@@ -21,10 +21,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene.hpp"
-#include "window_command.hpp"
-#include "window_gold.hpp"
-#include "window_menustatus.hpp"
+#include "scene.h"
+#include "window_command.h"
+#include "window_gold.h"
+#include "window_menustatus.h"
 
 ////////////////////////////////////////////////////////////
 /// Scene Menu class

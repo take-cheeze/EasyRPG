@@ -18,7 +18,7 @@
 #ifndef _SOFT_BITMAP_H_
 #define _SOFT_BITMAP_H_
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_SOFT_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -26,9 +26,9 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 
-#include "surface.hpp"
-#include "pixel_format.hpp"
-#include "bitmap_utils.hpp"
+#include "surface.h"
+#include "pixel_format.h"
+#include "bitmap_utils.h"
 
 ////////////////////////////////////////////////////////////
 /// SoftBitmap class.

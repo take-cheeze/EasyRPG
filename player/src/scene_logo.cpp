@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_logo.hpp"
-#include "graphics.hpp"
-#include "input.hpp"
-#include "scene_title.hpp"
+#include "scene_logo.h"
+#include "graphics.h"
+#include "input.h"
+#include "scene_title.h"
 
 static unsigned char easyrpg_logo[] = {
 	0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D,

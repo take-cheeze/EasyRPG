@@ -22,11 +22,11 @@
 // Headers
 ///////////////////////////////////////////////////////////
 #include "SDL.h"
-#include "baseui.hpp"
-#include "color.hpp"
-#include "rect.hpp"
-#include "system.hpp"
-#include "surface.hpp"
+#include "baseui.h"
+#include "color.h"
+#include "rect.h"
+#include "system.h"
+#include "surface.h"
 
 class Bitmap;
 

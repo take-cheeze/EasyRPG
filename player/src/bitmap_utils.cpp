@@ -18,11 +18,11 @@
 #include <algorithm>
 #include <cmath>
 #include <cstring>
-#include "system.hpp"
-#include "bitmap.hpp"
-#include "surface.hpp"
-#include "pixel_format.hpp"
-#include "bitmap_utils.hpp"
+#include "system.h"
+#include "bitmap.h"
+#include "surface.h"
+#include "pixel_format.h"
+#include "bitmap_utils.h"
 
 ////////////////////////////////////////////////////////////
 template <class PF>

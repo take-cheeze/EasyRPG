@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "system.hpp"
+#include "system.h"
 #if defined(USE_SDL) && defined(SUPPORT_AUDIO)
 #include <map>
-#include "audio.hpp"
-#include "filefinder.hpp"
-#include "output.hpp"
+#include "audio.h"
+#include "filefinder.h"
+#include "output.h"
 #include "SDL.h"
 #include "SDL_mixer.h"
 
@@ -31,7 +31,7 @@
 // FIXME: A bug in sdl_mixer causes that the player is muted forever when a
 // fadeout happened.
 // Fade out on Vista and higher has been disabled until this is fixed.
-#include "util_win.hpp"
+#include "util_win.h"
 #endif
 
 ////////////////////////////////////////////////////////////

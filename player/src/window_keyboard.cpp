@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <algorithm>
 #include <string>
-#include "window_keyboard.hpp"
-#include "game_system.hpp"
-#include "input.hpp"
+#include "window_keyboard.h"
+#include "game_system.h"
+#include "input.h"
 
 ////////////////////////////////////////////////////////////
 const char * const Window_Keyboard::items[2][9][10] = {

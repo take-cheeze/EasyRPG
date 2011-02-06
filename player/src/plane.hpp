@@ -21,12 +21,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "bitmap.hpp"
-#include "bitmap_screen.hpp"
-#include "color.hpp"
-#include "drawable.hpp"
-#include "tone.hpp"
-#include "zobj.hpp"
+#include "bitmap.h"
+#include "bitmap_screen.h"
+#include "color.h"
+#include "drawable.h"
+#include "tone.h"
+#include "zobj.h"
 
 ////////////////////////////////////////////////////////////
 /// Plane class

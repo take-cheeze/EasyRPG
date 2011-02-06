@@ -19,12 +19,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <algorithm>
-#include "system.hpp"
-#include "game_party.hpp"
-#include "game_actors.hpp"
-#include "game_player.hpp"
-#include "output.hpp"
-#include "util_macro.hpp"
+#include "system.h"
+#include "game_party.h"
+#include "game_actors.h"
+#include "game_player.h"
+#include "output.h"
+#include "util_macro.h"
 
 ////////////////////////////////////////////////////////////
 namespace {

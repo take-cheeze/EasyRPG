@@ -18,14 +18,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_equip.hpp"
-#include "game_actors.hpp"
-#include "game_party.hpp"
-#include "game_system.hpp"
-#include "graphics.hpp"
-#include "input.hpp"
-#include "player.hpp"
-#include "scene_menu.hpp"
+#include "scene_equip.h"
+#include "game_actors.h"
+#include "game_party.h"
+#include "game_system.h"
+#include "graphics.h"
+#include "input.h"
+#include "player.h"
+#include "scene_menu.h"
 
 ////////////////////////////////////////////////////////////
 Scene_Equip::Scene_Equip(int actor_index, int equip_index) :

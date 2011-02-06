@@ -21,14 +21,14 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-#include "utils.hpp"
-#include "cache.hpp"
-#include "bitmap.hpp"
-#include "bitmap_screen.hpp"
-#include "output.hpp"
-#include "text.hpp"
-#include "surface.hpp"
-#include "wcwidth.hpp"
+#include "utils.h"
+#include "cache.h"
+#include "bitmap.h"
+#include "bitmap_screen.h"
+#include "output.h"
+#include "text.h"
+#include "surface.h"
+#include "wcwidth.h"
 
 #if defined(USE_SDL_BITMAP)
 	#include "sdl_bitmap.hpp"
@@ -43,7 +43,7 @@
 	#include "gl_bitmap.hpp"
 #endif
 
-#include "util_macro.hpp"
+#include "util_macro.h"
 
 ////////////////////////////////////////////////////////////
 static int GetMaskByte(uint32 mask) {

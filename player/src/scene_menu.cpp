@@ -18,18 +18,18 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_menu.hpp"
-#include "audio.hpp"
-#include "graphics.hpp"
-#include "game_party.hpp"
-#include "game_system.hpp"
-#include "input.hpp"
-#include "player.hpp"
-#include "scene_end.hpp"
-#include "scene_equip.hpp"
-#include "scene_item.hpp"
-#include "scene_map.hpp"
-#include "scene_skill.hpp"
+#include "scene_menu.h"
+#include "audio.h"
+#include "graphics.h"
+#include "game_party.h"
+#include "game_system.h"
+#include "input.h"
+#include "player.h"
+#include "scene_end.h"
+#include "scene_equip.h"
+#include "scene_item.h"
+#include "scene_map.h"
+#include "scene_skill.h"
 
 ////////////////////////////////////////////////////////////
 Scene_Menu::Scene_Menu(int menu_index) :

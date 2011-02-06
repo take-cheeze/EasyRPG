@@ -18,17 +18,17 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "main_data.hpp"
-#include "game_actors.hpp"
-#include "game_party.hpp"
-#include "game_player.hpp"
-#include "game_screen.hpp"
-#include "game_troop.hpp"
-#include "game_message.hpp"
-#include "game_map.hpp"
-#include "game_variables.hpp"
-#include "game_switches.hpp"
-#include "font.hpp"
+#include "main_data.h"
+#include "game_actors.h"
+#include "game_party.h"
+#include "game_player.h"
+#include "game_screen.h"
+#include "game_troop.h"
+#include "game_message.h"
+#include "game_map.h"
+#include "game_variables.h"
+#include "game_switches.h"
+#include "font.h"
 
 ////////////////////////////////////////////////////////////
 /// Global Variables

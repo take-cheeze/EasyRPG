@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_item.hpp"
-#include "game_party.hpp"
+#include "window_item.h"
+#include "game_party.h"
 
 ////////////////////////////////////////////////////////////
 Window_Item::Window_Item(int ix, int iy, int iwidth, int iheight) :

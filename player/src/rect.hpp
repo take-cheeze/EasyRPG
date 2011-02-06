@@ -18,7 +18,7 @@
 #ifndef _RECT_H_
 #define _RECT_H_
 
-#include "system.hpp"
+#include "system.h"
 
 ////////////////////////////////////////////////////////////
 /// Rect.

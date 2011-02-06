@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "game_message.hpp"
+#include "game_message.h"
 
 namespace Game_Message {
 	std::vector<std::string> texts;

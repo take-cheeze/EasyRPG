@@ -22,8 +22,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "window_help.hpp"
-#include "window_selectable.hpp"
+#include "window_help.h"
+#include "window_selectable.h"
 
 ////////////////////////////////////////////////////////////
 /// Class_Name class

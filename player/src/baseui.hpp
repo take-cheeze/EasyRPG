@@ -23,8 +23,8 @@
 ///////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
-#include "color.hpp"
-#include "rect.hpp"
+#include "color.h"
+#include "rect.h"
 
 #include <boost/scoped_ptr.hpp>
 

@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "msgbox.hpp"
+#include "msgbox.h"
 
 // Note to OSX hackers:
 // Cocoa guidelines says only caution icon should be used when the operation is risky (data loss)

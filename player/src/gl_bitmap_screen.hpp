@@ -18,7 +18,7 @@
 #ifndef _GL_BITMAP_SCREEN_H_
 #define _GL_BITMAP_SCREEN_H_
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_OPENGL_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -32,8 +32,8 @@
 #else
 	#include <GL/gl.h>
 #endif
-#include "surface.hpp"
-#include "bitmap_screen.hpp"
+#include "surface.h"
+#include "bitmap_screen.h"
 
 ////////////////////////////////////////////////////////////
 /// GlBitmapScreen class.

@@ -20,7 +20,7 @@
 ///////////////////////////////////////////////////////////
 // Headers
 ///////////////////////////////////////////////////////////
-#include "sdl_ui.hpp"
+#include "sdl_ui.h"
 #ifdef _WIN32
 	#define WIN32_LEAN_AND_MEAN
 	#ifndef NOMINMAX
@@ -32,14 +32,14 @@
 	#include <gccore.h>
 	#include <wiiuse/wpad.h>
 #endif
-#include "color.hpp"
-#include "font_render_8x8.hpp"
-#include "graphics.hpp"
-#include "keys.hpp"
-#include "output.hpp"
-#include "player.hpp"
-#include "sdl_bitmap.hpp"
-#include "soft_bitmap.hpp"
+#include "color.h"
+#include "font_render_8x8.h"
+#include "graphics.h"
+#include "keys.h"
+#include "output.h"
+#include "player.h"
+#include "sdl_bitmap.h"
+#include "soft_bitmap.h"
 #ifdef USE_SDL_TTF
 #include <SDL_ttf.h>
 #endif

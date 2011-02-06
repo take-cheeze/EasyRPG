@@ -18,14 +18,14 @@
 #ifndef _SDL_BITMAP_SCREEN_H_
 #define _SDL_BITMAP_SCREEN_H_
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_SDL_BITMAP
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "bitmap_screen.hpp"
-#include "surface.hpp"
+#include "bitmap_screen.h"
+#include "surface.h"
 #include "SDL.h"
 
 ////////////////////////////////////////////////////////////

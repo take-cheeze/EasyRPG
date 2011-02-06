@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_base.hpp"
-#include "cache.hpp"
-#include "game_system.hpp"
+#include "window_base.h"
+#include "cache.h"
+#include "game_system.h"
 
 ////////////////////////////////////////////////////////////
 Window_Base::Window_Base(int x, int y, int width, int height) {

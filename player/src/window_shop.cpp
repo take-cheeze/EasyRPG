@@ -19,12 +19,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "input.hpp"
-#include "scene.hpp"
-#include "scene_shop.hpp"
-#include "game_temp.hpp"
-#include "game_system.hpp"
-#include "window_shop.hpp"
+#include "input.h"
+#include "scene.h"
+#include "scene_shop.h"
+#include "game_temp.h"
+#include "game_system.h"
+#include "window_shop.h"
 
 ////////////////////////////////////////////////////////////
 Window_Shop::Window_Shop(int ix, int iy, int iwidth, int iheight) :

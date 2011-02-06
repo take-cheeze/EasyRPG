@@ -18,11 +18,11 @@
 #ifndef _EASYRPG_IMAGE_H_
 #define _EASYRPG_IMAGE_H_
 
-#include "system.hpp"
+#include "system.h"
 #if defined(USE_SOFT_BITMAP) || defined(USE_PIXMAN_BITMAP)
 
 #include <cstdio>
-#include "system.hpp"
+#include "system.h"
 
 namespace Image {
 	void ReadPNG(FILE* stream, const void* buffer, bool transparent, int& width, int& height, void*& pixels);

@@ -18,13 +18,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_temp.hpp"
-#include "game_system.hpp"
-#include "game_party.hpp"
-#include "input.hpp"
-#include "scene_shop.hpp"
-#include "output.hpp"
-#include "time.hpp"
+#include "game_temp.h"
+#include "game_system.h"
+#include "game_party.h"
+#include "input.h"
+#include "scene_shop.h"
+#include "output.h"
+#include "time.h"
 
 ////////////////////////////////////////////////////////////
 Scene_Shop::Scene_Shop() :

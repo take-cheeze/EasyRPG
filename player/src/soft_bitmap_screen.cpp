@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_SOFT_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -23,11 +23,11 @@
 ////////////////////////////////////////////////////////////
 #include <cmath>
 #include <iostream>
-#include "soft_bitmap_screen.hpp"
-#include "soft_bitmap.hpp"
-#include "sdl_ui.hpp"
-#include "output.hpp"
-#include "util_macro.hpp"
+#include "soft_bitmap_screen.h"
+#include "soft_bitmap.h"
+#include "sdl_ui.h"
+#include "output.h"
+#include "util_macro.h"
 
 ////////////////////////////////////////////////////////////
 SoftBitmapScreen::SoftBitmapScreen(Bitmap* bitmap) :

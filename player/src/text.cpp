@@ -19,14 +19,14 @@
 // Headers
 ////////////////////////////////////////////////////////////
 
-#include "main_data.hpp"
-#include "cache.hpp"
-#include "output.hpp"
-#include "utils.hpp"
-#include "bitmap.hpp"
-#include "font.hpp"
-#include "text.hpp"
-#include "wcwidth.hpp"
+#include "main_data.h"
+#include "cache.h"
+#include "output.h"
+#include "utils.h"
+#include "bitmap.h"
+#include "font.h"
+#include "text.h"
+#include "wcwidth.h"
 
 ////////////////////////////////////////////////////////////
 void Text::Draw(Surface* dest, int x, int y, int color, std::wstring wtext, Surface::TextAlignment align) {

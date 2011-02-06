@@ -18,8 +18,8 @@
 #ifndef _EASYRPG_TEXT_H_
 #define _EASYRPG_TEXT_H_
 
-#include "ftfont.hpp"
-#include "surface.hpp"
+#include "ftfont.h"
+#include "surface.h"
 
 class Text {
 public:

@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_OPENGL_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -27,8 +27,8 @@
 #include <string>
 #include <sstream>
 #include <iosfwd>
-#include "gl_bitmap_screen.hpp"
-#include "bitmap.hpp"
+#include "gl_bitmap_screen.h"
+#include "bitmap.h"
 
 ////////////////////////////////////////////////////////////
 namespace GL {

@@ -24,10 +24,10 @@
 #include <string>
 #include <list>
 #include <memory>
-#include "color.hpp"
-#include "font.hpp"
-#include "rect.hpp"
-#include "tone.hpp"
+#include "color.h"
+#include "font.h"
+#include "rect.h"
+#include "tone.h"
 
 #include <boost/scoped_ptr.hpp>
 

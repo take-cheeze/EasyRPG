@@ -23,13 +23,13 @@
 #include <sstream>
 #include <cstdlib>
 #include <cstdarg>
-#include "graphics.hpp"
-#include "input.hpp"
-#include "msgbox.hpp"
-#include "options.hpp"
-#include "output.hpp"
-#include "player.hpp"
-#include "time.hpp"
+#include "graphics.h"
+#include "input.h"
+#include "msgbox.h"
+#include "options.h"
+#include "output.h"
+#include "player.h"
+#include "time.h"
 
 ////////////////////////////////////////////////////////////
 static void HandleScreenOutput(std::string msg, bool is_error) {

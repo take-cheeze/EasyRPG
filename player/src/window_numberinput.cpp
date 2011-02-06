@@ -18,11 +18,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_numberinput.hpp"
-#include "game_system.hpp"
-#include "input.hpp"
-#include "main_data.hpp"
-#include "util_macro.hpp"
+#include "window_numberinput.h"
+#include "game_system.h"
+#include "input.h"
+#include "main_data.h"
+#include "util_macro.h"
 
 ////////////////////////////////////////////////////////////
 Window_NumberInput::Window_NumberInput(int ix, int iy, int iwidth, int iheight) : 

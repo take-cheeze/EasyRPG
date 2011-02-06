@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "game_enemy.hpp"
+#include "game_enemy.h"
 
 
 Game_Enemy::Game_Enemy(void)

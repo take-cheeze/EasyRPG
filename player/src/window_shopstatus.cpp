@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <sstream>
-#include "game_party.hpp"
-#include "window_shopstatus.hpp"
+#include "game_party.h"
+#include "window_shopstatus.h"
 
 ////////////////////////////////////////////////////////////
 Window_ShopStatus::Window_ShopStatus(int ix, int iy, int iwidth, int iheight) :

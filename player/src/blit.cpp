@@ -15,9 +15,9 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "surface.hpp"
-#include "pixel_format.hpp"
-#include "blit.hpp"
+#include "surface.h"
+#include "pixel_format.h"
+#include "blit.h"
 
 ////////////////////////////////////////////////////////////
 template <class PFsrc, class PFdst>

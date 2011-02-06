@@ -18,7 +18,7 @@
 #ifndef _PIXMAN_BITMAP_H_
 #define _PIXMAN_BITMAP_H_
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_PIXMAN_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -30,10 +30,10 @@
 #include FT_FREETYPE_H
 #include <pixman.h>
 
-#include "bitmap.hpp"
-#include "surface.hpp"
-#include "pixel_format.hpp"
-#include "bitmap_utils.hpp"
+#include "bitmap.h"
+#include "surface.h"
+#include "pixel_format.h"
+#include "bitmap_utils.h"
 
 ////////////////////////////////////////////////////////////
 /// PixmanBitmap class.

@@ -22,9 +22,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "scene.hpp"
-#include "window_savefile.hpp"
-#include "window_filetitle.hpp"
+#include "scene.h"
+#include "window_savefile.h"
+#include "window_filetitle.h"
 
 #include <boost/ptr_container/ptr_vector.hpp>
 

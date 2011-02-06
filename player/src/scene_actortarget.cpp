@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_actortarget.hpp"
-#include "game_system.hpp"
-#include "input.hpp"
-#include "main_data.hpp"
-#include "scene_item.hpp"
-#include "scene_skill.hpp"
+#include "scene_actortarget.h"
+#include "game_system.h"
+#include "input.h"
+#include "main_data.h"
+#include "scene_item.h"
+#include "scene_skill.h"
 
 ////////////////////////////////////////////////////////////
 Scene_ActorTarget::Scene_ActorTarget(int item_id, int item_index) :

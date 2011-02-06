@@ -23,9 +23,9 @@
 ////////////////////////////////////////////////////////////
 #include <vector>
 #include <string>
-#include "game_commonevent.hpp"
-#include "game_event.hpp"
-#include "game_vehicle.hpp"
+#include "game_commonevent.h"
+#include "game_event.h"
+#include "game_vehicle.h"
 
 #include <boost/ptr_container/ptr_map.hpp>
 

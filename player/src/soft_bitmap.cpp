@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.hpp"
+#include "system.h"
 #ifdef USE_SOFT_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -23,17 +23,17 @@
 ////////////////////////////////////////////////////////////
 #include <cstdlib>
 #include <iostream>
-#include "cache.hpp"
-#include "filefinder.hpp"
-#include "options.hpp"
-#include "main_data.hpp"
-#include "output.hpp"
-#include "utils.hpp"
-#include "image_xyz.hpp"
-#include "image_png.hpp"
-#include "text.hpp"
-#include "bitmap_utils.hpp"
-#include "soft_bitmap.hpp"
+#include "cache.h"
+#include "filefinder.h"
+#include "options.h"
+#include "main_data.h"
+#include "output.h"
+#include "utils.h"
+#include "image_xyz.h"
+#include "image_png.h"
+#include "text.h"
+#include "bitmap_utils.h"
+#include "soft_bitmap.h"
 
 ////////////////////////////////////////////////////////////
 

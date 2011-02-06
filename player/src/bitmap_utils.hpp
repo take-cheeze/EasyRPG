@@ -24,11 +24,11 @@
 #include <string>
 #include <list>
 #include <memory>
-#include "pixel_format.hpp"
-#include "color.hpp"
-#include "rect.hpp"
-#include "tone.hpp"
-#include "matrix.hpp"
+#include "pixel_format.h"
+#include "color.h"
+#include "rect.h"
+#include "tone.h"
+#include "matrix.h"
 
 class Bitmap;
 

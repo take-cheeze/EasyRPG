@@ -24,7 +24,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <rpg2k/Project.hxx>
 #include <rpg2k/Event.hxx>
-#include "game_screen.hpp"
+#include "game_screen.h"
 
 namespace RPG {
 	typedef rpg2k::structure::Array1D Item;

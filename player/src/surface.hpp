@@ -23,11 +23,11 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <list>
-#include "color.hpp"
-#include "font.hpp"
-#include "rect.hpp"
-#include "tone.hpp"
-#include "bitmap.hpp"
+#include "color.h"
+#include "font.h"
+#include "rect.h"
+#include "tone.h"
+#include "bitmap.h"
 
 #if defined(DINGOO)
 #define wstring basic_string<wchar_t>

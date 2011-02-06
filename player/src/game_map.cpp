@@ -18,15 +18,15 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_map.hpp"
-#include "game_interpreter.hpp"
-#include "game_temp.hpp"
-#include "map_data.hpp"
-#include "main_data.hpp"
-#include "output.hpp"
-#include "util_macro.hpp"
-#include "game_system.hpp"
-#include "system.hpp"
+#include "game_map.h"
+#include "game_interpreter.h"
+#include "game_temp.h"
+#include "map_data.h"
+#include "main_data.h"
+#include "output.h"
+#include "util_macro.h"
+#include "game_system.h"
+#include "system.h"
 #include <algorithm>
 #include <cassert>
 

@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "bitmap.hpp"
-#include "surface.hpp"
-#include "cache.hpp"
-#include "game_party.hpp"
-#include "game_actor.hpp"
-#include "window_shopparty.hpp"
+#include "bitmap.h"
+#include "surface.h"
+#include "cache.h"
+#include "game_party.h"
+#include "game_actor.h"
+#include "window_shopparty.h"
 
 ////////////////////////////////////////////////////////////
 Window_ShopParty::Window_ShopParty(int ix, int iy, int iwidth, int iheight) :

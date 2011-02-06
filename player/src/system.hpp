@@ -30,7 +30,7 @@
 // options.h is oriented to configurations that the EasyRPG user might want
 // to change.
 // system.h is oriented to what used libraries and OS are capable of.
-#include "options.hpp"
+#include "options.h"
 
 #ifdef USE_OPENGL
 	#define USE_OPENGL_BITMAP

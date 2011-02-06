@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_skill.hpp"
-#include "game_actor.hpp"
-#include "game_actors.hpp"
+#include "window_skill.h"
+#include "game_actor.h"
+#include "game_actors.h"
 
 ////////////////////////////////////////////////////////////
 Window_Skill::Window_Skill(int ix, int iy, int iwidth, int iheight) :

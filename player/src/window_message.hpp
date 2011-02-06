@@ -22,8 +22,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "window_numberinput.hpp"
-#include "window_selectable.hpp"
+#include "window_numberinput.h"
+#include "window_selectable.h"
 
 ////////////////////////////////////////////////////////////
 /// Window Message Class.

@@ -23,7 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <sstream>
 #include <string>
-#include "main_data.hpp"
+#include "main_data.h"
 
 class Game_Event;
 class Game_Player;

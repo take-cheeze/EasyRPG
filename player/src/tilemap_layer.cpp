@@ -20,12 +20,12 @@
 ////////////////////////////////////////////////////////////
 #include <cstring>
 #include <cmath>
-#include "tilemap_layer.hpp"
-#include "graphics.hpp"
-#include "output.hpp"
-#include "player.hpp"
-#include "surface.hpp"
-#include "map_data.hpp"
+#include "tilemap_layer.h"
+#include "graphics.h"
+#include "output.h"
+#include "player.h"
+#include "surface.h"
+#include "map_data.h"
 
 ////////////////////////////////////////////////////////////
 // Blocks subtiles IDs

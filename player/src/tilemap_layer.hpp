@@ -23,9 +23,9 @@
 ////////////////////////////////////////////////////////////
 #include <vector>
 #include <map>
-#include "drawable.hpp"
-#include "bitmap.hpp"
-#include "bitmap_screen.hpp"
+#include "drawable.h"
+#include "bitmap.h"
+#include "bitmap_screen.h"
 
 ////////////////////////////////////////////////////////////
 /// TilemapLayer class.
