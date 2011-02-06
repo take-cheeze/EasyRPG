@@ -68,41 +68,20 @@ void Scene_Skill::Update() {
 		if (actor->IsSkillUsable(skill_id)) {
 			Game_System::SePlay(Main_Data::decisionSE());
 
-			RPG::Skill const& target = Main_Data::project->getLDB().skill()[skill_id];
-			switch( target[8].to<int>() ) {
-			case 0: // normal
+			RPG::Skill const& skill = Main_Data::skill(skill_id);
+			if (skill[8].to<int>() == rpg2k::Skill::SWITCH) {
+				actor->SetSp(actor->GetSp() - actor->CalculateSkillCost(skill_id));
+				Main_Data::setFlag(skill[13].to<int>(), true);
+				Scene::PopUntil(Scene::Map);
+				Game_Map::SetNeedRefresh(true);
+			} else if (skill[8].to<int>() == rpg2k::Skill::NORMAL) {
 				Scene::Push(std::auto_ptr<Scene>(new Scene_ActorTarget(skill_id, actor_index, skill_window.GetIndex())));
 				skill_index = skill_window.GetIndex();
-				break;
-			case 1: // teleport
+			} else if (skill[8].to<int>() == rpg2k::Skill::TELEPORT) {
 				// ToDo: Displays the teleport target scene/window
-				break;
-			case 2: // escape
-				// ToDo: Displays the escape target scene/window
-				break;
-			case 3: // flag
-				actor->SetSp(actor->GetSp() - actor->CalculateSkillCost(skill_id));
-				Main_Data::project->getLSD().setFlag( target[13].to<int>(), true );
-				// Game_Switches[Data::skills[skill_id - 1].switch_id] = true;
-				Scene::PopUntil(Scene::Map);
-				Game_Map::SetNeedRefresh(true);
-				break;
-			}
-			/*
-			if (Data::skills[skill_id - 1].type == RPG::Skill::Type_switch) {
-				actor->SetSp(actor->GetSp() - actor->CalculateSkillCost(skill_id));
-				Game_Switches[Data::skills[skill_id - 1].switch_id] = true;
-				Scene::PopUntil(Scene::Map);
-				Game_Map::SetNeedRefresh(true);
-			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_normal) {
-				Scene::Push(new Scene_ActorTarget(skill_id, actor_index, skill_window.GetIndex()));
-				skill_index = skill_window.GetIndex();
-			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_teleport) {
-				// ToDo: Displays the teleport target scene/window
-			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_escape) {
+			} else if (skill[8].to<int>() == rpg2k::Skill::ESCAPE) {
 				// ToDo: Displays the escape target scene/window
 			} 
-			*/
 		} else {
 			Game_System::SePlay(Main_Data::buzzerSE());
 		}

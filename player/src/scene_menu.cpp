@@ -71,18 +71,11 @@ void Scene_Menu::Update() {
 void Scene_Menu::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Main_Data::vocabulary(106));
-	options.push_back(Main_Data::vocabulary(107));
-	options.push_back(Main_Data::vocabulary(108));
-	options.push_back(Main_Data::vocabulary(110));
-	options.push_back(Main_Data::vocabulary(117));
-	/*
-	options.push_back(Data::terms.command_item);
-	options.push_back(Data::terms.command_skill);
-	options.push_back(Data::terms.menu_equipment);
-	options.push_back(Data::terms.menu_save);
-	options.push_back(Data::terms.menu_quit);
-	*/
+	options.push_back(Main_Data::vocabulary(106)); // item
+	options.push_back(Main_Data::vocabulary(107)); // skill
+	options.push_back(Main_Data::vocabulary(108)); // equip
+	options.push_back(Main_Data::vocabulary(110)); // save
+	options.push_back(Main_Data::vocabulary(117)); // quit
 
 	command_window.reset(new Window_Command(options, 88));
 	command_window->SetIndex(menu_index);
@@ -132,10 +125,12 @@ void Scene_Menu::UpdateCommand() {
 				Game_System::SePlay(Main_Data::decisionSE());
 			}
 
+#ifdef _DEBUG
 			// Debug Test code to add items
 			for (int i = 1; i < 82; ++i) {
 				Game_Party::GainItem(i, 1);
 			}
+#endif
 			break;
 		case 4: // Quit Game
 			Game_System::SePlay(Main_Data::decisionSE());

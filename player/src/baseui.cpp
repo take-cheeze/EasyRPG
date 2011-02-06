@@ -31,6 +31,6 @@ boost::scoped_ptr<BaseUi> DisplayUi;
 ///////////////////////////////////////////////////////////
 std::auto_ptr<BaseUi> BaseUi::CreateBaseUi(long width, long height, const std::string title, bool fs_flag, bool zoom) {
 	#ifdef USE_SDL
-	return std::auto_ptr<BaseUi>(new SdlUi(width, height, title, fs_flag));
+		return std::auto_ptr<BaseUi>(new SdlUi(width, height, title, fs_flag));
 	#endif
 }

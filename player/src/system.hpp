@@ -50,7 +50,7 @@
 #endif
 
 #ifdef USE_SOFT_BITMAP
-	//#define SUPPORT_BMP
+	#define SUPPORT_BMP
 	//#define SUPPORT_GIF
 	//#define SUPPORT_JPG
 	#define SUPPORT_PNG
@@ -61,7 +61,7 @@
 #endif
 
 #ifdef USE_PIXMAN_BITMAP
-	//#define SUPPORT_BMP
+	#define SUPPORT_BMP
 	//#define SUPPORT_GIF
 	//#define SUPPORT_JPG
 	#define SUPPORT_PNG
@@ -99,7 +99,7 @@
 		#define SUPPORT_GIF
 		//#define SUPPORT_JPG
 		#define SUPPORT_PNG
-		//#define SUPPORT_XYZ
+		#define SUPPORT_XYZ
 	#endif
 
 	#ifdef USE_SDL_MIXER
@@ -119,7 +119,7 @@
 #ifdef _WIN32
 	#define DEFAULT_FONTS { "RM2000", "DejaVuLGCSansMono", "msgothic", "Lucida Console", "MS Sans Serif", "" }
 #else
-	#define DEFAULT_FONTS { "DejaVuLGCSansMono.ttf", "" }
+	#define DEFAULT_FONTS { "RM2000", "DejaVuLGCSansMono", "" }
 #endif
 
 #ifdef USE_SDL 

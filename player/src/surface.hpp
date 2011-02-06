@@ -28,13 +28,13 @@
 #include "rect.hpp"
 #include "tone.hpp"
 #include "bitmap.hpp"
+#include "matrix.hpp"
 
 #if defined(DINGOO)
 #define wstring basic_string<wchar_t>
 #endif
 
 
-template <class T>
 class BitmapUtils;
 
 ////////////////////////////////////////////////////////////
@@ -46,9 +46,10 @@ public:
 	/// Creates surface.
 	/// @param width  : surface width
 	/// @param height : surface height
+	/// @param bpp : surface bpp
 	/// @param transparent : allow transparency on surface
 	////////////////////////////////////////////////////////
-	static std::auto_ptr<Surface> CreateSurface(int width, int height, bool transparent = true);
+	static std::auto_ptr<Surface> CreateSurface(int width, int height, int bpp = 0, bool transparent = true);
 
 	////////////////////////////////////////////////////////
 	/// Creates a bitmap from another.
@@ -57,6 +58,13 @@ public:
 	/// @param transparent : allow transparency on bitmap
 	////////////////////////////////////////////////////////
 	static std::auto_ptr<Surface> CreateSurface(Bitmap* source, Rect src_rect, bool transparent = true);
+
+	static std::auto_ptr<Surface> CreateSurfaceFrom(void *pixels, int width, int height, int depth, int pitch, uint32 Rmask, uint32 Gmask, uint32 Bmask, uint32 Amask);
+
+	////////////////////////////////////////////////////////
+	/// Destructor.
+	////////////////////////////////////////////////////////
+	virtual ~Surface() {}
 
 	////////////////////////////////////////////////////////
 	/// Blit source bitmap to this one.
@@ -105,13 +113,66 @@ public:
 	////////////////////////////////////////////////////////
 	virtual void StretchBlit(Rect dst_rect, Bitmap* src, Rect src_rect, int opacity);
 
+	////////////////////////////////////////////////////////
+	/// Blit source bitmap flipped
+	/// @param x : x position
+	/// @param y : y position
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
+	/// @param horizontal : flip horizontally
+	/// @param vertical : flip vertically
+	////////////////////////////////////////////////////////
+	virtual void FlipBlit(int x, int y, Bitmap* src, Rect src_rect, bool horizontal, bool vertical);
+
+	////////////////////////////////////////////////////////
+	/// Blit source bitmap scaled, rotated and translated
+	/// @param dst_rect : destination rect
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
+	/// @param inv : transformation matrix
+	///  - from destination coordinates to source coordinates
+	////////////////////////////////////////////////////////
+	virtual void TransformBlit(Rect dst_rect, Bitmap* src, Rect src_rect, const Matrix& inv);
+
+	////////////////////////////////////////////////////////
+	/// Blit source bitmap scaled, rotated and translated
+	/// @param dst_rect : destination rectangle
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
+	/// @param angle : rotation angle (positive is clockwise)
+	/// @param dst_w : scaled width
+	/// @param dst_h : scaled height
+	/// @param src_pos_x : source origin x
+	/// @param src_pos_y : source origin y
+	/// @param dst_pos_x : destination origin x
+	/// @param dst_pos_y : destination origin y
+	////////////////////////////////////////////////////////
+	virtual void TransformBlit(Rect dst_rect,
+							   Bitmap* src, Rect src_rect,
+							   double angle,
+							   double scale_x, double scale_y,
+							   int src_pos_x, int src_pos_y,
+							   int dst_pos_x, int dst_pos_y);
+
+	////////////////////////////////////////////////////////
 	/// Blit source bitmap transparency to this one.
 	/// @param x : x position
 	/// @param y : y position
 	/// @param src : source bitmap
 	/// @param src_rect : source bitmap rect
 	////////////////////////////////////////////////////////
-	virtual void Mask(int x, int y, Bitmap* src, Rect src_rect);
+	virtual void MaskBlit(int x, int y, Bitmap* src, Rect src_rect);
+
+	////////////////////////////////////////////////////////
+	/// Blit source with waver effect.
+	/// @param x : x position
+	/// @param y : y position
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
+	/// @param depth : wave magnitude
+	/// @param phase : wave phase
+	////////////////////////////////////////////////////////
+	virtual void WaverBlit(int x, int y, Bitmap* src, Rect src_rect, int depth, double phase);
 
 	////////////////////////////////////////////////////////
 	/// Fill entire bitmap with color.
@@ -139,39 +200,70 @@ public:
 	
 	////////////////////////////////////////////////////////
 	/// Rotate bitmap hue.
+	/// @param x : x position
+	/// @param y : y position
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
 	/// @param hue : hue change, degrees
 	////////////////////////////////////////////////////////
-	virtual void HueChange(double hue);
+	virtual void HueChangeBlit(int x, int y, Bitmap* src, Rect src_rect, double hue);
 
 	////////////////////////////////////////////////////////
 	/// Adjust bitmap HSL colors.
+	/// @param x : x position
+	/// @param y : y position
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
 	/// @param hue : hue change, degrees
 	/// @param sat : saturation scale
 	/// @param lum : luminance scale
 	/// @param loff: luminance offset
-	/// @param dst_rect : destination rect
 	////////////////////////////////////////////////////////
-	virtual void HSLChange(double hue, double sat, double lum, double loff, Rect dst_rect);
+	virtual void HSLBlit(int x, int y, Bitmap* src, Rect src_rect, double h, double s, double l, double lo);
 
 	////////////////////////////////////////////////////////
 	/// Adjust bitmap tone.
+	/// @param x : x position
+	/// @param y : y position
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
 	/// @param tone : tone to apply
 	////////////////////////////////////////////////////////
-	virtual void ToneChange(const Tone &tone);
-
-	////////////////////////////////////////////////////////
-	/// Flips the bitmap pixels.
-	/// @param horizontal : flip horizontally (mirror)
-	/// @param vertical : flip vertically
-	////////////////////////////////////////////////////////
-	virtual void Flip(bool horizontal, bool vertical);
+	virtual void ToneBlit(int x, int y, Bitmap* src, Rect src_rect, const Tone &tone);
 
 	////////////////////////////////////////////////////////
 	/// Change the opacity of a bitmap.
+	/// @param x : x position
+	/// @param y : y position
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rect
 	/// @param opacity : the maximum opacity
-	/// @param src_rect: the rectangle to modify
 	////////////////////////////////////////////////////////
-	virtual void OpacityChange(int opacity, const Rect &src_rect);
+	virtual void OpacityBlit(int x, int y, Bitmap* src, Rect src_rect, int opacity);
+
+	////////////////////////////////////////////////////////
+	/// Flips the bitmap pixels.
+	/// @param dst_rect : the rectangle to flip
+	/// @param horizontal : flip horizontally (mirror)
+	/// @param vertical : flip vertically
+	////////////////////////////////////////////////////////
+	virtual void Flip(const Rect& dst_rect, bool horizontal, bool vertical);
+
+	////////////////////////////////////////////////////////
+	/// Blit source bitmap scaled 2:1, with no transparency
+	/// @param dst_rect : destination rectangle
+	/// @param src : source bitmap
+	/// @param src_rect : source bitmap rectangle
+	////////////////////////////////////////////////////////
+	virtual void Blit2x(Rect dst_rect, Bitmap* src, Rect src_rect);
+
+	////////////////////////////////////////////////////////
+	/// Calculate the bounding rectangle of a transformed rectangle
+	/// @param m    : transformation matrix
+	/// @param rect : source rectangle
+	/// @return : the bounding rectangle
+	////////////////////////////////////////////////////////
+	static Rect TransformRectangle(const Matrix& m, const Rect& rect);
 
 	/// TextDraw alignment options
 	enum TextAlignment {
@@ -223,21 +315,6 @@ public:
 	/// Wide string version
 	static Rect GetTextSize(const std::wstring& text);
 
-	////////////////////////////////////////////////////////
-	/// Set the bitmap not to update its attached
-	/// BitmapScreen objects until EndEditing is called.
-	/// This way when multiple operation take place, the
-	/// attached BitmapScreen objects will be set dirty
-	/// only one time.
-	////////////////////////////////////////////////////////
-	virtual void BeginEditing();
-
-	////////////////////////////////////////////////////////
-	/// Set all attached BitmapScreen objects dirty and
-	/// restore normal updates.
-	////////////////////////////////////////////////////////
-	virtual void EndEditing();
-
 	/// @return text drawing font
 	virtual Font* GetFont() const;
 
@@ -247,7 +324,8 @@ public:
 protected:
 	friend class Text;
 	friend class FTFont;
-	template <class T> friend class BitmapUtils;
+	friend class BitmapUtils;
+	template <class T1, class T2> friend class BitmapUtilsT;
 
 #ifdef USE_SDL
 	friend class SdlBitmap;
@@ -259,6 +337,10 @@ protected:
 	/// Font for text drawing.
 	Font* font;
 
+	virtual BitmapUtils* Begin();
+	virtual BitmapUtils* Begin(Bitmap* src);
+	virtual void End();
+	virtual void End(Bitmap* src);
 	virtual void RefreshCallback();
 
 	////////////////////////////////////////////////////////

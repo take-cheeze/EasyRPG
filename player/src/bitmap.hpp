@@ -24,18 +24,21 @@
 #include <string>
 #include <list>
 #include <memory>
-#include "color.hpp"
-#include "font.hpp"
-#include "rect.hpp"
-#include "tone.hpp"
-#include "pixel_format.hpp"
-
 #include <boost/scoped_ptr.hpp>
+#include "color.hpp"
+#include "rect.hpp"
+#include "pixel_format.hpp"
 
 class BitmapScreen;
 
-template <class T>
 class BitmapUtils;
+
+template<class LHS, class RHS>
+boost::scoped_ptr<LHS>& operator <<(boost::scoped_ptr<LHS>& lhs, std::auto_ptr<RHS> rhs)
+{
+	lhs.reset(static_cast<LHS*>(rhs.release()));
+	return lhs;
+}
 
 ////////////////////////////////////////////////////////////
 /// Base Bitmap class.
@@ -95,9 +98,7 @@ public:
 	virtual Color GetTransparentColor() const;
 
 	/// @param color : new transparent color 
-	virtual void SetTransparentColor(Color color) = 0;
-
-	virtual bool HaveInvisibleTile();
+	virtual void SetTransparentColor(Color color);
 
 	static const uint32 System  = 0x80000000;
 	static const uint32 Chipset = 0x40000000;
@@ -110,31 +111,25 @@ public:
 	////////////////////////////////////////////////////////
 	virtual std::auto_ptr<Bitmap> Resample(int scale_w, int scale_h, const Rect& src_rect);
 
-	////////////////////////////////////////////////////////
-	/// Create a rotated and scaled bitmap.
-	/// @param angle : rotation angle
-	/// @param scale_w : resampled width
-	/// @param scale_h : resampled height
-	////////////////////////////////////////////////////////
-	virtual std::auto_ptr<Bitmap> RotateScale(double angle, int scale_w, int scale_h);
+	enum TileOpacity {
+		Opaque,
+		Partial,
+		Transparent
+	};
 
-	////////////////////////////////////////////////////////
-	/// Create a wavy bitmap.
-	/// @param depth : wave magnitude
-	/// @param phase : wave phase
-	////////////////////////////////////////////////////////
-	virtual std::auto_ptr<Bitmap> Waver(int depth, double phase);
+	TileOpacity GetTileOpacity(int row, int col);
 
 protected:
 	friend class Surface;
 	friend class BitmapScreen;
+	friend class SdlBitmapScreen;
 	friend class GlBitmapScreen;
-	template <class T> friend class BitmapUtils;
-	template <class T1, class T2> friend class Blit;
+	friend class BitmapUtils;
+	template <class T1, class T2> friend class BitmapUtilsT;
+	friend class Blit;
+	template <class T1, class T2> friend class BlitT;
 
 	Bitmap();
-
-	DynamicFormat format;
 
 	virtual void* pixels() = 0;
 	virtual int width() const = 0;
@@ -146,6 +141,7 @@ protected:
 	virtual uint32 bmask() const = 0;
 	virtual uint32 amask() const = 0;
 	virtual uint32 colorkey() const = 0;
+	virtual uint8* pointer(int x, int y);
 
 	bool transparent;
 
@@ -160,6 +156,9 @@ protected:
 	virtual void Lock() = 0;
 	virtual void Unlock() = 0;
 
+	virtual BitmapUtils* Begin();
+	virtual void End();
+
 	////////////////////////////////////////////////////////
 	/// Get a pixel color.
 	/// @param x : pixel x
@@ -168,9 +167,15 @@ protected:
 	////////////////////////////////////////////////////////
 	virtual Color GetPixel(int x, int y);
 
+	virtual TileOpacity CheckOpacity(const Rect& rect);
+
 	virtual void CheckPixels(uint32 flags);
 
+	DynamicFormat format;
+
 	std::list<BitmapScreen*> attached_screen_bitmaps;
+	TileOpacity (*opacity)[30];
+
 	bool have_invisible_tile;
 };
 

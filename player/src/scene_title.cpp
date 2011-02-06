@@ -225,12 +225,10 @@ void Scene_Title::CommandNewGame() {
 		Graphics::SetFrameCount(0);
 		CreateGameObjects();
 		Game_Party::SetupStartingMembers();
-
 		rpg2k::structure::Array1D const& start = Main_Data::project->getLMT().startPoint();
 		Game_Map::Setup(start[11].to<int>());
 		Main_Data::game_player->MoveTo(start[12].to<int>(), start[13].to<int>());
 		Main_Data::game_player->Refresh();
-
 		Game_Map::Autoplay();
 		Scene::Push(std::auto_ptr<Scene>(new Scene_Map()));
 	}

@@ -73,7 +73,7 @@ void Window_ShopBuy::DrawItem(int index) {
 
 	std::stringstream ss;
 	ss << item[5].to<int>();
-	contents->TextDraw(rect.width + 4, rect.y, Font::ColorDefault, ss.str(), Surface::TextAlignRight);
+	contents->TextDraw(rect.width + 4, rect.y, enabled ? Font::ColorDefault : Font::ColorDisabled, ss.str(), Surface::TextAlignRight);
 }
 
 ////////////////////////////////////////////////////////////

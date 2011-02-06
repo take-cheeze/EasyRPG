@@ -43,7 +43,6 @@ public:
 	static bool Exists(const std::string& name);
 	static void Dispose();
 
-	static const std::string default_name;
 	static const int default_size = 9;
 	static const bool default_bold = false;
 	static const bool default_italic = false;
@@ -61,6 +60,7 @@ public:
 	const bool italic;
 protected:
 	static boost::ptr_vector<Font> fonts;
+	static std::string const default_name;
 };
 
 #endif

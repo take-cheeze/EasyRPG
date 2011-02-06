@@ -149,7 +149,7 @@ void GlBitmapScreen::MakeBushTex() {
 	if (bush_tex == 0)
 		glGenTextures(1, &bush_tex);
 
-	std::verts<uint8> bush_pixels(h);
+	std::vector<uint8> bush_pixels(h);
 	for (int i = 0; i < h; i++)
 		bush_pixels[i] = i < h - bush_effect
 			? opacity_top_effect

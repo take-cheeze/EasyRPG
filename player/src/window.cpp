@@ -47,6 +47,15 @@ Window::Window():
 	opacity(255),
 	back_opacity(255),
 	contents_opacity(255),
+	windowskin_screen( BitmapScreen::CreateBitmapScreen().release() ),
+	contents_screen( BitmapScreen::CreateBitmapScreen().release() ),
+	background( BitmapScreen::CreateBitmapScreen().release() ),
+	frame_down( BitmapScreen::CreateBitmapScreen().release() ),
+	frame_up( BitmapScreen::CreateBitmapScreen().release() ),
+	frame_left( BitmapScreen::CreateBitmapScreen().release() ),
+	frame_right( BitmapScreen::CreateBitmapScreen().release() ),
+	cursor1( BitmapScreen::CreateBitmapScreen().release() ),
+	cursor2( BitmapScreen::CreateBitmapScreen().release() ),
 	cursor_frame(0),
 	pause_frame(0),
 	animation_frames(0),
@@ -55,17 +64,6 @@ Window::Window():
 
 	zobj = Graphics::RegisterZObj(0, ID);
 	Graphics::RegisterDrawable(ID, this);
-	
-	windowskin_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
-	contents_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
-
-	background.reset( BitmapScreen::CreateBitmapScreen().release() );
-	frame_down.reset( BitmapScreen::CreateBitmapScreen().release() );
-	frame_up.reset( BitmapScreen::CreateBitmapScreen().release() );
-	frame_left.reset( BitmapScreen::CreateBitmapScreen().release() );
-	frame_right.reset( BitmapScreen::CreateBitmapScreen().release() );
-	cursor1.reset( BitmapScreen::CreateBitmapScreen().release() );
-	cursor2.reset( BitmapScreen::CreateBitmapScreen().release() );
 }
 
 ////////////////////////////////////////////////////////////
@@ -355,7 +353,7 @@ Surface* Window::GetContents() const {
 	return contents.get();
 }
 void Window::SetContents(std::auto_ptr<Surface> ncontents) {
-	contents.reset( ncontents.release() );
+	contents << ncontents;
 	contents_screen->SetBitmap(contents.get());
 }
 

@@ -30,6 +30,7 @@
 Sprite::Sprite() :
 	type(TypeSprite),
 	ID(Graphics::drawable_id++),
+	bitmap_screen(BitmapScreen::CreateBitmapScreen().release()),
 	visible(true),
 	x(0),
 	y(0),
@@ -38,8 +39,6 @@ Sprite::Sprite() :
 	oy(0),
 	flash_duration(0),
 	flash_frame(0) {
-
-	bitmap_screen.reset( BitmapScreen::CreateBitmapScreen().release() );
 
 	zobj = Graphics::RegisterZObj(0, ID);
 	Graphics::RegisterDrawable(ID, this);

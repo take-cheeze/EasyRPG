@@ -28,6 +28,7 @@
 
 #include "surface.hpp"
 #include "pixel_format.hpp"
+#include "bitmap_utils.hpp"
 
 ////////////////////////////////////////////////////////////
 /// SoftBitmap class.
@@ -35,31 +36,11 @@
 class SoftBitmap : public Surface {
 public:
 	SoftBitmap(int width, int height, bool transparent);
+	SoftBitmap(void *pixels, int width, int height, int pitch);
 	SoftBitmap(const std::string& filename, bool transparent, uint32 flags);
 	SoftBitmap(const uint8* data, uint bytes, bool transparent, uint32 flags);
 	SoftBitmap(Bitmap* source, Rect src_rect, bool transparent);
 	~SoftBitmap();
-
-	Color GetPixel(int x, int y);
-	void SetPixel(int x, int y, const Color &color);
-	void Blit(int x, int y, Bitmap* src, Rect src_rect, int opacity);
-	void TiledBlit(Rect src_rect, Bitmap* src, Rect dst_rect, int opacity);
-	void TiledBlit(int ox, int oy, Rect src_rect, Bitmap* src, Rect dst_rect, int opacity);
-	void StretchBlit(Bitmap* src, Rect src_rect, int opacity);
-	void StretchBlit(Rect dst_rect, Bitmap* src, Rect src_rect, int opacity);
-	void Mask(int x, int y, Bitmap* src, Rect src_rect);
-	void Fill(const Color &color);
-	void FillRect(Rect dst_rect, const Color &color);
-	void Clear();
-	void ClearRect(Rect dst_rect);
-	void HueChange(double hue);
-	void HSLChange(double hue, double sat, double lum, double loff, Rect dst_rect);
-	void ToneChange(const Tone &tone);
-	void Flip(bool horizontal, bool vertical);
-	void OpacityChange(int opacity, const Rect &src_rect);
-	std::auto_ptr<Bitmap> Resample(int scale_w, int scale_h, const Rect& src_rect);
-	std::auto_ptr<Bitmap> RotateScale(double angle, int scale_w, int scale_h);
-	std::auto_ptr<Bitmap> Waver(int depth, double phase);
 
 	void SetTransparentColor(Color color);
 
@@ -77,14 +58,17 @@ public:
 protected:
 	friend class SoftBitmapScreen;
 
-	typedef format_B8G8R8A8 pixel_format;
-	typedef format_R8G8B8A8 image_format;
+	static const format_B8G8R8A8_a pixel_format;
+	static const format_B8G8R8A8_n opaque_format;
+	static const format_R8G8B8A8_a image_format;
 
 	/// Bitmap data.
 	int w, h;
+	int _pitch;
 	void* bitmap;
+	bool destroy;
 
-	void Init(int width, int height);
+	void Init(int width, int height, void* data, int pitch = 0, bool destroy = true);
 
 	Color GetColor(uint32 color) const;
 	uint32 GetUint32Color(const Color &color) const;
@@ -95,6 +79,7 @@ protected:
 	void Unlock();
 
 	void ConvertImage(int& width, int& height, void*& pixels);
+	void SetupFormat();
 };
 
 #endif

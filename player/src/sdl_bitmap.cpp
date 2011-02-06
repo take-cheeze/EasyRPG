@@ -35,10 +35,12 @@
 #include <SDL_image.h>
 #include "image_xyz.hpp"
 //#include "SDL_rotozoom.h"
-#include <SDL_ttf.h>
+#include "SDL_ttf.h"
 #include "sdl_ui.hpp"
 #include "util_macro.hpp"
 #include "utils.hpp"
+#include "pixel_format.hpp"
+#include "bitmap_utils.hpp"
 
 ////////////////////////////////////////////////////////////
 #ifdef USE_ALPHA
@@ -97,7 +99,7 @@ SDL_Surface* SdlBitmap::ReadXYZ(const std::string& filename, const uint8 *data, 
 #else
 	SDL_Surface* src = SDL_CreateRGBSurfaceFrom(pixels, w, h, 32, w * 4, 0xFF000000, 0x00FF0000, 0x0000FF00, 0);
 #endif
-	SDL_Surface* dst = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, ((SdlUi*)DisplayUi.get())->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
+	SDL_Surface* dst = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
 
 	SDL_Rect rect = {0, 0, (uint16) w, (uint16) h};
 	SDL_BlitSurface(src, &rect, dst, &rect);
@@ -109,14 +111,44 @@ SDL_Surface* SdlBitmap::ReadXYZ(const std::string& filename, const uint8 *data, 
 }
 
 ////////////////////////////////////////////////////////////
-SdlBitmap::SdlBitmap(int width, int height, bool itransparent) {
+void SdlBitmap::SetupFormat(SDL_PixelFormat* fmt) {
+#ifdef USE_ALPHA
+	uint32 amask = ~(fmt->Rmask | fmt->Gmask | fmt->Bmask);
+	PF::AlphaType alpha = transparent ? PF::Alpha : PF::NoAlpha;
+#else
+	uint32 amask = 0;
+	PF::AlphaType alpha = transparent ? PF::ColorKey : PF::NoAlpha;
+#endif
+	format = DynamicFormat((int) fmt->BitsPerPixel, fmt->Rmask, fmt->Gmask, fmt->Bmask, amask, alpha);
+}
+
+SdlBitmap::SdlBitmap(void *pixels, int width, int height, int depth, int pitch, uint32 Rmask, uint32 Gmask, uint32 Bmask, uint32 Amask) {
+	transparent = false;
+
+	bitmap = SDL_CreateRGBSurfaceFrom(pixels, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask);
+
+	if (bitmap == NULL) {
+		Output::Error("Couldn't create %dx%d bitmap.\n%s\n", width, height, SDL_GetError());
+	}
+
+	SetupFormat(bitmap->format);
+
+}
+
+////////////////////////////////////////////////////////////
+SdlBitmap::SdlBitmap(int width, int height, int bpp, bool itransparent) {
 	transparent = itransparent;
+
+	if ( !bpp ) {
+		assert(DisplayUi);
+		bpp = ((SdlUi*)DisplayUi)->GetDisplaySurface()->bpp() * 8;
+	}
 
 	uint32 flags = SDL_SWSURFACE;
 	if (transparent)
 		flags |= TRANSPARENT_FLAGS;
 
-	SDL_Surface* temp = SDL_CreateRGBSurface(flags, width, height, ((SdlUi*)DisplayUi.get())->GetDisplaySurface()->bpp() * 8, 0, 0, 0, 0);
+	SDL_Surface* temp = SDL_CreateRGBSurface(flags, width, height, bpp, 0, 0, 0, 0);
 
 	if (temp == NULL) {
 		Output::Error("Couldn't create %dx%d image.\n%s\n", width, height, SDL_GetError());
@@ -127,6 +159,8 @@ SdlBitmap::SdlBitmap(int width, int height, bool itransparent) {
 	if (bitmap == NULL) {
 		Output::Error("Couldn't optimize %dx%d image.\n%s\n", width, height, SDL_GetError());
 	}
+
+	SetupFormat(bitmap->format);
 
 	SDL_FreeSurface(temp);
 }
@@ -153,6 +187,8 @@ SdlBitmap::SdlBitmap(const std::string& filename, bool itransparent, uint32 flag
 		Output::Error("Couldn't optimize %s image.\n%s\n", filename.c_str(), SDL_GetError());
 	}
 	SDL_FreeSurface(temp);
+
+	SetupFormat(bitmap->format);
 
 	CheckPixels(flags);
 }
@@ -186,6 +222,8 @@ SdlBitmap::SdlBitmap(const uint8* data, uint bytes, bool itransparent, uint32 fl
 
 	SDL_FreeSurface(temp);
 
+	SetupFormat(bitmap->format);
+
 	CheckPixels(flags);
 }
 
@@ -210,10 +248,16 @@ SdlBitmap::SdlBitmap(Bitmap* source, Rect src_rect, bool itransparent) {
 
 	SDL_FreeSurface(temp);
 
+	#ifdef USE_ALPHA
+	Clear();
+	#else
 	if ((((SdlBitmap*)source)->bitmap->flags & SDL_SRCCOLORKEY) == SDL_SRCCOLORKEY && transparent) {
 		SDL_FillRect(bitmap, NULL, ((SdlBitmap*)source)->bitmap->format->colorkey);
 		SDL_SetColorKey(bitmap, COLORKEY_FLAGS, ((SdlBitmap*)source)->bitmap->format->colorkey);
 	}
+	#endif
+
+	SetupFormat(bitmap->format);
 
 	Blit(0, 0, source, src_rect, 255);
 }
@@ -222,6 +266,8 @@ SdlBitmap::SdlBitmap(SDL_Surface* bitmap, bool itransparent) :
 	bitmap(bitmap) {
 
 	transparent = itransparent;
+
+	SetupFormat(bitmap->format);
 }
 
 ////////////////////////////////////////////////////////////
@@ -309,19 +355,12 @@ void SdlBitmap::RemovePaletteColorkeyDuplicates(SDL_Surface* src, SDL_Color* col
 
 ////////////////////////////////////////////////////////////
 void SdlBitmap::Blit(int x, int y, Bitmap* src, Rect src_rect, int opacity) {
-	SDL_Rect src_r = {(int16)src_rect.x, (int16)src_rect.y, (uint16)src_rect.width, (uint16)src_rect.height};
-	SDL_Rect dst_r = {(int16)x, (int16)y, 0, 0};
-
 	#ifdef USE_ALPHA
-	if (opacity < 255)
 		Surface::Blit(x, y, src, src_rect, opacity);
-	else {
-		bool has_alpha = (((SdlBitmap*)src)->bitmap->flags & SDL_SRCALPHA) != 0;
-		SDL_SetAlpha(((SdlBitmap*)src)->bitmap, 0, 255);
-		SDL_BlitSurface(((SdlBitmap*)src)->bitmap, &src_r, bitmap, &dst_r);
-		SDL_SetAlpha(((SdlBitmap*)src)->bitmap, has_alpha ? SDL_SRCALPHA : 0, 255);
-	}
 	#else
+		SDL_Rect src_r = {(int16)src_rect.x, (int16)src_rect.y, (uint16)src_rect.width, (uint16)src_rect.height};
+		SDL_Rect dst_r = {(int16)x, (int16)y, 0, 0};
+
 		if (opacity < 255) SDL_SetAlpha(((SdlBitmap*)src)->bitmap, SETALPHA_FLAGS, (uint8)opacity);
 
 		SDL_BlitSurface(((SdlBitmap*)src)->bitmap, &src_r, bitmap, &dst_r);
@@ -360,7 +399,7 @@ void SdlBitmap::FillRect(Rect dst_rect, const Color &color) {
 ////////////////////////////////////////////////////////////
 void SdlBitmap::Mask(int x, int y, Bitmap* src, Rect src_rect) {
 	#ifdef USE_ALPHA
-		Surface::Mask(x, y, src, src_rect);
+		Surface::MaskBlit(x, y, src, src_rect);
 	#else
 		src->SetTransparentColor(Color(255,255,255,0));
 		Blit(x, y, src, src_rect, 255);
@@ -373,9 +412,8 @@ void SdlBitmap::Mask(int x, int y, Bitmap* src, Rect src_rect) {
 ////////////////////////////////////////////////////////////
 void SdlBitmap::SetTransparentColor(Color color) {
 	#ifndef USE_ALPHA
-		SDL_SetColorKey(bitmap, COLORKEY_FLAGS, GetUint32Color(color));
-
-		//colorkey = GetUint32Color(color);
+		uint32 colorkey = GetUint32Color(color);
+		SDL_SetColorKey(bitmap, COLORKEY_FLAGS, colorkey);
 	#endif
 }
 

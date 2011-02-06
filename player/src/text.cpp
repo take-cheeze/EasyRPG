@@ -139,7 +139,7 @@ void Text::Draw(Surface* dest, int x, int y, int color, std::wstring wtext, Surf
 			char_surface->Blit(6, 0, system, clip_system, 255);
 		}
 		// Blit mask onto background
-		char_surface->Mask(0, 0, mask.get(), mask->GetRect());
+		char_surface->MaskBlit(0, 0, mask.get(), mask->GetRect());
 
 		std::auto_ptr<Surface> char_shadow = Surface::CreateSurface(mask->GetWidth(), mask->GetHeight(), true);
 		#ifndef USE_ALPHA
@@ -150,7 +150,7 @@ void Text::Draw(Surface* dest, int x, int y, int color, std::wstring wtext, Surf
 		// Blit solid color background
 		char_shadow->Fill(shadow_color);
 		// Blit mask onto background
-		char_shadow->Mask(0, 0, mask.get(), mask->GetRect());
+		char_shadow->MaskBlit(0, 0, mask.get(), mask->GetRect());
 
 		// Blit first shadow and then text
 		text_surface->Blit(next_glyph_rect.x + 1, next_glyph_rect.y + 1, char_shadow.get(), char_shadow->GetRect(), 255);

@@ -54,19 +54,19 @@ bool Window_EquipItem::CheckInclude(int item_id) {
 	int const type = Main_Data::project->getLDB().item()[item_id][3].to<int>();
 	switch (equip_type) {
 	case Window_EquipItem::weapon:
-		result = (type == 1 /* RPG::Item::Type_weapon */);
+		result = (type == rpg2k::Item::WEAPON);
 		break;
 	case Window_EquipItem::shield:
-		result = (type == 2 /* RPG::Item::Type_shield */);
+		result = (type == rpg2k::Item::SHIELD);
 		break;
 	case Window_EquipItem::armor:
-		result = (type == 3 /* RPG::Item::Type_armor */);
+		result = (type == rpg2k::Item::ARMOR);
 		break;
 	case Window_EquipItem::helmet:
-		result = (type == 4 /* RPG::Item::Type_helmet */);
+		result = (type == rpg2k::Item::HELMET);
 		break;
 	case Window_EquipItem::other:
-		result = (type == 5 /* RPG::Item::Type_accessory */);
+		result = (type == rpg2k::Item::ACCESSORY);
 		break;
 	default:
 		return false;

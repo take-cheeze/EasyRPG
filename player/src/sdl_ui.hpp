@@ -42,7 +42,7 @@ public:
 	/// @param title : window title
 	/// @param fullscreen : start in fullscreen flag
 	///////////////////////////////////////////////////////
-	SdlUi(long width, long height, const std::string title, bool fullscreen);
+	SdlUi(long width, long height, const std::string title,	bool fullscreen);
 
 	///////////////////////////////////////////////////////
 	/// Destructor.
@@ -65,8 +65,8 @@ public:
 	std::auto_ptr<Bitmap> EndScreenCapture();
 	void SetTitle(const std::string &title);
 	void DrawScreenText(const std::string &text);
-	void DrawScreenText(const std::string &text, int x, int y, Color color = Color(255, 255, 255, 0));
-	void DrawScreenText(const std::string &text, Rect dst_rect, Color color = Color(255, 255, 255, 0));
+	void DrawScreenText(const std::string &text, int x, int y, Color color = Color(255, 255, 255, 255));
+	void DrawScreenText(const std::string &text, Rect dst_rect, Color color = Color(255, 255, 255, 255));
 	bool ShowCursor(bool flag);
 	
 	void ProcessEvents();
@@ -114,11 +114,11 @@ protected:
 	//@}
 
 	///////////////////////////////////////////////////////
-	/// Blit a surface scaled x2 to another surface.
-	/// @param src : source surface
+	/// Blit a bitmap scaled x2 to an SDL surface.
+	/// @param src : source bitmap
 	/// @param dst : destination surface
 	///////////////////////////////////////////////////////
-	void Blit2X(Surface* src, SDL_Surface* dst);
+	void Blit2X(Bitmap* src, SDL_Surface* dst);
 
 	///////////////////////////////////////////////////////
 	/// Set app icon.
@@ -159,7 +159,7 @@ protected:
 	SDL_Surface* main_window;
 
 	/// Surface used for zoom.
-	std::auto_ptr<Surface> main_surface;
+	boost::scoped_ptr<Surface> main_surface;
 
 	/// Color for display background
 	uint32 back_color;

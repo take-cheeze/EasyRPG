@@ -31,7 +31,7 @@ class Sprite_Character : public Sprite {
 public:
 	////////////////////////////////////////////////////////
 	/// Constructor.
-	/// @param character : game character to display
+	/// @param character :	game character to display
 	////////////////////////////////////////////////////////
 	Sprite_Character(Game_Character* character);
 

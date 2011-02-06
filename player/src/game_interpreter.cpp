@@ -337,7 +337,9 @@ void Game_Interpreter::Update() {
 
 		if (list.empty()) {
 			if (!Main_Data::game_player->IsTeleporting() && main_flag) {
-				SetupStartingEvent();
+				if (Game_Map::GetNeedRefresh()) {
+					Game_Map::Refresh();
+				}
 			}
 
 			if (list.empty()) {
@@ -358,11 +360,7 @@ void Game_Interpreter::Update() {
 ////////////////////////////////////////////////////////////
 /// Setup Starting Event
 ////////////////////////////////////////////////////////////
-void Game_Interpreter::SetupStartingEvent() {
-
-	if (Game_Map::GetNeedRefresh()) {
-		Game_Map::Refresh();
-	}
+void Game_Interpreter::SetupStartingEvent(Game_Event* ev) {
 
 	if (Game_Temp::common_event_id > 0) {
 		Setup(Main_Data::commonEvent(Game_Temp::common_event_id)[22].toEvent(), 0);
@@ -370,27 +368,23 @@ void Game_Interpreter::SetupStartingEvent() {
 		return;
 	}
 
-	Game_Event* _event;
-	for (tEventHash::iterator i = Game_Map::GetEvents().begin(); i != Game_Map::GetEvents().end(); i++) {
-		_event = i->second;
-		
-		if (_event->GetStarting()) {
-			_event->ClearStarting();
-			Setup(_event->GetList(), _event->GetId(), _event->GetX(), _event->GetY());
-			return;
-		}
-	}
+	ev->ClearStarting();
+	Setup(ev->GetList(), ev->GetId(), ev->GetX(), ev->GetY());
 
 	using rpg2k::structure::Array2D;
 	Array2D const& commonEvent = Main_Data::project->getLDB().commonEvent();
 	for (Array2D::const_iterator i = commonEvent.begin(); i != commonEvent.end(); ++i) {
 		// If trigger is auto run, and condition switch is ON
-		if ( ((*i->second)[11].to<int>() == 1) &&
-			 Game_Switches[(*i->second)[13].to<int>()]) {
+		if ( ((*i->second)[11].to<int>() == Game_Character::TriggerAutoStart) &&
+			Game_Switches[(*i->second)[13].to<int>()]) {
 			Setup((*i->second)[22].toEvent(), 0);
 			return;
 		}
 	}
+}
+
+void Game_Interpreter::SetupStartingEvent(Game_CommonEvent* ev) {
+	Setup(ev->GetList(), 0, ev->GetIndex(), -2);
 }
 
 ////////////////////////////////////////////////////////////
@@ -633,6 +627,8 @@ bool Game_Interpreter::ExecuteCommand() {
 			return CommandTileSubstitution();
 		case PanScreen:
 			return CommandPanScreen();
+		case SimulatedAttack:
+			return CommandSimulatedAttack();
 		default:
 			return true;
 	}
@@ -752,7 +748,6 @@ void Game_Interpreter::InputButton() {
 
 void Game_Interpreter::CommandEnd() {
 	CloseMessageWindow();
-	// list.clear();
 
 	if (teleport_pending) {
 		teleport_pending = false;
@@ -2373,7 +2368,7 @@ bool Game_Interpreter::CommandMessageOptions() { //code 10120
 }
 
 bool Game_Interpreter::CommandChangeSystemBGM() { //code 10660
-	/*
+	/* TODO
 	RPG::Music music;
 	int context = list[index][0];
 	music.name = list[index].string();
@@ -2387,7 +2382,7 @@ bool Game_Interpreter::CommandChangeSystemBGM() { //code 10660
 }
 
 bool Game_Interpreter::CommandChangeSystemSFX() { //code 10670
-	/*
+	/* TODO
 	RPG::Sound sound;
 	int context = list[index][0];
 	sound.name = list[index].string();
@@ -2428,9 +2423,9 @@ bool Game_Interpreter::CommandChangePBG() { // code 11720
 	Game_Map::SetParallaxName(name);
 
 	bool horz = list[index][0] != 0;
-	bool horz_auto = list[index][1] != 0;
-	int horz_speed = list[index][2];
-	bool vert = list[index][3] != 0;
+	bool vert = list[index][1] != 0;
+	bool horz_auto = list[index][2] != 0;
+	int horz_speed = list[index][3];
 	bool vert_auto = list[index][4] != 0;
 	int vert_speed = list[index][5];
 	Game_Map::SetParallaxScroll(horz, vert,
@@ -2913,7 +2908,7 @@ bool Game_Interpreter::CommandEraseEvent() { // code 12320
 		return true;
 
 	tEventHash& events = Game_Map::GetEvents();
-		events.find(event_id)->second->SetDisabled(true);
+	events.find(event_id)->second->SetDisabled(true);
 
 	return true;
 }
@@ -3133,5 +3128,39 @@ bool Game_Interpreter::CommandPanScreen() { // code 11060
 	}
 
 	return !wait;
+}
+
+bool Game_Interpreter::CommandSimulatedAttack() { // code 10500
+	std::vector<Game_Actor*> actors = GetActors(list[index][0],
+												list[index][1]);
+	int atk = list[index][2];
+	int def = list[index][3];
+	int spi = list[index][4];
+	int var = list[index][5];
+
+	for (std::vector<Game_Actor*>::iterator i = actors.begin(); 
+		 i != actors.end(); 
+		 i++) {
+		Game_Actor* actor = *i;
+		int result = atk;
+		result -= (actor->GetDef() * def) / 400;
+		result -= (actor->GetSpi() * spi) / 800;
+		if (var != 0) {
+			int rperc = var * 5;
+			int rval = rand() % (2 * rperc) - rperc;
+			result += result * rval / 100;
+		}
+
+		result = std::max(0, result);
+
+		int hp = actor->GetHp() - result;
+		hp = std::max(0, hp);
+		actor->SetHp(hp);
+
+		if (list[index][6] != 0)
+			Main_Data::setVar(list[index][7], result);
+	}
+
+	return true;
 }
 

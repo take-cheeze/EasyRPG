@@ -33,6 +33,7 @@
 #include "bitmap.hpp"
 #include "surface.hpp"
 #include "pixel_format.hpp"
+#include "bitmap_utils.hpp"
 
 ////////////////////////////////////////////////////////////
 /// PixmanBitmap class.
@@ -43,34 +44,34 @@ public:
 	PixmanBitmap(const std::string filename, bool transparent, uint32 flags);
 	PixmanBitmap(const uint8* data, uint bytes, bool transparent, uint32 flags);
 	PixmanBitmap(Bitmap* source, Rect src_rect, bool transparent);
+	PixmanBitmap(void *pixels, int width, int height, int pitch);
 	~PixmanBitmap();
+
+	std::auto_ptr<Bitmap> Resample(int scale_w, int scale_h, const Rect& src_rect);
 
 	void Blit(int x, int y, Bitmap* _src, Rect src_rect, int opacity);
 	void TiledBlit(Rect src_rect, Bitmap* _src, Rect dst_rect, int opacity);
 	void TiledBlit(int ox, int oy, Rect src_rect, Bitmap* src, Rect dst_rect, int opacity);
 	void StretchBlit(Bitmap* src, Rect src_rect, int opacity);
 	void StretchBlit(Rect dst_rect, Bitmap* src, Rect src_rect, int opacity);
-	void Mask(int x, int y, Bitmap* _src, Rect src_rect);
+	void TransformBlit(Rect dst_rect, Bitmap* src, Rect src_rect, const Matrix& inv);
+	void MaskBlit(int x, int y, Bitmap* src, Rect src_rect);
 	void Fill(const Color &color);
 	void FillRect(Rect dst_rect, const Color &color);
 	void Clear();
 	void ClearRect(Rect dst_rect);
+	void OpacityBlit(int x, int y, Bitmap* src, Rect src_rect, int opacity);
+	void ToneBlit(int x, int y, Bitmap* src, Rect src_rect, const Tone &tone);
+	void FlipBlit(int x, int y, Bitmap* src, Rect src_rect, bool horizontal, bool vertical);
+	void Flip(const Rect& dst_rect, bool horizontal, bool vertical);
+	void Blit2x(Rect dst_rect, Bitmap* _src, Rect src_rect);
 
-	void ToneChange(const Tone &tone);
-	void Flip(bool horizontal, bool vertical);
-	std::auto_ptr<Bitmap> Resample(int scale_w, int scale_h, const Rect& src_rect);
-	std::auto_ptr<Bitmap> RotateScale(double angle, int scale_w, int scale_h);
-	std::auto_ptr<Bitmap> Waver(int depth, double phase);
-	void OpacityChange(int opacity, const Rect& dst_rect);
-	void SetTransparentColor(Color color);
-
+	static const format_B8G8R8A8_a pixel_format;
+	static const format_B8G8R8A8_n opaque_format;
+	static const format_R8G8B8A8_a image_format;
 #ifndef USE_BIG_ENDIAN
-	typedef PixelFormat<32,false,true,false,true,8,16,8,8,8,0,8,24> pixel_format;
-	typedef PixelFormat<32,false,true,false,true,8,0,8,8,8,16,8,24> image_format;
 	static const pixman_format_code_t pixman_format = PIXMAN_a8r8g8b8;
 #else
-	typedef PixelFormat<32,false,true,false,true,8,8,8,16,8,24,8,0> pixel_format;
-	typedef PixelFormat<32,false,true,false,true,8,24,8,16,8,8,8,0> image_format;
 	static const pixman_format_code_t pixman_format = PIXMAN_b8g8r8a8;
 #endif
 
@@ -91,7 +92,7 @@ protected:
 	/// Bitmap data.
 	pixman_image_t *bitmap;
 
-	void Init(int width, int height, void* data);
+	void Init(int width, int height, void* data, int pitch = 0, bool destroy = true);
 
 	Color GetColor(uint32 color) const;
 	uint32 GetUint32Color(const Color &color) const;

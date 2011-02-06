@@ -414,7 +414,10 @@
     <ClCompile Include="..\..\src\image_xyz.cpp">
       <Filter>Source Files\Backend\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\blit.cpp">
+    <ClCompile Include="..\..\src\image_jpg.cpp">
+      <Filter>Source Files\Backend\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\image_bmp.cpp">
       <Filter>Source Files\Backend\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -776,7 +779,10 @@
     <ClInclude Include="..\..\src\image_png.h">
       <Filter>Source Files\Backend\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\blit.h">
+    <ClInclude Include="..\..\src\image_jpg.h">
+      <Filter>Source Files\Backend\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\image_bmp.h">
       <Filter>Source Files\Backend\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
