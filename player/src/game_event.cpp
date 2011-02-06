@@ -18,17 +18,17 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_event.h"
-#include "game_actor.h"
-#include "game_actors.h"
-#include "game_map.h"
-#include "game_party.h"
-#include "game_player.h"
-#include "game_switches.h"
-#include "game_variables.h"
-#include "game_system.h"
-#include "main_data.h"
-#include "player.h"
+#include "game_event.hpp"
+#include "game_actor.hpp"
+#include "game_actors.hpp"
+#include "game_map.hpp"
+#include "game_party.hpp"
+#include "game_player.hpp"
+#include "game_switches.hpp"
+#include "game_variables.hpp"
+#include "game_system.hpp"
+#include "main_data.hpp"
+#include "player.hpp"
 
 ////////////////////////////////////////////////////////////
 Game_Event::Game_Event(int map_id, const RPG::Event& event) :

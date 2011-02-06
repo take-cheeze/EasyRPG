@@ -23,9 +23,9 @@
 ////////////////////////////////////////////////////////////
 #include <vector>
 #include <map>
-#include "drawable.h"
-#include "bitmap.h"
-#include "bitmap_screen.h"
+#include "drawable.hpp"
+#include "bitmap.hpp"
+#include "bitmap_screen.hpp"
 
 ////////////////////////////////////////////////////////////
 /// TilemapLayer class.
@@ -35,6 +35,7 @@ public:
 	TilemapLayer(int ilayer);
 	~TilemapLayer();
 
+	void DrawTile(BitmapScreen* screen, int x, int y, int row, int col, bool autotile);
 	void Draw(int z_order);
 
 	void Update();
@@ -84,8 +85,6 @@ private:
 	unsigned long ID;
 	DrawableType type;
 	int layer;
-
-	bool have_invisible_tile;
 
 	void GenerateAutotileAB(short ID, short animID);
 	void GenerateAutotileD(short ID);

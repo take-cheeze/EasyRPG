@@ -19,9 +19,9 @@
 #define __game_screen__
 
 #include <boost/ptr_container/ptr_map.hpp>
-#include "plane.h"
-#include "surface.h"
-#include "game_picture.h"
+#include "plane.hpp"
+#include "surface.hpp"
+#include "game_picture.hpp"
 
 class Game_Screen {
 

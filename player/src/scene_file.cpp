@@ -20,11 +20,11 @@
 ////////////////////////////////////////////////////////////
 #include <algorithm>
 #include <vector>
-#include "game_system.h"
-#include "game_party.h"
-#include "input.h"
-#include "scene_file.h"
-#include "window_filetitle.h"
+#include "game_system.hpp"
+#include "game_party.hpp"
+#include "input.hpp"
+#include "scene_file.hpp"
+#include "window_filetitle.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_File::Scene_File(const std::string& message) :

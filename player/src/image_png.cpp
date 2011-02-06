@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #if defined(USE_SOFT_BITMAP) || defined(USE_PIXMAN_BITMAP)
 
 ////////////////////////////////////////////////////////////
@@ -23,8 +23,8 @@
 ////////////////////////////////////////////////////////////
 
 #include <png.h>
-#include "output.h"
-#include "image_png.h"
+#include "output.hpp"
+#include "image_png.hpp"
 
 ////////////////////////////////////////////////////////////
 static void read_data(png_structp png_ptr, png_bytep data, png_size_t length) {
@@ -53,7 +53,7 @@ void ImagePNG::ReadPNG(FILE* stream, const void* buffer, bool transparent,
 	if (stream != NULL)
 		png_init_io(png_ptr, stream);
 	else
-		png_set_read_fn(png_ptr, (voidp) &buffer, read_data);
+		png_set_read_fn(png_ptr, (png_voidp) &buffer, read_data);
 
 	png_read_info(png_ptr, info_ptr);
 

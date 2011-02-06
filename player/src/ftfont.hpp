@@ -18,14 +18,14 @@
 #ifndef _EASYRPG_FTFONT_H_
 #define _EASYRPG_FTFONT_H_
 
-#include "system.h"
+#include "system.hpp"
 #ifndef USE_SDL_TTF
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_BITMAP_H
-#include "font.h"
-#include "bitmap.h"
+#include "font.hpp"
+#include "bitmap.hpp"
 
 ////////////////////////////////////////////////////////////
 /// FTFont class

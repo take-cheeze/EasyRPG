@@ -18,18 +18,18 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_menu.h"
-#include "audio.h"
-#include "graphics.h"
-#include "game_party.h"
-#include "game_system.h"
-#include "input.h"
-#include "player.h"
-#include "scene_end.h"
-#include "scene_equip.h"
-#include "scene_item.h"
-#include "scene_map.h"
-#include "scene_skill.h"
+#include "scene_menu.hpp"
+#include "audio.hpp"
+#include "graphics.hpp"
+#include "game_party.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "player.hpp"
+#include "scene_end.hpp"
+#include "scene_equip.hpp"
+#include "scene_item.hpp"
+#include "scene_map.hpp"
+#include "scene_skill.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Menu::Scene_Menu(int menu_index) :
@@ -71,18 +71,11 @@ void Scene_Menu::Update() {
 void Scene_Menu::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Main_Data::vocabulary(106));
-	options.push_back(Main_Data::vocabulary(107));
-	options.push_back(Main_Data::vocabulary(108));
-	options.push_back(Main_Data::vocabulary(110));
-	options.push_back(Main_Data::vocabulary(117));
-	/*
-	options.push_back(Data::terms.command_item);
-	options.push_back(Data::terms.command_skill);
-	options.push_back(Data::terms.menu_equipment);
-	options.push_back(Data::terms.menu_save);
-	options.push_back(Data::terms.menu_quit);
-	*/
+	options.push_back(Main_Data::vocabulary(106)); // item
+	options.push_back(Main_Data::vocabulary(107)); // skill
+	options.push_back(Main_Data::vocabulary(108)); // equip
+	options.push_back(Main_Data::vocabulary(110)); // save
+	options.push_back(Main_Data::vocabulary(117)); // quit
 
 	command_window.reset(new Window_Command(options, 88));
 	command_window->SetIndex(menu_index);
@@ -132,10 +125,12 @@ void Scene_Menu::UpdateCommand() {
 				Game_System::SePlay(Main_Data::decisionSE());
 			}
 
+#ifdef _DEBUG
 			// Debug Test code to add items
 			for (int i = 1; i < 82; ++i) {
 				Game_Party::GainItem(i, 1);
 			}
+#endif
 			break;
 		case 4: // Quit Game
 			Game_System::SePlay(Main_Data::decisionSE());

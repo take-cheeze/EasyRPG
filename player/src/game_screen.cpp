@@ -16,8 +16,8 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <cstdlib>
-#include "options.h"
-#include "game_screen.h"
+#include "options.hpp"
+#include "game_screen.hpp"
 
 Game_Screen::Game_Screen() :
 	weather_plane(NULL),

@@ -15,8 +15,8 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "game_interpreter.h"
-#include "game_troop.h"
+#include "game_interpreter.hpp"
+#include "game_troop.hpp"
 
 Game_Troop::Game_Troop():
 	interpreter(NULL) {

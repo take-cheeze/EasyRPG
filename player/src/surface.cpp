@@ -21,14 +21,15 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-#include "utils.h"
-#include "cache.h"
-#include "bitmap.h"
-#include "bitmap_screen.h"
-#include "output.h"
-#include "text.h"
-#include "surface.h"
-#include "wcwidth.h"
+#include "utils.hpp"
+#include "cache.hpp"
+#include "bitmap.hpp"
+#include "bitmap_screen.hpp"
+#include "output.hpp"
+#include "text.hpp"
+#include "bitmap_utils.hpp"
+#include "surface.hpp"
+#include "wcwidth.hpp"
 
 #if defined(USE_SDL_BITMAP)
 	#include "sdl_bitmap.hpp"
@@ -43,26 +44,12 @@
 	#include "gl_bitmap.hpp"
 #endif
 
-#include "util_macro.h"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
-static int GetMaskByte(uint32 mask) {
-	const uint8* bytes = (const uint8*) &mask;
-	if (bytes[3] == 0xFF)
-		return 3;
-	if (bytes[2] == 0xFF)
-		return 2;
-	if (bytes[1] == 0xFF)
-		return 1;
-	if (bytes[0] == 0xFF)
-		return 0;
-	return 0;
-}
-
-////////////////////////////////////////////////////////////
-std::auto_ptr<Surface> Surface::CreateSurface(int width, int height, bool transparent) {
+std::auto_ptr<Surface> Surface::CreateSurface(int width, int height, int bpp, bool transparent) {
 	#if defined(USE_SDL_BITMAP)
-		return std::auto_ptr<Surface>(new SdlBitmap(width, height, transparent));
+	return std::auto_ptr<Surface>(new SdlBitmap(width, height, bpp, transparent));
 	#elif defined(USE_SOFT_BITMAP)
 		return std::auto_ptr<Surface>(new SoftBitmap(width, height, transparent));
 	#elif defined(USE_PIXMAN_BITMAP)
@@ -88,6 +75,18 @@ std::auto_ptr<Surface> Surface::CreateSurface(int width, int height, bool transp
 	#endif
 }
 
+std::auto_ptr<Surface> Surface::CreateSurfaceFrom(void *pixels, int width, int height, int depth, int pitch, uint32 Rmask, uint32 Gmask, uint32 Bmask, uint32 Amask) {
+	#if defined(USE_SDL_BITMAP)
+		return std::auto_ptr<Surface>(new SdlBitmap(pixels, width, height, depth, pitch, Rmask, Gmask, Bmask, Amask));
+	#elif defined(USE_SOFT_BITMAP)
+		return std::auto_ptr<Surface>(new SoftBitmap(pixels, width, height, pitch));
+	#elif defined(USE_PIXMAN_BITMAP)
+		return std::auto_ptr<Surface>(new PixmanBitmap(pixels, width, height, pitch));
+	#else
+		#error "No bitmap implementation selected"
+	#endif
+}
+
 ////////////////////////////////////////////////////////////
 Surface::Surface() :
 	editing(false) {
@@ -98,19 +97,12 @@ Surface::Surface() :
 void Surface::SetPixel(int x, int y, const Color &color) {
 	if (x < 0 || y < 0 || x >= width() || y >= height()) return;
 
-	Lock();
+	BitmapUtils* bm_utils = Begin();
 
-	if (bpp() == 2) {
-		uint16* dst_pixel = (uint16*)pixels() + x + y * pitch() / bpp();
-		dst_pixel[0] = (uint16)GetUint32Color(color);
-	} else if (bpp() == 4) {
-		uint32* dst_pixel = (uint32*)pixels() + x + y * pitch() / bpp();
-		dst_pixel[0] = GetUint32Color(color);
-	}
+	uint8* dst_pixels = pointer(x, y);
+	bm_utils->SetPixel(dst_pixels, color.red, color.green, color.blue, color.alpha);
 
-	Unlock();
-
-	RefreshCallback();
+	End();
 }
 
 ////////////////////////////////////////////////////////////
@@ -124,187 +116,29 @@ void Surface::Blit(int x, int y, Bitmap* src, Rect src_rect, int opacity) {
 	if (!Rect::AdjustRectangles(dst_rect, src_rect, GetRect()))
 		return;
 
-	if (opacity > 255) opacity = 255;
+	BitmapUtils* bm_utils = Begin(src);
 
-	Lock();
-	src->Lock();
+	if (opacity >= 255)
+		opacity = 255;
 
-	if (bpp() == 2) {
-		const uint16* src_pixels = (uint16*)src->pixels() + src_rect.x + src_rect.y * src->pitch() / bpp();
-		uint16* dst_pixels = (uint16*)pixels() + x + y * pitch() / bpp();
+	const uint8* src_pixels = src->pointer(src_rect.x, src_rect.y);
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
 
-		#ifdef USE_ALPHA
-			int src_stride = src->pitch() / bpp() - dst_rect.width;
-			int dst_stride = pitch() / bpp() - dst_rect.width;
+	bool opacity_blit = opacity < 255;
+	bool overlay_blit = bm_utils->GetSrcFormat().alpha_type != PF::NoAlpha;
 
-			uint8 src_r, src_g, src_b, src_a;
-			uint8 dst_r, dst_g, dst_b, dst_a;
-
-			for (int i = 0; i < dst_rect.height; i++) {
-				for (int j = 0; j < dst_rect.width; j++) {
-					GetColorComponents(src_pixels[0], src_r, src_g, src_b, src_a);
-					GetColorComponents(dst_pixels[0], dst_r, dst_g, dst_b, dst_a);
-
-					uint8 alpha = src_a * opacity / 255;
-
-					dst_r = (dst_r * (255 - alpha) + src_r * alpha) / 255;
-					dst_g = (dst_g * (255 - alpha) + src_g * alpha) / 255;
-					dst_b = (dst_b * (255 - alpha) + src_b * alpha) / 255;
-					dst_a = dst_a * (255 - alpha) / 255 + alpha;
-
-					dst_pixels[0] = (uint16)GetUint32Color(dst_r, dst_g, dst_b, dst_a);
-
-					src_pixels += 1;
-					dst_pixels += 1;
-				}
-				src_pixels += src_stride;
-				dst_pixels += dst_stride;
-			}
-		#else
-			if (opacity < 255) {
-				int src_stride = src->pitch() / bpp() - dst_rect.width;
-				int dst_stride = pitch() / bpp() - dst_rect.width;
-
-				uint8 src_r, src_g, src_b, src_a;
-				uint8 dst_r, dst_g, dst_b, dst_a;
-
-				for (int i = 0; i < dst_rect.height; i++) {
-					for (int j = 0; j < dst_rect.width; j++) {
-						if (transparent && src_pixels[0] == (uint16)colorkey()) continue;
-
-						GetColorComponents(src_pixels[0], src_r, src_g, src_b, src_a);
-						GetColorComponents(dst_pixels[0], dst_r, dst_g, dst_b, dst_a);
-
-						dst_r = (uint8)((dst_r * (255 - opacity) + src_r * opacity) / 255);
-						dst_g = (uint8)((dst_g * (255 - opacity) + src_g * opacity) / 255);
-						dst_b = (uint8)((dst_b * (255 - opacity) + src_b * opacity) / 255);
-						dst_a = (uint8)(dst_a * (255 - opacity) / 255 + opacity);
-
-						dst_pixels[0] = (uint16)GetUint32Color(dst_r, dst_g, dst_b, dst_a);
-
-						src_pixels += 1;
-						dst_pixels += 1;
-					}
-					src_pixels += src_stride;
-					dst_pixels += dst_stride;
-				}
-			} else if (transparent) {
-				int src_stride = src->pitch() / bpp() - dst_rect.width;
-				int dst_stride = pitch() / bpp() - dst_rect.width;
-
-				for (int i = 0; i < dst_rect.height; i++) {
-					for (int j = 0; j < dst_rect.width; j++) {
-						if (transparent && src_pixels[0] == (uint16)colorkey()) continue;
-
-						dst_pixels[0] = src_pixels[0];
-
-						src_pixels += 1;
-						dst_pixels += 1;
-					}
-					src_pixels += src_stride;
-					dst_pixels += dst_stride;
-				}
-			} else {
-				int stride = dst_rect.width * bpp();
-
-				for (int i = 0; i < dst_rect.height; i++) {
-					memcpy(dst_pixels, src_pixels, stride);
-
-					src_pixels += src->pitch() / bpp();
-					dst_pixels += pitch() / bpp();
-				}
-			}
-		#endif
-	} else if (bpp() == 4) {
-		const int rbyte = GetMaskByte(rmask());
-		const int gbyte = GetMaskByte(gmask());
-		const int bbyte = GetMaskByte(bmask());
-
-		#ifdef USE_ALPHA
-			const int abyte = GetMaskByte(amask());
-
-			const uint8* src_pixels = (uint8*)src->pixels() + src_rect.x * bpp() + src_rect.y * src->pitch();
-			uint8* dst_pixels = (uint8*)pixels() + x * bpp() + y * pitch();
-
-			int src_stride = src->pitch() - dst_rect.width * bpp();
-			int dst_stride = pitch() - dst_rect.width * bpp();
-
-			for (int i = 0; i < dst_rect.height; i++) {
-				for (int j = 0; j < dst_rect.width; j++) {
-					uint8 srca = src_pixels[abyte] * opacity / 255;
-
-					dst_pixels[rbyte] = (dst_pixels[rbyte] * (255 - srca) + src_pixels[rbyte] * srca) / 255;
-					dst_pixels[gbyte] = (dst_pixels[gbyte] * (255 - srca) + src_pixels[gbyte] * srca) / 255;
-					dst_pixels[bbyte] = (dst_pixels[bbyte] * (255 - srca) + src_pixels[bbyte] * srca) / 255;
-					dst_pixels[abyte] = dst_pixels[abyte] * (255 - srca) / 255 + srca;
-
-					src_pixels += bpp();
-					dst_pixels += bpp();
-				}
-				src_pixels += src_stride;
-				dst_pixels += dst_stride;
-			}
-		#else
-			if (opacity < 255) {
-				const uint8* src_pixels = (uint8*)src->pixels() + src_rect.x * bpp() + src_rect.y * src->pitch();
-				uint8* dst_pixels = (uint8*)pixels() + x * bpp() + y * pitch();
-
-				int src_stride = src->pitch() - dst_rect.width * bpp();
-				int dst_stride = pitch() - dst_rect.width * bpp();
-
-				for (int i = 0; i < dst_rect.height; i++) {
-					for (int j = 0; j < dst_rect.width; j++) {
-						if (transparent && ((uint32*)dst_pixels)[0] == colorkey()) continue;
-
-						dst_pixels[rbyte] = (uint8)((dst_pixels[rbyte] * (255 - opacity) + src_pixels[rbyte] * opacity) / 255);
-						dst_pixels[gbyte] = (uint8)((dst_pixels[gbyte] * (255 - opacity) + src_pixels[gbyte] * opacity) / 255);
-						dst_pixels[bbyte] = (uint8)((dst_pixels[bbyte] * (255 - opacity) + src_pixels[bbyte] * opacity) / 255);
-
-						src_pixels += bpp();
-						dst_pixels += bpp();
-					}
-					src_pixels += src_stride;
-					dst_pixels += dst_stride;
-				}
-			} else if (transparent) {
-				const uint32* src_pixels = (uint32*)src->pixels() + src_rect.x + src_rect.y * src->pitch() / bpp();
-				uint32* dst_pixels = (uint32*)pixels() + x + y * pitch() / bpp();
-
-				int src_stride = src->pitch() / bpp() - dst_rect.width;
-				int dst_stride = pitch() / bpp() - dst_rect.width;
-				
-				for (int i = 0; i < dst_rect.height; i++) {
-					for (int j = 0; j < dst_rect.width; j++) {
-						if (transparent && src_pixels[0] == colorkey()) continue;
-
-						dst_pixels[0] = src_pixels[0];
-
-						src_pixels += 1;
-						dst_pixels += 1;
-					}
-					src_pixels += src_stride;
-					dst_pixels += dst_stride;
-				}
-			} else {
-				const uint8* src_pixels = (uint8*)src->pixels() + src_rect.x * bpp() + src_rect.y * src->pitch();
-				uint8* dst_pixels = (uint8*)pixels() + x * bpp() + y * pitch();
-
-				int stride = dst_rect.width * bpp();
-
-				for (int i = 0; i < dst_rect.height; i++) {
-					memcpy(dst_pixels, src_pixels, stride);
-
-					src_pixels += src->pitch();
-					dst_pixels += pitch();
-				}
-			}
-		#endif
+	for (int i = 0; i < dst_rect.height; i++) {
+		if (opacity_blit)
+			bm_utils->OpacityBlit(dst_pixels, src_pixels, dst_rect.width, opacity);
+		else if (overlay_blit)
+			bm_utils->OverlayBlit(dst_pixels, src_pixels, dst_rect.width);
+		else
+			bm_utils->CopyBlit(dst_pixels, src_pixels, dst_rect.width);
+		src_pixels += src->pitch();
+		dst_pixels += pitch();
 	}
 
-	Unlock();
-	src->Unlock();
-
-	RefreshCallback();
+	End(src);
 }
 
 ////////////////////////////////////////////////////////////
@@ -322,14 +156,13 @@ void Surface::TiledBlit(Rect src_rect, Bitmap* src, Rect dst_rect, int opacity) 
 	Rect tile = src_rect;
 
 	for (int j = 0; j < y_blits; j++) {
-		tile.height = min(src_rect.height, dst_rect.height + dst_rect.y - j * src_rect.height);
+		tile.height = std::min(src_rect.height, dst_rect.height + dst_rect.y - j * src_rect.height);
 		for (int i = 0; i < x_blits; i++) {
-			tile.width = min(src_rect.width, dst_rect.width + dst_rect.x - i * src_rect.width);
+			tile.width = std::min(src_rect.width, dst_rect.width + dst_rect.x - i * src_rect.width);
 			Blit(dst_rect.x + i * src_rect.width, dst_rect.y + j * src_rect.height, src, tile, opacity);
 		}
 	}
 }
-
 
 ////////////////////////////////////////////////////////////
 void Surface::TiledBlit(int ox, int oy, Rect src_rect, Bitmap* src, Rect dst_rect, int opacity) {
@@ -363,7 +196,7 @@ void Surface::TiledBlit(int ox, int oy, Rect src_rect, Bitmap* src, Rect dst_rec
 			tile.height = src_rect.height;
 		}
 
-		tile.height = min(tile.height, dst_rect.y + dst_rect.height - dst_y);
+		tile.height = std::min(tile.height, dst_rect.y + dst_rect.height - dst_y);
 
 		for (int i = 0; i < x_blits; i++) {
 			dst_x = dst_rect.x + i * src_rect.width;
@@ -377,7 +210,7 @@ void Surface::TiledBlit(int ox, int oy, Rect src_rect, Bitmap* src, Rect dst_rec
 				tile.width = src_rect.width;
 			}
 
-			tile.width = min(tile.width, dst_rect.x + dst_rect.width - dst_x);
+			tile.width = std::min(tile.width, dst_rect.x + dst_rect.width - dst_x);
 
 			Blit(dst_x, dst_y, src, tile, opacity);
 		}
@@ -386,175 +219,264 @@ void Surface::TiledBlit(int ox, int oy, Rect src_rect, Bitmap* src, Rect dst_rec
 
 ////////////////////////////////////////////////////////////
 void Surface::StretchBlit(Bitmap* src, Rect src_rect, int opacity) {
-	if (src_rect.width == width() && src_rect.height == height()) {
+	if (src_rect.width == width() && src_rect.height == height())
 		Blit(0, 0, src, src_rect, opacity);
-	} else {
+	else
 		StretchBlit(GetRect(), src, src_rect, opacity);
-	}
 }
 
 ////////////////////////////////////////////////////////////
 void Surface::StretchBlit(Rect dst_rect, Bitmap* src, Rect src_rect, int opacity) {
 	if (src_rect.width == dst_rect.width && src_rect.height == dst_rect.height) {
 		Blit(dst_rect.x, dst_rect.y, src, src_rect, opacity);
-	} else {
-		src_rect.Adjust(src->width(), src->height());
-		if (src_rect.IsOutOfBounds(src->width(), src->height())) return;
-
-		if (dst_rect.IsOutOfBounds(width(), height())) return;
-
-		std::auto_ptr<Bitmap> resampled = src->Resample(dst_rect.width, dst_rect.height, src_rect);
-
-		Blit(dst_rect.x, dst_rect.y, resampled.get(), resampled->GetRect(), opacity);
+		return;
 	}
+
+	double zoom_x = (double)src_rect.width / dst_rect.width;
+	double zoom_y = (double)src_rect.height / dst_rect.height;
+
+	double sx0 = src_rect.x;
+	double sy0 = src_rect.y;
+	double sx1 = src_rect.x + src_rect.width;
+	double sy1 = src_rect.y + src_rect.height;
+	int dx0 = dst_rect.x;
+	int dy0 = dst_rect.y;
+	int dx1 = dst_rect.x + dst_rect.width;
+	int dy1 = dst_rect.y + dst_rect.height;
+
+	if (dx0 < 0) {
+		sx0 -= zoom_x * dx0;
+		dx0 = 0;
+	}
+
+	int dw = GetWidth();
+	if (dx1 - dw > 0) {
+		sx1 -= zoom_x * (dx1 - dw);
+		dx1 = dw;
+	}
+
+	if (dy0 < 0) {
+		sy0 -= zoom_y * dy0;
+		dy0 = 0;
+	}
+
+	int dh = GetHeight();
+	if (dy1 - dh > 0) {
+		sy1 -= zoom_y * (dy1 - dh);
+		dy1 = dh;
+	}
+
+	if (dx0 >= dx1 || dy0 >= dy1)
+		return;
+
+	BitmapUtils* bm_utils = Begin(src);
+
+	uint8* dst_pixels = pointer(dx0, dy0);
+	int step = (int)((sx1 - sx0) * (1 << BitmapUtils::FRAC_BITS)) / (dx1 - dx0);
+
+	bool opacity_blit = opacity < 255;
+	bool overlay_blit = bm_utils->GetSrcFormat().alpha_type != PF::NoAlpha;
+
+	for (int i = 0; i < dy1 - dy0; i++) {
+		const uint8* nearest_y = src->pointer(0, (int)(sy0 + i * zoom_y));
+		int x = (int)(sx0 * (1 << BitmapUtils::FRAC_BITS)) + step / 2;
+		if (opacity_blit)
+			bm_utils->OpacityScaleBlit(dst_pixels, nearest_y, dx1 - dx0, x, step, opacity);
+		else if (overlay_blit)
+			bm_utils->OverlayScaleBlit(dst_pixels, nearest_y, dx1 - dx0, x, step);
+		else
+			bm_utils->CopyScaleBlit(dst_pixels, nearest_y, dx1 - dx0, x, step);
+		dst_pixels += pitch();
+	}
+
+	End(src);
 }
 
 ////////////////////////////////////////////////////////////
-void Surface::Mask(int x, int y, Bitmap* src, Rect src_rect) {
-	Lock();
-	src->Lock();
-
-	if (bpp() == 2) {
-		#ifdef USE_ALPHA
-		for (int j = 0; j < src_rect.height; j++) {
-			uint16* src_pixels = (uint16*) src->pixels() + (src_rect.y + j) * src->pitch() / 2 + src_rect.x;
-			uint16* dst_pixels = (uint16*) pixels() + (y + j) * pitch() / 2 + x;
-			for (int i = 0; i < src_rect.width; i++) {
-				uint32 src_pix = (uint32) *src_pixels;
-				uint8 src_r, src_g, src_b, src_a;
-				GetColorComponents(src_pix, src_r, src_g, src_b, src_a);
-
-				uint32 dst_pix = (uint32) *dst_pixels;
-				uint8 dst_r, dst_g, dst_b, dst_a;
-				GetColorComponents(src_pix, dst_r, dst_g, dst_b, dst_a);
-
-				dst_pix = GetUint32Color(dst_r, dst_g, dst_b, src_a);
-
-				src_pixels++;
-				*dst_pixels++ = (uint16)dst_pix;
-			}
-		}
-		#else
-		const uint16 src_trans = src->colorkey();
-		const uint16 dst_trans = colorkey();
-
-		for (int j = 0; j < src_rect.height; j++) {
-			uint16* src_pixels = (uint16*) src->pixels() + (src_rect.y + j) * src->pitch() / src->bpp() + src_rect.x;
-			uint16* dst_pixels = (uint16*) pixels() + (y + j) * pitch() / bpp() + x;
-			for (int i = 0; i < src_rect.width; i++) {
-				if (*src_pixels == src_trans)
-					*dst_pixels = dst_trans;
-				src_pixels++;
-				dst_pixels++;
-			}
-		}
-		#endif
-	} else if (bpp() == 4) {
-		#ifdef USE_ALPHA
-		const int src_abyte = GetMaskByte(src->amask());
-		const int dst_abyte = GetMaskByte(amask());
-		const int src_bpp = src->bpp();
-		const int dst_bpp = bpp();
-
-		for (int j = 0; j < src_rect.height; j++) {
-			uint8* src_pixels = (uint8*) src->pixels() + (src_rect.y + j) * src->pitch() + src_rect.x * src_bpp;
-			uint8* dst_pixels = (uint8*) pixels() + (y + j) * pitch() + x * dst_bpp;
-			for (int i = 0; i < src_rect.width; i++) {
-				dst_pixels[dst_abyte] = src_pixels[src_abyte];
-				src_pixels += src_bpp;
-				dst_pixels += dst_bpp;
-			}
-		}
-		#else
-		const uint32 src_trans = src->colorkey();
-		const uint32 dst_trans = colorkey();
-
-		for (int j = 0; j < src_rect.height; j++) {
-			uint32* src_pixels = (uint32*) src->pixels() + (src_rect.y + j) * src->pitch() / src->bpp() + src_rect.x;
-			uint32* dst_pixels = (uint32*) pixels() + (y + j) * pitch() / bpp() + x;
-			for (int i = 0; i < src_rect.width; i++) {
-				if (*src_pixels == src_trans)
-					*dst_pixels = dst_trans;
-				src_pixels++;
-				dst_pixels++;
-			}
-		}
-		#endif
+void Surface::FlipBlit(int x, int y, Bitmap* src, Rect src_rect, bool horizontal, bool vertical) {
+	if (!horizontal && !vertical) {
+		Blit(x, y, src, src_rect, 255);
+		return;
 	}
 
-	src->Unlock();
-	Unlock();
+	int ox = horizontal
+		? src_rect.x + src_rect.width - 1 + x
+		: src_rect.x - x;
+	int oy = vertical
+		? src_rect.y + src_rect.height - 1 + y
+		: src_rect.y - y;
 
-	RefreshCallback();
+	Rect dst_rect(x, y, 0, 0);
+
+	if (!Rect::AdjustRectangles(src_rect, dst_rect, src->GetRect()))
+		return;
+	if (!Rect::AdjustRectangles(dst_rect, src_rect, GetRect()))
+		return;
+
+	BitmapUtils* bm_utils = Begin(src);
+
+	int sx0 = horizontal ? ox - dst_rect.x : ox + dst_rect.x;
+	int sy0 = vertical   ? oy - dst_rect.y : oy + dst_rect.y;
+
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
+	const uint8* src_pixels = src->pointer(sx0, sy0);
+
+	if (horizontal && vertical) {
+		for (int y = 0; y < dst_rect.height; y++) {
+			bm_utils->FlipHBlit(dst_pixels, src_pixels, dst_rect.width);
+			dst_pixels += pitch();
+			src_pixels -= src->pitch();
+		}
+	} else if (horizontal) {
+		for (int y = 0; y < dst_rect.height; y++) {
+			bm_utils->FlipHBlit(dst_pixels, src_pixels, dst_rect.width);
+			dst_pixels += pitch();
+			src_pixels += src->pitch();
+		}
+	} else {
+		for (int y = 0; y < dst_rect.height; y++) {
+			bm_utils->CopyBlit(dst_pixels, src_pixels, dst_rect.width);
+			dst_pixels += pitch();
+			src_pixels -= src->pitch();
+		}
+	}
+
+	End(src);
+}
+
+////////////////////////////////////////////////////////////
+void Surface::TransformBlit(Rect dst_rect, Bitmap* src, Rect src_rect, const Matrix& inv) {
+	dst_rect.Adjust(GetWidth(), GetHeight());
+
+	BitmapUtils* bm_utils = Begin(src);
+
+	const uint8* src_pixels = (const uint8*)src->pointer(0, 0);
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
+
+	for (int y = dst_rect.y; y < dst_rect.y + dst_rect.height; y++) {
+		bm_utils->TransformBlit(dst_pixels, src_pixels, src->pitch(),
+								dst_rect.x, dst_rect.x + dst_rect.width, y,
+								src_rect, inv);
+		dst_pixels += pitch();
+	}
+
+	End(src);
+}
+
+////////////////////////////////////////////////////////////
+void Surface::TransformBlit(Rect dst_rect,
+							Bitmap* src, Rect src_rect,
+							double angle,
+							double scale_x, double scale_y,
+							int src_pos_x, int src_pos_y,
+							int dst_pos_x, int dst_pos_y) {
+	Matrix fwd = Matrix::Setup(angle, scale_x, scale_y,
+							   src_pos_x, src_pos_y,
+							   dst_pos_x, dst_pos_y);
+	Matrix inv = fwd.Inverse();
+
+	Rect rect = TransformRectangle(fwd, src_rect);
+	dst_rect.Adjust(rect);
+	if (dst_rect.IsEmpty())
+		return;
+
+	TransformBlit(dst_rect, src, src_rect, inv);
+}
+
+////////////////////////////////////////////////////////////
+void Surface::MaskBlit(int x, int y, Bitmap* src, Rect src_rect) {
+	Rect dst_rect(x, y, 0, 0);
+
+	if (!Rect::AdjustRectangles(src_rect, dst_rect, src->GetRect()))
+		return;
+	if (!Rect::AdjustRectangles(dst_rect, src_rect, GetRect()))
+		return;
+
+	BitmapUtils* bm_utils = Begin(src);
+
+	const uint8* src_pixels = src->pointer(src_rect.x, src_rect.y);
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
+
+	for (int j = 0; j < dst_rect.height; j++) {
+		bm_utils->MaskBlit(dst_pixels, src_pixels, dst_rect.width);
+		src_pixels += src->pitch();
+		dst_pixels += pitch();
+	}
+
+	End(src);
+}
+
+////////////////////////////////////////////////////////////
+void Surface::WaverBlit(int x, int y, Bitmap* src, Rect src_rect, int depth, double phase) {
+	if (y < 0) {
+		src_rect.y -= y;
+		src_rect.height += y;
+		y = 0;
+	}
+
+	if (y + src_rect.height > GetHeight()) {
+		int dy = y + src_rect.height - GetHeight();
+		src_rect.height -= dy;
+	}
+
+	BitmapUtils* bm_utils = Begin(src);
+
+	const uint8* src_pixels = src->pointer(src_rect.x, src_rect.y);
+	uint8* dst_pixels = pointer(x, y);
+	int dst_width = GetWidth();
+	int src_bytes = src->bpp();
+	int dst_bytes = bpp();
+
+	for (int y = 0; y < src_rect.height; y++) {
+		int offset = (int) (depth * (1 + sin((phase + y * 20) * 3.14159 / 180)));
+		int sx0 = 0;
+		int dx0 = offset;
+		int count = src_rect.width;
+		if (x + offset + count > dst_width)
+			count -= x + count + offset - dst_width;
+		if (x + offset < 0) {
+			sx0 -= x + offset;
+			dx0 -= x + offset;
+			count += x + offset;
+		}
+
+		bm_utils->OverlayBlit(&dst_pixels[dx0 * dst_bytes], &src_pixels[sx0 * src_bytes], count);
+
+		src_pixels += src->pitch();
+		dst_pixels += pitch();
+	}
+
+	End(src);
 }
 
 ////////////////////////////////////////////////////////////
 void Surface::Fill(const Color &color) {
-	Lock();
-
-	if (bpp() == 2) {
-		uint16 pixel = (uint16)GetUint32Color(color);
-
-		uint16* dst_pixels = (uint16*)pixels();
-
-		if (pitch() == width()) {
-			std::fill(dst_pixels, dst_pixels + height() * pitch(), pixel);
-		} else {
-			for (int i = 0; i < height(); i++) {
-				std::fill(dst_pixels, dst_pixels + width(), pixel);
-				dst_pixels += width();
-			}
-		}
-	} else if (bpp() == 4) {
-		uint32 pixel = GetUint32Color(color);
-
-		uint32* dst_pixels = (uint32*)pixels();
-
-		if (pitch() == width()) {
-			std::fill(dst_pixels, dst_pixels + height() * pitch(), pixel);
-		} else {
-			for (int i = 0; i < height(); i++) {
-				std::fill(dst_pixels, dst_pixels + width(), pixel);
-				dst_pixels += width();
-			}
-		}
-	}
-
-	Unlock();
-
-	RefreshCallback();
+	FillRect(GetRect(), color);
 }
 
 ////////////////////////////////////////////////////////////
 void Surface::FillRect(Rect dst_rect, const Color &color) {
 	dst_rect.Adjust(width(), height());
-	if (dst_rect.IsOutOfBounds(width(), height())) return;
+	if (dst_rect.IsOutOfBounds(width(), height()))
+		return;
 
-	Lock();
+	BitmapUtils* bm_utils = Begin();
 
-	if (bpp() == 2) {
-		uint16 pixel = (uint16)GetUint32Color(color);
+	uint8 pixel[4];
+	bm_utils->SetPixel(pixel, color.red, color.green, color.blue, color.alpha);
 
-		uint16* dst_pixels = (uint16*)pixels() + dst_rect.y * pitch() / bpp() + dst_rect.x;
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
 
+	if (dst_rect.width * bpp() == pitch())
+		bm_utils->SetPixels(dst_pixels, pixel, dst_rect.height * dst_rect.width);
+	else {
 		for (int i = 0; i < dst_rect.height; i++) {
-			std::fill(dst_pixels, dst_pixels + dst_rect.width, pixel);
-			dst_pixels += pitch() / bpp();
-		}
-	} else if (bpp() == 4) {
-		uint32 pixel = GetUint32Color(color);
-
-		uint32* dst_pixels = (uint32*)pixels() + dst_rect.y * pitch() / bpp() + dst_rect.x;
-
-		for (int i = 0; i < dst_rect.height; i++) {
-			std::fill(dst_pixels, dst_pixels + dst_rect.width, pixel);
-			dst_pixels += pitch() / bpp();
+			bm_utils->SetPixels(dst_pixels, pixel, dst_rect.width);
+			dst_pixels += pitch();
 		}
 	}
 
-	Unlock();
-
-	RefreshCallback();
+	End();
 }
 
 ////////////////////////////////////////////////////////////
@@ -568,88 +490,18 @@ void Surface::ClearRect(Rect dst_rect) {
 }
 
 ////////////////////////////////////////////////////////////
-void Surface::HueChange(double hue) {
-	HSLChange(hue, 1, 1, 0, GetRect());
+void Surface::HueChangeBlit(int x, int y, Bitmap* src, Rect src_rect, double hue) {
+	HSLBlit(x, y, src, src_rect, hue, 1, 1, 0);
 }
 
 ////////////////////////////////////////////////////////////
+void Surface::HSLBlit(int x, int y, Bitmap* src, Rect src_rect, double h, double s, double l, double lo) {
+	Rect dst_rect(x, y, 0, 0);
 
-static inline void RGB_to_HSL(const uint8& r, const uint8& g, const uint8& b,
-							  int &h, int &s, int &l)
-{
-	enum RGBOrder {
-		O_RGB,
-		O_RBG,
-		O_GRB,
-		O_GBR,
-		O_BRG,
-		O_BGR
-	} order = (r > g)
-		  ? ((r > b) ? ((g < b) ? O_RBG : O_RGB) : O_BRG)
-		  : ((r < b) ? ((g > b) ? O_GBR : O_BGR) : O_GRB);
-
-	int c = 0;
-	int l2 = 0;
-	switch (order) {
-		case O_RGB: c = (r - b); h = (c == 0) ? 0 : 0x100*(g - b)/c + 0x000; l2 = (r + b); break;
-		case O_RBG: c = (r - g); h = (c == 0) ? 0 : 0x100*(g - b)/c + 0x600; l2 = (r + g); break;
-		case O_GRB: c = (g - b); h = (c == 0) ? 0 : 0x100*(b - r)/c + 0x200; l2 = (g + b); break;
-		case O_GBR: c = (g - r); h = (c == 0) ? 0 : 0x100*(b - r)/c + 0x200; l2 = (g + r); break;
-		case O_BRG: c = (b - g); h = (c == 0) ? 0 : 0x100*(r - g)/c + 0x400; l2 = (b + g); break;
-		case O_BGR: c = (b - r); h = (c == 0) ? 0 : 0x100*(r - g)/c + 0x400; l2 = (b + r); break;
-	}
-
-	if (l2 == 0) {
-		s = 0;
-		l = 0;
-	}
-	else {
-		s = 0x100 * c / ((l2 > 0xFF) ? 0x1FF - l2 : l2);
-		l = l2 / 2;
-	}
-}
-
-static inline void HSL_to_RGB(const int& h, const int& s, const int& l,
-							  uint8 &r, uint8 &g, uint8 &b)
-{
-
-	int l2 = 2 * l;
-	int c = s * ((l2 > 0xFF) ? 0x1FF - l2 : l2) / 0x100;
-	int m = (l2 - c) / 2;
-	int h0 = h & 0xFF;
-	int h1 = 0xFF - h0;
-
-	switch (h >> 8) {
-		case 0: r = m + c; g = m + h0*c/0x100; b = m; break;
-		case 1: r = m + h1*c/0x100; g = m + c; b = m; break;
-		case 2: r = m; g = m + c; b = m + h0*c/0x100; break;
-		case 3: r = m; g = m + h1*c/0x100; b = m + c; break;
-		case 4: r = m + h0*c/0x100; g = m; b = m + c; break;
-		case 5: r = m + c; g = m; b = m + h1*c/0x100; break;
-	}
-}
-
-static inline void HSL_adjust(int& h, int& s, int& l,
-							  int hue, int sat, int lmul, int loff) {
-	h += hue;
-	if (h > 0x600) h -= 0x600;
-	s = s * sat / 0x100;
-	if (s > 0xFF) s = 0xFF;
-	l = l * lmul / 0x100 + loff;
-	l = (l > 0xFF) ? 0xFF : (l < 0) ? 0 : l;
-}
-
-static inline void RGB_adjust_HSL(uint8& r, uint8& g, uint8& b,
-								  int hue, int sat, int lmul, int loff) {
-	int h, s, l;
-	RGB_to_HSL(r, g, b, h, s, l);
-	HSL_adjust(h, s, l, hue, sat, lmul, loff);
-	HSL_to_RGB(h, s, l, r, g, b);
-}
-
-void Surface::HSLChange(double h, double s, double l, double lo, Rect dst_rect) {
-	dst_rect.Adjust(width(), height());
-	if (dst_rect.IsOutOfBounds(width(), height())) return;
+	if (!Rect::AdjustRectangles(src_rect, dst_rect, src->GetRect()))
+		return;
+	if (!Rect::AdjustRectangles(dst_rect, src_rect, GetRect()))
+		return;
 
 	int hue  = (int) (h / 60.0 * 0x100);
 	int sat  = (int) (s * 0x100);
@@ -661,288 +513,188 @@ void Surface::HSLChange(double h, double s, double l, double lo, Rect dst_rect) 
 	else if (hue > 0x600)
 		hue -= (hue / 0x600) * 0x600;
 
-	Lock();
+	BitmapUtils* bm_utils = Begin(src);
 
-	if (bpp() == 2) {
-		uint16* dst_pixels = (uint16*)pixels() + dst_rect.x + dst_rect.y * pitch() / bpp();
-		int pad = pitch() / bpp() - dst_rect.width;
+	const uint8* src_pixels = src->pointer(src_rect.x, src_rect.y);
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
 
-		for (int i = 0; i < dst_rect.height; i++) {
-			for (int j = 0; j < dst_rect.width; j++) {
-				#ifndef USE_ALPHA
-					if (transparent && dst_pixels[0] == (uint16)colorkey()) continue;
-				#endif
-				uint8 dst_r, dst_g, dst_b, dst_a;
-				GetColorComponents(dst_pixels[0], dst_r, dst_g, dst_b, dst_a);
-				RGB_adjust_HSL(dst_r, dst_g, dst_b, hue, sat, lum, loff);
-				dst_pixels[0] = (uint16)GetUint32Color(dst_r, dst_g, dst_b, dst_a);
-
-				dst_pixels += 1;
-			}
-			dst_pixels += pad;
-		}
-	} else if (bpp() == 4) {
-		const int rbyte = GetMaskByte(rmask());
-		const int gbyte = GetMaskByte(gmask());
-		const int bbyte = GetMaskByte(bmask());
-		uint8* dst_pixels = (uint8*) pixels() + dst_rect.x * bpp() + dst_rect.y * pitch();
-		int pad = pitch() - dst_rect.width * bpp();
-
-		for (int i = 0; i < dst_rect.height; i++) {
-			for (int j = 0; j < dst_rect.width; j++) {
-				#ifndef USE_ALPHA
-					if (transparent && dst_pixels[0] == colorkey()) continue;
-				#endif
-				RGB_adjust_HSL(dst_pixels[rbyte], dst_pixels[gbyte], dst_pixels[bbyte], hue, sat, lum, loff);
-
-				dst_pixels += bpp();
-			}
-			dst_pixels += pad;
-		}
+	for (int i = 0; i < dst_rect.height; i++) {
+		bm_utils->HSLBlit(dst_pixels, src_pixels, dst_rect.width, hue, sat, lum, loff);
+		dst_pixels += pitch();
 	}
 
-	Unlock();
-
-	RefreshCallback();
+	End(src);
 }
 
 ////////////////////////////////////////////////////////////
-void Surface::ToneChange(const Tone &tone) {
-	if (tone == Tone()) return;
+void Surface::ToneBlit(int x, int y, Bitmap* src, Rect src_rect, const Tone &tone) {
+	if (tone == Tone()) {
+		if (src != this)
+			Blit(x, y, src, src_rect, 255);
+		return;
+	}
 
-	Lock();
+	Rect dst_rect(x, y, 0, 0);
 
-	if (bpp() == 2) {
-		uint16* dst_pixels = (uint16*)pixels();
+	if (!Rect::AdjustRectangles(src_rect, dst_rect, src->GetRect()))
+		return;
+	if (!Rect::AdjustRectangles(dst_rect, src_rect, GetRect()))
+		return;
 
-		int stride = pitch() / bpp() - width();
+	BitmapUtils* bm_utils = Begin(src);
 
-		uint8 dst_r, dst_g, dst_b, dst_a;
+	const uint8* src_pixels = src->pointer(src_rect.x, src_rect.y);
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
 
-		if (tone.gray == 0) {
-			for (int i = 0; i < height(); i++) {
-				for (int j = 0; j < width(); j++) {
-					#ifndef USE_ALPHA
-						if (transparent && ((uint16*)dst_pixels)[0] == colorkey()) {
-							dst_pixels++;
-							continue;
-						}
-					#endif
-
-					GetColorComponents(dst_pixels[0], dst_r, dst_g, dst_b, dst_a);
-
-					dst_r = (uint8)max(min(dst_r + tone.red, 255), 0);
-					dst_g = (uint8)max(min(dst_g + tone.green, 255), 0);
-					dst_b = (uint8)max(min(dst_b + tone.blue, 255), 0);
-
-					dst_pixels[0] = (uint16)GetUint32Color(dst_r, dst_g, dst_b, dst_a);
-
-					dst_pixels++;
-				}
-				dst_pixels += stride;
-			}
-		} else {
-			double factor = (255 - tone.gray) / 255.0;
-			double gray;
-			for (int i = 0; i < height(); i++) {
-				for (int j = 0; j < width(); j++) {
-					#ifndef USE_ALPHA
-						if (transparent && ((uint16*)dst_pixels)[0] == colorkey()) {
-							dst_pixels++;
-							continue;
-						}
-					#endif
-
-					GetColorComponents(dst_pixels[0], dst_r, dst_g, dst_b, dst_a);
-
-					gray = dst_r * 0.299 + dst_g * 0.587 + dst_b * 0.114;
-
-					dst_r = (uint8)max(min((dst_r - gray) * factor + gray + tone.red + 0.5, 255.0), 0.0);
-					dst_g = (uint8)max(min((dst_g - gray) * factor + gray + tone.green + 0.5, 255.0), 0.0);
-					dst_b = (uint8)max(min((dst_b - gray) * factor + gray + tone.blue + 0.5, 255.0), 0.0);
-
-					dst_pixels++;
-				}
-				dst_pixels += stride;
-			}
+	if (tone.gray == 0) {
+		for (int i = 0; i < dst_rect.height; i++) {
+			bm_utils->ToneBlit(dst_pixels, src_pixels, dst_rect.width, tone);
+			src_pixels += src->pitch();
+			dst_pixels += pitch();
 		}
-	} else if (bpp() == 4) {
-		uint8* dst_pixels = (uint8*)pixels();
-
-		int stride = pitch() - width() * bpp();
-
-		const int rbyte = GetMaskByte(rmask());
-		const int gbyte = GetMaskByte(gmask());
-		const int bbyte = GetMaskByte(bmask());
-
-		if (tone.gray == 0) {
-			for (int i = 0; i < height(); i++) {
-				for (int j = 0; j < width(); j++) {
-					#ifndef USE_ALPHA
-						if (transparent && ((uint32*)dst_pixels)[0] == colorkey()) {
-							dst_pixels += bpp();
-							continue;
-						}
-					#endif
-
-					dst_pixels[rbyte] = (uint8)max(min(dst_pixels[rbyte] + tone.red, 255), 0);
-					dst_pixels[gbyte] = (uint8)max(min(dst_pixels[gbyte] + tone.green, 255), 0);
-					dst_pixels[bbyte] = (uint8)max(min(dst_pixels[bbyte] + tone.blue, 255), 0);
-
-					dst_pixels += bpp();
-				}
-				dst_pixels += stride;
-			}
-		} else {
-			double factor = (255 - tone.gray) / 255.0;
-			double gray;
-			for (int i = 0; i < height(); i++) {
-				for (int j = 0; j < width(); j++) {
-					#ifndef USE_ALPHA
-						if (transparent && ((uint32*)dst_pixels)[0] == colorkey()) {
-							dst_pixels += bpp();
-							continue;
-						}
-					#endif
-
-					gray = dst_pixels[rbyte] * 0.299 + dst_pixels[gbyte] * 0.587 + dst_pixels[bbyte] * 0.114;
-
-					dst_pixels[rbyte] = (uint8)max(min((dst_pixels[rbyte] - gray) * factor + gray + tone.red + 0.5, 255.0), 0.0);
-					dst_pixels[gbyte] = (uint8)max(min((dst_pixels[gbyte] - gray) * factor + gray + tone.green + 0.5, 255.0), 0.0);
-					dst_pixels[bbyte] = (uint8)max(min((dst_pixels[bbyte] - gray) * factor + gray + tone.blue + 0.5, 255.0), 0.0);
-
-					dst_pixels += bpp();
-				}
-				dst_pixels += stride;
-			}
+	} else {
+		double factor = (255 - tone.gray) / 255.0;
+		for (int i = 0; i < dst_rect.height; i++) {
+			bm_utils->ToneBlit(dst_pixels, src_pixels, dst_rect.width, tone, factor);
+			src_pixels += src->pitch();
+			dst_pixels += pitch();
 		}
 	}
 	
-	Unlock();
-
-	RefreshCallback();
+	End(src);
 }
 
 ////////////////////////////////////////////////////////////
-void Surface::Flip(bool horizontal, bool vertical) {
-	if (!horizontal && !vertical) return;
+void Surface::OpacityBlit(int x, int y, Bitmap* src, Rect src_rect, int opacity) {
+	if (opacity == 255) {
+		if (src != this)
+			Blit(x, y, src, src_rect, 255);
+		return;
+	}
 
-	Lock();
+	Rect dst_rect(x, y, 0, 0);
+
+	if (!Rect::AdjustRectangles(src_rect, dst_rect, src->GetRect()))
+		return;
+	if (!Rect::AdjustRectangles(dst_rect, src_rect, GetRect()))
+		return;
+
+	BitmapUtils* bm_utils = Begin(src);
+
+	const uint8* src_pixels = src->pointer(src_rect.x, src_rect.y);
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
+
+	for (int j = 0; j < dst_rect.height; j++) {
+		bm_utils->OpacityChangeBlit(dst_pixels, src_pixels, dst_rect.width, opacity);
+		src_pixels += src->pitch();
+		dst_pixels += pitch();
+	}
+
+	End(src);
+}
+
+////////////////////////////////////////////////////////////
+void Surface::Flip(const Rect& dst_rect, bool horizontal, bool vertical) {
+	if (!horizontal && !vertical)
+		return;
+
+	BitmapUtils* bm_utils = Begin();
 
 	if (horizontal && vertical) {
-		int stride = pitch() - width() * bpp();
+		int pad = pitch() - width() * bpp();
+		uint8* dst_pixels_first = pointer(dst_rect.x, dst_rect.y);
+		uint8* dst_pixels_last = pointer(dst_rect.x + dst_rect.width - 1, dst_rect.y + dst_rect.height - 1);
 
-		uint8* dst_pixels_first = (uint8*)pixels();
-		uint8* dst_pixels_last = (uint8*)pixels() + (width() - 1) * bpp() + (height() - 1) * pitch();
-
-		std::vector<uint8> tmp_buffer(bpp());
-
-		for (int i = 0; i < height() / 2; i++) {
-			for (int j = 0; j < width(); j++) {
-				if (dst_pixels_first == dst_pixels_last) break;
-
-				memcpy(&tmp_buffer.front(), dst_pixels_first, bpp());
-				memcpy(dst_pixels_first, dst_pixels_last, bpp());
-				memcpy(dst_pixels_last, &tmp_buffer.front(), bpp());
-
-				dst_pixels_first += bpp();
-				dst_pixels_last -= bpp();
-			}
-			dst_pixels_first += stride;
-			dst_pixels_last += stride;
+		for (int i = 0; i < dst_rect.height / 2; i++) {
+			bm_utils->FlipHV(dst_pixels_first, dst_pixels_last, dst_rect.width);
+			dst_pixels_first += pad;
+			dst_pixels_last -= pad;
 		}
 	} else if (horizontal) {
-		int stride_left = (width() - width() / 2) * bpp();
-		int stride_right = (width() + width() / 2) * bpp();
+		int pad_left = (dst_rect.width - dst_rect.width / 2) * bpp();
+		int pad_right = (dst_rect.width + dst_rect.width / 2) * bpp();
 
-		uint8* dst_pixels_left = (uint8*)pixels();
-		uint8* dst_pixels_right = (uint8*)pixels() + (width() - 1) * bpp();
+		uint8* dst_pixels_left = pointer(dst_rect.x, dst_rect.y);
+		uint8* dst_pixels_right = pointer(dst_rect.x + dst_rect.width - 1, dst_rect.y);
 
-		std::vector<uint8> tmp_buffer(bpp());
-
-		for (int i = 0; i < height(); i++) {
-			for (int j = 0; j < width() / 2; j++) {
-				if (dst_pixels_left == dst_pixels_right) continue;
-
-				memcpy(&tmp_buffer.front(), dst_pixels_left, bpp());
-				memcpy(dst_pixels_left, dst_pixels_right, bpp());
-				memcpy(dst_pixels_right, &tmp_buffer.front(), bpp());
-
-				dst_pixels_left += bpp();
-				dst_pixels_right -= bpp();
-			}
-			dst_pixels_left += stride_left;
-			dst_pixels_right += stride_right;
+		for (int i = 0; i < dst_rect.height; i++) {
+			bm_utils->FlipH(dst_pixels_left, dst_pixels_right, dst_rect.width / 2);
+			dst_pixels_left += pad_left;
+			dst_pixels_right += pad_right;
 		}
 	} else {
-		uint8* dst_pixels_up = (uint8*)pixels();
-		uint8* dst_pixels_down = (uint8*)pixels() + (height() - 1) * pitch();
+		uint8* dst_pixels_up = pointer(dst_rect.x, dst_rect.y);
+		uint8* dst_pixels_down = pointer(dst_rect.x, dst_rect.y + dst_rect.height - 1);
+		uint8* tmp_buffer = new uint8[dst_rect.width * bpp()];
 
-		int stride = width() * bpp();
-
-		std::vector<uint8> tmp_buffer(stride);
-
-		for (int i = 0; i < height() / 2; i++) {
-			if (dst_pixels_up == dst_pixels_down) break;
-
-			memcpy(&tmp_buffer.front(), dst_pixels_down, stride);
-			memcpy(dst_pixels_down, dst_pixels_up, stride);
-			memcpy(dst_pixels_up, &tmp_buffer.front(), stride);
-
+		for (int i = 0; i < dst_rect.height / 2; i++) {
+			if (dst_pixels_up == dst_pixels_down)
+				break;
+			bm_utils->FlipV(dst_pixels_up, dst_pixels_down, dst_rect.width, tmp_buffer);
 			dst_pixels_up += pitch();
 			dst_pixels_down -= pitch();
 		}
 	}
 
-	Unlock();
-
-	RefreshCallback();
+	End();
 }
 
 ////////////////////////////////////////////////////////////
-void Surface::OpacityChange(int opacity, const Rect& src_rect) {
-	if (opacity == 255)
+void Surface::Blit2x(Rect dst_rect, Bitmap* src, Rect src_rect) {
+	dst_rect.Halve();
+	if (!Rect::AdjustRectangles(src_rect, dst_rect, src->GetRect()))
 		return;
+	dst_rect.Double();
 
+	src_rect.Double();
+	if (!Rect::AdjustRectangles(dst_rect, src_rect, GetRect()))
+		return;
+	src_rect.Halve();
+
+	BitmapUtils* bm_utils = Begin(src);
+
+	const uint8* src_pixels = src->pointer(src_rect.x, src_rect.y);
+	uint8* dst_pixels = pointer(dst_rect.x, dst_rect.y);
+
+	for (int i = 0; i < src_rect.height; i++) {
+		const uint8* save = dst_pixels;
+		bm_utils->Blit2x(dst_pixels, src_pixels, src_rect.width);
+		dst_pixels += pitch();
+		memcpy(dst_pixels, save, 2 * src_rect.width * bpp());
+		dst_pixels += pitch();
+		src_pixels += src->pitch();
+	}
+
+	End(src);
+}
+
+////////////////////////////////////////////////////////////
+BitmapUtils* Surface::Begin() {
 	Lock();
 
-	if (bpp() == 2) {
-		uint8 dst_r, dst_g, dst_b, dst_a;
+	BitmapUtils* bm_utils = BitmapUtils::Create(format, format, false);
+	bm_utils->SetDstColorKey(colorkey());
+	return bm_utils;
+}
 
-		for (int j = src_rect.y; j < src_rect.y + src_rect.height; j++) {
-			uint16* dst_pixels = (uint16*) pixels() + j * pitch() / 2 + src_rect.x;
-			for (int i = src_rect.x; i < src_rect.x + src_rect.width; i++) {
-				GetColorComponents(dst_pixels[0], dst_r, dst_g, dst_b, dst_a);
-				dst_a = dst_a * opacity / 255;
+BitmapUtils* Surface::Begin(Bitmap* src) {
+	Lock();
+	src->Lock();
 
-				dst_pixels++;
-			}
-		}
-	} else if (bpp() == 4) {
-		const int abyte = GetMaskByte(amask());
+	BitmapUtils* bm_utils = BitmapUtils::Create(format, src->format, true);
+	bm_utils->SetDstColorKey(colorkey());
+	bm_utils->SetSrcColorKey(src->colorkey());
+	return bm_utils;
+}
 
-		for (int j = src_rect.y; j < src_rect.y + src_rect.height; j++) {
-			uint8* dst_pixels = (uint8*) pixels() + j * pitch() + src_rect.x * bpp();
-			for (int i = src_rect.x; i < src_rect.x + src_rect.width; i++) {
-				dst_pixels[abyte] = (dst_pixels[abyte] * opacity) / 255;
-				dst_pixels += bpp();
-			}
-		}
-	}
-	
+void Surface::End() {
 	Unlock();
-
 	RefreshCallback();
 }
 
-////////////////////////////////////////////////////////////
-void Surface::BeginEditing() {
-	editing = true;
-}
-
-void Surface::EndEditing() {
-	editing = false;
-
+void Surface::End(Bitmap* src) {
+	src->Unlock();
+	Unlock();
 	RefreshCallback();
 }
 
@@ -950,7 +702,6 @@ void Surface::RefreshCallback() {
 	if (editing) return;
 
 	std::list<BitmapScreen*>::iterator it;
-
 
 	for (it = attached_screen_bitmaps.begin(); it != attached_screen_bitmaps.end(); it++) {
 		(*it)->SetDirty();
@@ -1020,5 +771,43 @@ void Surface::TextDraw(int x, int y, int color, std::wstring wtext, TextAlignmen
 
 void Surface::TextDraw(int x, int y, int color, std::string text, TextAlignment align) {
 	TextDraw(x, y, color, Utils::DecodeUTF(text), align);
+}
+
+////////////////////////////////////////////////////////////
+Rect Surface::TransformRectangle(const Matrix& m, const Rect& rect) {
+	int sx0 = rect.x;
+	int sy0 = rect.y;
+	int sx1 = rect.x + rect.width;
+	int sy1 = rect.y + rect.height;
+
+	double x0, y0, x1, y1, x2, y2, x3, y3;
+	m.Transform(sx0, sy0, x0, y0);
+	m.Transform(sx1, sy0, x1, y1);
+	m.Transform(sx1, sy1, x2, y2);
+	m.Transform(sx0, sy1, x3, y3);
+
+	double xmin = std::min(std::min(x0, x1), std::min(x2, x3));
+	double ymin = std::min(std::min(y0, y1), std::min(y2, y3));
+	double xmax = std::max(std::max(x0, x1), std::max(x2, x3));
+	double ymax = std::max(std::max(y0, y1), std::max(y2, y3));
+
+	int dx0 = (int) floor(xmin);
+	int dy0 = (int) floor(ymin);
+	int dx1 = (int) ceil(xmax);
+	int dy1 = (int) ceil(ymax);
+
+	return Rect(dx0, dy0, dx1 - dx0, dy1 - dy0);
+}
+
+////////////////////////////////////////////////////////////
+Matrix Matrix::Setup(double angle,
+					 double scale_x, double scale_y,
+					 int src_pos_x, int src_pos_y,
+					 int dst_pos_x, int dst_pos_y) {
+	Matrix m = Matrix::Translation(-src_pos_x, -src_pos_y);
+	m = m.PreMultiply(Matrix::Scale(scale_x, scale_y));
+	m = m.PreMultiply(Matrix::Rotation(angle));
+	m = m.PreMultiply(Matrix::Translation(dst_pos_x, dst_pos_y));
+	return m;
 }
 

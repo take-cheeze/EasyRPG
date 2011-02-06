@@ -19,10 +19,10 @@
 // Headers
 ////////////////////////////////////////////////////////////
 
-#include "options.h"
-#include "cache.h"
-#include "game_picture.h"
-#include "sprite.h"
+#include "options.hpp"
+#include "cache.hpp"
+#include "game_picture.hpp"
+#include "sprite.hpp"
 #include <vector>
 
 ////////////////////////////////////////////////////////////

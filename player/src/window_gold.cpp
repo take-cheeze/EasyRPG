@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_gold.h"
-#include "game_party.h"
-#include "main_data.h"
+#include "window_gold.hpp"
+#include "game_party.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Gold::Window_Gold(int ix, int iy, int iwidth, int iheight) :

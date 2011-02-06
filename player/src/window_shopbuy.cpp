@@ -20,11 +20,11 @@
 ////////////////////////////////////////////////////////////
 #include <sstream>
 #include <string>
-#include "window_base.h"
-#include "window_shopbuy.h"
-#include "game_system.h"
-#include "game_temp.h"
-#include "game_party.h"
+#include "window_base.hpp"
+#include "window_shopbuy.hpp"
+#include "game_system.hpp"
+#include "game_temp.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopBuy::Window_ShopBuy(int ix, int iy, int iwidth, int iheight) : 

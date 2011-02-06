@@ -18,10 +18,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "player.h"
-#include "graphics.h"
-#include "input.h"
-#include "audio.h"
+#include "player.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "audio.hpp"
 #include <cstdlib>
 
 #ifdef PSP

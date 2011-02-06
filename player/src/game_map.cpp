@@ -18,15 +18,15 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_map.h"
-#include "game_interpreter.h"
-#include "game_temp.h"
-#include "map_data.h"
-#include "main_data.h"
-#include "output.h"
-#include "util_macro.h"
-#include "game_system.h"
-#include "system.h"
+#include "game_map.hpp"
+#include "game_interpreter.hpp"
+#include "game_temp.hpp"
+#include "map_data.hpp"
+#include "main_data.hpp"
+#include "output.hpp"
+#include "util_macro.hpp"
+#include "game_system.hpp"
+#include "system.hpp"
 #include <algorithm>
 #include <cassert>
 
@@ -110,10 +110,6 @@ void Game_Map::Init() {
 ////////////////////////////////////////////////////////////
 void Game_Map::Dispose() {
 	events.clear();
-
-	for (tCommonEventHash::iterator i = common_events.begin(); i != common_events.end(); ++i) {
-		delete i->second;
-	}
 	common_events.clear();
 
 	if (Main_Data::game_screen != NULL) {
@@ -425,7 +421,6 @@ void Game_Map::StartScroll(int direction, int distance, int speed) {
 bool Game_Map::IsScrolling() {
 	return scroll_rest > 0;
 }
-
 
 ////////////////////////////////////////////////////////////
 void Game_Map::UpdateScroll() {

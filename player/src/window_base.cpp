@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "window_base.h"
-#include "cache.h"
-#include "game_system.h"
+#include "window_base.hpp"
+#include "cache.hpp"
+#include "game_system.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_Base::Window_Base(int x, int y, int width, int height) {
@@ -58,9 +58,7 @@ void Window_Base::DrawFace(std::string face_name, int face_index, int cx, int cy
 	);
 
 	if (flip) {
-		std::auto_ptr<Surface> faceflip = Surface::CreateSurface(faceset, src_rect, false);
-		faceflip->Flip(true, false);
-		contents->Blit(cx, cy, faceflip.get(), Rect(0, 0, 48, 48), 255);
+		contents->FlipBlit(cx, cy, faceset, src_rect, true, false);
 	} else {
 		contents->Blit(cx, cy, faceset, src_rect, 255);
 	}

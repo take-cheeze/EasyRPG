@@ -21,8 +21,8 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "game_character.h"
-#include "system.h"
+#include "game_character.hpp"
+#include "system.hpp"
 
 class Game_Event;
 class Game_CommonEvent;
@@ -173,6 +173,7 @@ private:
 	bool CommandSetVehicleLocation();
 	bool CommandTileSubstitution();
 	bool CommandPanScreen();
+	bool CommandSimulatedAttack();
 
 	void CommandEnd();
 

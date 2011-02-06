@@ -18,12 +18,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "bitmap.h"
-#include "surface.h"
-#include "cache.h"
-#include "game_party.h"
-#include "game_actor.h"
-#include "window_shopparty.h"
+#include "bitmap.hpp"
+#include "surface.hpp"
+#include "cache.hpp"
+#include "game_party.hpp"
+#include "game_actor.hpp"
+#include "window_shopparty.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_ShopParty::Window_ShopParty(int ix, int iy, int iwidth, int iheight) :
@@ -51,11 +51,11 @@ Window_ShopParty::Window_ShopParty(int ix, int iy, int iwidth, int iheight) :
 				std::auto_ptr<Surface> bm2 = Surface::CreateSurface(width, height, true);
 				#ifndef USE_ALPHA
 				bm2->SetTransparentColor(bm->GetTransparentColor());
-				bm2->Clear();
 				#endif
+				bm2->Clear();
 				bm2->Blit(0, 0, bm, src, 255);
 				if (k == 0)
-					bm2->ToneChange(Tone(0, 0, 0, 255));
+					bm2->ToneBlit(0, 0, bm2.get(), bm2->GetRect(), Tone(0, 0, 0, 255));
 				bitmaps[i][j][k] = bm2.release();
 			}
 		}

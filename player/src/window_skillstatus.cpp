@@ -18,9 +18,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_skillstatus.h"
-#include "game_actor.h"
-#include "game_actors.h"
+#include "window_skillstatus.hpp"
+#include "game_actor.hpp"
+#include "game_actors.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_SkillStatus::Window_SkillStatus(int ix, int iy, int iwidth, int iheight) :

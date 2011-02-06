@@ -21,12 +21,13 @@
 #include <cmath>
 #include <cstring>
 #include <algorithm>
-#include "utils.h"
-#include "cache.h"
-#include "bitmap.h"
-#include "surface.h"
-#include "bitmap_screen.h"
-#include "text.h"
+#include "utils.hpp"
+#include "cache.hpp"
+#include "bitmap.hpp"
+#include "surface.hpp"
+#include "bitmap_screen.hpp"
+#include "bitmap_utils.hpp"
+#include "text.hpp"
 
 #if defined(USE_SDL_BITMAP)
 	#include "sdl_bitmap.hpp"
@@ -41,7 +42,7 @@
 	#include "gl_bitmap.hpp"
 #endif
 
-#include "util_macro.h"
+#include "util_macro.hpp"
 
 std::auto_ptr<Bitmap> Bitmap::CreateBitmap(int width, int height, const Color& color) {
 	std::auto_ptr<Surface> surface = Surface::CreateSurface(width, height, false);
@@ -51,13 +52,13 @@ std::auto_ptr<Bitmap> Bitmap::CreateBitmap(int width, int height, const Color& c
 
 std::auto_ptr<Bitmap> Bitmap::CreateBitmap(const std::string& filename, bool transparent, uint32 flags) {
 	#if defined(USE_SDL_BITMAP)
-		return std::auto_ptr<Bitmap>( new SdlBitmap(filename, transparent, flags) );
+		return std::auto_ptr<Bitmap>new SdlBitmap(filename, transparent, flags));
 	#elif defined(USE_SOFT_BITMAP)
-		return std::auto_ptr<Bitmap>( new SoftBitmap(filename, transparent, flags) );
+		return std::auto_ptr<Bitmap>(new SoftBitmap(filename, transparent, flags));
 	#elif defined(USE_PIXMAN_BITMAP)
-		return std::auto_ptr<Bitmap>( new PixmanBitmap(filename, transparent, flags) );
+		return std::auto_ptr<Bitmap>(new PixmanBitmap(filename, transparent, flags));
 	#elif defined(USE_OPENGL_BITMAP)
-		return std::auto_ptr<Bitmap>( new GlBitmap(filename, transparent, flags) );
+		return std::auto_ptr<Bitmap>(new GlBitmap(filename, transparent, flags));
 	#else
 		#error "No bitmap implementation selected"
 	#endif
@@ -65,240 +66,56 @@ std::auto_ptr<Bitmap> Bitmap::CreateBitmap(const std::string& filename, bool tra
 
 std::auto_ptr<Bitmap> Bitmap::CreateBitmap(const uint8* data, uint bytes, bool transparent, uint32 flags) {
 	#if defined(USE_SDL_BITMAP)
-		return std::auto_ptr<Bitmap>( new SdlBitmap(data, bytes, transparent, flags) );
+		return std::auto_ptr<Bitmap>(new SdlBitmap(data, bytes, transparent, flags));
 	#elif defined(USE_SOFT_BITMAP)
-		return std::auto_ptr<Bitmap>( new SoftBitmap(data, bytes, transparent, flags) );
+		return std::auto_ptr<Bitmap>(new SoftBitmap(data, bytes, transparent, flags));
 	#elif defined(USE_PIXMAN_BITMAP)
-		return std::auto_ptr<Bitmap>( new PixmanBitmap(data, bytes, transparent, flags) );
+		return std::auto_ptr<Bitmap>(new PixmanBitmap(data, bytes, transparent, flags));
 	#elif defined(USE_OPENGL_BITMAP)
-		return std::auto_ptr<Bitmap>( new GlBitmap(data, bytes, transparent, flags) );
+		return std::auto_ptr<Bitmap>(new GlBitmap(data, bytes, transparent, flags));
 	#else
 		#error "No bitmap implementation selected"
 	#endif
 }
 
 std::auto_ptr<Bitmap> Bitmap::CreateBitmap(Bitmap* source, Rect src_rect, bool transparent) {
-	return std::auto_ptr<Bitmap>( Surface::CreateSurface(source, src_rect, transparent).release() );
+	return std::auto_ptr<Bitmap>(Surface::CreateSurface(source, src_rect, transparent).release());
 }
 
 ////////////////////////////////////////////////////////////
-Bitmap::Bitmap() {
+Bitmap::Bitmap() : opacity(NULL) {
 }
 
 ////////////////////////////////////////////////////////////
 Bitmap::~Bitmap() {
+	if (opacity != NULL)
+		delete[] opacity;
 }
 
 ////////////////////////////////////////////////////////////
 Color Bitmap::GetPixel(int x, int y) {
-	if (x < 0 || y < 0 || x >= width() || y >= height()) return Color();
+	if (x < 0 || y < 0 || x >= width() || y >= height())
+		return Color();
 
-	uint32 pixel = 0;
+	BitmapUtils* bm_utils = Begin();
 
-	Lock();
+	const uint8* src_pixels = pointer(x, y);
+	uint8 r, g, b, a;
+	bm_utils->GetPixel(src_pixels, r, g, b, a);
 
-	if (bpp() == 2) {
-		const uint16* src_pixel = (const uint16*)pixels() + x + y * (pitch() / bpp());
-		pixel = src_pixel[0];
-	} else if (bpp() == 4) {
-		const uint32* src_pixel = (const uint32*)pixels() + x + y * (pitch() / bpp());
-		pixel = src_pixel[0];
-	}
+	End();
 
-	Unlock();
-
-	Color color = GetColor(pixel);
-
-	#ifndef USE_ALPHA
-		if (transparent && pixel == colorkey()) {
-			color.alpha = 0;
-		} else {
-			color.alpha = 255;
-		}
-	#endif
-
-	return color;
+	return Color(r, g, b, a);
 }
 
 ////////////////////////////////////////////////////////////
 std::auto_ptr<Bitmap> Bitmap::Resample(int scale_w, int scale_h, const Rect& src_rect) {
-	double zoom_x = (double)(scale_w) / src_rect.width;
-	double zoom_y = (double)(scale_h) / src_rect.height;
-
-	std::auto_ptr<Surface> resampled = Surface::CreateSurface(scale_w, scale_h, transparent);
+	std::auto_ptr<Surface> dst = Surface::CreateSurface(scale_w, scale_h, transparent);
 	if (transparent)
-		resampled->SetTransparentColor(GetTransparentColor());
-
-	Lock();
-	resampled->Lock();
-
-	if (bpp() == 2) {
-		const uint16* src_pixels = (const uint16*)pixels();
-		uint16* dst_pixels = (uint16*)resampled->pixels();
-
-		int stride = resampled->pitch() / resampled->bpp() - resampled->GetWidth();
-
-		int nearest_y, nearest_match;
-
-		for (int i = 0; i < scale_h; i++) {
-			nearest_y = (src_rect.y + (int)(i / zoom_y)) * pitch() / bpp();
-
-			for (int j = 0; j < scale_w; j++) {
-				nearest_match = nearest_y + src_rect.x + (int)(j / zoom_x);
-				dst_pixels[0] = src_pixels[nearest_match];
-				dst_pixels += 1;
-			}
-			dst_pixels += stride;
-		}
-	} else if (bpp() == 4){
-		const uint32* nearest_y;
-		const uint32* nearest_match;
-		uint32* dst_pixels = (uint32*)resampled->pixels();
-
-		int stride = resampled->pitch() / resampled->bpp() - resampled->GetWidth();
-
-		for (int i = 0; i < scale_h; i++) {
-			nearest_y = (const uint32*)pixels() + (src_rect.y + (int)(i / zoom_y)) * (pitch() / bpp());
-
-			for (int j = 0; j < scale_w; j++) {
-				nearest_match = nearest_y + src_rect.x + (int)(j / zoom_x);
-
-				dst_pixels[0] = nearest_match[0];
-
-				dst_pixels += 1;
-			}
-			dst_pixels += stride;
-		}
-	}
-
-	Unlock();
-	resampled->Unlock();
-
-	return std::auto_ptr<Bitmap>(resampled.release());
-}
-
-////////////////////////////////////////////////////////////
-std::auto_ptr<Bitmap> Bitmap::RotateScale(double angle, int scale_w, int scale_h) {
-	double c = cos(-angle);
-	double s = sin(-angle);
-	int w = width();
-	int h = height();
-	double sx = (double) scale_w / w;
-	double sy = (double) scale_h / h;
-
-	double fxx =  c * sx;
-	double fxy =  s * sy;
-	double fyx = -s * sx;
-	double fyy =  c * sy;
-
-	double x0 = 0;
-	double y0 = 0;
-	double x1 = fxx * w;
-	double y1 = fyx * w;
-	double x2 = fxx * w + fxy * h;
-	double y2 = fyx * w + fyy * h;
-	double x3 = fxy * h;
-	double y3 = fyy * h;
-
-	double xmin = std::min(std::min(x0, x1), std::min(x2, x3));
-	double ymin = std::min(std::min(y0, y1), std::min(y2, y3));
-	double xmax = std::max(std::max(x0, x1), std::max(x2, x3));
-	double ymax = std::max(std::max(y0, y1), std::max(y2, y3));
-	double fx0 = -xmin;
-	double fy0 = -ymin;
-
-	int dst_w = (int)(ceil(xmax) - floor(xmin));
-	int dst_h = (int)(ceil(ymax) - floor(ymin));
-
-	double ixx =  c / sx;
-	double ixy = -s / sx;
-	double iyx =  s / sy;
-	double iyy =  c / sy;
-	double ix0 = -(c * fx0 - s * fy0) / sx;
-	double iy0 = -(s * fx0 + c * fy0) / sy;
-
-	std::auto_ptr<Surface> result = Surface::CreateSurface(dst_w, dst_h, true);
-	const Color& trans = transparent ? GetTransparentColor() : Color(255,0,255,0);
-	result->SetTransparentColor(trans);
-	result->Fill(trans);
-
-	Lock();
-	result->Lock();
-
-	if (bpp() == 2) {
-		const uint16* src_pixels = (const uint16*)pixels();
-		uint16* dst_pixels = (uint16*)result->pixels();
-		int src_pitch = pitch() / bpp();
-		int pad = result->pitch() / bpp() - result->GetWidth();
-
-		for (int i = 0; i < dst_h; i++) {
-			for (int j = 0; j < dst_w; j++) {
-				double x = ix0 + ixy * (i + 0.5) + ixx * (j + 0.5);
-				double y = iy0 + iyy * (i + 0.5) + iyx * (j + 0.5);
-				int xi = (int) floor(x);
-				int yi = (int) floor(y);
-				if (xi < 0 || xi >= w || yi < 0 || yi >= h)
-					dst_pixels++;
-				else
-					*dst_pixels++ = src_pixels[yi * src_pitch + xi];
-			}
-			dst_pixels += pad;
-		}
-	} else if (bpp() == 4){
-		const uint32* src_pixels = (const uint32*)pixels();
-		uint32* dst_pixels = (uint32*)result->pixels();
-		int src_pitch = pitch() / bpp();
-		int pad = result->pitch() / bpp() - result->GetWidth();
-
-		for (int i = 0; i < dst_h; i++) {
-			for (int j = 0; j < dst_w; j++) {
-				double x = ix0 + ixy * (i + 0.5) + ixx * (j + 0.5);
-				double y = iy0 + iyy * (i + 0.5) + iyx * (j + 0.5);
-				int xi = (int) floor(x);
-				int yi = (int) floor(y);
-				if (xi < 0 || xi >= w || yi < 0 || yi >= h)
-					dst_pixels++;
-				else
-					*dst_pixels++ = src_pixels[yi * src_pitch + xi];
-			}
-			dst_pixels += pad;
-		}
-	}
-
-	Unlock();
-	result->Unlock();
-
-	return std::auto_ptr<Bitmap>(result.release());
-}
-
-////////////////////////////////////////////////////////////
-std::auto_ptr<Bitmap> Bitmap::Waver(int depth, double phase) {
-	std::auto_ptr<Surface> resampled = Surface::CreateSurface(width() + 2 * depth, height(), true);
-
-	if (transparent)
-		resampled->SetTransparentColor(GetTransparentColor());
-
-	resampled->Clear();
-
-	Lock();
-	resampled->Lock();
-
-	const uint8* src_pixels = (const uint8*)pixels();
-	uint8* dst_pixels = (uint8*)resampled->pixels();
-
-	for (int y = 0; y < height(); y++) {
-		int offset = (int) (depth * (1 + sin((phase + y * 20) * 3.14159 / 180)));
-
-		memcpy(&dst_pixels[offset * bpp()], src_pixels, width() * bpp());
-
-		src_pixels += pitch();
-		dst_pixels += resampled->pitch();
-	}
-
-	Unlock();
-	resampled->Unlock();
-
-	return std::auto_ptr<Bitmap>(resampled.release());
+		dst->SetTransparentColor(GetTransparentColor());
+	dst->Clear();
+	dst->StretchBlit(dst->GetRect(), this, src_rect, 255);
+	return std::auto_ptr<Bitmap>(dst.release());
 }
 
 ////////////////////////////////////////////////////////////
@@ -308,6 +125,18 @@ void Bitmap::AttachBitmapScreen(BitmapScreen* bitmap) {
 
 void Bitmap::DetachBitmapScreen(BitmapScreen* bitmap) {
 	attached_screen_bitmaps.remove(bitmap);
+}
+
+////////////////////////////////////////////////////////////
+BitmapUtils* Bitmap::Begin() {
+	Lock();
+	BitmapUtils* bm_utils = BitmapUtils::Create(format, format, false);
+	bm_utils->SetDstColorKey(colorkey());
+	return bm_utils;
+}
+
+void Bitmap::End() {
+	Unlock();
 }
 
 ////////////////////////////////////////////////////////////
@@ -336,6 +165,34 @@ Color Bitmap::GetTransparentColor() const {
 }
 
 ////////////////////////////////////////////////////////////
+void Bitmap::SetTransparentColor(Color color) {
+}
+
+////////////////////////////////////////////////////////////
+Bitmap::TileOpacity Bitmap::CheckOpacity(const Rect& rect) {
+	bool all = true;
+	bool any = false;
+
+	BitmapUtils* bm_utils = Begin();
+
+	uint8* src_pixels = pointer(rect.x, rect.y);
+
+	for (int y = 0; y < rect.height; y++) {
+		bm_utils->CheckOpacity(src_pixels, rect.width, all, any);
+		if (any && !all)
+			break;
+		src_pixels += pitch();
+	}
+
+	End();
+
+	return
+		all ? Bitmap::Opaque :
+		any ? Bitmap::Partial :
+		Bitmap::Transparent;
+}
+
+////////////////////////////////////////////////////////////
 void Bitmap::CheckPixels(uint32 flags) {
 	if (flags & System) {
 		Cache::system_info.bg_color = GetPixel(0, 32);
@@ -343,20 +200,23 @@ void Bitmap::CheckPixels(uint32 flags) {
 	}
 
 	if (flags & Chipset) {
-		have_invisible_tile = true;
-		for (int x = 288; x < 288 + 16; x++) {
-			for (int y = 128; y < 128 + 16; y++) {
-				if (GetPixel(x, y).alpha > 0) {
-					have_invisible_tile = false;
-					x = 288 + 16;
-					break;
-				}
+		opacity = new TileOpacity[16][30];
+		for (int row = 0; row < 16; row++) {
+			for (int col = 0; col < 30; col++) {
+				Rect rect(col * 16, row * 16, 16, 16);
+				opacity[row][col] = CheckOpacity(rect);
 			}
 		}
 	}
 }
 
-bool Bitmap::HaveInvisibleTile() {
-	return have_invisible_tile;
+////////////////////////////////////////////////////////////
+Bitmap::TileOpacity Bitmap::GetTileOpacity(int row, int col) {
+	return (opacity == NULL) ? Partial : opacity[row][col];
+}
+
+////////////////////////////////////////////////////////////
+uint8* Bitmap::pointer(int x, int y) {
+	return (uint8*) pixels() + y * pitch() + x * bpp();
 }
 

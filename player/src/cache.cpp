@@ -18,9 +18,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "cache.h"
-#include "filefinder.h"
-#include "exfont.h"
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "exfont.hpp"
 
 #include <boost/ptr_container/ptr_unordered_map.hpp>
 

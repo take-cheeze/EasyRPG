@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 #include <iomanip>
 #include <sstream>
-#include "game_actors.h"
-#include "window_equipstatus.h"
+#include "game_actors.hpp"
+#include "window_equipstatus.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_EquipStatus::Window_EquipStatus(int actor_id) :

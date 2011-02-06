@@ -22,31 +22,31 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "scene_title.h"
-#include "audio.h"
-#include "bitmap.h"
-#include "cache.h"
-#include "filefinder.h"
-#include "game_actors.h"
-#include "game_map.h"
-#include "game_message.h"
-#include "game_party.h"
-#include "game_player.h"
-#include "game_screen.h"
-#include "game_switches.h"
-#include "game_system.h"
-#include "game_temp.h"
-#include "game_troop.h"
-#include "game_variables.h"
-#include "graphics.h"
-#include "input.h"
-#include "main_data.h"
-#include "options.h"
-#include "output.h"
-#include "player.h"
-#include "scene_map.h"
-#include "util_macro.h"
-#include "window_command.h"
+#include "scene_title.hpp"
+#include "audio.hpp"
+#include "bitmap.hpp"
+#include "cache.hpp"
+#include "filefinder.hpp"
+#include "game_actors.hpp"
+#include "game_map.hpp"
+#include "game_message.hpp"
+#include "game_party.hpp"
+#include "game_player.hpp"
+#include "game_screen.hpp"
+#include "game_switches.hpp"
+#include "game_system.hpp"
+#include "game_temp.hpp"
+#include "game_troop.hpp"
+#include "game_variables.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "main_data.hpp"
+#include "options.hpp"
+#include "output.hpp"
+#include "player.hpp"
+#include "scene_map.hpp"
+#include "util_macro.hpp"
+#include "window_command.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Title::Scene_Title() :
@@ -225,12 +225,10 @@ void Scene_Title::CommandNewGame() {
 		Graphics::SetFrameCount(0);
 		CreateGameObjects();
 		Game_Party::SetupStartingMembers();
-
 		rpg2k::structure::Array1D const& start = Main_Data::project->getLMT().startPoint();
 		Game_Map::Setup(start[11].to<int>());
 		Main_Data::game_player->MoveTo(start[12].to<int>(), start[13].to<int>());
 		Main_Data::game_player->Refresh();
-
 		Game_Map::Autoplay();
 		Scene::Push(std::auto_ptr<Scene>(new Scene_Map()));
 	}

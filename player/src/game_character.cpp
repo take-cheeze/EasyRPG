@@ -18,14 +18,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "audio.h"
-#include "game_character.h"
-#include "game_map.h"
-#include "game_player.h"
-#include "game_switches.h"
-#include "game_system.h"
-#include "main_data.h"
-#include "util_macro.h"
+#include "audio.hpp"
+#include "game_character.hpp"
+#include "game_map.hpp"
+#include "game_player.hpp"
+#include "game_switches.hpp"
+#include "game_system.hpp"
+#include "main_data.hpp"
+#include "util_macro.hpp"
 #include <rpg2k/Stream.hxx>
 #include <cassert>
 #include <cstdlib>

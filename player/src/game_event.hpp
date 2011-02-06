@@ -22,8 +22,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "game_character.h"
-#include "game_interpreter.h"
+#include "game_character.hpp"
+#include "game_interpreter.hpp"
 
 #include <boost/scoped_ptr.hpp>
 

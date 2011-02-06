@@ -21,13 +21,13 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "bitmap.h"
-#include "bitmap_screen.h"
-#include "color.h"
-#include "drawable.h"
-#include "rect.h"
-#include "tone.h"
-#include "zobj.h"
+#include "bitmap.hpp"
+#include "bitmap_screen.hpp"
+#include "color.hpp"
+#include "drawable.hpp"
+#include "rect.hpp"
+#include "tone.hpp"
+#include "zobj.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Sprite class.

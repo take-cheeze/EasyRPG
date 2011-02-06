@@ -19,13 +19,13 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "audio.h"
-#include "game_system.h"
-#include "input.h"
-#include "scene_end.h"
-#include "scene_menu.h"
-#include "scene_title.h"
-#include "util_macro.h"
+#include "audio.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
+#include "scene_end.hpp"
+#include "scene_menu.hpp"
+#include "scene_title.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_End::Scene_End() :

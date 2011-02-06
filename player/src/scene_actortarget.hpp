@@ -21,10 +21,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene.h"
-#include "window_actortarget.h"
-#include "window_help.h"
-#include "window_targetstatus.h"
+#include "scene.hpp"
+#include "window_actortarget.hpp"
+#include "window_help.hpp"
+#include "window_targetstatus.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Scene ActorTarget class.

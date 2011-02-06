@@ -19,7 +19,7 @@
 #define _EASYRPG_IMAGE_XYZ_H_
 
 #include <cstdio>
-#include "system.h"
+#include "system.hpp"
 
 namespace ImageXYZ {
 	void ReadXYZ(uint8 const* data, uint len, bool transparent, int& width, int& height, void*& pixels);

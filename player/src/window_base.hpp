@@ -22,9 +22,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "window.h"
-#include "game_actor.h"
-#include "main_data.h"
+#include "window.hpp"
+#include "game_actor.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Window Base class.

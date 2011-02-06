@@ -20,9 +20,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "msgbox.h"
-#include "utils.h"
-#include "util_win.h"
+#include "msgbox.hpp"
+#include "utils.hpp"
+#include "util_win.hpp"
 #include <windows.h>
 #ifdef _MSC_VER
 #include <Commctrl.h>

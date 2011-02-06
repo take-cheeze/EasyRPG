@@ -21,8 +21,8 @@
 
 #include <zlib.h>
 #include <vector>
-#include "output.h"
-#include "image_xyz.h"
+#include "output.hpp"
+#include "image_xyz.hpp"
 
 ////////////////////////////////////////////////////////////
 void ImageXYZ::ReadXYZ(const uint8* data, uint len, bool transparent,

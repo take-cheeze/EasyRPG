@@ -19,10 +19,10 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "sprite.h"
-#include "player.h"
-#include "graphics.h"
-#include "util_macro.h"
+#include "sprite.hpp"
+#include "player.hpp"
+#include "graphics.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Constructor

@@ -19,14 +19,14 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "filefinder.h"
-#include "output.h"
-#include "system.h"
-#include "font.h"
+#include "filefinder.hpp"
+#include "output.hpp"
+#include "system.hpp"
+#include "font.hpp"
 #ifdef USE_SDL_TTF
-#include "sdl_font.h"
+#include "sdl_font.hpp"
 #else
-#include "ftfont.h"
+#include "ftfont.hpp"
 #endif
 
 ////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ bool Font::Exists(const std::string& name) {
 /// Factory
 ////////////////////////////////////////////////////////////
 Font* Font::CreateFont(const std::string& _name, int size, bool bold, bool italic) {
-	const std::string& name = _name.empty() ? default_name : _name;
+	const std::string& name = _name.empty() ? FileFinder::DefaultFont() : _name;
 	if (size == 0)
 		size = default_size;
 

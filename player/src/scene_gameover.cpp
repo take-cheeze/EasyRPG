@@ -18,14 +18,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene_gameover.h"
-#include "audio.h"
-#include "bitmap.h"
-#include "cache.h"
-#include "game_system.h"
-#include "graphics.h"
-#include "input.h"
-#include "scene_title.h"
+#include "scene_gameover.hpp"
+#include "audio.hpp"
+#include "bitmap.hpp"
+#include "cache.hpp"
+#include "game_system.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "scene_title.hpp"
 
 ////////////////////////////////////////////////////////////
 Scene_Gameover::Scene_Gameover() {

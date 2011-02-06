@@ -19,8 +19,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <sstream>
-#include "window_targetstatus.h"
-#include "game_party.h"
+#include "window_targetstatus.hpp"
+#include "game_party.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_TargetStatus::Window_TargetStatus(int ix, int iy, int iwidth, int iheight) :

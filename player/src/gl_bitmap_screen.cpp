@@ -15,7 +15,7 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_OPENGL_BITMAP
 
 ////////////////////////////////////////////////////////////
@@ -27,8 +27,8 @@
 #include <string>
 #include <sstream>
 #include <iosfwd>
-#include "gl_bitmap_screen.h"
-#include "bitmap.h"
+#include "gl_bitmap_screen.hpp"
+#include "bitmap.hpp"
 
 ////////////////////////////////////////////////////////////
 namespace GL {
@@ -149,7 +149,7 @@ void GlBitmapScreen::MakeBushTex() {
 	if (bush_tex == 0)
 		glGenTextures(1, &bush_tex);
 
-	std::verts<uint8> bush_pixels(h);
+	std::vector<uint8> bush_pixels(h);
 	for (int i = 0; i < h; i++)
 		bush_pixels[i] = i < h - bush_effect
 			? opacity_top_effect

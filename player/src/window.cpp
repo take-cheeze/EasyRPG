@@ -19,13 +19,13 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <math.h>
-#include "system.h"
-#include "graphics.h"
-#include "bitmap_screen.h"
-#include "player.h"
-#include "rect.h"
-#include "util_macro.h"
-#include "window.h"
+#include "system.hpp"
+#include "graphics.hpp"
+#include "bitmap_screen.hpp"
+#include "player.hpp"
+#include "rect.hpp"
+#include "util_macro.hpp"
+#include "window.hpp"
 
 ////////////////////////////////////////////////////////////
 Window::Window():

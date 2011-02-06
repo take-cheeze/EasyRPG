@@ -18,29 +18,29 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
-#include "game_interpreter.h"
-#include "audio.h"
-#include "game_map.h"
-#include "game_event.h"
-#include "game_player.h"
-#include "game_temp.h"
-#include "game_switches.h"
-#include "game_variables.h"
-#include "game_party.h"
-#include "game_actors.h"
-#include "game_system.h"
-#include "game_message.h"
-#include "game_picture.h"
-#include "spriteset_map.h"
-#include "sprite_character.h"
-#include "scene_map.h"
-#include "scene.h"
-#include "graphics.h"
-#include "input.h"
-#include "main_data.h"
-#include "output.h"
-#include "player.h"
-#include "util_macro.h"
+#include "game_interpreter.hpp"
+#include "audio.hpp"
+#include "game_map.hpp"
+#include "game_event.hpp"
+#include "game_player.hpp"
+#include "game_temp.hpp"
+#include "game_switches.hpp"
+#include "game_variables.hpp"
+#include "game_party.hpp"
+#include "game_actors.hpp"
+#include "game_system.hpp"
+#include "game_message.hpp"
+#include "game_picture.hpp"
+#include "spriteset_map.hpp"
+#include "sprite_character.hpp"
+#include "scene_map.hpp"
+#include "scene.hpp"
+#include "graphics.hpp"
+#include "input.hpp"
+#include "main_data.hpp"
+#include "output.hpp"
+#include "player.hpp"
+#include "util_macro.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Enumeration of codes
@@ -627,6 +627,8 @@ bool Game_Interpreter::ExecuteCommand() {
 			return CommandTileSubstitution();
 		case PanScreen:
 			return CommandPanScreen();
+		case SimulatedAttack:
+			return CommandSimulatedAttack();
 		default:
 			return true;
 	}
@@ -746,7 +748,6 @@ void Game_Interpreter::InputButton() {
 
 void Game_Interpreter::CommandEnd() {
 	CloseMessageWindow();
-	// list.clear();
 
 	if (teleport_pending) {
 		teleport_pending = false;
@@ -2367,7 +2368,7 @@ bool Game_Interpreter::CommandMessageOptions() { //code 10120
 }
 
 bool Game_Interpreter::CommandChangeSystemBGM() { //code 10660
-	/*
+	/* TODO
 	RPG::Music music;
 	int context = list[index][0];
 	music.name = list[index].string();
@@ -2381,7 +2382,7 @@ bool Game_Interpreter::CommandChangeSystemBGM() { //code 10660
 }
 
 bool Game_Interpreter::CommandChangeSystemSFX() { //code 10670
-	/*
+	/* TODO
 	RPG::Sound sound;
 	int context = list[index][0];
 	sound.name = list[index].string();
@@ -2907,7 +2908,7 @@ bool Game_Interpreter::CommandEraseEvent() { // code 12320
 		return true;
 
 	tEventHash& events = Game_Map::GetEvents();
-		events.find(event_id)->second->SetDisabled(true);
+	events.find(event_id)->second->SetDisabled(true);
 
 	return true;
 }
@@ -3127,5 +3128,39 @@ bool Game_Interpreter::CommandPanScreen() { // code 11060
 	}
 
 	return !wait;
+}
+
+bool Game_Interpreter::CommandSimulatedAttack() { // code 10500
+	std::vector<Game_Actor*> actors = GetActors(list[index][0],
+												list[index][1]);
+	int atk = list[index][2];
+	int def = list[index][3];
+	int spi = list[index][4];
+	int var = list[index][5];
+
+	for (std::vector<Game_Actor*>::iterator i = actors.begin(); 
+		 i != actors.end(); 
+		 i++) {
+		Game_Actor* actor = *i;
+		int result = atk;
+		result -= (actor->GetDef() * def) / 400;
+		result -= (actor->GetSpi() * spi) / 800;
+		if (var != 0) {
+			int rperc = var * 5;
+			int rval = rand() % (2 * rperc) - rperc;
+			result += result * rval / 100;
+		}
+
+		result = std::max(0, result);
+
+		int hp = actor->GetHp() - result;
+		hp = std::max(0, hp);
+		actor->SetHp(hp);
+
+		if (list[index][6] != 0)
+			Main_Data::setVar(list[index][7], result);
+	}
+
+	return true;
 }
 

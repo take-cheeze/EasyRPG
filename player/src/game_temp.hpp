@@ -22,9 +22,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include "game_battler.h"
-#include "graphics.h"
-#include "main_data.h"
+#include "game_battler.hpp"
+#include "graphics.hpp"
+#include "main_data.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Game Temp static class

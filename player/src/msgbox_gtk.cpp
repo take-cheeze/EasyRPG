@@ -21,9 +21,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <gtk/gtk.h>
-#include "msgbox.h"
+#include "msgbox.hpp"
 #include "SDL_syswm.h"
-#include "player.h"
+#include "player.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Default Message Box with OK button

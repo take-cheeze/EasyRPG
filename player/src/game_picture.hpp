@@ -27,7 +27,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
-#include "sprite.h"
+#include "sprite.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Picture class

@@ -18,7 +18,7 @@
 #ifndef _EASYRPG_SDL_FONT_H_
 #define _EASYRPG_SDL_FONT_H_
 
-#include "system.h"
+#include "system.hpp"
 #ifdef USE_SDL_TTF
 
 ////////////////////////////////////////////////////////////
@@ -27,8 +27,8 @@
 #include <string>
 #include <map>
 #include <SDL_ttf.h>
-#include "font.h"
-#include "sdl_bitmap.h"
+#include "font.hpp"
+#include "sdl_bitmap.hpp"
 
 ////////////////////////////////////////////////////////////
 /// SdlFont class

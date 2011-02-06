@@ -21,9 +21,9 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
-#include "window_savefile.h"
-#include "game_system.h"
-#include "input.h"
+#include "window_savefile.hpp"
+#include "game_system.hpp"
+#include "input.hpp"
 
 ////////////////////////////////////////////////////////////
 Window_SaveFile::Window_SaveFile(int ix, int iy, int iwidth, int iheight) : 

@@ -22,11 +22,11 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "scene.h"
-#include "window_equipitem.h"
-#include "window_equip.h"
-#include "window_equipstatus.h"
-#include "window_help.h"
+#include "scene.hpp"
+#include "window_equipitem.hpp"
+#include "window_equip.hpp"
+#include "window_equipstatus.hpp"
+#include "window_help.hpp"
 
 ////////////////////////////////////////////////////////////
 /// Scene Equip class.

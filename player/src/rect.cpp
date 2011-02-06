@@ -18,7 +18,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "rect.h"
+#include "rect.hpp"
 
 ////////////////////////////////////////////////////////////
 Rect::Rect() :
@@ -67,6 +67,30 @@ void Rect::Adjust(int max_width, int max_height) {
 		if (max_width < x + width) width = max_width - x;
 		if (max_height < y + height) height = max_height - y;
 	}
+}
+
+////////////////////////////////////////////////////////////
+void Rect::Adjust(const Rect& rect) {
+	if (x < rect.x) {
+		width += x - rect.x;
+		x = rect.x;
+	}
+
+	if (y < rect.y) {
+		height += y - rect.y;
+		y = rect.y;
+	}
+
+	if (rect.x + rect.width < x + width)
+		width = rect.x + rect.width - x;
+
+	if (rect.y + rect.height < y + height)
+		height = rect.y + rect.height - y;
+}
+
+////////////////////////////////////////////////////////////
+bool Rect::IsEmpty() const {
+	return width <= 0 || height <= 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -145,3 +169,18 @@ bool Rect::AdjustRectangles(Rect& src, Rect& dst, const Rect& ref) {
 	return src.width > 0 && src.height > 0;
 }
 
+////////////////////////////////////////////////////////////
+void Rect::Double() {
+	x *= 2;
+	y *= 2;
+	width *= 2;
+	height *= 2;
+}
+
+////////////////////////////////////////////////////////////
+void Rect::Halve() {
+	x /= 2;
+	y /= 2;
+	width /= 2;
+	height /= 2;
+}

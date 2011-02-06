@@ -19,9 +19,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
-#include "game_actors.h"
-#include "main_data.h"
-#include "output.h"
+#include "game_actors.hpp"
+#include "main_data.hpp"
+#include "output.hpp"
 
 ////////////////////////////////////////////////////////////
 namespace {

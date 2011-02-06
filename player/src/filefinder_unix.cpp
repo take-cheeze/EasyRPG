@@ -31,10 +31,10 @@
 #include <unistd.h>
 
 #include <errno.h>
-#include "utils.h"
-#include "filefinder.h"
-#include "output.h"
-#include "player.h"
+#include "utils.hpp"
+#include "filefinder.hpp"
+#include "output.hpp"
+#include "player.hpp"
 
 typedef std::map<std::string, std::string> string_map;
 typedef std::map<std::string, string_map> directory_map;
@@ -222,8 +222,11 @@ std::string FileFinder::FindFont(const std::string& file) {
 
 ////////////////////////////////////////////////////////////
 std::string FileFinder::DefaultFont() {
-	// TODO
-	return "DejaVuLGCSansMono";
+	std::string fonts[] = DEFAULT_FONTS;
+	for (const std::string* pfont = fonts; !pfont->empty(); pfont++)
+		if (!FindFont(*pfont).empty())
+			return *pfont;
+	return "";
 }
 
 ////////////////////////////////////////////////////////////
