@@ -76,7 +76,7 @@ Window_ShopParty::~Window_ShopParty() {
 void Window_ShopParty::Refresh() {
 	contents->Clear();
 
-	Bitmap* system = Cache::System(Data::system.system_name);
+	Bitmap* system = Cache::System(Data::system->system_name);
 
 	const std::vector<Game_Actor*>& actors = Game_Party::GetActors();
 	for (size_t i = 0; i < actors.size() && i < 4; i++) {

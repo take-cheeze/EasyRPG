@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include <memory>
 #include "reader.h"
 #include "rpg_save.h"

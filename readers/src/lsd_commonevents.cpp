@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 /// Read Unknown Chunk 0x66
 ////////////////////////////////////////////////////////////
-RPG::SaveCommonEvent LSD_Reader::ReadCommonEvent(Reader& stream) {
-	RPG::SaveCommonEvent result;
-	result.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::SaveCommonEvent> LSD_Reader::ReadCommonEvent(Reader& stream) {
+	std::auto_ptr<RPG::SaveCommonEvent> result(new RPG::SaveCommonEvent);
+	result->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -40,7 +40,7 @@ RPG::SaveCommonEvent LSD_Reader::ReadCommonEvent(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkCommonEvent::event_data:
-			result.event_data = ReadSaveEventData(stream);
+			result->event_data = ReadSaveEventData(stream);
 			break;
 		default:
 			stream.Skip(chunk_info);

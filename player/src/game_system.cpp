@@ -50,13 +50,13 @@ void Game_System::Init() {
 	main_menu_disabled = false;
 	save_count = 0;
 	
-	SetSystemBGM(BGM_Battle, Data::system.battle_music); 
-	SetSystemBGM(BGM_Victory, Data::system.battle_end_music); 
-	SetSystemBGM(BGM_Inn, Data::system.inn_music);
-	SetSystemBGM(BGM_Skiff, Data::system.boat_music);
-	SetSystemBGM(BGM_Ship, Data::system.ship_music);
-	SetSystemBGM(BGM_Airship, Data::system.airship_music);
-	SetSystemBGM(BGM_GameOver, Data::system.gameover_music); 
+	SetSystemBGM(BGM_Battle, Data::system->battle_music); 
+	SetSystemBGM(BGM_Victory, Data::system->battle_end_music); 
+	SetSystemBGM(BGM_Inn, Data::system->inn_music);
+	SetSystemBGM(BGM_Skiff, Data::system->boat_music);
+	SetSystemBGM(BGM_Ship, Data::system->ship_music);
+	SetSystemBGM(BGM_Airship, Data::system->airship_music);
+	SetSystemBGM(BGM_GameOver, Data::system->gameover_music); 
 }
 
 ////////////////////////////////////////////////////////////
@@ -81,7 +81,7 @@ void Game_System::SePlay(RPG::Sound se) {
 ////////////////////////////////////////////////////////////
 std::string Game_System::GetSystemName() {
 	if (system_name.empty()) {
-		return Data::system.system_name;
+		return Data::system->system_name;
 	} else {
 		return system_name;
 	}

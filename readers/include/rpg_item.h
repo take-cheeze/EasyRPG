@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_itemanimation.h"
 
 ////////////////////////////////////////////////////////////
@@ -109,7 +109,7 @@ namespace RPG {
 		int switch_id;
 		bool ocassion_battle;
 
-		std::vector<RPG::ItemAnimation> animation_data;
+		boost::ptr_vector<RPG::ItemAnimation> animation_data;
 	};
 }
 

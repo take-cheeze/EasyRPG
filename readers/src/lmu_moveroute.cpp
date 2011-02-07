@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Move Route
 ////////////////////////////////////////////////////////////
-RPG::MoveRoute LMU_Reader::ReadMoveRoute(Reader& stream) {
-	RPG::MoveRoute moveroute;
+std::auto_ptr<RPG::MoveRoute> LMU_Reader::ReadMoveRoute(Reader& stream) {
+	std::auto_ptr<RPG::MoveRoute> moveroute(new RPG::MoveRoute);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -47,14 +47,14 @@ RPG::MoveRoute LMU_Reader::ReadMoveRoute(Reader& stream) {
 			// The chunk length must be used instead
 			startpos = stream.Tell();
 			do {
-				moveroute.move_commands.push_back(ReadMoveCommand(stream));
+				moveroute->move_commands.push_back(ReadMoveCommand(stream));
 			} while ((stream.Tell() - chunk_info.length) != startpos);
 			break;
 		case ChunkMoveRoute::skippable:
-			moveroute.skippable = stream.ReadBool();
+			moveroute->skippable = stream.ReadBool();
 			break;
 		case ChunkMoveRoute::repeat:
-			moveroute.repeat = stream.ReadBool();
+			moveroute->repeat = stream.ReadBool();
 			break;
 		default:
 			stream.Skip(chunk_info);

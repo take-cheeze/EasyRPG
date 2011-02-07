@@ -51,10 +51,10 @@ void Scene_End::Update() {
 	command_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::system->cancel_se);
 		Scene::Pop(); // Select End Game
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Data::system->decision_se);
 		switch (command_window->GetIndex()) {
 		case 0: // Yes
 			Audio::BGM_Fade(800);
@@ -73,8 +73,8 @@ void Scene_End::Update() {
 void Scene_End::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Data::terms.yes);
-	options.push_back(Data::terms.no);
+	options.push_back(Data::terms->yes);
+	options.push_back(Data::terms->no);
 
 	command_window = new Window_Command(options);
 	command_window->SetX(160 - command_window->GetWidth() / 2);
@@ -83,11 +83,11 @@ void Scene_End::CreateCommandWindow() {
 
 ////////////////////////////////////////////////////////////
 void Scene_End::CreateHelpWindow() {
-	int text_size = Surface::GetTextSize(Data::terms.exit_game_message).width;
+	int text_size = Surface::GetTextSize(Data::terms->exit_game_message).width;
 
 	help_window = new Window_Help(160 - (text_size + 16)/ 2,
 		72, text_size + 16, 32);
-	help_window->SetText(Data::terms.exit_game_message);
+	help_window->SetText(Data::terms->exit_game_message);
 
 	command_window->SetHelpWindow(help_window);
 }

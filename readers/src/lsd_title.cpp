@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Save Title
 ////////////////////////////////////////////////////////////
-RPG::SaveTitle LSD_Reader::ReadSaveTitle(Reader& stream) {
-	RPG::SaveTitle title;
+std::auto_ptr<RPG::SaveTitle> LSD_Reader::ReadSaveTitle(Reader& stream) {
+	std::auto_ptr<RPG::SaveTitle> title(new RPG::SaveTitle);
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -39,40 +39,40 @@ RPG::SaveTitle LSD_Reader::ReadSaveTitle(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkTitle::timestamp:
-			stream.Read8(title.timestamp, chunk_info.length);
+			stream.Read8(title->timestamp, chunk_info.length);
 			break;
 		case ChunkTitle::hero_name:
-			title.hero_name = stream.ReadString(chunk_info.length);
+			title->hero_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTitle::hero_level:
-			title.hero_level = stream.Read32(Reader::CompressedInteger);
+			title->hero_level = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTitle::hero_hp:
-			title.hero_hp = stream.Read32(Reader::CompressedInteger);
+			title->hero_hp = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTitle::face1_name:
-			title.face1_name = stream.ReadString(chunk_info.length);
+			title->face1_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTitle::face1_id:
-			title.face1_id = stream.Read32(Reader::CompressedInteger);
+			title->face1_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTitle::face2_name:
-			title.face2_name = stream.ReadString(chunk_info.length);
+			title->face2_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTitle::face2_id:
-			title.face2_id = stream.Read32(Reader::CompressedInteger);
+			title->face2_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTitle::face3_name:
-			title.face3_name = stream.ReadString(chunk_info.length);
+			title->face3_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTitle::face3_id:
-			title.face3_id = stream.Read32(Reader::CompressedInteger);
+			title->face3_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTitle::face4_name:
-			title.face4_name = stream.ReadString(chunk_info.length);
+			title->face4_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTitle::face4_id:
-			title.face4_id = stream.Read32(Reader::CompressedInteger);
+			title->face4_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

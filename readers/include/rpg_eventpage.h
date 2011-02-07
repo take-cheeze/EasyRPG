@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_eventpagecondition.h"
 #include "rpg_eventcommand.h"
 #include "rpg_moveroute.h"
@@ -36,7 +37,7 @@ namespace RPG {
 		EventPage();
 		
 		int ID;
-		RPG::EventPageCondition condition;
+		std::auto_ptr<EventPageCondition> condition;
 		std::string character_name;
 		int character_index;
 		int character_direction;
@@ -49,7 +50,7 @@ namespace RPG {
 		bool overlap;
 		int animation_type;
 		int move_speed;
-		RPG::MoveRoute move_route;
+		std::auto_ptr<MoveRoute> move_route;
 		std::vector<RPG::EventCommand> event_commands;
 	};
 }

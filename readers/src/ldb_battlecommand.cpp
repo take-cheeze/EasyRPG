@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read BattleCommands
 ////////////////////////////////////////////////////////////
-RPG::BattleCommands LDB_Reader::ReadBattleCommands(Reader& stream) {
-	RPG::BattleCommands battlecommands;
+std::auto_ptr<RPG::BattleCommands> LDB_Reader::ReadBattleCommands(Reader& stream) {
+	std::auto_ptr<RPG::BattleCommands> battlecommands(new RPG::BattleCommands);
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -40,50 +40,50 @@ RPG::BattleCommands LDB_Reader::ReadBattleCommands(Reader& stream) {
 		switch (chunk_info.ID) {
 		case ChunkBattleCommands::command:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				battlecommands.commands.push_back(ReadBattleCommand(stream));
+				battlecommands->commands.push_back(ReadBattleCommand(stream));
 			}
 			break;
 		case ChunkBattleCommands::placement:
-			battlecommands.placement = stream.Read32(Reader::CompressedInteger);
+			battlecommands->placement = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::row:
-			battlecommands.row = stream.Read32(Reader::CompressedInteger);
+			battlecommands->row = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::battle_type:
-			battlecommands.battle_type = stream.Read32(Reader::CompressedInteger);
+			battlecommands->battle_type = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::death_handler1:
-			battlecommands.death_handler1 = stream.Read32(Reader::CompressedInteger);
+			battlecommands->death_handler1 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::unknown1:
-			battlecommands.unknown1 = stream.Read32(Reader::CompressedInteger);
+			battlecommands->unknown1 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::death_handler2:
-			battlecommands.death_handler2 = stream.Read32(Reader::CompressedInteger);
+			battlecommands->death_handler2 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::death_event:
-			battlecommands.death_event = stream.Read32(Reader::CompressedInteger);
+			battlecommands->death_event = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::window_size:
-			battlecommands.window_size = stream.Read32(Reader::CompressedInteger);
+			battlecommands->window_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::transparency:
-			battlecommands.transparency = stream.Read32(Reader::CompressedInteger);
+			battlecommands->transparency = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::teleport:
-			battlecommands.teleport = stream.ReadBool();
+			battlecommands->teleport = stream.ReadBool();
 			break;
 		case ChunkBattleCommands::teleport_id:
-			battlecommands.teleport_id = stream.Read32(Reader::CompressedInteger);
+			battlecommands->teleport_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::teleport_x:
-			battlecommands.teleport_x = stream.Read32(Reader::CompressedInteger);
+			battlecommands->teleport_x = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::teleport_y:
-			battlecommands.teleport_y = stream.Read32(Reader::CompressedInteger);
+			battlecommands->teleport_y = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattleCommands::teleport_face:
-			battlecommands.teleport_face = stream.Read32(Reader::CompressedInteger);
+			battlecommands->teleport_face = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);
@@ -95,9 +95,9 @@ RPG::BattleCommands LDB_Reader::ReadBattleCommands(Reader& stream) {
 ////////////////////////////////////////////////////////////
 /// Read BattleCommand
 ////////////////////////////////////////////////////////////
-RPG::BattleCommand LDB_Reader::ReadBattleCommand(Reader& stream) {
-	RPG::BattleCommand battle_command;
-	battle_command.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::BattleCommand> LDB_Reader::ReadBattleCommand(Reader& stream) {
+	std::auto_ptr<RPG::BattleCommand> battle_command(new RPG::BattleCommand);
+	battle_command->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -110,10 +110,10 @@ RPG::BattleCommand LDB_Reader::ReadBattleCommand(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkBattleCommand::name:
-			battle_command.name = stream.ReadString(chunk_info.length);
+			battle_command->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkBattleCommand::type:
-			battle_command.type = stream.Read32(Reader::CompressedInteger);
+			battle_command->type = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

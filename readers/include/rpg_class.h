@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_learning.h"
 #include "reader.h"
 
@@ -50,7 +50,7 @@ namespace RPG {
 		int exp_inflation;
 		int exp_correction;
 		int unarmed_animation;
-		std::vector<Learning> skills;
+		boost::ptr_vector<Learning> skills;
 		std::vector<unsigned char> state_ranks;
 		std::vector<unsigned char> attribute_ranks;
 		std::vector<uint32_t> battle_commands;

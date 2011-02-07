@@ -37,7 +37,7 @@ namespace LMU_Reader {
 	std::auto_ptr<RPG::EventPage> ReadEventPage(Reader& stream);
 	std::auto_ptr<RPG::EventPageCondition> ReadEventPageCondition(Reader& stream);
 	std::auto_ptr<RPG::MoveRoute> ReadMoveRoute(Reader& stream);
-	std::auto_ptr<RPG::MoveCommand> ReadMoveCommand(Reader& stream);
+	RPG::MoveCommand ReadMoveCommand(Reader& stream);
 }
 
 #endif

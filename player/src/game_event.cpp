@@ -57,7 +57,7 @@ void Game_Event::ClearStarting() {
 }
 
 ////////////////////////////////////////////////////////////
-void Game_Event::Setup(RPG::EventPage* new_page) {
+void Game_Event::Setup(RPG::EventPage const* new_page) {
 	page = new_page;
 
 	if (page == NULL) {
@@ -100,7 +100,7 @@ void Game_Event::Setup(RPG::EventPage* new_page) {
 	move_type = page->move_type;
 	move_speed = page->move_speed;
 	move_frequency = page->move_frequency;
-	move_route = &page->move_route;
+	move_route = page->move_route.get();
 	move_route_index = 0;
 	move_route_forcing = false;
 	//animation_type = page.animation_type;
@@ -120,9 +120,9 @@ void Game_Event::Setup(RPG::EventPage* new_page) {
 }
 
 void Game_Event::Refresh() {
-	RPG::EventPage* new_page = NULL;
+	RPG::EventPage const* new_page = NULL;
 	if (!erased) {
-		std::vector<RPG::EventPage>::reverse_iterator i;
+		boost::ptr_vector<RPG::EventPage>::const_reverse_iterator i;
 		for (i = event.pages.rbegin(); i != event.pages.rend(); i++) {
 			// Loop in reverse order to see whether any page meets conditions...
 			if (AreConditionsMet(*i)) {
@@ -142,45 +142,45 @@ void Game_Event::Refresh() {
 
 bool Game_Event::AreConditionsMet(const RPG::EventPage& page) {
 	// First switch (A)
-	if (page.condition.switch_a && !Game_Switches[page.condition.switch_a_id]) {
+	if (page.condition->switch_a && !Game_Switches[page.condition->switch_a_id]) {
 		return false;
 	}
 
 	// Second switch (B)
-	if (page.condition.switch_b && !Game_Switches[page.condition.switch_b_id]) {
+	if (page.condition->switch_b && !Game_Switches[page.condition->switch_b_id]) {
 		return false;
 	}
 
 	// Variable
 	if (Player::engine == Player::EngineRpg2k) {
-		if (page.condition.variable && !(Game_Variables[page.condition.variable_id] >= page.condition.variable_value)) {
+		if (page.condition->variable && !(Game_Variables[page.condition->variable_id] >= page.condition->variable_value)) {
 			return false;
 		}
 	} else {
-		if (page.condition.variable) {
-			switch (page.condition.compare_operator) {
+		if (page.condition->variable) {
+			switch (page.condition->compare_operator) {
 			case 0: // ==
-				if (!(Game_Variables[page.condition.variable_id] == page.condition.variable_value))
+				if (!(Game_Variables[page.condition->variable_id] == page.condition->variable_value))
 					return false;
 				break;
 			case 1: // >=
-				if (!(Game_Variables[page.condition.variable_id] >= page.condition.variable_value))
+				if (!(Game_Variables[page.condition->variable_id] >= page.condition->variable_value))
 					return false;
 				break;
 			case 2: // <=
-				if (!(Game_Variables[page.condition.variable_id] <= page.condition.variable_value))
+				if (!(Game_Variables[page.condition->variable_id] <= page.condition->variable_value))
 					return false;
 				break;
 			case 3: // >
-				if (!(Game_Variables[page.condition.variable_id] > page.condition.variable_value))
+				if (!(Game_Variables[page.condition->variable_id] > page.condition->variable_value))
 					return false;
 				break;
 			case 4: // <
-				if (!(Game_Variables[page.condition.variable_id] < page.condition.variable_value))
+				if (!(Game_Variables[page.condition->variable_id] < page.condition->variable_value))
 					return false;
 				break;
 			case 5: // !=
-				if (!(Game_Variables[page.condition.variable_id] != page.condition.variable_value))
+				if (!(Game_Variables[page.condition->variable_id] != page.condition->variable_value))
 					return false;
 				break;
 			}
@@ -188,29 +188,29 @@ bool Game_Event::AreConditionsMet(const RPG::EventPage& page) {
 	}
 
 	// Item in possession?
-	if (page.condition.item && !Game_Party::ItemNumber(page.condition.item_id)) {
+	if (page.condition->item && !Game_Party::ItemNumber(page.condition->item_id)) {
 		return false;
 	}
 
 	// Actor in party?
-	if (page.condition.actor) {
-		Game_Actor* actor = Game_Actors::GetActor(page.condition.actor_id);
+	if (page.condition->actor) {
+		Game_Actor* actor = Game_Actors::GetActor(page.condition->actor_id);
 		if (!Game_Party::IsActorInParty(actor)) {
 			return false;
 		}
 	}
 
 	// Timer
-	if (page.condition.timer) {
+	if (page.condition->timer) {
 		int frames = Game_System::ReadTimer(Game_System::Timer1);
-		if (frames > page.condition.timer_sec * DEFAULT_FPS)
+		if (frames > page.condition->timer_sec * DEFAULT_FPS)
 			return false;
 	}
 
 	// Timer2
-	if (page.condition.timer2) {
+	if (page.condition->timer2) {
 		int frames = Game_System::ReadTimer(Game_System::Timer2);
-		if (frames > page.condition.timer2_sec * DEFAULT_FPS)
+		if (frames > page.condition->timer2_sec * DEFAULT_FPS)
 			return false;
 	}
 
@@ -298,7 +298,7 @@ void Game_Event::Update() {
 	
 }
 
-RPG::Event& Game_Event::GetEvent() {
+RPG::Event const& Game_Event::GetEvent() {
 	return event;
 }
 

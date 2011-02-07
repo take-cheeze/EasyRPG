@@ -56,13 +56,13 @@ void Scene_Item::Update() {
 	item_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::system->cancel_se);
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		int item_id = item_window->GetItemId();
 
 		if (Game_Party::IsItemUsable(item_id)) {
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::system->decision_se);
 
 			if (Data::items[item_id - 1].type == RPG::Item::Type_switch) {
 				Game_Switches[Data::items[item_id - 1].switch_id] = true;
@@ -73,7 +73,7 @@ void Scene_Item::Update() {
 				item_index = item_window->GetIndex();
 			}
 		} else {
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Data::system->buzzer_se);
 		}
 	}
 }

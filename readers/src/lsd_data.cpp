@@ -26,8 +26,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Save Cover
 ////////////////////////////////////////////////////////////
-RPG::SaveData LSD_Reader::ReadSaveData(Reader& stream) {
-	RPG::SaveData data;
+std::auto_ptr<RPG::SaveData> LSD_Reader::ReadSaveData(Reader& stream) {
+	std::auto_ptr<RPG::SaveData> data(new RPG::SaveData);
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -40,157 +40,157 @@ RPG::SaveData LSD_Reader::ReadSaveData(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkData::screen:
-			data.screen = stream.Read32(Reader::CompressedInteger);
+			data->screen = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::frame_count:
-			data.frame_count = stream.Read32(Reader::CompressedInteger);
+			data->frame_count = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::graphics_name:
-			data.graphics_name = stream.ReadString(chunk_info.length);
+			data->graphics_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkData::switches_size:
-			data.switches_size = stream.Read32(Reader::CompressedInteger);
+			data->switches_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::switches:
-			stream.ReadBool(data.switches, chunk_info.length);
+			stream.ReadBool(data->switches, chunk_info.length);
 			break;
 		case ChunkData::variables_size:
-			data.variables_size = stream.Read32(Reader::CompressedInteger);
+			data->variables_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::variables:
-			stream.Read32(data.variables, chunk_info.length);
+			stream.Read32(data->variables, chunk_info.length);
 			break;
 		case ChunkData::message_transparent:
-			data.message_transparent = stream.Read32(Reader::CompressedInteger);
+			data->message_transparent = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::message_position:
-			data.message_position = stream.Read32(Reader::CompressedInteger);
+			data->message_position = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::message_placement:
-			data.message_placement = stream.Read32(Reader::CompressedInteger);
+			data->message_placement = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::message_continue:
-			data.message_continue = stream.Read32(Reader::CompressedInteger);
+			data->message_continue = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::face_name:
-			data.face_name = stream.ReadString(chunk_info.length);
+			data->face_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkData::face_id:
-			data.face_id = stream.Read32(Reader::CompressedInteger);
+			data->face_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::unknown_36:
-			data.unknown_36 = stream.Read32(Reader::CompressedInteger);
+			data->unknown_36 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::transparent:
-			data.transparent = stream.ReadBool();
+			data->transparent = stream.ReadBool();
 			break;
 		case ChunkData::title_music:
-			data.title_music = LDB_Reader::ReadMusic(stream);
+			data->title_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::battle_music:
-			data.battle_music = LDB_Reader::ReadMusic(stream);
+			data->battle_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::battle_end_music:
-			data.battle_end_music = LDB_Reader::ReadMusic(stream);
+			data->battle_end_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::inn_music:
-			data.inn_music = LDB_Reader::ReadMusic(stream);
+			data->inn_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::current_music:
-			data.current_music = LDB_Reader::ReadMusic(stream);
+			data->current_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::unknown1_music:
-			data.unknown1_music = LDB_Reader::ReadMusic(stream);
+			data->unknown1_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::unknown2_music:
-			data.unknown2_music = LDB_Reader::ReadMusic(stream);
+			data->unknown2_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::stored_music:
-			data.stored_music = LDB_Reader::ReadMusic(stream);
+			data->stored_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::boat_music:
-			data.boat_music = LDB_Reader::ReadMusic(stream);
+			data->boat_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::ship_music:
-			data.ship_music = LDB_Reader::ReadMusic(stream);
+			data->ship_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::airship_music:
-			data.airship_music = LDB_Reader::ReadMusic(stream);
+			data->airship_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::gameover_music:
-			data.gameover_music = LDB_Reader::ReadMusic(stream);
+			data->gameover_music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkData::cursor_se:
-			data.cursor_se = LDB_Reader::ReadSound(stream);
+			data->cursor_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::decision_se:
-			data.decision_se = LDB_Reader::ReadSound(stream);
+			data->decision_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::cancel_se:
-			data.cancel_se = LDB_Reader::ReadSound(stream);
+			data->cancel_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::buzzer_se:
-			data.buzzer_se = LDB_Reader::ReadSound(stream);
+			data->buzzer_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::battle_se:
-			data.battle_se = LDB_Reader::ReadSound(stream);
+			data->battle_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::escape_se:
-			data.escape_se = LDB_Reader::ReadSound(stream);
+			data->escape_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::enemy_attack_se:
-			data.enemy_attack_se = LDB_Reader::ReadSound(stream);
+			data->enemy_attack_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::enemy_damaged_se:
-			data.enemy_damaged_se = LDB_Reader::ReadSound(stream);
+			data->enemy_damaged_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::actor_damaged_se:
-			data.actor_damaged_se = LDB_Reader::ReadSound(stream);
+			data->actor_damaged_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::dodge_se:
-			data.dodge_se = LDB_Reader::ReadSound(stream);
+			data->dodge_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::enemy_death_se:
-			data.enemy_death_se = LDB_Reader::ReadSound(stream);
+			data->enemy_death_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::item_se:
-			data.item_se = LDB_Reader::ReadSound(stream);
+			data->item_se = LDB_Reader::ReadSound(stream);
 			break;
 		case ChunkData::transition_out:
-			data.transition_out = stream.Read8();
+			data->transition_out = stream.Read8();
 			break;
 		case ChunkData::transition_in:
-			data.transition_in = stream.Read8();
+			data->transition_in = stream.Read8();
 			break;
 		case ChunkData::battle_start_fadeout:
-			data.battle_start_fadeout = stream.Read8();
+			data->battle_start_fadeout = stream.Read8();
 			break;
 		case ChunkData::battle_start_fadein:
-			data.battle_start_fadein = stream.Read8();
+			data->battle_start_fadein = stream.Read8();
 			break;
 		case ChunkData::battle_end_fadeout:
-			data.battle_end_fadeout = stream.Read8();
+			data->battle_end_fadeout = stream.Read8();
 			break;
 		case ChunkData::battle_end_fadein:
-			data.battle_end_fadein = stream.Read8();
+			data->battle_end_fadein = stream.Read8();
 			break;
 		case ChunkData::teleport_allowed:
-			data.teleport_allowed = stream.ReadBool();
+			data->teleport_allowed = stream.ReadBool();
 			break;
 		case ChunkData::escape_allowed:
-			data.escape_allowed = stream.ReadBool();
+			data->escape_allowed = stream.ReadBool();
 			break;
 		case ChunkData::save_allowed:
-			data.save_allowed = stream.ReadBool();
+			data->save_allowed = stream.ReadBool();
 			break;
 		case ChunkData::menu_allowed:
-			data.menu_allowed = stream.ReadBool();
+			data->menu_allowed = stream.ReadBool();
 			break;
 		case ChunkData::save_count:
-			data.save_count = stream.Read32(Reader::CompressedInteger);
+			data->save_count = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkData::save_slot:
-			data.save_slot = stream.Read32(Reader::CompressedInteger);
+			data->save_slot = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

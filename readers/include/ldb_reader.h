@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "reader.h"
 #include "rpg_actor.h"
 #include "rpg_skill.h"
@@ -73,8 +73,8 @@ namespace LDB_Reader {
 	std::auto_ptr<RPG::Terms> ReadTerms(Reader& stream);
 	std::auto_ptr<RPG::System> ReadSystem(Reader& stream);
 	std::auto_ptr<RPG::CommonEvent> ReadCommonEvent(Reader& stream);
-	std::auto_ptr<RPG::Sound> ReadSound(Reader& stream);
-	std::auto_ptr<RPG::Music> ReadMusic(Reader& stream);
+	RPG::Sound ReadSound(Reader& stream);
+	RPG::Music ReadMusic(Reader& stream);
 	std::vector<std::string> ReadVariables(Reader& stream);
 	std::vector<std::string> ReadSwitches(Reader& stream);
 	std::auto_ptr<RPG::TestBattler> ReadTestBattler(Reader& stream);

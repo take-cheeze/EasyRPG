@@ -43,9 +43,9 @@ void Window_TargetStatus::Refresh() {
 	}
 
 	if (use_item) {
-		contents->TextDraw(0, 0, 1, Data::terms.possessed_items);
+		contents->TextDraw(0, 0, 1, Data::terms->possessed_items);
 	} else {
-		contents->TextDraw(0, 0, 1, Data::terms.sp_cost);
+		contents->TextDraw(0, 0, 1, Data::terms->sp_cost);
 	}
 
 	std::stringstream ss;

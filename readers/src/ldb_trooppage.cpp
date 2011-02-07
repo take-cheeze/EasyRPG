@@ -26,8 +26,8 @@
 ////////////////////////////////////////////////////////////
 /// Read TroopPage
 ////////////////////////////////////////////////////////////
-RPG::TroopPage LDB_Reader::ReadTroopPage(Reader& stream) {
-	RPG::TroopPage page;
+std::auto_ptr<RPG::TroopPage> LDB_Reader::ReadTroopPage(Reader& stream) {
+	std::auto_ptr<RPG::TroopPage> page(new RPG::TroopPage);
 	stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
@@ -41,7 +41,7 @@ RPG::TroopPage LDB_Reader::ReadTroopPage(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkTroopPage::condition:
-			page.condition = ReadTroopPageCondition(stream);
+			page->condition = ReadTroopPageCondition(stream);
 			break;
 		case ChunkTroopPage::event_commands_size:
 			stream.Read32(Reader::CompressedInteger);
@@ -57,7 +57,7 @@ RPG::TroopPage LDB_Reader::ReadTroopPage(Reader& stream) {
 					break;
 				}
 				stream.Ungetch(ch);
-				page.event_commands.push_back(Event_Reader::ReadEventCommand(stream));
+				page->event_commands.push_back(Event_Reader::ReadEventCommand(stream));
 			}
 			break;
 		default:

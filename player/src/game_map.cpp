@@ -167,7 +167,7 @@ void Game_Map::Setup(int _id) {
 	scroll_direction = 2;
 	scroll_rest = 0;
 	scroll_speed = 4;
-	encounter_steps = Data::treemap.maps[map_id - 1].encounter_steps;
+	encounter_steps = Data::treemap->maps[map_id - 1].encounter_steps;
 
 	for (int i = 0; i < 3; i++)
 		vehicles[i]->Refresh();
@@ -186,26 +186,26 @@ void Game_Map::Autoplay() {
 	int parent_index = 0;
 	int current_index = GetMapIndex(map_id);
 	
-	if ((current_index > -1) && !Data::treemap.maps[current_index].music.name.empty()) {
-		switch(Data::treemap.maps[current_index].music_type) {
+	if ((current_index > -1) && !Data::treemap->maps[current_index].music.name.empty()) {
+		switch(Data::treemap->maps[current_index].music_type) {
 			case 0: // inherits music from parent
-				parent_index = GetMapIndex(Data::treemap.maps[current_index].parent_map);
-				if (Data::treemap.maps[parent_index].music.name != "(OFF)" && &Data::treemap.maps[parent_index].music != Game_Temp::map_bgm) {
-					Game_Temp::map_bgm = &Data::treemap.maps[parent_index].music;
+				parent_index = GetMapIndex(Data::treemap->maps[current_index].parent_map);
+				if (Data::treemap->maps[parent_index].music.name != "(OFF)" && &Data::treemap->maps[parent_index].music != Game_Temp::map_bgm) {
+					Game_Temp::map_bgm = &Data::treemap->maps[parent_index].music;
 					Game_System::BgmPlay(*Game_Temp::map_bgm);
 				}
 				break;
 			case 1:  // No Change
 				break;
 			case 2:  // specific map music
-				if (&Data::treemap.maps[current_index].music != Game_Temp::map_bgm) {
+				if (&Data::treemap->maps[current_index].music != Game_Temp::map_bgm) {
 					if (Game_Temp::map_bgm != NULL) {
-						if (Data::treemap.maps[current_index].music.name == Game_Temp::map_bgm->name) {
+						if (Data::treemap->maps[current_index].music.name == Game_Temp::map_bgm->name) {
 							// ToDo: Here the volume and pitch must be updated if the song is the same
 							return;
 						}
 					}
-					Game_Temp::map_bgm = &Data::treemap.maps[current_index].music;
+					Game_Temp::map_bgm = &Data::treemap->maps[current_index].music;
 					Game_System::BgmPlay(*Game_Temp::map_bgm);
 				}
 		}
@@ -473,7 +473,7 @@ int Game_Map::GetHeight() {
 }
 
 std::vector<RPG::Encounter>& Game_Map::GetEncounterList() {
-	return Data::treemap.maps[map_id - 1].encounters;
+	return Data::treemap->maps[map_id - 1].encounters;
 }
 
 int Game_Map::GetEncounterStep() {
@@ -571,8 +571,8 @@ void Game_Map::SetParallaxScroll(bool horz, bool vert,
 
 ////////////////////////////////////////////////////////////
 int Game_Map::GetMapIndex(int id) {
-	for (unsigned int i = 0; i < Data::treemap.maps.size(); ++i) {
-		if (Data::treemap.maps[i].ID == id) {
+	for (unsigned int i = 0; i < Data::treemap->maps.size(); ++i) {
+		if (Data::treemap->maps[i].ID == id) {
 			return i;
 		}
 	}

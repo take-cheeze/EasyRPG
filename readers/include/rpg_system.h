@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_sound.h"
 #include "rpg_music.h"
 #include "rpg_testbattler.h"
@@ -79,7 +79,7 @@ namespace RPG {
 		int selected_condition;
 		int selected_hero;
 		std::string battletest_background;
-		std::vector<TestBattler> battletest_data;
+		boost::ptr_vector<TestBattler> battletest_data;
 		int battletest_terrain;
 		int battletest_formation;
 		int battletest_condition;

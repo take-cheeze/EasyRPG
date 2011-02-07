@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 /// Read BattlerAnimation
 ////////////////////////////////////////////////////////////
-RPG::BattlerAnimationData LDB_Reader::ReadBattlerAnimationData(Reader& stream) {
-	RPG::BattlerAnimationData battler_animation_data;
-	battler_animation_data.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::BattlerAnimationData> LDB_Reader::ReadBattlerAnimationData(Reader& stream) {
+	std::auto_ptr<RPG::BattlerAnimationData> battler_animation_data(new RPG::BattlerAnimationData);
+	battler_animation_data->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -40,13 +40,13 @@ RPG::BattlerAnimationData LDB_Reader::ReadBattlerAnimationData(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkBattlerAnimationData::move:
-			battler_animation_data.move = stream.Read32(Reader::CompressedInteger);
+			battler_animation_data->move = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattlerAnimationData::after_image:
-			battler_animation_data.after_image = stream.Read32(Reader::CompressedInteger);
+			battler_animation_data->after_image = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattlerAnimationData::pose:
-			battler_animation_data.pose = stream.Read32(Reader::CompressedInteger);
+			battler_animation_data->pose = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

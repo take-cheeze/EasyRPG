@@ -62,7 +62,7 @@ void Scene_Skill::Update() {
 	skill_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::system->cancel_se);
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		int skill_id = skill_window->GetSkillId();
@@ -70,7 +70,7 @@ void Scene_Skill::Update() {
 		Game_Actor* actor = Game_Party::GetActors()[actor_index];
 
 		if (actor->IsSkillUsable(skill_id)) {
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::system->decision_se);
 
 			if (Data::skills[skill_id - 1].type == RPG::Skill::Type_switch) {
 				actor->SetSp(actor->GetSp() - actor->CalculateSkillCost(skill_id));
@@ -86,7 +86,7 @@ void Scene_Skill::Update() {
 				// ToDo: Displays the escape target scene/window
 			} 
 		} else {
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Data::system->buzzer_se);
 		}
 	}
 }

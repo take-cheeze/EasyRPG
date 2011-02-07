@@ -34,7 +34,7 @@ std::auto_ptr<RPG::Map> LMU_Reader::LoadMap(const std::string& filename) {
 	}
 	std::string header = reader.ReadString(reader.Read32(Reader::CompressedInteger));
 	if (header != "LcfMapUnit") {
-		Reader::SetError("%s is not a valid RPG2000 map.\n", filename.c_str());
+		Reader::SetError("%s is not a valid RPG2000 map->\n", filename.c_str());
 		return std::auto_ptr<RPG::Map>(NULL);
 	}
 	return ReadMapData(reader);

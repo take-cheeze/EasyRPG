@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_enemyaction.h"
 
 ////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ namespace RPG {
 		bool levitate;
 		std::vector<unsigned char> state_ranks;
 		std::vector<unsigned char> attribute_ranks;
-		std::vector<EnemyAction> actions;
+		boost::ptr_vector<EnemyAction> actions;
 	};
 }
 

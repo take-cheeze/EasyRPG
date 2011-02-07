@@ -56,7 +56,7 @@ void Text::Draw(Surface* dest, int x, int y, int color, std::wstring wtext, Surf
 	text_surface->Clear();
 
 	// Load the system file for the shadow and text color
-	Bitmap* system = Cache::System(Data::system.system_name);
+	Bitmap* system = Cache::System(Data::system->system_name);
 	// Load the exfont-file
 	Bitmap* exfont = Cache::ExFont();
 

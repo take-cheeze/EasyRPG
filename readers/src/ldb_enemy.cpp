@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 /// Read Enemy
 ////////////////////////////////////////////////////////////
-RPG::Enemy LDB_Reader::ReadEnemy(Reader& stream) {
-	RPG::Enemy enemy;
-	enemy.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::Enemy> LDB_Reader::ReadEnemy(Reader& stream) {
+	std::auto_ptr<RPG::Enemy> enemy(new RPG::Enemy);
+	enemy->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -40,74 +40,74 @@ RPG::Enemy LDB_Reader::ReadEnemy(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkEnemy::name:
-			enemy.name = stream.ReadString(chunk_info.length);
+			enemy->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkEnemy::battler_name:
-			enemy.battler_name = stream.ReadString(chunk_info.length);
+			enemy->battler_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkEnemy::battler_hue:
-			enemy.battler_hue = stream.Read32(Reader::CompressedInteger);
+			enemy->battler_hue = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::max_hp:
-			enemy.max_hp = stream.Read32(Reader::CompressedInteger);
+			enemy->max_hp = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::max_sp:
-			enemy.max_sp = stream.Read32(Reader::CompressedInteger);
+			enemy->max_sp = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::attack:
-			enemy.attack = stream.Read32(Reader::CompressedInteger);
+			enemy->attack = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::defense:
-			enemy.defense = stream.Read32(Reader::CompressedInteger);
+			enemy->defense = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::spirit:
-			enemy.spirit = stream.Read32(Reader::CompressedInteger);
+			enemy->spirit = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::agility:
-			enemy.agility = stream.Read32(Reader::CompressedInteger);
+			enemy->agility = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::transparent:
-			enemy.transparent = stream.ReadBool();
+			enemy->transparent = stream.ReadBool();
 			break;
 		case ChunkEnemy::exp:
-			enemy.exp = stream.Read32(Reader::CompressedInteger);
+			enemy->exp = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::gold:
-			enemy.gold = stream.Read32(Reader::CompressedInteger);
+			enemy->gold = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::drop_id:
-			enemy.drop_id = stream.Read32(Reader::CompressedInteger);
+			enemy->drop_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::drop_prob:
-			enemy.drop_prob = stream.Read32(Reader::CompressedInteger);
+			enemy->drop_prob = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::critical_hit:
-			enemy.critical_hit = stream.ReadBool();
+			enemy->critical_hit = stream.ReadBool();
 			break;
 		case ChunkEnemy::critical_hit_chance:
-			enemy.critical_hit_chance = stream.Read32(Reader::CompressedInteger);
+			enemy->critical_hit_chance = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::miss:
-			enemy.miss = stream.ReadBool();
+			enemy->miss = stream.ReadBool();
 			break;
 		case ChunkEnemy::levitate:
-			enemy.levitate = stream.ReadBool();
+			enemy->levitate = stream.ReadBool();
 			break;
 		case ChunkEnemy::state_ranks_size:
 			stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::state_ranks:
-			stream.Read8(enemy.state_ranks, chunk_info.length);
+			stream.Read8(enemy->state_ranks, chunk_info.length);
 			break;
 		case ChunkEnemy::attribute_ranks_size:
 			stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEnemy::attribute_ranks:
-			stream.Read8(enemy.attribute_ranks, chunk_info.length);
+			stream.Read8(enemy->attribute_ranks, chunk_info.length);
 			break;
 		case ChunkEnemy::actions:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				enemy.actions.push_back(ReadEnemyAction(stream));
+				enemy->actions.push_back(ReadEnemyAction(stream));
 			}
 			break;
 		default:

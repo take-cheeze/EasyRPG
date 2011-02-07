@@ -29,7 +29,7 @@
 /// Event Reader namespace
 ////////////////////////////////////////////////////////////
 namespace Event_Reader {
-	std::auto_ptr<RPG::EventCommand> ReadEventCommand(Reader& stream);
+	RPG::EventCommand ReadEventCommand(Reader& stream);
 }
 
 #endif

@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_troopmember.h"
 #include "rpg_trooppage.h"
 
@@ -36,9 +36,9 @@ namespace RPG {
 		
 		int ID;
 		std::string name;
-		std::vector<TroopMember> members;
+		boost::ptr_vector<TroopMember> members;
 		std::vector<bool> terrain_set;
-		std::vector<TroopPage> pages;
+		boost::ptr_vector<TroopPage> pages;
 	};
 }
 

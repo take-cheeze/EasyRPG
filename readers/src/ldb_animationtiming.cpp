@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read AnimationTiming
 ////////////////////////////////////////////////////////////
-RPG::AnimationTiming LDB_Reader::ReadAnimationTiming(Reader& stream) {
-	RPG::AnimationTiming timing;
+std::auto_ptr<RPG::AnimationTiming> LDB_Reader::ReadAnimationTiming(Reader& stream) {
+	std::auto_ptr<RPG::AnimationTiming> timing(new RPG::AnimationTiming);
 	stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
@@ -40,28 +40,28 @@ RPG::AnimationTiming LDB_Reader::ReadAnimationTiming(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkAnimationTiming::frame:
-			timing.frame = stream.Read32(Reader::CompressedInteger);
+			timing->frame = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkAnimationTiming::se:
-			timing.se = ReadSound(stream);
+			timing->se = ReadSound(stream);
 			break;
 		case ChunkAnimationTiming::flash_scope:
-			timing.flash_scope = stream.Read32(Reader::CompressedInteger);
+			timing->flash_scope = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkAnimationTiming::flash_red:
-			timing.flash_red = stream.Read32(Reader::CompressedInteger);
+			timing->flash_red = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkAnimationTiming::flash_green:
-			timing.flash_green = stream.Read32(Reader::CompressedInteger);
+			timing->flash_green = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkAnimationTiming::flash_blue:
-			timing.flash_blue = stream.Read32(Reader::CompressedInteger);
+			timing->flash_blue = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkAnimationTiming::flash_power:
-			timing.flash_power = stream.Read32(Reader::CompressedInteger);
+			timing->flash_power = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkAnimationTiming::screen_shake:
-			timing.screen_shake = stream.Read32(Reader::CompressedInteger);
+			timing->screen_shake = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

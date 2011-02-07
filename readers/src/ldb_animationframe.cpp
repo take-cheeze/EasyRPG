@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read AnimationFrame
 ////////////////////////////////////////////////////////////
-RPG::AnimationFrame LDB_Reader::ReadAnimationFrame(Reader& stream) {
-	RPG::AnimationFrame frame;
+std::auto_ptr<RPG::AnimationFrame> LDB_Reader::ReadAnimationFrame(Reader& stream) {
+	std::auto_ptr<RPG::AnimationFrame> frame(new RPG::AnimationFrame);
 	stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
@@ -41,7 +41,7 @@ RPG::AnimationFrame LDB_Reader::ReadAnimationFrame(Reader& stream) {
 		switch (chunk_info.ID) {
 		case ChunkAnimationFrame::cells:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				frame.cells.push_back(ReadAnimationCellData(stream));
+				frame->cells.push_back(ReadAnimationCellData(stream));
 			}
 			break;
 		default:

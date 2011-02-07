@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_learning.h"
 #include "reader.h"
 
@@ -65,7 +65,7 @@ namespace RPG {
 		int helmet_id;
 		int accessory_id;
 		int unarmed_animation;
-		std::vector<Learning> skills;
+		boost::ptr_vector<Learning> skills;
 		std::vector<unsigned char> state_ranks;
 		std::vector<unsigned char> attribute_ranks;
 		// RPG Maker 2000

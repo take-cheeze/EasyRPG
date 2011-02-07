@@ -23,27 +23,27 @@
 ////////////////////////////////////////////////////////////
 namespace Data {
 	// Database Data (ldb)
-	std::vector<RPG::Actor> actors;
-	std::vector<RPG::Skill> skills;
-	std::vector<RPG::Item> items;
-	std::vector<RPG::Enemy> enemies;
-	std::vector<RPG::Troop> troops;
-	std::vector<RPG::Terrain> terrains;
-	std::vector<RPG::Attribute> attributes;
-	std::vector<RPG::State> states;
-	std::vector<RPG::Animation> animations;
-	std::vector<RPG::Chipset> chipsets;
-	std::vector<RPG::CommonEvent> commonevents;
-	RPG::BattleCommands battlecommands;
-	std::vector<RPG::Class> classes;
-	std::vector<RPG::BattlerAnimation> battleranimations;
-	RPG::Terms terms;
-	RPG::System system;
+	boost::ptr_vector<RPG::Actor> actors;
+	boost::ptr_vector<RPG::Skill> skills;
+	boost::ptr_vector<RPG::Item> items;
+	boost::ptr_vector<RPG::Enemy> enemies;
+	boost::ptr_vector<RPG::Troop> troops;
+	boost::ptr_vector<RPG::Terrain> terrains;
+	boost::ptr_vector<RPG::Attribute> attributes;
+	boost::ptr_vector<RPG::State> states;
+	boost::ptr_vector<RPG::Animation> animations;
+	boost::ptr_vector<RPG::Chipset> chipsets;
+	boost::ptr_vector<RPG::CommonEvent> commonevents;
+	std::auto_ptr<RPG::BattleCommands> battlecommands;
+	boost::ptr_vector<RPG::Class> classes;
+	boost::ptr_vector<RPG::BattlerAnimation> battleranimations;
+	std::auto_ptr<RPG::Terms> terms;
+	std::auto_ptr<RPG::System> system;
 	std::vector<std::string> switches;
 	std::vector<std::string> variables;
 
 	// TreeMap (lmt)
-	RPG::TreeMap treemap;
+	std::auto_ptr<RPG::TreeMap> treemap;
 }
 
 ////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ void Data::Clear() {
 	animations.clear();
 	chipsets.clear();
 	commonevents.clear();
-	battlecommands.commands.clear();
+	battlecommands->commands.clear();
 	classes.clear();
 	battleranimations.clear();
 	switches.clear();

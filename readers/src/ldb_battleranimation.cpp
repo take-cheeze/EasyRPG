@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 /// Read BattlerAnimation
 ////////////////////////////////////////////////////////////
-RPG::BattlerAnimation LDB_Reader::ReadBattlerAnimation(Reader& stream) {
-	RPG::BattlerAnimation battler_animation;
-	battler_animation.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::BattlerAnimation> LDB_Reader::ReadBattlerAnimation(Reader& stream) {
+	std::auto_ptr<RPG::BattlerAnimation> battler_animation(new RPG::BattlerAnimation);
+	battler_animation->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -40,19 +40,19 @@ RPG::BattlerAnimation LDB_Reader::ReadBattlerAnimation(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkBattlerAnimation::name:
-			battler_animation.name = stream.ReadString(chunk_info.length);
+			battler_animation->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkBattlerAnimation::speed:
-			battler_animation.speed = stream.Read32(Reader::CompressedInteger);
+			battler_animation->speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattlerAnimation::base_data:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				battler_animation.base_data.push_back(ReadBattlerAnimationExtension(stream));
+				battler_animation->base_data.push_back(ReadBattlerAnimationExtension(stream));
 			}
 			break;
 		case ChunkBattlerAnimation::weapon_data:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				battler_animation.weapon_data.push_back(ReadBattlerAnimationExtension(stream));
+				battler_animation->weapon_data.push_back(ReadBattlerAnimationExtension(stream));
 			}
 			break;
 		default:

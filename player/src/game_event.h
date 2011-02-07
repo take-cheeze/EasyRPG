@@ -51,7 +51,7 @@ public:
 	////////////////////////////////////////////////////////
 	void Refresh();
 
-	void Setup(RPG::EventPage* new_page);
+	void Setup(RPG::EventPage const* new_page);
 
 	/// @return event id
 	int GetId() const;
@@ -77,17 +77,17 @@ public:
 	/// @return if the event has been disabled (via EraseEvent-EventCommand)
 	bool GetDisabled() const;
 
-	RPG::Event& GetEvent();
+	RPG::Event const& GetEvent();
 
 private:
 	int ID;
 	bool starting;
 	int trigger;
 	int map_id;
-	RPG::Event event;
+	RPG::Event const& event;
 	bool erased;
 	bool through;
-	RPG::EventPage* page;
+	RPG::EventPage const* page;
 	std::vector<RPG::EventCommand> list;
 	Game_Interpreter* interpreter;
 };

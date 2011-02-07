@@ -33,7 +33,7 @@ namespace RPG {
 	public:
 		TroopPage();
 		
-		TroopPageCondition condition;
+		std::auto_ptr<TroopPageCondition> condition;
 		std::vector<EventCommand> event_commands;
 	};
 }

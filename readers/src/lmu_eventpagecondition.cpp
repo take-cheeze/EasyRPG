@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Event Page Condition
 ////////////////////////////////////////////////////////////
-RPG::EventPageCondition LMU_Reader::ReadEventPageCondition(Reader& stream) {
-	RPG::EventPageCondition eventpagecondition;
+std::auto_ptr<RPG::EventPageCondition> LMU_Reader::ReadEventPageCondition(Reader& stream) {
+	std::auto_ptr<RPG::EventPageCondition> eventpagecondition(new RPG::EventPageCondition);
 	unsigned char bitflag;
 
 	Reader::Chunk chunk_info;
@@ -41,40 +41,40 @@ RPG::EventPageCondition LMU_Reader::ReadEventPageCondition(Reader& stream) {
 		switch (chunk_info.ID) {
 		case ChunkEventPageCondition::condition_flags:
 			bitflag = stream.Read8();
-			eventpagecondition.switch_a = (bitflag & 0x01) > 0;
-			eventpagecondition.switch_b = (bitflag & 0x02) > 0;
-			eventpagecondition.variable = (bitflag & 0x04) > 0;
-			eventpagecondition.item = (bitflag & 0x08) > 0;
-			eventpagecondition.actor = (bitflag & 0x10) > 0;
-			eventpagecondition.timer = (bitflag & 0x20) > 0;
-			eventpagecondition.timer2 = (bitflag & 0x40) > 0;
+			eventpagecondition->switch_a = (bitflag & 0x01) > 0;
+			eventpagecondition->switch_b = (bitflag & 0x02) > 0;
+			eventpagecondition->variable = (bitflag & 0x04) > 0;
+			eventpagecondition->item = (bitflag & 0x08) > 0;
+			eventpagecondition->actor = (bitflag & 0x10) > 0;
+			eventpagecondition->timer = (bitflag & 0x20) > 0;
+			eventpagecondition->timer2 = (bitflag & 0x40) > 0;
 			break;
 		case ChunkEventPageCondition::switch_a_id:
-			eventpagecondition.switch_a_id = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->switch_a_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::switch_b_id:
-			eventpagecondition.switch_b_id = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->switch_b_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::variable_id:
-			eventpagecondition.variable_id = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->variable_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::variable_value:
-			eventpagecondition.variable_value = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->variable_value = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::item_id:
-			eventpagecondition.item_id = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->item_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::actor_id:
-			eventpagecondition.actor_id = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->actor_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::timer_sec:
-			eventpagecondition.timer_sec = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->timer_sec = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::timer2_sec:
-			eventpagecondition.timer2_sec = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->timer2_sec = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventPageCondition::compare_operator:
-			eventpagecondition.compare_operator = stream.Read32(Reader::CompressedInteger);
+			eventpagecondition->compare_operator = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

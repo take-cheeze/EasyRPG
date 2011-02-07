@@ -26,9 +26,9 @@
 ////////////////////////////////////////////////////////////
 /// Read Unknown Chunk 0x71:0x01
 ////////////////////////////////////////////////////////////
-RPG::SaveEventCommands LSD_Reader::ReadSaveEventCommands(Reader& stream) {
-	RPG::SaveEventCommands result;
-	result.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::SaveEventCommands> LSD_Reader::ReadSaveEventCommands(Reader& stream) {
+	std::auto_ptr<RPG::SaveEventCommands> result(new RPG::SaveEventCommands);
+	result->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 
@@ -42,7 +42,7 @@ RPG::SaveEventCommands LSD_Reader::ReadSaveEventCommands(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkEventCommands::commands_size:
-			result.commands_size = stream.Read32(Reader::CompressedInteger);
+			result->commands_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventCommands::commands:
 			for (;;)
@@ -53,23 +53,23 @@ RPG::SaveEventCommands LSD_Reader::ReadSaveEventCommands(Reader& stream) {
 					break;
 				}
 				stream.Ungetch(ch);
-				result.commands.push_back(Event_Reader::ReadEventCommand(stream));
+				result->commands.push_back(Event_Reader::ReadEventCommand(stream));
 			}
 			break;
 		case ChunkEventCommands::current_command:
-			result.current_command = stream.Read32(Reader::CompressedInteger);
+			result->current_command = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventCommands::unknown_0c:
-			result.unknown_0c = stream.Read32(Reader::CompressedInteger);
+			result->unknown_0c = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventCommands::unknown_0d:
-			result.unknown_0d = stream.Read32(Reader::CompressedInteger);
+			result->unknown_0d = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventCommands::unknown_15:
-			result.unknown_15 = stream.Read8();
+			result->unknown_15 = stream.Read8();
 			break;
 		case ChunkEventCommands::unknown_16:
-			result.unknown_15 = stream.Read8();
+			result->unknown_15 = stream.Read8();
 			break;
 		default:
 			stream.Skip(chunk_info);

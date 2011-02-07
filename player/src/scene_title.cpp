@@ -68,7 +68,7 @@ void Scene_Title::Start() {
 	LoadDatabase();
 
 	if (!init) {
-		if (Data::system.ldb_id == 2003) {
+		if (Data::system->ldb_id == 2003) {
 			Output::Debug("Switching to Rpg2003 Interpreter");
 			Player::engine = Player::EngineRpg2k3;
 		}
@@ -140,7 +140,7 @@ void Scene_Title::LoadDatabase() {
 	if (!LDB_Reader::Load(FileFinder::FindDefault(".", DATABASE_NAME))) {
 		Output::ErrorStr(Reader::GetError());
 	}
-	if (!LMT_Reader::Load(FileFinder::FindDefault(".", TREEMAP_NAME))) {
+	if (!(Data::treemap = LMT_Reader::Load(FileFinder::FindDefault(".", TREEMAP_NAME))).get()) {
 		Output::ErrorStr(Reader::GetError());
 	}
 }
@@ -175,16 +175,16 @@ bool Scene_Title::CheckContinue() {
 void Scene_Title::CreateTitleGraphic() {
 	// Load Title Graphic
 	title = new Sprite();
-	title->SetBitmap(Cache::Title(Data::system.title_name));
+	title->SetBitmap(Cache::Title(Data::system->title_name));
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Data::terms.new_game);
-	options.push_back(Data::terms.load_game);
-	options.push_back(Data::terms.exit_game);
+	options.push_back(Data::terms->new_game);
+	options.push_back(Data::terms->load_game);
+	options.push_back(Data::terms->exit_game);
 
 	command_window = new Window_Command(options);
 	command_window->SetX(160 - command_window->GetWidth() / 2);
@@ -207,12 +207,12 @@ void Scene_Title::CreateCommandWindow() {
 ////////////////////////////////////////////////////////////
 void Scene_Title::PlayTitleMusic() {
 	// Play music
-	Game_System::BgmPlay(Data::system.title_music);
+	Game_System::BgmPlay(Data::system->title_music);
 }
 
 ////////////////////////////////////////////////////////////
 bool Scene_Title::CheckValidPlayerLocation() {
-	return (Data::treemap.start_map_id > 0);
+	return (Data::treemap->start_map_id > 0);
 }
 
 ////////////////////////////////////////////////////////////
@@ -220,14 +220,14 @@ void Scene_Title::CommandNewGame() {
 	if (!CheckValidPlayerLocation()) {
 		Output::Warning("The game has no start location set.");
 	} else {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Data::system->decision_se);
 		Audio::BGM_Stop();
 		Graphics::SetFrameCount(0);
 		CreateGameObjects();
 		Game_Party::SetupStartingMembers();
-		Game_Map::Setup(Data::treemap.start_map_id);
+		Game_Map::Setup(Data::treemap->start_map_id);
 		Main_Data::game_player->MoveTo(
-			Data::treemap.start_x, Data::treemap.start_y);
+			Data::treemap->start_x, Data::treemap->start_y);
 		Main_Data::game_player->Refresh();
 		Game_Map::Autoplay();
 		Scene::Push(new Scene_Map());
@@ -237,9 +237,9 @@ void Scene_Title::CommandNewGame() {
 ////////////////////////////////////////////////////////////
 void Scene_Title::CommandContinue() {
 	if (continue_enabled) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Data::system->decision_se);
 	} else {
-		Game_System::SePlay(Data::system.buzzer_se);
+		Game_System::SePlay(Data::system->buzzer_se);
 		return;
 	}
 
@@ -249,7 +249,7 @@ void Scene_Title::CommandContinue() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::CommandShutdown() {
-	Game_System::SePlay(Data::system.decision_se);
+	Game_System::SePlay(Data::system->decision_se);
 	Audio::BGS_Fade(800);
 	Pop();
 }

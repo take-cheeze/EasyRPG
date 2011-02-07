@@ -26,9 +26,10 @@
 ////////////////////////////////////////////////////////////
 /// Read CommonEvent
 ////////////////////////////////////////////////////////////
-RPG::CommonEvent LDB_Reader::ReadCommonEvent(Reader& stream) {
-	RPG::CommonEvent commonevent;
-	commonevent.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::CommonEvent> LDB_Reader::ReadCommonEvent(Reader& stream) {
+	std::auto_ptr<RPG::CommonEvent> commonevent(new RPG::CommonEvent);
+	
+	commonevent->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -41,16 +42,16 @@ RPG::CommonEvent LDB_Reader::ReadCommonEvent(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkCommonEvent::name:
-			commonevent.name = stream.ReadString(chunk_info.length);
+			commonevent->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkCommonEvent::trigger:
-			commonevent.trigger = stream.Read32(Reader::CompressedInteger);
+			commonevent->trigger = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkCommonEvent::switch_flag:
-			commonevent.switch_flag = stream.ReadBool();
+			commonevent->switch_flag = stream.ReadBool();
 			break;
 		case ChunkCommonEvent::switch_id:
-			commonevent.switch_id = stream.Read32(Reader::CompressedInteger);
+			commonevent->switch_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkCommonEvent::event_commands_size:
 			stream.Read32(Reader::CompressedInteger);
@@ -66,7 +67,7 @@ RPG::CommonEvent LDB_Reader::ReadCommonEvent(Reader& stream) {
 					break;
 				}
 				stream.Ungetch(ch);
-				commonevent.event_commands.push_back(Event_Reader::ReadEventCommand(stream));
+				commonevent->event_commands.push_back(Event_Reader::ReadEventCommand(stream));
 			}
 			break;
 		default:

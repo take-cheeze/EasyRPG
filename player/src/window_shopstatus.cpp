@@ -44,8 +44,8 @@ void Window_ShopStatus::Refresh() {
 	if (item_id != 0) {
 		int number = Game_Party::ItemNumber(item_id);
 
-		contents->TextDraw(0, 2, 1, Data::terms.possessed_items);
-		contents->TextDraw(0, 18, 1, Data::terms.equipped_items);
+		contents->TextDraw(0, 2, 1, Data::terms->possessed_items);
+		contents->TextDraw(0, 18, 1, Data::terms->equipped_items);
 
 		std::stringstream ss;
 		ss << number;

@@ -35,7 +35,7 @@ std::auto_ptr<RPG::Save> LSD_Reader::Load(const std::string& filename) {
 	}
 	std::string header = reader.ReadString(reader.Read32(Reader::CompressedInteger));
 	if (header != "LcfSaveData") {
-		Reader::SetError("%s is not a valid RPG2000 save.\n", filename.c_str());
+		Reader::SetError("%s is not a valid RPG2000 save->\n", filename.c_str());
 		return std::auto_ptr<RPG::Save>(NULL);
 	}
 	return LoadChunks(reader);

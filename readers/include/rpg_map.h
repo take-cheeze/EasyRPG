@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_event.h"
 #include "reader.h"
 
@@ -49,7 +49,7 @@ namespace RPG {
 		int parallax_sy;
 		std::vector<short> lower_layer;
 		std::vector<short> upper_layer;
-		std::vector<RPG::Event> events;
+		boost::ptr_vector<RPG::Event> events;
 		int save_times;
 		bool top_level;
 

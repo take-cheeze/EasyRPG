@@ -219,7 +219,7 @@ bool Game_Interpreter::IsRunning() const {
 ////////////////////////////////////////////////////////////
 /// Setup
 ////////////////////////////////////////////////////////////
-void Game_Interpreter::Setup(std::vector<RPG::EventCommand>& _list, int _event_id, int dbg_x, int dbg_y) {
+void Game_Interpreter::Setup(std::vector<RPG::EventCommand> const& _list, int _event_id, int dbg_x, int dbg_y) {
 
 	Clear();
 
@@ -2541,20 +2541,20 @@ bool Game_Interpreter::CommandShowInn() { // code 10730
 
 	switch (inn_type) {
 		case 0:
-			out << Data::terms.inn_a_greeting_1
+			out << Data::terms->inn_a_greeting_1
 				<< " " << Game_Temp::inn_price
-				<< " " << Data::terms.gold
-				<< Data::terms.inn_a_greeting_2;
+				<< " " << Data::terms->gold
+				<< Data::terms->inn_a_greeting_2;
 			Game_Message::texts.push_back(out.str());
-			Game_Message::texts.push_back(Data::terms.inn_a_greeting_3);
+			Game_Message::texts.push_back(Data::terms->inn_a_greeting_3);
 			break;
 		case 1:
-			out << Data::terms.inn_b_greeting_1
+			out << Data::terms->inn_b_greeting_1
 				<< " " << Game_Temp::inn_price
-				<< " " << Data::terms.gold
-				<< Data::terms.inn_b_greeting_2;
+				<< " " << Data::terms->gold
+				<< Data::terms->inn_b_greeting_2;
 			Game_Message::texts.push_back(out.str());
-			Game_Message::texts.push_back(Data::terms.inn_b_greeting_3);
+			Game_Message::texts.push_back(Data::terms->inn_b_greeting_3);
 			break;
 		default:
 			return false;
@@ -2564,12 +2564,12 @@ bool Game_Interpreter::CommandShowInn() { // code 10730
 
 	switch (inn_type) {
 		case 0:
-			Game_Message::texts.push_back(Data::terms.inn_a_accept);
-			Game_Message::texts.push_back(Data::terms.inn_a_cancel);
+			Game_Message::texts.push_back(Data::terms->inn_a_accept);
+			Game_Message::texts.push_back(Data::terms->inn_a_cancel);
 			break;
 		case 1:
-			Game_Message::texts.push_back(Data::terms.inn_b_accept);
-			Game_Message::texts.push_back(Data::terms.inn_b_cancel);
+			Game_Message::texts.push_back(Data::terms->inn_b_accept);
+			Game_Message::texts.push_back(Data::terms->inn_b_cancel);
 			break;
 		default:
 			return false;
@@ -2953,7 +2953,7 @@ bool Game_Interpreter::CommandCallEvent() { // code 12330
 	}
 
 	Game_Event* event = Game_Map::GetEvents().find(event_id)->second;
-	RPG::EventPage& page = event->GetEvent().pages[event_page - 1];
+	RPG::EventPage const& page = event->GetEvent().pages[event_page - 1];
 	child_interpreter->Setup(page.event_commands, event_id, event->GetX(), event->GetY());
 
 	return true;

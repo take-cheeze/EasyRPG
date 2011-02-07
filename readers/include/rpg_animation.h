@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_animationtiming.h"
 #include "rpg_animationframe.h"
 
@@ -47,10 +47,10 @@ namespace RPG {
 		int ID;
 		std::string name;
 		std::string animation_name;
-		std::vector<RPG::AnimationTiming> timings;
+		boost::ptr_vector<RPG::AnimationTiming> timings;
 		int scope;
 		int position;
-		std::vector<RPG::AnimationFrame> frames;
+		boost::ptr_vector<RPG::AnimationFrame> frames;
 	};
 }
 

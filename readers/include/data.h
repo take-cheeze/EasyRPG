@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_actor.h"
 #include "rpg_skill.h"
 #include "rpg_item.h"
@@ -50,28 +50,28 @@
 namespace Data {
 	/// Database Data (ldb)
 	//@{
-	extern std::vector<RPG::Actor> actors;
-	extern std::vector<RPG::Skill> skills;
-	extern std::vector<RPG::Item> items;
-	extern std::vector<RPG::Enemy> enemies;
-	extern std::vector<RPG::Troop> troops;
-	extern std::vector<RPG::Terrain> terrains;
-	extern std::vector<RPG::Attribute> attributes;
-	extern std::vector<RPG::State> states;
-	extern std::vector<RPG::Animation> animations;
-	extern std::vector<RPG::Chipset> chipsets;
-	extern std::vector<RPG::CommonEvent> commonevents;
-	extern RPG::BattleCommands battlecommands;
-	extern std::vector<RPG::Class> classes;
-	extern std::vector<RPG::BattlerAnimation> battleranimations;
-	extern RPG::Terms terms;
-	extern RPG::System system;
+	extern boost::ptr_vector<RPG::Actor> actors;
+	extern boost::ptr_vector<RPG::Skill> skills;
+	extern boost::ptr_vector<RPG::Item> items;
+	extern boost::ptr_vector<RPG::Enemy> enemies;
+	extern boost::ptr_vector<RPG::Troop> troops;
+	extern boost::ptr_vector<RPG::Terrain> terrains;
+	extern boost::ptr_vector<RPG::Attribute> attributes;
+	extern boost::ptr_vector<RPG::State> states;
+	extern boost::ptr_vector<RPG::Animation> animations;
+	extern boost::ptr_vector<RPG::Chipset> chipsets;
+	extern boost::ptr_vector<RPG::CommonEvent> commonevents;
+	extern std::auto_ptr<RPG::BattleCommands> battlecommands;
+	extern boost::ptr_vector<RPG::Class> classes;
+	extern boost::ptr_vector<RPG::BattlerAnimation> battleranimations;
+	extern std::auto_ptr<RPG::Terms> terms;
+	extern std::auto_ptr<RPG::System> system;
 	extern std::vector<std::string> switches;
 	extern std::vector<std::string> variables;
 	//@}
 
 	/// TreeMap (lmt)
-	extern RPG::TreeMap treemap;
+	extern std::auto_ptr<RPG::TreeMap> treemap;
 
 	////////////////////////////////////////////////////////
 	/// Clear all data.

@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 /// Read Chipset
 ////////////////////////////////////////////////////////////
-RPG::Chipset LDB_Reader::ReadChipset(Reader& stream) {
-	RPG::Chipset chipset;
-	chipset.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::Chipset> LDB_Reader::ReadChipset(Reader& stream) {
+	std::auto_ptr<RPG::Chipset> chipset(new RPG::Chipset);
+	chipset->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -40,25 +40,25 @@ RPG::Chipset LDB_Reader::ReadChipset(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkChipset::name:
-			chipset.name = stream.ReadString(chunk_info.length);
+			chipset->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkChipset::chipset_name:
-			chipset.chipset_name = stream.ReadString(chunk_info.length);
+			chipset->chipset_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkChipset::terrain_data:
-			stream.Read16(chipset.terrain_data, chunk_info.length);
+			stream.Read16(chipset->terrain_data, chunk_info.length);
 			break;
 		case ChunkChipset::passable_data_lower:
-			stream.Read8(chipset.passable_data_lower, chunk_info.length);
+			stream.Read8(chipset->passable_data_lower, chunk_info.length);
 			break;
 		case ChunkChipset::passable_data_upper:
-			stream.Read8(chipset.passable_data_upper, chunk_info.length);
+			stream.Read8(chipset->passable_data_upper, chunk_info.length);
 			break;
 		case ChunkChipset::animation_type:
-			chipset.animation_type = stream.Read32(Reader::CompressedInteger);
+			chipset->animation_type = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkChipset::animation_speed:
-			chipset.animation_speed = stream.Read32(Reader::CompressedInteger);
+			chipset->animation_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

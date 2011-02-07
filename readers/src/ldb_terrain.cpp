@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 /// Read Terrain
 ////////////////////////////////////////////////////////////
-RPG::Terrain LDB_Reader::ReadTerrain(Reader& stream) {
-	RPG::Terrain terrain;
-	terrain.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::Terrain> LDB_Reader::ReadTerrain(Reader& stream) {
+	std::auto_ptr<RPG::Terrain> terrain(new RPG::Terrain);
+	terrain->ID = stream.Read32(Reader::CompressedInteger);
 
 	unsigned char bitflag;
 
@@ -42,104 +42,104 @@ RPG::Terrain LDB_Reader::ReadTerrain(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkTerrain::name:
-			terrain.name = stream.ReadString(chunk_info.length);
+			terrain->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTerrain::damage:
-			terrain.damage = stream.Read32(Reader::CompressedInteger);
+			terrain->damage = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::encounter_rate:
-			terrain.encounter_rate = stream.Read32(Reader::CompressedInteger);
+			terrain->encounter_rate = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::background_name:
-			terrain.background_name = stream.ReadString(chunk_info.length);
+			terrain->background_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTerrain::boat_pass:
-			terrain.boat_pass = stream.ReadBool();
+			terrain->boat_pass = stream.ReadBool();
 			break;
 		case ChunkTerrain::ship_pass:
-			terrain.ship_pass = stream.ReadBool();
+			terrain->ship_pass = stream.ReadBool();
 			break;
 		case ChunkTerrain::airship_pass:
-			terrain.airship_pass = stream.ReadBool();
+			terrain->airship_pass = stream.ReadBool();
 			break;
 		case ChunkTerrain::airship_land:
-			terrain.airship_land = stream.ReadBool();
+			terrain->airship_land = stream.ReadBool();
 			break;
 		case ChunkTerrain::bush_depth:
-			terrain.bush_depth = stream.Read32(Reader::CompressedInteger);
+			terrain->bush_depth = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::footstep:
-			terrain.footstep = ReadSound(stream);
+			terrain->footstep = ReadSound(stream);
 			break;
 		case ChunkTerrain::on_damage_se:
-			terrain.on_damage_se = stream.ReadBool();
+			terrain->on_damage_se = stream.ReadBool();
 			break;
 		case ChunkTerrain::background_type:
-			terrain.background_type = stream.Read32(Reader::CompressedInteger);
+			terrain->background_type = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::background_a_name:
-			terrain.background_a_name = stream.ReadString(chunk_info.length);
+			terrain->background_a_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTerrain::background_a_scrollh:
-			terrain.background_a_scrollh = stream.ReadBool();
+			terrain->background_a_scrollh = stream.ReadBool();
 			break;
 		case ChunkTerrain::background_a_scrollv:
-			terrain.background_a_scrollv = stream.ReadBool();
+			terrain->background_a_scrollv = stream.ReadBool();
 			break;
 		case ChunkTerrain::background_a_scrollh_speed:
-			terrain.background_a_scrollh_speed = stream.Read32(Reader::CompressedInteger);
+			terrain->background_a_scrollh_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::background_a_scrollv_speed:
-			terrain.background_a_scrollv_speed = stream.Read32(Reader::CompressedInteger);
+			terrain->background_a_scrollv_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::background_b:
-			terrain.background_b = stream.ReadBool();
+			terrain->background_b = stream.ReadBool();
 			break;
 		case ChunkTerrain::background_b_name:
-			terrain.background_b_name = stream.ReadString(chunk_info.length);
+			terrain->background_b_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkTerrain::background_b_scrollh:
-			terrain.background_b_scrollh = stream.ReadBool();
+			terrain->background_b_scrollh = stream.ReadBool();
 			break;
 		case ChunkTerrain::background_b_scrollv:
-			terrain.background_b_scrollv = stream.ReadBool();
+			terrain->background_b_scrollv = stream.ReadBool();
 			break;
 		case ChunkTerrain::background_b_scrollh_speed:
-			terrain.background_b_scrollh_speed = stream.Read32(Reader::CompressedInteger);
+			terrain->background_b_scrollh_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::background_b_scrollv_speed:
-			terrain.background_b_scrollv_speed = stream.Read32(Reader::CompressedInteger);
+			terrain->background_b_scrollv_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::special_flags:
 			bitflag = stream.Read8();
-			terrain.special_back_party_flag = (bitflag & 0x01) > 0;
-			terrain.special_back_enemies_flag = (bitflag & 0x02) > 0;
-			terrain.special_lateral_party_flag = (bitflag & 0x04) > 0;
-			terrain.special_lateral_enemies_flag = (bitflag & 0x08) > 0;
+			terrain->special_back_party_flag = (bitflag & 0x01) > 0;
+			terrain->special_back_enemies_flag = (bitflag & 0x02) > 0;
+			terrain->special_lateral_party_flag = (bitflag & 0x04) > 0;
+			terrain->special_lateral_enemies_flag = (bitflag & 0x08) > 0;
 			break;
 		case ChunkTerrain::special_back_party:
-			terrain.special_back_party = stream.Read32(Reader::CompressedInteger);
+			terrain->special_back_party = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::special_back_enemies:
-			terrain.special_back_enemies = stream.Read32(Reader::CompressedInteger);
+			terrain->special_back_enemies = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::special_lateral_party:
-			terrain.special_lateral_party = stream.Read32(Reader::CompressedInteger);
+			terrain->special_lateral_party = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::special_lateral_enemies:
-			terrain.special_lateral_enemies = stream.Read32(Reader::CompressedInteger);
+			terrain->special_lateral_enemies = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::grid_location:
-			terrain.grid_location = stream.Read32(Reader::CompressedInteger);
+			terrain->grid_location = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::grid_a:
-			terrain.grid_a = stream.Read32(Reader::CompressedInteger);
+			terrain->grid_a = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::grid_b:
-			terrain.grid_b = stream.Read32(Reader::CompressedInteger);
+			terrain->grid_b = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTerrain::grid_c:
-			terrain.grid_c = stream.Read32(Reader::CompressedInteger);
+			terrain->grid_c = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Save Cover
 ////////////////////////////////////////////////////////////
-RPG::SaveMapInfo LSD_Reader::ReadSaveMapInfo(Reader& stream) {
-	RPG::SaveMapInfo map_info;
+std::auto_ptr<RPG::SaveMapInfo> LSD_Reader::ReadSaveMapInfo(Reader& stream) {
+	std::auto_ptr<RPG::SaveMapInfo> map_info(new RPG::SaveMapInfo);
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -39,42 +39,42 @@ RPG::SaveMapInfo LSD_Reader::ReadSaveMapInfo(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkMapInfo::pan_x:
-			map_info.pan_x = stream.Read32(Reader::CompressedInteger);
+			map_info->pan_x = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::pan_y:
-			map_info.pan_y = stream.Read32(Reader::CompressedInteger);
+			map_info->pan_y = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::events:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				map_info.events.push_back(ReadSaveMapEvent(stream));
+				map_info->events.push_back(ReadSaveMapEvent(stream));
 			}
 			break;
 		case ChunkMapInfo::lower_tiles:
-			stream.Read8(map_info.lower_tiles, chunk_info.length);
+			stream.Read8(map_info->lower_tiles, chunk_info.length);
 			break;
 		case ChunkMapInfo::upper_tiles:
-			stream.Read8(map_info.upper_tiles, chunk_info.length);
+			stream.Read8(map_info->upper_tiles, chunk_info.length);
 			break;
 		case ChunkMapInfo::parallax_name:
-			map_info.parallax_name = stream.ReadString(chunk_info.length);
+			map_info->parallax_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkMapInfo::parallax_horz:
-			map_info.parallax_horz = stream.ReadBool();
+			map_info->parallax_horz = stream.ReadBool();
 			break;
 		case ChunkMapInfo::parallax_vert:
-			map_info.parallax_vert = stream.ReadBool();
+			map_info->parallax_vert = stream.ReadBool();
 			break;
 		case ChunkMapInfo::parallax_horz_auto:
-			map_info.parallax_horz_auto = stream.ReadBool();
+			map_info->parallax_horz_auto = stream.ReadBool();
 			break;
 		case ChunkMapInfo::parallax_horz_speed:
-			map_info.parallax_horz_speed = stream.Read32(Reader::CompressedInteger);
+			map_info->parallax_horz_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::parallax_vert_auto:
-			map_info.parallax_vert_auto = stream.ReadBool();
+			map_info->parallax_vert_auto = stream.ReadBool();
 			break;
 		case ChunkMapInfo::parallax_vert_speed:
-			map_info.parallax_vert_speed = stream.Read32(Reader::CompressedInteger);
+			map_info->parallax_vert_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

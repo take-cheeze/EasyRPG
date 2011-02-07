@@ -21,7 +21,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_animationcelldata.h"
 
 ////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ namespace RPG {
 	public:
 		AnimationFrame();
 		
-		std::vector<AnimationCellData> cells;
+		boost::ptr_vector<AnimationCellData> cells;
 	};
 }
 

@@ -83,7 +83,7 @@ void Window_Base::DrawActorClass(Game_Actor* actor, int cx, int cy) {
 
 void Window_Base::DrawActorLevel(Game_Actor* actor, int cx, int cy) {
 	// Draw LV-String
-	contents->TextDraw(cx, cy, 1, Data::terms.lvl_short);
+	contents->TextDraw(cx, cy, 1, Data::terms->lvl_short);
 
 	// Draw Level of the Actor
 	std::stringstream ss;
@@ -96,7 +96,7 @@ void Window_Base::DrawActorState(Game_Actor* actor, int cx, int cy) {
 
 	// Unit has Normal state if no state is set
 	if (states.size() == 0) {
-		contents->TextDraw(cx, cy, Font::ColorDefault, Data::terms.normal_status);
+		contents->TextDraw(cx, cy, Font::ColorDefault, Data::terms->normal_status);
 	} else {
 		int highest_priority = 0;
 		int state = 0;
@@ -114,7 +114,7 @@ void Window_Base::DrawActorState(Game_Actor* actor, int cx, int cy) {
 
 void Window_Base::DrawActorExp(Game_Actor* actor, int cx, int cy) {
 	// Draw EXP-String
-	contents->TextDraw(cx, cy, 1, Data::terms.exp_short);
+	contents->TextDraw(cx, cy, 1, Data::terms->exp_short);
 
 	// Current Exp of the Actor
 	// ------/------
@@ -131,7 +131,7 @@ void Window_Base::DrawActorExp(Game_Actor* actor, int cx, int cy) {
 
 void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy) {
 	// Draw HP-String
-	contents->TextDraw(cx, cy, 1, Data::terms.hp_short);
+	contents->TextDraw(cx, cy, 1, Data::terms->hp_short);
 
 	// Draw Current HP of the Actor
 	cx += 12;
@@ -159,7 +159,7 @@ void Window_Base::DrawActorHp(Game_Actor* actor, int cx, int cy) {
 
 void Window_Base::DrawActorSp(Game_Actor* actor, int cx, int cy) {
 	// Draw SP-String
-	contents->TextDraw(cx, cy, 1, Data::terms.sp_short);
+	contents->TextDraw(cx, cy, 1, Data::terms->sp_short);
 
 	// Draw Current SP of the Actor
 	cx += 12;
@@ -189,19 +189,19 @@ void Window_Base::DrawActorParameter(Game_Actor* actor, int cx, int cy, int type
 	
 	switch (type) {
 	case 0:
-		name = Data::terms.attack;
+		name = Data::terms->attack;
 		value = actor->GetAtk();
 		break;
 	case 1:
-		name = Data::terms.defense;
+		name = Data::terms->defense;
 		value = actor->GetDef();
 		break;
 	case 2:
-		name = Data::terms.spirit;
+		name = Data::terms->spirit;
 		value = actor->GetSpi();
 		break;
 	case 3:
-		name = Data::terms.agility;
+		name = Data::terms->agility;
 		value = actor->GetAgi();
 		break;
 	default:
@@ -223,23 +223,23 @@ void Window_Base::DrawEquipmentType(Game_Actor* actor, int cx, int cy, int type)
 	
 	switch (type) {
 	case 0:
-		name = Data::terms.weapon;
+		name = Data::terms->weapon;
 		break;
 	case 1:
 		if (actor->GetTwoSwordsStyle()) {
-			name = Data::terms.weapon;
+			name = Data::terms->weapon;
 		} else {
-			name = Data::terms.shield;
+			name = Data::terms->shield;
 		}
 		break;
 	case 2:
-		name = Data::terms.armor;
+		name = Data::terms->armor;
 		break;
 	case 3:
-		name = Data::terms.helmet;
+		name = Data::terms->helmet;
 		break;
 	case 4:
-		name = Data::terms.accessory;
+		name = Data::terms->accessory;
 		break;
 	default:
 		return;
@@ -264,8 +264,8 @@ void Window_Base::DrawCurrencyValue(int money, int cx, int cy) {
 	std::stringstream gold;
 	gold << money;
 
-	Rect gold_text_size = contents->GetTextSize(Data::terms.gold);
-	contents->TextDraw(cx, cy, 1, Data::terms.gold, Surface::TextAlignRight);
+	Rect gold_text_size = contents->GetTextSize(Data::terms->gold);
+	contents->TextDraw(cx, cy, 1, Data::terms->gold, Surface::TextAlignRight);
 
 	contents->TextDraw(cx - gold_text_size.width, cy, Font::ColorDefault, gold.str(), Surface::TextAlignRight);
 }

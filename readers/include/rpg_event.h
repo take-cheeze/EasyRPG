@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_eventpage.h"
 
 ////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ namespace RPG {
 		std::string name;
 		int x;
 		int y;
-		std::vector<RPG::EventPage> pages;
+		boost::ptr_vector<RPG::EventPage> pages;
 	};
 }
 

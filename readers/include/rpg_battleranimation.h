@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_battleranimationextension.h"
 
 ////////////////////////////////////////////////////////////
@@ -42,8 +42,8 @@ namespace RPG {
 		int ID;
 		std::string name;
 		int speed;
-		std::vector<BattlerAnimationExtension> base_data;
-		std::vector<BattlerAnimationExtension> weapon_data;
+		boost::ptr_vector<BattlerAnimationExtension> base_data;
+		boost::ptr_vector<BattlerAnimationExtension> weapon_data;
 	};
 }
 

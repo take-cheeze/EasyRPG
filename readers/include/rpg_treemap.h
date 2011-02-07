@@ -21,7 +21,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "rpg_mapinfo.h"
 
 ////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ namespace RPG {
 	public:
 		TreeMap();
 		
-		std::vector<MapInfo> maps;
+		boost::ptr_vector<MapInfo> maps;
 		std::vector<int> tree_order;
 		int active_node;
 		int start_map_id;

@@ -22,7 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 
 ////////////////////////////////////////////////////////////
 /// RPG::BattleCommand class
@@ -51,7 +51,7 @@ namespace RPG {
 	public:
 		BattleCommands();
 		
-		std::vector<RPG::BattleCommand> commands;
+		boost::ptr_vector<RPG::BattleCommand> commands;
 		int placement;
 		int row;
 		int battle_type;

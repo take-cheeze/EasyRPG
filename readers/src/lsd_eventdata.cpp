@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Event Data
 ////////////////////////////////////////////////////////////
-RPG::SaveEventData LSD_Reader::ReadSaveEventData(Reader& stream) {
-	RPG::SaveEventData result;
+std::auto_ptr<RPG::SaveEventData> LSD_Reader::ReadSaveEventData(Reader& stream) {
+	std::auto_ptr<RPG::SaveEventData> result(new RPG::SaveEventData);
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -39,11 +39,11 @@ RPG::SaveEventData LSD_Reader::ReadSaveEventData(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkEventData::time_left:
-			result.time_left = stream.Read32(Reader::CompressedInteger);
+			result->time_left = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkEventData::commands:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				result.commands.push_back(ReadSaveEventCommands(stream));
+				result->commands.push_back(ReadSaveEventCommands(stream));
 			}
 			break;
 		default:

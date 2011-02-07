@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read TroopMember
 ////////////////////////////////////////////////////////////
-RPG::TroopMember LDB_Reader::ReadTroopMember(Reader& stream) {
-	RPG::TroopMember member;
+std::auto_ptr<RPG::TroopMember> LDB_Reader::ReadTroopMember(Reader& stream) {
+	std::auto_ptr<RPG::TroopMember> member(new RPG::TroopMember);
 	stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
@@ -40,16 +40,16 @@ RPG::TroopMember LDB_Reader::ReadTroopMember(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkTroopMember::ID:
-			member.ID = stream.Read32(Reader::CompressedInteger);
+			member->ID = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTroopMember::x:
-			member.x = stream.Read32(Reader::CompressedInteger);
+			member->x = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTroopMember::y:
-			member.y = stream.Read32(Reader::CompressedInteger);
+			member->y = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTroopMember::middle:
-			member.middle = stream.ReadBool();
+			member->middle = stream.ReadBool();
 			break;
 		default:
 			stream.Skip(chunk_info);

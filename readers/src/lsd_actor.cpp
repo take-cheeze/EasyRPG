@@ -25,9 +25,9 @@
 ////////////////////////////////////////////////////////////
 /// Read Save Cover
 ////////////////////////////////////////////////////////////
-RPG::SaveActor LSD_Reader::ReadSaveActor(Reader& stream) {
-	RPG::SaveActor actor;
-	actor.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::SaveActor> LSD_Reader::ReadSaveActor(Reader& stream) {
+	std::auto_ptr<RPG::SaveActor> actor(new RPG::SaveActor);
+	actor->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 
@@ -41,73 +41,73 @@ RPG::SaveActor LSD_Reader::ReadSaveActor(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkActor::name:
-			actor.name = stream.ReadString(chunk_info.length);
+			actor->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkActor::title:
-			actor.title = stream.ReadString(chunk_info.length);
+			actor->title = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkActor::sprite_name:
-			actor.sprite_name = stream.ReadString(chunk_info.length);
+			actor->sprite_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkActor::sprite_id:
-			actor.sprite_id = stream.Read32(Reader::CompressedInteger);
+			actor->sprite_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::face_name:
-			actor.face_name = stream.ReadString(chunk_info.length);
+			actor->face_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkActor::face_id:
-			actor.face_id = stream.Read32(Reader::CompressedInteger);
+			actor->face_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::level:
-			actor.level = stream.Read32(Reader::CompressedInteger);
+			actor->level = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::exp:
-			actor.exp = stream.Read32(Reader::CompressedInteger);
+			actor->exp = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::hp_mod:
-			actor.hp_mod = stream.Read32(Reader::CompressedInteger);
+			actor->hp_mod = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::sp_mod:
-			actor.sp_mod = stream.Read32(Reader::CompressedInteger);
+			actor->sp_mod = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::attack_mod:
-			actor.attack_mod = stream.Read32(Reader::CompressedInteger);
+			actor->attack_mod = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::defense_mod:
-			actor.defense_mod = stream.Read32(Reader::CompressedInteger);
+			actor->defense_mod = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::spirit_mod:
-			actor.spirit_mod = stream.Read32(Reader::CompressedInteger);
+			actor->spirit_mod = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::agility_mod:
-			actor.agility_mod = stream.Read32(Reader::CompressedInteger);
+			actor->agility_mod = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::skills_size:
-			actor.skills_size = stream.Read32(Reader::CompressedInteger);
+			actor->skills_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::skills:
-			stream.Read16(actor.skills, chunk_info.length);
+			stream.Read16(actor->skills, chunk_info.length);
 			break;
 		case ChunkActor::equipped:
-			stream.Read16(actor.equipped, chunk_info.length);
+			stream.Read16(actor->equipped, chunk_info.length);
 			break;
 		case ChunkActor::current_hp:
-			actor.current_hp = stream.Read32(Reader::CompressedInteger);
+			actor->current_hp = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::current_sp:
-			actor.current_sp = stream.Read32(Reader::CompressedInteger);
+			actor->current_sp = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::unknown_50:
-			stream.Read8(actor.unknown_50, chunk_info.length);
+			stream.Read8(actor->unknown_50, chunk_info.length);
 			break;
 		case ChunkActor::unknown_51:
-			actor.unknown_51 = stream.Read32(Reader::CompressedInteger);
+			actor->unknown_51 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::status:
-			stream.Read16(actor.status, chunk_info.length);
+			stream.Read16(actor->status, chunk_info.length);
 			break;
 		case ChunkActor::auto_battle:
-			actor.auto_battle = stream.Read32(Reader::CompressedInteger) != 0;
+			actor->auto_battle = stream.Read32(Reader::CompressedInteger) != 0;
 			break;
 		default:
 			stream.Skip(chunk_info);

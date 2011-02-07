@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read BattlerAnimationExtension
 ////////////////////////////////////////////////////////////
-RPG::BattlerAnimationExtension LDB_Reader::ReadBattlerAnimationExtension(Reader& stream) {
-	RPG::BattlerAnimationExtension extension;
+std::auto_ptr<RPG::BattlerAnimationExtension> LDB_Reader::ReadBattlerAnimationExtension(Reader& stream) {
+	std::auto_ptr<RPG::BattlerAnimationExtension> extension(new RPG::BattlerAnimationExtension);
 	stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
@@ -40,19 +40,19 @@ RPG::BattlerAnimationExtension LDB_Reader::ReadBattlerAnimationExtension(Reader&
 		}
 		switch (chunk_info.ID) {
 		case ChunkBattlerAnimationExtension::name:
-			extension.name = stream.ReadString(chunk_info.length);
+			extension->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkBattlerAnimationExtension::battler_name:
-			extension.battler_name = stream.ReadString(chunk_info.length);
+			extension->battler_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkBattlerAnimationExtension::battler_index:
-			extension.battler_index = stream.Read32(Reader::CompressedInteger);
+			extension->battler_index = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattlerAnimationExtension::animation_type:
-			extension.animation_type = stream.Read32(Reader::CompressedInteger);
+			extension->animation_type = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkBattlerAnimationExtension::animation_id:
-			extension.animation_id = stream.Read32(Reader::CompressedInteger);
+			extension->animation_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

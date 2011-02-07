@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include "reader.h"
 #include "rpg_music.h"
 #include "rpg_sound.h"
@@ -156,7 +157,7 @@ namespace RPG {
 		int unknown_21;
 		int unknown_23;
 		int unknown_25;
-		MoveRoute move_route;
+		std::auto_ptr<MoveRoute> move_route;
 		int unknown_2b;
 		int unknown_34;
 		int unknown_35;
@@ -193,7 +194,7 @@ namespace RPG {
 		int unknown_21;
 		int unknown_23;
 		int unknown_25;
-		MoveRoute move_route;
+		std::auto_ptr<MoveRoute> move_route;
 		int unknown_34;
 		int unknown_35;
 		std::string sprite_name;
@@ -274,7 +275,7 @@ namespace RPG {
 	public:
 		SaveEventData();
 
-		std::vector<SaveEventCommands> commands;
+		boost::ptr_vector<SaveEventCommands> commands;
 		int time_left;
 	};
 
@@ -298,7 +299,7 @@ namespace RPG {
 		int unknown_23;
 		int unknown_24;
 		int unknown_25;
-		MoveRoute move_route;
+		std::auto_ptr<MoveRoute> move_route;
 		int unknown_2a;
 		int unknown_2b;
 		int anim_paused;
@@ -317,7 +318,7 @@ namespace RPG {
 		int flash_time_left;
 		int unknown_66;
 		int unknown_67;
-		SaveEventData event_data;
+		std::auto_ptr<SaveEventData> event_data;
 	};
 
 	class SaveMapInfo {
@@ -326,7 +327,7 @@ namespace RPG {
 
 		int pan_x;
 		int pan_y;
-		std::vector<SaveMapEvent> events;
+		boost::ptr_vector<SaveMapEvent> events;
 		std::vector<uint8_t> lower_tiles;
 		std::vector<uint8_t> upper_tiles;
 		std::string parallax_name;
@@ -377,14 +378,14 @@ namespace RPG {
 		SaveCommonEvent();
 
 		int ID;
-		SaveEventData event_data;
+		std::auto_ptr<SaveEventData> event_data;
 	};
 
 	class SaveEvents {
 	public:
 		SaveEvents();
 
-		std::vector<SaveEventCommands> commands;
+		boost::ptr_vector<SaveEventCommands> commands;
 		int unknown_04;
 	};
 
@@ -392,19 +393,19 @@ namespace RPG {
 	public:
 		Save();
 
-		SaveTitle title;
-		SaveData data;
-		SaveScreen screen;
-		std::vector<SavePicture> pictures;
-		SavePartyLocation party_location;
-		SaveVehicleLocation boat_location;
-		SaveVehicleLocation ship_location;
-		SaveVehicleLocation airship_location;
-		std::vector<SaveActor> party;
-		SaveInventory inventory;
-		SaveMapInfo map_info;
-		std::vector<SaveCommonEvent> common_events;
-		SaveEvents events;
+		std::auto_ptr<SaveTitle> title;
+		std::auto_ptr<SaveData> data;
+		std::auto_ptr<SaveScreen> screen;
+		boost::ptr_vector<SavePicture> pictures;
+		std::auto_ptr<SavePartyLocation> party_location;
+		std::auto_ptr<SaveVehicleLocation> boat_location;
+		std::auto_ptr<SaveVehicleLocation> ship_location;
+		std::auto_ptr<SaveVehicleLocation> airship_location;
+		boost::ptr_vector<SaveActor> party;
+		std::auto_ptr<SaveInventory> inventory;
+		std::auto_ptr<SaveMapInfo> map_info;
+		boost::ptr_vector<SaveCommonEvent> common_events;
+		std::auto_ptr<SaveEvents> events;
 	};
 }
 

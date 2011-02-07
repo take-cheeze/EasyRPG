@@ -26,9 +26,9 @@
 ////////////////////////////////////////////////////////////
 /// Read MapInfo
 ////////////////////////////////////////////////////////////
-RPG::MapInfo LMT_Reader::ReadMapInfo(Reader& stream) {
-	RPG::MapInfo mapinfo;
-	mapinfo.ID = stream.Read32(Reader::CompressedInteger);
+std::auto_ptr<RPG::MapInfo> LMT_Reader::ReadMapInfo(Reader& stream) {
+	std::auto_ptr<RPG::MapInfo> mapinfo(new RPG::MapInfo);
+	mapinfo->ID = stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
 	while (!stream.Eof()) {
@@ -41,60 +41,60 @@ RPG::MapInfo LMT_Reader::ReadMapInfo(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkMapInfo::name:
-			mapinfo.name = stream.ReadString(chunk_info.length);
+			mapinfo->name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkMapInfo::parent_map:
-			mapinfo.parent_map = stream.Read32(Reader::CompressedInteger);
+			mapinfo->parent_map = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::indentation:
-			mapinfo.indentation = stream.Read32(Reader::CompressedInteger);
+			mapinfo->indentation = stream.Read32(Reader::CompressedInteger);
 			break;
  		case ChunkMapInfo::type:
- 			mapinfo.type = stream.Read32(Reader::CompressedInteger);
+ 			mapinfo->type = stream.Read32(Reader::CompressedInteger);
  			break;
 		case ChunkMapInfo::scrollbar_x:
-			mapinfo.scrollbar_x = stream.Read32(Reader::CompressedInteger);
+			mapinfo->scrollbar_x = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::scrollbar_y:
-			mapinfo.scrollbar_y = stream.Read32(Reader::CompressedInteger);
+			mapinfo->scrollbar_y = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::expanded_node:
-			mapinfo.expanded_node = stream.ReadBool();
+			mapinfo->expanded_node = stream.ReadBool();
 			break;
 		case ChunkMapInfo::music_type:
-			mapinfo.music_type = stream.Read32(Reader::CompressedInteger);
+			mapinfo->music_type = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::music_name:
-			mapinfo.music = LDB_Reader::ReadMusic(stream);
+			mapinfo->music = LDB_Reader::ReadMusic(stream);
 			break;
 		case ChunkMapInfo::background_type:
-			mapinfo.background_type = stream.Read32(Reader::CompressedInteger);
+			mapinfo->background_type = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::background_name:
-			mapinfo.background_name = stream.ReadString(chunk_info.length);
+			mapinfo->background_name = stream.ReadString(chunk_info.length);
 			break;
 		case ChunkMapInfo::teleport:
-			mapinfo.teleport = stream.Read32(Reader::CompressedInteger);
+			mapinfo->teleport = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::escape:
-			mapinfo.escape = stream.Read32(Reader::CompressedInteger);
+			mapinfo->escape = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::save:
-			mapinfo.save = stream.Read32(Reader::CompressedInteger);
+			mapinfo->save = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::encounters:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				mapinfo.encounters.push_back(ReadEncounter(stream));
+				mapinfo->encounters.push_back(ReadEncounter(stream));
 			}
 			break;
 		case ChunkMapInfo::encounter_steps:
-			mapinfo.encounter_steps = stream.Read32(Reader::CompressedInteger);
+			mapinfo->encounter_steps = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkMapInfo::area_rect:
-			mapinfo.area_x = stream.Read32(Reader::NormalInteger);
-			mapinfo.area_y = stream.Read32(Reader::NormalInteger);
-			mapinfo.area_w = stream.Read32(Reader::NormalInteger) - mapinfo.area_x;
-			mapinfo.area_h = stream.Read32(Reader::NormalInteger) - mapinfo.area_y;
+			mapinfo->area_x = stream.Read32(Reader::NormalInteger);
+			mapinfo->area_y = stream.Read32(Reader::NormalInteger);
+			mapinfo->area_w = stream.Read32(Reader::NormalInteger) - mapinfo->area_x;
+			mapinfo->area_h = stream.Read32(Reader::NormalInteger) - mapinfo->area_y;
 			break;
 		default:
 			stream.Skip(chunk_info);

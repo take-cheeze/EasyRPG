@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read TestBattler
 ////////////////////////////////////////////////////////////
-RPG::TestBattler LDB_Reader::ReadTestBattler(Reader& stream) {
-	RPG::TestBattler testbattler;
+std::auto_ptr<RPG::TestBattler> LDB_Reader::ReadTestBattler(Reader& stream) {
+	std::auto_ptr<RPG::TestBattler> testbattler(new RPG::TestBattler);
 	stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
@@ -40,25 +40,25 @@ RPG::TestBattler LDB_Reader::ReadTestBattler(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkTestBattler::ID:
-			testbattler.ID = stream.Read32(Reader::CompressedInteger);
+			testbattler->ID = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTestBattler::level:
-			testbattler.level = stream.Read32(Reader::CompressedInteger);
+			testbattler->level = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTestBattler::weapon_id:
-			testbattler.weapon_id = stream.Read32(Reader::CompressedInteger);
+			testbattler->weapon_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTestBattler::shield_id:
-			testbattler.shield_id = stream.Read32(Reader::CompressedInteger);
+			testbattler->shield_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTestBattler::armor_id:
-			testbattler.armor_id = stream.Read32(Reader::CompressedInteger);
+			testbattler->armor_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTestBattler::helmet_id:
-			testbattler.helmet_id = stream.Read32(Reader::CompressedInteger);
+			testbattler->helmet_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkTestBattler::accessory_id:
-			testbattler.accessory_id = stream.Read32(Reader::CompressedInteger);
+			testbattler->accessory_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

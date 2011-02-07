@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Learning
 ////////////////////////////////////////////////////////////
-RPG::Learning LDB_Reader::ReadLearning(Reader& stream) {
-	RPG::Learning learning;
+std::auto_ptr<RPG::Learning> LDB_Reader::ReadLearning(Reader& stream) {
+	std::auto_ptr<RPG::Learning> learning(new RPG::Learning);
 	stream.Read32(Reader::CompressedInteger);
 
 	Reader::Chunk chunk_info;
@@ -40,10 +40,10 @@ RPG::Learning LDB_Reader::ReadLearning(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkLearning::level:
-			learning.level = stream.Read32(Reader::CompressedInteger);
+			learning->level = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkLearning::skill_id:
-			learning.skill_id = stream.Read32(Reader::CompressedInteger);
+			learning->skill_id = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

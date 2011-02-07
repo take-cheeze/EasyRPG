@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Save Cover
 ////////////////////////////////////////////////////////////
-RPG::SaveInventory LSD_Reader::ReadSaveInventory(Reader& stream) {
-	RPG::SaveInventory inventory;
+std::auto_ptr<RPG::SaveInventory> LSD_Reader::ReadSaveInventory(Reader& stream) {
+	std::auto_ptr<RPG::SaveInventory> inventory(new RPG::SaveInventory);
 
 	Reader::Chunk chunk_info;
 
@@ -40,52 +40,52 @@ RPG::SaveInventory LSD_Reader::ReadSaveInventory(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkInventory::party_size:
-			inventory.party_size = stream.Read32(Reader::CompressedInteger);
+			inventory->party_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::party:
-			stream.Read16(inventory.party, chunk_info.length);
+			stream.Read16(inventory->party, chunk_info.length);
 			break;
 		case ChunkInventory::items_size:
-			inventory.items_size = stream.Read32(Reader::CompressedInteger);
+			inventory->items_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::item_ids:
-			stream.Read16(inventory.item_ids, chunk_info.length);
+			stream.Read16(inventory->item_ids, chunk_info.length);
 			break;
 		case ChunkInventory::item_counts:
-			stream.Read8(inventory.item_counts, chunk_info.length);
+			stream.Read8(inventory->item_counts, chunk_info.length);
 			break;
 		case ChunkInventory::item_usage:
-			stream.Read8(inventory.item_usage, chunk_info.length);
+			stream.Read8(inventory->item_usage, chunk_info.length);
 			break;
 		case ChunkInventory::gold:
-			inventory.gold = stream.Read32(Reader::CompressedInteger);
+			inventory->gold = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::timer_secs:
-			inventory.timer_secs = stream.Read32(Reader::CompressedInteger);
+			inventory->timer_secs = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::timer_18:
-			inventory.timer_18 = stream.Read32(Reader::CompressedInteger);
+			inventory->timer_18 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::timer_19:
-			inventory.timer_19 = stream.Read32(Reader::CompressedInteger);
+			inventory->timer_19 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::battles:
-			inventory.battles = stream.Read32(Reader::CompressedInteger);
+			inventory->battles = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::defeats:
-			inventory.defeats = stream.Read32(Reader::CompressedInteger);
+			inventory->defeats = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::unknown_22:
-			inventory.unknown_22 = stream.Read32(Reader::CompressedInteger);
+			inventory->unknown_22 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::unknown_23:
-			inventory.unknown_23 = stream.Read32(Reader::CompressedInteger);
+			inventory->unknown_23 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::unknown_29:
-			inventory.unknown_29 = stream.Read32(Reader::CompressedInteger);
+			inventory->unknown_29 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkInventory::steps:
-			inventory.steps = stream.Read32(Reader::CompressedInteger);
+			inventory->steps = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

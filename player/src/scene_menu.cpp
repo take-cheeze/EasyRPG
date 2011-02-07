@@ -74,11 +74,11 @@ void Scene_Menu::Update() {
 void Scene_Menu::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Data::terms.command_item);
-	options.push_back(Data::terms.command_skill);
-	options.push_back(Data::terms.menu_equipment);
-	options.push_back(Data::terms.menu_save);
-	options.push_back(Data::terms.menu_quit);
+	options.push_back(Data::terms->command_item);
+	options.push_back(Data::terms->command_skill);
+	options.push_back(Data::terms->menu_equipment);
+	options.push_back(Data::terms->menu_save);
+	options.push_back(Data::terms->menu_quit);
 
 	command_window = new Window_Command(options, 88);
 	command_window->SetIndex(menu_index);
@@ -100,22 +100,22 @@ void Scene_Menu::CreateCommandWindow() {
 ////////////////////////////////////////////////////////////
 void Scene_Menu::UpdateCommand() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::system->cancel_se);
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		menu_index = command_window->GetIndex();
 
 		switch (menu_index) {
 		case 0: // Item
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::system->decision_se);
 			Scene::Push(new Scene_Item());
 			break;
 		case 1: // Tech Skill
 		case 2: // Equipment
 			if (Game_Party::GetActors().empty()) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Data::system->buzzer_se);
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Data::system->decision_se);
 				command_window->SetActive(false);
 				menustatus_window->SetActive(true);
 				menustatus_window->SetIndex(0);
@@ -123,9 +123,9 @@ void Scene_Menu::UpdateCommand() {
 			break;
 		case 3: // Save
 			if (Game_System::save_disabled) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Data::system->buzzer_se);
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Data::system->decision_se);
 			}
 
 #ifdef _DEBUG
@@ -136,7 +136,7 @@ void Scene_Menu::UpdateCommand() {
 #endif
 			break;
 		case 4: // Quit Game
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::system->decision_se);
 			Scene::Push(new Scene_End());
 			break;
 		}
@@ -146,12 +146,12 @@ void Scene_Menu::UpdateCommand() {
 ////////////////////////////////////////////////////////////
 void Scene_Menu::UpdateActorSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::system->cancel_se);
 		command_window->SetActive(true);
 		menustatus_window->SetActive(false);
 		menustatus_window->SetIndex(-1);
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Data::system->decision_se);
 		switch (command_window->GetIndex()) {
 		case 1: // Tech Skill
 			Scene::Push(new Scene_Skill(menustatus_window->GetIndex()));

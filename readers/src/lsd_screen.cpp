@@ -25,8 +25,8 @@
 ////////////////////////////////////////////////////////////
 /// Read Screen Appearance
 ////////////////////////////////////////////////////////////
-RPG::SaveScreen LSD_Reader::ReadSaveScreen(Reader& stream) {
-	RPG::SaveScreen result;
+std::auto_ptr<RPG::SaveScreen> LSD_Reader::ReadSaveScreen(Reader& stream) {
+	std::auto_ptr<RPG::SaveScreen> result(new RPG::SaveScreen);
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -39,88 +39,88 @@ RPG::SaveScreen LSD_Reader::ReadSaveScreen(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkScreen::tint_finish_red:
-			result.tint_finish_red = stream.Read32(Reader::CompressedInteger);
+			result->tint_finish_red = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::tint_finish_green:
-			result.tint_finish_green = stream.Read32(Reader::CompressedInteger);
+			result->tint_finish_green = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::tint_finish_blue:
-			result.tint_finish_blue = stream.Read32(Reader::CompressedInteger);
+			result->tint_finish_blue = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::tint_finish_sat:
-			result.tint_finish_sat = stream.Read32(Reader::CompressedInteger);
+			result->tint_finish_sat = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::tint_current_red:
-			result.tint_current_red = stream.ReadDouble();
+			result->tint_current_red = stream.ReadDouble();
 			break;
 		case ChunkScreen::tint_current_green:
-			result.tint_current_green = stream.ReadDouble();
+			result->tint_current_green = stream.ReadDouble();
 			break;
 		case ChunkScreen::tint_current_blue:
-			result.tint_current_blue = stream.ReadDouble();
+			result->tint_current_blue = stream.ReadDouble();
 			break;
 		case ChunkScreen::tint_current_sat:
-			result.tint_current_sat = stream.ReadDouble();
+			result->tint_current_sat = stream.ReadDouble();
 			break;
 		case ChunkScreen::tint_time_left:
-			result.tint_time_left = stream.Read32(Reader::CompressedInteger);
+			result->tint_time_left = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::flash_status:
-			result.flash_status = stream.Read32(Reader::CompressedInteger);
+			result->flash_status = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::flash_red:
-			result.flash_red = stream.Read32(Reader::CompressedInteger);
+			result->flash_red = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::flash_green:
-			result.flash_green = stream.Read32(Reader::CompressedInteger);
+			result->flash_green = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::flash_blue:
-			result.flash_blue = stream.Read32(Reader::CompressedInteger);
+			result->flash_blue = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::flash_current_level:
-			result.flash_current_level = stream.ReadDouble();
+			result->flash_current_level = stream.ReadDouble();
 			break;
 		case ChunkScreen::flash_time_left:
-			result.flash_time_left = stream.Read32(Reader::CompressedInteger);
+			result->flash_time_left = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::shake_status:
-			result.shake_status = stream.Read32(Reader::CompressedInteger);
+			result->shake_status = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::shake_strength:
-			result.shake_strength = stream.Read32(Reader::CompressedInteger);
+			result->shake_strength = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::shake_speed:
-			result.shake_speed = stream.Read32(Reader::CompressedInteger);
+			result->shake_speed = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::shake_position:
-			result.shake_position = stream.Read32(Reader::CompressedInteger);
+			result->shake_position = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::shake_time_left:
-			result.shake_time_left = stream.Read32(Reader::CompressedInteger);
+			result->shake_time_left = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::pan_x:
-			result.pan_x = stream.Read32(Reader::CompressedInteger);
+			result->pan_x = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::pan_y:
-			result.pan_y = stream.Read32(Reader::CompressedInteger);
+			result->pan_y = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::unknown_2b:
-			result.unknown_2b = stream.Read32(Reader::CompressedInteger);
+			result->unknown_2b = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::unknown_2c:
-			result.unknown_2c = stream.Read32(Reader::CompressedInteger);
+			result->unknown_2c = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::unknown_2d:
-			result.unknown_2d = stream.Read32(Reader::CompressedInteger);
+			result->unknown_2d = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::unknown_2f:
-			result.unknown_2f = stream.Read32(Reader::CompressedInteger);
+			result->unknown_2f = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::weather:
-			result.weather = stream.Read32(Reader::CompressedInteger);
+			result->weather = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkScreen::weather_strength:
-			result.weather_strength = stream.Read32(Reader::CompressedInteger);
+			result->weather_strength = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

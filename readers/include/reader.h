@@ -22,8 +22,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
-#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
 #include <iosfwd>
+#include <memory>
 #include <cstring>
 #include <cstdio>
 #include <cassert>
