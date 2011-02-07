@@ -32,11 +32,12 @@
 namespace LMU_Reader {
 	std::auto_ptr<RPG::Map> LoadMap(const std::string &filename);
 	std::auto_ptr<RPG::Map> ReadMapData(Reader& stream);
-	RPG::Event ReadEvent(Reader& stream);
-	RPG::EventPage ReadEventPage(Reader& stream);
-	RPG::EventPageCondition ReadEventPageCondition(Reader& stream);
-	RPG::MoveRoute ReadMoveRoute(Reader& stream);
-	RPG::MoveCommand ReadMoveCommand(Reader& stream);
+
+	std::auto_ptr<RPG::Event> ReadEvent(Reader& stream);
+	std::auto_ptr<RPG::EventPage> ReadEventPage(Reader& stream);
+	std::auto_ptr<RPG::EventPageCondition> ReadEventPageCondition(Reader& stream);
+	std::auto_ptr<RPG::MoveRoute> ReadMoveRoute(Reader& stream);
+	std::auto_ptr<RPG::MoveCommand> ReadMoveCommand(Reader& stream);
 }
 
 #endif

@@ -52,41 +52,41 @@ namespace LDB_Reader {
 	bool Load(const std::string &filename);
 	void LoadChunks(Reader& stream);
 
-	RPG::Actor ReadActor(Reader& stream);
-	RPG::Learning ReadLearning(Reader& stream);
-	RPG::Skill ReadSkill(Reader& stream);
-	RPG::Item ReadItem(Reader& stream);
-	RPG::Enemy ReadEnemy(Reader& stream);
-	RPG::EnemyAction ReadEnemyAction(Reader& stream);
-	RPG::Troop ReadTroop(Reader& stream);
-	RPG::TroopMember ReadTroopMember(Reader& stream);
-	RPG::TroopPage ReadTroopPage(Reader& stream);
-	RPG::TroopPageCondition ReadTroopPageCondition(Reader& stream);
-	RPG::Attribute ReadAttribute(Reader& stream);
-	RPG::State ReadState(Reader& stream);
-	RPG::Terrain ReadTerrain(Reader& stream);
-	RPG::Chipset ReadChipset(Reader& stream);
-	RPG::Animation ReadAnimation(Reader& stream);
-	RPG::AnimationTiming ReadAnimationTiming(Reader& stream);
-	RPG::AnimationFrame ReadAnimationFrame(Reader& stream);
-	RPG::AnimationCellData ReadAnimationCellData(Reader& stream);
-	RPG::Terms ReadTerms(Reader& stream);
-	RPG::System ReadSystem(Reader& stream);
-	RPG::CommonEvent ReadCommonEvent(Reader& stream);
-	RPG::Sound ReadSound(Reader& stream);
-	RPG::Music ReadMusic(Reader& stream);
+	std::auto_ptr<RPG::Actor> ReadActor(Reader& stream);
+	std::auto_ptr<RPG::Learning> ReadLearning(Reader& stream);
+	std::auto_ptr<RPG::Skill> ReadSkill(Reader& stream);
+	std::auto_ptr<RPG::Item> ReadItem(Reader& stream);
+	std::auto_ptr<RPG::Enemy> ReadEnemy(Reader& stream);
+	std::auto_ptr<RPG::EnemyAction> ReadEnemyAction(Reader& stream);
+	std::auto_ptr<RPG::Troop> ReadTroop(Reader& stream);
+	std::auto_ptr<RPG::TroopMember> ReadTroopMember(Reader& stream);
+	std::auto_ptr<RPG::TroopPage> ReadTroopPage(Reader& stream);
+	std::auto_ptr<RPG::TroopPageCondition> ReadTroopPageCondition(Reader& stream);
+	std::auto_ptr<RPG::Attribute> ReadAttribute(Reader& stream);
+	std::auto_ptr<RPG::State> ReadState(Reader& stream);
+	std::auto_ptr<RPG::Terrain> ReadTerrain(Reader& stream);
+	std::auto_ptr<RPG::Chipset> ReadChipset(Reader& stream);
+	std::auto_ptr<RPG::Animation> ReadAnimation(Reader& stream);
+	std::auto_ptr<RPG::AnimationTiming> ReadAnimationTiming(Reader& stream);
+	std::auto_ptr<RPG::AnimationFrame> ReadAnimationFrame(Reader& stream);
+	std::auto_ptr<RPG::AnimationCellData> ReadAnimationCellData(Reader& stream);
+	std::auto_ptr<RPG::Terms> ReadTerms(Reader& stream);
+	std::auto_ptr<RPG::System> ReadSystem(Reader& stream);
+	std::auto_ptr<RPG::CommonEvent> ReadCommonEvent(Reader& stream);
+	std::auto_ptr<RPG::Sound> ReadSound(Reader& stream);
+	std::auto_ptr<RPG::Music> ReadMusic(Reader& stream);
 	std::vector<std::string> ReadVariables(Reader& stream);
 	std::vector<std::string> ReadSwitches(Reader& stream);
-	RPG::TestBattler ReadTestBattler(Reader& stream);
+	std::auto_ptr<RPG::TestBattler> ReadTestBattler(Reader& stream);
 
 	// 2003
-	RPG::BattleCommands ReadBattleCommands(Reader& stream);
-	RPG::BattleCommand ReadBattleCommand(Reader& stream);
-	RPG::Class ReadClass(Reader& stream);
-	RPG::BattlerAnimation ReadBattlerAnimation(Reader& stream);
-	RPG::BattlerAnimationExtension ReadBattlerAnimationExtension(Reader& stream);
-	RPG::BattlerAnimationData ReadBattlerAnimationData(Reader& stream);
-	RPG::ItemAnimation ReadItemAnimation(Reader& stream);
+	std::auto_ptr<RPG::BattleCommands> ReadBattleCommands(Reader& stream);
+	std::auto_ptr<RPG::BattleCommand> ReadBattleCommand(Reader& stream);
+	std::auto_ptr<RPG::Class> ReadClass(Reader& stream);
+	std::auto_ptr<RPG::BattlerAnimation> ReadBattlerAnimation(Reader& stream);
+	std::auto_ptr<RPG::BattlerAnimationExtension> ReadBattlerAnimationExtension(Reader& stream);
+	std::auto_ptr<RPG::BattlerAnimationData> ReadBattlerAnimationData(Reader& stream);
+	std::auto_ptr<RPG::ItemAnimation> ReadItemAnimation(Reader& stream);
 }
 
 #endif

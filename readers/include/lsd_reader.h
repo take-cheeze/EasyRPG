@@ -31,21 +31,21 @@
 /// LDB Reader namespace
 ////////////////////////////////////////////////////////////
 namespace LSD_Reader {
-	RPG::SaveTitle ReadSaveTitle(Reader& stream);
-	RPG::SaveData ReadSaveData(Reader& stream);
-	RPG::SavePicture ReadSavePicture(Reader& stream);
-	RPG::SavePartyLocation ReadSavePartyLocation(Reader& stream);
-	RPG::SaveVehicleLocation ReadSaveVehicleLocation(Reader& stream);
-	RPG::SaveActor ReadSaveActor(Reader& stream);
-	RPG::SaveInventory ReadSaveInventory(Reader& stream);
-	RPG::SaveMapInfo ReadSaveMapInfo(Reader& stream);
-	RPG::SaveMapEvent ReadSaveMapEvent(Reader& stream);
-	RPG::SaveEventData ReadSaveEventData(Reader& stream);
-	RPG::SaveEventCommands ReadSaveEventCommands(Reader& stream);
-	RPG::SaveScreen ReadSaveScreen(Reader& stream);
-	RPG::SaveCommonEvent ReadCommonEvent(Reader& stream);
-	RPG::SaveEvents ReadSaveEvents(Reader& stream);
-	RPG::SaveEventCommands ReadSaveEventCommands(Reader& stream);
+	std::auto_ptr<RPG::SaveTitle> ReadSaveTitle(Reader& stream);
+	std::auto_ptr<RPG::SaveData> ReadSaveData(Reader& stream);
+	std::auto_ptr<RPG::SavePicture> ReadSavePicture(Reader& stream);
+	std::auto_ptr<RPG::SavePartyLocation> ReadSavePartyLocation(Reader& stream);
+	std::auto_ptr<RPG::SaveVehicleLocation> ReadSaveVehicleLocation(Reader& stream);
+	std::auto_ptr<RPG::SaveActor> ReadSaveActor(Reader& stream);
+	std::auto_ptr<RPG::SaveInventory> ReadSaveInventory(Reader& stream);
+	std::auto_ptr<RPG::SaveMapInfo> ReadSaveMapInfo(Reader& stream);
+	std::auto_ptr<RPG::SaveMapEvent> ReadSaveMapEvent(Reader& stream);
+	std::auto_ptr<RPG::SaveEventData> ReadSaveEventData(Reader& stream);
+	std::auto_ptr<RPG::SaveEventCommands> ReadSaveEventCommands(Reader& stream);
+	std::auto_ptr<RPG::SaveScreen> ReadSaveScreen(Reader& stream);
+	std::auto_ptr<RPG::SaveCommonEvent> ReadCommonEvent(Reader& stream);
+	std::auto_ptr<RPG::SaveEvents> ReadSaveEvents(Reader& stream);
+	std::auto_ptr<RPG::SaveEventCommands> ReadSaveEventCommands(Reader& stream);
 
 	std::auto_ptr<RPG::Save> Load(const std::string &filename);
 	std::auto_ptr<RPG::Save> LoadChunks(Reader& stream);
