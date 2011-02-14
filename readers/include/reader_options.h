@@ -39,11 +39,28 @@
 //
 // DATABASE_NAME
 //		Database filename.
+//
+// TREEMAP_NAME
+//		MapTree filename.
+//
+// EASY_RPG_NAME
+//		EasyRPG Data file filename.
 ////////////////////////////////////////////////////////////
-#define INI_NAME "RPG_RT.ini"
-#define READ_INI_GAME_TITLE 1
-#define DATABASE_NAME "RPG_RT.ldb"
-#define TREEMAP_NAME "RPG_RT.lmt"
+#ifndef INI_NAME
+	#define INI_NAME "RPG_RT.ini"
+#endif
+#ifndef READ_INI_GAME_TITLE
+	#define READ_INI_GAME_TITLE 1
+#endif
+#ifndef DATABASE_NAME
+	#define DATABASE_NAME "RPG_RT.ldb"
+#endif
+#ifndef TREEMAP_NAME
+	#define TREEMAP_NAME "RPG_RT.lmt"
+#endif
+#ifndef EASY_RPG_NAME
+	#define EASY_RPG_NAME "EasyRPG.xml"
+#endif
 
 #if defined(GEKKO)
 	#define READER_BIG_ENDIAN
