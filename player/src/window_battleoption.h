@@ -15,49 +15,48 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _GAME_ENEMY_H_
-#define _GAME_ENEMY_H_
+#ifndef _WINDOW_BATTLEOPTION_H_
+#define _WINDOW_BATTLEOPTION_H_
 
-#include "game_battler.h"
-class Game_Enemy :
-	public Game_Battler
-{
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include <string>
+#include <vector>
+#include "window_base.h"
+
+////////////////////////////////////////////////////////////
+/// Window_BattleOption class.
+////////////////////////////////////////////////////////////
+class Window_BattleOption: public Window_Base {
 public:
-	Game_Enemy(int enemy_id);
+	////////////////////////////////////////////////////////
+	/// Constructor.
+	////////////////////////////////////////////////////////
+	Window_BattleOption(int x, int y, int width, int height);
 
 	////////////////////////////////////////////////////////
-	/// Gets the maximum hp for the current level
-	/// @return max hp
+	/// Refresh the window contents.
 	////////////////////////////////////////////////////////
-	int GetBaseMaxHp() const;
+	void Refresh();
 
 	////////////////////////////////////////////////////////
-	/// Gets the maximum sp for the current level
-	/// @return max sp
+	/// Update the window state.
 	////////////////////////////////////////////////////////
-	int GetBaseMaxSp() const;
+	void Update();
 
-	/// @return atk
-	int GetBaseAtk() const;
-
-	/// @return def
-	int GetBaseDef() const;
-
-	/// @return spi
-	int GetBaseSpi() const;
-
-	/// @return agi
-	int GetBaseAgi() const;
-
-	void SetHidden(bool _hidden);
-	bool IsHidden();
-	void Transform(int new_enemy_id);
+	int GetIndex();
+	void SetIndex(int index);
+	void SetActive(bool active);
+	void UpdateCursorRect();
 
 protected:
-	void Setup(int enemy_id);
+	std::vector<std::string> commands;
+	int index;
+	int num_rows;
+	int top_row;
 
-	int enemy_id;
+	void DrawItem(int index, Font::SystemColor color);
 };
 
 #endif
-

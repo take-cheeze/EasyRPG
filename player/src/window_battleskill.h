@@ -15,76 +15,46 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SCENE_MENU_H_
-#define _SCENE_MENU_H_
+#ifndef _WINDOW_BATTLESKILL_H_
+#define _WINDOW_BATTLESKILL_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene.h"
-#include "window_command.h"
-#include "window_gold.h"
-#include "window_menustatus.h"
+#include <vector>
+#include "window_skill.h"
 
 ////////////////////////////////////////////////////////////
-/// Scene Menu class
+/// Window_BattleSkill class
 ////////////////////////////////////////////////////////////
-class Scene_Menu : public Scene {
+class Window_BattleSkill : public Window_Skill {
+
 public:
 	////////////////////////////////////////////////////////
 	/// Constructor.
-	/// @param menu_index : Selected index in the menu
 	////////////////////////////////////////////////////////
-	Scene_Menu(int menu_index = 0);
-
-	void Start();
-	void Update();
-	void Terminate();
-	void Resume();
+	Window_BattleSkill(int ix, int iy, int iwidth, int iheight);
 
 	////////////////////////////////////////////////////////
-	/// Creates the Window displaying the options.
+	/// Sets the actor whose skills are displayed.
+	/// @param actor_id : Id of the actor
 	////////////////////////////////////////////////////////
-	void CreateCommandWindow();
+	void SetSubset(int id);
 
 	////////////////////////////////////////////////////////
-	/// Update Function if Command Window is Active
+	/// Checks if the skill should be in the list
+	/// @param skill_id Skill to check
 	////////////////////////////////////////////////////////
-	void UpdateCommand();
+	bool CheckInclude(int skill_id);
 
 	////////////////////////////////////////////////////////
-	/// Update Function if Status Window is Active
+	/// Chechs if skill should be enabled.
+	/// @param skill_id : Skill to check
 	////////////////////////////////////////////////////////
-	void UpdateActorSelection();
-
-	/// Options available in a Rpg2k3 Menu
-	enum CommandOptionType {
-		Item = 1,
-		Skill,
-		Equipment,
-		Save,
-		Status,
-		Row,
-		Order,
-		Wait,
-		Quit
-	};
+	bool CheckEnable(int skill_id);
 
 private:
-	/// selected index on startup
-	int menu_index;
-
-	/// window displaying the commands
-	Window_Command* command_window;
-
-	/// window displaying the gold amount
-	Window_Gold* gold_window;
-
-	/// window displaying the heros and their status
-	Window_MenuStatus* menustatus_window;
-
-	/// Options available in the Menu
-	std::vector<CommandOptionType> command_options;
+	int subset;
 };
 
 #endif

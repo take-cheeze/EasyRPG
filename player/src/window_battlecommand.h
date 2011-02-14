@@ -25,9 +25,10 @@
 #include <vector>
 #include "window_base.h"
 #include "window_help.h"
+#include "rpg_battlecommand.h"
 
 ////////////////////////////////////////////////////////////
-/// Window Command class.
+/// Window_BattleCommand class.
 ////////////////////////////////////////////////////////////
 class Window_BattleCommand: public Window_Base {
 public:
@@ -35,8 +36,7 @@ public:
 	/// Constructor.
 	/// @param commands : commands to display
 	////////////////////////////////////////////////////////
-	Window_BattleCommand(int x, int y, int width, int height,
-						 const std::vector<std::string>& commands);
+	Window_BattleCommand(int x, int y, int width, int height);
 
 	////////////////////////////////////////////////////////
 	/// Refresh the window contents.
@@ -49,26 +49,29 @@ public:
 	void Update();
 
 	////////////////////////////////////////////////////////
-	/// set the command list.
-	/// @param commands : command list
-	////////////////////////////////////////////////////////
-	void SetCommands(const std::vector<std::string>& commands);
-
-	////////////////////////////////////////////////////////
 	/// Enable or disable a command.
 	/// @param index : command index
 	/// @param enabled : whether the command is enabled
 	////////////////////////////////////////////////////////
 	void SetEnabled(int index, bool enabled);
 
+	////////////////////////////////////////////////////////
+	/// Enable or disable a command.
+	/// @param index : command index
+	/// @param enabled : whether the command is enabled
+	////////////////////////////////////////////////////////
+	void SetActor(int actor_id);
+
 	int GetIndex();
 	void SetIndex(int index);
 	void SetActive(bool active);
 	void UpdateCursorRect();
+	RPG::BattleCommand GetCommand();
+	int GetSkillSubset();
 
 protected:
+	int actor_id;
 	std::vector<std::string> commands;
-	int num_commands;
 	int index;
 	int num_rows;
 	int top_row;

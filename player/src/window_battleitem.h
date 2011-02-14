@@ -15,76 +15,57 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SCENE_MENU_H_
-#define _SCENE_MENU_H_
+#ifndef _WINDOW_BATTLEITEM_H_
+#define _WINDOW_BATTLEITEM_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "scene.h"
-#include "window_command.h"
-#include "window_gold.h"
-#include "window_menustatus.h"
+#include <vector>
+#include "window_help.h"
+#include "window_item.h"
 
 ////////////////////////////////////////////////////////////
-/// Scene Menu class
+/// Window BattleItem class.
+/// Displays all items of the party for use in battle
 ////////////////////////////////////////////////////////////
-class Scene_Menu : public Scene {
+class Window_BattleItem : public Window_Item {
+
 public:
 	////////////////////////////////////////////////////////
 	/// Constructor.
-	/// @param menu_index : Selected index in the menu
 	////////////////////////////////////////////////////////
-	Scene_Menu(int menu_index = 0);
-
-	void Start();
-	void Update();
-	void Terminate();
-	void Resume();
+	Window_BattleItem(int ix, int iy, int iwidth, int iheight);
 
 	////////////////////////////////////////////////////////
-	/// Creates the Window displaying the options.
+	/// Destructor.
 	////////////////////////////////////////////////////////
-	void CreateCommandWindow();
-
-	////////////////////////////////////////////////////////
-	/// Update Function if Command Window is Active
-	////////////////////////////////////////////////////////
-	void UpdateCommand();
+	virtual ~Window_BattleItem();
 
 	////////////////////////////////////////////////////////
-	/// Update Function if Status Window is Active
+	/// Checks if item should be enabled.
+	/// @param item_id : Item to check
 	////////////////////////////////////////////////////////
-	void UpdateActorSelection();
+	virtual bool CheckEnable(int item_id);
 
-	/// Options available in a Rpg2k3 Menu
-	enum CommandOptionType {
-		Item = 1,
-		Skill,
-		Equipment,
-		Save,
-		Status,
-		Row,
-		Order,
-		Wait,
-		Quit
-	};
+	////////////////////////////////////////////////////////
+	/// Sets the actor used for enable checks
+	/// @param actor_id : the actor
+	////////////////////////////////////////////////////////
+	void SetActor(int actor_id);
 
-private:
-	/// selected index on startup
-	int menu_index;
+	////////////////////////////////////////////////////////
+	/// Sets the actor used for enable checks
+	/// @param actor_id : the actor
+	////////////////////////////////////////////////////////
+	void SetHaveCorpse(bool have_corpse);
 
-	/// window displaying the commands
-	Window_Command* command_window;
+protected:
+	int actor_id;
+	bool have_corpse;
 
-	/// window displaying the gold amount
-	Window_Gold* gold_window;
-
-	/// window displaying the heros and their status
-	Window_MenuStatus* menustatus_window;
-
-	/// Options available in the Menu
-	std::vector<CommandOptionType> command_options;
+	bool CanUseItem(const RPG::Item& item);
+	bool CanUseSkill(int skill_id);
 };
 
 #endif

@@ -15,29 +15,31 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#include "channel.h"
-#include "resampler.h"
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include <iomanip>
+#include <sstream>
+#include "window_actorstatus.h"
+#include "game_actor.h"
+#include "game_party.h"
 
-namespace Audio {
+////////////////////////////////////////////////////////////
+Window_ActorStatus::Window_ActorStatus(int ix, int iy, int iwidth, int iheight, int actor_id) :
+	Window_Base(ix, iy, iwidth, iheight),
+	actor_id(actor_id) {
 
-Channel::Channel(uint16 _rate, uint16 _vol, uint8 _balance, AudioStream* _stream):
-rate(_rate),
-vol(_vol),
-balance(_balance),
-paused(true),
-stream(_stream) {
+	SetContents(Surface::CreateSurface(width - 16, height - 16));
+	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
-	resampler = Resampler::GetInstance(rate, 22050); 
-
+	Refresh();
 }
 
-Channel::~Channel() {
-	delete resampler;
+////////////////////////////////////////////////////////////
+Window_ActorStatus::~Window_ActorStatus() {
 }
 
-
-void Channel::Mix(int16 *data, int len) {
-	resampler->merge(data, len, stream, vol, balance);
-}
-
+////////////////////////////////////////////////////////////
+void Window_ActorStatus::Refresh() {
+	contents->Clear();
 }

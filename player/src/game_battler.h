@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "rpg_state.h"
 
 class Game_Actor;
 
@@ -44,7 +45,11 @@ public:
 	bool HasState(int state_id) const;
 
 	/// @return Vector containing the ids of all states the battler has
-	std::vector<int> GetStates() const;
+	const std::vector<int>& GetStates() const;
+
+	/// @return The highest priority state affecting the battler
+	///  returns NULL if no states
+	const RPG::State* GetState();
 
 	/// @return current hp
 	int GetHp() const;
@@ -59,7 +64,7 @@ public:
 	void SetMaxHp(int _maxhp);
 
 	/// @return current maxhp
-	int GetMaxHp();
+	int GetMaxHp() const;
 
 	////////////////////////////////////////////////////////
 	/// Sets the maximum SP.
@@ -68,7 +73,7 @@ public:
 	void SetMaxSp(int _maxsp);
 
 	/// @return current maxsp
-	int GetMaxSp();
+	int GetMaxSp() const;
 
 	////////////////////////////////////////////////////////
 	/// Sets the current hp
@@ -170,6 +175,11 @@ public:
 	/// @param state_id : id of state to remove
 	////////////////////////////////////////////////////////
 	void RemoveState(int state_id);
+
+	////////////////////////////////////////////////////////
+	/// Removes all States which end after battle
+	////////////////////////////////////////////////////////
+	void RemoveStates();
 
 	////////////////////////////////////////////////////////
 	/// Removes all States

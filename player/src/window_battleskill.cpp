@@ -18,53 +18,34 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "window_equip.h"
+#include "window_battleskill.h"
 #include "game_actors.h"
+#include "game_actor.h"
 
 ////////////////////////////////////////////////////////////
-Window_Equip::Window_Equip(int ix, int iy, int iwidth, int iheight, int actor_id) :
-	Window_Selectable(ix, iy, iwidth, iheight),
-	actor_id(actor_id) {
+Window_BattleSkill::Window_BattleSkill(int ix, int iy, int iwidth, int iheight) :
+	Window_Skill(ix, iy, iwidth, iheight) {
+}
 
-	SetContents(Surface::CreateSurface(width - 16, height - 16));
-	contents->SetTransparentColor(windowskin->GetTransparentColor());
-
-	index = 0;
-
+////////////////////////////////////////////////////////////
+void Window_BattleSkill::SetSubset(int id) {
+	subset = id;
 	Refresh();
 }
 
 ////////////////////////////////////////////////////////////
-Window_Equip::~Window_Equip() {
+bool Window_BattleSkill::CheckInclude(int skill_id) {
+	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	return (subset == RPG::Skill::Type_normal)
+		? (skill.type < 4)
+		: (subset == skill.type);
 }
 
 ////////////////////////////////////////////////////////////
-int Window_Equip::GetItemId() {
-	return index < 0 ? 0 : data[index];
+bool Window_BattleSkill::CheckEnable(int skill_id) {
+	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	return (skill.type == RPG::Skill::Type_switch)
+		? skill.occasion_battle
+		: true;
 }
 
-////////////////////////////////////////////////////////////
-void Window_Equip::Refresh() {
-	contents->Clear();
-
-	// Add the equipment of the actor to data
-	data.clear();
-	Game_Actor* actor = Game_Actors::GetActor(actor_id);
-	for (int i = 0; i < 5; ++i) {
-		data.push_back(actor->GetEquipment(i));
-	}
-	item_max = data.size();
-
-	// Draw equipment text
-	for (int i = 0; i < 5; ++i) {
-		DrawEquipmentType(actor, 0, (12 + 4) * i + 2, i);
-		if (data[i] > 0) {
-			DrawItemName(&Data::items[data[i] - 1], 60, (12 + 4) * i + 2);
-		}
-	}
-}
-
-////////////////////////////////////////////////////////////
-void Window_Equip::UpdateHelp() {
-	help_window->SetText(GetItemId() == 0 ? "" : Data::items[GetItemId() - 1].description);
-}

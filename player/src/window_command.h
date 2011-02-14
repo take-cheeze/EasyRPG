@@ -34,8 +34,11 @@ public:
 	/// @param commands : commands to display
 	/// @param width : window width, if no width is passed
 	/// 			the width is autocalculated
+	/// @param max_item : forces a window height for max_item
+	/// 			items , if no height is passed
+	/// 			the height is autocalculated
 	////////////////////////////////////////////////////////
-	Window_Command(std::vector<std::string> commands, int width = -1);
+	Window_Command(std::vector<std::string> commands, int width = -1, int max_item = -1);
 
 	////////////////////////////////////////////////////////
 	/// Refresh the window contents.
@@ -47,6 +50,13 @@ public:
 	/// @param index : command index
 	////////////////////////////////////////////////////////
 	void DisableItem(int index);
+
+	////////////////////////////////////////////////////////
+	/// Replaces the text of an item
+	/// @param index : command index
+	/// @param text : new item text
+	////////////////////////////////////////////////////////
+	void SetItemText(unsigned index, std::string text);
 
 protected:
 	std::vector<std::string> commands;

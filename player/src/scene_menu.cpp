@@ -23,6 +23,7 @@
 #include "graphics.h"
 #include "game_party.h"
 #include "game_system.h"
+#include "game_temp.h"
 #include "input.h"
 #include "player.h"
 #include "scene_end.h"
@@ -30,6 +31,8 @@
 #include "scene_item.h"
 #include "scene_map.h"
 #include "scene_skill.h"
+#include "scene_order.h"
+#include "scene_status.h"
 
 ////////////////////////////////////////////////////////////
 Scene_Menu::Scene_Menu(int menu_index) :
@@ -57,6 +60,15 @@ void Scene_Menu::Terminate() {
 }
 
 ////////////////////////////////////////////////////////////
+void Scene_Menu::Resume() {
+	if (command_options[command_window->GetIndex()] == Order) {
+		// FixMe: This must be done before fadein but on pop start is not
+		// called. And placing it in TransitionIn is not nice.
+		menustatus_window->Refresh();
+	}
+}
+
+////////////////////////////////////////////////////////////
 void Scene_Menu::Update() {
 	command_window->Update();
 	gold_window->Update();
@@ -74,26 +86,81 @@ void Scene_Menu::Update() {
 void Scene_Menu::CreateCommandWindow() {
 	// Create Options Window
 	std::vector<std::string> options;
-	options.push_back(Data::terms->command_item);
-	options.push_back(Data::terms->command_skill);
-	options.push_back(Data::terms->menu_equipment);
-	options.push_back(Data::terms->menu_save);
-	options.push_back(Data::terms->menu_quit);
+	
+	if (Player::engine == Player::EngineRpg2k) {
+		command_options.resize(5);
+		command_options[0] = Item;
+		command_options[1] = Skill;
+		command_options[2] = Equipment;
+		command_options[3] = Save;
+		command_options[4] = Quit;
+	} else {
+		for (std::vector<int16>::iterator it = Data::system->menu_commands.begin();
+			it != Data::system->menu_commands.end(); ++it) {
+				command_options.push_back((CommandOptionType)*it);
+		}
+		command_options.push_back(Quit);
+	}
+
+	// Add all menu items
+	std::vector<CommandOptionType>::iterator it;
+	for (it = command_options.begin(); it != command_options.end(); ++it) {
+		switch(*it) {
+		case Item:
+			options.push_back(Data::terms->command_item);
+			break;
+		case Skill:
+			options.push_back(Data::terms->command_skill);
+			break;
+		case Equipment:
+			options.push_back(Data::terms->menu_equipment);
+			break;
+		case Save:
+			options.push_back(Data::terms->menu_save);
+			break;
+		case Status:
+			options.push_back(Data::terms->status);
+			break;
+		case Row:
+			options.push_back(Data::terms->row);
+			break;
+		case Order:
+			options.push_back(Data::terms->order);
+			break;
+		case Wait:
+			options.push_back(Game_Temp::battle_wait ? Data::terms->wait_on : Data::terms->wait_off);
+			break;
+		default:
+			options.push_back(Data::terms->menu_quit);
+			break;
+		}
+	}
 
 	command_window = new Window_Command(options, 88);
 	command_window->SetIndex(menu_index);
 
-	// If there are no actors in the party disable Skills and Equipment
-	// RPG2k does not do this, but crashes if you try to access these menus
-	if (Game_Party::GetActors().empty()) {
-		//command_window->DisableItem(0);
-		command_window->DisableItem(1);
-		command_window->DisableItem(2);
-	}
-
-	// If save is forbidden disable this item
-	if (Game_System::save_disabled) {
-		command_window->DisableItem(3);
+	// Disable items
+	for (it = command_options.begin(); it != command_options.end(); ++it) {
+		switch(*it) {
+		case Save:
+			// If save is forbidden disable this item
+			if (Game_System::save_disabled) {
+				command_window->DisableItem(it - command_options.begin());
+			}
+		case Wait:
+		case Quit:
+			break;
+		case Order:
+			if (Game_Party::GetActors().size() <= 1) {
+				command_window->DisableItem(it - command_options.begin());
+			}
+			break;
+		default:
+			if (Game_Party::GetActors().empty()) {
+				command_window->DisableItem(it - command_options.begin());
+			}
+			break;
+		}
 	}
 }
 
@@ -105,13 +172,19 @@ void Scene_Menu::UpdateCommand() {
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		menu_index = command_window->GetIndex();
 
-		switch (menu_index) {
-		case 0: // Item
-			Game_System::SePlay(Data::system->decision_se);
-			Scene::Push(new Scene_Item());
+		switch (command_options[menu_index]) {
+		case Item:
+			if (Game_Party::GetActors().empty()) {
+				Game_System::SePlay(Data::system->buzzer_se);
+			} else {
+				Game_System::SePlay(Data::system->decision_se);
+				Scene::Push(new Scene_Item());
+			}
 			break;
-		case 1: // Tech Skill
-		case 2: // Equipment
+		case Skill:
+		case Equipment:
+		case Status:
+		case Row:
 			if (Game_Party::GetActors().empty()) {
 				Game_System::SePlay(Data::system->buzzer_se);
 			} else {
@@ -121,7 +194,7 @@ void Scene_Menu::UpdateCommand() {
 				menustatus_window->SetIndex(0);
 			}
 			break;
-		case 3: // Save
+		case Save: // Save
 			if (Game_System::save_disabled) {
 				Game_System::SePlay(Data::system->buzzer_se);
 			} else {
@@ -135,7 +208,20 @@ void Scene_Menu::UpdateCommand() {
 			}
 #endif
 			break;
-		case 4: // Quit Game
+		case Order:
+			if (Game_Party::GetActors().size() <= 1) {
+				Game_System::SePlay(Data::system->buzzer_se);
+			} else {
+				Game_System::SePlay(Data::system->decision_se);
+				Scene::Push(new Scene_Order());
+			}
+			break;
+		case Wait:
+			Game_System::SePlay(Data::system->decision_se);
+			Game_Temp::battle_wait = !Game_Temp::battle_wait;
+			command_window->SetItemText(menu_index, Game_Temp::battle_wait ? Data::terms->wait_on : Data::terms->wait_off);
+			break;
+		case Quit: // Quit Game
 			Game_System::SePlay(Data::system->decision_se);
 			Scene::Push(new Scene_End());
 			break;
@@ -152,19 +238,26 @@ void Scene_Menu::UpdateActorSelection() {
 		menustatus_window->SetIndex(-1);
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		Game_System::SePlay(Data::system->decision_se);
-		switch (command_window->GetIndex()) {
-		case 1: // Tech Skill
+		switch (command_options[command_window->GetIndex()]) {
+		case Skill: // Tech Skill
 			Scene::Push(new Scene_Skill(menustatus_window->GetIndex()));
-			command_window->SetActive(true);
-			menustatus_window->SetActive(false);
-			menustatus_window->SetIndex(-1);
 			break;
-		case 2: // Equipment
+		case Equipment: // Equipment
 			Scene::Push(new Scene_Equip(menustatus_window->GetIndex()));
-			command_window->SetActive(true);
-			menustatus_window->SetActive(false);
-			menustatus_window->SetIndex(-1);
+			break;
+		case Status:
+			Scene::Push(new Scene_Status(menustatus_window->GetIndex()));
+			break;
+		case Row:
+			//
+			break;
+		default:
+			assert(false);
 			break;
 		}
+
+		command_window->SetActive(true);
+		menustatus_window->SetActive(false);
+		menustatus_window->SetIndex(-1);
 	}
 }

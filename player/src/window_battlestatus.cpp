@@ -18,12 +18,14 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <algorithm>
 #include "bitmap.h"
 #include "surface.h"
 #include "cache.h"
 #include "input.h"
 #include "game_party.h"
 #include "game_actor.h"
+#include "game_system.h"
 #include "window_battlestatus.h"
 
 ////////////////////////////////////////////////////////////
@@ -73,7 +75,7 @@ void Window_BattleStatus::RefreshGauge(int i) {
 
 ////////////////////////////////////////////////////////////
 void Window_BattleStatus::DrawGauge(Game_Actor* actor, int index, int cx, int cy) {
-	Bitmap* system2 = Cache::System2(Data::system.system2_name);
+	Bitmap* system2 = Cache::System2(Data::system->system2_name);
 
 	bool full = gauges[index] == gauge_full;
 	int gauge = gauges[index] * 25 / gauge_full;
@@ -104,12 +106,12 @@ int Window_BattleStatus::GetActiveCharacter() {
 }
 
 ////////////////////////////////////////////////////////////
-void Window_BattleStatus::SetTimeGauge(int _index, int value) {
-	gauges[_index] = value;
+void Window_BattleStatus::SetTimeGauge(int _index, int value, int limit) {
+	gauges[_index] = std::min(value, limit) * gauge_full / limit;
 	RefreshGauge(_index);
 
 	int num_actors = actors.size();
-	int old_index = index;
+	int old_index = index < 0 ? 0 : index;
 	index = -1;
 	for (int i = 0; i < num_actors; i++) {
 		int new_index = (old_index + i) % num_actors;
@@ -131,6 +133,7 @@ void Window_BattleStatus::Update() {
 		int num_actors = actors.size();
 
 		if (Input::IsRepeated(Input::DOWN)) {
+			Game_System::SePlay(Data::system->cursor_se);
 			for (int i = 1; i < num_actors; i++) {
 				int new_index = (index + i) % num_actors;
 				if (gauges[new_index] == gauge_full) {
@@ -140,6 +143,7 @@ void Window_BattleStatus::Update() {
 			}
 		}
 		if (Input::IsRepeated(Input::UP)) {
+			Game_System::SePlay(Data::system->cursor_se);
 			for (int i = num_actors - 1; i > 0; i--) {
 				int new_index = (index + i) % num_actors;
 				if (gauges[new_index] == gauge_full) {

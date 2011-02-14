@@ -18,8 +18,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "game_battler.h"
 #include <algorithm>
+#include "player.h"
+#include "game_battler.h"
 #include "game_actor.h"
 #include "util_macro.h"
 #include "main_data.h"
@@ -51,7 +52,7 @@ bool Game_Battler::HasState(int state_id) const {
 }
 
 ////////////////////////////////////////////////////////////
-std::vector<int> Game_Battler::GetStates() const {
+const std::vector<int>& Game_Battler::GetStates() const {
 	return states;
 }
 
@@ -61,6 +62,25 @@ bool Game_Battler::IsDead() const {
 
 bool Game_Battler::Exists() const {
 	return !hidden && !IsDead();
+}
+
+const RPG::State* Game_Battler::GetState() {
+	int priority = 0;
+	const RPG::State* the_state = NULL;
+
+	for (int i = 0; i < (int) states.size(); i++) {
+		const RPG::State* state = &Data::states[states[i]];
+		// Death has highest priority
+		if (state->ID == 1)
+			return state;
+
+		if (state->priority > priority) {
+			the_state = state;
+			priority = state->priority;
+		}
+	}
+
+	return the_state;
 }
 
 ////////////////////////////////////////////////////////////
@@ -74,11 +94,11 @@ int Game_Battler::GetSp() const {
 }
 
 ////////////////////////////////////////////////////////////
-int Game_Battler::GetMaxHp() {
+int Game_Battler::GetMaxHp() const {
 	int base_maxhp = GetBaseMaxHp();
 	int n = min(max(base_maxhp + maxhp_plus, 1), 999);
 
-	for (std::vector<int>::iterator i = states.begin();
+	for (std::vector<int>::const_iterator i = states.begin();
 		i != states.end();
 		i++) {
 			// TODO test needed
@@ -91,11 +111,11 @@ int Game_Battler::GetMaxHp() {
 }
 
 ////////////////////////////////////////////////////////////
-int Game_Battler::GetMaxSp() {
+int Game_Battler::GetMaxSp() const {
 	int base_maxsp = GetBaseMaxSp();
 	int n = min(max(base_maxsp + maxsp_plus, 0), 999);
 
-	for (std::vector<int>::iterator i = states.begin();
+	for (std::vector<int>::const_iterator i = states.begin();
 		i != states.end();
 		i++) {
 			// TODO test needed
@@ -191,12 +211,12 @@ int Game_Battler::GetAgi() {
 
 ////////////////////////////////////////////////////////////
 void Game_Battler::SetHp(int _hp) {
-	hp = min(_hp, GetMaxHp());
+	hp = min(max(_hp, 0), GetMaxHp());
 }
 
 ////////////////////////////////////////////////////////////
 void Game_Battler::SetSp(int _sp) {
-	sp = min(_sp, GetMaxSp());
+	sp = min(max(_sp, 0), GetMaxSp());
 }
 
 ////////////////////////////////////////////////////////////
@@ -261,7 +281,11 @@ bool Game_Battler::IsSkillUsable(int skill_id) {
 
 ////////////////////////////////////////////////////////////
 int Game_Battler::CalculateSkillCost(int skill_id) {
-	return Data::skills[skill_id - 1].sp_cost;
+	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	return (Player::engine == Player::EngineRpg2k3 &&
+			skill.sp_type == RPG::Skill::SpType_percent)
+		? GetMaxSp() * skill.sp_percent / 100
+		: skill.sp_cost;
 }
 
 ////////////////////////////////////////////////////////////
@@ -277,6 +301,16 @@ void Game_Battler::RemoveState(int state_id) {
 	std::vector<int>::iterator it = std::find(states.begin(), states.end(), state_id);
 	if (it != states.end())
 		states.erase(it);
+}
+
+////////////////////////////////////////////////////////////
+static bool NonPermanent(int state_id) {
+	return Data::states[state_id - 1].type == 0;
+}
+
+void Game_Battler::RemoveStates() {
+	std::vector<int>::iterator end = std::remove_if(states.begin(), states.end(), NonPermanent);
+	states.erase(end, states.end());
 }
 
 ////////////////////////////////////////////////////////////
