@@ -19,49 +19,36 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "data.h"
+#include <fstream>
+#include <cassert>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
 
 ////////////////////////////////////////////////////////////
 namespace Data {
-	// Database Data (ldb)
-	std::vector<RPG::Actor> actors;
-	std::vector<RPG::Skill> skills;
-	std::vector<RPG::Item> items;
-	std::vector<RPG::Enemy> enemies;
-	std::vector<RPG::Troop> troops;
-	std::vector<RPG::Terrain> terrains;
-	std::vector<RPG::Attribute> attributes;
-	std::vector<RPG::State> states;
-	std::vector<RPG::Animation> animations;
-	std::vector<RPG::Chipset> chipsets;
-	std::vector<RPG::CommonEvent> commonevents;
-	RPG::BattleCommands battlecommands;
-	std::vector<RPG::Class> classes;
-	std::vector<RPG::BattlerAnimation> battleranimations;
-	RPG::Terms terms;
-	RPG::System system;
-	std::vector<std::string> switches;
-	std::vector<std::string> variables;
-
+	/// Database (ldb)
+	RPG::Database database;
 	// TreeMap (lmt)
 	RPG::TreeMap treemap;
 }
 
 ////////////////////////////////////////////////////////////
 void Data::Clear() {
-	actors.clear();
-	skills.clear();
-	items.clear();
-	enemies.clear();
-	troops.clear();
-	terrains.clear();
-	attributes.clear();
-	states.clear();
-	animations.clear();
-	chipsets.clear();
-	commonevents.clear();
-	battlecommands.commands.clear();
-	classes.clear();
-	battleranimations.clear();
-	switches.clear();
-	variables.clear();
+	database.Clear();
+	treemap.Clear();
+}
+
+void Data::Load(std::string const& filename) {
+	std::ifstream ifs(filename.c_str());
+	assert(ifs);
+	boost::archive::xml_iarchive ia(ifs);
+	ia & BOOST_SERIALIZATION_NVP(database);
+	ia & BOOST_SERIALIZATION_NVP(treemap);
+}
+void Data::Save(std::string const& filename) {
+	std::ofstream ofs(filename.c_str());
+	assert(ofs);
+	boost::archive::xml_oarchive oa(ofs);
+	oa & BOOST_SERIALIZATION_NVP(database);
+	oa & BOOST_SERIALIZATION_NVP(treemap);
 }

@@ -110,6 +110,76 @@ namespace RPG {
 		bool ocassion_battle;
 
 		std::vector<RPG::ItemAnimation> animation_data;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(description);
+			ar & BOOST_SERIALIZATION_NVP(type);
+			ar & BOOST_SERIALIZATION_NVP(price);
+			ar & BOOST_SERIALIZATION_NVP(actor_set);
+			ar & BOOST_SERIALIZATION_NVP(class_set); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(uses); // Consumables only
+
+		// Equipable		
+			ar & BOOST_SERIALIZATION_NVP(atk_points);
+			ar & BOOST_SERIALIZATION_NVP(def_points);
+			ar & BOOST_SERIALIZATION_NVP(spi_points);
+			ar & BOOST_SERIALIZATION_NVP(agi_points);
+			ar & BOOST_SERIALIZATION_NVP(attribute_set);
+			ar & BOOST_SERIALIZATION_NVP(state_set);
+			ar & BOOST_SERIALIZATION_NVP(state_effect); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(state_chance);
+			ar & BOOST_SERIALIZATION_NVP(cursed); // RPG2003
+				
+		// Weapon
+			ar & BOOST_SERIALIZATION_NVP(two_handed);
+			ar & BOOST_SERIALIZATION_NVP(sp_cost);
+			ar & BOOST_SERIALIZATION_NVP(hit);
+			ar & BOOST_SERIALIZATION_NVP(critical_hit);
+			ar & BOOST_SERIALIZATION_NVP(animation_id);
+			ar & BOOST_SERIALIZATION_NVP(preemptive);
+			ar & BOOST_SERIALIZATION_NVP(dual_attack);
+			ar & BOOST_SERIALIZATION_NVP(attack_all);
+			ar & BOOST_SERIALIZATION_NVP(ignore_evasion);
+			ar & BOOST_SERIALIZATION_NVP(weapon_animation); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(use_skill); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(ranged_trajectory); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(ranged_target); // RPG2003
+		
+		// Shield Armor Head Other
+			ar & BOOST_SERIALIZATION_NVP(prevent_critical);
+			ar & BOOST_SERIALIZATION_NVP(raise_evasion);
+			ar & BOOST_SERIALIZATION_NVP(half_sp_cost);
+			ar & BOOST_SERIALIZATION_NVP(no_terrain_damage);
+		
+		// Medicine
+			ar & BOOST_SERIALIZATION_NVP(entire_party);
+			ar & BOOST_SERIALIZATION_NVP(recover_hp);
+			ar & BOOST_SERIALIZATION_NVP(recover_hp_rate);
+			ar & BOOST_SERIALIZATION_NVP(recover_sp);
+			ar & BOOST_SERIALIZATION_NVP(recover_sp_rate);
+			ar & BOOST_SERIALIZATION_NVP(ocassion_field); // Also used by Switch
+			ar & BOOST_SERIALIZATION_NVP(ko_only);
+		
+		// Book - Unique
+			ar & BOOST_SERIALIZATION_NVP(skill_id);
+			ar & BOOST_SERIALIZATION_NVP(using_message);
+		
+		// Material (See also Equipable *_points)
+			ar & BOOST_SERIALIZATION_NVP(max_hp_points);
+			ar & BOOST_SERIALIZATION_NVP(max_sp_points);
+		
+		// Switch
+			ar & BOOST_SERIALIZATION_NVP(switch_id);
+			ar & BOOST_SERIALIZATION_NVP(ocassion_battle);
+
+			ar & BOOST_SERIALIZATION_NVP(animation_data);
+		}
 	};
 }
 

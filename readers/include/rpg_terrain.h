@@ -68,6 +68,49 @@ namespace RPG {
 		int grid_a;
 		int grid_b;
 		int grid_c;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(damage);
+			ar & BOOST_SERIALIZATION_NVP(encounter_rate);
+			ar & BOOST_SERIALIZATION_NVP(background_name);
+			ar & BOOST_SERIALIZATION_NVP(boat_pass);
+			ar & BOOST_SERIALIZATION_NVP(ship_pass);
+			ar & BOOST_SERIALIZATION_NVP(airship_pass);
+			ar & BOOST_SERIALIZATION_NVP(airship_land);
+			ar & BOOST_SERIALIZATION_NVP(bush_depth);
+			ar & BOOST_SERIALIZATION_NVP(footstep);
+			ar & BOOST_SERIALIZATION_NVP(on_damage_se);
+			ar & BOOST_SERIALIZATION_NVP(background_type);
+			ar & BOOST_SERIALIZATION_NVP(background_a_name);
+			ar & BOOST_SERIALIZATION_NVP(background_a_scrollh);
+			ar & BOOST_SERIALIZATION_NVP(background_a_scrollv);
+			ar & BOOST_SERIALIZATION_NVP(background_a_scrollh_speed);
+			ar & BOOST_SERIALIZATION_NVP(background_a_scrollv_speed);
+			ar & BOOST_SERIALIZATION_NVP(background_b);
+			ar & BOOST_SERIALIZATION_NVP(background_b_name);
+			ar & BOOST_SERIALIZATION_NVP(background_b_scrollh);
+			ar & BOOST_SERIALIZATION_NVP(background_b_scrollv);
+			ar & BOOST_SERIALIZATION_NVP(background_b_scrollh_speed);
+			ar & BOOST_SERIALIZATION_NVP(background_b_scrollv_speed);
+			ar & BOOST_SERIALIZATION_NVP(special_back_party_flag);
+			ar & BOOST_SERIALIZATION_NVP(special_back_enemies_flag);
+			ar & BOOST_SERIALIZATION_NVP(special_lateral_party_flag);
+			ar & BOOST_SERIALIZATION_NVP(special_lateral_enemies_flag);
+			ar & BOOST_SERIALIZATION_NVP(special_back_party);
+			ar & BOOST_SERIALIZATION_NVP(special_back_enemies);
+			ar & BOOST_SERIALIZATION_NVP(special_lateral_party);
+			ar & BOOST_SERIALIZATION_NVP(special_lateral_enemies);
+			ar & BOOST_SERIALIZATION_NVP(grid_location);
+			ar & BOOST_SERIALIZATION_NVP(grid_a);
+			ar & BOOST_SERIALIZATION_NVP(grid_b);
+			ar & BOOST_SERIALIZATION_NVP(grid_c);
+		}
 	};
 }
 

@@ -235,7 +235,7 @@ void Game_Interpreter::Update() {
 void Game_Interpreter::SetupStartingEvent(Game_Event* ev) {
 
 	if (Game_Temp::common_event_id > 0) {
-		Setup(Data::commonevents[Game_Temp::common_event_id].event_commands, 0);
+		Setup(Data::database.commonevents[Game_Temp::common_event_id].event_commands, 0);
 		Game_Temp::common_event_id = 0;
 		return;
 	}
@@ -244,8 +244,8 @@ void Game_Interpreter::SetupStartingEvent(Game_Event* ev) {
 	Setup(ev->GetList(), ev->GetId(), ev->GetX(), ev->GetY());
 
 	RPG::CommonEvent* common_event;
-	for (size_t i = 0; i < Data::commonevents.size(); i++) {
-		common_event = &Data::commonevents[i];
+	for (size_t i = 0; i < Data::database.commonevents.size(); i++) {
+		common_event = &Data::database.commonevents[i];
 
 		// If trigger is auto run, and condition switch is ON
 		if ( (common_event->trigger == Game_Character::TriggerAutoStart) &&
@@ -1106,7 +1106,7 @@ bool Game_Interpreter::CommandChangeEquipment() { // Code 10450
 		case 0:
 			item_id = ValueOrVariable(list[index].parameters[3],
 									  list[index].parameters[4]);
-			type = Data::items[item_id - 1].type;
+			type = Data::database.items[item_id - 1].type;
 			switch (type) {
 				case RPG::Item::Type_weapon:
 				case RPG::Item::Type_shield:

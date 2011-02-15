@@ -31,9 +31,9 @@
 Window_BattleOption::Window_BattleOption(int x, int y, int width, int height) :
 	Window_Base(x, y, width, height) {
 
-	commands.push_back(Data::terms.battle_fight);
-	commands.push_back(Data::terms.battle_auto);
-	commands.push_back(Data::terms.battle_escape);
+	commands.push_back(Data::database.terms.battle_fight);
+	commands.push_back(Data::database.terms.battle_auto);
+	commands.push_back(Data::database.terms.battle_escape);
 
 	index = -1;
 	top_row = 0;
@@ -62,12 +62,12 @@ void Window_BattleOption::Update() {
 
 	if (active && num_commands >= 0 && index >= 0) {
 		if (Input::IsRepeated(Input::DOWN)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			index++;
 		}
 
 		if (Input::IsRepeated(Input::UP)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			index--;
 		}
 

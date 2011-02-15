@@ -19,6 +19,11 @@
 #define _RPG_EVENTPAGECONDITION_H_
 
 ////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include "reader.h"
+
+////////////////////////////////////////////////////////////
 /// RPG::EventPageCondition class
 ////////////////////////////////////////////////////////////
 namespace RPG {
@@ -42,6 +47,29 @@ namespace RPG {
 		int timer_sec;
 		int timer2_sec;
 		int compare_operator;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(switch_a);
+			ar & BOOST_SERIALIZATION_NVP(switch_b);
+			ar & BOOST_SERIALIZATION_NVP(variable);
+			ar & BOOST_SERIALIZATION_NVP(item);
+			ar & BOOST_SERIALIZATION_NVP(actor);
+			ar & BOOST_SERIALIZATION_NVP(timer);
+			ar & BOOST_SERIALIZATION_NVP(timer2);
+			ar & BOOST_SERIALIZATION_NVP(switch_a_id);
+			ar & BOOST_SERIALIZATION_NVP(switch_b_id);
+			ar & BOOST_SERIALIZATION_NVP(variable_id);
+			ar & BOOST_SERIALIZATION_NVP(variable_value);
+			ar & BOOST_SERIALIZATION_NVP(item_id);
+			ar & BOOST_SERIALIZATION_NVP(actor_id);
+			ar & BOOST_SERIALIZATION_NVP(timer_sec);
+			ar & BOOST_SERIALIZATION_NVP(timer2_sec);
+			ar & BOOST_SERIALIZATION_NVP(compare_operator);
+		}
 	};
 }
 

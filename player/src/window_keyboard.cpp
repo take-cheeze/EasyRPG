@@ -121,15 +121,15 @@ void Window_Keyboard::Update() {
 	Window_Base::Update();
 	if (active) {
 		if (Input::IsRepeated(Input::DOWN)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			row = (row + 1) % row_max;
 		}
 		if (Input::IsRepeated(Input::UP)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			row = (row + row_max - 1) % row_max;
 		}
 		if (Input::IsRepeated(Input::RIGHT)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			col += 1;
 			if (col >= col_max) {
 				col = 0;
@@ -137,7 +137,7 @@ void Window_Keyboard::Update() {
 			}
 		}
 		if (Input::IsRepeated(Input::LEFT)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			col -= 1;
 			if (col < 0) {
 				col = col_max - 1;

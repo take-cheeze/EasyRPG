@@ -74,7 +74,7 @@ Scene_Battle::FloatText::~FloatText() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Battle::CreateCursors() {
-	Bitmap* system2 = Cache::System2(Data::system.system2_name);
+	Bitmap* system2 = Cache::System2(Data::database.system.system2_name);
 
 	ally_cursor = new Sprite();
 	ally_cursor->SetBitmap(system2);
@@ -372,14 +372,14 @@ void Scene_Battle::Defend() {
 void Scene_Battle::Item() {
 	int item_id = item_window->GetItemId();
 	if (item_id <= 0) {
-		Game_System::SePlay(Data::system.buzzer_se);
+		Game_System::SePlay(Data::database.system.buzzer_se);
 		return;
 	}
 
-	const RPG::Item& item = Data::items[item_id - 1];
+	const RPG::Item& item = Data::database.items[item_id - 1];
 	switch (item.type) {
 		case RPG::Item::Type_normal:
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Data::database.system.buzzer_se);
 			break;
 		case RPG::Item::Type_weapon:
 		case RPG::Item::Type_shield:
@@ -390,7 +390,7 @@ void Scene_Battle::Item() {
 				ItemSkill(item);
 			else
 				// can't be used
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Data::database.system.buzzer_se);
 			break;
 		case RPG::Item::Type_medicine:
 			if (item.entire_party)
@@ -403,7 +403,7 @@ void Scene_Battle::Item() {
 		case RPG::Item::Type_book:
 		case RPG::Item::Type_material:
 			// can't be used in battle?
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Data::database.system.buzzer_se);
 			break;
 		case RPG::Item::Type_special:
 			ItemSkill(item);
@@ -419,18 +419,18 @@ void Scene_Battle::Item() {
 void Scene_Battle::Skill() {
 	int skill_id = skill_window->GetSkillId();
 	if (skill_id <= 0) {
-		Game_System::SePlay(Data::system.buzzer_se);
+		Game_System::SePlay(Data::database.system.buzzer_se);
 		return;
 	}
 
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 
 	Skill(skill);
 }
 
 ////////////////////////////////////////////////////////////
 void Scene_Battle::ItemSkill(const RPG::Item& item) {
-	const RPG::Skill& skill = Data::skills[item.skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[item.skill_id - 1];
 	Skill(skill);
 }
 
@@ -524,10 +524,10 @@ void Scene_Battle::BeginItem() {
 ////////////////////////////////////////////////////////////
 void Scene_Battle::BeginSkill() {
 	Battle::Ally& ally = Game_Battle::GetActiveAlly();
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 	int anim_state = SkillAnimation(skill, ally);
 	const RPG::Animation* animation = (skill.animation_id != 0)
-		? &Data::animations[skill.animation_id - 1]
+		? &Data::database.animations[skill.animation_id - 1]
 		: NULL;
 	Battle::Action* action = NULL;
 	int x, y;
@@ -650,7 +650,7 @@ void Scene_Battle::EnemyActionBasic() {
 			Game_Battle::TargetRandomAlly();
 			Battle::Ally &ally = Game_Battle::GetTargetAlly();
 			actions.push_back(new Battle::WaitAction(20));
-			actions.push_back(new Battle::AnimationAction(ally.sprite, &Data::animations[0]));
+			actions.push_back(new Battle::AnimationAction(ally.sprite, &Data::database.animations[0]));
 			actions.push_back(new Battle::CommandAction1(&Game_Battle::EnemyAttack, (void*) &ally));
 			break;
 		}
@@ -659,12 +659,12 @@ void Scene_Battle::EnemyActionBasic() {
 			Game_Battle::TargetRandomAlly();
 			Battle::Ally &ally1 = Game_Battle::GetTargetAlly();
 			actions.push_back(new Battle::WaitAction(20));
-			actions.push_back(new Battle::AnimationAction(ally1.sprite, &Data::animations[0]));
+			actions.push_back(new Battle::AnimationAction(ally1.sprite, &Data::database.animations[0]));
 			actions.push_back(new Battle::CommandAction1(&Game_Battle::EnemyAttack, (void*) &ally1));
 			Game_Battle::TargetRandomAlly();
 			Battle::Ally &ally2 = Game_Battle::GetTargetAlly();
 			actions.push_back(new Battle::WaitAction(20));
-			actions.push_back(new Battle::AnimationAction(ally2.sprite, &Data::animations[0]));
+			actions.push_back(new Battle::AnimationAction(ally2.sprite, &Data::database.animations[0]));
 			actions.push_back(new Battle::CommandAction1(&Game_Battle::EnemyAttack, (void*) &ally2));
 			break;
 		}
@@ -692,9 +692,9 @@ void Scene_Battle::EnemyActionBasic() {
 ////////////////////////////////////////////////////////////
 void Scene_Battle::EnemyActionSkill() {
 	Battle::Enemy& enemy = Game_Battle::GetActiveEnemy();
-	const RPG::Skill& skill = Data::skills[enemy_action->skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[enemy_action->skill_id - 1];
 	const RPG::Animation* animation = (skill.animation_id != 0)
-		? &Data::animations[skill.animation_id - 1]
+		? &Data::database.animations[skill.animation_id - 1]
 		: NULL;
 	Battle::Action* action = NULL;
 	int x, y;
@@ -794,7 +794,7 @@ void Scene_Battle::ProcessActions() {
 ////////////////////////////////////////////////////////////
 void Scene_Battle::ProcessInput() {
 	if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Data::database.system.decision_se);
 		switch (state) {
 			case State_Options:
 				switch (options_window->GetIndex()) {
@@ -843,7 +843,7 @@ void Scene_Battle::ProcessInput() {
 	}
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::database.system.cancel_se);
 		switch (state) {
 			case State_Options:
 				Scene::Pop();
@@ -991,7 +991,7 @@ void Scene_Battle::UpdateFloaters() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Battle::ShowAnimation(int animation_id, bool allies, Battle::Ally* ally, Battle::Enemy* enemy, bool wait) {
-	const RPG::Animation* rpg_anim = &Data::animations[animation_id - 1];
+	const RPG::Animation* rpg_anim = &Data::database.animations[animation_id - 1];
 	int x, y;
 
 	if (ally != NULL) {
@@ -1086,7 +1086,7 @@ void Scene_Battle::CheckWin() {
 		it->SetAnimState(Battle::Ally::Victory);
 	Game_Temp::battle_result = Game_Temp::BattleVictory;
 	SetState(State_Victory);
-	Message(Data::terms.victory.empty() ? Data::terms.victory : "Victory");
+	Message(Data::database.terms.victory.empty() ? Data::database.terms.victory : "Victory");
 }
 
 ////////////////////////////////////////////////////////////
@@ -1099,7 +1099,7 @@ void Scene_Battle::CheckLose() {
 
 	Game_Temp::battle_result = Game_Temp::BattleDefeat;
 	SetState(State_Defeat);
-	Message(!Data::terms.defeat.empty() ? Data::terms.defeat : "Defeat");
+	Message(!Data::database.terms.defeat.empty() ? Data::database.terms.defeat : "Defeat");
 }
 
 ////////////////////////////////////////////////////////////

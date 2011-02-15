@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::Terms class
@@ -158,6 +159,140 @@ namespace RPG {
 		std::string file;
 		std::string yes;
 		std::string no;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(encounter);
+			ar & BOOST_SERIALIZATION_NVP(special_combat);
+			ar & BOOST_SERIALIZATION_NVP(escape_success);
+			ar & BOOST_SERIALIZATION_NVP(escape_failure);
+			ar & BOOST_SERIALIZATION_NVP(victory);
+			ar & BOOST_SERIALIZATION_NVP(defeat);
+			ar & BOOST_SERIALIZATION_NVP(exp_received);
+			ar & BOOST_SERIALIZATION_NVP(gold_recieved_a);
+			ar & BOOST_SERIALIZATION_NVP(gold_recieved_b);
+			ar & BOOST_SERIALIZATION_NVP(item_recieved);
+			ar & BOOST_SERIALIZATION_NVP(attacking);
+			ar & BOOST_SERIALIZATION_NVP(actor_critical);
+			ar & BOOST_SERIALIZATION_NVP(enemy_critical);
+			ar & BOOST_SERIALIZATION_NVP(defending);
+			ar & BOOST_SERIALIZATION_NVP(observing);
+			ar & BOOST_SERIALIZATION_NVP(focus);
+			ar & BOOST_SERIALIZATION_NVP(autodestruction);
+			ar & BOOST_SERIALIZATION_NVP(enemy_escape);
+			ar & BOOST_SERIALIZATION_NVP(enemy_transform);
+			ar & BOOST_SERIALIZATION_NVP(enemy_damaged);
+			ar & BOOST_SERIALIZATION_NVP(enemy_undamaged);
+			ar & BOOST_SERIALIZATION_NVP(actor_damaged);
+			ar & BOOST_SERIALIZATION_NVP(actor_undamaged);
+			ar & BOOST_SERIALIZATION_NVP(skill_failure_a);
+			ar & BOOST_SERIALIZATION_NVP(skill_failure_b);
+			ar & BOOST_SERIALIZATION_NVP(skill_failure_c);
+			ar & BOOST_SERIALIZATION_NVP(dodge);
+			ar & BOOST_SERIALIZATION_NVP(use_item);
+			ar & BOOST_SERIALIZATION_NVP(hp_recovery);
+			ar & BOOST_SERIALIZATION_NVP(parameter_increase);
+			ar & BOOST_SERIALIZATION_NVP(parameter_decrease);
+			ar & BOOST_SERIALIZATION_NVP(actor_hp_absorbed);
+			ar & BOOST_SERIALIZATION_NVP(enemy_hp_absorbed);
+			ar & BOOST_SERIALIZATION_NVP(resistance_increase);
+			ar & BOOST_SERIALIZATION_NVP(resistance_decrease);
+			ar & BOOST_SERIALIZATION_NVP(level_up);
+			ar & BOOST_SERIALIZATION_NVP(skill_learned);
+			ar & BOOST_SERIALIZATION_NVP(battle_start);
+			ar & BOOST_SERIALIZATION_NVP(miss);
+			ar & BOOST_SERIALIZATION_NVP(shop_greeting1);
+			ar & BOOST_SERIALIZATION_NVP(shop_regreeting1);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy1);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell1);
+			ar & BOOST_SERIALIZATION_NVP(shop_leave1);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy_select1);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy_number1);
+			ar & BOOST_SERIALIZATION_NVP(shop_purchased1);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell_select1);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell_number1);
+			ar & BOOST_SERIALIZATION_NVP(shop_sold1);
+			ar & BOOST_SERIALIZATION_NVP(shop_greeting2);
+			ar & BOOST_SERIALIZATION_NVP(shop_regreeting2);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy2);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell2);
+			ar & BOOST_SERIALIZATION_NVP(shop_leave2);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy_select2);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy_number2);
+			ar & BOOST_SERIALIZATION_NVP(shop_purchased2);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell_select2);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell_number2);
+			ar & BOOST_SERIALIZATION_NVP(shop_sold2);
+			ar & BOOST_SERIALIZATION_NVP(shop_greeting3);
+			ar & BOOST_SERIALIZATION_NVP(shop_regreeting3);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy3);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell3);
+			ar & BOOST_SERIALIZATION_NVP(shop_leave3);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy_select3);
+			ar & BOOST_SERIALIZATION_NVP(shop_buy_number3);
+			ar & BOOST_SERIALIZATION_NVP(shop_purchased3);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell_select3);
+			ar & BOOST_SERIALIZATION_NVP(shop_sell_number3);
+			ar & BOOST_SERIALIZATION_NVP(shop_sold3);
+			ar & BOOST_SERIALIZATION_NVP(inn_a_greeting_1);
+			ar & BOOST_SERIALIZATION_NVP(inn_a_greeting_2);
+			ar & BOOST_SERIALIZATION_NVP(inn_a_greeting_3);
+			ar & BOOST_SERIALIZATION_NVP(inn_a_accept);
+			ar & BOOST_SERIALIZATION_NVP(inn_a_cancel);
+			ar & BOOST_SERIALIZATION_NVP(inn_b_greeting_1);
+			ar & BOOST_SERIALIZATION_NVP(inn_b_greeting_2);
+			ar & BOOST_SERIALIZATION_NVP(inn_b_greeting_3);
+			ar & BOOST_SERIALIZATION_NVP(inn_b_accept);
+			ar & BOOST_SERIALIZATION_NVP(inn_b_cancel);
+			ar & BOOST_SERIALIZATION_NVP(possessed_items);
+			ar & BOOST_SERIALIZATION_NVP(equipped_items);
+			ar & BOOST_SERIALIZATION_NVP(gold);
+			ar & BOOST_SERIALIZATION_NVP(battle_fight);
+			ar & BOOST_SERIALIZATION_NVP(battle_auto);
+			ar & BOOST_SERIALIZATION_NVP(battle_escape);
+			ar & BOOST_SERIALIZATION_NVP(command_attack);
+			ar & BOOST_SERIALIZATION_NVP(command_defend);
+			ar & BOOST_SERIALIZATION_NVP(command_item);
+			ar & BOOST_SERIALIZATION_NVP(command_skill);
+			ar & BOOST_SERIALIZATION_NVP(menu_equipment);
+			ar & BOOST_SERIALIZATION_NVP(menu_save);
+			ar & BOOST_SERIALIZATION_NVP(menu_quit);
+			ar & BOOST_SERIALIZATION_NVP(new_game);
+			ar & BOOST_SERIALIZATION_NVP(load_game);
+			ar & BOOST_SERIALIZATION_NVP(exit_game);
+			ar & BOOST_SERIALIZATION_NVP(status);
+			ar & BOOST_SERIALIZATION_NVP(row);
+			ar & BOOST_SERIALIZATION_NVP(order);
+			ar & BOOST_SERIALIZATION_NVP(wait_on);
+			ar & BOOST_SERIALIZATION_NVP(wait_off);
+			ar & BOOST_SERIALIZATION_NVP(level);
+			ar & BOOST_SERIALIZATION_NVP(health_points);
+			ar & BOOST_SERIALIZATION_NVP(spirit_points);
+			ar & BOOST_SERIALIZATION_NVP(normal_status);
+			ar & BOOST_SERIALIZATION_NVP(exp_short);
+			ar & BOOST_SERIALIZATION_NVP(lvl_short);
+			ar & BOOST_SERIALIZATION_NVP(hp_short);
+			ar & BOOST_SERIALIZATION_NVP(sp_short);
+			ar & BOOST_SERIALIZATION_NVP(sp_cost);
+			ar & BOOST_SERIALIZATION_NVP(attack);
+			ar & BOOST_SERIALIZATION_NVP(defense);
+			ar & BOOST_SERIALIZATION_NVP(spirit);
+			ar & BOOST_SERIALIZATION_NVP(agility);
+			ar & BOOST_SERIALIZATION_NVP(weapon);
+			ar & BOOST_SERIALIZATION_NVP(shield);
+			ar & BOOST_SERIALIZATION_NVP(armor);
+			ar & BOOST_SERIALIZATION_NVP(helmet);
+			ar & BOOST_SERIALIZATION_NVP(accessory);
+			ar & BOOST_SERIALIZATION_NVP(save_game_message);
+			ar & BOOST_SERIALIZATION_NVP(load_game_message);
+			ar & BOOST_SERIALIZATION_NVP(exit_game_message);
+			ar & BOOST_SERIALIZATION_NVP(file);
+			ar & BOOST_SERIALIZATION_NVP(yes);
+			ar & BOOST_SERIALIZATION_NVP(no);
+		}
 	};
 }
 

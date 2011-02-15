@@ -76,7 +76,7 @@ Battle::Enemy::Enemy(const RPG::TroopMember* member, int id) :
 	Battler(id),
 	game_enemy(new Game_Enemy(member->ID)),
 	member(member),
-	rpg_enemy(&Data::enemies[member->ID - 1]),
+	rpg_enemy(&Data::database.enemies[member->ID - 1]),
 	fade(0),
 	defending(false),
 	charged(false),
@@ -107,7 +107,7 @@ void Battle::Enemy::CreateSprite() {
 }
 
 void Battle::Enemy::Transform(int enemy_id) {
-	rpg_enemy = &Data::enemies[enemy_id - 1];
+	rpg_enemy = &Data::database.enemies[enemy_id - 1];
 	game_enemy->Transform(enemy_id);
 	delete sprite;
 	CreateSprite();
@@ -121,7 +121,7 @@ bool Battle::Enemy::CanAct() const {
 Battle::Ally::Ally(Game_Actor* game_actor, int id) :
 	Battler(id),
 	game_actor(game_actor),
-	rpg_actor(&Data::actors[game_actor->GetId() - 1]),
+	rpg_actor(&Data::database.actors[game_actor->GetId() - 1]),
 	sprite_frame(-1),
 	sprite_file(""),
 	anim_state(Idle),
@@ -152,7 +152,7 @@ void Battle::Ally::SetAnimState(int state) {
 
 	anim_state = state;
 
-	const RPG::BattlerAnimation& anim = Data::battleranimations[rpg_actor->battler_animation - 1];
+	const RPG::BattlerAnimation& anim = Data::database.battleranimations[rpg_actor->battler_animation - 1];
 	const RPG::BattlerAnimationExtension& ext = anim.base_data[anim_state - 1];
 	if (ext.battler_name == sprite_file)
 		return;
@@ -170,7 +170,7 @@ void Battle::Ally::UpdateAnim(int cycle) {
 	if (frame == sprite_frame)
 		return;
 
-	const RPG::BattlerAnimation& anim = Data::battleranimations[rpg_actor->battler_animation - 1];
+	const RPG::BattlerAnimation& anim = Data::database.battleranimations[rpg_actor->battler_animation - 1];
 	const RPG::BattlerAnimationExtension& ext = anim.base_data[anim_state - 1];
 
 	sprite->SetSrcRect(Rect(frame * 48, ext.battler_index * 48, 48, 48));

@@ -102,7 +102,7 @@ void Window_Item::DrawItem(int index) {
 	if (item_id > 0) {
 		int number = Game_Party::ItemNumber(item_id);
 		bool enabled = CheckEnable(item_id);
-		DrawItemName(&Data::items[item_id - 1], rect.x, rect.y, enabled);
+		DrawItemName(&Data::database.items[item_id - 1], rect.x, rect.y, enabled);
 		
 		std::stringstream ss;
 		ss << number;
@@ -115,5 +115,5 @@ void Window_Item::DrawItem(int index) {
 ////////////////////////////////////////////////////////////
 void Window_Item::UpdateHelp() {
 	help_window->SetText(GetItemId() == 0 ? "" : 
-		Data::items[GetItemId() - 1].description);
+		Data::database.items[GetItemId() - 1].description);
 }

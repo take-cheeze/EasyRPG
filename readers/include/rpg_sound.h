@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::Sound class
@@ -35,6 +36,17 @@ namespace RPG {
 		int volume;
 		int tempo;
 		int balance;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(volume);
+			ar & BOOST_SERIALIZATION_NVP(tempo);
+			ar & BOOST_SERIALIZATION_NVP(balance);
+		}
 	};
 }
 

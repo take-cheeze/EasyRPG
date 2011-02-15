@@ -35,6 +35,15 @@ namespace RPG {
 		
 		TroopPageCondition condition;
 		std::vector<EventCommand> event_commands;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(condition);
+			ar & BOOST_SERIALIZATION_NVP(event_commands);
+		}
 	};
 }
 

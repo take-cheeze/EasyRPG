@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
+#include "reader.h"
 #include "rpg_movecommand.h"
 
 ////////////////////////////////////////////////////////////
@@ -35,6 +36,16 @@ namespace RPG {
 		std::vector<RPG::MoveCommand> move_commands;
 		bool repeat;
 		bool skippable;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(move_commands);
+			ar & BOOST_SERIALIZATION_NVP(repeat);
+			ar & BOOST_SERIALIZATION_NVP(skippable);
+		}
 	};
 }
 

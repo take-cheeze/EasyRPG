@@ -88,7 +88,7 @@ void Sprite_Character::Update() {
 	//SetBlendType(character->GetBlendType());
 	//SetBushDepth(character->GetBushDepth());
 	/*if (character->GetAnimationId() != 0) {
-		RPG::Animation animation = Data::animations[character->GetAnimationId()]
+		RPG::Animation animation = Data::database.animations[character->GetAnimationId()]
 		this->Animation(animation, true);
 		character->SetAnimationId(0);
 	}*/

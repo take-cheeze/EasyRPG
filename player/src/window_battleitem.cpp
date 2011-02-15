@@ -39,7 +39,7 @@ void Window_BattleItem::SetActor(int _actor_id) {
 
 ////////////////////////////////////////////////////////////
 bool Window_BattleItem::CheckEnable(int item_id) {
-	const RPG::Item& item = Data::items[item_id - 1];
+	const RPG::Item& item = Data::database.items[item_id - 1];
 
 	switch (item.type) {
 		case RPG::Item::Type_normal:
@@ -75,7 +75,7 @@ bool Window_BattleItem::CanUseItem(const RPG::Item& item) {
 	if (Player::engine != Player::EngineRpg2k3)
 		return false;
 
-	const RPG::Actor& actor = Data::actors[actor_id - 1];
+	const RPG::Actor& actor = Data::database.actors[actor_id - 1];
 	if (actor.class_id < 0)
 		return false;
 	if (actor.class_id >= (int) item.class_set.size() ||
@@ -87,7 +87,7 @@ bool Window_BattleItem::CanUseItem(const RPG::Item& item) {
 
 ////////////////////////////////////////////////////////////
 bool Window_BattleItem::CanUseSkill(int skill_id) {
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 	return skill.type != RPG::Skill::Type_switch || skill.occasion_battle;
 }
 

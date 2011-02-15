@@ -55,6 +55,34 @@ namespace RPG {
 		int scrollbar_x;
 		int scrollbar_y;
 		bool expanded_node;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(parent_map);
+			ar & BOOST_SERIALIZATION_NVP(type);
+			ar & BOOST_SERIALIZATION_NVP(music_type);
+			ar & BOOST_SERIALIZATION_NVP(music);
+			ar & BOOST_SERIALIZATION_NVP(background_type);
+			ar & BOOST_SERIALIZATION_NVP(background_name);
+			ar & BOOST_SERIALIZATION_NVP(teleport);
+			ar & BOOST_SERIALIZATION_NVP(escape);
+			ar & BOOST_SERIALIZATION_NVP(save);
+			ar & BOOST_SERIALIZATION_NVP(encounters);
+			ar & BOOST_SERIALIZATION_NVP(encounter_steps);
+			ar & BOOST_SERIALIZATION_NVP(area_x);
+			ar & BOOST_SERIALIZATION_NVP(area_y);
+			ar & BOOST_SERIALIZATION_NVP(area_w);
+			ar & BOOST_SERIALIZATION_NVP(area_h);
+			ar & BOOST_SERIALIZATION_NVP(indentation);
+			ar & BOOST_SERIALIZATION_NVP(scrollbar_x);
+			ar & BOOST_SERIALIZATION_NVP(scrollbar_y);
+			ar & BOOST_SERIALIZATION_NVP(expanded_node);
+		}
 	};
 }
 

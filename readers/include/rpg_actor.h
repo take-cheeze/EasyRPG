@@ -78,6 +78,57 @@ namespace RPG {
 		std::vector<uint32_t> battle_commands;
 		int battle_x;
 		int battle_y;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(title);
+			ar & BOOST_SERIALIZATION_NVP(character_name);
+			ar & BOOST_SERIALIZATION_NVP(character_index);
+			ar & BOOST_SERIALIZATION_NVP(transparent);
+			ar & BOOST_SERIALIZATION_NVP(initial_level);
+			ar & BOOST_SERIALIZATION_NVP(final_level);
+			ar & BOOST_SERIALIZATION_NVP(critical_hit);
+			ar & BOOST_SERIALIZATION_NVP(critical_hit_chance);
+			ar & BOOST_SERIALIZATION_NVP(face_name);
+			ar & BOOST_SERIALIZATION_NVP(face_index);
+			ar & BOOST_SERIALIZATION_NVP(two_swords_style);
+			ar & BOOST_SERIALIZATION_NVP(fix_equipment);
+			ar & BOOST_SERIALIZATION_NVP(auto_battle);
+			ar & BOOST_SERIALIZATION_NVP(super_guard);
+			ar & BOOST_SERIALIZATION_NVP(parameter_maxhp);
+			ar & BOOST_SERIALIZATION_NVP(parameter_maxsp);
+			ar & BOOST_SERIALIZATION_NVP(parameter_attack);
+			ar & BOOST_SERIALIZATION_NVP(parameter_defense);
+			ar & BOOST_SERIALIZATION_NVP(parameter_spirit);
+			ar & BOOST_SERIALIZATION_NVP(parameter_agility);
+			ar & BOOST_SERIALIZATION_NVP(exp_base);
+			ar & BOOST_SERIALIZATION_NVP(exp_inflation);
+			ar & BOOST_SERIALIZATION_NVP(exp_correction);
+			ar & BOOST_SERIALIZATION_NVP(weapon_id);
+			ar & BOOST_SERIALIZATION_NVP(shield_id);
+			ar & BOOST_SERIALIZATION_NVP(armor_id);
+			ar & BOOST_SERIALIZATION_NVP(helmet_id);
+			ar & BOOST_SERIALIZATION_NVP(accessory_id);
+			ar & BOOST_SERIALIZATION_NVP(unarmed_animation);
+			ar & BOOST_SERIALIZATION_NVP(skills);
+			ar & BOOST_SERIALIZATION_NVP(state_ranks);
+			ar & BOOST_SERIALIZATION_NVP(attribute_ranks);
+			// RPG Maker 2000
+			ar & BOOST_SERIALIZATION_NVP(rename_skill);
+			ar & BOOST_SERIALIZATION_NVP(skill_name);
+			
+			// RPG Maker 2003
+			ar & BOOST_SERIALIZATION_NVP(class_id);
+			ar & BOOST_SERIALIZATION_NVP(battler_animation);
+			ar & BOOST_SERIALIZATION_NVP(battle_commands);
+			ar & BOOST_SERIALIZATION_NVP(battle_x);
+			ar & BOOST_SERIALIZATION_NVP(battle_y);
+		}
 	};
 }
 

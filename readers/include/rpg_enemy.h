@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 #include "rpg_enemyaction.h"
 
 ////////////////////////////////////////////////////////////
@@ -55,6 +56,35 @@ namespace RPG {
 		std::vector<unsigned char> state_ranks;
 		std::vector<unsigned char> attribute_ranks;
 		std::vector<EnemyAction> actions;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(battler_name);
+			ar & BOOST_SERIALIZATION_NVP(battler_hue);
+			ar & BOOST_SERIALIZATION_NVP(max_hp);
+			ar & BOOST_SERIALIZATION_NVP(max_sp);
+			ar & BOOST_SERIALIZATION_NVP(attack);
+			ar & BOOST_SERIALIZATION_NVP(defense);
+			ar & BOOST_SERIALIZATION_NVP(spirit);
+			ar & BOOST_SERIALIZATION_NVP(agility);
+			ar & BOOST_SERIALIZATION_NVP(transparent);
+			ar & BOOST_SERIALIZATION_NVP(exp);
+			ar & BOOST_SERIALIZATION_NVP(gold);
+			ar & BOOST_SERIALIZATION_NVP(drop_id);
+			ar & BOOST_SERIALIZATION_NVP(drop_prob);
+			ar & BOOST_SERIALIZATION_NVP(critical_hit);
+			ar & BOOST_SERIALIZATION_NVP(critical_hit_chance);
+			ar & BOOST_SERIALIZATION_NVP(miss);
+			ar & BOOST_SERIALIZATION_NVP(levitate);
+			ar & BOOST_SERIALIZATION_NVP(state_ranks);
+			ar & BOOST_SERIALIZATION_NVP(attribute_ranks);
+			ar & BOOST_SERIALIZATION_NVP(actions);
+		}
 	};
 }
 

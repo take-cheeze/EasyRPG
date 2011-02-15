@@ -24,7 +24,7 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Save::Scene_Save() :
-	Scene_File(Data::terms.save_game_message) {
+	Scene_File(Data::database.terms.save_game_message) {
 	Scene::type = Scene::Save;
 }
 

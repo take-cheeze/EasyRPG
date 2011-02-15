@@ -19,6 +19,11 @@
 #define _RPG_TESTBATTLER_H_
 
 ////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include "reader.h"
+
+////////////////////////////////////////////////////////////
 /// RPG::TestBattler class
 ////////////////////////////////////////////////////////////
 namespace RPG {
@@ -33,6 +38,20 @@ namespace RPG {
 		int armor_id;
 		int helmet_id;
 		int accessory_id;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(level);
+			ar & BOOST_SERIALIZATION_NVP(weapon_id);
+			ar & BOOST_SERIALIZATION_NVP(shield_id);
+			ar & BOOST_SERIALIZATION_NVP(armor_id);
+			ar & BOOST_SERIALIZATION_NVP(helmet_id);
+			ar & BOOST_SERIALIZATION_NVP(accessory_id);
+		}
 	};
 }
 

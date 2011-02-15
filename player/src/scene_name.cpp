@@ -61,13 +61,13 @@ void Scene_Name::Update() {
 
 	if (Input::IsTriggered(Input::CANCEL)) {
 		if (name_window->Get().size() > 0) {
-			Game_System::SePlay(Data::system.cancel_se);
+			Game_System::SePlay(Data::database.system.cancel_se);
 			name_window->Erase();
 		}
 		else
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Data::database.system.buzzer_se);
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Data::database.system.decision_se);
 		std::string s(kbd_window->GetSelected());
 		if (s == "Done") {
 			Game_Temp::hero_name = name_window->Get();

@@ -62,7 +62,7 @@ void Scene_Skill::Update() {
 	skill_window->Update();
 
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::database.system.cancel_se);
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		int skill_id = skill_window->GetSkillId();
@@ -70,23 +70,23 @@ void Scene_Skill::Update() {
 		Game_Actor* actor = Game_Party::GetActors()[actor_index];
 
 		if (actor->IsSkillUsable(skill_id)) {
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::database.system.decision_se);
 
-			if (Data::skills[skill_id - 1].type == RPG::Skill::Type_switch) {
+			if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_switch) {
 				actor->SetSp(actor->GetSp() - actor->CalculateSkillCost(skill_id));
-				Game_Switches[Data::skills[skill_id - 1].switch_id] = true;
+				Game_Switches[Data::database.skills[skill_id - 1].switch_id] = true;
 				Scene::PopUntil(Scene::Map);
 				Game_Map::SetNeedRefresh(true);
-			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_normal) {
+			} else if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_normal) {
 				Scene::Push(new Scene_ActorTarget(skill_id, actor_index, skill_window->GetIndex()));
 				skill_index = skill_window->GetIndex();
-			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_teleport) {
+			} else if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_teleport) {
 				// ToDo: Displays the teleport target scene/window
-			} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_escape) {
+			} else if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_escape) {
 				// ToDo: Displays the escape target scene/window
 			} 
 		} else {
-			Game_System::SePlay(Data::system.buzzer_se);
+			Game_System::SePlay(Data::database.system.buzzer_se);
 		}
 	}
 }

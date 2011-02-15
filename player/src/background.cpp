@@ -46,7 +46,7 @@ Background::Background(int terrain_id) :
 	zobj = Graphics::RegisterZObj(0, ID);
 	Graphics::RegisterDrawable(ID, this);
 
-	const RPG::Terrain& terrain = Data::terrains[terrain_id - 1];
+	const RPG::Terrain& terrain = Data::database.terrains[terrain_id - 1];
 
 	if (terrain.background_type == 0) {
 		bg_screen = BitmapScreen::CreateBitmapScreen(Cache::Backdrop(terrain.background_name));

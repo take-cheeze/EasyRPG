@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::Attribute class
@@ -44,6 +45,21 @@ namespace RPG {
 		int c_rate;
 		int d_rate;
 		int e_rate;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(type);
+			ar & BOOST_SERIALIZATION_NVP(a_rate);
+			ar & BOOST_SERIALIZATION_NVP(b_rate);
+			ar & BOOST_SERIALIZATION_NVP(c_rate);
+			ar & BOOST_SERIALIZATION_NVP(d_rate);
+			ar & BOOST_SERIALIZATION_NVP(e_rate);
+		}
 	};
 }
 

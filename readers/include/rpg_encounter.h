@@ -19,6 +19,11 @@
 #define _RPG_ENCOUNTER_H_
 
 ////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include "reader.h"
+
+////////////////////////////////////////////////////////////
 /// RPG::Encounter class
 ////////////////////////////////////////////////////////////
 namespace RPG {
@@ -27,6 +32,14 @@ namespace RPG {
 		Encounter();
 		
 		int ID;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+		}
 	};
 }
 

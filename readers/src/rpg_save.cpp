@@ -35,13 +35,13 @@ RPG::SaveTitle::SaveTitle() {
 }
 
 void RPG::SaveSystem::Setup() {
-	const RPG::System& system = Data::system;
+	const RPG::System& system = Data::database.system;
 	screen = 0;
 	frame_count = 0;
 	graphics_name = system.system_name;
-	switches_size = Data::switches.size();
+	switches_size = Data::database.switches.size();
 	switches.resize(switches_size);
-	variables_size = Data::variables.size();
+	variables_size = Data::database.variables.size();
 	variables.resize(variables_size);
 	message_transparent = -1;
 	message_position = -1;
@@ -246,7 +246,7 @@ RPG::SaveActor::SaveActor() {
 }
 
 void RPG::SaveActor::Setup(int actor_id) {
-	const RPG::Actor& actor = Data::actors[actor_id - 1];
+	const RPG::Actor& actor = Data::database.actors[actor_id - 1];
 	ID = actor.ID;
 	name = actor.name;
 	title = actor.title;
@@ -307,7 +307,7 @@ RPG::SaveInventory::SaveInventory() {
 }
 
 void RPG::SaveInventory::Setup() {
-	party = Data::system.party;
+	party = Data::database.system.party;
 	party_size = party.size();
 }
 
@@ -465,7 +465,7 @@ RPG::Save::Save() {
 void RPG::Save::Setup() {
 	system.Setup();
 	pictures.resize(50);
-	party.resize(Data::actors.size());
+	party.resize(Data::database.actors.size());
 	for (int i = 1; i <= (int) party.size(); i++)
 		party[i - 1].Setup(i);
 	map_info.Setup();

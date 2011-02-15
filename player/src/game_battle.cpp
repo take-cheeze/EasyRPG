@@ -39,7 +39,7 @@ namespace Game_Battle {
 void Game_Battle::Init(Battle_Interface* _scene) {
 	scene = _scene;
 
-	troop = &Data::troops[Game_Temp::battle_troop_id - 1];
+	troop = &Data::database.troops[Game_Temp::battle_troop_id - 1];
 
 	allies.clear();
 	const std::vector<Game_Actor*>& actors = Game_Party::GetActors();
@@ -458,13 +458,13 @@ void Game_Battle::Attack() {
 
 void Game_Battle::UseItem() {
 	Battle::Ally& ally = GetActiveAlly();
-	const RPG::Item& item = Data::items[item_id - 1];
+	const RPG::Item& item = Data::database.items[item_id - 1];
 	UseItem(ally, item);
 	ally.defending = false;
 }
 
 void Game_Battle::UseSkill() {
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 	Battle::Ally& ally = GetActiveAlly();
 	UseSkill(ally, skill);
 	ally.defending = false;
@@ -480,8 +480,8 @@ void Game_Battle::EnemyAttack(void* target) {
 
 void Game_Battle::EnemyDefend() {
 	Battle::Enemy& enemy = GetActiveEnemy();
-	const std::string msg = !Data::terms.defending.empty()
-		? Data::terms.defending
+	const std::string msg = !Data::database.terms.defending.empty()
+		? Data::database.terms.defending
 		: " is defending";
 	GetScene()->Message(enemy.rpg_enemy->name + msg);
 	enemy.defending = true;
@@ -489,16 +489,16 @@ void Game_Battle::EnemyDefend() {
 
 void Game_Battle::EnemyObserve() {
 	Battle::Enemy& enemy = GetActiveEnemy();
-	const std::string msg = !Data::terms.observing.empty()
-		? Data::terms.observing
+	const std::string msg = !Data::database.terms.observing.empty()
+		? Data::database.terms.observing
 		: " is observing the battle";
 	GetScene()->Message(enemy.rpg_enemy->name + msg);
 }
 
 void Game_Battle::EnemyCharge() {
 	Battle::Enemy& enemy = GetActiveEnemy();
-	const std::string msg = !Data::terms.focus.empty()
-		? Data::terms.focus
+	const std::string msg = !Data::database.terms.focus.empty()
+		? Data::database.terms.focus
 		: " is charging";
 	GetScene()->Message(enemy.rpg_enemy->name + msg);
 	enemy.charged = true;
@@ -506,8 +506,8 @@ void Game_Battle::EnemyCharge() {
 
 void Game_Battle::EnemyDestruct() {
 	Battle::Enemy& enemy = GetActiveEnemy();
-	const std::string msg = !Data::terms.autodestruction.empty()
-		? Data::terms.autodestruction
+	const std::string msg = !Data::database.terms.autodestruction.empty()
+		? Data::database.terms.autodestruction
 		: "Self-destruct";
 	GetScene()->Message(msg);
 	enemy.charged = true;
@@ -517,7 +517,7 @@ void Game_Battle::EnemyDestruct() {
 }
 
 void Game_Battle::EnemySkill() {
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 	Battle::Enemy& enemy = GetActiveEnemy();
 	EnemySkill(enemy, skill);
 }

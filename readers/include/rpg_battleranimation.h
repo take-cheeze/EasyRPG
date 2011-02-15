@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 #include "rpg_battleranimationextension.h"
 
 ////////////////////////////////////////////////////////////
@@ -44,6 +45,18 @@ namespace RPG {
 		int speed;
 		std::vector<BattlerAnimationExtension> base_data;
 		std::vector<BattlerAnimationExtension> weapon_data;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(speed);
+			ar & BOOST_SERIALIZATION_NVP(base_data);
+			ar & BOOST_SERIALIZATION_NVP(weapon_data);
+		}
 	};
 }
 

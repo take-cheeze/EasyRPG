@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::BattlerAnimation class
@@ -36,7 +37,18 @@ namespace RPG {
 		int move;
 		int after_image;
 		int pose;
-	};
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(move);
+			ar & BOOST_SERIALIZATION_NVP(after_image);
+			ar & BOOST_SERIALIZATION_NVP(pose);
+		}
+};
 }
 
 #endif

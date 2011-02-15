@@ -87,6 +87,65 @@ namespace RPG {
 		bool show_frame;
 		std::string frame_name;
 		bool invert_animations;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ldb_id);
+			ar & BOOST_SERIALIZATION_NVP(boat_name);
+			ar & BOOST_SERIALIZATION_NVP(ship_name);
+			ar & BOOST_SERIALIZATION_NVP(airship_name);
+			ar & BOOST_SERIALIZATION_NVP(boat_index);
+			ar & BOOST_SERIALIZATION_NVP(ship_index);
+			ar & BOOST_SERIALIZATION_NVP(airship_index);
+			ar & BOOST_SERIALIZATION_NVP(title_name);
+			ar & BOOST_SERIALIZATION_NVP(gameover_name);
+			ar & BOOST_SERIALIZATION_NVP(system_name);
+			ar & BOOST_SERIALIZATION_NVP(system2_name);
+			ar & BOOST_SERIALIZATION_NVP(party);
+			ar & BOOST_SERIALIZATION_NVP(menu_commands);
+			ar & BOOST_SERIALIZATION_NVP(title_music);
+			ar & BOOST_SERIALIZATION_NVP(battle_music);
+			ar & BOOST_SERIALIZATION_NVP(battle_end_music);
+			ar & BOOST_SERIALIZATION_NVP(inn_music);
+			ar & BOOST_SERIALIZATION_NVP(boat_music);
+			ar & BOOST_SERIALIZATION_NVP(ship_music);
+			ar & BOOST_SERIALIZATION_NVP(airship_music);
+			ar & BOOST_SERIALIZATION_NVP(gameover_music);
+			ar & BOOST_SERIALIZATION_NVP(cursor_se);
+			ar & BOOST_SERIALIZATION_NVP(decision_se);
+			ar & BOOST_SERIALIZATION_NVP(cancel_se);
+			ar & BOOST_SERIALIZATION_NVP(buzzer_se);
+			ar & BOOST_SERIALIZATION_NVP(battle_se);
+			ar & BOOST_SERIALIZATION_NVP(escape_se);
+			ar & BOOST_SERIALIZATION_NVP(enemy_attack_se);
+			ar & BOOST_SERIALIZATION_NVP(enemy_damaged_se);
+			ar & BOOST_SERIALIZATION_NVP(actor_damaged_se);
+			ar & BOOST_SERIALIZATION_NVP(dodge_se);
+			ar & BOOST_SERIALIZATION_NVP(enemy_death_se);
+			ar & BOOST_SERIALIZATION_NVP(item_se);
+			ar & BOOST_SERIALIZATION_NVP(transition_out);
+			ar & BOOST_SERIALIZATION_NVP(transition_in);
+			ar & BOOST_SERIALIZATION_NVP(battle_start_fadeout);
+			ar & BOOST_SERIALIZATION_NVP(battle_start_fadein);
+			ar & BOOST_SERIALIZATION_NVP(battle_end_fadeout);
+			ar & BOOST_SERIALIZATION_NVP(battle_end_fadein);
+			ar & BOOST_SERIALIZATION_NVP(message_stretch);
+			ar & BOOST_SERIALIZATION_NVP(font_id);
+			ar & BOOST_SERIALIZATION_NVP(selected_condition);
+			ar & BOOST_SERIALIZATION_NVP(selected_hero);
+			ar & BOOST_SERIALIZATION_NVP(battletest_background);
+			ar & BOOST_SERIALIZATION_NVP(battletest_data);
+			ar & BOOST_SERIALIZATION_NVP(battletest_terrain);
+			ar & BOOST_SERIALIZATION_NVP(battletest_formation);
+			ar & BOOST_SERIALIZATION_NVP(battletest_condition);
+			ar & BOOST_SERIALIZATION_NVP(saved_times);
+			ar & BOOST_SERIALIZATION_NVP(show_frame);
+			ar & BOOST_SERIALIZATION_NVP(frame_name);
+			ar & BOOST_SERIALIZATION_NVP(invert_animations);
+		}
 	};
 }
 

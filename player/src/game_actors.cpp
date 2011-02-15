@@ -30,7 +30,7 @@ namespace {
 
 ////////////////////////////////////////////////////////////
 void Game_Actors::Init() {
-	data.resize(Data::actors.size() + 1);
+	data.resize(Data::database.actors.size() + 1);
 	for (size_t i = 1; i < data.size(); i++)
 		GetActor(i)->Init();
 }

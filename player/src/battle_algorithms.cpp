@@ -28,7 +28,7 @@
 
 ////////////////////////////////////////////////////////////
 void Game_Battle::AttackEnemy(Battle::Ally& ally, Battle::Enemy& enemy) {
-	const RPG::Item& weapon = Data::items[ally.game_actor->GetWeaponId() - 1];
+	const RPG::Item& weapon = Data::database.items[ally.game_actor->GetWeaponId() - 1];
 	double to_hit = 100 - (100 - weapon.hit) * (1 + (1.0 * enemy.GetAgi() / ally.GetAgi() - 1) / 2);
 
 	if (rand() % 100 < to_hit) {
@@ -43,7 +43,7 @@ void Game_Battle::AttackEnemy(Battle::Ally& ally, Battle::Enemy& enemy) {
 		GetScene()->Floater(enemy.sprite, Font::ColorDefault, effect, 60);
 	}
 	else
-		GetScene()->Floater(enemy.sprite, Font::ColorDefault, Data::terms.miss, 60);
+		GetScene()->Floater(enemy.sprite, Font::ColorDefault, Data::database.terms.miss, 60);
 }
 
 ////////////////////////////////////////////////////////////
@@ -199,7 +199,7 @@ void Game_Battle::UseSkillAlly(Battle::Battler& user, const RPG::Skill& skill, B
 	}
 
 	if (miss)
-		GetScene()->Floater(target.sprite, Font::ColorDefault, Data::terms.miss, 60);
+		GetScene()->Floater(target.sprite, Font::ColorDefault, Data::database.terms.miss, 60);
 }
 
 ////////////////////////////////////////////////////////////
@@ -256,7 +256,7 @@ void Game_Battle::UseSkillEnemy(Battle::Battler& user, const RPG::Skill& skill, 
 	}
 
 	if (miss)
-		GetScene()->Floater(target.sprite, Font::ColorDefault, Data::terms.miss, 60);
+		GetScene()->Floater(target.sprite, Font::ColorDefault, Data::database.terms.miss, 60);
 }
 
 ////////////////////////////////////////////////////////////
@@ -363,7 +363,7 @@ void Game_Battle::EnemyAttackAlly(Battle::Enemy& enemy, Battle::Ally& ally) {
 		GetScene()->Floater(ally.sprite, Font::ColorDefault, effect, 60);
 	}
 	else
-		GetScene()->Floater(ally.sprite, Font::ColorDefault, Data::terms.miss, 60);
+		GetScene()->Floater(ally.sprite, Font::ColorDefault, Data::database.terms.miss, 60);
 }
 
 ////////////////////////////////////////////////////////////

@@ -47,6 +47,30 @@ namespace RPG {
 		int airship_map_id;
 		int airship_x;
 		int airship_y;
+
+		void Clear();
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(maps);
+			ar & BOOST_SERIALIZATION_NVP(tree_order);
+			ar & BOOST_SERIALIZATION_NVP(active_node);
+			ar & BOOST_SERIALIZATION_NVP(start_map_id);
+			ar & BOOST_SERIALIZATION_NVP(start_x);
+			ar & BOOST_SERIALIZATION_NVP(start_y);
+			ar & BOOST_SERIALIZATION_NVP(boat_map_id);
+			ar & BOOST_SERIALIZATION_NVP(boat_x);
+			ar & BOOST_SERIALIZATION_NVP(boat_y);
+			ar & BOOST_SERIALIZATION_NVP(ship_map_id);
+			ar & BOOST_SERIALIZATION_NVP(ship_x);
+			ar & BOOST_SERIALIZATION_NVP(ship_y);
+			ar & BOOST_SERIALIZATION_NVP(airship_map_id);
+			ar & BOOST_SERIALIZATION_NVP(airship_x);
+			ar & BOOST_SERIALIZATION_NVP(airship_y);
+		}
 	};
 }
 

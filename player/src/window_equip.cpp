@@ -59,12 +59,12 @@ void Window_Equip::Refresh() {
 	for (int i = 0; i < 5; ++i) {
 		DrawEquipmentType(actor, 0, (12 + 4) * i + 2, i);
 		if (data[i] > 0) {
-			DrawItemName(&Data::items[data[i] - 1], 60, (12 + 4) * i + 2);
+			DrawItemName(&Data::database.items[data[i] - 1], 60, (12 + 4) * i + 2);
 		}
 	}
 }
 
 ////////////////////////////////////////////////////////////
 void Window_Equip::UpdateHelp() {
-	help_window->SetText(GetItemId() == 0 ? "" : Data::items[GetItemId() - 1].description);
+	help_window->SetText(GetItemId() == 0 ? "" : Data::database.items[GetItemId() - 1].description);
 }

@@ -53,6 +53,25 @@ namespace RPG {
 		int face2_id;
 		int face3_id;
 		int face4_id;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(timestamp);
+			ar & BOOST_SERIALIZATION_NVP(hero_name);
+			ar & BOOST_SERIALIZATION_NVP(hero_level);
+			ar & BOOST_SERIALIZATION_NVP(hero_hp);
+			ar & BOOST_SERIALIZATION_NVP(face1_name);
+			ar & BOOST_SERIALIZATION_NVP(face2_name);
+			ar & BOOST_SERIALIZATION_NVP(face3_name);
+			ar & BOOST_SERIALIZATION_NVP(face4_name);
+			ar & BOOST_SERIALIZATION_NVP(face1_id);
+			ar & BOOST_SERIALIZATION_NVP(face2_id);
+			ar & BOOST_SERIALIZATION_NVP(face3_id);
+			ar & BOOST_SERIALIZATION_NVP(face4_id);
+		}
 	};
 
 	class SaveSystem {
@@ -113,6 +132,67 @@ namespace RPG {
 		std::string background;
 		int save_count;
 		int save_slot;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(screen);
+			ar & BOOST_SERIALIZATION_NVP(frame_count);
+			ar & BOOST_SERIALIZATION_NVP(graphics_name);
+			ar & BOOST_SERIALIZATION_NVP(switches_size);
+			ar & BOOST_SERIALIZATION_NVP(switches);
+			ar & BOOST_SERIALIZATION_NVP(variables_size);
+			ar & BOOST_SERIALIZATION_NVP(variables);
+			ar & BOOST_SERIALIZATION_NVP(message_transparent);
+			ar & BOOST_SERIALIZATION_NVP(message_position);
+			ar & BOOST_SERIALIZATION_NVP(message_placement);
+			ar & BOOST_SERIALIZATION_NVP(message_continue);
+			ar & BOOST_SERIALIZATION_NVP(face_name);
+			ar & BOOST_SERIALIZATION_NVP(face_id);
+			ar & BOOST_SERIALIZATION_NVP(face_right);
+			ar & BOOST_SERIALIZATION_NVP(face_flip);
+			ar & BOOST_SERIALIZATION_NVP(transparent);
+			ar & BOOST_SERIALIZATION_NVP(unknown_3d);
+			ar & BOOST_SERIALIZATION_NVP(title_music);
+			ar & BOOST_SERIALIZATION_NVP(battle_music);
+			ar & BOOST_SERIALIZATION_NVP(battle_end_music);
+			ar & BOOST_SERIALIZATION_NVP(inn_music);
+			ar & BOOST_SERIALIZATION_NVP(current_music);
+			ar & BOOST_SERIALIZATION_NVP(unknown1_music);
+			ar & BOOST_SERIALIZATION_NVP(unknown2_music);
+			ar & BOOST_SERIALIZATION_NVP(stored_music);
+			ar & BOOST_SERIALIZATION_NVP(boat_music);
+			ar & BOOST_SERIALIZATION_NVP(ship_music);
+			ar & BOOST_SERIALIZATION_NVP(airship_music);
+			ar & BOOST_SERIALIZATION_NVP(gameover_music);
+			ar & BOOST_SERIALIZATION_NVP(cursor_se);
+			ar & BOOST_SERIALIZATION_NVP(decision_se);
+			ar & BOOST_SERIALIZATION_NVP(cancel_se);
+			ar & BOOST_SERIALIZATION_NVP(buzzer_se);
+			ar & BOOST_SERIALIZATION_NVP(battle_se);
+			ar & BOOST_SERIALIZATION_NVP(escape_se);
+			ar & BOOST_SERIALIZATION_NVP(enemy_attack_se);
+			ar & BOOST_SERIALIZATION_NVP(enemy_damaged_se);
+			ar & BOOST_SERIALIZATION_NVP(actor_damaged_se);
+			ar & BOOST_SERIALIZATION_NVP(dodge_se);
+			ar & BOOST_SERIALIZATION_NVP(enemy_death_se);
+			ar & BOOST_SERIALIZATION_NVP(item_se);
+			ar & BOOST_SERIALIZATION_NVP(transition_out);
+			ar & BOOST_SERIALIZATION_NVP(transition_in);
+			ar & BOOST_SERIALIZATION_NVP(battle_start_fadeout);
+			ar & BOOST_SERIALIZATION_NVP(battle_start_fadein);
+			ar & BOOST_SERIALIZATION_NVP(battle_end_fadeout);
+			ar & BOOST_SERIALIZATION_NVP(battle_end_fadein);
+			ar & BOOST_SERIALIZATION_NVP(teleport_allowed);
+			ar & BOOST_SERIALIZATION_NVP(escape_allowed);
+			ar & BOOST_SERIALIZATION_NVP(save_allowed);
+			ar & BOOST_SERIALIZATION_NVP(menu_allowed);
+			ar & BOOST_SERIALIZATION_NVP(background);
+			ar & BOOST_SERIALIZATION_NVP(save_count);
+			ar & BOOST_SERIALIZATION_NVP(save_slot);
+		}
 	};
 
 	class SavePicture {
@@ -149,6 +229,43 @@ namespace RPG {
 		int time_left;
 		double current_rotation;
 		int current_waver;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(start_x);
+			ar & BOOST_SERIALIZATION_NVP(start_y);
+			ar & BOOST_SERIALIZATION_NVP(current_x);
+			ar & BOOST_SERIALIZATION_NVP(current_y);
+			ar & BOOST_SERIALIZATION_NVP(picture_scrolls);
+			ar & BOOST_SERIALIZATION_NVP(current_magnify);
+			ar & BOOST_SERIALIZATION_NVP(current_top_trans);
+			ar & BOOST_SERIALIZATION_NVP(transparency);
+			ar & BOOST_SERIALIZATION_NVP(current_red);
+			ar & BOOST_SERIALIZATION_NVP(current_green);
+			ar & BOOST_SERIALIZATION_NVP(current_blue);
+			ar & BOOST_SERIALIZATION_NVP(current_sat);
+			ar & BOOST_SERIALIZATION_NVP(effect_mode);
+			ar & BOOST_SERIALIZATION_NVP(effect_speed);
+			ar & BOOST_SERIALIZATION_NVP(current_bot_trans);
+			ar & BOOST_SERIALIZATION_NVP(finish_x);
+			ar & BOOST_SERIALIZATION_NVP(finish_y);
+			ar & BOOST_SERIALIZATION_NVP(finish_magnify);
+			ar & BOOST_SERIALIZATION_NVP(finish_top_trans);
+			ar & BOOST_SERIALIZATION_NVP(finish_bot_trans);
+			ar & BOOST_SERIALIZATION_NVP(finish_red);
+			ar & BOOST_SERIALIZATION_NVP(finish_green);
+			ar & BOOST_SERIALIZATION_NVP(finish_blue);
+			ar & BOOST_SERIALIZATION_NVP(finish_sat);
+			ar & BOOST_SERIALIZATION_NVP(effect2_speed);
+			ar & BOOST_SERIALIZATION_NVP(time_left);
+			ar & BOOST_SERIALIZATION_NVP(current_rotation);
+			ar & BOOST_SERIALIZATION_NVP(current_waver);
+		}
 	};
 
 	class SavePartyLocation {
@@ -192,6 +309,44 @@ namespace RPG {
 		int unknown_7c;
 		int unknown_83;
 		int unknown_84;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(map_id);
+			ar & BOOST_SERIALIZATION_NVP(position_x);
+			ar & BOOST_SERIALIZATION_NVP(position_y);
+			ar & BOOST_SERIALIZATION_NVP(facing1);
+			ar & BOOST_SERIALIZATION_NVP(facing2);
+			ar & BOOST_SERIALIZATION_NVP(unknown_17);
+			ar & BOOST_SERIALIZATION_NVP(unknown_21);
+			ar & BOOST_SERIALIZATION_NVP(unknown_23);
+			ar & BOOST_SERIALIZATION_NVP(unknown_25);
+			ar & BOOST_SERIALIZATION_NVP(move_route);
+			ar & BOOST_SERIALIZATION_NVP(unknown_2b);
+			ar & BOOST_SERIALIZATION_NVP(unknown_34);
+			ar & BOOST_SERIALIZATION_NVP(unknown_35);
+			ar & BOOST_SERIALIZATION_NVP(unknown_36);
+			ar & BOOST_SERIALIZATION_NVP(unknown_3e);
+			ar & BOOST_SERIALIZATION_NVP(unknown_3f);
+			ar & BOOST_SERIALIZATION_NVP(sprite_name);
+			ar & BOOST_SERIALIZATION_NVP(sprite_id);
+			ar & BOOST_SERIALIZATION_NVP(unknown_4b);
+			ar & BOOST_SERIALIZATION_NVP(unknown_51);
+			ar & BOOST_SERIALIZATION_NVP(unknown_52);
+			ar & BOOST_SERIALIZATION_NVP(unknown_53);
+			ar & BOOST_SERIALIZATION_NVP(pan_state);
+			ar & BOOST_SERIALIZATION_NVP(pan_current_x);
+			ar & BOOST_SERIALIZATION_NVP(pan_current_y);
+			ar & BOOST_SERIALIZATION_NVP(pan_finish_x);
+			ar & BOOST_SERIALIZATION_NVP(pan_finish_y);
+			ar & BOOST_SERIALIZATION_NVP(unknown_79);
+			ar & BOOST_SERIALIZATION_NVP(unknown_7c);
+			ar & BOOST_SERIALIZATION_NVP(unknown_83);
+			ar & BOOST_SERIALIZATION_NVP(unknown_84);
+		}
 	};
 
 	class SaveVehicleLocation {
@@ -216,6 +371,31 @@ namespace RPG {
 		int unknown_65;
 		std::string sprite2_name;
 		int sprite2_id;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(map_id);
+			ar & BOOST_SERIALIZATION_NVP(position_x);
+			ar & BOOST_SERIALIZATION_NVP(position_y);
+			ar & BOOST_SERIALIZATION_NVP(facing1);
+			ar & BOOST_SERIALIZATION_NVP(facing2);
+			ar & BOOST_SERIALIZATION_NVP(unknown_17);
+			ar & BOOST_SERIALIZATION_NVP(unknown_21);
+			ar & BOOST_SERIALIZATION_NVP(unknown_23);
+			ar & BOOST_SERIALIZATION_NVP(unknown_25);
+			ar & BOOST_SERIALIZATION_NVP(move_route);
+			ar & BOOST_SERIALIZATION_NVP(unknown_34);
+			ar & BOOST_SERIALIZATION_NVP(unknown_35);
+			ar & BOOST_SERIALIZATION_NVP(sprite_name);
+			ar & BOOST_SERIALIZATION_NVP(sprite_id);
+			ar & BOOST_SERIALIZATION_NVP(unknown_4b);
+			ar & BOOST_SERIALIZATION_NVP(unknown_65);
+			ar & BOOST_SERIALIZATION_NVP(sprite2_name);
+			ar & BOOST_SERIALIZATION_NVP(sprite2_id);
+		}
 	};
 
 	class SaveActor {
@@ -255,6 +435,45 @@ namespace RPG {
 		bool auto_battle;
 		bool mighty_guard;
 		int unknown_60;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(title);
+			ar & BOOST_SERIALIZATION_NVP(sprite_name);
+			ar & BOOST_SERIALIZATION_NVP(sprite_id);
+			ar & BOOST_SERIALIZATION_NVP(sprite_flags);
+			ar & BOOST_SERIALIZATION_NVP(face_name);
+			ar & BOOST_SERIALIZATION_NVP(face_id);
+			ar & BOOST_SERIALIZATION_NVP(level);
+			ar & BOOST_SERIALIZATION_NVP(exp);
+			ar & BOOST_SERIALIZATION_NVP(hp_mod);
+			ar & BOOST_SERIALIZATION_NVP(sp_mod);
+			ar & BOOST_SERIALIZATION_NVP(attack_mod);
+			ar & BOOST_SERIALIZATION_NVP(defense_mod);
+			ar & BOOST_SERIALIZATION_NVP(spirit_mod);
+			ar & BOOST_SERIALIZATION_NVP(agility_mod);
+			ar & BOOST_SERIALIZATION_NVP(skills_size);
+			ar & BOOST_SERIALIZATION_NVP(skills);
+			ar & BOOST_SERIALIZATION_NVP(equipped);
+			ar & BOOST_SERIALIZATION_NVP(current_hp);
+			ar & BOOST_SERIALIZATION_NVP(current_sp);
+			ar & BOOST_SERIALIZATION_NVP(battle_commands);
+			ar & BOOST_SERIALIZATION_NVP(status_size);
+			ar & BOOST_SERIALIZATION_NVP(status);
+			ar & BOOST_SERIALIZATION_NVP(changed_class);
+			ar & BOOST_SERIALIZATION_NVP(class_id);
+			ar & BOOST_SERIALIZATION_NVP(unknown_5b);
+			ar & BOOST_SERIALIZATION_NVP(two_weapon);
+			ar & BOOST_SERIALIZATION_NVP(lock_equipment);
+			ar & BOOST_SERIALIZATION_NVP(auto_battle);
+			ar & BOOST_SERIALIZATION_NVP(mighty_guard);
+			ar & BOOST_SERIALIZATION_NVP(unknown_60);
+		}
 	};
 
 	class SaveInventory {
@@ -283,6 +502,34 @@ namespace RPG {
 		int victories;
 		int unknown_29;
 		int steps;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(party_size);
+			ar & BOOST_SERIALIZATION_NVP(party);
+			ar & BOOST_SERIALIZATION_NVP(items_size);
+			ar & BOOST_SERIALIZATION_NVP(item_ids);
+			ar & BOOST_SERIALIZATION_NVP(item_counts);
+			ar & BOOST_SERIALIZATION_NVP(item_usage);
+			ar & BOOST_SERIALIZATION_NVP(gold);
+			ar & BOOST_SERIALIZATION_NVP(timer1_secs);
+			ar & BOOST_SERIALIZATION_NVP(timer1_active);
+			ar & BOOST_SERIALIZATION_NVP(timer1_visible);
+			ar & BOOST_SERIALIZATION_NVP(timer1_battle);
+			ar & BOOST_SERIALIZATION_NVP(timer2_secs);
+			ar & BOOST_SERIALIZATION_NVP(timer2_active);
+			ar & BOOST_SERIALIZATION_NVP(timer2_visible);
+			ar & BOOST_SERIALIZATION_NVP(timer2_battle);
+			ar & BOOST_SERIALIZATION_NVP(battles);
+			ar & BOOST_SERIALIZATION_NVP(defeats);
+			ar & BOOST_SERIALIZATION_NVP(escapes);
+			ar & BOOST_SERIALIZATION_NVP(victories);
+			ar & BOOST_SERIALIZATION_NVP(unknown_29);
+			ar & BOOST_SERIALIZATION_NVP(steps);
+		}
 	};
 
 	class SaveEventCommands {
@@ -296,7 +543,22 @@ namespace RPG {
 		int unknown_0c;
 		int unknown_0d;
 		int unknown_15;
-		std::vector<uint8_t> unknown_16;
+		int unknown_16;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(commands_size);
+			ar & BOOST_SERIALIZATION_NVP(commands);
+			ar & BOOST_SERIALIZATION_NVP(current_command);
+			ar & BOOST_SERIALIZATION_NVP(unknown_0c);
+			ar & BOOST_SERIALIZATION_NVP(unknown_0d);
+			ar & BOOST_SERIALIZATION_NVP(unknown_15);
+			ar & BOOST_SERIALIZATION_NVP(unknown_16);
+		}
 	};
 
 	class SaveEventData {
@@ -308,6 +570,18 @@ namespace RPG {
 		int unknown_16;
 		int unknown_17;
 		int unknown_20;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(commands);
+			ar & BOOST_SERIALIZATION_NVP(time_left);
+			ar & BOOST_SERIALIZATION_NVP(unknown_16);
+			ar & BOOST_SERIALIZATION_NVP(unknown_17);
+			ar & BOOST_SERIALIZATION_NVP(unknown_20);
+		}
 	};
 
 	class SaveMapEvent {
@@ -353,6 +627,49 @@ namespace RPG {
 		int unknown_66;
 		int unknown_67;
 		SaveEventData event_data;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(unknown_01);
+			ar & BOOST_SERIALIZATION_NVP(map_id);
+			ar & BOOST_SERIALIZATION_NVP(position_x);
+			ar & BOOST_SERIALIZATION_NVP(position_y);
+			ar & BOOST_SERIALIZATION_NVP(facing1);
+			ar & BOOST_SERIALIZATION_NVP(facing2);
+			ar & BOOST_SERIALIZATION_NVP(anim_frame);
+			ar & BOOST_SERIALIZATION_NVP(unknown_18);
+			ar & BOOST_SERIALIZATION_NVP(unknown_1f);
+			ar & BOOST_SERIALIZATION_NVP(unknown_20);
+			ar & BOOST_SERIALIZATION_NVP(layer);
+			ar & BOOST_SERIALIZATION_NVP(unknown_22);
+			ar & BOOST_SERIALIZATION_NVP(unknown_23);
+			ar & BOOST_SERIALIZATION_NVP(unknown_24);
+			ar & BOOST_SERIALIZATION_NVP(unknown_25);
+			ar & BOOST_SERIALIZATION_NVP(move_route);
+			ar & BOOST_SERIALIZATION_NVP(unknown_2a);
+			ar & BOOST_SERIALIZATION_NVP(unknown_2b);
+			ar & BOOST_SERIALIZATION_NVP(anim_paused);
+			ar & BOOST_SERIALIZATION_NVP(unknown_33);
+			ar & BOOST_SERIALIZATION_NVP(unknown_34);
+			ar & BOOST_SERIALIZATION_NVP(unknown_35);
+			ar & BOOST_SERIALIZATION_NVP(unknown_36);
+			ar & BOOST_SERIALIZATION_NVP(unknown_47);
+			ar & BOOST_SERIALIZATION_NVP(sprite_name);
+			ar & BOOST_SERIALIZATION_NVP(sprite_id);
+			ar & BOOST_SERIALIZATION_NVP(unknown_4b);
+			ar & BOOST_SERIALIZATION_NVP(flash_red);
+			ar & BOOST_SERIALIZATION_NVP(flash_green);
+			ar & BOOST_SERIALIZATION_NVP(flash_blue);
+			ar & BOOST_SERIALIZATION_NVP(flash_current_level);
+			ar & BOOST_SERIALIZATION_NVP(flash_time_left);
+			ar & BOOST_SERIALIZATION_NVP(unknown_66);
+			ar & BOOST_SERIALIZATION_NVP(unknown_67);
+			ar & BOOST_SERIALIZATION_NVP(event_data);
+		}
 	};
 
 	class SaveMapInfo {
@@ -376,6 +693,25 @@ namespace RPG {
 		int parallax_horz_speed;
 		bool parallax_vert_auto;
 		int parallax_vert_speed;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(pan_x);
+			ar & BOOST_SERIALIZATION_NVP(pan_y);
+			ar & BOOST_SERIALIZATION_NVP(events);
+			ar & BOOST_SERIALIZATION_NVP(lower_tiles);
+			ar & BOOST_SERIALIZATION_NVP(upper_tiles);
+			ar & BOOST_SERIALIZATION_NVP(parallax_name);
+			ar & BOOST_SERIALIZATION_NVP(parallax_horz);
+			ar & BOOST_SERIALIZATION_NVP(parallax_vert);
+			ar & BOOST_SERIALIZATION_NVP(parallax_horz_auto);
+			ar & BOOST_SERIALIZATION_NVP(parallax_horz_speed);
+			ar & BOOST_SERIALIZATION_NVP(parallax_vert_auto);
+			ar & BOOST_SERIALIZATION_NVP(parallax_vert_speed);
+		}
 	};
 
 	class SaveScreen {
@@ -410,6 +746,41 @@ namespace RPG {
 		bool battleanim_global;
 		int weather;
 		int weather_strength;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(tint_finish_red);
+			ar & BOOST_SERIALIZATION_NVP(tint_finish_green);
+			ar & BOOST_SERIALIZATION_NVP(tint_finish_blue);
+			ar & BOOST_SERIALIZATION_NVP(tint_finish_sat);
+			ar & BOOST_SERIALIZATION_NVP(tint_current_red);
+			ar & BOOST_SERIALIZATION_NVP(tint_current_green);
+			ar & BOOST_SERIALIZATION_NVP(tint_current_blue);
+			ar & BOOST_SERIALIZATION_NVP(tint_current_sat);
+			ar & BOOST_SERIALIZATION_NVP(tint_time_left);
+			ar & BOOST_SERIALIZATION_NVP(flash_status);
+			ar & BOOST_SERIALIZATION_NVP(flash_red);
+			ar & BOOST_SERIALIZATION_NVP(flash_green);
+			ar & BOOST_SERIALIZATION_NVP(flash_blue);
+			ar & BOOST_SERIALIZATION_NVP(flash_current_level);
+			ar & BOOST_SERIALIZATION_NVP(flash_time_left);
+			ar & BOOST_SERIALIZATION_NVP(shake_status);
+			ar & BOOST_SERIALIZATION_NVP(shake_strength);
+			ar & BOOST_SERIALIZATION_NVP(shake_speed);
+			ar & BOOST_SERIALIZATION_NVP(shake_position);
+			ar & BOOST_SERIALIZATION_NVP(shake_time_left);
+			ar & BOOST_SERIALIZATION_NVP(pan_x);
+			ar & BOOST_SERIALIZATION_NVP(pan_y);
+			ar & BOOST_SERIALIZATION_NVP(battleanim_id);
+			ar & BOOST_SERIALIZATION_NVP(battleanim_target);
+			ar & BOOST_SERIALIZATION_NVP(battleanim_unk_2d);
+			ar & BOOST_SERIALIZATION_NVP(battleanim_global);
+			ar & BOOST_SERIALIZATION_NVP(weather);
+			ar & BOOST_SERIALIZATION_NVP(weather_strength);
+		}
 	};
 
 	class SaveCommonEvent {
@@ -418,6 +789,15 @@ namespace RPG {
 
 		int ID;
 		SaveEventData event_data;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(event_data);
+		}
 	};
 
 	class SaveEvents {
@@ -429,6 +809,18 @@ namespace RPG {
 		int unknown_16;
 		int unknown_17;
 		int unknown_18;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(events);
+			ar & BOOST_SERIALIZATION_NVP(events_size);
+			ar & BOOST_SERIALIZATION_NVP(unknown_16);
+			ar & BOOST_SERIALIZATION_NVP(unknown_17);
+			ar & BOOST_SERIALIZATION_NVP(unknown_18);
+		}
 	};
 
 	class SaveTarget {
@@ -463,6 +855,26 @@ namespace RPG {
 		int unknown_70;
 		std::vector<SaveCommonEvent> common_events;
 		SaveEvents events;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(title);
+			ar & BOOST_SERIALIZATION_NVP(system);
+			ar & BOOST_SERIALIZATION_NVP(screen);
+			ar & BOOST_SERIALIZATION_NVP(pictures);
+			ar & BOOST_SERIALIZATION_NVP(party_location);
+			ar & BOOST_SERIALIZATION_NVP(boat_location);
+			ar & BOOST_SERIALIZATION_NVP(ship_location);
+			ar & BOOST_SERIALIZATION_NVP(airship_location);
+			ar & BOOST_SERIALIZATION_NVP(party);
+			ar & BOOST_SERIALIZATION_NVP(inventory);
+			ar & BOOST_SERIALIZATION_NVP(map_info);
+			ar & BOOST_SERIALIZATION_NVP(common_events);
+			ar & BOOST_SERIALIZATION_NVP(events);
+		}
 	};
 }
 

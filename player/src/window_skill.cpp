@@ -82,7 +82,7 @@ void Window_Skill::DrawItem(int index) {
 	int skill_id = data[index];
 
 	if (skill_id > 0) {
-		int costs = Data::skills[skill_id - 1].sp_cost;
+		int costs = Data::database.skills[skill_id - 1].sp_cost;
 		bool enabled = CheckEnable(skill_id);
 		int color = !enabled ? Font::ColorDisabled : Font::ColorDefault;
 		
@@ -91,14 +91,14 @@ void Window_Skill::DrawItem(int index) {
 		contents->TextDraw(rect.x + rect.width - 28, rect.y, color, "-");
 		contents->TextDraw(rect.x + rect.width - 6, rect.y, color, ss.str(), Surface::TextAlignRight);
 
-		DrawSkillName(&Data::skills[skill_id - 1], rect.x, rect.y, enabled);
+		DrawSkillName(&Data::database.skills[skill_id - 1], rect.x, rect.y, enabled);
 	}
 }
 
 ////////////////////////////////////////////////////////////
 void Window_Skill::UpdateHelp() {
 	help_window->SetText(GetSkillId() == 0 ? "" : 
-		Data::skills[GetSkillId() - 1].description);
+		Data::database.skills[GetSkillId() - 1].description);
 }
 
 ////////////////////////////////////////////////////////////

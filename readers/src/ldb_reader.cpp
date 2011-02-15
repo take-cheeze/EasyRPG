@@ -58,86 +58,105 @@ void LDB_Reader::LoadChunks(Reader& stream) {
 		switch (chunk_info.ID) {
 			case ChunkData::Actor:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::actors.push_back(ReadActor(stream));
+					Data::database.actors.push_back(ReadActor(stream));
 				}
 				break;
 			case ChunkData::Skill:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::skills.push_back(ReadSkill(stream));
+					Data::database.skills.push_back(ReadSkill(stream));
 				}
 				break;
 			case ChunkData::Item:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::items.push_back(ReadItem(stream));
+					Data::database.items.push_back(ReadItem(stream));
 				}
 				break;
 			case ChunkData::Enemy:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::enemies.push_back(ReadEnemy(stream));
+					Data::database.enemies.push_back(ReadEnemy(stream));
 				}
 				break;
 			case ChunkData::Troop:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::troops.push_back(ReadTroop(stream));
+					Data::database.troops.push_back(ReadTroop(stream));
 				}
 				break;
 			case ChunkData::Terrain:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::terrains.push_back(ReadTerrain(stream));
+					Data::database.terrains.push_back(ReadTerrain(stream));
 				}
 				break;
 			case ChunkData::Attribute:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::attributes.push_back(ReadAttribute(stream));
+					Data::database.attributes.push_back(ReadAttribute(stream));
 				}
 				break;
 			case ChunkData::State:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::states.push_back(ReadState(stream));
+					Data::database.states.push_back(ReadState(stream));
 				}
 				break;
 			case ChunkData::Animation:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::animations.push_back(ReadAnimation(stream));
+					Data::database.animations.push_back(ReadAnimation(stream));
 				}
 				break;
 			case ChunkData::Chipset:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::chipsets.push_back(ReadChipset(stream));
+					Data::database.chipsets.push_back(ReadChipset(stream));
 				}
 				break;
 			case ChunkData::Terms:
-				Data::terms = ReadTerms(stream);
+				Data::database.terms = ReadTerms(stream);
 				break;
 			case ChunkData::System:
-				Data::system = ReadSystem(stream);
+				Data::database.system = ReadSystem(stream);
 				break;
 			case ChunkData::Switches:
-				Data::switches = ReadSwitches(stream);
+				Data::database.switches = ReadSwitches(stream);
 				break;
 			case ChunkData::Variables:
-				Data::variables = ReadVariables(stream);
+				Data::database.variables = ReadVariables(stream);
 				break;
 			case ChunkData::CommonEvent:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::commonevents.push_back(ReadCommonEvent(stream));
+					Data::database.commonevents.push_back(ReadCommonEvent(stream));
 				}
 				break;
 			case ChunkData::BattleCommand:
-				Data::battlecommands = ReadBattleCommands(stream);
+				Data::database.battlecommands = ReadBattleCommands(stream);
 				break;
 			case ChunkData::Class:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::classes.push_back(ReadClass(stream));
+					Data::database.classes.push_back(ReadClass(stream));
 				}
 				break;
 			case ChunkData::BattlerAnimation:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::battleranimations.push_back(ReadBattlerAnimation(stream));
+					Data::database.battleranimations.push_back(ReadBattlerAnimation(stream));
 				}
 				break;
 			default:
 				stream.Skip(chunk_info);
 		}
 	}
+}
+
+void RPG::Database::Clear() {
+	actors.clear();
+	skills.clear();
+	items.clear();
+	enemies.clear();
+	troops.clear();
+	terrains.clear();
+	attributes.clear();
+	states.clear();
+	animations.clear();
+	chipsets.clear();
+	commonevents.clear();
+	battlecommands.commands.clear();
+	classes.clear();
+	battleranimations.clear();
+	switches.clear();
+	variables.clear();
 }

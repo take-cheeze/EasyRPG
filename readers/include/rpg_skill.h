@@ -94,6 +94,55 @@ namespace RPG {
 		bool occasion_battle;
 
 		std::vector<RPG::BattlerAnimationData> battler_animation_data; // RPG2003
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(type);
+			ar & BOOST_SERIALIZATION_NVP(sp_type); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(sp_cost);
+			ar & BOOST_SERIALIZATION_NVP(sp_percent); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(description);
+		
+		// type == Normal
+			ar & BOOST_SERIALIZATION_NVP(scope);
+			ar & BOOST_SERIALIZATION_NVP(animation_id);
+			ar & BOOST_SERIALIZATION_NVP(using_message1); // RPG2000
+			ar & BOOST_SERIALIZATION_NVP(using_message2); // RPG2000
+			ar & BOOST_SERIALIZATION_NVP(failure_message); // RPG2000
+			ar & BOOST_SERIALIZATION_NVP(pdef_f);
+			ar & BOOST_SERIALIZATION_NVP(mdef_f);
+			ar & BOOST_SERIALIZATION_NVP(variance);
+			ar & BOOST_SERIALIZATION_NVP(power);
+			ar & BOOST_SERIALIZATION_NVP(hit);
+			ar & BOOST_SERIALIZATION_NVP(affect_hp);
+			ar & BOOST_SERIALIZATION_NVP(affect_sp);
+			ar & BOOST_SERIALIZATION_NVP(affect_attack);
+			ar & BOOST_SERIALIZATION_NVP(affect_defense);
+			ar & BOOST_SERIALIZATION_NVP(affect_spirit);
+			ar & BOOST_SERIALIZATION_NVP(affect_agility);
+			ar & BOOST_SERIALIZATION_NVP(absorb_damage);
+			ar & BOOST_SERIALIZATION_NVP(ignore_defense);
+			ar & BOOST_SERIALIZATION_NVP(state_effect); // RPG2003
+			ar & BOOST_SERIALIZATION_NVP(state_effects);
+			ar & BOOST_SERIALIZATION_NVP(attribute_effects);
+			ar & BOOST_SERIALIZATION_NVP(affect_attr_defence);
+			ar & BOOST_SERIALIZATION_NVP(battler_animation); // RPG2003
+
+		// type == Teleport/Escape
+			ar & BOOST_SERIALIZATION_NVP(sound_effect);
+		
+		// type == Switch
+			ar & BOOST_SERIALIZATION_NVP(switch_id);
+			ar & BOOST_SERIALIZATION_NVP(occasion_field);
+			ar & BOOST_SERIALIZATION_NVP(occasion_battle);
+
+			ar & BOOST_SERIALIZATION_NVP(battler_animation_data); // RPG2003
+		}
 	};
 }
 

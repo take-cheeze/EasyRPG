@@ -19,6 +19,11 @@
 #define _RPG_ANIMATIONCELLDATA_H_
 
 ////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include "reader.h"
+
+////////////////////////////////////////////////////////////
 /// RPG::AnimationCellData class
 ////////////////////////////////////////////////////////////
 namespace RPG {
@@ -36,7 +41,24 @@ namespace RPG {
 		int tone_blue;
 		int tone_gray;
 		int transparency;
-	 };
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(priority);
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(x);
+			ar & BOOST_SERIALIZATION_NVP(y);
+			ar & BOOST_SERIALIZATION_NVP(zoom);
+			ar & BOOST_SERIALIZATION_NVP(tone_red);
+			ar & BOOST_SERIALIZATION_NVP(tone_green);
+			ar & BOOST_SERIALIZATION_NVP(tone_blue);
+			ar & BOOST_SERIALIZATION_NVP(tone_gray);
+			ar & BOOST_SERIALIZATION_NVP(transparency);
+		}
+	};
 }
 
 #endif

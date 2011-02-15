@@ -24,7 +24,7 @@
 
 ////////////////////////////////////////////////////////////
 Scene_Load::Scene_Load() :
-	Scene_File(Data::terms.load_game_message) {
+	Scene_File(Data::database.terms.load_game_message) {
 	Scene::type = Scene::Load;
 }
 

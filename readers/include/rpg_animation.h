@@ -51,6 +51,20 @@ namespace RPG {
 		int scope;
 		int position;
 		std::vector<RPG::AnimationFrame> frames;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(animation_name);
+			ar & BOOST_SERIALIZATION_NVP(timings);
+			ar & BOOST_SERIALIZATION_NVP(scope);
+			ar & BOOST_SERIALIZATION_NVP(position);
+			ar & BOOST_SERIALIZATION_NVP(frames);
+		}
 	};
 }
 

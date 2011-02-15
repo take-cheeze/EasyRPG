@@ -64,27 +64,27 @@ void Window_ShopBuy::Refresh() {
 ////////////////////////////////////////////////////////////
 void Window_ShopBuy::DrawItem(int index) {
 	int item_id = data[index];
-	bool enabled = Data::items[item_id - 1].price <= Game_Party::GetGold();
+	bool enabled = Data::database.items[item_id - 1].price <= Game_Party::GetGold();
 	Rect rect = GetItemRect(index);
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 	contents->ClearRect(rect);
-	DrawItemName(&Data::items[item_id - 1], rect.x, rect.y, enabled);
+	DrawItemName(&Data::database.items[item_id - 1], rect.x, rect.y, enabled);
 
 	std::stringstream ss;
-	ss << Data::items[item_id - 1].price;
+	ss << Data::database.items[item_id - 1].price;
 	contents->TextDraw(rect.width + 4, rect.y, enabled ? Font::ColorDefault : Font::ColorDisabled, ss.str(), Surface::TextAlignRight);
 }
 
 ////////////////////////////////////////////////////////////
 void Window_ShopBuy::UpdateHelp() {
 	help_window->SetText(GetItemId() == 0 ? "" : 
-		Data::items[GetItemId() - 1].description);
+		Data::database.items[GetItemId() - 1].description);
 }
 
 ////////////////////////////////////////////////////////////
 bool Window_ShopBuy::CheckEnable(int item_id) {
 	return (
 		item_id > 0 &&
-		Data::items[item_id - 1].price <= Game_Party::GetGold() &&
+		Data::database.items[item_id - 1].price <= Game_Party::GetGold() &&
 		Game_Party::ItemNumber(item_id) < 99);
 }

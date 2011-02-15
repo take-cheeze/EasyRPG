@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::BattleCommand class
@@ -45,6 +46,15 @@ namespace RPG {
 		int ID;
 		std::string name;
 		int type;
+
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(type);
+		}
 	};
 
 	class BattleCommands {
@@ -66,6 +76,28 @@ namespace RPG {
 		int teleport_x;
 		int teleport_y;
 		int teleport_face;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(commands);
+			ar & BOOST_SERIALIZATION_NVP(placement);
+			ar & BOOST_SERIALIZATION_NVP(row);
+			ar & BOOST_SERIALIZATION_NVP(battle_type);
+			ar & BOOST_SERIALIZATION_NVP(death_handler1);
+			ar & BOOST_SERIALIZATION_NVP(unknown1);
+			ar & BOOST_SERIALIZATION_NVP(death_handler2);
+			ar & BOOST_SERIALIZATION_NVP(death_event);
+			ar & BOOST_SERIALIZATION_NVP(window_size);
+			ar & BOOST_SERIALIZATION_NVP(transparency);
+			ar & BOOST_SERIALIZATION_NVP(teleport);
+			ar & BOOST_SERIALIZATION_NVP(teleport_id);
+			ar & BOOST_SERIALIZATION_NVP(teleport_x);
+			ar & BOOST_SERIALIZATION_NVP(teleport_y);
+			ar & BOOST_SERIALIZATION_NVP(teleport_face);
+		}
 	};
 }
 

@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::EventCommand class
@@ -36,6 +37,17 @@ namespace RPG {
 		int indent;
 		std::string string;
 		std::vector<int> parameters;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(code);
+			ar & BOOST_SERIALIZATION_NVP(indent);
+			ar & BOOST_SERIALIZATION_NVP(string);
+			ar & BOOST_SERIALIZATION_NVP(parameters);
+		}
 	};
 }
 

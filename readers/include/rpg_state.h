@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::State class
@@ -95,6 +96,56 @@ namespace RPG {
 		int sp_change_val;
 		int sp_change_map_val;
 		int sp_change_map_steps;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(type);
+			ar & BOOST_SERIALIZATION_NVP(color);
+			ar & BOOST_SERIALIZATION_NVP(priority);
+			ar & BOOST_SERIALIZATION_NVP(restriction);
+			ar & BOOST_SERIALIZATION_NVP(a_rate);
+			ar & BOOST_SERIALIZATION_NVP(b_rate);
+			ar & BOOST_SERIALIZATION_NVP(c_rate);
+			ar & BOOST_SERIALIZATION_NVP(d_rate);
+			ar & BOOST_SERIALIZATION_NVP(e_rate);
+			ar & BOOST_SERIALIZATION_NVP(hold_turn);
+			ar & BOOST_SERIALIZATION_NVP(auto_release_prob);
+			ar & BOOST_SERIALIZATION_NVP(release_by_damage);
+			ar & BOOST_SERIALIZATION_NVP(affect_type);
+			ar & BOOST_SERIALIZATION_NVP(affect_attack);
+			ar & BOOST_SERIALIZATION_NVP(affect_defense);
+			ar & BOOST_SERIALIZATION_NVP(affect_spirit);
+			ar & BOOST_SERIALIZATION_NVP(affect_agility);
+			ar & BOOST_SERIALIZATION_NVP(reduce_hit_ratio);
+			ar & BOOST_SERIALIZATION_NVP(avoid_attacks);
+			ar & BOOST_SERIALIZATION_NVP(reflect_magic);
+			ar & BOOST_SERIALIZATION_NVP(cursed);
+			ar & BOOST_SERIALIZATION_NVP(battler_animation_id);
+			ar & BOOST_SERIALIZATION_NVP(restrict_skill);
+			ar & BOOST_SERIALIZATION_NVP(restrict_skill_level);
+			ar & BOOST_SERIALIZATION_NVP(restrict_magic);
+			ar & BOOST_SERIALIZATION_NVP(restrict_magic_level);
+			ar & BOOST_SERIALIZATION_NVP(hp_change_type);
+			ar & BOOST_SERIALIZATION_NVP(sp_change_type);
+			ar & BOOST_SERIALIZATION_NVP(message_actor);
+			ar & BOOST_SERIALIZATION_NVP(message_enemy);
+			ar & BOOST_SERIALIZATION_NVP(message_already);
+			ar & BOOST_SERIALIZATION_NVP(message_affected);
+			ar & BOOST_SERIALIZATION_NVP(message_recovery);
+			ar & BOOST_SERIALIZATION_NVP(hp_change_max);
+			ar & BOOST_SERIALIZATION_NVP(hp_change_val);
+			ar & BOOST_SERIALIZATION_NVP(hp_change_map_val);
+			ar & BOOST_SERIALIZATION_NVP(hp_change_map_steps);
+			ar & BOOST_SERIALIZATION_NVP(sp_change_max);
+			ar & BOOST_SERIALIZATION_NVP(sp_change_val);
+			ar & BOOST_SERIALIZATION_NVP(sp_change_map_val);
+			ar & BOOST_SERIALIZATION_NVP(sp_change_map_steps);
+		}
 	};
 }
 

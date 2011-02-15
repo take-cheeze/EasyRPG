@@ -19,6 +19,11 @@
 #define _RPG_ENEMYACTION_H_
 
 ////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include "reader.h"
+
+////////////////////////////////////////////////////////////
 /// RPG::EnemyAction class
 ////////////////////////////////////////////////////////////
 namespace RPG {
@@ -64,6 +69,26 @@ namespace RPG {
 		bool switch_off;
 		int switch_off_id;
 		int rating;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(kind);
+			ar & BOOST_SERIALIZATION_NVP(basic);
+			ar & BOOST_SERIALIZATION_NVP(skill_id);
+			ar & BOOST_SERIALIZATION_NVP(enemy_id);
+			ar & BOOST_SERIALIZATION_NVP(condition_type);
+			ar & BOOST_SERIALIZATION_NVP(condition_param1);
+			ar & BOOST_SERIALIZATION_NVP(condition_param2);
+			ar & BOOST_SERIALIZATION_NVP(switch_id);
+			ar & BOOST_SERIALIZATION_NVP(switch_on);
+			ar & BOOST_SERIALIZATION_NVP(switch_on_id);
+			ar & BOOST_SERIALIZATION_NVP(switch_off);
+			ar & BOOST_SERIALIZATION_NVP(switch_off_id);
+			ar & BOOST_SERIALIZATION_NVP(rating);
+		}
 	};
 }
 

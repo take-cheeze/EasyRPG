@@ -76,7 +76,7 @@ Window_ShopParty::~Window_ShopParty() {
 void Window_ShopParty::Refresh() {
 	contents->Clear();
 
-	Bitmap* system = Cache::System(Data::system.system_name);
+	Bitmap* system = Cache::System(Data::database.system.system_name);
 
 	const std::vector<Game_Actor*>& actors = Game_Party::GetActors();
 	for (size_t i = 0; i < actors.size() && i < 4; i++) {
@@ -98,7 +98,7 @@ void Window_ShopParty::Refresh() {
 				contents->Blit(i * 32 + 20, 24, system, Rect(128 + 8 * phase, 24, 8, 8), 255);
 			else {
 
-				RPG::Item* new_item = &Data::items[item_id - 1];
+				RPG::Item* new_item = &Data::database.items[item_id - 1];
 				int item_type =  new_item->type;
 				RPG::Item* current_item = NULL;
 
@@ -107,33 +107,33 @@ void Window_ShopParty::Refresh() {
 				//get the current equipped item
 				case RPG::Item::Type_weapon:
 					if (actor->GetWeaponId() > 0)
-						current_item = &Data::items[actor->GetWeaponId() - 1];
+						current_item = &Data::database.items[actor->GetWeaponId() - 1];
 					else
-						current_item = &Data::items[0];
+						current_item = &Data::database.items[0];
 					break;
 				case RPG::Item::Type_helmet:
 					if (actor->GetHelmetId() > 0)
-						current_item = &Data::items[actor->GetHelmetId() - 1];
+						current_item = &Data::database.items[actor->GetHelmetId() - 1];
 					else
-						current_item = &Data::items[0];
+						current_item = &Data::database.items[0];
 					break;
 				case RPG::Item::Type_shield:
 					if (actor->GetShieldId() > 0)
-						current_item = &Data::items[actor->GetShieldId() - 1];
+						current_item = &Data::database.items[actor->GetShieldId() - 1];
 					else
-						current_item = &Data::items[0];
+						current_item = &Data::database.items[0];
 					break;
 				case RPG::Item::Type_armor:
 					if (actor->GetArmorId() > 0)
-						current_item = &Data::items[actor->GetArmorId() - 1];
+						current_item = &Data::database.items[actor->GetArmorId() - 1];
 					else
-						current_item = &Data::items[0];
+						current_item = &Data::database.items[0];
 					break;
 				case RPG::Item::Type_accessory:
 					if (actor->GetAccessoryId() > 0)
-						current_item = &Data::items[actor->GetAccessoryId() -1];
+						current_item = &Data::database.items[actor->GetAccessoryId() -1];
 					else
-						current_item = &Data::items[0];
+						current_item = &Data::database.items[0];
 					break;
 				}
 

@@ -51,7 +51,7 @@ void Window_ShopNumber::Refresh() {
 	contents->Clear();
 
 	int y = 34;
-	DrawItemName(&Data::items[item_id - 1], 0, y);
+	DrawItemName(&Data::database.items[item_id - 1], 0, y);
 
 	std::stringstream ss;
 	ss << number;
@@ -85,7 +85,7 @@ void Window_ShopNumber::Update() {
 		}
 
 		if (last_number != number) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			Refresh();
 		}
 	}
@@ -93,5 +93,5 @@ void Window_ShopNumber::Update() {
 
 ////////////////////////////////////////////////////////////
 int Window_ShopNumber::GetTotal() const {
-	return Data::items[item_id - 1].price * number;
+	return Data::database.items[item_id - 1].price * number;
 }

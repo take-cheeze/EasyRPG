@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 #include "rpg_eventcommand.h"
 
 ////////////////////////////////////////////////////////////
@@ -45,6 +46,19 @@ namespace RPG {
 		bool switch_flag;
 		int switch_id;
 		std::vector<EventCommand> event_commands;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(trigger);
+			ar & BOOST_SERIALIZATION_NVP(switch_flag);
+			ar & BOOST_SERIALIZATION_NVP(switch_id);
+			ar & BOOST_SERIALIZATION_NVP(event_commands);
+		}
 	};
 }
 

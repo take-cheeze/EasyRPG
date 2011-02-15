@@ -67,6 +67,46 @@ namespace RPG {
 		std::vector<uint32_t> generator_x;
 		std::vector<uint32_t> generator_y;
 		std::vector<short> generator_tile_ids;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(chipset_id);
+			ar & BOOST_SERIALIZATION_NVP(width);
+			ar & BOOST_SERIALIZATION_NVP(height);
+			ar & BOOST_SERIALIZATION_NVP(scroll_type);
+			ar & BOOST_SERIALIZATION_NVP(parallax_flag);
+			ar & BOOST_SERIALIZATION_NVP(parallax_name);
+			ar & BOOST_SERIALIZATION_NVP(parallax_loop_x);
+			ar & BOOST_SERIALIZATION_NVP(parallax_loop_y);
+			ar & BOOST_SERIALIZATION_NVP(parallax_auto_loop_x);
+			ar & BOOST_SERIALIZATION_NVP(parallax_sx);
+			ar & BOOST_SERIALIZATION_NVP(parallax_auto_loop_y);
+			ar & BOOST_SERIALIZATION_NVP(parallax_sy);
+			ar & BOOST_SERIALIZATION_NVP(lower_layer);
+			ar & BOOST_SERIALIZATION_NVP(upper_layer);
+			ar & BOOST_SERIALIZATION_NVP(events);
+			ar & BOOST_SERIALIZATION_NVP(save_times);
+			ar & BOOST_SERIALIZATION_NVP(top_level);
+
+			ar & BOOST_SERIALIZATION_NVP(generator_flag);
+			ar & BOOST_SERIALIZATION_NVP(generator_mode);
+			ar & BOOST_SERIALIZATION_NVP(generator_tiles);
+			ar & BOOST_SERIALIZATION_NVP(generator_width);
+			ar & BOOST_SERIALIZATION_NVP(generator_height);
+			ar & BOOST_SERIALIZATION_NVP(generator_surround);
+			ar & BOOST_SERIALIZATION_NVP(generator_upper_wall);
+			ar & BOOST_SERIALIZATION_NVP(generator_floor_b);
+			ar & BOOST_SERIALIZATION_NVP(generator_floor_c);
+			ar & BOOST_SERIALIZATION_NVP(generator_extra_b);
+			ar & BOOST_SERIALIZATION_NVP(generator_extra_c);
+			ar & BOOST_SERIALIZATION_NVP(generator_x);
+			ar & BOOST_SERIALIZATION_NVP(generator_y);
+			ar & BOOST_SERIALIZATION_NVP(generator_tile_ids);
+		}
 	};
 }
 

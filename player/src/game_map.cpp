@@ -146,8 +146,8 @@ void Game_Map::Setup(int _id) {
 		events.insert(std::pair<int, Game_Event*>(map->events[i].ID, new Game_Event(location.map_id, map->events[i])));
 	}
 
-	for (size_t i = 0; i < Data::commonevents.size(); ++i) {
-		common_events.insert(std::pair<int, Game_CommonEvent*>(Data::commonevents[i].ID, new Game_CommonEvent(Data::commonevents[i].ID)));
+	for (size_t i = 0; i < Data::database.commonevents.size(); ++i) {
+		common_events.insert(std::pair<int, Game_CommonEvent*>(Data::database.commonevents[i].ID, new Game_CommonEvent(Data::database.commonevents[i].ID)));
 	}
 
 	scroll_direction = 2;
@@ -569,7 +569,7 @@ int Game_Map::GetMapIndex(int id) {
 ////////////////////////////////////////////////////////////
 void Game_Map::SetChipset(int id) {
 	map_info.chipset_id = id;
-	RPG::Chipset &chipset = Data::chipsets[map_info.chipset_id - 1];
+	RPG::Chipset &chipset = Data::database.chipsets[map_info.chipset_id - 1];
 	chipset_name = chipset.chipset_name;
 	passages_down = chipset.passable_data_lower;
 	passages_up = chipset.passable_data_upper;

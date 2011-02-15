@@ -1042,20 +1042,20 @@ bool Game_Interpreter_Map::CommandShowInn() { // code 10730
 
 	switch (inn_type) {
 		case 0:
-			out << Data::terms.inn_a_greeting_1
+			out << Data::database.terms.inn_a_greeting_1
 				<< " " << Game_Temp::inn_price
-				<< " " << Data::terms.gold
-				<< Data::terms.inn_a_greeting_2;
+				<< " " << Data::database.terms.gold
+				<< Data::database.terms.inn_a_greeting_2;
 			Game_Message::texts.push_back(out.str());
-			Game_Message::texts.push_back(Data::terms.inn_a_greeting_3);
+			Game_Message::texts.push_back(Data::database.terms.inn_a_greeting_3);
 			break;
 		case 1:
-			out << Data::terms.inn_b_greeting_1
+			out << Data::database.terms.inn_b_greeting_1
 				<< " " << Game_Temp::inn_price
-				<< " " << Data::terms.gold
-				<< Data::terms.inn_b_greeting_2;
+				<< " " << Data::database.terms.gold
+				<< Data::database.terms.inn_b_greeting_2;
 			Game_Message::texts.push_back(out.str());
-			Game_Message::texts.push_back(Data::terms.inn_b_greeting_3);
+			Game_Message::texts.push_back(Data::database.terms.inn_b_greeting_3);
 			break;
 		default:
 			return false;
@@ -1065,12 +1065,12 @@ bool Game_Interpreter_Map::CommandShowInn() { // code 10730
 
 	switch (inn_type) {
 		case 0:
-			Game_Message::texts.push_back(Data::terms.inn_a_accept);
-			Game_Message::texts.push_back(Data::terms.inn_a_cancel);
+			Game_Message::texts.push_back(Data::database.terms.inn_a_accept);
+			Game_Message::texts.push_back(Data::database.terms.inn_a_cancel);
 			break;
 		case 1:
-			Game_Message::texts.push_back(Data::terms.inn_b_accept);
-			Game_Message::texts.push_back(Data::terms.inn_b_cancel);
+			Game_Message::texts.push_back(Data::database.terms.inn_b_accept);
+			Game_Message::texts.push_back(Data::database.terms.inn_b_cancel);
 			break;
 		default:
 			return false;
@@ -1349,7 +1349,7 @@ bool Game_Interpreter_Map::CommandCallEvent() { // code 12330
 	switch (list[index].parameters[0]) {
 		case 0: // Common Event
 			evt_id = list[index].parameters[1];
-			child_interpreter->Setup(Data::commonevents[evt_id - 1].event_commands, 0, Data::commonevents[evt_id - 1].ID, -2);
+			child_interpreter->Setup(Data::database.commonevents[evt_id - 1].event_commands, 0, Data::database.commonevents[evt_id - 1].ID, -2);
 			return true;
 		case 1: // Map Event
 			evt_id = list[index].parameters[1];
@@ -1682,7 +1682,7 @@ bool Game_Interpreter_Map::CommandChangeClass() { // code 1008
 			break;
 		case 2:
 		{
-			const RPG::Class& klass = Data::classes[class_id - 1];
+			const RPG::Class& klass = Data::database.classes[class_id - 1];
 			while (!actor->GetSkills().empty())
 				actor->UnlearnSkill(actor->GetSkills()[0]);
 			std::vector<RPG::Learning>::const_iterator it;

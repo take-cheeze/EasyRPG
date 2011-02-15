@@ -43,16 +43,16 @@ void Window_TargetStatus::Refresh() {
 	}
 
 	if (use_item) {
-		contents->TextDraw(0, 0, 1, Data::terms.possessed_items);
+		contents->TextDraw(0, 0, 1, Data::database.terms.possessed_items);
 	} else {
-		contents->TextDraw(0, 0, 1, Data::terms.sp_cost);
+		contents->TextDraw(0, 0, 1, Data::database.terms.sp_cost);
 	}
 
 	std::stringstream ss;
 	if (use_item) {
 		ss << Game_Party::ItemNumber(id);
 	} else {
-		ss << Data::skills[id - 1].sp_cost;
+		ss << Data::database.skills[id - 1].sp_cost;
 	}
 
 	contents->TextDraw(contents->GetWidth() - contents->GetTextSize(ss.str()).width, 0, Font::ColorDefault, ss.str(), Surface::TextAlignRight);

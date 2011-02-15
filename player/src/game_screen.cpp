@@ -186,7 +186,7 @@ void Game_Screen::ShowBattleAnimation(int animation_id, int target_id, bool glob
 	Game_Character* target = Game_Character::GetCharacter(target_id, target_id);
 
 	animation = new BattleAnimation(target->GetScreenX(), target->GetScreenY(),
-									&Data::animations[animation_id - 1]);
+									&Data::database.animations[animation_id - 1]);
 	animation->SetVisible(true);
 	// FIXME: target
 	// FIXME: global

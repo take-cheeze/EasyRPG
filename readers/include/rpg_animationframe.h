@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <vector>
+#include "reader.h"
 #include "rpg_animationcelldata.h"
 
 ////////////////////////////////////////////////////////////
@@ -33,6 +34,14 @@ namespace RPG {
 		AnimationFrame();
 		
 		std::vector<AnimationCellData> cells;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(cells);
+		}
 	};
 }
 

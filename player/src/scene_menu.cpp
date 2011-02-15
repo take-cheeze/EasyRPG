@@ -95,8 +95,8 @@ void Scene_Menu::CreateCommandWindow() {
 		command_options[3] = Save;
 		command_options[4] = Quit;
 	} else {
-		for (std::vector<int16>::iterator it = Data::system.menu_commands.begin();
-			it != Data::system.menu_commands.end(); ++it) {
+		for (std::vector<int16>::iterator it = Data::database.system.menu_commands.begin();
+			it != Data::database.system.menu_commands.end(); ++it) {
 				command_options.push_back((CommandOptionType)*it);
 		}
 		command_options.push_back(Quit);
@@ -107,31 +107,31 @@ void Scene_Menu::CreateCommandWindow() {
 	for (it = command_options.begin(); it != command_options.end(); ++it) {
 		switch(*it) {
 		case Item:
-			options.push_back(Data::terms.command_item);
+			options.push_back(Data::database.terms.command_item);
 			break;
 		case Skill:
-			options.push_back(Data::terms.command_skill);
+			options.push_back(Data::database.terms.command_skill);
 			break;
 		case Equipment:
-			options.push_back(Data::terms.menu_equipment);
+			options.push_back(Data::database.terms.menu_equipment);
 			break;
 		case Save:
-			options.push_back(Data::terms.menu_save);
+			options.push_back(Data::database.terms.menu_save);
 			break;
 		case Status:
-			options.push_back(Data::terms.status);
+			options.push_back(Data::database.terms.status);
 			break;
 		case Row:
-			options.push_back(Data::terms.row);
+			options.push_back(Data::database.terms.row);
 			break;
 		case Order:
-			options.push_back(Data::terms.order);
+			options.push_back(Data::database.terms.order);
 			break;
 		case Wait:
-			options.push_back(Game_Temp::battle_wait ? Data::terms.wait_on : Data::terms.wait_off);
+			options.push_back(Game_Temp::battle_wait ? Data::database.terms.wait_on : Data::database.terms.wait_off);
 			break;
 		default:
-			options.push_back(Data::terms.menu_quit);
+			options.push_back(Data::database.terms.menu_quit);
 			break;
 		}
 	}
@@ -167,7 +167,7 @@ void Scene_Menu::CreateCommandWindow() {
 ////////////////////////////////////////////////////////////
 void Scene_Menu::UpdateCommand() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::database.system.cancel_se);
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		menu_index = command_window->GetIndex();
@@ -175,9 +175,9 @@ void Scene_Menu::UpdateCommand() {
 		switch (command_options[menu_index]) {
 		case Item:
 			if (Game_Party::GetActors().empty()) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Data::database.system.buzzer_se);
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Data::database.system.decision_se);
 				Scene::Push(new Scene_Item());
 			}
 			break;
@@ -186,9 +186,9 @@ void Scene_Menu::UpdateCommand() {
 		case Status:
 		case Row:
 			if (Game_Party::GetActors().empty()) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Data::database.system.buzzer_se);
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Data::database.system.decision_se);
 				command_window->SetActive(false);
 				menustatus_window->SetActive(true);
 				menustatus_window->SetIndex(0);
@@ -196,9 +196,9 @@ void Scene_Menu::UpdateCommand() {
 			break;
 		case Save: // Save
 			if (Game_System::GetAllowSave()) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Data::database.system.buzzer_se);
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Data::database.system.decision_se);
 			}
 
 #ifdef _DEBUG
@@ -210,19 +210,19 @@ void Scene_Menu::UpdateCommand() {
 			break;
 		case Order:
 			if (Game_Party::GetActors().size() <= 1) {
-				Game_System::SePlay(Data::system.buzzer_se);
+				Game_System::SePlay(Data::database.system.buzzer_se);
 			} else {
-				Game_System::SePlay(Data::system.decision_se);
+				Game_System::SePlay(Data::database.system.decision_se);
 				Scene::Push(new Scene_Order());
 			}
 			break;
 		case Wait:
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::database.system.decision_se);
 			Game_Temp::battle_wait = !Game_Temp::battle_wait;
-			command_window->SetItemText(menu_index, Game_Temp::battle_wait ? Data::terms.wait_on : Data::terms.wait_off);
+			command_window->SetItemText(menu_index, Game_Temp::battle_wait ? Data::database.terms.wait_on : Data::database.terms.wait_off);
 			break;
 		case Quit: // Quit Game
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::database.system.decision_se);
 			Scene::Push(new Scene_End());
 			break;
 		}
@@ -232,12 +232,12 @@ void Scene_Menu::UpdateCommand() {
 ////////////////////////////////////////////////////////////
 void Scene_Menu::UpdateActorSelection() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::database.system.cancel_se);
 		command_window->SetActive(true);
 		menustatus_window->SetActive(false);
 		menustatus_window->SetIndex(-1);
 	} else if (Input::IsTriggered(Input::DECISION)) {
-		Game_System::SePlay(Data::system.decision_se);
+		Game_System::SePlay(Data::database.system.decision_se);
 		switch (command_options[command_window->GetIndex()]) {
 		case Skill: // Tech Skill
 			Scene::Push(new Scene_Skill(menustatus_window->GetIndex()));

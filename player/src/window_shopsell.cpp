@@ -33,5 +33,5 @@ Window_ShopSell::~Window_ShopSell() {
 
 ////////////////////////////////////////////////////////////
 bool Window_ShopSell::CheckEnable(int item_id) {
-	return Data::items[item_id - 1].price > 0;
+	return Data::database.items[item_id - 1].price > 0;
 }

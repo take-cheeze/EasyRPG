@@ -35,7 +35,7 @@ void Window_BattleSkill::SetSubset(int id) {
 
 ////////////////////////////////////////////////////////////
 bool Window_BattleSkill::CheckInclude(int skill_id) {
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 	return (subset == RPG::Skill::Type_normal)
 		? (skill.type < 4)
 		: (subset == skill.type);
@@ -43,7 +43,7 @@ bool Window_BattleSkill::CheckInclude(int skill_id) {
 
 ////////////////////////////////////////////////////////////
 bool Window_BattleSkill::CheckEnable(int skill_id) {
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 	return (skill.type == RPG::Skill::Type_switch)
 		? skill.occasion_battle
 		: true;

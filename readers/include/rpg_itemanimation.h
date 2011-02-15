@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::ItemAnimation class
@@ -41,6 +42,23 @@ namespace RPG {
 		int ranged_anim;
 		int ranged_speed;
 		int battle_anim;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(type);
+			ar & BOOST_SERIALIZATION_NVP(weapon_anim);
+			ar & BOOST_SERIALIZATION_NVP(movement);
+			ar & BOOST_SERIALIZATION_NVP(after_image);
+			ar & BOOST_SERIALIZATION_NVP(attacks);
+			ar & BOOST_SERIALIZATION_NVP(ranged);
+			ar & BOOST_SERIALIZATION_NVP(ranged_anim);
+			ar & BOOST_SERIALIZATION_NVP(ranged_speed);
+			ar & BOOST_SERIALIZATION_NVP(battle_anim);
+		}
 	};
 }
 

@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::Chipset class
@@ -40,6 +41,21 @@ namespace RPG {
 		std::vector<unsigned char> passable_data_upper;
 		int animation_type;
 		int animation_speed;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(chipset_name);
+			ar & BOOST_SERIALIZATION_NVP(terrain_data);
+			ar & BOOST_SERIALIZATION_NVP(passable_data_lower);
+			ar & BOOST_SERIALIZATION_NVP(passable_data_upper);
+			ar & BOOST_SERIALIZATION_NVP(animation_type);
+			ar & BOOST_SERIALIZATION_NVP(animation_speed);
+		}
 	};
 }
 

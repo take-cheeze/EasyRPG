@@ -90,7 +90,7 @@ void Game_Party::LoseGold(int n) {
 
 ////////////////////////////////////////////////////////////
 void Game_Party::GainItem(int item_id, int amount) {
-	if (item_id < 1 || item_id > (int) Data::items.size()) {
+	if (item_id < 1 || item_id > (int) Data::database.items.size()) {
 		Output::Warning("Can't add item to party.\n%04d is not a valid item id.",
 						item_id);
 		return;
@@ -115,7 +115,7 @@ void Game_Party::GainItem(int item_id, int amount) {
 
 	data.item_ids.push_back(item_id);
 	data.item_counts.push_back(std::min(amount, 99));
-	data.item_usage.push_back(Data::items[item_id - 1].uses);
+	data.item_usage.push_back(Data::database.items[item_id - 1].uses);
 }
 
 void Game_Party::LoseItem(int item_id, int amount) {
@@ -124,20 +124,20 @@ void Game_Party::LoseItem(int item_id, int amount) {
 
 ////////////////////////////////////////////////////////////
 bool Game_Party::IsItemUsable(int item_id) {
-	if (item_id > 0 && item_id <= (int)Data::items.size()) {
+	if (item_id > 0 && item_id <= (int)Data::database.items.size()) {
 		//ToDo: if (Game_Temp::IsInBattle()) {
-		//if (Data::items[item_id - 1].type == RPG::Item::Type_medicine) {
-		//	return !Data::items[item_id - 1].ocassion_field;
-		//} else if (Data::items[item_id - 1].type == RPG::Item::Type_switch) {
-		//	return Data::items[item_id - 1].ocassion_battle;
+		//if (Data::database.items[item_id - 1].type == RPG::Item::Type_medicine) {
+		//	return !Data::database.items[item_id - 1].ocassion_field;
+		//} else if (Data::database.items[item_id - 1].type == RPG::Item::Type_switch) {
+		//	return Data::database.items[item_id - 1].ocassion_battle;
 		//} else {
 		if (data.party.size() > 0 &&
-			(Data::items[item_id - 1].type == RPG::Item::Type_medicine ||
-			Data::items[item_id - 1].type == RPG::Item::Type_material ||
-			Data::items[item_id - 1].type == RPG::Item::Type_book)) {
+			(Data::database.items[item_id - 1].type == RPG::Item::Type_medicine ||
+			 Data::database.items[item_id - 1].type == RPG::Item::Type_material ||
+			Data::database.items[item_id - 1].type == RPG::Item::Type_book)) {
 			return true;
-		} else if (Data::items[item_id - 1].type == RPG::Item::Type_switch) {
-			return Data::items[item_id - 1].ocassion_field;
+		} else if (Data::database.items[item_id - 1].type == RPG::Item::Type_switch) {
+			return Data::database.items[item_id - 1].ocassion_field;
 		}
 	}
 

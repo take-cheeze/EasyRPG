@@ -36,7 +36,7 @@ Scene_Gameover::Scene_Gameover() {
 void Scene_Gameover::Start() {
 	// Load Background Graphic
 	background = new Sprite();
-	background->SetBitmap(Cache::Gameover(Data::system.gameover_name));
+	background->SetBitmap(Cache::Gameover(Data::database.system.gameover_name));
 	// Stop current music
 	Audio::BGM_Stop();
 	Audio::BGS_Stop();

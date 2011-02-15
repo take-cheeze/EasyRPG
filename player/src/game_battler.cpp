@@ -45,7 +45,7 @@ const RPG::State* Game_Battler::GetState() {
 
 	const std::vector<int16_t>& states = GetStates();
 	for (int i = 0; i < (int) states.size(); i++) {
-		const RPG::State* state = &Data::states[states[i]];
+		const RPG::State* state = &Data::database.states[states[i]];
 		// Death has highest priority
 		if (state->ID == 1)
 			return state;
@@ -68,27 +68,27 @@ bool Game_Battler::IsSkillUsable(int skill_id) {
 
 	// ToDo: Escape and Teleport Spells need event SetTeleportPlace and
 	// SetEscapePlace first. Not sure if any game uses this...
-	//if (Data::skills[skill_id - 1].type == RPG::Skill::Type_teleport) {
+	//if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_teleport) {
 	//	return is_there_a_teleport_set;
-	//} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_escape) {
+	//} else if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_escape) {
 	//	return is_there_an_escape_set;
 	//} else
-	if (Data::skills[skill_id - 1].type == RPG::Skill::Type_normal) {
-		int scope = Data::skills[skill_id - 1].scope;
+	if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_normal) {
+		int scope = Data::database.skills[skill_id - 1].scope;
 
 		if (scope == RPG::Skill::Scope_self ||
 			scope == RPG::Skill::Scope_ally ||
 			scope == RPG::Skill::Scope_party) {
 			// ToDo: A skill is also acceptable when it cures a status
-			return (Data::skills[skill_id - 1].affect_hp ||
-					Data::skills[skill_id - 1].affect_sp);
+			return (Data::database.skills[skill_id - 1].affect_hp ||
+					Data::database.skills[skill_id - 1].affect_sp);
 		}
-	} else if (Data::skills[skill_id - 1].type == RPG::Skill::Type_switch) {
+	} else if (Data::database.skills[skill_id - 1].type == RPG::Skill::Type_switch) {
 		// Todo:
 		// if (Game_Temp::IsInBattle()) {
-		// return Data::skills[skill_id - 1].occasion_battle;
+		// return Data::database.skills[skill_id - 1].occasion_battle;
 		// else {
-		return Data::skills[skill_id - 1].occasion_field;
+		return Data::database.skills[skill_id - 1].occasion_field;
 		// }
 	}
 
@@ -97,7 +97,7 @@ bool Game_Battler::IsSkillUsable(int skill_id) {
 
 ////////////////////////////////////////////////////////////
 int Game_Battler::CalculateSkillCost(int skill_id) {
-	const RPG::Skill& skill = Data::skills[skill_id - 1];
+	const RPG::Skill& skill = Data::database.skills[skill_id - 1];
 	return (Player::engine == Player::EngineRpg2k3 &&
 			skill.sp_type == RPG::Skill::SpType_percent)
 		? GetMaxSp() * skill.sp_percent / 100
@@ -123,7 +123,7 @@ void Game_Battler::RemoveState(int state_id) {
 
 ////////////////////////////////////////////////////////////
 static bool NonPermanent(int state_id) {
-	return Data::states[state_id - 1].type == 0;
+	return Data::database.states[state_id - 1].type == 0;
 }
 
 void Game_Battler::RemoveStates() {
@@ -156,7 +156,7 @@ int Game_Battler::GetMaxHp() const {
 	const std::vector<int16_t>& states = GetStates();
 	for (std::vector<int16_t>::const_iterator i = states.begin(); i != states.end(); i++) {
 		// TODO test needed
-		n *= Data::states[(*i)].hp_change_max / 100;
+		n *= Data::database.states[(*i)].hp_change_max / 100;
 	}
 
 	n = min(max(n, 1), 999);
@@ -172,7 +172,7 @@ int Game_Battler::GetMaxSp() const {
 	const std::vector<int16_t>& states = GetStates();
 	for (std::vector<int16_t>::const_iterator i = states.begin(); i != states.end(); i++) {
 		// TODO test needed
-		n *= Data::states[(*i)].sp_change_max / 100;
+		n *= Data::database.states[(*i)].sp_change_max / 100;
 	}
 
 	n = min(max(n, 0), 999);
@@ -188,7 +188,7 @@ int Game_Battler::GetAtk() const {
 	const std::vector<int16_t>& states = GetStates();
 	for (std::vector<int16_t>::const_iterator i = states.begin(); i != states.end(); i++) {
 			// TODO 
-			//n *= Data::states[(*i)]. / 100;
+			//n *= Data::database.states[(*i)]. / 100;
 	}
 
 	n = min(max(n, 1), 999);
@@ -204,7 +204,7 @@ int Game_Battler::GetDef() const {
 	const std::vector<int16_t>& states = GetStates();
 	for (std::vector<int16_t>::const_iterator i = states.begin(); i != states.end(); i++) {
 			// TODO 
-			//n *= Data::states[(*i)]. / 100;
+			//n *= Data::database.states[(*i)]. / 100;
 	}
 
 	n = min(max(n, 1), 999);
@@ -220,7 +220,7 @@ int Game_Battler::GetSpi() const {
 	const std::vector<int16_t>& states = GetStates();
 	for (std::vector<int16_t>::const_iterator i = states.begin(); i != states.end(); i++) {
 			// TODO 
-			//n *= Data::states[(*i)]. / 100;
+			//n *= Data::database.states[(*i)]. / 100;
 	}
 
 	n = min(max(n, 1), 999);
@@ -236,11 +236,10 @@ int Game_Battler::GetAgi() const {
 	const std::vector<int16_t>& states = GetStates();
 	for (std::vector<int16_t>::const_iterator i = states.begin(); i != states.end(); i++) {
 			// TODO 
-			//n *= Data::states[(*i)]. / 100;
+			//n *= Data::database.states[(*i)]. / 100;
 	}
 
 	n = min(max(n, 1), 999);
 
 	return n;
 }
-

@@ -69,12 +69,12 @@ void Window_BattleCommand::Update() {
 	int old_index = index;
 	if (active && num_commands >= 0 && index >= 0) {
 		if (Input::IsRepeated(Input::DOWN)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			index++;
 		}
 
 		if (Input::IsRepeated(Input::UP)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			index--;
 		}
 
@@ -150,10 +150,10 @@ void Window_BattleCommand::SetActor(int _actor_id) {
 	commands.clear();
 
 	if (actor_id == 0) {
-		commands.push_back(!Data::terms.command_attack.empty() ? Data::terms.command_attack : "Attack");
-		commands.push_back(!Data::terms.command_defend.empty() ? Data::terms.command_defend : "Defend");
-		commands.push_back(!Data::terms.command_item.empty() ? Data::terms.command_item : "Item");
-		commands.push_back(!Data::terms.command_skill.empty() ? Data::terms.command_skill : "Skill");
+		commands.push_back(!Data::database.terms.command_attack.empty() ? Data::database.terms.command_attack : "Attack");
+		commands.push_back(!Data::database.terms.command_defend.empty() ? Data::database.terms.command_defend : "Defend");
+		commands.push_back(!Data::database.terms.command_item.empty() ? Data::database.terms.command_item : "Item");
+		commands.push_back(!Data::database.terms.command_skill.empty() ? Data::database.terms.command_skill : "Skill");
 	}
 	else {
 		Game_Actor* actor = Game_Actors::GetActor(actor_id);
@@ -161,9 +161,9 @@ void Window_BattleCommand::SetActor(int _actor_id) {
 		std::vector<uint32_t>::const_iterator it;
 		for (it = bcmds.begin(); it != bcmds.end(); it++) {
 			uint32_t bcmd = *it;
-			if (bcmd <= 0 || bcmd > Data::battlecommands.commands.size())
+			if (bcmd <= 0 || bcmd > Data::database.battlecommands.commands.size())
 				break;
-			const RPG::BattleCommand& command = Data::battlecommands.commands[bcmd - 1];
+			const RPG::BattleCommand& command = Data::database.battlecommands.commands[bcmd - 1];
 			commands.push_back(command.name);
 		}
 	}
@@ -176,7 +176,7 @@ void Window_BattleCommand::SetActor(int _actor_id) {
 RPG::BattleCommand Window_BattleCommand::GetCommand() {
 	if (actor_id > 0) {
 		Game_Actor* actor = Game_Actors::GetActor(actor_id);
-		return Data::battlecommands.commands[actor->GetBattleCommands()[index] - 1];
+		return Data::database.battlecommands.commands[actor->GetBattleCommands()[index] - 1];
 	}
 
 	RPG::BattleCommand command;
@@ -204,7 +204,7 @@ int Window_BattleCommand::GetSkillSubset() {
 
 	int idx = 4;
 	for (int i = 0; i < bcmd - 1; i++) {
-		const RPG::BattleCommand& command = Data::battlecommands.commands[i];
+		const RPG::BattleCommand& command = Data::database.battlecommands.commands[i];
 		if (command.type == RPG::BattleCommand::Type_subskill)
 			idx++;
 	}

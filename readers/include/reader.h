@@ -39,6 +39,11 @@
 #include "reader_options.h"
 #include "reader_util.h"
 
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
+
 ////////////////////////////////////////////////////////////
 // Defines
 ////////////////////////////////////////////////////////////

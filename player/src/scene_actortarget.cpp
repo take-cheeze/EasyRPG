@@ -51,20 +51,20 @@ void Scene_ActorTarget::Start() {
 	target_window->SetIndex(0);
 
 	if (use_item) {
-		if (Data::items[id - 1].entire_party) {
+		if (Data::database.items[id - 1].entire_party) {
 			target_window->SetIndex(-100);
 		}
 		status_window->SetData(id, true);
-		help_window->SetText(Data::items[id - 1].name);
+		help_window->SetText(Data::database.items[id - 1].name);
 	} else {
-		if (Data::skills[id - 1].scope == RPG::Skill::Scope_self) {
+		if (Data::database.skills[id - 1].scope == RPG::Skill::Scope_self) {
 			target_window->SetIndex(-actor_index);
-		} else if (Data::skills[id - 1].scope == RPG::Skill::Scope_party) {
+		} else if (Data::database.skills[id - 1].scope == RPG::Skill::Scope_party) {
 			target_window->SetIndex(-100);
 		}
 
 		status_window->SetData(id, false);
-		help_window->SetText(Data::skills[id - 1].name);
+		help_window->SetText(Data::database.skills[id - 1].name);
 	}
 }
 
@@ -91,7 +91,7 @@ void Scene_ActorTarget::Update() {
 ////////////////////////////////////////////////////////////
 void Scene_ActorTarget::UpdateItem() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::database.system.cancel_se);
 		Scene::Pop();
 	}
 }
@@ -99,7 +99,7 @@ void Scene_ActorTarget::UpdateItem() {
 ////////////////////////////////////////////////////////////
 void Scene_ActorTarget::UpdateSkill() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::database.system.cancel_se);
 		Scene::Pop();
 	}
 }

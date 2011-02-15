@@ -89,4 +89,55 @@ namespace LDB_Reader {
 	RPG::ItemAnimation ReadItemAnimation(Reader& stream);
 }
 
+namespace RPG {
+	/// Database Data (ldb)
+	struct Database {
+		std::vector<Actor> actors;
+		std::vector<Skill> skills;
+		std::vector<Item> items;
+		std::vector<Enemy> enemies;
+		std::vector<Troop> troops;
+		std::vector<Terrain> terrains;
+		std::vector<Attribute> attributes;
+		std::vector<State> states;
+		std::vector<Animation> animations;
+		std::vector<Chipset> chipsets;
+		std::vector<CommonEvent> commonevents;
+		BattleCommands battlecommands;
+		std::vector<Class> classes;
+		std::vector<BattlerAnimation> battleranimations;
+		Terms terms;
+		System system;
+		std::vector<std::string> switches;
+		std::vector<std::string> variables;
+
+		void Clear();
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(actors);
+			ar & BOOST_SERIALIZATION_NVP(skills);
+			ar & BOOST_SERIALIZATION_NVP(items);
+			ar & BOOST_SERIALIZATION_NVP(enemies);
+			ar & BOOST_SERIALIZATION_NVP(troops);
+			ar & BOOST_SERIALIZATION_NVP(terrains);
+			ar & BOOST_SERIALIZATION_NVP(attributes);
+			ar & BOOST_SERIALIZATION_NVP(states);
+			ar & BOOST_SERIALIZATION_NVP(animations);
+			ar & BOOST_SERIALIZATION_NVP(chipsets);
+			ar & BOOST_SERIALIZATION_NVP(commonevents);
+			ar & BOOST_SERIALIZATION_NVP(battlecommands);
+			ar & BOOST_SERIALIZATION_NVP(classes);
+			ar & BOOST_SERIALIZATION_NVP(battleranimations);
+			ar & BOOST_SERIALIZATION_NVP(terms);
+			ar & BOOST_SERIALIZATION_NVP(system);
+			ar & BOOST_SERIALIZATION_NVP(switches);
+			ar & BOOST_SERIALIZATION_NVP(variables);
+		}
+	};
+}
+
 #endif

@@ -63,13 +63,13 @@ void Scene_Order::Update() {
 
 void Scene_Order::UpdateOrder() {
 	if (Input::IsTriggered(Input::CANCEL)) {
-		Game_System::SePlay(Data::system.cancel_se);
+		Game_System::SePlay(Data::database.system.cancel_se);
 		Scene::Pop();
 	} else if (Input::IsTriggered(Input::DECISION)) {
 		if (std::find(actors.begin(), actors.end(), window_left->GetIndex() + 1) != actors.end()) {
-			Game_System::SePlay(Data::system.cancel_se);
+			Game_System::SePlay(Data::database.system.cancel_se);
 		} else {
-			Game_System::SePlay(Data::system.decision_se);
+			Game_System::SePlay(Data::database.system.decision_se);
 			window_left->SetItemText(window_left->GetIndex(), "");
 			window_right->SetItemText(actor_counter, Game_Party::GetActors()[window_left->GetIndex()]->GetName());
 
@@ -137,7 +137,7 @@ void Scene_Order::CreateCommandWindow() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Order::Redo() {
-	Game_System::SePlay(Data::system.cancel_se);
+	Game_System::SePlay(Data::database.system.cancel_se);
 
 	for (std::vector<Game_Actor*>::iterator it = Game_Party::GetActors().begin();
 		it != Game_Party::GetActors().end(); ++it) {
@@ -159,7 +159,7 @@ void Scene_Order::Redo() {
 }
 
 void Scene_Order::Confirm() {
-	Game_System::SePlay(Data::system.decision_se);
+	Game_System::SePlay(Data::database.system.decision_se);
 
 	std::vector<Game_Actor*> party_actors = Game_Party::GetActors();
 

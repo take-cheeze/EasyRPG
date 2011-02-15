@@ -51,6 +51,29 @@ namespace RPG {
 		int move_speed;
 		RPG::MoveRoute move_route;
 		std::vector<RPG::EventCommand> event_commands;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(condition);
+			ar & BOOST_SERIALIZATION_NVP(character_name);
+			ar & BOOST_SERIALIZATION_NVP(character_index);
+			ar & BOOST_SERIALIZATION_NVP(character_direction);
+			ar & BOOST_SERIALIZATION_NVP(character_pattern);
+			ar & BOOST_SERIALIZATION_NVP(translucent);
+			ar & BOOST_SERIALIZATION_NVP(move_type);
+			ar & BOOST_SERIALIZATION_NVP(move_frequency);
+			ar & BOOST_SERIALIZATION_NVP(trigger);
+			ar & BOOST_SERIALIZATION_NVP(priority_type);
+			ar & BOOST_SERIALIZATION_NVP(overlap);
+			ar & BOOST_SERIALIZATION_NVP(animation_type);
+			ar & BOOST_SERIALIZATION_NVP(move_speed);
+			ar & BOOST_SERIALIZATION_NVP(move_route);
+			ar & BOOST_SERIALIZATION_NVP(event_commands);
+		}
 	};
 }
 

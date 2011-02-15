@@ -38,25 +38,25 @@ Game_Vehicle::Game_Vehicle(Type _type) {
 void Game_Vehicle::LoadSystemSettings() {
     switch (type) {
 		case Boat:
-			character_name = Data::system.boat_name;
-			character_index = Data::system.boat_index;
-			bgm = Data::system.boat_music;
+			character_name = Data::database.system.boat_name;
+			character_index = Data::database.system.boat_index;
+			bgm = Data::database.system.boat_music;
 			map_id = Data::treemap.boat_map_id;
 			x = Data::treemap.boat_x;
 			y = Data::treemap.boat_y;
 			break;
 		case Ship:
-			character_name = Data::system.ship_name;
-			character_index = Data::system.ship_index;
-			bgm = Data::system.ship_music;
+			character_name = Data::database.system.ship_name;
+			character_index = Data::database.system.ship_index;
+			bgm = Data::database.system.ship_music;
 			map_id = Data::treemap.ship_map_id;
 			x = Data::treemap.ship_x;
 			y = Data::treemap.ship_y;
 			break;
 		case Airship:
-			character_name = Data::system.airship_name;
-			character_index = Data::system.airship_index;
-			bgm = Data::system.airship_music;
+			character_name = Data::database.system.airship_name;
+			character_index = Data::database.system.airship_index;
+			bgm = Data::database.system.airship_music;
 			map_id = Data::treemap.airship_map_id;
 			x = Data::treemap.airship_x;
 			y = Data::treemap.airship_y;

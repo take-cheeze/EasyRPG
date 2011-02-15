@@ -40,7 +40,7 @@ void Game_Actor::Setup() {
 
 ////////////////////////////////////////////////////////////
 void Game_Actor::Init() {
-	const std::vector<RPG::Learning>& skills = Data::actors[data.ID - 1].skills;
+	const std::vector<RPG::Learning>& skills = Data::database.actors[data.ID - 1].skills;
 	for (int i = 0; i < (int) skills.size(); i++)
 		if (skills[i].level <= GetLevel())
 			LearnSkill(skills[i].skill_id);
@@ -143,8 +143,8 @@ int Game_Actor::GetSp() const {
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseMaxHp(bool mod) const {
 	int n = data.changed_class
-		? Data::classes[data.class_id - 1].parameter_maxhp[data.level - 1]
-		: Data::actors[data.ID - 1].parameter_maxhp[data.level - 1];
+		? Data::database.classes[data.class_id - 1].parameter_maxhp[data.level - 1]
+		: Data::database.actors[data.ID - 1].parameter_maxhp[data.level - 1];
 
 	if (mod)
 		n += data.hp_mod;
@@ -160,8 +160,8 @@ int Game_Actor::GetBaseMaxHp() const {
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseMaxSp(bool mod) const {
 	int n = data.changed_class
-		? Data::classes[data.class_id - 1].parameter_maxsp[data.level - 1]
-		: Data::actors[data.ID - 1].parameter_maxsp[data.level - 1];
+		? Data::database.classes[data.class_id - 1].parameter_maxsp[data.level - 1]
+		: Data::database.actors[data.ID - 1].parameter_maxsp[data.level - 1];
 
 	if (mod)
 		n += data.sp_mod;
@@ -177,8 +177,8 @@ int Game_Actor::GetBaseMaxSp() const {
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseAtk(bool mod, bool equip) const {
 	int n = data.changed_class
-		? Data::classes[data.class_id - 1].parameter_attack[data.level - 1]
-		: Data::actors[data.ID - 1].parameter_attack[data.level - 1];
+		? Data::database.classes[data.class_id - 1].parameter_attack[data.level - 1]
+		: Data::database.actors[data.ID - 1].parameter_attack[data.level - 1];
 
 	if (mod)
 		n += data.attack_mod;
@@ -186,7 +186,7 @@ int Game_Actor::GetBaseAtk(bool mod, bool equip) const {
 	if (equip)
 		for (std::vector<int16_t>::const_iterator it = data.equipped.begin(); it != data.equipped.end(); it++)
 			if (*it > 0)
-				n += Data::items[*it - 1].atk_points;
+				n += Data::database.items[*it - 1].atk_points;
 
 	return min(max(n, 1), 999);
 }
@@ -199,8 +199,8 @@ int Game_Actor::GetBaseAtk() const {
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseDef(bool mod, bool equip) const {
 	int n = data.changed_class
-		? Data::classes[data.class_id - 1].parameter_defense[data.level - 1]
-		: Data::actors[data.ID - 1].parameter_defense[data.level - 1];
+		? Data::database.classes[data.class_id - 1].parameter_defense[data.level - 1]
+		: Data::database.actors[data.ID - 1].parameter_defense[data.level - 1];
 
 	if (mod)
 		n += data.defense_mod;
@@ -208,7 +208,7 @@ int Game_Actor::GetBaseDef(bool mod, bool equip) const {
 	if (equip)
 		for (std::vector<int16_t>::const_iterator it = data.equipped.begin(); it != data.equipped.end(); it++)
 			if (*it > 0)
-				n += Data::items[*it - 1].def_points;
+				n += Data::database.items[*it - 1].def_points;
 
 	return min(max(n, 1), 999);
 }
@@ -221,8 +221,8 @@ int Game_Actor::GetBaseDef() const {
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseSpi(bool mod, bool equip) const {
 	int n = data.changed_class
-		? Data::classes[data.class_id - 1].parameter_spirit[data.level - 1]
-		: Data::actors[data.ID - 1].parameter_spirit[data.level - 1];
+		? Data::database.classes[data.class_id - 1].parameter_spirit[data.level - 1]
+		: Data::database.actors[data.ID - 1].parameter_spirit[data.level - 1];
 
 	if (mod)
 		n += data.spirit_mod;
@@ -230,7 +230,7 @@ int Game_Actor::GetBaseSpi(bool mod, bool equip) const {
 	if (equip)
 		for (std::vector<int16_t>::const_iterator it = data.equipped.begin(); it != data.equipped.end(); it++)
 			if (*it > 0)
-				n += Data::items[*it - 1].spi_points;
+				n += Data::database.items[*it - 1].spi_points;
 
 	return min(max(n, 1), 999);
 }
@@ -243,8 +243,8 @@ int Game_Actor::GetBaseSpi() const {
 ////////////////////////////////////////////////////////////
 int Game_Actor::GetBaseAgi(bool mod, bool equip) const {
 	int n = data.changed_class
-		? Data::classes[data.class_id - 1].parameter_agility[data.level - 1]
-		: Data::actors[data.ID - 1].parameter_agility[data.level - 1];
+		? Data::database.classes[data.class_id - 1].parameter_agility[data.level - 1]
+		: Data::database.actors[data.ID - 1].parameter_agility[data.level - 1];
 
 	if (mod)
 		n += data.agility_mod;
@@ -252,7 +252,7 @@ int Game_Actor::GetBaseAgi(bool mod, bool equip) const {
 	if (equip)
 		for (std::vector<int16_t>::const_iterator it = data.equipped.begin(); it != data.equipped.end(); it++)
 			if (*it > 0)
-				n += Data::items[*it - 1].agi_points;
+				n += Data::database.items[*it - 1].agi_points;
 
 	return min(max(n, 1), 999);
 }
@@ -267,13 +267,13 @@ int Game_Actor::CalculateExp(int level)
 {
 	double base, inflation, correction;
 	if (data.changed_class) {
-		const RPG::Class& klass = Data::classes[data.class_id - 1];
+		const RPG::Class& klass = Data::database.classes[data.class_id - 1];
 		base = klass.exp_base;
 		inflation = klass.exp_inflation;
 		correction = klass.exp_correction;
 	}
 	else {
-		const RPG::Actor& actor = Data::actors[data.ID - 1];
+		const RPG::Actor& actor = Data::database.actors[data.ID - 1];
 		base = actor.exp_base;
 		inflation = actor.exp_inflation;
 		correction = actor.exp_correction;
@@ -294,7 +294,7 @@ int Game_Actor::CalculateExp(int level)
 
 ////////////////////////////////////////////////////////////
 void Game_Actor::MakeExpList() {
-	int final_level = Data::actors[data.ID - 1].final_level;
+	int final_level = Data::database.actors[data.ID - 1].final_level;
 	exp_list.resize(final_level, 0);;
 	for (int i = 1; i < final_level; ++i) {
 		exp_list[i] = CalculateExp(i);
@@ -417,16 +417,16 @@ void Game_Actor::ChangeLevel(int level) {
 ////////////////////////////////////////////////////////////
 bool Game_Actor::IsEquippable(int item_id) {
 	if (data.two_weapon &&
-		Data::items[item_id - 1].type == RPG::Item::Type_shield) {
+		Data::database.items[item_id - 1].type == RPG::Item::Type_shield) {
 			return false;
 	}
 
 	// If the actor id is out of range this is an optimization in the ldb file
 	// (all actors missing can equip the item)
-	if (Data::items[item_id - 1].actor_set.size() <= (unsigned)(data.ID - 1)) {
+	if (Data::database.items[item_id - 1].actor_set.size() <= (unsigned)(data.ID - 1)) {
 		return true;
 	} else {
-		return Data::items[item_id - 1].actor_set.at(data.ID - 1);
+		return Data::database.items[item_id - 1].actor_set.at(data.ID - 1);
 	}
 }
 

@@ -69,17 +69,17 @@ int Game_CommonEvent::GetIndex() const {
 }
 
 std::string Game_CommonEvent::GetName() const {
-	return Data::commonevents[common_event_id - 1].name;
+	return Data::database.commonevents[common_event_id - 1].name;
 }
 
 int Game_CommonEvent::GetSwitchId() const {
-	return Data::commonevents[common_event_id - 1].switch_id;
+	return Data::database.commonevents[common_event_id - 1].switch_id;
 }
 
 int Game_CommonEvent::GetTrigger() const {
-	return Data::commonevents[common_event_id - 1].trigger;
+	return Data::database.commonevents[common_event_id - 1].trigger;
 }
 
 std::vector<RPG::EventCommand>& Game_CommonEvent::GetList() {
-	return Data::commonevents[common_event_id - 1].event_commands;
+	return Data::database.commonevents[common_event_id - 1].event_commands;
 }

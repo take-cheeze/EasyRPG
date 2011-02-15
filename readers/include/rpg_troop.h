@@ -39,6 +39,18 @@ namespace RPG {
 		std::vector<TroopMember> members;
 		std::vector<bool> terrain_set;
 		std::vector<TroopPage> pages;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(members);
+			ar & BOOST_SERIALIZATION_NVP(terrain_set);
+			ar & BOOST_SERIALIZATION_NVP(pages);
+		}
 	};
 }
 

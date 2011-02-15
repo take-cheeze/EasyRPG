@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <string>
 #include <vector>
+#include "reader.h"
 #include "rpg_eventpage.h"
 
 ////////////////////////////////////////////////////////////
@@ -38,6 +39,18 @@ namespace RPG {
 		int x;
 		int y;
 		std::vector<RPG::EventPage> pages;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(name);
+			ar & BOOST_SERIALIZATION_NVP(x);
+			ar & BOOST_SERIALIZATION_NVP(y);
+			ar & BOOST_SERIALIZATION_NVP(pages);
+		}
 	};
 }
 

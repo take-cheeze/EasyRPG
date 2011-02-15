@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <string>
+#include "reader.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::MoveCommand class
@@ -36,6 +37,18 @@ namespace RPG {
 		int parameter_a;
 		int parameter_b;
 		int parameter_c;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(command_id);
+			ar & BOOST_SERIALIZATION_NVP(parameter_string);
+			ar & BOOST_SERIALIZATION_NVP(parameter_a);
+			ar & BOOST_SERIALIZATION_NVP(parameter_b);
+			ar & BOOST_SERIALIZATION_NVP(parameter_c);
+		}
 	};
 }
 

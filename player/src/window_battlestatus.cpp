@@ -74,7 +74,7 @@ void Window_BattleStatus::RefreshGauge(int i) {
 
 ////////////////////////////////////////////////////////////
 void Window_BattleStatus::DrawGauge(Game_Actor* actor, int index, int cx, int cy) {
-	Bitmap* system2 = Cache::System2(Data::system.system2_name);
+	Bitmap* system2 = Cache::System2(Data::database.system.system2_name);
 
 	Battle::Ally& ally = Game_Battle::GetAlly(index);
 	bool full = ally.IsReady();
@@ -132,7 +132,7 @@ void Window_BattleStatus::Update() {
 
 	if (active && index >= 0) {
 		if (Input::IsRepeated(Input::DOWN)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			for (int i = 1; i < num_actors; i++) {
 				int new_index = (index + i) % num_actors;
 				if (Game_Battle::GetAlly(new_index).IsReady()) {
@@ -142,7 +142,7 @@ void Window_BattleStatus::Update() {
 			}
 		}
 		if (Input::IsRepeated(Input::UP)) {
-			Game_System::SePlay(Data::system.cursor_se);
+			Game_System::SePlay(Data::database.system.cursor_se);
 			for (int i = num_actors - 1; i > 0; i--) {
 				int new_index = (index + i) % num_actors;
 				if (Game_Battle::GetAlly(new_index).IsReady()) {

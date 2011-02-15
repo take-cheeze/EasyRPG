@@ -19,6 +19,11 @@
 #define _RPG_LEARNING_H_
 
 ////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+#include "reader.h"
+
+////////////////////////////////////////////////////////////
 /// RPG::Learning class
 ////////////////////////////////////////////////////////////
 namespace RPG {
@@ -28,6 +33,15 @@ namespace RPG {
 		
 		int level;
 		int skill_id;
+
+	private:
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive &ar, unsigned int const /* file_version */)
+		{
+			ar & BOOST_SERIALIZATION_NVP(level);
+			ar & BOOST_SERIALIZATION_NVP(skill_id);
+		}
 	};
 }
 
