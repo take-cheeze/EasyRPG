@@ -71,6 +71,13 @@
 	#define SUPPORT_FON
 #endif
 
+#ifdef USE_OPENAL
+	#define SUPPORT_WAV
+	// #define SUPPORT_MID
+	#define SUPPORT_OGG
+	#define SUPPORT_MP3
+#endif
+
 #ifdef USE_SDL
 	#if !defined(USE_OPENGL_BITMAP) && !defined(USE_SOFT_BITMAP) && !defined(USE_PIXMAN_BITMAP)
 		#define USE_SDL_IMAGE
