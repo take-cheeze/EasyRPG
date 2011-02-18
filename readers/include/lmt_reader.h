@@ -26,11 +26,19 @@
 #include "rpg_treemap.h"
 
 ////////////////////////////////////////////////////////////
+/// Data namespace
+////////////////////////////////////////////////////////////
+namespace Data {
+	/// Database (ldb)
+	extern RPG::TreeMap treemap;
+}
+
+////////////////////////////////////////////////////////////
 /// LMT Reader namespace
 ////////////////////////////////////////////////////////////
 namespace LMT_Reader {
-	bool Load(const std::string &filename);
-	void ReadTreeMap(Reader& stream);
+	bool Load(const std::string &filename, RPG::TreeMap& lmt = Data::treemap);
+	void ReadTreeMap(Reader& stream, RPG::TreeMap& lmt);
 	RPG::MapInfo ReadMapInfo(Reader& stream);
 	RPG::Encounter ReadEncounter(Reader& stream);
 }

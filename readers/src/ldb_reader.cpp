@@ -26,7 +26,7 @@
 ////////////////////////////////////////////////////////////
 /// Load Database
 ////////////////////////////////////////////////////////////
-bool LDB_Reader::Load(const std::string& filename) {
+bool LDB_Reader::Load(const std::string& filename, RPG::Database& db) {
 	Reader reader(filename, ReaderUtil::GetEncoding());
 	if (!reader.IsOk()) {
 		Reader::SetError("Couldn't find %s database file.\n", filename.c_str());
@@ -37,14 +37,14 @@ bool LDB_Reader::Load(const std::string& filename) {
 		Reader::SetError("%s is not a valid RPG2000 database.\n", filename.c_str());
 		return false;
 	}
-	LoadChunks(reader);
+	LoadChunks(reader, db);
 	return true;
 }
 
 ////////////////////////////////////////////////////////////
 /// Load data chunks
 ////////////////////////////////////////////////////////////
-void LDB_Reader::LoadChunks(Reader& stream) {
+void LDB_Reader::LoadChunks(Reader& stream, RPG::Database& db) {
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -58,105 +58,86 @@ void LDB_Reader::LoadChunks(Reader& stream) {
 		switch (chunk_info.ID) {
 			case ChunkData::Actor:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.actors.push_back(ReadActor(stream));
+					db.actors.push_back(ReadActor(stream));
 				}
 				break;
 			case ChunkData::Skill:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.skills.push_back(ReadSkill(stream));
+					db.skills.push_back(ReadSkill(stream));
 				}
 				break;
 			case ChunkData::Item:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.items.push_back(ReadItem(stream));
+					db.items.push_back(ReadItem(stream));
 				}
 				break;
 			case ChunkData::Enemy:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.enemies.push_back(ReadEnemy(stream));
+					db.enemies.push_back(ReadEnemy(stream));
 				}
 				break;
 			case ChunkData::Troop:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.troops.push_back(ReadTroop(stream));
+					db.troops.push_back(ReadTroop(stream));
 				}
 				break;
 			case ChunkData::Terrain:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.terrains.push_back(ReadTerrain(stream));
+					db.terrains.push_back(ReadTerrain(stream));
 				}
 				break;
 			case ChunkData::Attribute:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.attributes.push_back(ReadAttribute(stream));
+					db.attributes.push_back(ReadAttribute(stream));
 				}
 				break;
 			case ChunkData::State:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.states.push_back(ReadState(stream));
+					db.states.push_back(ReadState(stream));
 				}
 				break;
 			case ChunkData::Animation:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.animations.push_back(ReadAnimation(stream));
+					db.animations.push_back(ReadAnimation(stream));
 				}
 				break;
 			case ChunkData::Chipset:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.chipsets.push_back(ReadChipset(stream));
+					db.chipsets.push_back(ReadChipset(stream));
 				}
 				break;
 			case ChunkData::Terms:
-				Data::database.terms = ReadTerms(stream);
+				db.terms = ReadTerms(stream);
 				break;
 			case ChunkData::System:
-				Data::database.system = ReadSystem(stream);
+				db.system = ReadSystem(stream);
 				break;
 			case ChunkData::Switches:
-				Data::database.switches = ReadSwitches(stream);
+				db.switches = ReadSwitches(stream);
 				break;
 			case ChunkData::Variables:
-				Data::database.variables = ReadVariables(stream);
+				db.variables = ReadVariables(stream);
 				break;
 			case ChunkData::CommonEvent:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.commonevents.push_back(ReadCommonEvent(stream));
+					db.commonevents.push_back(ReadCommonEvent(stream));
 				}
 				break;
 			case ChunkData::BattleCommand:
-				Data::database.battlecommands = ReadBattleCommands(stream);
+				db.battlecommands = ReadBattleCommands(stream);
 				break;
 			case ChunkData::Class:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.classes.push_back(ReadClass(stream));
+					db.classes.push_back(ReadClass(stream));
 				}
 				break;
 			case ChunkData::BattlerAnimation:
 				for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-					Data::database.battleranimations.push_back(ReadBattlerAnimation(stream));
+					db.battleranimations.push_back(ReadBattlerAnimation(stream));
 				}
 				break;
 			default:
 				stream.Skip(chunk_info);
 		}
 	}
-}
-
-void RPG::Database::Clear() {
-	actors.clear();
-	skills.clear();
-	items.clear();
-	enemies.clear();
-	troops.clear();
-	terrains.clear();
-	attributes.clear();
-	states.clear();
-	animations.clear();
-	chipsets.clear();
-	commonevents.clear();
-	battlecommands.commands.clear();
-	classes.clear();
-	battleranimations.clear();
-	switches.clear();
-	variables.clear();
 }

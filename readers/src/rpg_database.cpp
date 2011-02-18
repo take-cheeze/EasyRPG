@@ -15,29 +15,31 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _LMU_READER_H_
-#define _LMU_READER_H_
-
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <string>
-#include <memory>
-#include "reader.h"
-#include "rpg_map.h"
+#include "rpg_database.h"
 
+/*
 ////////////////////////////////////////////////////////////
-/// LMU Reader namespace
+/// Clear Database
 ////////////////////////////////////////////////////////////
-namespace LMU_Reader {
-	std::auto_ptr<RPG::Map> LoadMap(const std::string &filename);
-	bool LoadMap(const std::string &filename, RPG::Map& lmu);
-	void ReadMapData(Reader& stream, RPG::Map& lmu);
-	RPG::Event ReadEvent(Reader& stream);
-	RPG::EventPage ReadEventPage(Reader& stream);
-	RPG::EventPageCondition ReadEventPageCondition(Reader& stream);
-	RPG::MoveRoute ReadMoveRoute(Reader& stream);
-	RPG::MoveCommand ReadMoveCommand(Reader& stream);
+void RPG::Database::Clear() {
+	actors.clear();
+	skills.clear();
+	items.clear();
+	enemies.clear();
+	troops.clear();
+	terrains.clear();
+	attributes.clear();
+	states.clear();
+	animations.clear();
+	chipsets.clear();
+	commonevents.clear();
+	battlecommands.commands.clear();
+	classes.clear();
+	battleranimations.clear();
+	switches.clear();
+	variables.clear();
 }
-
-#endif
+*/

@@ -49,7 +49,8 @@ namespace LSD_Reader {
 	RPG::SaveTarget ReadSaveTarget(Reader& stream);
 
 	std::auto_ptr<RPG::Save> Load(const std::string &filename);
-	std::auto_ptr<RPG::Save> LoadChunks(Reader& stream);
+	bool Load(const std::string &filename, RPG::Save& lsd);
+	void LoadChunks(Reader& stream, RPG::Save& lsd);
 }
 
 #endif

@@ -19,7 +19,12 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include "data.h"
+#include "ldb_reader.h"
+#include "lmt_reader.h"
+#include "lmu_reader.h"
+#include "lsd_reader.h"
 #include <fstream>
+#include <sstream>
 #include <cassert>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
@@ -30,25 +35,153 @@ namespace Data {
 	RPG::Database database;
 	// TreeMap (lmt)
 	RPG::TreeMap treemap;
+	/// Msp Unit (lmu)
+	RPG::Map mapunit;
+	/// Save Data (lsd)
+	RPG::Save savedata;
+
+	namespace {
+		std::string baseDirectory_ = "./";
+		std::string mapUnitPath_, saveDataPath_, dataPath_;
+	}
 }
 
 ////////////////////////////////////////////////////////////
-void Data::Clear() {
-	database.Clear();
-	treemap.Clear();
+void Data::SetBaseDirectory(std::string const& dir) {
+	if(*dir.rbegin() == '/') { baseDirectory_ = dir; }
+	else { baseDirectory_.assign(dir).push_back('/'); }
+}
+////////////////////////////////////////////////////////////
+void Data::Convert()
+{
+	{
+		if(!LDB_Reader::Load(baseDirectory_ + DATABASE_NAME)) assert(false);
+		if(!LMT_Reader::Load(baseDirectory_ + TREEMAP_NAME)) assert(false);
+
+		std::ofstream ofs((baseDirectory_ + EASY_RPG_NAME).c_str());
+		assert(ofs);
+		boost::archive::xml_oarchive oa(ofs);
+		oa & BOOST_SERIALIZATION_NVP(database);
+		oa & BOOST_SERIALIZATION_NVP(treemap);
+		dataPath_.assign(baseDirectory_).append(EASY_RPG_NAME);
+	}
+
+	for(int i = 1; i <= 15; i++) {
+		{
+			std::ostringstream oss("Save");
+			oss << std::setw(2) << i << ".lsd";
+			if(!LSD_Reader::Load(baseDirectory_ + oss.str(), savedata)) continue;
+		}
+
+		{
+			std::ostringstream oss("Save");
+			oss << std::setw(2) << i << ".xml";
+			std::ifstream ofs((baseDirectory_ + oss.str()).c_str());
+			assert(ofs);
+			boost::archive::xml_iarchive ia(ofs);
+			ia & BOOST_SERIALIZATION_NVP(savedata);
+		}
+	}
+
+	for(int i = 1; i <= 9999; i++) {
+		{
+			std::ostringstream oss("Map");
+			oss << std::setw(4) << i << ".lmu";
+			if(!LMU_Reader::LoadMap(baseDirectory_ + oss.str(), mapunit)) continue;
+		}
+
+		{
+			std::ostringstream oss("Map");
+			oss << std::setw(4) << i << ".xml";
+			std::ifstream ofs((baseDirectory_ + oss.str()).c_str());
+			assert(ofs);
+			boost::archive::xml_iarchive ia(ofs);
+			ia & BOOST_SERIALIZATION_NVP(mapunit);
+		}
+	}
 }
 
-void Data::Load(std::string const& filename) {
-	std::ifstream ifs(filename.c_str());
-	assert(ifs);
-	boost::archive::xml_iarchive ia(ifs);
-	ia & BOOST_SERIALIZATION_NVP(database);
-	ia & BOOST_SERIALIZATION_NVP(treemap);
+////////////////////////////////////////////////////////////
+bool Data::Load(std::string const& filename) {
+	std::ifstream ifs((baseDirectory_ + filename).c_str());
+	if(!ifs) { Convert(); return false; }
+	else {
+		boost::archive::xml_iarchive ia(ifs);
+		ia & BOOST_SERIALIZATION_NVP(database);
+		ia & BOOST_SERIALIZATION_NVP(treemap);
+		dataPath_.assign(baseDirectory_).append(filename);
+		return true;
+	}
 }
-void Data::Save(std::string const& filename) {
-	std::ofstream ofs(filename.c_str());
+
+////////////////////////////////////////////////////////////
+void Data::Save() {
+	assert(!dataPath_.empty());
+	std::ofstream ofs(dataPath_.c_str());
 	assert(ofs);
 	boost::archive::xml_oarchive oa(ofs);
 	oa & BOOST_SERIALIZATION_NVP(database);
 	oa & BOOST_SERIALIZATION_NVP(treemap);
+}
+
+////////////////////////////////////////////////////////////
+bool Data::LoadMapUnit(std::string const& filename)
+{
+	std::ifstream ifs((baseDirectory_ + filename).c_str());
+	if(!ifs) { return false; }
+	else {
+		boost::archive::xml_iarchive ia(ifs);
+		ia & BOOST_SERIALIZATION_NVP(mapunit);
+		mapUnitPath_.assign(baseDirectory_).append(filename);
+		return true;
+	}
+}
+
+////////////////////////////////////////////////////////////
+bool Data::LoadMapUnit(int id)
+{
+	std::ostringstream oss("Map");
+	oss << std::setw(4) << id << ".xml";
+	return LoadMapUnit(oss.str());
+}
+
+////////////////////////////////////////////////////////////
+bool Data::LoadSaveData(std::string const& filename)
+{
+	std::ifstream ifs((baseDirectory_ + filename).c_str());
+	if(!ifs) { return false; }
+	else {
+		boost::archive::xml_iarchive ia(ifs);
+		ia & BOOST_SERIALIZATION_NVP(savedata);
+		saveDataPath_.assign(baseDirectory_).append(filename);
+		return true;
+	}
+}
+
+////////////////////////////////////////////////////////////
+bool Data::LoadSaveData(int id)
+{
+	std::ostringstream oss("Save");
+	oss << std::setw(2) << id << ".xml";
+	return LoadSaveData(oss.str());
+}
+
+////////////////////////////////////////////////////////////
+void Data::SaveSaveData()
+{
+	assert(!saveDataPath_.empty());
+	std::ofstream ofs(saveDataPath_.c_str());
+	assert(ofs);
+	boost::archive::xml_oarchive oa(ofs);
+	oa & BOOST_SERIALIZATION_NVP(savedata);
+}
+
+////////////////////////////////////////////////////////////
+void Data::SaveMapUnit()
+{
+	assert(!mapUnitPath_.empty());
+	std::ofstream ofs(mapUnitPath_.c_str());
+	assert(ofs);
+	boost::archive::xml_oarchive oa(ofs);
+	oa & BOOST_SERIALIZATION_NVP(mapunit);
 }

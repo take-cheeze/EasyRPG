@@ -148,15 +148,15 @@ void Scene_Title::Update() {
 
 ////////////////////////////////////////////////////////////
 void Scene_Title::LoadDatabase() {
-	// Load Database
-	Data::database.Clear();
-
+	Data::Load();
+	/*
 	if (!LDB_Reader::Load(FileFinder::FindDefault(".", DATABASE_NAME))) {
 		Output::ErrorStr(Reader::GetError());
 	}
 	if (!LMT_Reader::Load(FileFinder::FindDefault(".", TREEMAP_NAME))) {
 		Output::ErrorStr(Reader::GetError());
 	}
+	*/
 }
 
 ////////////////////////////////////////////////////////////

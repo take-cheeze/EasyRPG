@@ -38,14 +38,29 @@ std::auto_ptr<RPG::Save> LSD_Reader::Load(const std::string& filename) {
 		Reader::SetError("%s is not a valid RPG2000 save.\n", filename.c_str());
 		return std::auto_ptr<RPG::Save>(NULL);
 	}
-	return LoadChunks(reader);
+	std::auto_ptr<RPG::Save> save(new RPG::Save());
+	LoadChunks(reader, *save);
+	return save;
+}
+bool LSD_Reader::Load(const std::string& filename, RPG::Save& save) {
+	Reader reader(filename, ReaderUtil::GetEncoding());
+	if (!reader.IsOk()) {
+		Reader::SetError("Couldn't find %s save file.\n", filename.c_str());
+		return false;
+	}
+	std::string header = reader.ReadString(reader.Read32(Reader::CompressedInteger));
+	if (header != "LcfSaveData") {
+		Reader::SetError("%s is not a valid RPG2000 save.\n", filename.c_str());
+		return false;
+	}
+	LoadChunks(reader, save);
+	return true;
 }
 
 ////////////////////////////////////////////////////////////
 /// Load data chunks
 ////////////////////////////////////////////////////////////
-std::auto_ptr<RPG::Save> LSD_Reader::LoadChunks(Reader& stream) {
-	std::auto_ptr<RPG::Save> save(new RPG::Save());
+void LSD_Reader::LoadChunks(Reader& stream, RPG::Save& save) {
 	Reader::Chunk chunk_info;
 
 	while (!stream.Eof()) {
@@ -58,61 +73,60 @@ std::auto_ptr<RPG::Save> LSD_Reader::LoadChunks(Reader& stream) {
 		}
 		switch (chunk_info.ID) {
 		case ChunkSave::title:
-			save->title = ReadSaveTitle(stream);
+			save.title = ReadSaveTitle(stream);
 			break;
 		case ChunkSave::data:
-			save->system = ReadSaveSystem(stream);
+			save.system = ReadSaveSystem(stream);
 			break;
 		case ChunkSave::screen:
-			save->screen = ReadSaveScreen(stream);
+			save.screen = ReadSaveScreen(stream);
 			break;
 		case ChunkSave::pictures:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				save->pictures.push_back(ReadSavePicture(stream));
+				save.pictures.push_back(ReadSavePicture(stream));
 			}
 			break;
 		case ChunkSave::party_location:
-			save->party_location = ReadSavePartyLocation(stream);
+			save.party_location = ReadSavePartyLocation(stream);
 			break;
 		case ChunkSave::boat_location:
-			save->boat_location = ReadSaveVehicleLocation(stream);
+			save.boat_location = ReadSaveVehicleLocation(stream);
 			break;
 		case ChunkSave::ship_location:
-			save->ship_location = ReadSaveVehicleLocation(stream);
+			save.ship_location = ReadSaveVehicleLocation(stream);
 			break;
 		case ChunkSave::airship_location:
-			save->airship_location = ReadSaveVehicleLocation(stream);
+			save.airship_location = ReadSaveVehicleLocation(stream);
 			break;
 		case ChunkSave::party:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				save->party.push_back(ReadSaveActor(stream));
+				save.party.push_back(ReadSaveActor(stream));
 			}
 			break;
 		case ChunkSave::inventory:
-			save->inventory = ReadSaveInventory(stream);
+			save.inventory = ReadSaveInventory(stream);
 			break;
 		case ChunkSave::targets:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				save->targets.push_back(ReadSaveTarget(stream));
+				save.targets.push_back(ReadSaveTarget(stream));
 			}
 			break;
 		case ChunkSave::map_info:
-			save->map_info = ReadSaveMapInfo(stream);
+			save.map_info = ReadSaveMapInfo(stream);
 			break;
 		case ChunkSave::unknown_70:
-			save->unknown_70 = stream.Read32(Reader::CompressedInteger);
+			save.unknown_70 = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkSave::events:
-			save->events = ReadSaveEvents(stream);
+			save.events = ReadSaveEvents(stream);
 			break;
 		case ChunkSave::common_events:
 			for (int i = stream.Read32(Reader::CompressedInteger); i > 0; i--) {
-				save->common_events.push_back(ReadCommonEvent(stream));
+				save.common_events.push_back(ReadCommonEvent(stream));
 			}
 			break;
 		default:
 			stream.Skip(chunk_info);
 		}
 	}
-	return save;
 }

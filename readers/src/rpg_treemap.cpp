@@ -39,7 +39,9 @@ RPG::TreeMap::TreeMap() {
 	airship_y = 0;
 }
 
+/*
 void RPG::TreeMap::Clear() {
 	maps.clear();
 	tree_order.clear();
 }
+*/

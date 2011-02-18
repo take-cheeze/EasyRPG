@@ -48,8 +48,6 @@ namespace RPG {
 		int airship_x;
 		int airship_y;
 
-		void Clear();
-
 	private:
 		friend class boost::serialization::access;
 		template<class Archive>
