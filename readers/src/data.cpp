@@ -25,6 +25,7 @@
 #include "lsd_reader.h"
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 #include <cassert>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
@@ -43,6 +44,17 @@ namespace Data {
 	namespace {
 		std::string baseDirectory_ = "./";
 		std::string mapUnitPath_, saveDataPath_, dataPath_;
+
+		std::string GenMapName(int const id, char const* const suffix) {
+			std::ostringstream oss;
+			oss << "Map" << std::setfill('0') << std::setw(4) << id << suffix;
+			return oss.str();
+		}
+		std::string GenSaveName(int const id, char const* const suffix) {
+			std::ostringstream oss;
+			oss << "Save" << std::setfill('0') << std::setw(2) << id << suffix;
+			return oss.str();
+		}
 	}
 }
 
@@ -67,37 +79,21 @@ void Data::Convert()
 	}
 
 	for(int i = 1; i <= 15; i++) {
-		{
-			std::ostringstream oss("Save");
-			oss << std::setw(2) << i << ".lsd";
-			if(!LSD_Reader::Load(baseDirectory_ + oss.str(), savedata)) continue;
-		}
+		if(!LSD_Reader::Load(baseDirectory_ + GenSaveName(i, ".lsd"), savedata)) continue;
 
-		{
-			std::ostringstream oss("Save");
-			oss << std::setw(2) << i << ".xml";
-			std::ifstream ofs((baseDirectory_ + oss.str()).c_str());
-			assert(ofs);
-			boost::archive::xml_iarchive ia(ofs);
-			ia & BOOST_SERIALIZATION_NVP(savedata);
-		}
+		std::ofstream ofs((baseDirectory_ + GenSaveName(i, ".xml")).c_str());
+		assert(ofs);
+		boost::archive::xml_oarchive oa(ofs);
+		oa & BOOST_SERIALIZATION_NVP(savedata);
 	}
 
 	for(int i = 1; i <= 9999; i++) {
-		{
-			std::ostringstream oss("Map");
-			oss << std::setw(4) << i << ".lmu";
-			if(!LMU_Reader::LoadMap(baseDirectory_ + oss.str(), mapunit)) continue;
-		}
+		if(!LMU_Reader::LoadMap(baseDirectory_ + GenMapName(i, ".lmu"), mapunit)) continue;
 
-		{
-			std::ostringstream oss("Map");
-			oss << std::setw(4) << i << ".xml";
-			std::ifstream ofs((baseDirectory_ + oss.str()).c_str());
-			assert(ofs);
-			boost::archive::xml_iarchive ia(ofs);
-			ia & BOOST_SERIALIZATION_NVP(mapunit);
-		}
+		std::ofstream ofs((baseDirectory_ + GenMapName(i, ".xml")).c_str());
+		assert(ofs);
+		boost::archive::xml_oarchive oa(ofs);
+		oa & BOOST_SERIALIZATION_NVP(mapunit);
 	}
 }
 
@@ -138,11 +134,9 @@ bool Data::LoadMapUnit(std::string const& filename)
 }
 
 ////////////////////////////////////////////////////////////
-bool Data::LoadMapUnit(int id)
+bool Data::LoadMapUnit(int const id)
 {
-	std::ostringstream oss("Map");
-	oss << std::setw(4) << id << ".xml";
-	return LoadMapUnit(oss.str());
+	return LoadMapUnit(GenMapName(id, ".xml"));
 }
 
 ////////////////////////////////////////////////////////////
@@ -159,11 +153,9 @@ bool Data::LoadSaveData(std::string const& filename)
 }
 
 ////////////////////////////////////////////////////////////
-bool Data::LoadSaveData(int id)
+bool Data::LoadSaveData(int const id)
 {
-	std::ostringstream oss("Save");
-	oss << std::setw(2) << id << ".xml";
-	return LoadSaveData(oss.str());
+	return LoadSaveData(GenSaveName(id, ".xml"));
 }
 
 ////////////////////////////////////////////////////////////
