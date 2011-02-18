@@ -46,7 +46,7 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_CURRENT_SOURCE_DIR}/../../../readers/include
 )
 
-AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/../../../readers/src SRCS)
+ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/../../../readers/builds/cmake ${CMAKE_CURRENT_SOURCE_DIR}/../../../readers/builds/cmake)
 AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/../../src SRCS)
 
 SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../bin/testgame)
@@ -61,6 +61,10 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	${SDLTTF_LIBRARY}
 	${ZLIB_LIBRARIES}
 
+	EasyRPG_Reader
+
 	avformat avcodec avutil avdevice
 	iconv
 )
+
+ADD_DEPENDENCIES(${PROJECT_NAME} EasyRPG_Reader)
