@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="Editor.Database.ActorsEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:extToolkit="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Controls="clr-namespace:Editor.Controls" mc:Ignorable="d"
+             d:DesignHeight="480" d:DesignWidth="640"
+             Loaded="ActorsEditorLoaded">
+    <Grid SizeChanged="GridSizeChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <ListBox x:Name="itemsListBox" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0:0000}: {1}">
+                                <Binding Path="Id"/>
+                                <Binding Path="Name"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <GridSplitter Grid.Column="1" Width="10" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" />
+
+        <Grid x:Name="itemGrid" Grid.Column="2" DataContext="{Binding Path=SelectedItem, ElementName=itemsListBox}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Name">
+                    <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </GroupBox>
+
+                <GroupBox Header="Title" Grid.Row="1">
+                    <TextBox Text="{Binding Title, Mode=TwoWay}"/>
+                </GroupBox>
+                
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="Initial Level">
+                        <extToolkit:NumericUpDown Minimum="1" Maximum="{Binding FinalLevel, Mode=TwoWay}" Value="{Binding InitialLevel, Mode=TwoWay}" ValueType="{x:Type System:Int32}"/>
+                    </GroupBox>
+
+                    <GroupBox Header="Max Level" Grid.Column="1">
+                        <extToolkit:NumericUpDown Minimum="{Binding InitialLevel, Mode=TwoWay}" Maximum="50" Value="{Binding FinalLevel, Mode=TwoWay}" ValueType="{x:Type System:Int32}"/>
+                    </GroupBox>
+                </Grid>
+
+                <GroupBox Header="Experience Curve" Grid.Row="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBox IsEnabled="False" IsReadOnly="True">
+                            <TextBox.Text>
+                                <MultiBinding StringFormat="{}Base: {0} - Inflation: {1} - Correction: {2}">
+                                    <Binding Path="ExpBase"/>
+                                    <Binding Path="ExpInflation"/>
+                                    <Binding Path="ExpCorrection"/>
+                                </MultiBinding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <Button Grid.Column="1" Margin="4, 0, 0, 0">
+                            <TextBlock Text="Edit" Margin="8, 0"/>
+                        </Button>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Character Graphic" Grid.Row="4">
+                    <Controls:CharacterSelector DataContext="{Binding}"/>
+                </GroupBox>
+
+                <GroupBox Header="Face Graphic" Grid.Row="5">
+                    <Controls:FaceSelector DataContext="{Binding}"/>
+                </GroupBox>
+            </Grid>
+
+            <Grid Grid.Column="1">
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
