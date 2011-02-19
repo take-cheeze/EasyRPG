@@ -23,6 +23,7 @@
 #include "lmt_reader.h"
 #include "lmu_reader.h"
 #include "lsd_reader.h"
+#include "serialization_no_rtti.h"
 #include <fstream>
 #include <sstream>
 #include <iomanip>
@@ -73,8 +74,8 @@ void Data::Convert()
 		std::ofstream ofs((baseDirectory_ + EASY_RPG_NAME).c_str());
 		assert(ofs);
 		boost::archive::xml_oarchive oa(ofs);
-		oa & BOOST_SERIALIZATION_NVP(database);
-		oa & BOOST_SERIALIZATION_NVP(treemap);
+		oa & BOOST_SERIALIZATION_NVP(Data::database);
+		oa & BOOST_SERIALIZATION_NVP(Data::treemap);
 		dataPath_.assign(baseDirectory_).append(EASY_RPG_NAME);
 	}
 
@@ -84,7 +85,7 @@ void Data::Convert()
 		std::ofstream ofs((baseDirectory_ + GenSaveName(i, ".xml")).c_str());
 		assert(ofs);
 		boost::archive::xml_oarchive oa(ofs);
-		oa & BOOST_SERIALIZATION_NVP(savedata);
+		oa & BOOST_SERIALIZATION_NVP(Data::savedata);
 	}
 
 	for(int i = 1; i <= 9999; i++) {
@@ -93,7 +94,7 @@ void Data::Convert()
 		std::ofstream ofs((baseDirectory_ + GenMapName(i, ".xml")).c_str());
 		assert(ofs);
 		boost::archive::xml_oarchive oa(ofs);
-		oa & BOOST_SERIALIZATION_NVP(mapunit);
+		oa & BOOST_SERIALIZATION_NVP(Data::mapunit);
 	}
 }
 
@@ -103,8 +104,8 @@ bool Data::Load(std::string const& filename) {
 	if(!ifs) { Convert(); return false; }
 	else {
 		boost::archive::xml_iarchive ia(ifs);
-		ia & BOOST_SERIALIZATION_NVP(database);
-		ia & BOOST_SERIALIZATION_NVP(treemap);
+		ia & BOOST_SERIALIZATION_NVP(Data::database);
+		ia & BOOST_SERIALIZATION_NVP(Data::treemap);
 		dataPath_.assign(baseDirectory_).append(filename);
 		return true;
 	}
@@ -116,8 +117,8 @@ void Data::Save() {
 	std::ofstream ofs(dataPath_.c_str());
 	assert(ofs);
 	boost::archive::xml_oarchive oa(ofs);
-	oa & BOOST_SERIALIZATION_NVP(database);
-	oa & BOOST_SERIALIZATION_NVP(treemap);
+	oa & BOOST_SERIALIZATION_NVP(Data::database);
+	oa & BOOST_SERIALIZATION_NVP(Data::treemap);
 }
 
 ////////////////////////////////////////////////////////////
@@ -127,7 +128,7 @@ bool Data::LoadMapUnit(std::string const& filename)
 	if(!ifs) { return false; }
 	else {
 		boost::archive::xml_iarchive ia(ifs);
-		ia & BOOST_SERIALIZATION_NVP(mapunit);
+		ia & BOOST_SERIALIZATION_NVP(Data::mapunit);
 		mapUnitPath_.assign(baseDirectory_).append(filename);
 		return true;
 	}
@@ -146,7 +147,7 @@ bool Data::LoadSaveData(std::string const& filename)
 	if(!ifs) { return false; }
 	else {
 		boost::archive::xml_iarchive ia(ifs);
-		ia & BOOST_SERIALIZATION_NVP(savedata);
+		ia & BOOST_SERIALIZATION_NVP(Data::savedata);
 		saveDataPath_.assign(baseDirectory_).append(filename);
 		return true;
 	}
@@ -165,7 +166,7 @@ void Data::SaveSaveData()
 	std::ofstream ofs(saveDataPath_.c_str());
 	assert(ofs);
 	boost::archive::xml_oarchive oa(ofs);
-	oa & BOOST_SERIALIZATION_NVP(savedata);
+	oa & BOOST_SERIALIZATION_NVP(Data::savedata);
 }
 
 ////////////////////////////////////////////////////////////
@@ -175,5 +176,5 @@ void Data::SaveMapUnit()
 	std::ofstream ofs(mapUnitPath_.c_str());
 	assert(ofs);
 	boost::archive::xml_oarchive oa(ofs);
-	oa & BOOST_SERIALIZATION_NVP(mapunit);
+	oa & BOOST_SERIALIZATION_NVP(Data::mapunit);
 }
