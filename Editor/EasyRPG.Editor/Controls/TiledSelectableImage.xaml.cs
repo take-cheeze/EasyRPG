@@ -56,25 +56,25 @@ namespace Editor.Controls
 			rectangle.Width = Width / TilesX;
 			rectangle.Height = Height / TilesY;
 			rectangle.Margin = new Thickness(0, 0, 0, 0);
-			UpdateRectanglePosition(Index % TilesX, Index / TilesY);
+			UpdateRectanglePosition(Index / TilesY, Index % TilesX);
 		}
 
 		private void ControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			var pos = e.GetPosition(this);
 
-			UpdateRectanglePosition((int)(pos.X / rectangle.Width), (int)(pos.Y / rectangle.Height));
+			UpdateRectanglePosition((int)(pos.Y / rectangle.Height), (int)(pos.X / rectangle.Width));
 		}
 
 		private void UpdateRectanglePosition(int row, int column)
 		{
-			var left = row * rectangle.Width;
-			var top = column * rectangle.Height;
+			var left = column * rectangle.Width;
+			var top = row * rectangle.Height;
 
 			Canvas.SetLeft(rectangle, left);
 			Canvas.SetTop(rectangle, top);
 
-			Index = row * TilesX + column;
+			Index = row * TilesY + column;
 		}
 	}
 }

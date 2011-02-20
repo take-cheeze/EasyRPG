@@ -25,9 +25,11 @@ namespace Editor.Dialogs
 			{
 				if (filesDisplayList.Count > 0)
 				{
+					var targetFile = value.ToUpper();
+
 					for (var i = 0; i < filesDisplayList.Count - 1; i++)
 					{
-						if (filesDisplayList[i].DisplayName == value)
+						if (filesDisplayList[i].DisplayName.ToUpper() == targetFile)
 						{
 							filesListBox.SelectedIndex = i;
 							return;
@@ -70,7 +72,7 @@ namespace Editor.Dialogs
 															}).ToList();
 
 			filesDisplayList = projectFilesDisplay;
-			filesDisplayList.AddRange(rtpFilesDisplay.Where(r => !projectFilesDisplay.Any(p => p.DisplayName == r.DisplayName)));
+			filesDisplayList.AddRange(rtpFilesDisplay.Where(r => !projectFilesDisplay.Any(p => p.DisplayName.ToUpper() == r.DisplayName.ToUpper())));
 
 			filesListBox.DataContext = filesDisplayList;
 		}
