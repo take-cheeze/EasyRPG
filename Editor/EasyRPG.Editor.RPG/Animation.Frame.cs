@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -6,11 +5,11 @@ namespace EasyRPG.Editor.RPG
 	public class AnimationFrame : NotifyPropertyChanged
 	{
 		#region PrivateMembers
-		private List<AnimationCellData> cells;
+		private ExtendedObservableCollection<AnimationCellData> cells;
 		#endregion
 
 		#region PublicMembers
-		public List<AnimationCellData> Cells
+		public ExtendedObservableCollection<AnimationCellData> Cells
 		{
 			get { return cells; }
 			set { cells = value; OnPropertyChanged("Cells"); }
@@ -20,7 +19,7 @@ namespace EasyRPG.Editor.RPG
 		#region Constructor
 		public AnimationFrame()
 		{
-			cells = new List<AnimationCellData>();
+			cells = new ExtendedObservableCollection<AnimationCellData>();
 		}
 		#endregion
 	}

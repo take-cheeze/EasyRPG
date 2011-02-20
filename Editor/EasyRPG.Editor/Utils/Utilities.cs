@@ -7,7 +7,7 @@ namespace Editor.Utils
 	{
 		public static DependencyObject GetTopLevelControl(DependencyObject control)
 		{
-			DependencyObject tmp = control;
+			var tmp = control;
 			DependencyObject parent = null;
 			while ((tmp = VisualTreeHelper.GetParent(tmp)) != null)
 			{

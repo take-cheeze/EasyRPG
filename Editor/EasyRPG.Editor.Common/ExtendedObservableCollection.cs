@@ -32,7 +32,7 @@ namespace EasyRPG.Editor.Common
 			}
 			surpressEvents = false;
 			OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, items.ToList()));
-		} 
+		}
 		#endregion
 
 		#region ObservableCollection

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -53,15 +52,15 @@ namespace EasyRPG.Editor.RPG
 		private bool absorbDamage;
 		private bool ignoreDefense;
 		private bool stateEffect;
-		private List<bool> stateEffects;
-		private List<bool> attributeEffects;
+		private ExtendedObservableCollection<bool> stateEffects;
+		private ExtendedObservableCollection<bool> attributeEffects;
 		private bool affectAttrDefence;
 		private int battlerAnimation;
 		private Sound soundEffect;
 		private int switchId;
 		private bool occasionField;
 		private bool occasionBattle;
-		private List<BattlerAnimationData> battlerAnimationData;
+		private ExtendedObservableCollection<BattlerAnimationData> battlerAnimationData;
 		#endregion
 
 		#region PublicMembers
@@ -197,12 +196,12 @@ namespace EasyRPG.Editor.RPG
 			get { return stateEffect; }
 			set { stateEffect = value; OnPropertyChanged("StateEffect"); }
 		}
-		public List<bool> StateEffects
+		public ExtendedObservableCollection<bool> StateEffects
 		{
 			get { return stateEffects; }
 			set { stateEffects = value; OnPropertyChanged("StateEffects"); }
 		}
-		public List<bool> AttributeEffects
+		public ExtendedObservableCollection<bool> AttributeEffects
 		{
 			get { return attributeEffects; }
 			set { attributeEffects = value; OnPropertyChanged("AttributeEffects"); }
@@ -242,7 +241,7 @@ namespace EasyRPG.Editor.RPG
 			set { occasionBattle = value; OnPropertyChanged("OccasionBattle"); }
 		}
 
-		public List<BattlerAnimationData> BattlerAnimationData // RPG2003
+		public ExtendedObservableCollection<BattlerAnimationData> BattlerAnimationData // RPG2003
 		{
 			get { return battlerAnimationData; }
 			set { battlerAnimationData = value; OnPropertyChanged("BattlerAnimationData"); }
@@ -278,14 +277,14 @@ namespace EasyRPG.Editor.RPG
 			absorbDamage = false;
 			ignoreDefense = false;
 			stateEffect = false;
-			stateEffects = new List<bool>();
-			attributeEffects = new List<bool>();
+			stateEffects = new ExtendedObservableCollection<bool>();
+			attributeEffects = new ExtendedObservableCollection<bool>();
 			affectAttrDefence = false;
 			battlerAnimation = 1;
 			switchId = 1;
 			occasionField = true;
 			occasionBattle = false;
-			battlerAnimationData = new List<BattlerAnimationData>();
+			battlerAnimationData = new ExtendedObservableCollection<BattlerAnimationData>();
 		}
 		#endregion
 	}

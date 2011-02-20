@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using EasyRPG.Editor.Common;
+﻿using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
 {
 	public class BattleCommands : NotifyPropertyChanged
 	{
 		#region PrivateMembers
-		private List<BattleCommand> commands;
+		private ExtendedObservableCollection<BattleCommand> commands;
 		private int placement;
 		private int row;
 		private int battleType;
@@ -24,7 +23,7 @@ namespace EasyRPG.Editor.RPG
 		#endregion
 
 		#region privateMembers
-		public List<BattleCommand> Commands
+		public ExtendedObservableCollection<BattleCommand> Commands
 		{
 			get { return commands; }
 			set { commands = value; OnPropertyChanged("Commands"); }
@@ -104,7 +103,7 @@ namespace EasyRPG.Editor.RPG
 		#region Constructor
 		public BattleCommands()
 		{
-			commands = new List<BattleCommand>();
+			commands = new ExtendedObservableCollection<BattleCommand>();
 			placement = 0;
 			row = 0;
 			battleType = 0;

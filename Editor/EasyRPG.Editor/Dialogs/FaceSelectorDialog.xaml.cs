@@ -19,11 +19,7 @@ namespace Editor.Dialogs
 			get
 			{
 				var file = filesListBox.SelectedItem as FileSourceDisplay;
-				if (file != null)
-				{
-					return file.DisplayName;
-				}
-				return null;
+				return file != null ? file.DisplayName : null;
 			}
 			set
 			{

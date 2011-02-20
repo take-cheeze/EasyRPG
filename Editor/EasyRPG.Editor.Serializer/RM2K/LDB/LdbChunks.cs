@@ -2,24 +2,24 @@
 {
 	enum ChunkData
 	{
-		Actor				= 0x0B, // RPG::Actor
-		Skill				= 0x0C, // RPG::Skill
-		Item				= 0x0D, // RPG::Item
-		Enemy				= 0x0E, // RPG::Enemy
-		Troop				= 0x0F, // RPG::Troop
-		Terrain				= 0x10, // RPG::Terrain
-		Attribute			= 0x11, // RPG::Attribute
-		State				= 0x12, // RPG::State
-		Animation			= 0x13, // RPG::Animation
-		Chipset				= 0x14, // RPG::Chipset
-		Terms				= 0x15, // RPG::Terms
-		System				= 0x16, // RPG::System
-		Switches			= 0x17, // RPG::Switchs
-		Variables			= 0x18, // RPG::Variables
-		CommonEvent			= 0x19, // RPG::CommonEvent
-		BattleCommand		= 0x1D, // RPG::BattleCommand - RPG2003
-		Class				= 0x1E, // RPG::Class - RPG2003
-		BattlerAnimation	= 0x20, // RPG::BattlerAnimation - RPG2003
+		Actor				= 0x0B, // RPG.Actor
+		Skill				= 0x0C, // RPG.Skill
+		Item				= 0x0D, // RPG.Item
+		Enemy				= 0x0E, // RPG.Enemy
+		Troop				= 0x0F, // RPG.Troop
+		Terrain				= 0x10, // RPG.Terrain
+		Attribute			= 0x11, // RPG.Attribute
+		State				= 0x12, // RPG.State
+		Animation			= 0x13, // RPG.Animation
+		Chipset				= 0x14, // RPG.Chipset
+		Terms				= 0x15, // RPG.Terms
+		System				= 0x16, // RPG.System
+		Switches			= 0x17, // RPG.Switchs
+		Variables			= 0x18, // RPG.Variables
+		CommonEvent			= 0x19, // RPG.CommonEvent
+		BattleCommand		= 0x1D, // RPG.BattleCommand - RPG2003
+		Class				= 0x1E, // RPG.Class - RPG2003
+		BattlerAnimation	= 0x20, // RPG.BattlerAnimation - RPG2003
 
 		CommonEventD1		= 0x1A, // Duplicated? - Not used - RPG2003
 		CommonEventD2		= 0x1B, // Duplicated? - Not used - RPG2003
@@ -56,14 +56,14 @@
 		BattleX				= 0x3B, // Integer - RPG2003
 		BattleY				= 0x3C, // Integer - RPG2003
 		BattlerAnimation	= 0x3E, // Integer - RPG2003
-		Skills				= 0x3F, // Array - RPG::Learning
+		Skills				= 0x3F, // Array - RPG.Learning
 		RenameSkill			= 0x42, // Flag
 		SkillName			= 0x43, // String
 		StateRanksSize		= 0x47, // Integer
 		StateRanks			= 0x48, // Array - Short
 		AttributeRanksSize	= 0x49, // Integer
 		AttributeRanks		= 0x4A, // Array - Short
-		BattleCommands		= 0x50	// Array - RPG::BattleCommand - RPG2003
+		BattleCommands		= 0x50	// Array - RPG.BattleCommand - RPG2003
 	}
 
 	enum ChunkLearning
@@ -86,7 +86,7 @@
 		Scope					= 0x0C, // Integer
 		SwitchId				= 0x0D, // Integer
 		AnimationId				= 0x0E, // Integer
-		SoundEffect				= 0x10, // RPG::Sound
+		SoundEffect				= 0x10, // RPG.Sound
 		OccasionField			= 0x12, // Flag
 		OccasionBattle			= 0x13, // Flag
 		StateEffect				= 0x14, // Flag - RPG2003
@@ -169,7 +169,7 @@
 		ClassSetSize		= 0x48, // Integer - RPG2003
 		ClassSet			= 0x49, // Array - Flag - RPG2003
 		RangedTrajectory	= 0x4B, // Integer
-		RangedTarget		= 0x4C  // Integer
+		RangedTarget		= 0x4C	// Integer
 	}
 
 	enum ChunkItemAnimation
@@ -209,7 +209,7 @@
 		StateRanks			= 0x20, // Array - Short
 		AttributeRanksSize	= 0x21, // Integer
 		AttributeRanks		= 0x22, // Array - Short
-		Actions				= 0x2A	// Array - RPG::EnemyAction
+		Actions				= 0x2A	// Array - RPG.EnemyAction
 	}
 
 	enum ChunkEnemyAction
@@ -232,10 +232,10 @@
 	enum ChunkTroop
 	{
 		Name			= 0x01, // String
-		Members			= 0x02, // Array - RPG::TroopMember
+		Members			= 0x02, // Array - RPG.TroopMember
 		TerrainSetSize	= 0x04, // Integer
 		TerrainSet		= 0x05, // Array - Flag
-		Pages			= 0x0B	// Array - RPG::TroopPage
+		Pages			= 0x0B	// Array - RPG.TroopPage
 	}
 
 	enum ChunkTroopMember
@@ -248,9 +248,9 @@
 
 	enum ChunkTroopPage
 	{
-		Condition			= 0x02, // RPG::TroopPageCondition
+		Condition			= 0x02, // RPG.TroopPageCondition
 		EventCommandsSize	= 0x0B, // Integer
-		EventCommands		= 0x0C	// Array - RPG::EventCommand
+		EventCommands		= 0x0C	// Array - RPG.EventCommand
 	}
 
 	enum ChunkTroopPageCondition
@@ -291,20 +291,20 @@
 		AirshipPass				= 0x07, // Flag
 		AirshipLand				= 0x09, // Flag
 		BushDepth				= 0x0B, // Integer
-		Footstep				= 0x0F, // RPG::Sound - RPG2003
+		Footstep				= 0x0F, // RPG.Sound - RPG2003
 		OnDamageSe				= 0x10, // Flag - RPG2003
 		BackgroundType			= 0x11, // Integer - RPG2003
 		BackgroundAName			= 0x15, // String - RPG2003
-		BackgroundAScrollh		= 0x16, // Flag - RPG2003
-		BackgroundAScrollv		= 0x17, // Flag - RPG2003
-		BackgroundAScrollhSpeed	= 0x18, // Integer - RPG2003
-		BackgroundAScrollvSpeed	= 0x19, // Integer - RPG2003
+		BackgroundAScrollH		= 0x16, // Flag - RPG2003
+		BackgroundAScrollV		= 0x17, // Flag - RPG2003
+		BackgroundAScrollHSpeed	= 0x18, // Integer - RPG2003
+		BackgroundAScrollVSpeed	= 0x19, // Integer - RPG2003
 		BackgroundB				= 0x1E, // Flag - RPG2003
 		BackgroundBName			= 0x1F, // String - RPG2003
-		BackgroundBScrollh		= 0x20, // Flag - RPG2003
-		BackgroundBScrollv		= 0x21, // Flag - RPG2003
-		BackgroundBScrollhSpeed	= 0x22, // Integer - RPG2003
-		BackgroundBScrollvSpeed	= 0x23, // Integer - RPG2003
+		BackgroundBScrollH		= 0x20, // Flag - RPG2003
+		BackgroundBScrollV		= 0x21, // Flag - RPG2003
+		BackgroundBScrollHSpeed	= 0x22, // Integer - RPG2003
+		BackgroundBScrollVSpeed	= 0x23, // Integer - RPG2003
 		SpecialFlags			= 0x28, // Bitflag - RPG2003
 		SpecialBackParty		= 0x29, // Integer - RPG2003
 		SpecialBackEnemies		= 0x2A, // Integer - RPG2003
@@ -377,27 +377,27 @@
 	{
 		Name			= 0x01, // String
 		AnimationName	= 0x02, // String
-		Timings			= 0x06, // Array - RPG::AnimationTiming
+		Timings			= 0x06, // Array - RPG.AnimationTiming
 		Scope			= 0x09, // Integer
 		Position		= 0x0A, // Integer
-		Frames			= 0x0C	// Array - RPG::AnimationFrames
+		Frames			= 0x0C	// Array - RPG.AnimationFrames
 	}
 
 	enum ChunkAnimationTiming
 	{
 		Frame		= 0x01, // Integer
-		Se			= 0x02, // RPG::Sound
+		Se			= 0x02, // RPG.Sound
 		FlashScope	= 0x03, // Integer
 		FlashRed	= 0x04, // Integer
 		FlashGreen	= 0x05, // Integer
 		FlashBlue	= 0x06, // Integer
 		FlashPower	= 0x07,	// Integer
-		ScreenShake	= 0x08  // Integer - RPG2003
+		ScreenShake	= 0x08	// Integer - RPG2003
 	}
 
 	enum ChunkAnimationFrame
 	{
-		Cells	= 0x01 // Array - RPG::AnimationCellData
+		Cells	= 0x01 // Array - RPG.AnimationCellData
 	}
 
 	enum ChunkAnimationCellData
@@ -563,7 +563,7 @@
 		SwitchFlag			= 0x0C, // Flag
 		SwitchId			= 0x0D, // Integer
 		EventCommandsSize	= 0x15, // Integer
-		EventCommands		= 0x16	// Array - RPG::EventCommand
+		EventCommands		= 0x16	// Array - RPG.EventCommand
 	}
 
 	enum ChunkSystem
@@ -583,26 +583,26 @@
 		Party				= 0x16, // Array - Short
 		MenuCommandsSize	= 0x1A, // Integer - RPG2003
 		MenuCommands		= 0x1B, // Array - Short - RPG2003
-		TitleMusic			= 0x1F, // RPG::Music
-		BattleMusic			= 0x20, // RPG::Music
-		BattleEndMusic		= 0x21, // RPG::Music
-		InnMusic			= 0x22, // RPG::Music
-		BoatMusic			= 0x23, // RPG::Music
-		ShipMusic			= 0x24, // RPG::Music
-		AirshipMusic		= 0x25, // RPG::Music
-		GameoverMusic		= 0x26, // RPG::Music
-		CursorSe			= 0x29, // RPG::Sound
-		DecisionSe			= 0x2A, // RPG::Sound
-		CancelSe			= 0x2B, // RPG::Sound
-		BuzzerSe			= 0x2C, // RPG::Sound
-		BattleSe			= 0x2D, // RPG::Sound
-		EscapeSe			= 0x2E, // RPG::Sound
-		EnemyAttackSe		= 0x2F, // RPG::Sound
-		EnemyDamagedSe		= 0x30, // RPG::Sound
-		ActorDamagedSe		= 0x31, // RPG::Sound
-		DodgeSe				= 0x32, // RPG::Sound
-		EnemyDeathSe		= 0x33, // RPG::Sound
-		ItemSe				= 0x34, // RPG::Sound
+		TitleMusic			= 0x1F, // RPG.Music
+		BattleMusic			= 0x20, // RPG.Music
+		BattleEndMusic		= 0x21, // RPG.Music
+		InnMusic			= 0x22, // RPG.Music
+		BoatMusic			= 0x23, // RPG.Music
+		ShipMusic			= 0x24, // RPG.Music
+		AirshipMusic		= 0x25, // RPG.Music
+		GameoverMusic		= 0x26, // RPG.Music
+		CursorSe			= 0x29, // RPG.Sound
+		DecisionSe			= 0x2A, // RPG.Sound
+		CancelSe			= 0x2B, // RPG.Sound
+		BuzzerSe			= 0x2C, // RPG.Sound
+		BattleSe			= 0x2D, // RPG.Sound
+		EscapeSe			= 0x2E, // RPG.Sound
+		EnemyAttackSe		= 0x2F, // RPG.Sound
+		EnemyDamagedSe		= 0x30, // RPG.Sound
+		ActorDamagedSe		= 0x31, // RPG.Sound
+		DodgeSe				= 0x32, // RPG.Sound
+		EnemyDeathSe		= 0x33, // RPG.Sound
+		ItemSe				= 0x34, // RPG.Sound
 		TransitionOut		= 0x3D, // Integer
 		TransitionIn		= 0x3E, // Integer
 		BattleStartFadeout	= 0x3F, // Integer
@@ -614,11 +614,11 @@
 		SelectedCondition	= 0x51, // Integer
 		SelectedHero		= 0x52, // Integer
 		BattletestBackground= 0x54, // String
-		BattletestData		= 0x55, // Array - RPG::TestBattler
+		BattletestData		= 0x55, // Array - RPG.TestBattler
 		SavedTimes			= 0x5B, // Integer
-		BattletestTerrain	= 0x5E, // Integer
-		BattletestFormation	= 0x5F, // Integer
-		BattletestCondition	= 0x60, // Integer
+		BattleTestTerrain	= 0x5E, // Integer
+		BattleTestFormation	= 0x5F, // Integer
+		BattleTestCondition	= 0x60, // Integer
 		//???				= 0x61, // ???
 		ShowFrame			= 0x63, // Flag - RPG2003
 		FrameName			= 0x64, // String - RPG2003
@@ -649,9 +649,9 @@
 		Row				= 0x06,	// Integer
 		BattleType		= 0x07,	// Integer
 		Unknown1		= 0x09,	// Integer
-		Command 		= 0x0A, // Array - RPG::BattleCommand
+		Command 		= 0x0A, // Array - RPG.BattleCommand
 		DeathHandler2	= 0x0F,	// Integer
-		DeathEvent  	= 0x10,	// Integer
+		DeathEvent		= 0x10,	// Integer
 		WindowSize		= 0x14, // Integer
 		Transparency	= 0x18,	// Integer
 		Teleport		= 0x19,	// Integer
@@ -665,8 +665,8 @@
 	{
 		Name		= 0x01, // String
 		Speed		= 0x02, // Integer
-		BaseData	= 0x0A, // Array - RPG::BattlerAnimationExtension
-		WeaponData	= 0x0B	// Array - RPG::BattlerAnimationExtension
+		BaseData	= 0x0A, // Array - RPG.BattlerAnimationExtension
+		WeaponData	= 0x0B	// Array - RPG.BattlerAnimationExtension
 	}
 
 	enum ChunkBattlerAnimationData // RPG2k3
@@ -697,7 +697,7 @@
 		ExpInflation		= 0x2A, // Integer
 		ExpCorrection		= 0x2B, // Integer
 		UnarmedAnimation	= 0x3E, // Integer
-		Skills				= 0x3F, // Array - RPG::Learning
+		Skills				= 0x3F, // Array - RPG.Learning
 		StateRanksSize		= 0x47, // Integer
 		StateRanks			= 0x48, // Array - Short
 		AttributeRanksSize	= 0x49, // Integer

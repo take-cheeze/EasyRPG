@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -21,7 +20,7 @@ namespace EasyRPG.Editor.RPG
 		private int animationType;
 		private int moveSpeed;
 		private MoveRoute moveRoute;
-		private List<EventCommand> eventCommands;
+		private ExtendedObservableCollection<EventCommand> eventCommands;
 		#endregion
 
 
@@ -101,7 +100,7 @@ namespace EasyRPG.Editor.RPG
 			get { return moveRoute; }
 			set { moveRoute = value; OnPropertyChanged("MoveRoute"); }
 		}
-		public List<EventCommand> EventCommands
+		public ExtendedObservableCollection<EventCommand> EventCommands
 		{
 			get { return eventCommands; }
 			set { eventCommands = value; OnPropertyChanged("EventCommands"); }
@@ -126,7 +125,7 @@ namespace EasyRPG.Editor.RPG
 			animationType = 0;
 			moveSpeed = 3;
 			moveRoute = new MoveRoute();
-			eventCommands = new List<EventCommand>();
+			eventCommands = new ExtendedObservableCollection<EventCommand>();
 		}
 		#endregion
 	}

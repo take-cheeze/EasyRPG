@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -17,8 +16,8 @@ namespace EasyRPG.Editor.RPG
 		private string gameoverName;
 		private string systemName;
 		private string system2Name;
-		private List<short> party;
-		private List<short> menuCommands;
+		private ExtendedObservableCollection<short> party;
+		private ExtendedObservableCollection<short> menuCommands;
 		private Music titleMusic;
 		private Music battleMusic;
 		private Music battleEndMusic;
@@ -50,8 +49,11 @@ namespace EasyRPG.Editor.RPG
 		private int selectedCondition;
 		private int selectedHero;
 		private string battletestBackground;
-		private List<TestBattler> battletestData;
+		private ExtendedObservableCollection<TestBattler> battletestData;
 		private int savedTimes;
+		private int battleTestTerrain;
+		private int battleTestFormation;
+		private int battleTestCondition;
 		private bool showFrame;
 		private string frameName;
 		private bool invertAnimations;
@@ -113,12 +115,12 @@ namespace EasyRPG.Editor.RPG
 			get { return system2Name; }
 			set { system2Name = value; OnPropertyChanged("System2Name"); }
 		}
-		public List<short> Party
+		public ExtendedObservableCollection<short> Party
 		{
 			get { return party; }
 			set { party = value; OnPropertyChanged("Party"); }
 		}
-		public List<short> MenuCommands
+		public ExtendedObservableCollection<short> MenuCommands
 		{
 			get { return menuCommands; }
 			set { menuCommands = value; OnPropertyChanged("MenuCommands"); }
@@ -278,7 +280,7 @@ namespace EasyRPG.Editor.RPG
 			get { return battletestBackground; }
 			set { battletestBackground = value; OnPropertyChanged("BattletestBackground"); }
 		}
-		public List<TestBattler> BattletestData
+		public ExtendedObservableCollection<TestBattler> BattletestData
 		{
 			get { return battletestData; }
 			set { battletestData = value; OnPropertyChanged("BattletestData"); }
@@ -287,6 +289,21 @@ namespace EasyRPG.Editor.RPG
 		{
 			get { return savedTimes; }
 			set { savedTimes = value; OnPropertyChanged("SavedTimes"); }
+		}
+		public int BattleTestTerrain
+		{
+			get { return battleTestTerrain; }
+			set { battleTestTerrain = value; OnPropertyChanged("BattleTestTerrain"); }
+		}
+		public int BattleTestFormation
+		{
+			get { return battleTestFormation; }
+			set { battleTestFormation = value; OnPropertyChanged("BattleTestFormation"); }
+		}
+		public int BattleTestCondition
+		{
+			get { return battleTestCondition; }
+			set { battleTestCondition = value; OnPropertyChanged("BattleTestCondition"); }
 		}
 		public bool ShowFrame
 		{
@@ -319,8 +336,8 @@ namespace EasyRPG.Editor.RPG
 			gameoverName = "";
 			systemName = "";
 			system2Name = "";
-			party = new List<short>();
-			menuCommands = new List<short>();
+			party = new ExtendedObservableCollection<short>();
+			menuCommands = new ExtendedObservableCollection<short>();
 			titleMusic = new Music();
 			battleMusic = new Music();
 			battleEndMusic = new Music();
@@ -352,8 +369,11 @@ namespace EasyRPG.Editor.RPG
 			selectedCondition = 0;
 			selectedHero = 0;
 			battletestBackground = "";
-			battletestData = new List<TestBattler>();
+			battletestData = new ExtendedObservableCollection<TestBattler>();
 			savedTimes = 0;
+			battleTestTerrain = 0;
+			battleTestFormation = 0;
+			battleTestCondition = 0;
 			showFrame = false;
 			frameName = "";
 			invertAnimations = false;

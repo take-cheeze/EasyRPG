@@ -4,7 +4,7 @@ namespace EasyRPG.Editor.Serializer.RM2K.LDB
 {
 	public partial class LdbReader
 	{
-		#region HelperMethods
+		#region BehaviorMethods
 		private Actor ReadActor()
 		{
 			var actor = new Actor

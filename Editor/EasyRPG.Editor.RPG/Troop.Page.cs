@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -7,7 +6,7 @@ namespace EasyRPG.Editor.RPG
 	{
 		#region PrivateMembers
 		private TroopPageCondition condition;
-		private List<EventCommand> eventCommands;
+		private ExtendedObservableCollection<EventCommand> eventCommands;
 		#endregion
 
 		#region PublicMembers
@@ -16,7 +15,7 @@ namespace EasyRPG.Editor.RPG
 			get { return condition; }
 			set { condition = value; OnPropertyChanged("Condition"); }
 		}
-		public List<EventCommand> EventCommands
+		public ExtendedObservableCollection<EventCommand> EventCommands
 		{
 			get { return eventCommands; }
 			set { eventCommands = value; OnPropertyChanged("EventCommands"); }
@@ -27,7 +26,7 @@ namespace EasyRPG.Editor.RPG
 		public TroopPage()
 		{
 			condition = new TroopPageCondition();
-			eventCommands = new List<EventCommand>();
+			eventCommands = new ExtendedObservableCollection<EventCommand>();
 		}
 		#endregion
 	}

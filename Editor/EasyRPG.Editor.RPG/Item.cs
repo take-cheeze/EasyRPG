@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -26,15 +25,15 @@ namespace EasyRPG.Editor.RPG
 		private string description;
 		private ItemType type;
 		private int price;
-		private List<bool> actorSet;
-		private List<bool> classSet;
+		private ExtendedObservableCollection<bool> actorSet;
+		private ExtendedObservableCollection<bool> classSet;
 		private int uses;
 		private int atkPoints;
 		private int defPoints;
 		private int spiPoints;
 		private int agiPoints;
-		private List<bool> attributeSet;
-		private List<bool> stateSet;
+		private ExtendedObservableCollection<bool> attributeSet;
+		private ExtendedObservableCollection<bool> stateSet;
 		private bool stateEffect;
 		private int stateChance;
 		private bool cursed;
@@ -63,12 +62,12 @@ namespace EasyRPG.Editor.RPG
 		private bool ocassionField;
 		private bool koOnly;
 		private int skillId;
-		private int usingMesssage;
+		private int usingMessage;
 		private int maxHpPoints;
 		private int maxSpPoints;
 		private int switchId;
 		private bool ocassionBattle;
-		private List<ItemAnimation> animationData;
+		private ExtendedObservableCollection<ItemAnimation> animationData;
 		#endregion
 
 		#region PublicMembers
@@ -97,12 +96,12 @@ namespace EasyRPG.Editor.RPG
 			get { return price; }
 			set { price = value; OnPropertyChanged("Price"); }
 		}
-		public List<bool> ActorSet
+		public ExtendedObservableCollection<bool> ActorSet
 		{
 			get { return actorSet; }
 			set { actorSet = value; OnPropertyChanged("ActorSet"); }
 		}
-		public List<bool> ClassSet // RPG2003
+		public ExtendedObservableCollection<bool> ClassSet // RPG2003
 		{
 			get { return classSet; }
 			set { classSet = value; OnPropertyChanged("ClassSet"); }
@@ -134,12 +133,12 @@ namespace EasyRPG.Editor.RPG
 			get { return agiPoints; }
 			set { agiPoints = value; OnPropertyChanged("AgiPoints"); }
 		}
-		public List<bool> AttributeSet
+		public ExtendedObservableCollection<bool> AttributeSet
 		{
 			get { return attributeSet; }
 			set { attributeSet = value; OnPropertyChanged("AttributeSet"); }
 		}
-		public List<bool> StateSet
+		public ExtendedObservableCollection<bool> StateSet
 		{
 			get { return stateSet; }
 			set { stateSet = value; OnPropertyChanged("StateSet"); }
@@ -291,10 +290,10 @@ namespace EasyRPG.Editor.RPG
 			get { return skillId; }
 			set { skillId = value; OnPropertyChanged("SkillId"); }
 		}
-		public int UsingMesssage
+		public int UsingMessage
 		{
-			get { return usingMesssage; }
-			set { usingMesssage = value; OnPropertyChanged("UsingMesssage"); }
+			get { return usingMessage; }
+			set { usingMessage = value; OnPropertyChanged("UsingMessage"); }
 		}
 
 		// Material (See also Equipable *_points)
@@ -321,7 +320,7 @@ namespace EasyRPG.Editor.RPG
 			set { ocassionBattle = value; OnPropertyChanged("OcassionBattle"); }
 		}
 
-		public List<ItemAnimation> AnimationData
+		public ExtendedObservableCollection<ItemAnimation> AnimationData
 		{
 			get { return animationData; }
 			set { animationData = value; OnPropertyChanged("AnimationData"); }
@@ -336,15 +335,15 @@ namespace EasyRPG.Editor.RPG
 			description = "";
 			type = ItemType.Normal;
 			price = 0;
-			actorSet = new List<bool>();
-			classSet = new List<bool>();
+			actorSet = new ExtendedObservableCollection<bool>();
+			classSet = new ExtendedObservableCollection<bool>();
 			uses = 1;
 			atkPoints = 0;
 			defPoints = 0;
 			spiPoints = 0;
 			agiPoints = 0;
-			attributeSet = new List<bool>();
-			stateSet = new List<bool>();
+			attributeSet = new ExtendedObservableCollection<bool>();
+			stateSet = new ExtendedObservableCollection<bool>();
 			stateEffect = false;
 			stateChance = 0;
 			cursed = false;
@@ -373,12 +372,12 @@ namespace EasyRPG.Editor.RPG
 			ocassionField = false;
 			koOnly = false;
 			skillId = 1;
-			usingMesssage = 0;
+			usingMessage = 0;
 			maxHpPoints = 0;
 			maxSpPoints = 0;
 			switchId = 1;
 			ocassionBattle = false;
-			animationData = new List<ItemAnimation>();
+			animationData = new ExtendedObservableCollection<ItemAnimation>();
 		}
 		#endregion
 	}

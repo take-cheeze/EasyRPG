@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -17,7 +16,7 @@ namespace EasyRPG.Editor.RPG
 		private int teleport;
 		private int escape;
 		private int save;
-		private List<Encounter> encounters;
+		private ExtendedObservableCollection<Encounter> encounters;
 		private int encounterSteps;
 		private int areaX;
 		private int areaY;
@@ -85,7 +84,7 @@ namespace EasyRPG.Editor.RPG
 			get { return save; }
 			set { save = value; OnPropertyChanged("Save"); }
 		}
-		public List<Encounter> Encounters
+		public ExtendedObservableCollection<Encounter> Encounters
 		{
 			get { return encounters; }
 			set { encounters = value; OnPropertyChanged("Encounters"); }
@@ -151,7 +150,7 @@ namespace EasyRPG.Editor.RPG
 			teleport = 0;
 			escape = 0;
 			save = 0;
-			encounters = new List<Encounter>();
+			encounters = new ExtendedObservableCollection<Encounter>();
 			encounterSteps = 25;
 			areaX = 0;
 			areaY = 0;

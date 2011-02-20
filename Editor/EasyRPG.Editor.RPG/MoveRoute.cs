@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -6,13 +5,13 @@ namespace EasyRPG.Editor.RPG
 	public class MoveRoute : NotifyPropertyChanged
 	{
 		#region PrivateMembers
-		private List<MoveCommand> moveCommands;
+		private ExtendedObservableCollection<MoveCommand> moveCommands;
 		private bool repeat;
 		private bool skippable;
 		#endregion
 
 		#region PublicMembers
-		public List<MoveCommand> MoveCommands
+		public ExtendedObservableCollection<MoveCommand> MoveCommands
 		{
 			get { return moveCommands; }
 			set { moveCommands = value; OnPropertyChanged("MoveCommands"); }
@@ -32,7 +31,7 @@ namespace EasyRPG.Editor.RPG
 		#region Constructor
 		public MoveRoute()
 		{
-			moveCommands = new List<MoveCommand>();
+			moveCommands = new ExtendedObservableCollection<MoveCommand>();
 			repeat = true;
 			skippable = false;
 		}

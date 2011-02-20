@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -8,9 +7,9 @@ namespace EasyRPG.Editor.RPG
 		#region PrivateMembers
 		private int id;
 		private string name;
-		private List<TroopMember> members;
-		private List<bool> terrainSet;
-		private List<TroopPage> pages;
+		private ExtendedObservableCollection<TroopMember> members;
+		private ExtendedObservableCollection<bool> terrainSet;
+		private ExtendedObservableCollection<TroopPage> pages;
 		#endregion
 
 		#region PublicMembers
@@ -24,17 +23,17 @@ namespace EasyRPG.Editor.RPG
 			get { return name; }
 			set { name = value; OnPropertyChanged("Name"); }
 		}
-		public List<TroopMember> Members
+		public ExtendedObservableCollection<TroopMember> Members
 		{
 			get { return members; }
 			set { members = value; OnPropertyChanged("Members"); }
 		}
-		public List<bool> TerrainSet
+		public ExtendedObservableCollection<bool> TerrainSet
 		{
 			get { return terrainSet; }
 			set { terrainSet = value; OnPropertyChanged("TerrainSet"); }
 		}
-		public List<TroopPage> Pages
+		public ExtendedObservableCollection<TroopPage> Pages
 		{
 			get { return pages; }
 			set { pages = value; OnPropertyChanged("Pages"); }
@@ -46,9 +45,9 @@ namespace EasyRPG.Editor.RPG
 		{
 			id = 0;
 			name = "";
-			members = new List<TroopMember>();
-			terrainSet = new List<bool>();
-			pages = new List<TroopPage>();
+			members = new ExtendedObservableCollection<TroopMember>();
+			terrainSet = new ExtendedObservableCollection<bool>();
+			pages = new ExtendedObservableCollection<TroopPage>();
 		}
 		#endregion
 	}

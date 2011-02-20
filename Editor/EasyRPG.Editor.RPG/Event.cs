@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -10,7 +9,7 @@ namespace EasyRPG.Editor.RPG
 		private string name;
 		private int x;
 		private int y;
-		private List<EventPage> pages;
+		private ExtendedObservableCollection<EventPage> pages;
 		#endregion
 
 		#region PublicMembers
@@ -34,7 +33,7 @@ namespace EasyRPG.Editor.RPG
 			get { return y; }
 			set { y = value; OnPropertyChanged("Y"); }
 		}
-		public List<EventPage> Pages
+		public ExtendedObservableCollection<EventPage> Pages
 		{
 			get { return pages; }
 			set { pages = value; OnPropertyChanged("Pages"); }
@@ -48,7 +47,7 @@ namespace EasyRPG.Editor.RPG
 			name = "";
 			x = 0;
 			y = 0;
-			pages = new List<EventPage>();
+			pages = new ExtendedObservableCollection<EventPage>();
 		}
 		#endregion
 	}

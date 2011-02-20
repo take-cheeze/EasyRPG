@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -12,20 +11,20 @@ namespace EasyRPG.Editor.RPG
 		private bool fixEquipment;
 		private bool autoBattle;
 		private bool superGuard;
-		private List<short> parameterMaxhp;
-		private List<short> parameterMaxsp;
-		private List<short> parameterAttack;
-		private List<short> parameterDefense;
-		private List<short> parameterSpirit;
-		private List<short> parameterAgility;
+		private ExtendedObservableCollection<short> parameterMaxhp;
+		private ExtendedObservableCollection<short> parameterMaxsp;
+		private ExtendedObservableCollection<short> parameterAttack;
+		private ExtendedObservableCollection<short> parameterDefense;
+		private ExtendedObservableCollection<short> parameterSpirit;
+		private ExtendedObservableCollection<short> parameterAgility;
 		private int expBase;
 		private int expInflation;
 		private int expCorrection;
 		private int unarmedAnimation;
-		private List<Learning> skills;
-		private List<byte> stateRanks;
-		private List<byte> attributeRanks;
-		private List<uint> battleCommands;
+		private ExtendedObservableCollection<Learning> skills;
+		private ExtendedObservableCollection<byte> stateRanks;
+		private ExtendedObservableCollection<byte> attributeRanks;
+		private ExtendedObservableCollection<uint> battleCommands;
 		#endregion
 
 		#region PublicMembers
@@ -59,32 +58,32 @@ namespace EasyRPG.Editor.RPG
 			get { return superGuard; }
 			set { superGuard = value; OnPropertyChanged("SuperGuard"); }
 		}
-		public List<short> ParameterMaxhp
+		public ExtendedObservableCollection<short> ParameterMaxhp
 		{
 			get { return parameterMaxhp; }
 			set { parameterMaxhp = value; OnPropertyChanged("ParameterMaxhp"); }
 		}
-		public List<short> ParameterMaxsp
+		public ExtendedObservableCollection<short> ParameterMaxsp
 		{
 			get { return parameterMaxsp; }
 			set { parameterMaxsp = value; OnPropertyChanged("ParameterMaxsp"); }
 		}
-		public List<short> ParameterAttack
+		public ExtendedObservableCollection<short> ParameterAttack
 		{
 			get { return parameterAttack; }
 			set { parameterAttack = value; OnPropertyChanged("ParameterAttack"); }
 		}
-		public List<short> ParameterDefense
+		public ExtendedObservableCollection<short> ParameterDefense
 		{
 			get { return parameterDefense; }
 			set { parameterDefense = value; OnPropertyChanged("ParameterDefense"); }
 		}
-		public List<short> ParameterSpirit
+		public ExtendedObservableCollection<short> ParameterSpirit
 		{
 			get { return parameterSpirit; }
 			set { parameterSpirit = value; OnPropertyChanged("ParameterSpirit"); }
 		}
-		public List<short> ParameterAgility
+		public ExtendedObservableCollection<short> ParameterAgility
 		{
 			get { return parameterAgility; }
 			set { parameterAgility = value; OnPropertyChanged("ParameterAgility"); }
@@ -109,22 +108,22 @@ namespace EasyRPG.Editor.RPG
 			get { return unarmedAnimation; }
 			set { unarmedAnimation = value; OnPropertyChanged("UnarmedAnimation"); }
 		}
-		public List<Learning> Skills
+		public ExtendedObservableCollection<Learning> Skills
 		{
 			get { return skills; }
 			set { skills = value; OnPropertyChanged("Skills"); }
 		}
-		public List<byte> StateRanks
+		public ExtendedObservableCollection<byte> StateRanks
 		{
 			get { return stateRanks; }
 			set { stateRanks = value; OnPropertyChanged("StateRanks"); }
 		}
-		public List<byte> AttributeRanks
+		public ExtendedObservableCollection<byte> AttributeRanks
 		{
 			get { return attributeRanks; }
 			set { attributeRanks = value; OnPropertyChanged("AttributeRanks"); }
 		}
-		public List<uint> BattleCommands
+		public ExtendedObservableCollection<uint> BattleCommands
 		{
 			get { return battleCommands; }
 			set { battleCommands = value; OnPropertyChanged("BattleCommands"); }
@@ -140,20 +139,20 @@ namespace EasyRPG.Editor.RPG
 			fixEquipment = false;
 			autoBattle = false;
 			superGuard = false;
-			parameterMaxhp = new List<short>();
-			parameterMaxsp = new List<short>();
-			parameterAttack = new List<short>();
-			parameterDefense = new List<short>();
-			parameterSpirit = new List<short>();
-			parameterAgility = new List<short>();
+			parameterMaxhp = new ExtendedObservableCollection<short>();
+			parameterMaxsp = new ExtendedObservableCollection<short>();
+			parameterAttack = new ExtendedObservableCollection<short>();
+			parameterDefense = new ExtendedObservableCollection<short>();
+			parameterSpirit = new ExtendedObservableCollection<short>();
+			parameterAgility = new ExtendedObservableCollection<short>();
 			expBase = 300;
 			expInflation = 300;
 			expCorrection = 0;
 			unarmedAnimation = 0;
-			skills = new List<Learning>();
-			stateRanks = new List<byte>();
-			attributeRanks = new List<byte>();
-			battleCommands = new List<uint>();
+			skills = new ExtendedObservableCollection<Learning>();
+			stateRanks = new ExtendedObservableCollection<byte>();
+			attributeRanks = new ExtendedObservableCollection<byte>();
+			battleCommands = new ExtendedObservableCollection<uint>();
 		}
 		#endregion
 	}

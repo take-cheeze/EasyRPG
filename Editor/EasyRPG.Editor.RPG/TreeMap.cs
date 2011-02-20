@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -6,8 +5,8 @@ namespace EasyRPG.Editor.RPG
 	public class TreeMap : NotifyPropertyChanged
 	{
 		#region PrivateMembers
-		private List<MapInfo> maps;
-		private List<int> treeOrder;
+		private ExtendedObservableCollection<MapInfo> maps;
+		private ExtendedObservableCollection<int> treeOrder;
 		private int activeNode;
 		private int startMapId;
 		private int startX;
@@ -24,12 +23,12 @@ namespace EasyRPG.Editor.RPG
 		#endregion
 
 		#region PublicMembers
-		public List<MapInfo> Maps
+		public ExtendedObservableCollection<MapInfo> Maps
 		{
 			get { return maps; }
 			set { maps = value; OnPropertyChanged("Maps"); }
 		}
-		public List<int> TreeOrder
+		public ExtendedObservableCollection<int> TreeOrder
 		{
 			get { return treeOrder; }
 			set { treeOrder = value; OnPropertyChanged("TreeOrder"); }
@@ -104,8 +103,8 @@ namespace EasyRPG.Editor.RPG
 		#region Constructor
 		public TreeMap()
 		{
-			maps = new List<MapInfo>();
-			treeOrder = new List<int>();
+			maps = new ExtendedObservableCollection<MapInfo>();
+			treeOrder = new ExtendedObservableCollection<int>();
 			activeNode = 0;
 			startMapId = 0;
 			startX = 0;

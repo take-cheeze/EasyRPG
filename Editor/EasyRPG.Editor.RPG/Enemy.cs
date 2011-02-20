@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -25,9 +24,9 @@ namespace EasyRPG.Editor.RPG
 		private int criticalHitChance;
 		private bool miss;
 		private bool levitate;
-		private List<byte> stateRanks;
-		private List<byte> attributeRanks;
-		private List<EnemyAction> actions;
+		private ExtendedObservableCollection<byte> stateRanks;
+		private ExtendedObservableCollection<byte> attributeRanks;
+		private ExtendedObservableCollection<EnemyAction> actions;
 		#endregion
 
 		#region PublicMembers
@@ -126,17 +125,17 @@ namespace EasyRPG.Editor.RPG
 			get { return levitate; }
 			set { levitate = value; OnPropertyChanged("Levitate"); }
 		}
-		public List<byte> StateRanks
+		public ExtendedObservableCollection<byte> StateRanks
 		{
 			get { return stateRanks; }
 			set { stateRanks = value; OnPropertyChanged("StateRanks"); }
 		}
-		public List<byte> AttributeRanks
+		public ExtendedObservableCollection<byte> AttributeRanks
 		{
 			get { return attributeRanks; }
 			set { attributeRanks = value; OnPropertyChanged("AttributeRanks"); }
 		}
-		public List<EnemyAction> Actions
+		public ExtendedObservableCollection<EnemyAction> Actions
 		{
 			get { return actions; }
 			set { actions = value; OnPropertyChanged("Actions"); }
@@ -165,9 +164,9 @@ namespace EasyRPG.Editor.RPG
 			criticalHitChance = 30;
 			miss = false;
 			levitate = false;
-			stateRanks = new List<byte>();
-			attributeRanks = new List<byte>();
-			actions = new List<EnemyAction>();
+			stateRanks = new ExtendedObservableCollection<byte>();
+			attributeRanks = new ExtendedObservableCollection<byte>();
+			actions = new ExtendedObservableCollection<EnemyAction>();
 		}
 		#endregion
 	}

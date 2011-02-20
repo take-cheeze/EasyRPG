@@ -122,6 +122,16 @@ namespace EasyRPG.Editor.Serializer.RM2K
 			return list;
 		}
 
+		public ExtendedObservableCollection<UInt32> ReadUInt32Array(int size)
+		{
+			var list = new ExtendedObservableCollection<UInt32>();
+			for (var i = 0; i < size / 4; i++)
+			{
+				list.Add(ReadUInt32());
+			}
+			return list;
+		}
+
 		public string ReadString(int size)
 		{
 			return Encoding.ASCII.GetString(ReadBytes(size));

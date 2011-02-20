@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -9,7 +8,7 @@ namespace EasyRPG.Editor.RPG
 		private int code;
 		private int indent;
 		private string text;
-		private List<int> parameters;
+		private ExtendedObservableCollection<int> parameters;
 		#endregion
 
 		#region PublicMembers
@@ -28,7 +27,7 @@ namespace EasyRPG.Editor.RPG
 			get { return text; }
 			set { text = value; OnPropertyChanged("Text"); }
 		}
-		public List<int> Parameters
+		public ExtendedObservableCollection<int> Parameters
 		{
 			get { return parameters; }
 			set { parameters = value; OnPropertyChanged("Parameters"); }
@@ -41,7 +40,7 @@ namespace EasyRPG.Editor.RPG
 			code = 0;
 			indent = 0;
 			text = "";
-			parameters = new List<int>();
+			parameters = new ExtendedObservableCollection<int>();
 		}
 		#endregion
 	}

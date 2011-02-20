@@ -32,7 +32,7 @@ namespace EasyRPG.Editor.Serializer.RM2K.LDB
 			var header = stream.ReadString(stream.ReadCompressedInt());
 			if (header != "LcfDataBase")
 			{
-				throw new Exception("Invalid Database file format.");
+				throw new Exception("InvalId Database file format.");
 			}
 			LoadChunks();
 		}
@@ -60,82 +60,82 @@ namespace EasyRPG.Editor.Serializer.RM2K.LDB
 							Database.Actors.Add(ReadActor());
 						}
 						break;
-					/*case ChunkData.Skill:
+					case ChunkData.Skill:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--)
 						{
-							Database.Skills.Add(ReadSkill(stream));
+							Database.Skills.Add(ReadSkill());
 						}
 						break;
 					case ChunkData.Item:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Items.Add(ReadItem(stream));
+							Database.Items.Add(ReadItem());
 						}
 						break;
 					case ChunkData.Enemy:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Enemies.Add(ReadEnemy(stream));
+							Database.Enemies.Add(ReadEnemy());
 						}
 						break;
 					case ChunkData.Troop:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Troops.Add(ReadTroop(stream));
+							Database.Troops.Add(ReadTroop());
 						}
 						break;
 					case ChunkData.Terrain:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Terrains.Add(ReadTerrain(stream));
+							Database.Terrains.Add(ReadTerrain());
 						}
 						break;
 					case ChunkData.Attribute:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Attributes.Add(ReadAttribute(stream));
+							Database.Attributes.Add(ReadAttribute());
 						}
 						break;
 					case ChunkData.State:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.States.Add(ReadState(stream));
+							Database.States.Add(ReadState());
 						}
 						break;
 					case ChunkData.Animation:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Animations.Add(ReadAnimation(stream));
+							Database.Animations.Add(ReadAnimation());
 						}
 						break;
 					case ChunkData.Chipset:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Chipsets.Add(ReadChipset(stream));
+							Database.Chipsets.Add(ReadChipset());
 						}
 						break;
 					case ChunkData.Terms:
-						Database.Terms = ReadTerms(stream);
+						Database.Terms = ReadTerms();
 						break;
 					case ChunkData.System:
-						Database.System = ReadSystem(stream);
+						Database.System = ReadSystem();
 						break;
 					case ChunkData.Switches:
-						Database.Switches = ReadSwitches(stream);
+						Database.Switches = ReadSwitches();
 						break;
 					case ChunkData.Variables:
-						Database.Variables = ReadVariables(stream);
+						Database.Variables = ReadVariables();
 						break;
 					case ChunkData.CommonEvent:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Commonevents.Add(ReadCommonEvent(stream));
+							Database.Commonevents.Add(ReadCommonEvent());
 						}
 						break;
 					case ChunkData.BattleCommand:
-						Database.BattleCommands = ReadBattleCommands(stream);
+						Database.BattleCommands = ReadBattleCommands();
 						break;
 					case ChunkData.Class:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.Classes.Add(ReadClass(stream));
+							Database.Classes.Add(ReadClass());
 						}
 						break;
 					case ChunkData.BattlerAnimation:
 						for (var i = stream.ReadCompressedInt(); i > 0; i--) {
-							Database.BattlerAnimations.Add(ReadBattlerAnimation(stream));
+							Database.BattlerAnimations.Add(ReadBattlerAnimation());
 						}
-						break;*/
+						break;
 					default:
 						stream.Skip(chunkLenght);
 						break;

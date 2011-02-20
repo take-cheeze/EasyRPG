@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -21,10 +20,10 @@ namespace EasyRPG.Editor.RPG
 		private int id;
 		private string name;
 		private string animationName;
-		private List<AnimationTiming> timings;
+		private ExtendedObservableCollection<AnimationTiming> timings;
 		private ScopeType scope;
 		private PositionType position;
-		private List<AnimationFrame> frames;
+		private ExtendedObservableCollection<AnimationFrame> frames;
 		#endregion
 
 		#region PublicMembers
@@ -43,7 +42,7 @@ namespace EasyRPG.Editor.RPG
 			get { return animationName; }
 			set { animationName = value; OnPropertyChanged("AnimationName"); }
 		}
-		public List<AnimationTiming> Timings
+		public ExtendedObservableCollection<AnimationTiming> Timings
 		{
 			get { return timings; }
 			set { timings = value; OnPropertyChanged("Timings"); }
@@ -58,7 +57,7 @@ namespace EasyRPG.Editor.RPG
 			get { return position; }
 			set { position = value; OnPropertyChanged("Position"); }
 		}
-		public List<AnimationFrame> Frames
+		public ExtendedObservableCollection<AnimationFrame> Frames
 		{
 			get { return frames; }
 			set { frames = value; OnPropertyChanged("Frames"); }
@@ -71,10 +70,10 @@ namespace EasyRPG.Editor.RPG
 			id = 0;
 			name = "";
 			animationName = "";
-			timings = new List<AnimationTiming>();
+			timings = new ExtendedObservableCollection<AnimationTiming>();
 			scope = ScopeType.Target;
 			position = PositionType.Down;
-			frames = new List<AnimationFrame>();
+			frames = new ExtendedObservableCollection<AnimationFrame>();
 		}
 		#endregion
 	}

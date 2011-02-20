@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -16,8 +15,8 @@ namespace EasyRPG.Editor.RPG
 		private int id;
 		private string name;
 		private SpeedType speed;
-		private List<BattlerAnimationExtension> baseData;
-		private List<BattlerAnimationExtension> weaponData;
+		private ExtendedObservableCollection<BattlerAnimationExtension> baseData;
+		private ExtendedObservableCollection<BattlerAnimationExtension> weaponData;
 		#endregion
 
 		#region PublicMembers
@@ -36,12 +35,12 @@ namespace EasyRPG.Editor.RPG
 			get { return speed; }
 			set { speed = value; OnPropertyChanged("Speed"); }
 		}
-		public List<BattlerAnimationExtension> BaseData
+		public ExtendedObservableCollection<BattlerAnimationExtension> BaseData
 		{
 			get { return baseData; }
 			set { baseData = value; OnPropertyChanged("BaseData"); }
 		}
-		public List<BattlerAnimationExtension> WeaponData
+		public ExtendedObservableCollection<BattlerAnimationExtension> WeaponData
 		{
 			get { return weaponData; }
 			set { weaponData = value; OnPropertyChanged("WeaponData"); }
@@ -54,8 +53,8 @@ namespace EasyRPG.Editor.RPG
 			id = 0;
 			name = "";
 			speed = SpeedType.Slow;
-			baseData = new List<BattlerAnimationExtension>();
-			weaponData = new List<BattlerAnimationExtension>();
+			baseData = new ExtendedObservableCollection<BattlerAnimationExtension>();
+			weaponData = new ExtendedObservableCollection<BattlerAnimationExtension>();
 		}
 		#endregion
 	}

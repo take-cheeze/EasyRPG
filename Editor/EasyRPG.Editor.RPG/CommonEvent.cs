@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -18,7 +17,7 @@ namespace EasyRPG.Editor.RPG
 		private TriggerType trigger;
 		private bool switchFlag;
 		private int switchId;
-		private List<EventCommand> eventCommands;
+		private ExtendedObservableCollection<EventCommand> eventCommands;
 		#endregion
 
 		#region PublicMembers
@@ -47,7 +46,7 @@ namespace EasyRPG.Editor.RPG
 			get { return switchId; }
 			set { switchId = value; OnPropertyChanged("SwitchId"); }
 		}
-		public List<EventCommand> EventCommands
+		public ExtendedObservableCollection<EventCommand> EventCommands
 		{
 			get { return eventCommands; }
 			set { eventCommands = value; OnPropertyChanged("EventCommands"); }
@@ -62,7 +61,7 @@ namespace EasyRPG.Editor.RPG
 			trigger = TriggerType.Call;
 			switchFlag = false;
 			switchId = 1;
-			eventCommands = new List<EventCommand>();
+			eventCommands = new ExtendedObservableCollection<EventCommand>();
 		}
 		#endregion
 	}

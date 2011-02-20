@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -19,9 +18,9 @@ namespace EasyRPG.Editor.RPG
 		private int parallaxSx;
 		private bool parallaxAutoLoopY;
 		private int parallaxSy;
-		private List<short> lowerLayer;
-		private List<short> upperLayer;
-		private List<Event> events;
+		private ExtendedObservableCollection<short> lowerLayer;
+		private ExtendedObservableCollection<short> upperLayer;
+		private ExtendedObservableCollection<Event> events;
 		private int saveTimes;
 		private bool topLevel;
 		private bool generatorFlag;
@@ -35,9 +34,9 @@ namespace EasyRPG.Editor.RPG
 		private bool generatorFloorC;
 		private bool generatorExtraB;
 		private bool generatorExtraC;
-		private List<uint> generatorX;
-		private List<uint> generatorY;
-		private List<short> generatorTileIds;
+		private ExtendedObservableCollection<uint> generatorX;
+		private ExtendedObservableCollection<uint> generatorY;
+		private ExtendedObservableCollection<short> generatorTileIds;
 		#endregion
 
 		#region PublicMembers
@@ -106,17 +105,17 @@ namespace EasyRPG.Editor.RPG
 			get { return parallaxSy; }
 			set { parallaxSy = value; OnPropertyChanged("ParallaxSy"); }
 		}
-		public List<short> LowerLayer
+		public ExtendedObservableCollection<short> LowerLayer
 		{
 			get { return lowerLayer; }
 			set { lowerLayer = value; OnPropertyChanged("LowerLayer"); }
 		}
-		public List<short> UpperLayer
+		public ExtendedObservableCollection<short> UpperLayer
 		{
 			get { return upperLayer; }
 			set { upperLayer = value; OnPropertyChanged("UpperLayer"); }
 		}
-		public List<Event> Events
+		public ExtendedObservableCollection<Event> Events
 		{
 			get { return events; }
 			set { events = value; OnPropertyChanged("Events"); }
@@ -187,17 +186,17 @@ namespace EasyRPG.Editor.RPG
 			get { return generatorExtraC; }
 			set { generatorExtraC = value; OnPropertyChanged("GeneratorExtraC"); }
 		}
-		public List<uint> GeneratorX
+		public ExtendedObservableCollection<uint> GeneratorX
 		{
 			get { return generatorX; }
 			set { generatorX = value; OnPropertyChanged("GeneratorX"); }
 		}
-		public List<uint> GeneratorY
+		public ExtendedObservableCollection<uint> GeneratorY
 		{
 			get { return generatorY; }
 			set { generatorY = value; OnPropertyChanged("GeneratorY"); }
 		}
-		public List<short> GeneratorTileIds
+		public ExtendedObservableCollection<short> GeneratorTileIds
 		{
 			get { return generatorTileIds; }
 			set { generatorTileIds = value; OnPropertyChanged("GeneratorTileIds"); }
@@ -220,9 +219,9 @@ namespace EasyRPG.Editor.RPG
 			parallaxSx = 0;
 			parallaxAutoLoopY = false;
 			parallaxSy = 0;
-			lowerLayer = new List<short>();
-			upperLayer = new List<short>();
-			events = new List<Event>();
+			lowerLayer = new ExtendedObservableCollection<short>();
+			upperLayer = new ExtendedObservableCollection<short>();
+			events = new ExtendedObservableCollection<Event>();
 			saveTimes = 0;
 			topLevel = false;
 
@@ -237,9 +236,9 @@ namespace EasyRPG.Editor.RPG
 			generatorFloorC = true;
 			generatorExtraB = true;
 			generatorExtraC = true;
-			generatorX = new List<uint>();
-			generatorY = new List<uint>();
-			generatorTileIds = new List<short>();
+			generatorX = new ExtendedObservableCollection<uint>();
+			generatorY = new ExtendedObservableCollection<uint>();
+			generatorTileIds = new ExtendedObservableCollection<short>();
 		}
 		#endregion
 	}

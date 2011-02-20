@@ -1,98 +1,97 @@
-﻿using System.Collections.Generic;
-using EasyRPG.Editor.Common;
+﻿using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
 {
 	public class Database : NotifyPropertyChanged
 	{
 		#region PrivateMembers
-		private List<Actor> actors;
-		private List<Skill> skills;
-		private List<Item> items;
-		private List<Enemy> enemies;
-		private List<Troop> troops;
-		private List<Terrain> terrains;
-		private List<Attribute> attributes;
-		private List<State> states;
-		private List<Animation> animations;
-		private List<Chipset> chipsets;
-		private List<CommonEvent> commonevents;
-		private List<BattleCommand> battleCommands;
-		private List<Class> classes;
-		private List<BattlerAnimation> battlerAnimations;
+		private ExtendedObservableCollection<Actor> actors;
+		private ExtendedObservableCollection<Skill> skills;
+		private ExtendedObservableCollection<Item> items;
+		private ExtendedObservableCollection<Enemy> enemies;
+		private ExtendedObservableCollection<Troop> troops;
+		private ExtendedObservableCollection<Terrain> terrains;
+		private ExtendedObservableCollection<Attribute> attributes;
+		private ExtendedObservableCollection<State> states;
+		private ExtendedObservableCollection<Animation> animations;
+		private ExtendedObservableCollection<Chipset> chipsets;
+		private ExtendedObservableCollection<CommonEvent> commonevents;
+		private BattleCommands battleCommands;
+		private ExtendedObservableCollection<Class> classes;
+		private ExtendedObservableCollection<BattlerAnimation> battlerAnimations;
 		private Terms terms;
 		private System system;
-		private List<string> switches;
-		private List<string> variables;
+		private ExtendedObservableCollection<string> switches;
+		private ExtendedObservableCollection<string> variables;
 		#endregion
 
 		#region PublicMembers
-		public List<Actor> Actors
+		public ExtendedObservableCollection<Actor> Actors
 		{
 			get { return actors; }
 			set { actors = value; OnPropertyChanged("Actors"); }
 		}
-		public List<Skill> Skills
+		public ExtendedObservableCollection<Skill> Skills
 		{
 			get { return skills; }
 			set { skills = value; OnPropertyChanged("Skills"); }
 		}
-		public List<Item> Items
+		public ExtendedObservableCollection<Item> Items
 		{
 			get { return items; }
 			set { items = value; OnPropertyChanged("Items"); }
 		}
-		public List<Enemy> Enemies
+		public ExtendedObservableCollection<Enemy> Enemies
 		{
 			get { return enemies; }
 			set { enemies = value; OnPropertyChanged("Enemies"); }
 		}
-		public List<Troop> Troops
+		public ExtendedObservableCollection<Troop> Troops
 		{
 			get { return troops; }
 			set { troops = value; OnPropertyChanged("Troops"); }
 		}
-		public List<Terrain> Terrains
+		public ExtendedObservableCollection<Terrain> Terrains
 		{
 			get { return terrains; }
 			set { terrains = value; OnPropertyChanged("Terrains"); }
 		}
-		public List<Attribute> Attributes
+		public ExtendedObservableCollection<Attribute> Attributes
 		{
 			get { return attributes; }
 			set { attributes = value; OnPropertyChanged("Attributes"); }
 		}
-		public List<State> States
+		public ExtendedObservableCollection<State> States
 		{
 			get { return states; }
 			set { states = value; OnPropertyChanged("States"); }
 		}
-		public List<Animation> Animations
+		public ExtendedObservableCollection<Animation> Animations
 		{
 			get { return animations; }
 			set { animations = value; OnPropertyChanged("Animations"); }
 		}
-		public List<Chipset> Chipsets
+		public ExtendedObservableCollection<Chipset> Chipsets
 		{
 			get { return chipsets; }
 			set { chipsets = value; OnPropertyChanged("Chipsets"); }
 		}
-		public List<CommonEvent> Commonevents
+		public ExtendedObservableCollection<CommonEvent> Commonevents
 		{
 			get { return commonevents; }
 			set { commonevents = value; OnPropertyChanged("Commonevents"); }
 		}
-		public List<BattleCommand> BattleCommands
+		public BattleCommands BattleCommands
 		{
 			get { return battleCommands; }
 			set { battleCommands = value; OnPropertyChanged("BattleCommands"); }
 		}
-		public List<Class> Classes
+		public ExtendedObservableCollection<Class> Classes
 		{
 			get { return classes; }
 			set { classes = value; OnPropertyChanged("Classes"); }
 		}
-		public List<BattlerAnimation> BattlerAnimations
+		public ExtendedObservableCollection<BattlerAnimation> BattlerAnimations
 		{
 			get { return battlerAnimations; }
 			set { battlerAnimations = value; OnPropertyChanged("BattlerAnimations"); }
@@ -107,12 +106,12 @@ namespace EasyRPG.Editor.RPG
 			get { return system; }
 			set { system = value; OnPropertyChanged("System"); }
 		}
-		public List<string> Switches
+		public ExtendedObservableCollection<string> Switches
 		{
 			get { return switches; }
 			set { switches = value; OnPropertyChanged("Switches"); }
 		}
-		public List<string> Variables
+		public ExtendedObservableCollection<string> Variables
 		{
 			get { return variables; }
 			set { variables = value; OnPropertyChanged("Variables"); }
@@ -122,24 +121,24 @@ namespace EasyRPG.Editor.RPG
 		#region Constructor
 		public Database()
 		{
-			actors = new List<Actor>();
-			skills = new List<Skill>();
-			items = new List<Item>();
-			enemies = new List<Enemy>();
-			troops = new List<Troop>();
-			terrains = new List<Terrain>();
-			attributes = new List<Attribute>();
-			states = new List<State>();
-			animations = new List<Animation>();
-			chipsets = new List<Chipset>();
-			commonevents = new List<CommonEvent>();
-			battleCommands = new List<BattleCommand>();
-			classes = new List<Class>();
-			battlerAnimations = new List<BattlerAnimation>();
+			actors = new ExtendedObservableCollection<Actor>();
+			skills = new ExtendedObservableCollection<Skill>();
+			items = new ExtendedObservableCollection<Item>();
+			enemies = new ExtendedObservableCollection<Enemy>();
+			troops = new ExtendedObservableCollection<Troop>();
+			terrains = new ExtendedObservableCollection<Terrain>();
+			attributes = new ExtendedObservableCollection<Attribute>();
+			states = new ExtendedObservableCollection<State>();
+			animations = new ExtendedObservableCollection<Animation>();
+			chipsets = new ExtendedObservableCollection<Chipset>();
+			commonevents = new ExtendedObservableCollection<CommonEvent>();
+			battleCommands = new BattleCommands();
+			classes = new ExtendedObservableCollection<Class>();
+			battlerAnimations = new ExtendedObservableCollection<BattlerAnimation>();
 			terms = new Terms();
 			system = new System();
-			switches = new List<string>();
-			variables = new List<string>();
+			switches = new ExtendedObservableCollection<string>();
+			variables = new ExtendedObservableCollection<string>();
 		}
 		#endregion
 	}

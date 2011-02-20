@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using EasyRPG.Editor.Common;
 
 namespace EasyRPG.Editor.RPG
@@ -9,9 +8,9 @@ namespace EasyRPG.Editor.RPG
 		private int id;
 		private string name;
 		private string chipsetName;
-		private List<short> terrainData;
-		private List<byte> passableDataLower;
-		private List<byte> passableDataUpper;
+		private ExtendedObservableCollection<short> terrainData;
+		private ExtendedObservableCollection<byte> passableDataLower;
+		private ExtendedObservableCollection<byte> passableDataUpper;
 		private int animationType;
 		private int animationSpeed;
 		#endregion
@@ -32,17 +31,17 @@ namespace EasyRPG.Editor.RPG
 			get { return chipsetName; }
 			set { chipsetName = value; OnPropertyChanged("ChipsetName"); }
 		}
-		public List<short> TerrainData
+		public ExtendedObservableCollection<short> TerrainData
 		{
 			get { return terrainData; }
 			set { terrainData = value; OnPropertyChanged("TerrainData"); }
 		}
-		public List<byte> PassableDataLower
+		public ExtendedObservableCollection<byte> PassableDataLower
 		{
 			get { return passableDataLower; }
 			set { passableDataLower = value; OnPropertyChanged("PassableDataLower"); }
 		}
-		public List<byte> PassableDataUpper
+		public ExtendedObservableCollection<byte> PassableDataUpper
 		{
 			get { return passableDataUpper; }
 			set { passableDataUpper = value; OnPropertyChanged("PassableDataUpper"); }
@@ -65,9 +64,9 @@ namespace EasyRPG.Editor.RPG
 			id = 0;
 			name = "";
 			chipsetName = "";
-			terrainData = new List<short>();
-			passableDataLower = new List<byte>();
-			passableDataUpper = new List<byte>();
+			terrainData = new ExtendedObservableCollection<short>();
+			passableDataLower = new ExtendedObservableCollection<byte>();
+			passableDataUpper = new ExtendedObservableCollection<byte>();
 			animationType = 0;
 			animationSpeed = 0;
 		}

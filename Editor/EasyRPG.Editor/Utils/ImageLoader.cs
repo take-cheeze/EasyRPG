@@ -15,12 +15,7 @@ namespace Editor.Utils
 		{
 			var path = FileFinder.FindImage(filename);
 
-			if (string.IsNullOrEmpty(path))
-			{
-				return null;
-			}
-
-			return LoadImage(path);
+			return string.IsNullOrEmpty(path) ? null : LoadImage(path);
 		}
 
 		private static Image LoadImage(string path)
