@@ -24,6 +24,7 @@
 #include "game_map.h"
 #include "game_message.h"
 #include "game_party.h"
+#include "game_player.h"
 #include "game_system.h"
 #include "game_variables.h"
 #include "graphics.h"
@@ -32,32 +33,37 @@
 #include "util_macro.h"
 #include "utils.h"
 
-
 #ifdef NO_WCHAR
 // This is a workaround if your system has no wchar
 #undef wstring
 #define wstring string
 #endif
 
+const int Window_Message::speed_table[21] = {0, 0, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6,
+											7, 7, 8, 8, 9, 9, 10, 10, 11};
+
 ////////////////////////////////////////////////////////////
 Window_Message::Window_Message(int ix, int iy, int iwidth, int iheight) :
 	Window_Selectable(ix, iy, iwidth, iheight),
 	contents_x(0), contents_y(0), line_count(0), text_index(-1), text(utf("")),
-	kill_message(false), halt_output(false), number_input_window(NULL)
+	kill_message(false), halt_output(false), speed_modifier(0), 
+	speed_frame_counter(0), number_input_window(NULL)
 {
 	SetContents(Surface::CreateSurface(width - 16, height - 16));
 	contents->SetTransparentColor(windowskin->GetTransparentColor());
 
 	visible = false;
 	SetZ(10000);
-	//contents_showing = false;
-	//cursor_width = 0;
+
 	active = false;
 	index = -1;
 	text_color = Font::ColorDefault;
 
 	number_input_window = new Window_NumberInput(0, 0);
 	number_input_window->SetVisible(false);
+
+	gold_window = new Window_Gold(232, 0, 88, 32);
+	gold_window->SetVisible(false);
 
 	Game_Message::Init();
 }
@@ -66,10 +72,10 @@ Window_Message::Window_Message(int ix, int iy, int iwidth, int iheight) :
 Window_Message::~Window_Message() {
 	TerminateMessage();
 	Game_Message::visible = false;
-	//Game_Temp::message_window_showing = false;
-	// The Windows are already deleted in Graphics during closing
-	// But this probably memleaks during scene change?
+
+	// Without this check the player crashes at the end
 	if (!Player::exit_flag) {
+		delete gold_window;
 		delete number_input_window;
 	}
 }
@@ -132,7 +138,31 @@ void Window_Message::StartNumberInputProcessing() {
 void Window_Message::InsertNewPage() {
 	contents->Clear();
 
-	y = Game_Message::position * 80;
+	if (Game_Message::fixed_position) {
+		y = Game_Message::position * 80;
+	} else {
+		// Move Message Box to prevent player hiding
+		int disp = Main_Data::game_player->GetScreenY();
+
+		switch (Game_Message::position) {
+		case 0: // Up
+			y = disp > (16 * 7) ? 0 : 2 * 80;
+			break;
+		case 1: // Center
+			if (disp <= 16 * 7) {
+				y = 2 * 80;
+			} else if (disp >= 16 * 10) {
+				y = 0;
+			} else {
+				y = 80;
+			}
+			break;
+		case 2: // Down
+			y = disp >= (16 * 10) ? 0 : 2 * 80;
+			break;
+		};
+	}
+	
 
 	if (Game_Message::background) {
 		opacity = 255;
@@ -164,6 +194,7 @@ void Window_Message::InsertNewPage() {
 	contents_y = 2;
 	line_count = 0;
 	text_color = Font::ColorDefault;
+	speed_modifier = 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -198,8 +229,14 @@ void Window_Message::TerminateMessage() {
 	index = -1;
 
 	Game_Message::message_waiting = false;
-	number_input_window->SetActive(false);
-	number_input_window->SetVisible(false);
+	if (number_input_window->GetVisible()) {
+		number_input_window->SetActive(false);
+		number_input_window->SetVisible(false);
+	}
+
+	if (gold_window->GetVisible()) {
+		gold_window->SetVisible(false);
+	}
 	// The other flag resetting is done in Game_Interpreter::CommandEnd
 	Game_Message::SemiClear();
 }
@@ -262,8 +299,6 @@ void Window_Message::Update() {
 ////////////////////////////////////////////////////////////
 void Window_Message::UpdateMessage() {
 	// Message Box Show Message rendering loop
-	// At the moment 3 chars per frame are drawn
-	// ToDo: Value must depend on Speedevent
 
 	// Contains at what frame the sleep is over
 	static int sleep_until = -1;
@@ -278,8 +313,19 @@ void Window_Message::UpdateMessage() {
 
 	bool instant_speed = false;
 	int loop_count = 0;
-	int loop_max = 3;
+	int loop_max = speed_table[speed_modifier] == 0 ? 2 : 1;
+
 	while (instant_speed || loop_count < loop_max) {
+		// It's assumed that speed_modifier is between 0 and 20
+		++speed_frame_counter;
+
+		if (speed_table[speed_modifier] != 0 &&
+			speed_table[speed_modifier] != speed_frame_counter) {
+				break;
+		}
+
+		speed_frame_counter = 0;
+
 		++loop_count;
 		++text_index;
 		if ((unsigned)text_index == text.size()) {
@@ -319,7 +365,10 @@ void Window_Message::UpdateMessage() {
 				// Insert half size space
 				contents_x += contents->GetTextSize(" ").width / 2;
 			case utf('$'):
-				// Show Money Window ToDo
+				// Show Gold Window
+				gold_window->SetY(y == 0 ? 240 - 32 : 0);
+				gold_window->SetOpenAnimation(5);
+				gold_window->SetVisible(true);
 				break;
 			case utf('!'):
 				// Text pause
@@ -334,7 +383,6 @@ void Window_Message::UpdateMessage() {
 				break;
 			case utf('>'):
 				// Instant speed start
-				// ToDo: Not working properly
 				instant_speed = true;
 				break;
 			case utf('<'):
@@ -511,13 +559,15 @@ std::wstring Window_Message::ParseCommandCode(int call_depth) {
 	case utf('s'):
 	case utf('S'):
 		// Speed modifier
-		// ToDo: Find out how long each \s take
 		if (sub_code >= 0) {
 			is_valid = true;
 			parameter = sub_code;
 		} else {
 			parameter = ParseParameter(is_valid, call_depth);
 		}
+
+		speed_modifier = min(parameter, 20);
+		speed_modifier = max(0, speed_modifier);
 		break;
 	case utf('v'):
 	case utf('V'):

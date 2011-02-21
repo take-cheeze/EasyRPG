@@ -65,8 +65,8 @@ std::auto_ptr<RPG::SaveScreen> LSD_Reader::ReadSaveScreen(Reader& stream) {
 		case ChunkScreen::tint_time_left:
 			result->tint_time_left = stream.Read32(Reader::CompressedInteger);
 			break;
-		case ChunkScreen::flash_status:
-			result->flash_status = stream.Read32(Reader::CompressedInteger);
+		case ChunkScreen::flash_continuous:
+			result->flash_continuous = stream.ReadBool();
 			break;
 		case ChunkScreen::flash_red:
 			result->flash_red = stream.Read32(Reader::CompressedInteger);
@@ -83,8 +83,8 @@ std::auto_ptr<RPG::SaveScreen> LSD_Reader::ReadSaveScreen(Reader& stream) {
 		case ChunkScreen::flash_time_left:
 			result->flash_time_left = stream.Read32(Reader::CompressedInteger);
 			break;
-		case ChunkScreen::shake_status:
-			result->shake_status = stream.Read32(Reader::CompressedInteger);
+		case ChunkScreen::shake_continuous:
+			result->shake_continuous = stream.ReadBool();
 			break;
 		case ChunkScreen::shake_strength:
 			result->shake_strength = stream.Read32(Reader::CompressedInteger);
@@ -104,17 +104,17 @@ std::auto_ptr<RPG::SaveScreen> LSD_Reader::ReadSaveScreen(Reader& stream) {
 		case ChunkScreen::pan_y:
 			result->pan_y = stream.Read32(Reader::CompressedInteger);
 			break;
-		case ChunkScreen::unknown_2b:
-			result->unknown_2b = stream.Read32(Reader::CompressedInteger);
+		case ChunkScreen::battleanim_id:
+			result->battleanim_id = stream.Read32(Reader::CompressedInteger);
 			break;
-		case ChunkScreen::unknown_2c:
-			result->unknown_2c = stream.Read32(Reader::CompressedInteger);
+		case ChunkScreen::battleanim_target:
+			result->battleanim_target = stream.Read32(Reader::CompressedInteger);
 			break;
-		case ChunkScreen::unknown_2d:
-			result->unknown_2d = stream.Read32(Reader::CompressedInteger);
+		case ChunkScreen::battleanim_unk_2d:
+			result->battleanim_unk_2d = stream.Read32(Reader::CompressedInteger);
 			break;
-		case ChunkScreen::unknown_2f:
-			result->unknown_2f = stream.Read32(Reader::CompressedInteger);
+		case ChunkScreen::battleanim_global:
+			result->battleanim_global = stream.ReadBool();
 			break;
 		case ChunkScreen::weather:
 			result->weather = stream.Read32(Reader::CompressedInteger);

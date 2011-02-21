@@ -759,6 +759,19 @@ void Game_Character::ForceMoveRoute(RPG::MoveRoute* new_route,
 	MoveTypeCustom();
 }
 
+void Game_Character::CancelMoveRoute(RPG::MoveRoute* route, Game_Interpreter* owner) {
+	if (!move_route_forcing ||
+		move_route_owner != owner ||
+		move_route != route)
+		return;
+
+	move_route_forcing = false;
+	move_route_owner = NULL;
+	move_route = original_move_route;
+	move_route_index = original_move_route_index;
+	original_move_route = NULL;
+}
+
 void Game_Character::DetachMoveRouteOwner(Game_Interpreter* owner) {
 	if (owner == move_route_owner) {
 		move_route_owner = NULL;
@@ -832,5 +845,28 @@ void Game_Character::UpdateBushDepth() {
 void Game_Character::SetGraphic(const std::string& name, int index) {
 	character_name = name;
 	character_index = index;
+}
+
+////////////////////////////////////////////////////////////
+/// Get Character
+////////////////////////////////////////////////////////////
+Game_Character* Game_Character::GetCharacter(int character_id, int event_id) {
+	switch (character_id) {
+		case CharPlayer:
+			// Player/Hero
+			return Main_Data::game_player;
+		case CharBoat:
+			return Game_Map::GetVehicle(Game_Vehicle::Boat);
+		case CharShip:
+			return Game_Map::GetVehicle(Game_Vehicle::Ship);
+		case CharAirship:
+			return Game_Map::GetVehicle(Game_Vehicle::Airship);
+		case CharThisEvent:
+			// This event
+			return (Game_Map::GetEvents().empty()) ? NULL : Game_Map::GetEvents().find(event_id)->second;
+		default:
+			// Other events
+			return (Game_Map::GetEvents().empty()) ? NULL : Game_Map::GetEvents().find(character_id)->second;
+	}
 }
 

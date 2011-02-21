@@ -212,6 +212,13 @@ public:
 	void ForceMoveRoute(RPG::MoveRoute* new_route, int frequency, Game_Interpreter* owner);
 
 	////////////////////////////////////////////////////////
+	/// Cancels a previous forced move route
+	/// @param route : Previous move route
+	/// @param owner : The interpreter which set the route
+	////////////////////////////////////////////////////////
+	void CancelMoveRoute(RPG::MoveRoute* route, Game_Interpreter* owner);
+
+	////////////////////////////////////////////////////////
 	/// Tells the Character to not report back to the owner.
 	/// (Usually because the owner got deleted)
 	/// @param owner : The owner of the move route; if the
@@ -308,6 +315,16 @@ public:
 		DirectionRight = 6,
 		DirectionUp = 8
 	};
+
+	enum CharsID {
+		CharPlayer		= 10001,
+		CharBoat		= 10002,
+		CharShip		= 10003,
+		CharAirship		= 10004,
+		CharThisEvent	= 10005
+	};
+
+	static Game_Character* GetCharacter(int character_id, int event_id);
 
 protected:
 	void UpdateMove();

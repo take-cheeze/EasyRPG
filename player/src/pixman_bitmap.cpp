@@ -462,7 +462,7 @@ void PixmanBitmap::StretchBlit(Rect dst_rect, Bitmap* _src, Rect src_rect, int o
 
 	pixman_image_composite32(PIXMAN_OP_OVER,
 							 src->bitmap, mask, bitmap,
-							 src_rect.x, src_rect.y,
+							 src_rect.x / zoom_x, src_rect.y / zoom_y,
 							 0, 0,
 							 dst_rect.x, dst_rect.y,
 							 dst_rect.width, dst_rect.height);
@@ -686,6 +686,38 @@ void PixmanBitmap::ToneBlit(int x, int y, Bitmap* _src, Rect src_rect, const Ton
 
 		delete gray;
 	}
+
+	RefreshCallback();
+}
+
+void PixmanBitmap::BlendBlit(int x, int y, Bitmap* _src, Rect src_rect, const Color& color) {
+	PixmanBitmap* src = (PixmanBitmap*) _src;
+
+	if (color.alpha == 0) {
+		if (_src != this)
+			Blit(x, y, _src, src_rect, 255);
+		return;
+	}
+
+	if (src != this)
+		pixman_image_composite32(PIXMAN_OP_SRC,
+								 src->bitmap, (pixman_image_t*) NULL, bitmap,
+								 src_rect.x, src_rect.y,
+								 0, 0,
+								 x, y,
+								 src_rect.width, src_rect.height);
+
+	pixman_color_t tcolor = PixmanColor(color);
+	pixman_image_t* timage = pixman_image_create_solid_fill(&tcolor);
+
+	pixman_image_composite32(PIXMAN_OP_OVER,
+							 timage, src->bitmap, bitmap,
+							 0, 0,
+							 src_rect.x, src_rect.y,
+							 x, y,
+							 src_rect.width, src_rect.height);
+
+	pixman_image_unref(timage);
 
 	RefreshCallback();
 }

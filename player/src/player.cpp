@@ -30,6 +30,7 @@
 #include "scene_logo.h"
 #include "scene_title.h"
 #include "scene_battle.h"
+#include "utils.h"
 #include <algorithm>
 #include <set>
 #include <locale>
@@ -76,64 +77,28 @@ void Player::Init(int argc, char *argv[]) {
 
 	exit_flag = false;
 	reset_flag = false;
-#ifdef _DEBUG
-	debug_flag = true;
-#else
-	debug_flag = false;
-#endif
-	hide_title_flag = false;
-#ifdef _DEBUG
-	window_flag = true; // Debug Build needs no fullscreen
-#else
-	window_flag = false;
-#endif
 
-	battle_test_flag = false;
-	battle_test_troop_id = 0;
-
-	engine = EngineRpg2k;
-
-	// extended
-	std::set<std::string> args;
-	for(int i = 1; i < argc; ++i) {
-		std::string const in = argv[i];
-		std::string out(in.size(), '\0');
-		std::transform(in.begin(), in.end(), out.begin(), tolower);
-		args.insert(out);
-	}
-	if((argc > 1) && std::string(argv[1]) == "battletest") {
+	// Command line parser
+	if((argc > 1) && Utils::LowerCase(argv[1]) == "battletest") {
 		battle_test_flag = true;
 		battle_test_troop_id = (argc > 4)? atoi(argv[4]) : 0;
 	} else {
+		std::set<std::string> args;
+		battle_test_flag = false;
+		battle_test_troop_id = 0;
+		for(int i = 1; i < argc; ++i) { args.insert(Utils::LowerCase(argv[i])); }
 		window_flag = args.find("window") != args.end();
 		debug_flag = args.find("testplay") != args.end();
 		hide_title_flag = args.find("hidetitle") != args.end();
 	}
 
-	/* RPG_RT
-	switch(argc) {
-	case 4:
-		if(!strcmp(argv[3], "Window")) {
-			window_flag = true;
-		}
-	case 3:
-		if(!strcmp(argv[2], "HideTitle")) {
-			hide_title_flag = true;
-		}
-	case 2:
-		if(!strcmp(argv[1], "TestPlay")) {
-			debug_flag = true;
-		}
-		else if (!strcmp(argv[1], "BattleTest")) {
-			battle_test_flag = true;
-			if (argc > 4) {
-				battle_test_troop_id = atoi(argv[4]);
-			} else {
-				battle_test_troop_id = 0;
-			}
-		}
-	}
-	*/
+
+#ifdef _DEBUG
+	debug_flag = true;
+	window_flag = true; // Debug Build needs no fullscreen
+#endif
+
+	engine = EngineRpg2k;
 
 	FileFinder::Init();
 
@@ -150,9 +115,7 @@ void Player::Init(int argc, char *argv[]) {
 
 ////////////////////////////////////////////////////////////
 void Player::Run() {
-	if (battle_test_flag) {
-		Scene::Push(new Scene_Battle());
-	} else if (debug_flag) {
+	if (debug_flag) {
 		Scene::Push(new Scene_Title());
 	} else {
 		Scene::Push(new Scene_Logo());

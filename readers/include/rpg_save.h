@@ -29,6 +29,10 @@
 #include "rpg_sound.h"
 #include "rpg_eventcommand.h"
 #include "rpg_moveroute.h"
+#include "rpg_actor.h"
+#include "rpg_system.h"
+#include "rpg_map.h"
+#include "rpg_mapinfo.h"
 
 ////////////////////////////////////////////////////////////
 /// RPG::Map class
@@ -52,9 +56,10 @@ namespace RPG {
 		int face4_id;
 	};
 
-	class SaveData {
+	class SaveSystem {
 	public:
-		SaveData();
+		SaveSystem();
+		void Setup();
 		int screen;
 		int frame_count;
 		std::string graphics_name;
@@ -68,8 +73,10 @@ namespace RPG {
 		int message_continue;
 		std::string face_name;
 		int face_id;
-		int unknown_36;
+		bool face_right;
+		bool face_flip;
 		bool transparent;
+		int unknown_3d;
 		Music title_music;
 		Music battle_music;
 		Music battle_end_music;
@@ -104,6 +111,7 @@ namespace RPG {
 		bool escape_allowed;
 		bool save_allowed;
 		bool menu_allowed;
+		std::string background;
 		int save_count;
 		int save_slot;
 	};
@@ -154,11 +162,17 @@ namespace RPG {
 		int facing1;
 		int facing2;
 		int unknown_17;
+		int unknown_20;
 		int unknown_21;
 		int unknown_23;
 		int unknown_25;
 		std::auto_ptr<MoveRoute> move_route;
+		int unknown_2a;
 		int unknown_2b;
+		int unknown_2c;
+		bool sprite_transparent;
+		int unknown_2f;
+		int unknown_33;
 		int unknown_34;
 		int unknown_35;
 		int unknown_36;
@@ -208,12 +222,14 @@ namespace RPG {
 	class SaveActor {
 	public:
 		SaveActor();
+		void Setup(int actor_id);
 
 		int ID;
 		std::string name;
 		std::string title;
 		std::string sprite_name;
 		int sprite_id;
+		int sprite_flags;
 		std::string face_name;
 		int face_id;
 		int level;
@@ -229,15 +245,23 @@ namespace RPG {
 		std::vector<int16_t> equipped;
 		int current_hp;
 		int current_sp;
-		std::vector<uint8_t> unknown_50;
-		int unknown_51;
+		std::vector<uint32_t> battle_commands;
+		int status_size;
 		std::vector<int16_t> status;
+		bool changed_class;
+		int class_id;
+		int unknown_5b;
+		bool two_weapon;
+		bool lock_equipment;
 		bool auto_battle;
+		bool mighty_guard;
+		int unknown_60;
 	};
 
 	class SaveInventory {
 	public:
 		SaveInventory();
+		void Setup();
 
 		int party_size;
 		std::vector<int16_t> party;
@@ -246,13 +270,18 @@ namespace RPG {
 		std::vector<uint8_t> item_counts;
 		std::vector<uint8_t> item_usage;
 		int gold;
-		int timer_secs;
-		int timer_18;
-		int timer_19;
+		int timer1_secs;
+		bool timer1_active;
+		bool timer1_visible;
+		bool timer1_battle;
+		int timer2_secs;
+		bool timer2_active;
+		bool timer2_visible;
+		bool timer2_battle;
 		int battles;
 		int defeats;
-		int unknown_22;
-		int unknown_23;
+		int escapes;
+		int victories;
 		int unknown_29;
 		int steps;
 	};
@@ -268,7 +297,7 @@ namespace RPG {
 		int unknown_0c;
 		int unknown_0d;
 		int unknown_15;
-		int unknown_16;
+		std::vector<uint8_t> unknown_16;
 	};
 
 	class SaveEventData {
@@ -277,6 +306,9 @@ namespace RPG {
 
 		boost::ptr_vector<SaveEventCommands> commands;
 		int time_left;
+		int unknown_16;
+		int unknown_17;
+		int unknown_20;
 	};
 
 	class SaveMapEvent {
@@ -302,11 +334,14 @@ namespace RPG {
 		std::auto_ptr<MoveRoute> move_route;
 		int unknown_2a;
 		int unknown_2b;
+		int unknown_2f;
 		int anim_paused;
 		int unknown_33;
 		int unknown_34;
 		int unknown_35;
 		int unknown_36;
+		int unknown_3e;
+		int unknown_3f;
 		int unknown_47;
 		std::string sprite_name;
 		int sprite_id;
@@ -324,9 +359,14 @@ namespace RPG {
 	class SaveMapInfo {
 	public:
 		SaveMapInfo();
+		void Setup();
+		void Setup(const RPG::Map& map);
+		void Setup(const RPG::MapInfo& map_info);
 
 		int pan_x;
 		int pan_y;
+		int encounter_rate;
+		int chipset_id;
 		boost::ptr_vector<SaveMapEvent> events;
 		std::vector<uint8_t> lower_tiles;
 		std::vector<uint8_t> upper_tiles;
@@ -352,23 +392,23 @@ namespace RPG {
 		double tint_current_blue;
 		double tint_current_sat;
 		int tint_time_left;
-		int flash_status;
+		bool flash_continuous;
 		int flash_red;
 		int flash_green;
 		int flash_blue;
 		double flash_current_level;
 		int flash_time_left;
-		int shake_status;
+		bool shake_continuous;
 		int shake_strength;
 		int shake_speed;
 		int shake_position;
 		int shake_time_left;
 		int pan_x;
 		int pan_y;
-		int unknown_2b;
-		int unknown_2c;
-		int unknown_2d;
-		int unknown_2f;
+		int battleanim_id;
+		int battleanim_target;
+		int battleanim_unk_2d;
+		bool battleanim_global;
 		int weather;
 		int weather_strength;
 	};
@@ -385,16 +425,32 @@ namespace RPG {
 	public:
 		SaveEvents();
 
-		boost::ptr_vector<SaveEventCommands> commands;
-		int unknown_04;
+		boost::ptr_vector<SaveEventCommands> events;
+		int events_size;
+		int unknown_16;
+		int unknown_17;
+		int unknown_18;
+	};
+
+	class SaveTarget {
+	public:
+		SaveTarget();
+
+		int ID;
+		int map_id;
+		int map_x;
+		int map_y;
+		bool switch_on;
+		int switch_id;
 	};
 
 	class Save {
 	public:
 		Save();
+		void Setup();
 
 		std::auto_ptr<SaveTitle> title;
-		std::auto_ptr<SaveData> data;
+		std::auto_ptr<SaveSystem> system;
 		std::auto_ptr<SaveScreen> screen;
 		boost::ptr_vector<SavePicture> pictures;
 		std::auto_ptr<SavePartyLocation> party_location;
@@ -403,7 +459,9 @@ namespace RPG {
 		std::auto_ptr<SaveVehicleLocation> airship_location;
 		boost::ptr_vector<SaveActor> party;
 		std::auto_ptr<SaveInventory> inventory;
+		boost::ptr_vector<SaveTarget> targets;
 		std::auto_ptr<SaveMapInfo> map_info;
+		int unknown_70;
 		boost::ptr_vector<SaveCommonEvent> common_events;
 		std::auto_ptr<SaveEvents> events;
 	};

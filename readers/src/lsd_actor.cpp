@@ -52,6 +52,9 @@ std::auto_ptr<RPG::SaveActor> LSD_Reader::ReadSaveActor(Reader& stream) {
 		case ChunkActor::sprite_id:
 			actor->sprite_id = stream.Read32(Reader::CompressedInteger);
 			break;
+		case ChunkActor::sprite_flags:
+			actor->sprite_flags = stream.Read32(Reader::CompressedInteger);
+			break;
 		case ChunkActor::face_name:
 			actor->face_name = stream.ReadString(chunk_info.length);
 			break;
@@ -97,17 +100,38 @@ std::auto_ptr<RPG::SaveActor> LSD_Reader::ReadSaveActor(Reader& stream) {
 		case ChunkActor::current_sp:
 			actor->current_sp = stream.Read32(Reader::CompressedInteger);
 			break;
-		case ChunkActor::unknown_50:
-			stream.Read8(actor->unknown_50, chunk_info.length);
+		case ChunkActor::battle_commands:
+			stream.Read32(actor->battle_commands, chunk_info.length);
 			break;
-		case ChunkActor::unknown_51:
-			actor->unknown_51 = stream.Read32(Reader::CompressedInteger);
+		case ChunkActor::status_size:
+			actor->status_size = stream.Read32(Reader::CompressedInteger);
 			break;
 		case ChunkActor::status:
 			stream.Read16(actor->status, chunk_info.length);
 			break;
+		case ChunkActor::changed_class:
+			actor->changed_class = stream.ReadBool();
+			break;
+		case ChunkActor::class_id:
+			actor->class_id = stream.Read32(Reader::CompressedInteger);
+			break;
+		case ChunkActor::unknown_5b:
+			actor->unknown_5b = stream.Read32(Reader::CompressedInteger);
+			break;
+		case ChunkActor::two_weapon:
+			actor->two_weapon = stream.ReadBool();
+			break;
+		case ChunkActor::lock_equipment:
+			actor->lock_equipment = stream.ReadBool();
+			break;
 		case ChunkActor::auto_battle:
-			actor->auto_battle = stream.Read32(Reader::CompressedInteger) != 0;
+			actor->auto_battle = stream.ReadBool();
+			break;
+		case ChunkActor::mighty_guard:
+			actor->mighty_guard = stream.ReadBool();
+			break;
+		case ChunkActor::unknown_60:
+			actor->unknown_60 = stream.Read32(Reader::CompressedInteger);
 			break;
 		default:
 			stream.Skip(chunk_info);

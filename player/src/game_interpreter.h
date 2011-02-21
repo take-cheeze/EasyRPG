@@ -15,15 +15,17 @@
 // along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef _INTERPRETER_H_
-#define _INTERPRETER_H_
+#ifndef _GAME_INTERPRETER_H_
+#define _GAME_INTERPRETER_H_
 
 #include <map>
 #include <string>
 #include <vector>
 #include "game_character.h"
+#include "game_actor.h"
 #include "rpg_eventcommand.h"
 #include "system.h"
+#include "command_codes.h"
 
 class Game_Event;
 class Game_CommonEvent;
@@ -35,21 +37,29 @@ class Game_Interpreter
 {
 public:
 	Game_Interpreter(int _depth = 0, bool _main_flag = false);
-	~Game_Interpreter();
+	virtual ~Game_Interpreter();
 
 	void Clear();
-	void Setup(std::vector<RPG::EventCommand> const& _list, int _event_id, int dbg_x = -1, int dbg_y = -1);
+	void Setup(const std::vector<RPG::EventCommand>& _list, int _event_id, int dbg_x = -1, int dbg_y = -1);
 	bool IsRunning() const;
 	void Update();
 
 	void SetupStartingEvent(Game_Event* ev);
 	void SetupStartingEvent(Game_CommonEvent* ev);
-	bool ExecuteCommand();
 	void InputButton();
 	void SetupChoices(const std::vector<std::string>& choices);
-	void EndMoveRoute(RPG::MoveRoute* route);
 
-private:
+	virtual bool ExecuteCommand();
+	virtual void EndMoveRoute(RPG::MoveRoute* route);
+
+	enum Sizes {
+		MaxSize = 9999999,
+		MinSize = -9999999
+	};
+
+protected:
+	friend class Game_Interpreter_Map;
+
 	int depth;
 	bool main_flag;
 
@@ -82,122 +92,52 @@ private:
 
 	void CancelMenuCall();
 
+	static std::vector<Game_Actor*> GetActors(int mode, int id);
+	static int ValueOrVariable(int mode, int val);
+
 	////////////////////////////////////////////////////////
 	/// Closes the Message Window
 	////////////////////////////////////////////////////////
 	void CloseMessageWindow();
 
 	bool CommandShowMessage();
-	bool CommandShowChoices();
 	bool CommandChangeFaceGraphic();
+	bool CommandShowChoices();
 	bool CommandInputNumber();
-	bool CommandMessageOptions();
 	bool CommandControlSwitches();
 	bool CommandControlVariables();
 	bool CommandChangeGold();
 	bool CommandChangeItems();
 	bool CommandChangePartyMember();
-	bool CommandConditionalBranch();
-	bool CommandElseBranch();
-	bool CommandChangeExp();
 	bool CommandChangeLevel();
-	bool CommandChangeParameters();
 	bool CommandChangeSkills();
 	bool CommandChangeEquipment();
 	bool CommandChangeHP();
 	bool CommandChangeSP();
 	bool CommandChangeCondition();
 	bool CommandFullHeal();
-	bool CommandChangeHeroName();
-	bool CommandChangeHeroTitle();
-	bool CommandChangeSpriteAssociation();
-	bool CommandMemorizeLocation();
-	bool CommandRecallToLocation();
-	bool CommandStoreTerrainID();
-	bool CommandStoreEventID();
-	bool CommandPlayBGM();
-	bool CommandFadeOutBGM();
-	bool CommandMemorizeBGM();
-	bool CommandPlayMemorizedBGM();
-	bool CommandPlaySound();
-	bool CommandChangeSystemBGM();
-	bool CommandChangeSystemSFX();
-	bool CommandChangeSaveAccess();
-	bool CommandChangeTeleportAccess();
-	bool CommandChangeEscapeAccess();
-	bool CommandChangeMainMenuAccess();
-	bool CommandChangeActorFace();
-	bool CommandWait();
-	bool CommandTeleport();
-	bool CommandEraseScreen();
-	bool CommandShowScreen();
-	bool CommandShowPicture();
-	bool CommandMovePicture();
-	bool CommandErasePicture();
 	bool CommandTintScreen();
 	bool CommandFlashScreen();
 	bool CommandShakeScreen();
-	bool CommandWeatherEffects();
-	bool CommandChangeSystemGraphics();
-	bool CommandChangeScreenTransitions();
-	bool CommandChangeEventLocation();
-	bool CommandTradeEventLocations();
-	bool CommandTimerOperation();
-	bool CommandChangePBG();
-	bool CommandJumpToLabel();
-	bool CommandBreakLoop();
-	bool CommandEndLoop();
+	bool CommandWait();
+	bool CommandPlayBGM();
+	bool CommandFadeOutBGM();
+	bool CommandPlaySound();
 	bool CommandEndEventProcessing();
-	bool CommandOpenShop();
-	bool CommandShowInn();
-	bool CommandEnterHeroName();
 	bool CommandGameOver();
-	bool CommandReturnToTitleScreen();
-	bool CommandOpenSaveMenu();
-	bool CommandOpenMainMenu();
-	bool CommandEnemyEncounter();
-	bool CommandTeleportTargets();
-	bool CommandEscapeTarget();
-	bool CommandMoveEvent();
-	bool CommandFlashSprite();
-	bool CommandSpriteTransparency();
-	bool CommandEraseEvent();
-	bool CommandChangeMapTileset();
-	bool CommandCallEvent();
-	bool CommandChangeEncounterRate();
-	bool CommandProceedWithMovement();
-	bool CommandPlayMovie();
-	bool CommandChangeBattleCommands();
-	bool CommandKeyInputProc();
-	bool CommandChangeVehicleGraphic();
-	bool CommandEnterExitVehicle();
-	bool CommandSetVehicleLocation();
-	bool CommandTileSubstitution();
-	bool CommandPanScreen();
-	bool CommandSimulatedAttack();
 
 	void CommandEnd();
 
-	bool DefaultContinuation();
-	bool ContinuationChoices();
-	bool ContinuationOpenShop();
-	bool ContinuationShowInn();
-	bool ContinuationEnemyEncounter();
-	bool ContinuationPanScreen();
-
-private:
-	int DecodeInt(std::vector<int>::const_iterator& it);
-	const std::string DecodeString(std::vector<int>::const_iterator& it);
-	RPG::MoveCommand DecodeMove(std::vector<int>::const_iterator& it);
+	virtual bool DefaultContinuation();
+	virtual bool ContinuationChoices();
+	virtual bool ContinuationOpenShop();
+	virtual bool ContinuationShowInn();
+	virtual bool ContinuationEnemyEncounter();
 
 	int debug_x;
 	int debug_y;
 
 	bool teleport_pending;
-
-	typedef std::pair<RPG::MoveRoute*,Game_Character*> pending_move_route;
-
-	std::vector<pending_move_route> pending;
 };
 
 #endif

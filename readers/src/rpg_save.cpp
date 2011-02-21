@@ -18,6 +18,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include "data.h"
 #include "rpg_save.h"
 
 ////////////////////////////////////////////////////////////
@@ -33,7 +34,65 @@ RPG::SaveTitle::SaveTitle() {
 	face4_id = 0;
 }
 
-RPG::SaveData::SaveData() {
+void RPG::SaveSystem::Setup() {
+	const RPG::System& system = *Data::system;
+	screen = 0;
+	frame_count = 0;
+	graphics_name = system.system_name;
+	switches_size = Data::switches.size();
+	switches.resize(switches_size);
+	variables_size = Data::variables.size();
+	variables.resize(variables_size);
+	message_transparent = -1;
+	message_position = -1;
+	message_placement = -1;
+	message_continue = -1;
+	face_name = "";
+	face_id = -1;
+	face_right = false;
+	face_flip = false;
+	transparent = false;
+	unknown_3d = -1;
+	title_music = system.title_music;
+	battle_music = system.battle_music;
+	battle_end_music = system.battle_end_music;
+	inn_music = system.inn_music;
+	// current_music
+	// unknown1_music
+	// unknown2_music
+	// stored_music
+	boat_music = system.boat_music;
+	ship_music = system.ship_music;
+	airship_music = system.airship_music;
+	gameover_music = system.gameover_music;
+	cursor_se = system.cursor_se;
+	decision_se = system.decision_se;
+	cancel_se = system.cancel_se;
+	buzzer_se = system.buzzer_se;
+	battle_se = system.battle_se;
+	escape_se = system.escape_se;
+	enemy_attack_se = system.enemy_attack_se;
+	enemy_damaged_se = system.enemy_damaged_se;
+	actor_damaged_se = system.actor_damaged_se;
+	dodge_se = system.dodge_se;
+	enemy_death_se = system.enemy_death_se;
+	item_se = system.item_se;
+	transition_out = system.transition_out;
+	transition_in = system.transition_in;
+	battle_start_fadeout = system.battle_start_fadeout;
+	battle_start_fadein = system.battle_start_fadein;
+	battle_end_fadeout = system.battle_end_fadeout;
+	battle_end_fadein = system.battle_end_fadein;
+	teleport_allowed = true;
+	escape_allowed = true;
+	save_allowed = true;
+	menu_allowed = true;
+	background = "";
+	save_count = -1;
+	save_slot = -1;
+}
+
+RPG::SaveSystem::SaveSystem() {
 	screen = 0;
 	frame_count = 0;
 	graphics_name = "";
@@ -45,8 +104,10 @@ RPG::SaveData::SaveData() {
 	message_continue = -1;
 	face_name = "";
 	face_id = 0;
-	unknown_36 = -1;
+	face_right = false;
+	face_flip = false;
 	transparent = false;
+	unknown_3d = -1;
 	transition_out = -1;
 	transition_in = -1;
 	battle_start_fadeout = -1;
@@ -101,10 +162,16 @@ RPG::SavePartyLocation::SavePartyLocation() {
 	facing1 = -1;
 	facing2 = -1;
 	unknown_17 = -1;
+	unknown_20 = -1;
 	unknown_21 = -1;
 	unknown_23 = -1;
 	unknown_25 = -1;
-	unknown_2b = 0;
+	unknown_2a = -1;
+	unknown_2b = -1;
+	unknown_2c = -1;
+	sprite_transparent = false;
+	unknown_2f = -1;
+	unknown_33 = -1;
 	unknown_34 = -1;
 	unknown_35 = -1;
 	unknown_36 = -1;
@@ -153,6 +220,7 @@ RPG::SaveActor::SaveActor() {
 	title = "";
 	sprite_name = "";
 	sprite_id = -1;
+	sprite_flags = -1;
 	face_name = "";
 	face_id = -1;
 	level = -1;
@@ -166,23 +234,81 @@ RPG::SaveActor::SaveActor() {
 	skills_size = -1;
 	current_hp = -1;
 	current_sp = -1;
-	unknown_51 = -1;
+	status_size = -1;
+	changed_class = false;
+	class_id = -1;
+	unknown_5b = -1;
+	two_weapon = false;
+	lock_equipment = false;
 	auto_battle = false;
+	mighty_guard = false;
+	unknown_60 = -1;
+}
+
+void RPG::SaveActor::Setup(int actor_id) {
+	const RPG::Actor& actor = Data::actors[actor_id - 1];
+	ID = actor.ID;
+	name = actor.name;
+	title = actor.title;
+	sprite_name = actor.character_name;
+	sprite_id = actor.character_index;
+	sprite_flags = actor.transparent ? 3 : 0;
+	face_name = actor.face_name;
+	face_id = actor.face_index;
+	level = actor.initial_level;
+	exp = 0;
+	hp_mod = 0;
+	sp_mod = 0;
+	attack_mod = 0;
+	defense_mod = 0;
+	spirit_mod = 0;
+	agility_mod = 0;
+	skills_size = 0;
+	skills.clear();
+	equipped.clear();
+	equipped.push_back(actor.weapon_id);
+	equipped.push_back(actor.shield_id);
+	equipped.push_back(actor.armor_id);
+	equipped.push_back(actor.helmet_id);
+	equipped.push_back(actor.accessory_id);
+	current_hp = 0;
+	current_sp = 0;
+	battle_commands = actor.battle_commands;
+	status_size = 0;
+	status.clear();
+	changed_class = false;
+	class_id = actor.class_id;
+	unknown_5b = -1;
+	two_weapon = actor.two_swords_style;
+	lock_equipment = actor.fix_equipment;
+	auto_battle = actor.auto_battle;
+	mighty_guard = actor.super_guard;
+	unknown_60 = -1;
 }
 
 RPG::SaveInventory::SaveInventory() {
 	party_size = 0;
 	items_size = 0;
-	gold = -1;
-	timer_secs = -1;
-	timer_18 = -1;
-	timer_19 = -1;
-	battles = -1;
-	defeats = -1;
-	unknown_22 = -1;
-	unknown_23 = -1;
+	gold = 0;
+	timer1_secs = 0;
+	timer1_active = false;
+	timer1_visible = false;
+	timer1_battle = false;
+	timer2_secs = 0;
+	timer2_active = false;
+	timer2_visible = false;
+	timer2_battle = false;
+	battles = 0;
+	defeats = 0;
+	escapes = 0;
+	victories = 0;
 	unknown_29 = -1;
-	steps = -1;
+	steps = 0;
+}
+
+void RPG::SaveInventory::Setup() {
+	party = Data::system->party;
+	party_size = party.size();
 }
 
 RPG::SaveMapEvent::SaveMapEvent() {
@@ -204,11 +330,14 @@ RPG::SaveMapEvent::SaveMapEvent() {
 	unknown_25 = -1;
 	unknown_2a = -1;
 	unknown_2b = -1;
+	unknown_2f = -1;
 	anim_paused = 0;
 	unknown_33 = -1;
 	unknown_34 = -1;
 	unknown_35 = -1;
 	unknown_36 = -1;
+	unknown_3e = -1;
+	unknown_3f = -1;
 	unknown_47 = -1;
 	sprite_name = "";
 	sprite_id = -1;
@@ -232,24 +361,23 @@ RPG::SaveScreen::SaveScreen() {
 	tint_current_blue = -1.0;
 	tint_current_sat = -1.0;
 	tint_time_left = -1;
-	flash_status = -1;
+	flash_continuous = false;
 	flash_red = -1;
 	flash_green = -1;
 	flash_blue = -1;
 	flash_current_level = -1.0;
 	flash_time_left = -1;
-	unknown_2f = -1;
-	shake_status = -1;
+	shake_continuous = false;
 	shake_strength = -1;
 	shake_speed = -1;
 	shake_position = 0;
 	shake_time_left = -1;
 	pan_x = -1;
 	pan_y = -1;
-	unknown_2b = -1;
-	unknown_2c = -1;
-	unknown_2d = -1;
-	unknown_2f = -1;
+	battleanim_id = -1;
+	battleanim_target = -1;
+	battleanim_unk_2d = -1;
+	battleanim_global = false;
 	weather = 0;
 	weather_strength = 0;
 }
@@ -261,11 +389,13 @@ RPG::SaveEventCommands::SaveEventCommands() {
 	unknown_0c = -1;
 	unknown_0d = -1;
 	unknown_15 = -1;
-	unknown_16 = -1;
 }
 
 RPG::SaveEventData::SaveEventData() {
 	time_left = -1;
+	unknown_16 = -1;
+	unknown_17 = -1;
+	unknown_20 = -1;
 }
 
 RPG::SaveCommonEvent::SaveCommonEvent() {
@@ -273,8 +403,10 @@ RPG::SaveCommonEvent::SaveCommonEvent() {
 }
 
 RPG::SaveMapInfo::SaveMapInfo() {
-	pan_x = -1;
-	pan_y = -1;
+	pan_x = 0;
+	pan_y = 0;
+	encounter_rate = -1;
+	chipset_id = -1;
 	parallax_name = "";
 	parallax_horz = false;
 	parallax_vert = false;
@@ -284,10 +416,58 @@ RPG::SaveMapInfo::SaveMapInfo() {
 	parallax_vert_speed = 0;
 }
 
+void RPG::SaveMapInfo::Setup() {
+	pan_x = 0;
+	pan_y = 0;
+	lower_tiles.resize(144);
+	upper_tiles.resize(144);
+	for (int i = 0; i < 144; i++) {
+		lower_tiles[i] = i;
+		upper_tiles[i] = i;
+	}
+}
+
+void RPG::SaveMapInfo::Setup(const RPG::Map& map) {
+	chipset_id = map.chipset_id;
+	parallax_name = map.parallax_name;
+	parallax_horz = map.parallax_loop_x;
+	parallax_vert = map.parallax_loop_y;
+	parallax_horz_auto = map.parallax_auto_loop_x;
+	parallax_vert_auto = map.parallax_auto_loop_y;
+	parallax_horz_speed = map.parallax_sx;
+	parallax_vert_speed = map.parallax_sy;
+}
+
+void RPG::SaveMapInfo::Setup(const RPG::MapInfo& map_info) {
+	encounter_rate = map_info.encounter_steps;
+}
+
 RPG::SaveEvents::SaveEvents() {
-	unknown_04 = -1;
+	events_size = -1;
+	unknown_16 = -1;
+	unknown_17 = -1;
+	unknown_18 = -1;
+}
+
+RPG::SaveTarget::SaveTarget() {
+	ID = -1;
+	map_id = -1;
+	map_x = -1;
+	map_y = -1;
+	switch_on = false;
+	switch_id = -1;
 }
 
 RPG::Save::Save() {
+	unknown_70 = -1;
+}
+
+void RPG::Save::Setup() {
+	system->Setup();
+	pictures.resize(50);
+	party.resize(Data::actors.size());
+	for (int i = 1; i <= (int) party.size(); i++)
+		party[i - 1].Setup(i);
+	map_info->Setup();
 }
 

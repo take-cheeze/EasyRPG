@@ -32,7 +32,7 @@
 ////////////////////////////////////////////////////////////
 namespace LSD_Reader {
 	std::auto_ptr<RPG::SaveTitle> ReadSaveTitle(Reader& stream);
-	std::auto_ptr<RPG::SaveData> ReadSaveData(Reader& stream);
+	std::auto_ptr<RPG::SaveSystem> ReadSaveSystem(Reader& stream);
 	std::auto_ptr<RPG::SavePicture> ReadSavePicture(Reader& stream);
 	std::auto_ptr<RPG::SavePartyLocation> ReadSavePartyLocation(Reader& stream);
 	std::auto_ptr<RPG::SaveVehicleLocation> ReadSaveVehicleLocation(Reader& stream);
@@ -46,6 +46,7 @@ namespace LSD_Reader {
 	std::auto_ptr<RPG::SaveCommonEvent> ReadCommonEvent(Reader& stream);
 	std::auto_ptr<RPG::SaveEvents> ReadSaveEvents(Reader& stream);
 	std::auto_ptr<RPG::SaveEventCommands> ReadSaveEventCommands(Reader& stream);
+	std::auto_ptr<RPG::SaveTarget> ReadSaveTarget(Reader& stream);
 
 	std::auto_ptr<RPG::Save> Load(const std::string &filename);
 	std::auto_ptr<RPG::Save> LoadChunks(Reader& stream);

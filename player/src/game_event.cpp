@@ -27,6 +27,7 @@
 #include "game_switches.h"
 #include "game_variables.h"
 #include "game_system.h"
+#include "game_interpreter_map.h"
 #include "main_data.h"
 #include "player.h"
 
@@ -114,7 +115,7 @@ void Game_Event::Setup(RPG::EventPage const* new_page) {
 	delete interpreter;
 	interpreter = NULL;
 	if (trigger == TriggerParallelProcess) {
-		interpreter = new Game_Interpreter();
+		interpreter = new Game_Interpreter_Map();
 	}
 	CheckEventTriggerAuto();
 }
@@ -194,22 +195,21 @@ bool Game_Event::AreConditionsMet(const RPG::EventPage& page) {
 
 	// Actor in party?
 	if (page.condition->actor) {
-		Game_Actor* actor = Game_Actors::GetActor(page.condition->actor_id);
-		if (!Game_Party::IsActorInParty(actor)) {
+		if (!Game_Party::IsActorInParty(page.condition->actor_id)) {
 			return false;
 		}
 	}
 
 	// Timer
 	if (page.condition->timer) {
-		int frames = Game_System::ReadTimer(Game_System::Timer1);
+		int frames = Game_Party::ReadTimer(Game_Party::Timer1);
 		if (frames > page.condition->timer_sec * DEFAULT_FPS)
 			return false;
 	}
 
 	// Timer2
 	if (page.condition->timer2) {
-		int frames = Game_System::ReadTimer(Game_System::Timer2);
+		int frames = Game_Party::ReadTimer(Game_Party::Timer2);
 		if (frames > page.condition->timer2_sec * DEFAULT_FPS)
 			return false;
 	}
