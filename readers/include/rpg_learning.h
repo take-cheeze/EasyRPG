@@ -34,11 +34,7 @@ namespace RPG {
 		int level;
 		int skill_id;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(level);
 			ar & BOOST_SERIALIZATION_NVP(skill_id);
 		}

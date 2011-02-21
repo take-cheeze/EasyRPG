@@ -51,11 +51,7 @@ namespace RPG {
 		int flash_power;
 		int screen_shake;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(frame);
 			ar & BOOST_SERIALIZATION_NVP(se);
 			ar & BOOST_SERIALIZATION_NVP(flash_scope);

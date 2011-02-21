@@ -38,11 +38,7 @@ namespace RPG {
 		int after_image;
 		int pose;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(move);
 			ar & BOOST_SERIALIZATION_NVP(after_image);

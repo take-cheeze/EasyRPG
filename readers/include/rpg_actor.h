@@ -79,11 +79,7 @@ namespace RPG {
 		int battle_x;
 		int battle_y;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(name);
 			ar & BOOST_SERIALIZATION_NVP(title);

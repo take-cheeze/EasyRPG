@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="8">
-<mapunit class_id="0" tracking_level="0" version="0">
+<mapunit class_id="0" tracking_level="1" version="0" object_id="_0">
 	<ID>0</ID>
 	<chipset_id>1</chipset_id>
 	<width>20</width>
@@ -823,20 +823,20 @@
 		<item>10000</item>
 		<item>10000</item>
 	</upper_layer>
-	<events class_id="2" tracking_level="0" version="0">
+	<events class_id="2" tracking_level="1" version="0" object_id="_1">
 		<count>54</count>
 		<item_version>0</item_version>
-		<item class_id="3" tracking_level="0" version="0">
+		<item class_id="3" tracking_level="1" version="0" object_id="_2">
 			<ID>1</ID>
 			<name>EV0001</name>
 			<x>5</x>
 			<y>5</y>
-			<pages class_id="4" tracking_level="0" version="0">
+			<pages class_id="4" tracking_level="1" version="0" object_id="_3">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item class_id="5" tracking_level="0" version="0">
+				<item class_id="5" tracking_level="1" version="0" object_id="_4">
 					<ID>1</ID>
-					<condition class_id="6" tracking_level="0" version="0">
+					<condition class_id="6" tracking_level="1" version="0" object_id="_5">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -866,18 +866,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route class_id="7" tracking_level="0" version="0">
-						<move_commands class_id="8" tracking_level="0" version="0">
+					<move_route class_id="7" tracking_level="1" version="0" object_id="_6">
+						<move_commands class_id="8" tracking_level="1" version="0" object_id="_7">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands class_id="9" tracking_level="0" version="0">
+					<event_commands class_id="9" tracking_level="1" version="0" object_id="_8">
 						<count>47</count>
 						<item_version>0</item_version>
-						<item class_id="10" tracking_level="0" version="0">
+						<item class_id="10" tracking_level="1" version="0" object_id="_9">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -886,7 +886,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_10">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[1]Speed 1</string>
@@ -895,7 +895,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_11">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -904,7 +904,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_12">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[2]Speed 2</string>
@@ -913,7 +913,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_13">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -922,7 +922,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_14">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[3]Speed 3</string>
@@ -931,7 +931,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_15">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -940,7 +940,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_16">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[4]Speed 4</string>
@@ -949,7 +949,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_17">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -958,7 +958,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_18">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[5]Speed 5</string>
@@ -967,7 +967,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_19">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -976,7 +976,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_20">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[6]Speed 6</string>
@@ -985,7 +985,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_21">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -994,7 +994,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_22">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[7]Speed 7</string>
@@ -1003,7 +1003,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_23">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1012,7 +1012,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_24">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[8]Speed 8</string>
@@ -1021,7 +1021,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_25">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1030,7 +1030,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_26">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[9]Speed 9</string>
@@ -1039,7 +1039,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_27">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1048,7 +1048,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_28">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[10]Speed 10</string>
@@ -1057,7 +1057,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_29">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1066,7 +1066,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_30">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[11]Speed 11</string>
@@ -1075,7 +1075,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_31">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1084,7 +1084,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_32">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[12]Speed 12</string>
@@ -1093,7 +1093,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_33">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1102,7 +1102,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_34">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[13]Speed 13</string>
@@ -1111,7 +1111,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_35">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1120,7 +1120,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_36">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[14]Speed 14</string>
@@ -1129,7 +1129,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_37">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1138,7 +1138,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_38">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[15]Speed 15</string>
@@ -1147,7 +1147,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_39">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1156,7 +1156,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_40">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[16]Speed 16</string>
@@ -1165,7 +1165,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_41">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1174,7 +1174,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_42">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[17]Speed 17</string>
@@ -1183,7 +1183,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_43">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1192,7 +1192,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_44">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[18]Speed 18</string>
@@ -1201,7 +1201,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_45">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1210,7 +1210,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_46">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[19]Speed 19</string>
@@ -1219,7 +1219,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_47">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing message speed:</string>
@@ -1228,7 +1228,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_48">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[20]Speed 20</string>
@@ -1237,7 +1237,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_49">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing out-of-range speed codes:</string>
@@ -1246,7 +1246,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_50">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[36]Speed 36</string>
@@ -1255,7 +1255,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_51">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[-80]Speed -80</string>
@@ -1264,7 +1264,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_52">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Doing speed combos:</string>
@@ -1273,7 +1273,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_53">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>Lorem ipsum\s[15] dolor sit \s[2]amet, consectetur </string>
@@ -1282,7 +1282,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_54">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>adipiscing elit. \s[12]Nulla at\s[6] suscipit massa. </string>
@@ -1291,7 +1291,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_55">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\s[20]Cras\s[8] in lorem\s[1] mi. </string>
@@ -1304,17 +1304,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_56">
 			<ID>2</ID>
 			<name>EV0002</name>
 			<x>8</x>
 			<y>9</y>
-			<pages>
+			<pages object_id="_57">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_58">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_59">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1344,18 +1344,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_60">
+						<move_commands object_id="_61">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_62">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_63">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>This is a Message.</string>
@@ -1364,7 +1364,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_64">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Message skip works.</string>
@@ -1377,17 +1377,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_65">
 			<ID>3</ID>
 			<name>EV0003</name>
 			<x>4</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_66">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_67">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_68">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1417,18 +1417,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_69">
+						<move_commands object_id="_70">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_71">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_72">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Show a &quot;slash&quot; sign</string>
@@ -1437,7 +1437,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_73">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\\</string>
@@ -1450,17 +1450,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_74">
 			<ID>4</ID>
 			<name>EV0004</name>
 			<x>6</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_75">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_76">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_77">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1490,18 +1490,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_78">
+						<move_commands object_id="_79">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_80">
 						<count>5</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_81">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing the hero name in position ID 4</string>
@@ -1510,7 +1510,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_82">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\n[0004]</string>
@@ -1519,7 +1519,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_83">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing the hero name in position ID a.</string>
@@ -1528,7 +1528,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_84">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>Rpg_Rt 1.51 will crash now, Enjoy :).</string>
@@ -1537,7 +1537,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_85">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>\n[a]</string>
@@ -1550,17 +1550,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_86">
 			<ID>5</ID>
 			<name> </name>
 			<x>7</x>
 			<y>3</y>
-			<pages>
+			<pages object_id="_87">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_88">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_89">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1590,18 +1590,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_90">
+						<move_commands object_id="_91">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_92">
 						<count>5</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_93">
 							<code>10220</code>
 							<indent>0</indent>
 							<string></string>
@@ -1617,7 +1617,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_94">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing the hero name in position ID</string>
@@ -1626,7 +1626,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_95">
 							<code>20110</code>
 							<indent>0</indent>
 							<string></string>
@@ -1635,7 +1635,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_96">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\N[\v[0009]]</string>
@@ -1644,7 +1644,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_97">
 							<code>20110</code>
 							<indent>0</indent>
 							<string> </string>
@@ -1657,17 +1657,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_98">
 			<ID>6</ID>
 			<name>EV0006</name>
 			<x>7</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_99">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_100">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_101">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1697,18 +1697,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_102">
+						<move_commands object_id="_103">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_104">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_105">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing the value of the variable 0007</string>
@@ -1717,7 +1717,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_106">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[0007]</string>
@@ -1730,17 +1730,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_107">
 			<ID>7</ID>
 			<name>EV0007</name>
 			<x>8</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_108">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_109">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_110">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1770,18 +1770,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_111">
+						<move_commands object_id="_112">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_113">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_114">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing your money</string>
@@ -1790,7 +1790,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_115">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\$</string>
@@ -1803,17 +1803,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_116">
 			<ID>8</ID>
 			<name>EV0008</name>
 			<x>9</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_117">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_118">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_119">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1843,18 +1843,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_120">
+						<move_commands object_id="_121">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_122">
 						<count>3</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_123">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing instant speed messages.</string>
@@ -1863,7 +1863,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_124">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\&gt;This is a instant message  \&lt;---</string>
@@ -1872,7 +1872,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_125">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>This is a non instant message.</string>
@@ -1885,17 +1885,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_126">
 			<ID>9</ID>
 			<name>EV0009</name>
 			<x>10</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_127">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_128">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_129">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -1925,18 +1925,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_130">
+						<move_commands object_id="_131">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_132">
 						<count>47</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_133">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -1945,7 +1945,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_134">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[0]Color 0</string>
@@ -1954,7 +1954,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_135">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -1963,7 +1963,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_136">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[1]Color 1</string>
@@ -1972,7 +1972,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_137">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -1981,7 +1981,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_138">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[2]Color 2</string>
@@ -1990,7 +1990,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_139">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -1999,7 +1999,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_140">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[3]Color 3</string>
@@ -2008,7 +2008,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_141">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2017,7 +2017,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_142">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[4]Color 4</string>
@@ -2026,7 +2026,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_143">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2035,7 +2035,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_144">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[5]Color 5</string>
@@ -2044,7 +2044,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_145">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2053,7 +2053,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_146">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[6]Color 6</string>
@@ -2062,7 +2062,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_147">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2071,7 +2071,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_148">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[7]Color 7</string>
@@ -2080,7 +2080,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_149">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2089,7 +2089,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_150">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[8]Color 8</string>
@@ -2098,7 +2098,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_151">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2107,7 +2107,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_152">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[9]Color 9</string>
@@ -2116,7 +2116,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_153">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2125,7 +2125,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_154">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[10]Color 10</string>
@@ -2134,7 +2134,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_155">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2143,7 +2143,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_156">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[11]Color 11</string>
@@ -2152,7 +2152,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_157">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2161,7 +2161,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_158">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[12]Color 12</string>
@@ -2170,7 +2170,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_159">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2179,7 +2179,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_160">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[13]Color 13</string>
@@ -2188,7 +2188,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_161">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2197,7 +2197,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_162">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[14]Color 14</string>
@@ -2206,7 +2206,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_163">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2215,7 +2215,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_164">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[15]Color 15</string>
@@ -2224,7 +2224,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_165">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2233,7 +2233,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_166">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[16]Color 16</string>
@@ -2242,7 +2242,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_167">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2251,7 +2251,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_168">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[17]Color 17</string>
@@ -2260,7 +2260,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_169">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2269,7 +2269,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_170">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[18]Color 18</string>
@@ -2278,7 +2278,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_171">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing different colors in messages.</string>
@@ -2287,7 +2287,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_172">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[19]Color 19</string>
@@ -2296,7 +2296,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_173">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Chossing a out-of-range color code.</string>
@@ -2305,7 +2305,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_174">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[36]Color 36</string>
@@ -2314,7 +2314,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_175">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[-80]Color -80</string>
@@ -2323,7 +2323,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_176">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Doing color combos.</string>
@@ -2332,7 +2332,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_177">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>Lorem ipsum \c[4]dolor sit amet, consectetur </string>
@@ -2341,7 +2341,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_178">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>adipiscing elit.\c[16] Nulla at suscipit massa. </string>
@@ -2350,7 +2350,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_179">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>Cras in \c[2]lorem mi. </string>
@@ -2363,17 +2363,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_180">
 			<ID>10</ID>
 			<name>EV0010</name>
 			<x>11</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_181">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_182">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_183">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -2403,18 +2403,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_184">
+						<move_commands object_id="_185">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_186">
 						<count>3</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_187">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Test pauses in the message.</string>
@@ -2423,7 +2423,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_188">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>Press key to continue... \!</string>
@@ -2432,7 +2432,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_189">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>The message has continued</string>
@@ -2445,17 +2445,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_190">
 			<ID>11</ID>
 			<name>EV0011</name>
 			<x>12</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_191">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_192">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_193">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -2485,18 +2485,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_194">
+						<move_commands object_id="_195">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_196">
 						<count>4</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_197">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Test waiting times in message (0.25 sec):</string>
@@ -2505,7 +2505,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_198">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\.1\.2\.3\.4\.5\.6\.7\.8</string>
@@ -2514,7 +2514,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_199">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Test waiting times in message (1 sec):</string>
@@ -2523,7 +2523,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_200">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\|1\|2\|3</string>
@@ -2536,17 +2536,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_201">
 			<ID>12</ID>
 			<name>EV0012</name>
 			<x>13</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_202">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_203">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_204">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -2576,18 +2576,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_205">
+						<move_commands object_id="_206">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_207">
 						<count>4</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_208">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Killing messages. Press a key to continue</string>
@@ -2596,7 +2596,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_209">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Lorem ipsum dolor sit amet, consectetur </string>
@@ -2605,7 +2605,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_210">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>adipiscing elit. Nulla at suscipit massa.</string>
@@ -2614,7 +2614,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_211">
 							<code>20110</code>
 							<indent>0</indent>
 							<string> Cras in lorem mi. \^</string>
@@ -2627,17 +2627,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_212">
 			<ID>13</ID>
 			<name>EV0013</name>
 			<x>8</x>
 			<y>3</y>
-			<pages>
+			<pages object_id="_213">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_214">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_215">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -2667,18 +2667,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_216">
+						<move_commands object_id="_217">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_218">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_219">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Doing some command combos in messages:</string>
@@ -2687,7 +2687,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_220">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\&gt;\C[4]1234\C[0]\&lt; \S[5]\V[0003] \..\..\..\|\^</string>
@@ -2700,17 +2700,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_221">
 			<ID>14</ID>
 			<name>EV0014</name>
 			<x>9</x>
 			<y>9</y>
-			<pages>
+			<pages object_id="_222">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_223">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_224">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -2740,18 +2740,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_225">
+						<move_commands object_id="_226">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_227">
 						<count>4</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_228">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Special message icons:</string>
@@ -2760,7 +2760,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_229">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>$A$B$C$D$E$F$G$H$I$J$K$L$M$N$O$P$Q$R$S$T$U$V$W$X$Y$Z</string>
@@ -2769,7 +2769,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_230">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>$a$b$c$d$e$f$g$h$i$j$k$l$m$n$o$p$q$r$s$t$u$v$w$x$y$z</string>
@@ -2778,7 +2778,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_231">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>Last icons per row: $Y and $y. Missing: $Z and $z</string>
@@ -2791,17 +2791,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_232">
 			<ID>15</ID>
 			<name>EV0015</name>
 			<x>14</x>
 			<y>5</y>
-			<pages>
+			<pages object_id="_233">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_234">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_235">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -2831,18 +2831,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_236">
+						<move_commands object_id="_237">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_238">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_239">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing half size spaces:</string>
@@ -2851,7 +2851,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_240">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>This\_message\_has\_half\_size\_spaces.</string>
@@ -2864,17 +2864,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_241">
 			<ID>16</ID>
 			<name>EV0016</name>
 			<x>9</x>
 			<y>3</y>
-			<pages>
+			<pages object_id="_242">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_243">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_244">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -2904,18 +2904,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_245">
+						<move_commands object_id="_246">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_247">
 						<count>16</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_248">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing messages commands with wrong parameters</string>
@@ -2924,7 +2924,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_249">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Watch out!)</string>
@@ -2933,7 +2933,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_250">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing variable -0003</string>
@@ -2942,7 +2942,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_251">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[-0003]</string>
@@ -2951,7 +2951,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_252">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing variable &quot;hi&quot;</string>
@@ -2960,7 +2960,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_253">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[hi]</string>
@@ -2969,7 +2969,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_254">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing variable 2.8</string>
@@ -2978,7 +2978,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_255">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[2.8]</string>
@@ -2987,7 +2987,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_256">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing variable 10000 (out of range)</string>
@@ -2996,7 +2996,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_257">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[10000]</string>
@@ -3005,7 +3005,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_258">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Picking color W</string>
@@ -3014,7 +3014,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_259">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[w]Test</string>
@@ -3023,7 +3023,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_260">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Picking color 3.1415</string>
@@ -3032,7 +3032,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_261">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[3.1415]Test</string>
@@ -3041,7 +3041,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_262">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Picking color 0001</string>
@@ -3050,7 +3050,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_263">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[0001]Test</string>
@@ -3063,17 +3063,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_264">
 			<ID>17</ID>
 			<name>EV0017</name>
 			<x>10</x>
 			<y>3</y>
-			<pages>
+			<pages object_id="_265">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_266">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_267">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3103,18 +3103,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_268">
+						<move_commands object_id="_269">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_270">
 						<count>15</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_271">
 							<code>10220</code>
 							<indent>0</indent>
 							<string></string>
@@ -3130,7 +3130,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_272">
 							<code>10220</code>
 							<indent>0</indent>
 							<string></string>
@@ -3146,7 +3146,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_273">
 							<code>10220</code>
 							<indent>0</indent>
 							<string></string>
@@ -3162,7 +3162,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_274">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing variable 0003 (= 42)</string>
@@ -3171,7 +3171,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_275">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[0003]</string>
@@ -3180,7 +3180,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_276">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing variable 3</string>
@@ -3189,7 +3189,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_277">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[3]</string>
@@ -3198,7 +3198,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_278">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing variable via indirect access.</string>
@@ -3207,7 +3207,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_279">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>Accessing Var 4 (=3) and use this as param for \\v</string>
@@ -3216,7 +3216,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_280">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>This is an EasyRPG Extension</string>
@@ -3225,7 +3225,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_281">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\v[\v[4]]</string>
@@ -3234,7 +3234,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_282">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Showing message using color value from variable 4</string>
@@ -3243,7 +3243,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_283">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[\v[4]]This text is colored\c[0]</string>
@@ -3252,7 +3252,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_284">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>EasyRPG Extension: Indirect over variable 5 (= 4):</string>
@@ -3261,7 +3261,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_285">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>\c[\v[\v[5]]]This text is colored too</string>
@@ -3274,17 +3274,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_286">
 			<ID>18</ID>
 			<name>EV0018</name>
 			<x>10</x>
 			<y>9</y>
-			<pages>
+			<pages object_id="_287">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_288">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_289">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3314,18 +3314,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_290">
+						<move_commands object_id="_291">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_292">
 						<count>7</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_293">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Message length test.</string>
@@ -3334,7 +3334,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_294">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>The X should be NOT visible.</string>
@@ -3343,7 +3343,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_295">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>12345678901234567890123456789012345678901234567890XXXXX</string>
@@ -3352,7 +3352,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_296">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>ABCDEFGHIJKLMNOPQRSTUVWABCDEFGHIJKLMNOPQRSTUVWABCDXX</string>
@@ -3361,7 +3361,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_297">
 							<code>20110</code>
 							<indent>0</indent>
 							<string></string>
@@ -3370,7 +3370,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_298">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>The ExFont should be not visible on the next line:</string>
@@ -3379,7 +3379,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_299">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>1234567890123456789012345678901234567890123456789$A</string>
@@ -3392,17 +3392,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_300">
 			<ID>1</ID>
 			<name>EV0001</name>
 			<x>5</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_301">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_302">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_303">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3432,18 +3432,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_304">
+						<move_commands object_id="_305">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_306">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_307">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3459,17 +3459,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_308">
 			<ID>2</ID>
 			<name>EV0002</name>
 			<x>6</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_309">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_310">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_311">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3499,18 +3499,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_312">
+						<move_commands object_id="_313">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_314">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_315">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3526,17 +3526,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_316">
 			<ID>3</ID>
 			<name>EV0003</name>
 			<x>7</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_317">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_318">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_319">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3566,18 +3566,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_320">
+						<move_commands object_id="_321">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_322">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_323">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3593,17 +3593,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_324">
 			<ID>4</ID>
 			<name>EV0004</name>
 			<x>8</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_325">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_326">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_327">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3633,18 +3633,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_328">
+						<move_commands object_id="_329">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_330">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_331">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3660,17 +3660,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_332">
 			<ID>5</ID>
 			<name>EV0005</name>
 			<x>9</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_333">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_334">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_335">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3700,18 +3700,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_336">
+						<move_commands object_id="_337">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_338">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_339">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3727,17 +3727,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_340">
 			<ID>6</ID>
 			<name>EV0006</name>
 			<x>10</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_341">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_342">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_343">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3767,18 +3767,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_344">
+						<move_commands object_id="_345">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_346">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_347">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3794,17 +3794,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_348">
 			<ID>7</ID>
 			<name>EV0007</name>
 			<x>11</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_349">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_350">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_351">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3834,18 +3834,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_352">
+						<move_commands object_id="_353">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_354">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_355">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3861,17 +3861,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_356">
 			<ID>8</ID>
 			<name>EV0008</name>
 			<x>12</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_357">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_358">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_359">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3901,18 +3901,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_360">
+						<move_commands object_id="_361">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_362">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_363">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3928,17 +3928,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_364">
 			<ID>9</ID>
 			<name>EV0009</name>
 			<x>5</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_365">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_366">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_367">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -3968,18 +3968,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_368">
+						<move_commands object_id="_369">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_370">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_371">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -3995,17 +3995,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_372">
 			<ID>10</ID>
 			<name>EV0010</name>
 			<x>6</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_373">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_374">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_375">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4035,18 +4035,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_376">
+						<move_commands object_id="_377">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_378">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_379">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4062,17 +4062,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_380">
 			<ID>11</ID>
 			<name>EV0011</name>
 			<x>7</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_381">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_382">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_383">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4102,18 +4102,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_384">
+						<move_commands object_id="_385">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_386">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_387">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4129,17 +4129,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_388">
 			<ID>12</ID>
 			<name>EV0012</name>
 			<x>8</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_389">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_390">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_391">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4169,18 +4169,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_392">
+						<move_commands object_id="_393">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_394">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_395">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4196,17 +4196,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_396">
 			<ID>13</ID>
 			<name>EV0013</name>
 			<x>9</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_397">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_398">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_399">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4236,18 +4236,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_400">
+						<move_commands object_id="_401">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_402">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_403">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4263,17 +4263,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_404">
 			<ID>14</ID>
 			<name>EV0014</name>
 			<x>10</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_405">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_406">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_407">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4303,18 +4303,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_408">
+						<move_commands object_id="_409">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_410">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_411">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4330,17 +4330,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_412">
 			<ID>15</ID>
 			<name>EV0015</name>
 			<x>11</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_413">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_414">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_415">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4370,18 +4370,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_416">
+						<move_commands object_id="_417">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_418">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_419">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4397,17 +4397,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_420">
 			<ID>16</ID>
 			<name>EV0016</name>
 			<x>12</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_421">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_422">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_423">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4437,18 +4437,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_424">
+						<move_commands object_id="_425">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_426">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_427">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4464,17 +4464,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_428">
 			<ID>17</ID>
 			<name>EV0017</name>
 			<x>12</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_429">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_430">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_431">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4504,18 +4504,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_432">
+						<move_commands object_id="_433">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_434">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_435">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4531,17 +4531,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_436">
 			<ID>18</ID>
 			<name>EV0018</name>
 			<x>9</x>
 			<y>4</y>
-			<pages>
+			<pages object_id="_437">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_438">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_439">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4571,18 +4571,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_440">
+						<move_commands object_id="_441">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_442">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_443">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4598,17 +4598,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_444">
 			<ID>19</ID>
 			<name>EV0019</name>
 			<x>11</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_445">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_446">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_447">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4638,18 +4638,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_448">
+						<move_commands object_id="_449">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_450">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_451">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4665,17 +4665,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_452">
 			<ID>20</ID>
 			<name>EV0020</name>
 			<x>10</x>
 			<y>4</y>
-			<pages>
+			<pages object_id="_453">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_454">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_455">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4705,18 +4705,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_456">
+						<move_commands object_id="_457">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_458">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_459">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4732,17 +4732,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_460">
 			<ID>21</ID>
 			<name>EV0021</name>
 			<x>10</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_461">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_462">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_463">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4772,18 +4772,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_464">
+						<move_commands object_id="_465">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_466">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_467">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4799,17 +4799,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_468">
 			<ID>23</ID>
 			<name>EV0023</name>
 			<x>9</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_469">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_470">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_471">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4839,18 +4839,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_472">
+						<move_commands object_id="_473">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_474">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_475">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4866,17 +4866,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_476">
 			<ID>25</ID>
 			<name>EV0025</name>
 			<x>8</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_477">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_478">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_479">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4906,18 +4906,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_480">
+						<move_commands object_id="_481">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_482">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_483">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -4933,17 +4933,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_484">
 			<ID>26</ID>
 			<name>EV0026</name>
 			<x>8</x>
 			<y>4</y>
-			<pages>
+			<pages object_id="_485">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_486">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_487">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -4973,18 +4973,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_488">
+						<move_commands object_id="_489">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_490">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_491">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -5000,17 +5000,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_492">
 			<ID>27</ID>
 			<name>EV0027</name>
 			<x>7</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_493">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_494">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_495">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5040,18 +5040,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_496">
+						<move_commands object_id="_497">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_498">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_499">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -5067,17 +5067,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_500">
 			<ID>28</ID>
 			<name>EV0028</name>
 			<x>7</x>
 			<y>4</y>
-			<pages>
+			<pages object_id="_501">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_502">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_503">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5107,18 +5107,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_504">
+						<move_commands object_id="_505">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_506">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_507">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -5134,17 +5134,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_508">
 			<ID>29</ID>
 			<name>EV0029</name>
 			<x>6</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_509">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_510">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_511">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5174,18 +5174,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_512">
+						<move_commands object_id="_513">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_514">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_515">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -5201,17 +5201,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_516">
 			<ID>30</ID>
 			<name>EV0030</name>
 			<x>6</x>
 			<y>4</y>
-			<pages>
+			<pages object_id="_517">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_518">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_519">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5241,18 +5241,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_520">
+						<move_commands object_id="_521">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_522">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_523">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -5268,17 +5268,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_524">
 			<ID>31</ID>
 			<name>EV0031</name>
 			<x>5</x>
 			<y>6</y>
-			<pages>
+			<pages object_id="_525">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_526">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_527">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5308,18 +5308,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_528">
+						<move_commands object_id="_529">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_530">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_531">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -5335,17 +5335,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_532">
 			<ID>32</ID>
 			<name>EV0032</name>
 			<x>5</x>
 			<y>4</y>
-			<pages>
+			<pages object_id="_533">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_534">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_535">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5375,18 +5375,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_536">
+						<move_commands object_id="_537">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_538">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_539">
 							<code>10810</code>
 							<indent>0</indent>
 							<string></string>
@@ -5402,17 +5402,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_540">
 			<ID>1</ID>
 			<name>EV0001</name>
 			<x>7</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_541">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_542">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_543">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5442,18 +5442,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_544">
+						<move_commands object_id="_545">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_546">
 						<count>22</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_547">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5466,7 +5466,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_548">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Normal - Auto - Non continuing events</string>
@@ -5475,7 +5475,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_549">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5488,7 +5488,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_550">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Normal - Up - Non continuing events</string>
@@ -5497,7 +5497,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_551">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Auto disabled)</string>
@@ -5506,7 +5506,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_552">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5519,7 +5519,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_553">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Normal - Center - Non continuing events</string>
@@ -5528,7 +5528,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_554">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Auto disabled)</string>
@@ -5537,7 +5537,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_555">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5550,7 +5550,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_556">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Normal - Down - Non continuing events</string>
@@ -5559,7 +5559,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_557">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Auto disabled)</string>
@@ -5568,7 +5568,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_558">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5581,7 +5581,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_559">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Transparent - Auto - Non continuing events</string>
@@ -5590,7 +5590,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_560">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5603,7 +5603,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_561">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Transparent - Up - Non continuing events</string>
@@ -5612,7 +5612,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_562">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Auto disabled)</string>
@@ -5621,7 +5621,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_563">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5634,7 +5634,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_564">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Transparent - Center - Non continuing events</string>
@@ -5643,7 +5643,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_565">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Auto disabled)</string>
@@ -5652,7 +5652,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_566">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5665,7 +5665,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_567">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Transparent - Down - Non continuing events</string>
@@ -5674,7 +5674,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_568">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Auto disabled)</string>
@@ -5687,17 +5687,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_569">
 			<ID>2</ID>
 			<name>EV0002</name>
 			<x>8</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_570">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_571">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_572">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5727,18 +5727,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_573">
+						<move_commands object_id="_574">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_575">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_576">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Just a simple message with no message </string>
@@ -5747,7 +5747,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_577">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>options before and after</string>
@@ -5760,17 +5760,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_578">
 			<ID>3</ID>
 			<name>EV0003</name>
 			<x>10</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_579">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_580">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_581">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5800,18 +5800,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_582">
+						<move_commands object_id="_583">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_584">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_585">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5824,7 +5824,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_586">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Resetting to RM2K defaults.</string>
@@ -5837,17 +5837,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_587">
 			<ID>4</ID>
 			<name>EV0004</name>
 			<x>9</x>
 			<y>10</y>
-			<pages>
+			<pages object_id="_588">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_589">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_590">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5877,18 +5877,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_591">
+						<move_commands object_id="_592">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_593">
 						<count>2</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_594">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -5901,7 +5901,7 @@
 								<item>1</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_595">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Normal - Auto - CONTINUING events</string>
@@ -5914,17 +5914,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_596">
 			<ID>5</ID>
 			<name>EV0005</name>
 			<x>9</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_597">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_598">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_599">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -5954,18 +5954,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_600">
+						<move_commands object_id="_601">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_602">
 						<count>3</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_603">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>I&apos;m moving. If not, movement is still </string>
@@ -5974,7 +5974,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_604">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>not implemented, so you can&apos;t test the</string>
@@ -5983,7 +5983,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_605">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>continuing events function in message options.</string>
@@ -5996,17 +5996,17 @@
 				</item>
 			</pages>
 		</item>
-		<item>
+		<item object_id="_606">
 			<ID>6</ID>
 			<name>EV0006</name>
 			<x>3</x>
 			<y>8</y>
-			<pages>
+			<pages object_id="_607">
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>
+				<item object_id="_608">
 					<ID>1</ID>
-					<condition>
+					<condition object_id="_609">
 						<switch_a>0</switch_a>
 						<switch_b>0</switch_b>
 						<variable>0</variable>
@@ -6036,18 +6036,18 @@
 					<overlap>0</overlap>
 					<animation_type>0</animation_type>
 					<move_speed>3</move_speed>
-					<move_route>
-						<move_commands>
+					<move_route object_id="_610">
+						<move_commands object_id="_611">
 							<count>0</count>
 							<item_version>0</item_version>
 						</move_commands>
 						<repeat>1</repeat>
 						<skippable>0</skippable>
 					</move_route>
-					<event_commands>
+					<event_commands object_id="_612">
 						<count>6</count>
 						<item_version>0</item_version>
-						<item>
+						<item object_id="_613">
 							<code>10120</code>
 							<indent>0</indent>
 							<string></string>
@@ -6060,7 +6060,7 @@
 								<item>0</item>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_614">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>Testing auto-message position.</string>
@@ -6069,7 +6069,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_615">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>(Normal-Auto-Non continuing events)</string>
@@ -6078,7 +6078,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_616">
 							<code>10110</code>
 							<indent>0</indent>
 							<string>I&apos;m moving. If not, movement is still </string>
@@ -6087,7 +6087,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_617">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>not implemented, so you can&apos;t test the</string>
@@ -6096,7 +6096,7 @@
 								<item_version>0</item_version>
 							</parameters>
 						</item>
-						<item>
+						<item object_id="_618">
 							<code>20110</code>
 							<indent>0</indent>
 							<string>auto-positioning function in message options.</string>

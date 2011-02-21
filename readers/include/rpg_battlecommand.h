@@ -47,10 +47,7 @@ namespace RPG {
 		std::string name;
 		int type;
 
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(name);
 			ar & BOOST_SERIALIZATION_NVP(type);
@@ -77,11 +74,7 @@ namespace RPG {
 		int teleport_y;
 		int teleport_face;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(commands);
 			ar & BOOST_SERIALIZATION_NVP(placement);
 			ar & BOOST_SERIALIZATION_NVP(row);

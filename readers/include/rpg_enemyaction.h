@@ -70,11 +70,7 @@ namespace RPG {
 		int switch_off_id;
 		int rating;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(kind);
 			ar & BOOST_SERIALIZATION_NVP(basic);
 			ar & BOOST_SERIALIZATION_NVP(skill_id);

@@ -38,11 +38,7 @@ namespace RPG {
 		int tempo;
 		int balance;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(name);
 			ar & BOOST_SERIALIZATION_NVP(fadein);
 			ar & BOOST_SERIALIZATION_NVP(volume);

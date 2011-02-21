@@ -48,11 +48,7 @@ namespace RPG {
 		int timer2_sec;
 		int compare_operator;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(switch_a);
 			ar & BOOST_SERIALIZATION_NVP(switch_b);
 			ar & BOOST_SERIALIZATION_NVP(variable);

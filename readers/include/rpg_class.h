@@ -55,11 +55,7 @@ namespace RPG {
 		std::vector<unsigned char> attribute_ranks;
 		std::vector<uint32_t> battle_commands;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(name);
 			ar & BOOST_SERIALIZATION_NVP(two_swords_style);

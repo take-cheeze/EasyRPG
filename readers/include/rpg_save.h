@@ -54,11 +54,7 @@ namespace RPG {
 		int face3_id;
 		int face4_id;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(timestamp);
 			ar & BOOST_SERIALIZATION_NVP(hero_name);
 			ar & BOOST_SERIALIZATION_NVP(hero_level);
@@ -133,11 +129,7 @@ namespace RPG {
 		int save_count;
 		int save_slot;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(screen);
 			ar & BOOST_SERIALIZATION_NVP(frame_count);
 			ar & BOOST_SERIALIZATION_NVP(graphics_name);
@@ -230,11 +222,7 @@ namespace RPG {
 		double current_rotation;
 		int current_waver;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(name);
 			ar & BOOST_SERIALIZATION_NVP(start_x);
@@ -310,11 +298,7 @@ namespace RPG {
 		int unknown_83;
 		int unknown_84;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(map_id);
 			ar & BOOST_SERIALIZATION_NVP(position_x);
 			ar & BOOST_SERIALIZATION_NVP(position_y);
@@ -372,11 +356,7 @@ namespace RPG {
 		std::string sprite2_name;
 		int sprite2_id;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(map_id);
 			ar & BOOST_SERIALIZATION_NVP(position_x);
 			ar & BOOST_SERIALIZATION_NVP(position_y);
@@ -436,11 +416,7 @@ namespace RPG {
 		bool mighty_guard;
 		int unknown_60;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(name);
 			ar & BOOST_SERIALIZATION_NVP(title);
@@ -503,11 +479,7 @@ namespace RPG {
 		int unknown_29;
 		int steps;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(party_size);
 			ar & BOOST_SERIALIZATION_NVP(party);
 			ar & BOOST_SERIALIZATION_NVP(items_size);
@@ -545,11 +517,7 @@ namespace RPG {
 		int unknown_15;
 		int unknown_16;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(commands_size);
 			ar & BOOST_SERIALIZATION_NVP(commands);
@@ -571,11 +539,7 @@ namespace RPG {
 		int unknown_17;
 		int unknown_20;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(commands);
 			ar & BOOST_SERIALIZATION_NVP(time_left);
 			ar & BOOST_SERIALIZATION_NVP(unknown_16);
@@ -628,11 +592,7 @@ namespace RPG {
 		int unknown_67;
 		SaveEventData event_data;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(unknown_01);
 			ar & BOOST_SERIALIZATION_NVP(map_id);
@@ -694,11 +654,7 @@ namespace RPG {
 		bool parallax_vert_auto;
 		int parallax_vert_speed;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(pan_x);
 			ar & BOOST_SERIALIZATION_NVP(pan_y);
 			ar & BOOST_SERIALIZATION_NVP(events);
@@ -747,11 +703,7 @@ namespace RPG {
 		int weather;
 		int weather_strength;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(tint_finish_red);
 			ar & BOOST_SERIALIZATION_NVP(tint_finish_green);
 			ar & BOOST_SERIALIZATION_NVP(tint_finish_blue);
@@ -790,11 +742,7 @@ namespace RPG {
 		int ID;
 		SaveEventData event_data;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ID);
 			ar & BOOST_SERIALIZATION_NVP(event_data);
 		}
@@ -810,11 +758,7 @@ namespace RPG {
 		int unknown_17;
 		int unknown_18;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(events);
 			ar & BOOST_SERIALIZATION_NVP(events_size);
 			ar & BOOST_SERIALIZATION_NVP(unknown_16);
@@ -833,6 +777,15 @@ namespace RPG {
 		int map_y;
 		bool switch_on;
 		int switch_id;
+
+		RPG_SERIALIZE() {
+			ar & BOOST_SERIALIZATION_NVP(ID);
+			ar & BOOST_SERIALIZATION_NVP(map_id);
+			ar & BOOST_SERIALIZATION_NVP(map_x);
+			ar & BOOST_SERIALIZATION_NVP(map_y);
+			ar & BOOST_SERIALIZATION_NVP(switch_on);
+			ar & BOOST_SERIALIZATION_NVP(switch_id);
+		}
 	};
 
 	class Save {
@@ -856,11 +809,7 @@ namespace RPG {
 		std::vector<SaveCommonEvent> common_events;
 		SaveEvents events;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(title);
 			ar & BOOST_SERIALIZATION_NVP(system);
 			ar & BOOST_SERIALIZATION_NVP(screen);

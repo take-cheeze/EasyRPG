@@ -18,18 +18,63 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#define dynamic_cast static_cast
+
+#include "serialization_no_rtti.h"
 #include "data.h"
 #include "ldb_reader.h"
 #include "lmt_reader.h"
 #include "lmu_reader.h"
 #include "lsd_reader.h"
-#include "serialization_no_rtti.h"
+#include <cassert>
+#include <exception>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <iomanip>
-#include <cassert>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
+
+#ifdef BOOST_NO_EXCEPTIONS
+
+namespace boost {
+void throw_exception(std::exception const& e)
+{
+	std::cerr << e.what() << std::endl;
+	assert(false);
+}
+}
+
+#endif
+
+#define PP_exportWithKey(NAME, KEY) BOOST_CLASS_EXPORT_IMPLEMENT(NAME)
+
+#define PP_rpgNoRTTI(NAME) \
+	PP_exportWithKey(RPG::NAME, BOOST_PP_STRINGIZE(NAME)) \
+	PP_exportWithKey(std::vector<RPG::NAME>, BOOST_PP_STRINGIZE(vector__ ## NAME)) \
+
+/*
+	const char * RPG::NAME::get_key() const \
+	{ \
+		return \
+			boost::serialization::type_info_implementation< \
+				RPG::NAME \
+			>::type::get_const_instance().get_key(); \
+	} \
+*/
+
+PP_allRpgType(PP_rpgNoRTTI)
+
+#undef PP_rpgNoRTTI
+
+PP_exportWithKey(std::vector<std::string>, "vector__string")
+PP_exportWithKey(std::vector<unsigned int>, "vector__unsigned_int")
+PP_exportWithKey(std::vector<unsigned char>, "vector__unsigned_char")
+PP_exportWithKey(std::vector<int>, "vector__int")
+PP_exportWithKey(std::vector<short>, "vector__short")
+PP_exportWithKey(std::vector<bool>, "vector__bool")
+
+#undef PP_exportWithKey
 
 ////////////////////////////////////////////////////////////
 namespace Data {
@@ -74,8 +119,8 @@ void Data::Convert()
 		std::ofstream ofs((baseDirectory_ + EASY_RPG_NAME).c_str());
 		assert(ofs);
 		boost::archive::xml_oarchive oa(ofs);
-		oa & BOOST_SERIALIZATION_NVP(Data::database);
-		oa & BOOST_SERIALIZATION_NVP(Data::treemap);
+		oa & BOOST_SERIALIZATION_NVP(database);
+		oa & BOOST_SERIALIZATION_NVP(treemap);
 		dataPath_.assign(baseDirectory_).append(EASY_RPG_NAME);
 	}
 
@@ -85,7 +130,7 @@ void Data::Convert()
 		std::ofstream ofs((baseDirectory_ + GenSaveName(i, ".xml")).c_str());
 		assert(ofs);
 		boost::archive::xml_oarchive oa(ofs);
-		oa & BOOST_SERIALIZATION_NVP(Data::savedata);
+		oa & BOOST_SERIALIZATION_NVP(savedata);
 	}
 
 	for(int i = 1; i <= 9999; i++) {
@@ -94,7 +139,7 @@ void Data::Convert()
 		std::ofstream ofs((baseDirectory_ + GenMapName(i, ".xml")).c_str());
 		assert(ofs);
 		boost::archive::xml_oarchive oa(ofs);
-		oa & BOOST_SERIALIZATION_NVP(Data::mapunit);
+		oa & BOOST_SERIALIZATION_NVP(mapunit);
 	}
 }
 
@@ -104,8 +149,8 @@ bool Data::Load(std::string const& filename) {
 	if(!ifs) { Convert(); return false; }
 	else {
 		boost::archive::xml_iarchive ia(ifs);
-		ia & BOOST_SERIALIZATION_NVP(Data::database);
-		ia & BOOST_SERIALIZATION_NVP(Data::treemap);
+		ia & BOOST_SERIALIZATION_NVP(database);
+		ia & BOOST_SERIALIZATION_NVP(treemap);
 		dataPath_.assign(baseDirectory_).append(filename);
 		return true;
 	}
@@ -117,8 +162,8 @@ void Data::Save() {
 	std::ofstream ofs(dataPath_.c_str());
 	assert(ofs);
 	boost::archive::xml_oarchive oa(ofs);
-	oa & BOOST_SERIALIZATION_NVP(Data::database);
-	oa & BOOST_SERIALIZATION_NVP(Data::treemap);
+	oa & BOOST_SERIALIZATION_NVP(database);
+	oa & BOOST_SERIALIZATION_NVP(treemap);
 }
 
 ////////////////////////////////////////////////////////////
@@ -128,7 +173,7 @@ bool Data::LoadMapUnit(std::string const& filename)
 	if(!ifs) { return false; }
 	else {
 		boost::archive::xml_iarchive ia(ifs);
-		ia & BOOST_SERIALIZATION_NVP(Data::mapunit);
+		ia & BOOST_SERIALIZATION_NVP(mapunit);
 		mapUnitPath_.assign(baseDirectory_).append(filename);
 		return true;
 	}
@@ -147,7 +192,7 @@ bool Data::LoadSaveData(std::string const& filename)
 	if(!ifs) { return false; }
 	else {
 		boost::archive::xml_iarchive ia(ifs);
-		ia & BOOST_SERIALIZATION_NVP(Data::savedata);
+		ia & BOOST_SERIALIZATION_NVP(savedata);
 		saveDataPath_.assign(baseDirectory_).append(filename);
 		return true;
 	}
@@ -166,7 +211,7 @@ void Data::SaveSaveData()
 	std::ofstream ofs(saveDataPath_.c_str());
 	assert(ofs);
 	boost::archive::xml_oarchive oa(ofs);
-	oa & BOOST_SERIALIZATION_NVP(Data::savedata);
+	oa & BOOST_SERIALIZATION_NVP(savedata);
 }
 
 ////////////////////////////////////////////////////////////
@@ -176,5 +221,5 @@ void Data::SaveMapUnit()
 	std::ofstream ofs(mapUnitPath_.c_str());
 	assert(ofs);
 	boost::archive::xml_oarchive oa(ofs);
-	oa & BOOST_SERIALIZATION_NVP(Data::mapunit);
+	oa & BOOST_SERIALIZATION_NVP(mapunit);
 }

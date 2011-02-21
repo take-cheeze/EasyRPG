@@ -88,11 +88,7 @@ namespace RPG {
 		std::string frame_name;
 		bool invert_animations;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(ldb_id);
 			ar & BOOST_SERIALIZATION_NVP(boat_name);
 			ar & BOOST_SERIALIZATION_NVP(ship_name);

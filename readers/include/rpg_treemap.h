@@ -48,11 +48,7 @@ namespace RPG {
 		int airship_x;
 		int airship_y;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(maps);
 			ar & BOOST_SERIALIZATION_NVP(tree_order);
 			ar & BOOST_SERIALIZATION_NVP(active_node);

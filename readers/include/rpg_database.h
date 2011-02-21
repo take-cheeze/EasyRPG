@@ -69,11 +69,7 @@ namespace RPG {
 		std::vector<std::string> switches;
 		std::vector<std::string> variables;
 
-	private:
-		friend class boost::serialization::access;
-		template<class Archive>
-		void serialize(Archive &ar, unsigned int const /* file_version */)
-		{
+		RPG_SERIALIZE() {
 			ar & BOOST_SERIALIZATION_NVP(actors);
 			ar & BOOST_SERIALIZATION_NVP(skills);
 			ar & BOOST_SERIALIZATION_NVP(items);
