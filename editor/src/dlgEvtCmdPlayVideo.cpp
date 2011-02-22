@@ -20,6 +20,6 @@
 dlgEvtCmdPlayVideo::dlgEvtCmdPlayVideo(wxWindow* parent) : dlgEvtCmdPlayVideo_Base(parent) {
 }
 
-void dlgEvtCmdPlayVideo::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdPlayVideo::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

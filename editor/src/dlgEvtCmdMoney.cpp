@@ -20,6 +20,6 @@
 dlgEvtCmdMoney::dlgEvtCmdMoney(wxWindow* parent) : dlgEvtCmdMoney_Base(parent) {
 }
 
-void dlgEvtCmdMoney::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdMoney::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

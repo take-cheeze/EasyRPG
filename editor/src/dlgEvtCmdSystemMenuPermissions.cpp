@@ -20,6 +20,6 @@
 dlgEvtCmdSystemMenuPermissions::dlgEvtCmdSystemMenuPermissions(wxWindow* parent) : dlgEvtCmdSystemMenuPermissions_Base(parent) {
 }
 
-void dlgEvtCmdSystemMenuPermissions::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdSystemMenuPermissions::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

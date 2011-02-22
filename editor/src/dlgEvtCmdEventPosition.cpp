@@ -20,6 +20,6 @@
 dlgEvtCmdEventPosition::dlgEvtCmdEventPosition(wxWindow* parent) : dlgEvtCmdEventPosition_Base(parent) {
 }
 
-void dlgEvtCmdEventPosition::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdEventPosition::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

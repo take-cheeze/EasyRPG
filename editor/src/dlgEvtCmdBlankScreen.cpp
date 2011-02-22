@@ -20,6 +20,6 @@
 dlgEvtCmdBlankScreen::dlgEvtCmdBlankScreen(wxWindow* parent) : dlgEvtCmdBlankScreen_Base(parent) {
 }
 
-void dlgEvtCmdBlankScreen::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdBlankScreen::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

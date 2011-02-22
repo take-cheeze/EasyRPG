@@ -20,6 +20,6 @@
 dlgEvtCmdMoveScreen::dlgEvtCmdMoveScreen(wxWindow* parent) : dlgEvtCmdMoveScreen_Base(parent) {
 }
 
-void dlgEvtCmdMoveScreen::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdMoveScreen::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

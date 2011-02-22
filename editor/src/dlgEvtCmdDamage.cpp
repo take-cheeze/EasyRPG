@@ -20,6 +20,6 @@
 dlgEvtCmdDamage::dlgEvtCmdDamage(wxWindow* parent) : dlgEvtCmdDamage_Base(parent) {
 }
 
-void dlgEvtCmdDamage::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdDamage::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

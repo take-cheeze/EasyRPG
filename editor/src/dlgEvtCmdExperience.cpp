@@ -20,6 +20,6 @@
 dlgEvtCmdExperience::dlgEvtCmdExperience(wxWindow* parent) : dlgEvtCmdExperience_Base(parent) {
 }
 
-void dlgEvtCmdExperience::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdExperience::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

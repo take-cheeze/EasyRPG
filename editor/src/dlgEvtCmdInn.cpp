@@ -20,6 +20,6 @@
 dlgEvtCmdInn::dlgEvtCmdInn(wxWindow* parent) : dlgEvtCmdInn_Base(parent) {
 }
 
-void dlgEvtCmdInn::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdInn::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

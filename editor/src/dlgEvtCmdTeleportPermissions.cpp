@@ -20,6 +20,6 @@
 dlgEvtCmdTeleportPermissions::dlgEvtCmdTeleportPermissions(wxWindow* parent) : dlgEvtCmdTeleportPermissions_Base(parent) {
 }
 
-void dlgEvtCmdTeleportPermissions::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdTeleportPermissions::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

@@ -20,6 +20,6 @@
 dlgEvtCmdGetPositionID::dlgEvtCmdGetPositionID(wxWindow* parent) : dlgEvtCmdGetPositionID_Base(parent) {
 }
 
-void dlgEvtCmdGetPositionID::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdGetPositionID::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

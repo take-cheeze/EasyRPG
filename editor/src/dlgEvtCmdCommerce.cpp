@@ -20,6 +20,6 @@
 dlgEvtCmdCommerce::dlgEvtCmdCommerce(wxWindow* parent) : dlgEvtCmdCommerce_Base(parent) {
 }
 
-void dlgEvtCmdCommerce::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdCommerce::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

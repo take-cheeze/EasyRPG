@@ -20,6 +20,6 @@
 dlgEvtCmdFlashCharacter::dlgEvtCmdFlashCharacter(wxWindow* parent) : dlgEvtCmdFlashCharacter_Base(parent) {
 }
 
-void dlgEvtCmdFlashCharacter::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdFlashCharacter::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

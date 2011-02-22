@@ -20,6 +20,6 @@
 dlgEvtCmdConditions::dlgEvtCmdConditions(wxWindow* parent) : dlgEvtCmdConditions_Base(parent) {
 }
 
-void dlgEvtCmdConditions::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdConditions::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

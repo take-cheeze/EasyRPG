@@ -1,18 +1,18 @@
 /////////////////////////////////////////////////////////////////////////////
-// This file is part of EasyRPG Player.
+// This file is part of EasyRPG Editor.
 //
-// EasyRPG Player is free software: you can redistribute it and/or modify
+// EasyRPG Editor is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// EasyRPG Player is distributed in the hope that it will be useful,
+// EasyRPG Editor is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
+// along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef _FRMEDITOR_H_
@@ -32,17 +32,37 @@ public:
 	/// Constructor
 	frmEditor(wxWindow* parent);
 	~frmEditor();
-protected:
-	/// Exits app on menu exit
+private:
+	/// Show new project window
+	void New_click(wxCommandEvent& WXUNUSED(event));
+	/// Show open project window
+	void Open_click(wxCommandEvent& WXUNUSED(event));
+	/// Show pack project window
+	void Pack_click(wxCommandEvent& WXUNUSED(event));
+	/// Exit app on menu exit
 	void Exit_click(wxCommandEvent& WXUNUSED(event));
 	/// Show database window
 	void Database_click(wxCommandEvent& WXUNUSED(event));
 	/// Show material window
 	void Material_click(wxCommandEvent& WXUNUSED(event));
-	/// Secondary click on map tree
-	void MapTree_menu_click(wxMouseEvent& WXUNUSED(event));
+	/// Show music window
+	void Music_click(wxCommandEvent& WXUNUSED(event));
+	/// Show about window
+	void About_click(wxCommandEvent& WXUNUSED(event));
+	/// Context menu on map tree
+	void tcMapTree_menu(wxTreeEvent& WXUNUSED(event));
+	/// Click on new map under map tree context menu (root)
+	void menuitemMapTreeRootNewMap_click(wxCommandEvent& WXUNUSED(event));
+	/// Click on map properties under map tree context menu (map)
+	void menuitemMapTreeMapProperties_click(wxCommandEvent& WXUNUSED(event));
+	/// Click on new map under map tree context menu (map)
+	void menuitemMapTreeMapNewMap_click(wxCommandEvent& WXUNUSED(event));
+	/// Click on new area under map tree context menu (map)
+	void menuitemMapTreeMapNewArea_click(wxCommandEvent& WXUNUSED(event));
+	/// Click on shift map under map tree context menu (map)
+	void menuitemMapTreeMapShiftMap_click(wxCommandEvent& WXUNUSED(event));
 	/// Secondary click on editor map
-	void EditorMap_menu_click(wxMouseEvent& WXUNUSED(event));
+	void pnEditorMap_rclick(wxMouseEvent& WXUNUSED(event));
 	dlgDb *DialogDb;
 };
 

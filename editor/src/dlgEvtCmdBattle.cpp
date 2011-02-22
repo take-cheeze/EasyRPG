@@ -20,6 +20,6 @@
 dlgEvtCmdBattle::dlgEvtCmdBattle(wxWindow* parent) : dlgEvtCmdBattle_Base(parent) {
 }
 
-void dlgEvtCmdBattle::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdBattle::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

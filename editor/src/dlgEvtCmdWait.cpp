@@ -20,6 +20,6 @@
 dlgEvtCmdWait::dlgEvtCmdWait(wxWindow* parent) : dlgEvtCmdWait_Base(parent) {
 }
 
-void dlgEvtCmdWait::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdWait::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

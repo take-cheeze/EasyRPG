@@ -20,6 +20,6 @@
 dlgEvtCmdTimer::dlgEvtCmdTimer(wxWindow* parent) : dlgEvtCmdTimer_Base(parent) {
 }
 
-void dlgEvtCmdTimer::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdTimer::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

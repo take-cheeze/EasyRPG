@@ -20,6 +20,6 @@
 dlgEvtCmdEscapePlace::dlgEvtCmdEscapePlace(wxWindow* parent) : dlgEvtCmdEscapePlace_Base(parent) {
 }
 
-void dlgEvtCmdEscapePlace::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdEscapePlace::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

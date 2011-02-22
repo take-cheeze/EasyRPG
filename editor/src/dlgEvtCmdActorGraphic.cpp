@@ -20,6 +20,6 @@
 dlgEvtCmdActorGraphic::dlgEvtCmdActorGraphic(wxWindow* parent) : dlgEvtCmdActorGraphic_Base(parent) {
 }
 
-void dlgEvtCmdActorGraphic::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdActorGraphic::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

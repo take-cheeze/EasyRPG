@@ -20,10 +20,6 @@
 dlgMap::dlgMap(wxWindow* parent) : dlgMap_Base(parent) {
 }
 
-void dlgMap::OK_click(wxCommandEvent& WXUNUSED(event)) {
-	Close();
-}
-
-void dlgMap::Cancel_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgMap::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

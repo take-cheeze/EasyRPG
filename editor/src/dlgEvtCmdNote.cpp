@@ -20,6 +20,6 @@
 dlgEvtCmdNote::dlgEvtCmdNote(wxWindow* parent) : dlgEvtCmdNote_Base(parent) {
 }
 
-void dlgEvtCmdNote::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdNote::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }
