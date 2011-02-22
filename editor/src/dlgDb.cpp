@@ -42,6 +42,7 @@
 #include "pnText.h"
 #include "pnSystem.h"
 #include "pnCommonEvent.h"
+#include "dlgMusic.h"
 
 dlgDb::dlgDb(wxWindow* parent) : dlgDb_Base(parent) {
 	pnActor *panelActor = new pnActor(nbDb);
@@ -73,10 +74,16 @@ dlgDb::dlgDb(wxWindow* parent) : dlgDb_Base(parent) {
 	Fit();
 }
 
-void dlgDb::OK_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgDb::btnMusic_click(wxCommandEvent& WXUNUSED(event)) {
+	dlgMusic *DialogMusic = new dlgMusic(NULL);
+	DialogMusic->ShowModal();
+	DialogMusic->Destroy();
+}
+
+void dlgDb::btnOK_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }
 
-void dlgDb::Cancel_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgDb::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

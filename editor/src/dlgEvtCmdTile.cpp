@@ -20,6 +20,6 @@
 dlgEvtCmdTile::dlgEvtCmdTile(wxWindow* parent) : dlgEvtCmdTile_Base(parent) {
 }
 
-void dlgEvtCmdTile::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdTile::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

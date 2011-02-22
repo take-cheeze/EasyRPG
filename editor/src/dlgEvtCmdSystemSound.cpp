@@ -20,6 +20,6 @@
 dlgEvtCmdSystemSound::dlgEvtCmdSystemSound(wxWindow* parent) : dlgEvtCmdSystemSound_Base(parent) {
 }
 
-void dlgEvtCmdSystemSound::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdSystemSound::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

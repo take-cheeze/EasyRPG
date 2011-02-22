@@ -1,18 +1,18 @@
 /////////////////////////////////////////////////////////////////////////////
-// This file is part of EasyRPG Player.
+// This file is part of EasyRPG Editor.
 //
-// EasyRPG Player is free software: you can redistribute it and/or modify
+// EasyRPG Editor is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// EasyRPG Player is distributed in the hope that it will be useful,
+// EasyRPG Editor is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with EasyRPG Player. If not, see <http://www.gnu.org/licenses/>.
+// along with EasyRPG Editor. If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef _DLGDB_H_
@@ -30,11 +30,18 @@ class dlgDb : public dlgDb_Base {
 public:
 	/// Constructor
 	dlgDb(wxWindow* parent);
-protected:
-	/// Accepts dialog on click
-	void OK_click(wxCommandEvent& WXUNUSED(event));
-	/// Cancels dialog on click
-	void Cancel_click(wxCommandEvent& WXUNUSED(event));
+private:
+	/// Show music dialog on click
+	void btnMusic_click(wxCommandEvent& WXUNUSED(event));
+	/// Accept dialog on click
+	void btnOK_click(wxCommandEvent& WXUNUSED(event));
+	/// Cancel dialog on click
+	void btnCancel_click(wxCommandEvent& WXUNUSED(event));
 };
+
+// TODO:
+// There are some undocumented keyboard actions in rm2k database:
+// F4 / F5 should change between database listbox elements
+// Ctrl+tab / Ctrl+Shift+tab should change between tabs
 
 #endif

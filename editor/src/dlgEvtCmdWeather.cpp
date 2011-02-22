@@ -20,6 +20,6 @@
 dlgEvtCmdWeather::dlgEvtCmdWeather(wxWindow* parent) : dlgEvtCmdWeather_Base(parent) {
 }
 
-void dlgEvtCmdWeather::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdWeather::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

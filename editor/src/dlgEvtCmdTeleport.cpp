@@ -20,6 +20,6 @@
 dlgEvtCmdTeleport::dlgEvtCmdTeleport(wxWindow* parent) : dlgEvtCmdTeleport_Base(parent) {
 }
 
-void dlgEvtCmdTeleport::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdTeleport::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

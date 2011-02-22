@@ -20,6 +20,6 @@
 dlgEvtCmdEncounterRate::dlgEvtCmdEncounterRate(wxWindow* parent) : dlgEvtCmdEncounterRate_Base(parent) {
 }
 
-void dlgEvtCmdEncounterRate::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdEncounterRate::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

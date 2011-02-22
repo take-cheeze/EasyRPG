@@ -20,6 +20,6 @@
 dlgEvtCmdActorName::dlgEvtCmdActorName(wxWindow* parent) : dlgEvtCmdActorName_Base(parent) {
 }
 
-void dlgEvtCmdActorName::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdActorName::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

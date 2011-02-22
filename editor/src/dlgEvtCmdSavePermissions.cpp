@@ -20,6 +20,6 @@
 dlgEvtCmdSavePermissions::dlgEvtCmdSavePermissions(wxWindow* parent) : dlgEvtCmdSavePermissions_Base(parent) {
 }
 
-void dlgEvtCmdSavePermissions::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdSavePermissions::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

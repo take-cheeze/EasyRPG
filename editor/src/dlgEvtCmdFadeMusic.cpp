@@ -20,6 +20,6 @@
 dlgEvtCmdFadeMusic::dlgEvtCmdFadeMusic(wxWindow* parent) : dlgEvtCmdFadeMusic_Base(parent) {
 }
 
-void dlgEvtCmdFadeMusic::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdFadeMusic::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

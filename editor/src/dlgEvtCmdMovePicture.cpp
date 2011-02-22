@@ -20,6 +20,6 @@
 dlgEvtCmdMovePicture::dlgEvtCmdMovePicture(wxWindow* parent) : dlgEvtCmdMovePicture_Base(parent) {
 }
 
-void dlgEvtCmdMovePicture::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdMovePicture::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

@@ -42,7 +42,7 @@ class dlgDb_Base : public wxDialog
 	
 	protected:
 		wxNotebook* nbDb;
-		wxBitmapButton* btnBGM;
+		wxBitmapButton* btnMusic;
 		
 		wxButton* btnOK;
 		wxButton* btnCancel;
@@ -50,10 +50,11 @@ class dlgDb_Base : public wxDialog
 		wxButton* btnHelp;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Apply_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnMusic_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnOK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnCancel_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnApply_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnHelp_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
@@ -77,8 +78,8 @@ class dlgDbMaxNumber_Base : public wxDialog
 		wxButton* btnCancel;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnOK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnCancel_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
@@ -103,9 +104,9 @@ class dlgDbLearnSkill_Base : public wxDialog
 		wxButton* btnHelp;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Help_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnOK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnCancel_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnHelp_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
@@ -126,16 +127,16 @@ class dlgDbSelectAnyGraphic_Base : public wxDialog
 		wxListBox* listGraphic;
 		wxStaticBitmap* bmpGraphic;
 		wxButton* btnOK;
-		wxButton* wxID_CANCEL;
+		wxButton* btnCancel;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OK_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Cancel_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnOK_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnCancel_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		dlgDbSelectAnyGraphic_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Graphic of Type..."), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
+		dlgDbSelectAnyGraphic_Base( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Select graphic"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~dlgDbSelectAnyGraphic_Base();
 	
 };

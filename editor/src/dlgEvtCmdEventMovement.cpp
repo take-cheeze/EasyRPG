@@ -20,6 +20,6 @@
 dlgEvtCmdEventMovement::dlgEvtCmdEventMovement(wxWindow* parent) : dlgEvtCmdEventMovement_Base(parent) {
 }
 
-void dlgEvtCmdEventMovement::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdEventMovement::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

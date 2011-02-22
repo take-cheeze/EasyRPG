@@ -742,7 +742,7 @@ dlgEvtCmdTimer_Base::dlgEvtCmdTimer_Base( wxWindow* parent, wxWindowID id, const
 	chbShowScreen->SetValue(true); 
 	szOptions->Add( chbShowScreen, 1, wxRIGHT, 0 );
 	
-	chbShowBattle = new wxCheckBox( this, wxID_ANY, _("show in battle"), wxDefaultPosition, wxDefaultSize, 0 );
+	chbShowBattle = new wxCheckBox( this, wxID_ANY, _("Show in battle"), wxDefaultPosition, wxDefaultSize, 0 );
 	chbShowBattle->SetValue(true); 
 	szOptions->Add( chbShowBattle, 1, wxLEFT, 0 );
 	

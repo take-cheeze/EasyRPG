@@ -20,6 +20,6 @@
 dlgEvtCmdSwapEvents::dlgEvtCmdSwapEvents(wxWindow* parent) : dlgEvtCmdSwapEvents_Base(parent) {
 }
 
-void dlgEvtCmdSwapEvents::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdSwapEvents::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

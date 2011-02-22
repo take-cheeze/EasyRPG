@@ -20,6 +20,6 @@
 dlgEvtCmdDeletePicture::dlgEvtCmdDeletePicture(wxWindow* parent) : dlgEvtCmdDeletePicture_Base(parent) {
 }
 
-void dlgEvtCmdDeletePicture::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdDeletePicture::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

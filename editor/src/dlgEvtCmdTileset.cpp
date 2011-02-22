@@ -20,6 +20,6 @@
 dlgEvtCmdTileset::dlgEvtCmdTileset(wxWindow* parent) : dlgEvtCmdTileset_Base(parent) {
 }
 
-void dlgEvtCmdTileset::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdTileset::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

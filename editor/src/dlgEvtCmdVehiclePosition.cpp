@@ -20,6 +20,6 @@
 dlgEvtCmdVehiclePosition::dlgEvtCmdVehiclePosition(wxWindow* parent) : dlgEvtCmdVehiclePosition_Base(parent) {
 }
 
-void dlgEvtCmdVehiclePosition::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdVehiclePosition::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

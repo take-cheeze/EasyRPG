@@ -20,6 +20,6 @@
 dlgEvtCmdEscapePermissions::dlgEvtCmdEscapePermissions(wxWindow* parent) : dlgEvtCmdEscapePermissions_Base(parent) {
 }
 
-void dlgEvtCmdEscapePermissions::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdEscapePermissions::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

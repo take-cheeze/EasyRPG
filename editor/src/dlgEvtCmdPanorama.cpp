@@ -20,6 +20,6 @@
 dlgEvtCmdPanorama::dlgEvtCmdPanorama(wxWindow* parent) : dlgEvtCmdPanorama_Base(parent) {
 }
 
-void dlgEvtCmdPanorama::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdPanorama::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

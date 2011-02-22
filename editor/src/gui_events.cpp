@@ -849,7 +849,7 @@ dlgEvtCmd_Base::dlgEvtCmd_Base( wxWindow* parent, wxWindowID id, const wxString&
 	btnGameOver->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnGameOver_click ), NULL, this );
 	btnEscapePermissions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnEscapePermissions_click ), NULL, this );
 	btnGoToTitle->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnGoToTitle_click ), NULL, this );
-	btnClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::Close_click ), NULL, this );
+	btnClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnClose_click ), NULL, this );
 }
 
 dlgEvtCmd_Base::~dlgEvtCmd_Base()
@@ -945,6 +945,6 @@ dlgEvtCmd_Base::~dlgEvtCmd_Base()
 	btnGameOver->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnGameOver_click ), NULL, this );
 	btnEscapePermissions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnEscapePermissions_click ), NULL, this );
 	btnGoToTitle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnGoToTitle_click ), NULL, this );
-	btnClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::Close_click ), NULL, this );
+	btnClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgEvtCmd_Base::btnClose_click ), NULL, this );
 	
 }

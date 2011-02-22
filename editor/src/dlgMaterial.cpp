@@ -20,6 +20,6 @@
 dlgMaterial::dlgMaterial(wxWindow* parent) : dlgMaterial_Base(parent) {
 }
 
-void dlgMaterial::Close_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgMaterial::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }
