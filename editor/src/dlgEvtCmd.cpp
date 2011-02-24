@@ -565,6 +565,6 @@ void dlgEvtCmd::btnNote_click(wxCommandEvent& WXUNUSED(event)) {
 }
 
 
-void dlgEvtCmd::Close_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmd::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

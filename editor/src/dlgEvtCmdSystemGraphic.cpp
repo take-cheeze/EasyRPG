@@ -20,6 +20,6 @@
 dlgEvtCmdSystemGraphic::dlgEvtCmdSystemGraphic(wxWindow* parent) : dlgEvtCmdSystemGraphic_Base(parent) {
 }
 
-void dlgEvtCmdSystemGraphic::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdSystemGraphic::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

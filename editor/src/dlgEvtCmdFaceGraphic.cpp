@@ -20,6 +20,6 @@
 dlgEvtCmdFaceGraphic::dlgEvtCmdFaceGraphic(wxWindow* parent) : dlgEvtCmdFaceGraphic_Base(parent) {
 }
 
-void dlgEvtCmdFaceGraphic::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdFaceGraphic::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

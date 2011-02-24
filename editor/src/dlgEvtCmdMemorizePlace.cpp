@@ -20,6 +20,6 @@
 dlgEvtCmdMemorizePlace::dlgEvtCmdMemorizePlace(wxWindow* parent) : dlgEvtCmdMemorizePlace_Base(parent) {
 }
 
-void dlgEvtCmdMemorizePlace::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdMemorizePlace::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

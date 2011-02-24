@@ -20,6 +20,6 @@
 dlgEvtCmdNumberInput::dlgEvtCmdNumberInput(wxWindow* parent) : dlgEvtCmdNumberInput_Base(parent) {
 }
 
-void dlgEvtCmdNumberInput::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdNumberInput::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

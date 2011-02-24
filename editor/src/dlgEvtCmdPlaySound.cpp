@@ -20,6 +20,6 @@
 dlgEvtCmdPlaySound::dlgEvtCmdPlaySound(wxWindow* parent) : dlgEvtCmdPlaySound_Base(parent) {
 }
 
-void dlgEvtCmdPlaySound::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdPlaySound::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

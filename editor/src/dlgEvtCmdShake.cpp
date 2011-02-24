@@ -20,6 +20,6 @@
 dlgEvtCmdShake::dlgEvtCmdShake(wxWindow* parent) : dlgEvtCmdShake_Base(parent) {
 }
 
-void dlgEvtCmdShake::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdShake::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

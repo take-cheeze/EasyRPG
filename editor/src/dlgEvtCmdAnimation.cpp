@@ -20,6 +20,6 @@
 dlgEvtCmdAnimation::dlgEvtCmdAnimation(wxWindow* parent) : dlgEvtCmdAnimation_Base(parent) {
 }
 
-void dlgEvtCmdAnimation::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdAnimation::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

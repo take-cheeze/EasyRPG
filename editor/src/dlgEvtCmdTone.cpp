@@ -20,6 +20,6 @@
 dlgEvtCmdTone::dlgEvtCmdTone(wxWindow* parent) : dlgEvtCmdTone_Base(parent) {
 }
 
-void dlgEvtCmdTone::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdTone::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

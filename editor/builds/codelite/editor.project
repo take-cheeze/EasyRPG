@@ -68,14 +68,8 @@
       <File Name="../../src/gui_events_page_3.h"/>
     </VirtualDirectory>
     <File Name="../../resources/win/editor.rc"/>
-    <File Name="../../src/dlgMap.cpp"/>
-    <File Name="../../src/dlgMap.h"/>
-    <File Name="../../src/frmEditor.cpp"/>
-    <File Name="../../src/frmEditor.h"/>
     <File Name="../../src/appEditor.cpp"/>
     <File Name="../../src/appEditor.h"/>
-    <File Name="../../src/dlgMaterial.cpp"/>
-    <File Name="../../src/dlgMaterial.h"/>
     <File Name="../../src/dlgDb.h"/>
     <File Name="../../src/dlgDb.cpp"/>
     <File Name="../../src/dlgEvt.h"/>
@@ -272,6 +266,34 @@
         <File Name="../../src/dlgEvtCmdSavePermissions.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
+    <VirtualDirectory Name="Editor">
+      <File Name="../../src/dlgMap.cpp"/>
+      <File Name="../../src/dlgMap.h"/>
+      <File Name="../../src/dlgMaterial.cpp"/>
+      <File Name="../../src/dlgMaterial.h"/>
+      <File Name="../../src/dlgNew.cpp"/>
+      <File Name="../../src/dlgNew.h"/>
+      <File Name="../../src/dlgOpen.cpp"/>
+      <File Name="../../src/dlgOpen.h"/>
+      <File Name="../../src/dlgRename.cpp"/>
+      <File Name="../../src/dlgRename.h"/>
+      <File Name="../../src/dlgPack.cpp"/>
+      <File Name="../../src/dlgPack.h"/>
+      <File Name="../../src/dlgAbout.cpp"/>
+      <File Name="../../src/dlgAbout.h"/>
+      <File Name="../../src/dlgCredits.cpp"/>
+      <File Name="../../src/dlgCredits.h"/>
+      <File Name="../../src/dlgMusic.cpp"/>
+      <File Name="../../src/dlgMusic.h"/>
+      <File Name="../../src/dlgVehicle.cpp"/>
+      <File Name="../../src/dlgVehicle.h"/>
+      <File Name="../../src/dlgArea.cpp"/>
+      <File Name="../../src/dlgArea.h"/>
+      <File Name="../../src/dlgShiftMap.h"/>
+      <File Name="../../src/dlgShiftMap.cpp"/>
+    </VirtualDirectory>
+    <File Name="../../src/frmEditor.cpp"/>
+    <File Name="../../src/frmEditor.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

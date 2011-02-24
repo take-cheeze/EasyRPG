@@ -20,6 +20,6 @@
 dlgEvtCmdShowScreen::dlgEvtCmdShowScreen(wxWindow* parent) : dlgEvtCmdShowScreen_Base(parent) {
 }
 
-void dlgEvtCmdShowScreen::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdShowScreen::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

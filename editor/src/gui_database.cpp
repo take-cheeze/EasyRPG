@@ -23,8 +23,8 @@ dlgDb_Base::dlgDb_Base( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* szBottom;
 	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	btnBGM = new wxBitmapButton( this, wxID_ANY, wxBitmap( wxT("../share/toolbar/music.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW|wxNO_BORDER );
-	szBottom->Add( btnBGM, 0, wxALL, 1 );
+	btnMusic = new wxBitmapButton( this, wxID_ANY, wxBitmap( wxT("../share/easyrpg/editor/toolbar/music.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0|wxNO_BORDER );
+	szBottom->Add( btnMusic, 0, wxALL, 1 );
 	
 	
 	szBottom->Add( 0,  0, 1, wxEXPAND, 0 );
@@ -45,26 +45,28 @@ dlgDb_Base::dlgDb_Base( wxWindow* parent, wxWindowID id, const wxString& title, 
 	btnHelp->SetDefault(); 
 	szBottom->Add( btnHelp, 0, wxALL, 1 );
 	
-	szDb->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxEXPAND|wxALIGN_RIGHT, 3 );
+	szDb->Add( szBottom, 0, wxEXPAND|wxALIGN_RIGHT|wxBOTTOM|wxRIGHT|wxLEFT, 3 );
 	
 	this->SetSizer( szDb );
 	this->Layout();
 	szDb->Fit( this );
 	
 	// Connect Events
-	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::OK_click ), NULL, this );
-	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Cancel_click ), NULL, this );
-	btnApply->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Apply_click ), NULL, this );
-	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Help_click ), NULL, this );
+	btnMusic->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnMusic_click ), NULL, this );
+	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnOK_click ), NULL, this );
+	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnCancel_click ), NULL, this );
+	btnApply->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnApply_click ), NULL, this );
+	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnHelp_click ), NULL, this );
 }
 
 dlgDb_Base::~dlgDb_Base()
 {
 	// Disconnect Events
-	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::OK_click ), NULL, this );
-	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Cancel_click ), NULL, this );
-	btnApply->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Apply_click ), NULL, this );
-	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::Help_click ), NULL, this );
+	btnMusic->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnMusic_click ), NULL, this );
+	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnOK_click ), NULL, this );
+	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnCancel_click ), NULL, this );
+	btnApply->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnApply_click ), NULL, this );
+	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDb_Base::btnHelp_click ), NULL, this );
 	
 }
 
@@ -105,15 +107,15 @@ dlgDbMaxNumber_Base::dlgDbMaxNumber_Base( wxWindow* parent, wxWindowID id, const
 	szDbMaxNumber->Fit( this );
 	
 	// Connect Events
-	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::OK_click ), NULL, this );
-	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::Cancel_click ), NULL, this );
+	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::btnOK_click ), NULL, this );
+	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::btnCancel_click ), NULL, this );
 }
 
 dlgDbMaxNumber_Base::~dlgDbMaxNumber_Base()
 {
 	// Disconnect Events
-	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::OK_click ), NULL, this );
-	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::Cancel_click ), NULL, this );
+	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::btnOK_click ), NULL, this );
+	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbMaxNumber_Base::btnCancel_click ), NULL, this );
 	
 }
 
@@ -169,17 +171,17 @@ dlgDbLearnSkill_Base::dlgDbLearnSkill_Base( wxWindow* parent, wxWindowID id, con
 	szDbLearnSkill->Fit( this );
 	
 	// Connect Events
-	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::OK_click ), NULL, this );
-	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Cancel_click ), NULL, this );
-	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Help_click ), NULL, this );
+	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::btnOK_click ), NULL, this );
+	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::btnCancel_click ), NULL, this );
+	btnHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::btnHelp_click ), NULL, this );
 }
 
 dlgDbLearnSkill_Base::~dlgDbLearnSkill_Base()
 {
 	// Disconnect Events
-	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::OK_click ), NULL, this );
-	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Cancel_click ), NULL, this );
-	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::Help_click ), NULL, this );
+	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::btnOK_click ), NULL, this );
+	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::btnCancel_click ), NULL, this );
+	btnHelp->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbLearnSkill_Base::btnHelp_click ), NULL, this );
 	
 }
 
@@ -204,13 +206,13 @@ dlgDbSelectAnyGraphic_Base::dlgDbSelectAnyGraphic_Base( wxWindow* parent, wxWind
 	wxBoxSizer* szBottom;
 	szBottom = new wxBoxSizer( wxHORIZONTAL );
 	
-	btnOK = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	btnOK = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
 	btnOK->SetDefault(); 
 	szBottom->Add( btnOK, 0, wxALL, 1 );
 	
-	wxID_CANCEL = new wxButton( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	wxID_CANCEL->SetDefault(); 
-	szBottom->Add( wxID_CANCEL, 0, wxALL, 1 );
+	btnCancel = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	btnCancel->SetDefault(); 
+	szBottom->Add( btnCancel, 0, wxALL, 1 );
 	
 	SelectAnyGraphic->Add( szBottom, 0, wxRIGHT|wxBOTTOM|wxALIGN_RIGHT, 3 );
 	
@@ -219,14 +221,14 @@ dlgDbSelectAnyGraphic_Base::dlgDbSelectAnyGraphic_Base( wxWindow* parent, wxWind
 	SelectAnyGraphic->Fit( this );
 	
 	// Connect Events
-	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::OK_click ), NULL, this );
-	wxID_CANCEL->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::Cancel_click ), NULL, this );
+	btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::btnOK_click ), NULL, this );
+	btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::btnCancel_click ), NULL, this );
 }
 
 dlgDbSelectAnyGraphic_Base::~dlgDbSelectAnyGraphic_Base()
 {
 	// Disconnect Events
-	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::OK_click ), NULL, this );
-	wxID_CANCEL->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::Cancel_click ), NULL, this );
+	btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::btnOK_click ), NULL, this );
+	btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( dlgDbSelectAnyGraphic_Base::btnCancel_click ), NULL, this );
 	
 }

@@ -59,7 +59,7 @@ void Data::Clear() {
 	animations.clear();
 	chipsets.clear();
 	commonevents.clear();
-	battlecommands->commands.clear();
+	battlecommands.reset();
 	classes.clear();
 	battleranimations.clear();
 	switches.clear();

@@ -301,7 +301,7 @@ class dlgEvtCmd_Base : public wxDialog
 		virtual void btnGameOver_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnEscapePermissions_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void btnGoToTitle_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Close_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void btnClose_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

@@ -20,6 +20,6 @@
 dlgEvtCmdVehicleGraphic::dlgEvtCmdVehicleGraphic(wxWindow* parent) : dlgEvtCmdVehicleGraphic_Base(parent) {
 }
 
-void dlgEvtCmdVehicleGraphic::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdVehicleGraphic::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

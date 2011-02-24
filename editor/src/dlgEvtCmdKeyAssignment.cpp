@@ -20,6 +20,6 @@
 dlgEvtCmdKeyAssignment::dlgEvtCmdKeyAssignment(wxWindow* parent) : dlgEvtCmdKeyAssignment_Base(parent) {
 }
 
-void dlgEvtCmdKeyAssignment::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdKeyAssignment::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

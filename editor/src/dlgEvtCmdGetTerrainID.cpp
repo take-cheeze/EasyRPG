@@ -20,6 +20,6 @@
 dlgEvtCmdGetTerrainID::dlgEvtCmdGetTerrainID(wxWindow* parent) : dlgEvtCmdGetTerrainID_Base(parent) {
 }
 
-void dlgEvtCmdGetTerrainID::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdGetTerrainID::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

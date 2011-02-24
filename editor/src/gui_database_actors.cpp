@@ -294,12 +294,12 @@ pnActor_Base::pnActor_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szActorExperienceCurve;
 	szActorExperienceCurve = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Experience curve") ), wxHORIZONTAL );
 	
-	tcActorExperienceCurve = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), 0 );
-	szActorExperienceCurve->Add( tcActorExperienceCurve, 1, wxRIGHT|wxALIGN_CENTER_VERTICAL, 1 );
+	tcActorExperienceCurve = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), wxTE_CENTRE|wxTE_READONLY );
+	szActorExperienceCurve->Add( tcActorExperienceCurve, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	btnActorExperienceCurve = new wxButton( this, wxID_ANY, _("Select..."), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	btnActorExperienceCurve->SetDefault(); 
-	szActorExperienceCurve->Add( btnActorExperienceCurve, 0, wxLEFT|wxALIGN_CENTER_VERTICAL, 1 );
+	szActorExperienceCurve->Add( btnActorExperienceCurve, 0, 0, 0 );
 	
 	szRightBottomLeft->Add( szActorExperienceCurve, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
 	

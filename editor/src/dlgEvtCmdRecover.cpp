@@ -20,6 +20,6 @@
 dlgEvtCmdRecover::dlgEvtCmdRecover(wxWindow* parent) : dlgEvtCmdRecover_Base(parent) {
 }
 
-void dlgEvtCmdRecover::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdRecover::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

@@ -20,6 +20,6 @@
 dlgEvtCmdActorTransparency::dlgEvtCmdActorTransparency(wxWindow* parent) : dlgEvtCmdActorTransparency_Base(parent) {
 }
 
-void dlgEvtCmdActorTransparency::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdActorTransparency::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

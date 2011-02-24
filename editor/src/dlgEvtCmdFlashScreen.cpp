@@ -20,6 +20,6 @@
 dlgEvtCmdFlashScreen::dlgEvtCmdFlashScreen(wxWindow* parent) : dlgEvtCmdFlashScreen_Base(parent) {
 }
 
-void dlgEvtCmdFlashScreen::btnClose_click(wxCommandEvent& WXUNUSED(event)) {
+void dlgEvtCmdFlashScreen::btnCancel_click(wxCommandEvent& WXUNUSED(event)) {
 	Close();
 }

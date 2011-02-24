@@ -152,8 +152,8 @@ pnSkill_Base::pnSkill_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szSkillAnimation;
 	szSkillAnimation = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Animation") ), wxVERTICAL );
 	
-	bmpSkillAnimation = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 160, 120 ), wxSUNKEN_BORDER );
-	szSkillAnimation->Add( bmpSkillAnimation, 0, wxBOTTOM, 1 );
+	bmpSkillAnimation = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 160,80 ), wxSUNKEN_BORDER );
+	szSkillAnimation->Add( bmpSkillAnimation, 1, wxBOTTOM, 1 );
 	
 	wxArrayString chSkillAnimationChoices;
 	chSkillAnimation = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxSize( 50, -1 ), chSkillAnimationChoices, 0 );
@@ -173,7 +173,7 @@ pnSkill_Base::pnSkill_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szSkillAttackInfluence;
 	szSkillAttackInfluence = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Attack influence") ), wxHORIZONTAL );
 	
-	slSkillAttackInfluence = new wxSlider( this, wxID_ANY, 0, 0, 0, wxDefaultPosition, wxSize( 50, -1 ), wxSL_HORIZONTAL|wxSL_AUTOTICKS|wxSL_LABELS );
+	slSkillAttackInfluence = new wxSlider( this, wxID_ANY, 0, 0, 10, wxDefaultPosition, wxSize( 50, -1 ), wxSL_HORIZONTAL|wxSL_AUTOTICKS|wxSL_LABELS );
 	szSkillAttackInfluence->Add( slSkillAttackInfluence, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szSkillRightBottomLeft->Add( szSkillAttackInfluence, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
@@ -181,7 +181,7 @@ pnSkill_Base::pnSkill_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szSkillMagicInfluence;
 	szSkillMagicInfluence = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Magic influence") ), wxHORIZONTAL );
 	
-	slSkillMagicInfluence = new wxSlider( this, wxID_ANY, 3, 0, 0, wxDefaultPosition, wxSize( 50, -1 ), wxSL_HORIZONTAL|wxSL_AUTOTICKS|wxSL_LABELS );
+	slSkillMagicInfluence = new wxSlider( this, wxID_ANY, 3, 0, 10, wxDefaultPosition, wxSize( 50, -1 ), wxSL_HORIZONTAL|wxSL_AUTOTICKS|wxSL_LABELS );
 	szSkillMagicInfluence->Add( slSkillMagicInfluence, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szSkillRightBottomLeft->Add( szSkillMagicInfluence, 1, wxLEFT|wxRIGHT|wxEXPAND, 1 );
@@ -189,7 +189,7 @@ pnSkill_Base::pnSkill_Base( wxWindow* parent, wxWindowID id, const wxPoint& pos,
 	wxStaticBoxSizer* szSkillVariance;
 	szSkillVariance = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Variance") ), wxHORIZONTAL );
 	
-	slSkillVariance = new wxSlider( this, wxID_ANY, 4, 0, 0, wxDefaultPosition, wxSize( 50, -1 ), wxSL_HORIZONTAL|wxSL_AUTOTICKS|wxSL_LABELS );
+	slSkillVariance = new wxSlider( this, wxID_ANY, 4, 0, 10, wxDefaultPosition, wxSize( 50, -1 ), wxSL_HORIZONTAL|wxSL_AUTOTICKS|wxSL_LABELS );
 	szSkillVariance->Add( slSkillVariance, 1, wxALIGN_CENTER_VERTICAL, 0 );
 	
 	szSkillRightBottomLeft->Add( szSkillVariance, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 1 );
