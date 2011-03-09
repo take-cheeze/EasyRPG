@@ -30,6 +30,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <sstream>
+#include <vector>
 
 #include "inireader.h"
 #include "reader_util.h"
@@ -86,28 +87,24 @@ std::string ReaderUtil::Recode(const std::string& str_to_encode,
 #ifdef _WIN32
 	size_t strsize = str_to_encode.size();
 
-	wchar_t* widechar = new wchar_t[strsize * 5 + 1];
+	std::vector<wchar_t> widechar(strsize * 5 + 1);
 
 	// To Utf16
 	// Default codepage is 0, so we dont need a check here
-	int res = MultiByteToWideChar(atoi(src_enc.c_str()), 0, str_to_encode.c_str(), strsize, widechar, strsize * 5 + 1);
+	int res = MultiByteToWideChar(atoi(src_enc.c_str()), 0, str_to_encode.c_str(), strsize, &widechar.front(), strsize * 5 + 1);
 	if (res == 0) {
 		// Invalid codepage
-		delete [] widechar;
 		return str_to_encode;
 	}
 	widechar[res] = '\0';
 
 	// Back to Utf8 ...
-	char* utf8char = new char[strsize * 5 + 1];
-	res = WideCharToMultiByte(atoi(dst_enc.c_str()), 0, widechar, res, utf8char, strsize * 5 + 1, NULL, NULL);
+	std::vector<char> utf8char(strsize * 5 + 1);
+	res = WideCharToMultiByte(atoi(dst_enc.c_str()), 0, widechar, res, &utf8char.front(), strsize * 5 + 1, NULL, NULL);
 	utf8char[res] = '\0';
 
 	// Result in str
 	std::string str = std::string(utf8char, res);
-
-	delete [] widechar;
-	delete [] utf8char;
 
 	return str;
 #else
@@ -117,19 +114,17 @@ std::string ReaderUtil::Recode(const std::string& str_to_encode,
 	char *src = (char *) str_to_encode.c_str();
 	size_t src_left = str_to_encode.size();
 	size_t dst_size = str_to_encode.size() * 5 + 10;
-	char *dst = new char[dst_size];
+	std::vector<char> dst(dst_size);
 	size_t dst_left = dst_size;
 	char *p = src;
-	char *q = dst;
+	char *q = &dst.front();
 	size_t status = iconv(cd, &p, &src_left, &q, &dst_left);
 	iconv_close(cd);
 	if (status == (size_t) -1 || src_left > 0) {
-		delete[] dst;
 		return "";
 	}
 	*q++ = '\0';
-	std::string result(dst);
-	delete[] dst;
+	std::string result(&dst.front());
 	return result;
 #endif
 }

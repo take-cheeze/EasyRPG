@@ -19,6 +19,7 @@
 /// Headers
 ////////////////////////////////////////////////////////////
 #include <cstdarg>
+#include <vector>
 #include "reader_lcf.h"
 
 ////////////////////////////////////////////////////////////
@@ -185,11 +186,10 @@ void LcfReader::Read<uint32_t>(std::vector<uint32_t> &buffer, size_t size) {
 
 ////////////////////////////////////////////////////////////
 void LcfReader::ReadString(std::string& ref, size_t size) {
-	char* chars = new char[size + 1];
+	std::vector<char> chars(size + 1);
 	chars[size] = '\0';
-	Read(chars, 1, size);
-	ref = Encode(std::string(chars));
-	delete[] chars;
+	Read(&chars.front(), 1, size);
+	ref = Encode(std::string(&chars.front()));
 }
 
 ////////////////////////////////////////////////////////////
