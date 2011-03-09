@@ -21,8 +21,8 @@
 #include "lmt_reader.h"
 #include "lmt_chunks.h"
 #include "data.h"
-#include "reader_util.h"
 #include "reader_struct.h"
+#include "reader_util.h"
 
 ////////////////////////////////////////////////////////////
 /// Load Map Tree

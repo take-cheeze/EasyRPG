@@ -22,23 +22,27 @@
 /// LDB Reader namespace
 ////////////////////////////////////////////////////////////
 namespace LDB_Reader {
-	struct ChunkData {
+	struct ChunkDatabase {
 		enum Index {
-			Actor				= 0x0B, // RPG::Actor
-			Skill				= 0x0C, // RPG::Skill
-			Item				= 0x0D, // RPG::Item
-			Enemy				= 0x0E, // RPG::Enemy
-			Troop				= 0x0F, // RPG::Troop
-			Terrain				= 0x10, // RPG::Terrain
-			Attribute			= 0x11, // RPG::Attribute
-			State				= 0x12, // RPG::State
-			Animation			= 0x13, // RPG::Animation
-			Chipset				= 0x14, // RPG::Chipset
-			Terms				= 0x15, // RPG::Terms
-			System				= 0x16, // RPG::System
-			Switches			= 0x17, // RPG::Switchs
-			Variables			= 0x18, // RPG::Variables
-			CommonEvent			= 0x19, // RPG::CommonEvent
+			actors				= 0x0B, // RPG::Actor
+			skills				= 0x0C, // RPG::Skill
+			items				= 0x0D, // RPG::Item
+			enemies				= 0x0E, // RPG::Enemy
+			troops				= 0x0F, // RPG::Troop
+			terrains				= 0x10, // RPG::Terrain
+			attributes			= 0x11, // RPG::Attribute
+			states				= 0x12, // RPG::State
+			animations			= 0x13, // RPG::Animation
+			chipsets				= 0x14, // RPG::Chipset
+			terms				= 0x15, // RPG::Terms
+			system				= 0x16, // RPG::System
+			switches			= 0x17, // RPG::Switchs
+			variables			= 0x18, // RPG::Variables
+			commonevents		= 0x19, // RPG::CommonEvent
+			battlecommands		= 0x1D, // RPG::BattleCommand - RPG2003
+			classes				= 0x1E, // RPG::Class - RPG2003
+			battleranimations	= 0x20, // RPG::BattlerAnimation - RPG2003
+
 			CommonEventD1		= 0x1A, // Duplicated? - Not used - RPG2003
 			CommonEventD2		= 0x1B, // Duplicated? - Not used - RPG2003
 			CommonEventD3		= 0x1C, // Duplicated? - Not used - RPG2003
@@ -162,7 +166,7 @@ namespace LDB_Reader {
 			recover_hp_rate		= 0x21, // Integer
 			recover_sp			= 0x22, // Integer
 			recover_sp_rate		= 0x23, // Integer
-			ocassion_field1		= 0x25, // Flag
+			occasion_field1		= 0x25, // Flag
 			ko_only				= 0x26, // Flag
 			max_hp_points		= 0x29, // Integer
 			max_sp_points		= 0x2A, // Integer
@@ -173,8 +177,8 @@ namespace LDB_Reader {
 			using_message		= 0x33, // Integer
 			skill_id			= 0x35, // Integer - RPG2003
 			switch_id			= 0x37, // Integer
-			ocassion_field2		= 0x39, // Flag
-			ocassion_battle		= 0x3A, // Flag
+			occasion_field2		= 0x39, // Flag
+			occasion_battle		= 0x3A, // Flag
 			actor_set_size		= 0x3D, // Integer
 			actor_set			= 0x3E, // Array - Flag
 			state_set_size		= 0x3F, // Integer

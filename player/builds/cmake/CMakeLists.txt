@@ -44,6 +44,10 @@ IF(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	ADD_DEFINITIONS(-D _DEBUG=1)
 ENDIF()
 
+IF(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
+	ADD_DEFINITIONS("-Wall -Wextra -Wno-multichar -Wno-unused-parameter -Weffc++ -Werror -ferror-limit=30")
+ENDIF()
+
 INCLUDE_DIRECTORIES(
 	# ${Boost_INCLUDE_DIRS}
 	${FREETYPE_INCLUDE_DIRS}
@@ -81,6 +85,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 
 	EasyRPG_Reader
 
+	expat
 	pixman-1
 )
 

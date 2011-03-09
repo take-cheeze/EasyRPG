@@ -115,7 +115,7 @@ void LcfReader::Read<int>(int& ref) {
 
 ////////////////////////////////////////////////////////////
 template <>
-void LcfReader::Read<double>(double& ref) {
+void LcfReader::Read<double>(double& /* ref */) {
 	double val = 0;
 	Read(&val, 8, 1);
 #ifdef READER_BIG_ENDIAN

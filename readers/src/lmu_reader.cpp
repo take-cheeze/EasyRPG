@@ -21,8 +21,8 @@
 #include "lmu_reader.h"
 #include "lmu_chunks.h"
 #include "reader_lcf.h"
-#include "reader_util.h"
 #include "reader_struct.h"
+#include "reader_util.h"
 
 ////////////////////////////////////////////////////////////
 /// Load Map

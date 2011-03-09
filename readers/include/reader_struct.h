@@ -41,6 +41,16 @@
 #include "rpg_treemap.h"
 #include "rpg_rect.h"
 
+#define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS
+#define BOOST_MPL_LIMIT_MAP_SIZE 256
+
+#include <boost/mpl/size_t.hpp>
+#include <boost/mpl/map.hpp>
+#include <boost/mpl/string.hpp>
+#include <boost/noncopyable.hpp>
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
+
 ////////////////////////////////////////////////////////////
 // Forward declarations
 ////////////////////////////////////////////////////////////
@@ -127,7 +137,7 @@ struct TypeReader<T, Category::RawStruct> {
 	static void BeginXml(T& ref, XmlReader& stream) {
 		RawStruct<T>::BeginXml(ref, stream);
 	}
-	static void ParseXml(T& ref, const std::string& data) {
+	static void ParseXml(T& /* ref */, const std::string& /* data */) {
 		// no-op
 	}
 };
@@ -159,7 +169,7 @@ struct Primitive {
 	static void WriteLcf(const T& ref, LcfWriter& stream) {
 		stream.Write(ref);
 	}
-	static int LcfSize(const T& ref, LcfWriter& stream) {
+	static int LcfSize(const T& /* ref */, LcfWriter& /* stream */) {
 		return LcfSizeT<T>::value;
 	}
 	static void WriteXml(const T& ref, XmlWriter& stream) {
@@ -182,7 +192,7 @@ struct Primitive<std::vector<T> > {
 	static void WriteLcf(const std::vector<T>& ref, LcfWriter& stream) {
 		stream.Write(ref);
 	}
-	static int LcfSize(const std::vector<T>& ref, LcfWriter& stream) {
+	static int LcfSize(const std::vector<T>& ref, LcfWriter& /* stream */) {
 		return LcfSizeT<T>::value * ref.size();
 	}
 	static void WriteXml(const std::vector<T>& ref, XmlWriter& stream) {
@@ -206,7 +216,7 @@ struct Primitive<int> {
 	static void WriteLcf(const int& ref, LcfWriter& stream) {
 		stream.WriteInt(ref);
 	}
-	static int LcfSize(const int& ref, LcfWriter& stream) {
+	static int LcfSize(const int& ref, LcfWriter& /* stream */) {
 		return LcfReader::IntSize(ref);
 	}
 	static void WriteXml(const int& ref, XmlWriter& stream) {
@@ -243,7 +253,6 @@ struct Primitive<std::string> {
 ////////////////////////////////////////////////////////////
 // Primitive Reader
 ////////////////////////////////////////////////////////////
-
 template <class T>
 struct TypeReader<T, Category::Primitive> {
 	static void ReadLcf(T& ref, LcfReader& stream, uint32_t length) {
@@ -258,7 +267,7 @@ struct TypeReader<T, Category::Primitive> {
 	static void WriteXml(const T& ref, XmlWriter& stream) {
 		Primitive<T>::WriteXml(ref, stream);
 	}
-	static void BeginXml(T& ref, XmlReader& stream) {
+	static void BeginXml(T& /* ref */, XmlReader& /* stream */) {
 		// no-op
 	}
 	static void ParseXml(T& ref, const std::string& data) {
@@ -296,12 +305,12 @@ struct FieldReader {
 // Field abstract base class template
 ////////////////////////////////////////////////////////////
 
-template <class S>
+template <class S, unsigned ID, class Name = boost::mpl::string<> >
 struct Field {
 	typedef S struct_type;
 
-	int id;
-	const char* const name;
+	static unsigned const id = ID;
+	typedef Name name;
 
 	virtual void ReadLcf(S& obj, LcfReader& stream, uint32_t length) const = 0;
 	virtual void WriteLcf(const S& obj, LcfWriter& stream) const = 0;
@@ -310,9 +319,6 @@ struct Field {
 	virtual void WriteXml(const S& obj, XmlWriter& stream) const = 0;
 	virtual void BeginXml(S& obj, XmlReader& stream) const = 0;
 	virtual void ParseXml(S& obj, const std::string& data) const = 0;
-
-	Field(int id, const char* name) :
-		id(id), name(name) {}
 };
 
 ////////////////////////////////////////////////////////////
@@ -359,7 +365,7 @@ struct Compare_Traits_Impl<T, true> {
 
 template <class T>
 struct Compare_Traits_Impl<T, false> {
-	static bool IsEqual(const T& a, const T& b) {
+	static bool IsEqual(const T& /* a */, const T& /* b */) {
 		return false;
 	}
 };
@@ -383,73 +389,67 @@ struct Compare_Traits {
 // TypedField class template
 ////////////////////////////////////////////////////////////
 
-template <class S, class T>
-struct TypedField : public Field<S> {
-	T S::*ref;
+template <class S, class T, T S::*Ref, unsigned ID, class Name>
+struct TypedField : public Field<S, ID, Name> {
+	static T S::* GetRef() { return Ref; }
 
-	void ReadLcf(S& obj, LcfReader& stream, uint32_t length) const {
-		FieldReader<S, T>::ReadLcf(obj, ref, stream, length);
+	static void ReadLcf(S& obj, LcfReader& stream, uint32_t length) {
+		FieldReader<S, T>::ReadLcf(obj, Ref, stream, length);
 	}
-	void WriteLcf(const S& obj, LcfWriter& stream) const {
-		FieldReader<S, T>::WriteLcf(obj, ref, stream);
+	static void WriteLcf(const S& obj, LcfWriter& stream) {
+		FieldReader<S, T>::WriteLcf(obj, Ref, stream);
 	}
-	int LcfSize(const S& obj, LcfWriter& stream) const {
-		return FieldReader<S, T>::LcfSize(obj, ref, stream);
+	static int LcfSize(const S& obj, LcfWriter& stream) {
+		return FieldReader<S, T>::LcfSize(obj, Ref, stream);
 	}
-	void WriteXml(const S& obj, XmlWriter& stream) const {
-		stream.BeginElement(this->name);
-		FieldReader<S, T>::WriteXml(obj, ref, stream);
-		stream.EndElement(this->name);
+	static void WriteXml(const S& obj, XmlWriter& stream) {
+		stream.BeginElement(boost::mpl::c_str<Name>::value);
+		FieldReader<S, T>::WriteXml(obj, Ref, stream);
+		stream.EndElement(boost::mpl::c_str<Name>::value);
 	}
-	void BeginXml(S& obj, XmlReader& stream) const {
-		FieldReader<S, T>::BeginXml(obj, ref, stream);
+	static void BeginXml(S& obj, XmlReader& stream) {
+		FieldReader<S, T>::BeginXml(obj, Ref, stream);
 	}
-	void ParseXml(S& obj, const std::string& data) const {
-		FieldReader<S, T>::ParseXml(obj, ref, data);
+	static void ParseXml(S& obj, const std::string& data) {
+		FieldReader<S, T>::ParseXml(obj, Ref, data);
 	}
-	bool IsDefault(const S& a, const S& b) const {
-		return Compare_Traits<T>::IsEqual(a.*ref, b.*ref);
+	static bool IsDefault(const S& a, const S& b) {
+		return Compare_Traits<T>::IsEqual(a.*Ref, b.*Ref);
 	}
-
-	TypedField(T S::*ref, int id, const char* name) :
-		Field<S>(id, name), ref(ref) {}
 };
 
 ////////////////////////////////////////////////////////////
 // SizeField class template
 ////////////////////////////////////////////////////////////
 
-template <class S, class T>
-struct SizeField : public Field<S> {
-	const std::vector<T> S::*ref;
+template <class S, class T, std::vector<T> S::*Ref, unsigned ID, class Name>
+struct SizeField : public Field<S, ID, Name> {
+	static std::vector<T> S::* GetRef() { return Ref; }
 
-	void ReadLcf(S& obj, LcfReader& stream, uint32_t length) const {
+	static void ReadLcf(S& /* obj */, LcfReader& stream, uint32_t length) {
 		int dummy;
 		TypeReader<int>::ReadLcf(dummy, stream, length);
 	}
-	void WriteLcf(const S& obj, LcfWriter& stream) const {
-		int size = TypeReader<std::vector<T> >::LcfSize(obj.*ref, stream);
+	static void WriteLcf(const S& obj, LcfWriter& stream) {
+		int size = TypeReader<std::vector<T> >::LcfSize(obj.*Ref, stream);
 		TypeReader<int>::WriteLcf(size, stream);
 	}
-	int LcfSize(const S& obj, LcfWriter& stream) const {
-		int size = TypeReader<std::vector<T> >::LcfSize(obj.*ref, stream);
+	static int LcfSize(const S& obj, LcfWriter& stream) {
+		int size = TypeReader<std::vector<T> >::LcfSize(obj.*Ref, stream);
 		return LcfReader::IntSize(size);
 	}
-	void WriteXml(const S& obj, XmlWriter& stream) const {
+	static void WriteXml(const S& /* obj */, XmlWriter& /* stream */) {
 		// no-op
 	}
-	void BeginXml(S& obj, XmlReader& stream) const {
+	static void BeginXml(S& /* obj */, XmlReader& /* stream */) {
 		// no-op
 	}
-	void ParseXml(S& obj, const std::string& data) const {
+	static void ParseXml(S& /* obj */, const std::string& /* data */) {
 		// no-op
 	}
 	bool IsDefault(const S& a, const S& b) const {
-		return (a.*ref).empty() && (b.*ref).empty();
+		return (a.*Ref).empty() && (b.*Ref).empty();
 	}
-
-	SizeField(const std::vector<T> S::*ref, int id) :
-		Field<S>(id, ""), ref(ref) {}
 };
 
 ////////////////////////////////////////////////////////////
@@ -467,32 +467,32 @@ enum StructIDType {
 
 template <class S>
 struct IDReader {
-	virtual void ReadID(S& obj, LcfReader& stream) const = 0;
-	virtual void WriteID(const S& obj, LcfWriter& stream) const = 0;
-	virtual int IDSize(const S& obj) const = 0;
-	virtual void WriteXmlTag(const S& obj, const std::string& name, XmlWriter& stream) const = 0;
-	virtual void ReadIDXml(S& obj, const char** atts) const = 0;
+	static void ReadID(S& /* obj */, LcfReader& /* stream */) {}
+	static void WriteID(const S& /* obj */, LcfWriter& /* stream */) {}
+	static int IDSize(const S& /* obj */) { return 0; }
+	static void WriteXmlTag(const S& /* obj */, const std::string& /* name */, XmlWriter& /* stream */) {}
+	static void ReadIDXml(S& /* obj */, const char** /* atts */) {}
 };
 
 template <class S, StructIDType T>
-struct IDReaderT : public IDReader<S> {
+struct IDReaderT {
 };
 
 template <class S>
-struct IDReaderT<S, WithID> : public IDReader<S> {
-	void ReadID(S& obj, LcfReader& stream) const {
+struct IDReaderT<S, WithID> {
+	static void ReadID(S& obj, LcfReader& stream) {
 		obj.ID = stream.ReadInt();
 	}
-	void WriteID(const S& obj, LcfWriter& stream) const {
+	static void WriteID(const S& obj, LcfWriter& stream) {
 		stream.WriteInt(obj.ID);
 	}
-	int IDSize(const S& obj) const {
+	static int IDSize(const S& obj){
 		return LcfReader::IntSize(obj.ID);
 	}
-	void WriteXmlTag(const S& obj, const std::string& name, XmlWriter& stream) const {
+	static void WriteXmlTag(const S& obj, const std::string& name, XmlWriter& stream) {
 		stream.BeginElement(name, obj.ID);
 	}
-	void ReadIDXml(S& obj, const char** atts) const {
+	static void ReadIDXml(S& obj, const char** atts) {
 		for (int i = 0; atts[i] != NULL && atts[i + 1] != NULL; i += 2) {
 			if (strcmp(atts[i], "id") == 0)
 				obj.ID = atoi(atts[i + 1]);
@@ -501,14 +501,14 @@ struct IDReaderT<S, WithID> : public IDReader<S> {
 };
 
 template <class S>
-struct IDReaderT<S, NoID> : public IDReader<S> {
-	void ReadID(S& obj, LcfReader& stream) const {}
-	void WriteID(const S& obj, LcfWriter& stream) const {}
-	int IDSize(const S& obj) const { return 0; }
-	void WriteXmlTag(const S& obj, const std::string& name, XmlWriter& stream) const {
+struct IDReaderT<S, NoID> {
+	static void ReadID(S& /* obj */, LcfReader& /* stream */) {}
+	static void WriteID(const S& /* obj */, LcfWriter& /* stream */) {}
+	static int IDSize(const S& /* obj */) { return 0; }
+	static void WriteXmlTag(const S& /* obj */, const std::string& name, XmlWriter& stream) {
 		stream.BeginElement(name);
 	}
-	void ReadIDXml(S& obj, const char** atts) const {}
+	static void ReadIDXml(S& /* obj */, const char** /* atts */) {}
 };
 
 ////////////////////////////////////////////////////////////
@@ -521,19 +521,26 @@ struct StringComparator {
 	}
 };
 
+typedef boost::mpl::pair<boost::mpl::void_, boost::mpl::void_> InvalidType;
+
 template <class S>
-class Struct {
+class Struct : boost::noncopyable {
 private:
-	typedef std::map<int, const Field<S>* > field_map_type;
+	/*
 	typedef std::map<const char* const, const Field<S>*, StringComparator> tag_map_type;
+	static tag_map_type tag_map;
+	typedef std::map<int, const Field<S>* > field_map_type;
 	static const Field<S>* fields[];
 	static field_map_type field_map;
-	static tag_map_type tag_map;
-	static IDReader<S>* ID_reader;
+	*/
+	struct field_map { typedef boost::mpl::map<> type; };
+	struct ID_reader { typedef IDReader<S> type; };
 	static const char* const name;
 
+	/*
 	static void MakeFieldMap();
 	static void MakeTagMap();
+	*/
 
 	template <class T> friend class StructXmlHandler;
 	template <class T> friend class StructVectorXmlHandler;
@@ -553,11 +560,81 @@ public:
 	static void BeginXml(std::vector<S>& obj, XmlReader& stream);
 };
 
+/*
+ needs define of
+ - EASYRPG_CURRENT_STRUCT
+ - EASYRPG_CHUNK_SUFFIX
+ */
+#define EASYRPG_STRUCT_FIELD_MAP_BEGIN(T) \
+	template <> \
+	struct Struct<RPG::T>::field_map { typedef boost::mpl::map< \
+		InvalidType \
+
+#define EASYRPG_NAME_SEQ(r, data, elem) elem,
+
+template<class Str>
+struct String {
+	typedef Str type;
+};
+
+#define EASYRPG_TYPED_FIELD_PAIR(T, REF, NAME) \
+	boost::mpl::pair< \
+		  boost::mpl::size_t<EASYRPG_CHUNK_SUFFIX::BOOST_PP_CAT(Chunk, EASYRPG_CURRENT_STRUCT)::REF> \
+		, TypedField< \
+			  RPG::EASYRPG_CURRENT_STRUCT, T \
+			, &RPG::EASYRPG_CURRENT_STRUCT::REF \
+			, EASYRPG_CHUNK_SUFFIX::BOOST_PP_CAT(Chunk, EASYRPG_CURRENT_STRUCT)::REF \
+			, boost::mpl::string<BOOST_PP_SEQ_FOR_EACH(EASYRPG_NAME_SEQ, , NAME) '\0'> \
+		> \
+	>, \
+	boost::mpl::pair< \
+		  String<boost::mpl::string<BOOST_PP_SEQ_FOR_EACH(EASYRPG_NAME_SEQ, , NAME) '\0'> > \
+		, TypedField< \
+			  RPG::EASYRPG_CURRENT_STRUCT, T \
+			, &RPG::EASYRPG_CURRENT_STRUCT::REF \
+			, EASYRPG_CHUNK_SUFFIX::BOOST_PP_CAT(Chunk, EASYRPG_CURRENT_STRUCT)::REF \
+			, boost::mpl::string<BOOST_PP_SEQ_FOR_EACH(EASYRPG_NAME_SEQ, , NAME) '\0'> \
+		> \
+	> \
+
+#define EASYRPG_SIZE_FIELD_PAIR(T, REF, NAME) \
+	boost::mpl::pair< \
+		  boost::mpl::size_t<EASYRPG_CHUNK_SUFFIX::BOOST_PP_CAT(Chunk, EASYRPG_CURRENT_STRUCT)::REF> \
+		, SizeField< \
+			  RPG::EASYRPG_CURRENT_STRUCT, T \
+			, &RPG::EASYRPG_CURRENT_STRUCT::REF \
+			, EASYRPG_CHUNK_SUFFIX::BOOST_PP_CAT(Chunk, EASYRPG_CURRENT_STRUCT)::REF \
+			, boost::mpl::string<BOOST_PP_SEQ_FOR_EACH(EASYRPG_NAME_SEQ, , NAME) '\0'> \
+		> \
+	>, \
+	boost::mpl::pair< \
+		  String<boost::mpl::string<BOOST_PP_SEQ_FOR_EACH(EASYRPG_NAME_SEQ, , NAME) '\0'> > \
+		, SizeField< \
+			  RPG::EASYRPG_CURRENT_STRUCT, T \
+			, &RPG::EASYRPG_CURRENT_STRUCT::REF \
+			, EASYRPG_CHUNK_SUFFIX::BOOST_PP_CAT(Chunk, EASYRPG_CURRENT_STRUCT)::REF \
+			, boost::mpl::string<BOOST_PP_SEQ_FOR_EACH(EASYRPG_NAME_SEQ, , NAME) '\0'> \
+		> \
+	> \
+
+#define EASYRPG_STRUCT_FIELD_MAP_END() > type; };
+
+
+#define EASYRPG_STRUCT_ID_READER(T, ID_TYPE) \
+	template <> \
+	struct Struct<RPG::T>::ID_reader { typedef IDReaderT<RPG::T, ID_TYPE> type; }; \
+
+#define EASYRPG_STRUCT_NAME(T) \
+	template <> \
+	char const* const Struct<RPG::T>::name(#T); \
+
+/*
 template <class S>
 std::map<int, const Field<S>* > Struct<S>::field_map;
 
 template <class S>
 std::map<const char* const, const Field<S>*, StringComparator> Struct<S>::tag_map;
+*/
 
 ////////////////////////////////////////////////////////////
 // Struct reader
@@ -565,7 +642,7 @@ std::map<const char* const, const Field<S>*, StringComparator> Struct<S>::tag_ma
 
 template <class T>
 struct TypeReader<T, Category::Struct> {
-	static void ReadLcf(T& ref, LcfReader& stream, uint32_t length) {
+	static void ReadLcf(T& ref, LcfReader& stream, uint32_t /* length */) {
 		Struct<T>::ReadLcf(ref, stream);
 	}
 	static void WriteLcf(const T& ref, LcfWriter& stream) {
@@ -580,14 +657,14 @@ struct TypeReader<T, Category::Struct> {
 	static void BeginXml(T& ref, XmlReader& stream) {
 		Struct<T>::BeginXml(ref, stream);
 	}
-	static void ParseXml(T& ref, const std::string& data) {
+	static void ParseXml(T& /* ref */, const std::string& /* data */) {
 		// no-op
 	}
 };
 
 template <class T>
 struct TypeReader<std::vector<T>, Category::Struct> {
-	static void ReadLcf(std::vector<T>& ref, LcfReader& stream, uint32_t length) {
+	static void ReadLcf(std::vector<T>& ref, LcfReader& stream, uint32_t /* length */) {
 		Struct<T>::ReadLcf(ref, stream);
 	}
 	static void WriteLcf(const std::vector<T>& ref, LcfWriter& stream) {
@@ -602,7 +679,7 @@ struct TypeReader<std::vector<T>, Category::Struct> {
 	static void BeginXml(std::vector<T>& ref, XmlReader& stream) {
 		Struct<T>::BeginXml(ref, stream);
 	}
-	static void ParseXml(std::vector<T>& ref, const std::string& data) {
+	static void ParseXml(std::vector<T>& /* ref */, const std::string& /* data */) {
 		// no-op
 	}
 };
@@ -663,7 +740,7 @@ struct TypeReader<T, Category::Flags> {
 	static void BeginXml(T& ref, XmlReader& stream) {
 		Flags<T>::BeginXml(ref, stream);
 	}
-	static void ParseXml(T& ref, const std::string& data) {
+	static void ParseXml(T& /* ref */, const std::string& /* data */) {
 		// no-op
 	}
 };
@@ -677,7 +754,7 @@ public:
 	WrapperXmlHandler(const char* const name, XmlHandler* handler) :
 		name(name), handler(handler) {}
 
-	void StartElement(XmlReader& stream, const char* name, const char** atts) {
+		void StartElement(XmlReader& stream, const char* name, const char** /* atts */) {
 		if (strcmp(name, this->name) != 0)
 			stream.Error("Expecting %s but got %s", this->name, name);
 		stream.SetHandler(handler);
@@ -685,7 +762,7 @@ public:
 
 private:
 	const char* const name;
-	XmlHandler* handler;	
+	XmlHandler* handler;
 };
 
 ////////////////////////////////////////////////////////////
@@ -697,7 +774,7 @@ class RootXmlHandler : public XmlHandler {
 public:
 	RootXmlHandler(S& ref, const char* const name) : ref(ref), name(name) {}
 
-	void StartElement(XmlReader& stream, const char* name, const char** atts) {
+	void StartElement(XmlReader& stream, const char* name, const char** /* atts */) {
 		if (strcmp(name, this->name) != 0)
 			stream.Error("Expecting %s but got %s", this->name, name);
 		TypeReader<S>::BeginXml(ref, stream);
@@ -709,4 +786,3 @@ private:
 };
 
 #endif
-

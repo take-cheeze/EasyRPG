@@ -21,9 +21,9 @@
 #include "lsd_reader.h"
 #include "lsd_chunks.h"
 #include "ldb_reader.h"
-#include "rpg_save.h"
-#include "reader_util.h"
 #include "reader_struct.h"
+#include "reader_util.h"
+#include "rpg_save.h"
 
 ////////////////////////////////////////////////////////////
 /// Load Save

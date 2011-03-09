@@ -100,7 +100,7 @@ void XmlReader::Parse() {
 	while (IsOk() && !feof(stream)) {
 		void* buffer = XML_GetBuffer(parser, bufsize);
 		int len = fread(buffer, 1, bufsize, stream);
-		int result = XML_ParseBuffer(parser, len, len <= 0);
+		/* int result = */ XML_ParseBuffer(parser, len, len <= 0);
 	}
 #else
 	LcfReader::SetError("XML reading not implemented.\n");
@@ -146,48 +146,41 @@ void XmlReader::EndElement(const char* name) {
 ////////////////////////////////////////////////////////////
 /// Primitive type readers
 ////////////////////////////////////////////////////////////
-template <>
-void XmlReader::Read<bool>(bool& val, const std::string& data) {
+template <> void XmlReader::Read<bool>(bool& val, const std::string& data) {
 	std::istringstream s(data);
 	std::string str;
 	s >> str;
 	val = str == "T";
 }
 
-template <>
-void XmlReader::Read<int>(int& val, const std::string& data) {
+template <> void XmlReader::Read<int>(int& val, const std::string& data) {
 	std::istringstream s(data);
 	s >> val;
 }
 
-template <>
-void XmlReader::Read<uint8_t>(uint8_t& val, const std::string& data) {
+template <> void XmlReader::Read<uint8_t>(uint8_t& val, const std::string& data) {
 	std::istringstream s(data);
 	int x;
 	s >> x;
 	val = x;
 }
 
-template <>
-void XmlReader::Read<int16_t>(int16_t& val, const std::string& data) {
+template <> void XmlReader::Read<int16_t>(int16_t& val, const std::string& data) {
 	std::istringstream s(data);
 	s >> val;
 }
 
-template <>
-void XmlReader::Read<uint32_t>(uint32_t& val, const std::string& data) {
+template <> void XmlReader::Read<uint32_t>(uint32_t& val, const std::string& data) {
 	std::istringstream s(data);
 	s >> val;
 }
 
-template <>
-void XmlReader::Read<double>(double& val, const std::string& data) {
+template <> void XmlReader::Read<double>(double& val, const std::string& data) {
 	std::istringstream s(data);
 	s >> val;
 }
 
-template <>
-void XmlReader::Read<std::string>(std::string& val, const std::string& data) {
+template <> void XmlReader::Read<std::string>(std::string& val, const std::string& data) {
 	val = data;
 }
 
@@ -208,33 +201,27 @@ void XmlReader::ReadVector(std::vector<T>& val, const std::string& data) {
 	}
 }
 
-template <>
-void XmlReader::Read<std::vector<int> >(std::vector<int>& val, const std::string& data) {
+template <> void XmlReader::Read<std::vector<int> >(std::vector<int>& val, const std::string& data) {
 	ReadVector<int>(val, data);
 }
 
-template <>
-void XmlReader::Read<std::vector<bool> >(std::vector<bool>& val, const std::string& data) {
+template <> void XmlReader::Read<std::vector<bool> >(std::vector<bool>& val, const std::string& data) {
 	ReadVector<bool>(val, data);
 }
 
-template <>
-void XmlReader::Read<std::vector<uint8_t> >(std::vector<uint8_t>& val, const std::string& data) {
+template <> void XmlReader::Read<std::vector<uint8_t> >(std::vector<uint8_t>& val, const std::string& data) {
 	ReadVector<uint8_t>(val, data);
 }
 
-template <>
-void XmlReader::Read<std::vector<int16_t> >(std::vector<int16_t>& val, const std::string& data) {
+template <> void XmlReader::Read<std::vector<int16_t> >(std::vector<int16_t>& val, const std::string& data) {
 	ReadVector<int16_t>(val, data);
 }
 
-template <>
-void XmlReader::Read<std::vector<uint32_t> >(std::vector<uint32_t>& val, const std::string& data) {
+template <> void XmlReader::Read<std::vector<uint32_t> >(std::vector<uint32_t>& val, const std::string& data) {
 	ReadVector<uint32_t>(val, data);
 }
 
-template <>
-void XmlReader::Read<std::vector<double> >(std::vector<double>& val, const std::string& data) {
+template <> void XmlReader::Read<std::vector<double> >(std::vector<double>& val, const std::string& data) {
 	ReadVector<double>(val, data);
 }
 

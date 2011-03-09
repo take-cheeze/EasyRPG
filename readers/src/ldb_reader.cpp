@@ -21,8 +21,8 @@
 #include "ldb_reader.h"
 #include "ldb_chunks.h"
 #include "data.h"
-#include "reader_util.h"
 #include "reader_struct.h"
+#include "reader_util.h"
 
 ////////////////////////////////////////////////////////////
 /// Load Database

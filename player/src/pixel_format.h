@@ -301,7 +301,7 @@ struct alpha_type_traits {};
 
 template<class TPF, PF::AlphaType _alpha_type>
 struct alpha_type_traits<TPF, PF::StaticAlpha, _alpha_type> {
-	static inline PF::AlphaType alpha_type(const TPF* pf) {
+	static inline PF::AlphaType alpha_type(const TPF* /* pf */) {
 		return (PF::AlphaType) _alpha_type;
 	}
 };
@@ -324,7 +324,7 @@ struct opacity_type_traits {};
 
 template<class TPF, PF::OpacityType _opacity_type>
 struct opacity_type_traits<TPF, PF::StaticAlpha, _opacity_type> {
-	static inline PF::OpacityType opacity_type(const TPF* pf) {
+	static inline PF::OpacityType opacity_type(const TPF* /* pf */) {
 		return _opacity_type;
 	}
 };
