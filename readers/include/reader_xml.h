@@ -126,6 +126,8 @@ public:
 	virtual void StartElement(XmlReader& /* reader */, const char* /* name */, const char** /* atts */) {}
 	virtual void CharacterData(XmlReader& /* reader */, const std::string& /* data */) {}
 	virtual void EndElement(XmlReader& /* reader */, const char* /* name */) {}
+
+	virtual ~XmlHandler() {}
 };
 
 #endif
