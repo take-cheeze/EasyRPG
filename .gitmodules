@@ -1,0 +1,3 @@
+[submodule "rpg2kLib"]
+	path = rpg2kLib
+	url = git@github.com:take-cheeze/rpg2kLib.git
