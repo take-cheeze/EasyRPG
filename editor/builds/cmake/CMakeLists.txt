@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 PROJECT("EasyRPG_Editor" CXX C)
 
-FIND_PACKAGE(wxWidgets COMPONENTS gl core base adv REQUIRED)
+FIND_PACKAGE(wxWidgets COMPONENTS core base adv REQUIRED)
 INCLUDE(${wxWidgets_USE_FILE})
 
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/../../../readers/builds/cmake ${CMAKE_CURRENT_SOURCE_DIR}/../../../readers/builds/cmake)
