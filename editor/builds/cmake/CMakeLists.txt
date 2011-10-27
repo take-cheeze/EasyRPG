@@ -19,3 +19,6 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	EasyRPG_Reader)
 
 ADD_DEPENDENCIES(${PROJECT_NAME} EasyRPG_Reader)
+
+# test
+enable_testing()
