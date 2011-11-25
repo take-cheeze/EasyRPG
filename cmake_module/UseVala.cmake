@@ -106,10 +106,14 @@
 include(CMakeParseArguments)
 
 function(vala_precompile output)
-    cmake_parse_arguments(ARGS "" "GENERATE_HEADER;GENERATE_VAPI"
+    cmake_parse_arguments(ARGS "" "DIRECTORY;GENERATE_HEADER;GENERATE_VAPI"
         "SOURCES;PACKAGES;OPTIONS;CUSTOM_VAPIS" ${ARGN})
 
-    set(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/vala)
+    if(ARGS_DIRECTORY)
+        set(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DIRECTORY})
+    else(ARGS_DIRECTORY)
+        set(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+    endif(ARGS_DIRECTORY)
     include_directories(${DIRECTORY})
     set(vala_pkg_opts "")
     foreach(pkg ${ARGS_PACKAGES})
@@ -118,16 +122,21 @@ function(vala_precompile output)
     set(in_files "")
     set(out_files "")
     foreach(src ${ARGS_SOURCES} ${ARGS_UNPARSED_ARGUMENTS})
-        list(APPEND in_files "${src}")
+        list(APPEND in_files "${CMAKE_CURRENT_SOURCE_DIR}/${src}")
         string(REPLACE ".vala" ".c" src ${src})
         string(REPLACE ".gs" ".c" src ${src})
+        set(out_file "${DIRECTORY}/${src}")
         list(APPEND out_files "${DIRECTORY}/${src}")
     endforeach(src ${ARGS_SOURCES} ${ARGS_UNPARSED_ARGUMENTS})
 
     set(custom_vapi_arguments "")
     if(ARGS_CUSTOM_VAPIS)
         foreach(vapi ${ARGS_CUSTOM_VAPIS})
-          list(APPEND custom_vapi_arguments ${vapi})
+            if(${vapi} MATCHES ${CMAKE_SOURCE_DIR} OR ${vapi} MATCHES ${CMAKE_BINARY_DIR})
+                list(APPEND custom_vapi_arguments ${vapi})
+            else (${vapi} MATCHES ${CMAKE_SOURCE_DIR} OR ${vapi} MATCHES ${CMAKE_BINARY_DIR})
+                list(APPEND custom_vapi_arguments ${CMAKE_CURRENT_SOURCE_DIR}/${vapi})
+            endif(${vapi} MATCHES ${CMAKE_SOURCE_DIR} OR ${vapi} MATCHES ${CMAKE_BINARY_DIR})
         endforeach(vapi ${ARGS_CUSTOM_VAPIS})
     endif(ARGS_CUSTOM_VAPIS)
 
@@ -157,7 +166,8 @@ function(vala_precompile output)
         "-C" 
         ${header_arguments} 
         ${vapi_arguments}
-        "-d" ${DIRECTORY}/${CMAKE_CURRENT_BINARY_DIR}
+        "-b" ${CMAKE_CURRENT_SOURCE_DIR} 
+        "-d" ${DIRECTORY} 
         ${vala_pkg_opts} 
         ${ARGS_OPTIONS} 
         ${in_files} 
