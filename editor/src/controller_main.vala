@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
  * controller_main.vala
- * Copyright (C) EasyRPG Project 2011
+ * Copyright (C) EasyRPG Project 2011-2012
  *
  * EasyRPG is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -37,6 +37,7 @@ public class MainController : Controller {
 	private string project_filename;
 	private XmlNode project_data;
 	private XmlNode game_data;
+	private string[] tilesets;
 	private GLib.HashTable<int, Map> maps;
 	private GLib.HashTable<int, Gtk.TreeRowReference> map_references;
 	private int current_map;
@@ -44,11 +45,16 @@ public class MainController : Controller {
 	/**
 	 * Instantiantes the MainWindow view.
 	 */
-	public MainController () {
+	public MainController (string? project_file = null) {
 		Gtk.IconTheme.get_default().append_search_path ("../data/icons");
+		Gtk.IconTheme.get_default().append_search_path ("data/icons");
+
 		this.main_view = new MainWindow (this);
 		this.maps = new GLib.HashTable<int, Map> (null, null);
 		this.map_references = new GLib.HashTable<int, Gtk.TreeRowReference> (null, null);
+
+		if(project_file != null)
+			open_project_from_file (project_file);
 	}
 
 	/**
@@ -59,7 +65,29 @@ public class MainController : Controller {
 	}
 
 	/**
-	 * Opens a project, loads its data and change the status of some widgets. 
+	 * Opens a project from file, loads its data and change the status of some widgets.
+	 */
+	public void open_project_from_file (string project_file) {
+		File file = File.new_for_path (project_file);
+
+		if(file.query_exists()) {
+			this.project_filename = file.get_basename ();
+			this.base_path = file.get_parent ().get_path () + "/";
+
+			// Manages all the XML read stuff
+			this.load_project_data ();
+			this.load_maptree_data ();
+
+			// Enable/disable some widgets
+			this.main_view.set_project_status ("open");
+			this.main_view.update_statusbar_current_frame();
+		} else {
+			warning("project file does not exist!");
+		}
+	}
+
+	/**
+	 * Opens a project from dialog, loads its data and change the status of some widgets.
 	 */
 	public void open_project () {
 		var open_project_dialog = new Gtk.FileChooserDialog ("Open Project", this.main_view,
@@ -80,21 +108,9 @@ public class MainController : Controller {
 		file_filter.add_pattern ("*.rproject"); // for case-insensitive patterns -> add_custom()
 		open_project_dialog.add_filter (file_filter);
 
-		if (open_project_dialog.run () == Gtk.ResponseType.ACCEPT) {
-			// Get the base_path and project_filename from the selected file
-			string full_path = open_project_dialog.get_filename ();
-			string[] path_tokens = full_path.split ("/");
-			this.project_filename = path_tokens[path_tokens.length - 1];
-			this.base_path = full_path.replace (this.project_filename, "");
+		if (open_project_dialog.run () == Gtk.ResponseType.ACCEPT)
+			open_project_from_file (open_project_dialog.get_filename ());
 
-			// Manages all the XML read stuff
-			this.load_project_data ();
-			this.load_maptree_data ();
-
-			// Enable/disable some widgets
-			this.main_view.set_project_status ("open");
-			this.main_view.update_statusbar_current_frame();
-		}
 		open_project_dialog.destroy ();
 	}
 
@@ -143,6 +159,18 @@ public class MainController : Controller {
 		this.airship = new Vehicle ();
 		XmlNode airship_node = this.game_data.get_node_by_name ("airship");
 		this.airship.load_data (airship_node);
+
+		try {
+			var dir = Dir.open(this.base_path + "graphics/tilesets", 0);
+			string entry;
+			while((entry = dir.read_name ()) != null) {
+				this.tilesets += entry;
+			}
+		} catch (GLib.FileError e) {
+			error ("Could not open tileset directory: %s", e.message);
+		}
+
+		/* TODO: sort tilesets alphabetically */
 
 		this.current_map = 0;
 	}
@@ -401,6 +429,26 @@ public class MainController : Controller {
 	}
 
 	/**
+	 * Manages the reactions to the map creation.
+	 */
+	public void on_map_properties (int map_id) {
+		Map map = this.maps.get (map_id);
+
+		var dialog = new MapPropertiesDialog (this, map);
+		int result = dialog.run ();
+
+		switch(result) {
+			case Gtk.ResponseType.OK:
+				dialog.updateModel ();
+				break;
+			default:
+				break;
+		}
+
+		dialog.destroy ();
+	}
+
+	/**
 	 * Instantiates and shows the database dialog.
 	 */
 	public void show_database () {
@@ -421,13 +469,17 @@ public class MainController : Controller {
 		about_dialog.set_program_name (Resources.APP_NAME);
 		about_dialog.set_comments ("A role playing game editor");
 		about_dialog.set_website (Resources.APP_WEBSITE);
-		about_dialog.set_copyright ("© EasyRPG Project 2011");
+		about_dialog.set_copyright ("© EasyRPG Project 2011-2012");
 		about_dialog.set_authors (Resources.APP_AUTHORS);
 		about_dialog.set_artists (Resources.APP_ARTISTS);
 		about_dialog.set_logo (Resources.load_icon_as_pixbuf ("easyrpg", 48));
 
 		about_dialog.run ();
 		about_dialog.destroy ();
+	}
+
+	public string[] getTilesets () {
+		return this.tilesets;
 	}
 }
 

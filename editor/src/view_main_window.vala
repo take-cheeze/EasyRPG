@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*- */
 /*
  * view_main_window.vala
- * Copyright (C) EasyRPG Project 2011
+ * Copyright (C) EasyRPG Project 2011-2012
  *
  * EasyRPG is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -371,7 +371,8 @@ public class MainWindow : Gtk.Window {
 		 */
 		this.toolbar_sidebar = new Gtk.Toolbar ();
 		this.toolbar_sidebar.set_show_arrow (true);
-		this.toolbar_sidebar.get_style_context ().add_class (Gtk.STYLE_CLASS_PRIMARY_TOOLBAR);
+		this.toolbar_sidebar.set_style (Gtk.ToolbarStyle.ICONS);
+		this.toolbar_sidebar.set_icon_size (Gtk.IconSize.SMALL_TOOLBAR);
 
 		// Add buttons
 		this.toolbar_sidebar.add (toolitem_undo);
@@ -527,6 +528,7 @@ public class MainWindow : Gtk.Window {
 
 		// Map selected
 		this.treeview_maptree.map_selected.connect (this.controller.on_map_selected);
+		this.treeview_maptree.map_properties.connect (this.controller.on_map_properties);
 
 		// Eraser menu callbacks
 		toolitem_menu_eraser.clicked.connect (menu_eraser_popup);
@@ -688,7 +690,7 @@ public class MainWindow : Gtk.Window {
 	/**
 	 * Shows the view and makes small fixes to the layout.
 	 */
-	public void show_all () {
+	public new void show_all () {
 		base.show_all ();
 
 		// Sets the paned_palette_maptree handle position to middle
